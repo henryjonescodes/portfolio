@@ -62,3 +62,25 @@ export const homeObjThree = {
     buttonLightText: true,
     buttonLargeText: false
 }
+
+
+export const homeObjFour = {
+    id: 'hireMe',
+    lightBg: true,
+    lightText: false,
+    lightTextDesc: false,
+    topLine: "Topline",
+    heading: "Headline",
+    description: "This is a much longer description designed to take up more space on the page than the last description I wrote earlier before I knew I needed a longer one",
+    buttonLabel: "See More",
+    imgStart: false,
+    img: someImgName2,
+    alt: 'Photo',
+    dark: true,
+    darkText: false,
+    buttonLarge: true,
+    buttonLightBg: false,
+    buttonLightText: true,
+    buttonLargeText: false
+}
+
