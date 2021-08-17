@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import SplashVideo from '../../videos/splashVideo.mp4'
-// import {Button} from '../ButtonElements'
+import {Button} from '../ButtonElements'
 import { 
     HeroContainer,
     HeroBackground,
@@ -31,9 +31,9 @@ const HeroSection = () => {
                     Computer Scientist and 3D Artist
                 </HeroP>
                 <HeroBtnWrapper>
-                    {/* <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover}>
+                    <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover}>
                         Get Started {hover ? <ArrowForward /> : <ArrowRight />}
-                    </Button> */}
+                    </Button>
                 </HeroBtnWrapper>
             </HeroContent> 
         </HeroContainer>
