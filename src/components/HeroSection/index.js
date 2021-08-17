@@ -31,7 +31,14 @@ const HeroSection = () => {
                     Computer Scientist and 3D Artist
                 </HeroP>
                 <HeroBtnWrapper>
-                    <Button to="signup" onMouseEnter={onHover} onMouseLeave={onHover}>
+                    <Button 
+                        to="signup" 
+                        onMouseEnter={onHover} onMouseLeave={onHover}
+                        primary ="true"
+                        big = "true"
+                        fontBig = "true"
+                        dark = "true"
+                    >
                         Get Started {hover ? <ArrowForward /> : <ArrowRight />}
                     </Button>
                 </HeroBtnWrapper>
