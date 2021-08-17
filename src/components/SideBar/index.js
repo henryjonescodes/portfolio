@@ -16,7 +16,7 @@ const SideBar = ({isOpen, toggle}) => {
             <Icon onClick = {toggle}>
                 <CloseIcon />
             </Icon>
-            {/* <SideBarWrapper>
+            <SideBarWrapper>
                 <SideBarMenu>
                     <SideBarLink to ="about" onClick = {toggle}>About</SideBarLink>
                     <SideBarLink to ="photography" onClick = {toggle}>Photography</SideBarLink>
@@ -26,7 +26,7 @@ const SideBar = ({isOpen, toggle}) => {
                     <SideBtnWrap>
                         <SideBarRoute to="/signin">Sign In</SideBarRoute>
                     </SideBtnWrap>
-            </SideBarWrapper> */}
+            </SideBarWrapper>
         </SideBarContainer>
     )
 }
