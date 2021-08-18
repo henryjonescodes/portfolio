@@ -1,4 +1,20 @@
 import React from 'react'
+import {FaLinkedin, FaInstagram, FaGithub} from 'react-icons/fa'
+import { 
+    FooterContainer,
+    FooterWrap,
+    FooterLinksContainer,
+    FooterLinksWrapper,
+    FooterLinkItems,
+    FooterLinkTitle,
+    FooterLink,
+    SocialMedia,
+    SocialMediaLogo,
+    SocialMediaWrap,
+    WebsiteRights,
+    SocialIconLink,
+    SocialIcons
+    } from './FooterElements'
 
 const Footer = () => {
     return (
@@ -7,14 +23,52 @@ const Footer = () => {
                 <FooterLinksContainer>
                     <FooterLinksWrapper>
                         <FooterLinkItems>
-                            <FooterLinkTitle>
-                                <FooterLink to="/signin">Some Text</FooterLink>
-                                <FooterLink to="/signin">Some Text</FooterLink>
-                                <FooterLink to="/signin">Some Text</FooterLink>
-                            </FooterLinkTitle>
+                            <FooterLinkTitle>Some Title</FooterLinkTitle>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                        </FooterLinkItems>
+                        <FooterLinkItems>
+                            <FooterLinkTitle>Some Title2</FooterLinkTitle>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                        </FooterLinkItems>
+                    </FooterLinksWrapper>
+                    <FooterLinksWrapper>
+                        <FooterLinkItems>
+                            <FooterLinkTitle>Some Title3</FooterLinkTitle>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                        </FooterLinkItems>
+                        <FooterLinkItems>
+                            <FooterLinkTitle>Some Title4</FooterLinkTitle>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
+                            <FooterLink to="/signin">Some Text</FooterLink>
                         </FooterLinkItems>
                     </FooterLinksWrapper>
                 </FooterLinksContainer>
+                <SocialMedia>
+                    <SocialMediaWrap>
+                        <SocialMediaLogo to='/'>Media Text</SocialMediaLogo>
+                        <WebsiteRights>
+                            Made 1hundo pa'cent by Henry Jones in {new Date().getFullYear()}
+                        </WebsiteRights>
+                        <SocialIcons>
+                            <SocialIconLink href="//www.instagram.com/theycallmezonez/" target="_black" aria-label="Instagram">
+                                <FaInstagram />
+                            </SocialIconLink>
+                            <SocialIconLink href="//www.linkedin.com/in/henryjonescodes/" target="_black" aria-label="LinkedIn">
+                                <FaLinkedin />
+                            </SocialIconLink>
+                            <SocialIconLink href="//github.com/henryjonescodes" target="_black" aria-label="GitHub">
+                                <FaGithub />
+                            </SocialIconLink>
+                        </SocialIcons>
+                    </SocialMediaWrap>
+                </SocialMedia>
             </FooterWrap>
         </FooterContainer>
     )
