@@ -15,7 +15,6 @@ export const ServicesContainer = styled.div`
     @media screen and (max-width: 480px){
         height: 1300px;
     }
-
 `
 export const ServicesH1 = styled.h1`
     font-size: 2.5rem;
@@ -56,7 +55,6 @@ export const ServicesWrapper = styled.div`
         grid-template-columns: 1fr;
         padding: 0 20px; 
     }
-
 `
 export const ServicesCard = styled.div`
     background: #fff;

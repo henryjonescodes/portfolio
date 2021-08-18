@@ -8,7 +8,7 @@ export const homeObjOne = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: "Topline",
+    topLine: "James",
     heading: "Headline",
     description: "This is a much longer description designed to take up more space on the page than the last description I wrote earlier before I knew I needed a longer one",
     buttonLabel: "See More",
