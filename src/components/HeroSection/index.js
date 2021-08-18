@@ -21,7 +21,7 @@ const HeroSection = () => {
     }
 
     return (
-        <HeroContainer>
+        <HeroContainer id ="home">
             <HeroBackground>
                 <VideoBackground autoPlay loop muted src={SplashVideo} type = 'splashVideo/mp4'/>
             </HeroBackground>

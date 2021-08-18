@@ -1,4 +1,5 @@
 import React from 'react'
+import {animateScroll as scroll} from 'react-scroll'
 import {FaLinkedin, FaInstagram, FaGithub} from 'react-icons/fa'
 import { 
     FooterContainer,
@@ -17,6 +18,10 @@ import {
     } from './FooterElements'
 
 const Footer = () => {
+    const toggleHome = () => {
+        scroll.scrollToTop()
+    }
+
     return (
         <FooterContainer>
             <FooterWrap>
@@ -52,7 +57,7 @@ const Footer = () => {
                 </FooterLinksContainer>
                 <SocialMedia>
                     <SocialMediaWrap>
-                        <SocialMediaLogo to='/'>Media Text</SocialMediaLogo>
+                        <SocialMediaLogo to='/' onClick={toggleHome}>Henry Jones</SocialMediaLogo>
                         <WebsiteRights>
                             Made 1hundo pa'cent by Henry Jones in {new Date().getFullYear()}
                         </WebsiteRights>
