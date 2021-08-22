@@ -8,9 +8,9 @@ export const homeObjOne = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: "James",
-    heading: "Headline",
-    description: "This is a much longer description designed to take up more space on the page than the last description I wrote earlier before I knew I needed a longer one",
+    topLine: "",
+    heading: "About Me",
+    description: "View my virtual resume and take a tour of my life story through 3D animation.",
     buttonLabel: "See More",
     imgStart: true,
     img: someImgName2,
@@ -20,7 +20,8 @@ export const homeObjOne = {
     buttonLarge: true,
     buttonLightBg: true,
     buttonLightText: true,
-    buttonLargeText: false
+    buttonLargeText: false,
+    buttonDestination: 'about'
 }
 
 export const homeObjTwo = {
@@ -28,9 +29,9 @@ export const homeObjTwo = {
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
-    topLine: "Topline",
-    heading: "Headline",
-    description: "This is a much longer description designed to take up more space on the page than the last description I wrote earlier before I knew I needed a longer one",
+    topLine: "Interactive",
+    heading: "Photography Gallery",
+    description: "View my recent photography and Instagram feed",
     buttonLabel: "See More",
     imgStart: false,
     img: someImgName,
@@ -40,7 +41,8 @@ export const homeObjTwo = {
     buttonLarge: true,
     buttonLightBg: false,
     buttonLightText: true,
-    buttonLargeText: false
+    buttonLargeText: false,
+    buttonDestination: 'gallery'
 }
 
 export const homeObjThree = {
@@ -48,9 +50,9 @@ export const homeObjThree = {
     lightBg: false,
     lightText: true,
     lightTextDesc: true,
-    topLine: "Topline",
-    heading: "Headline",
-    description: "This is a much longer description designed to take up more space on the page than the last description I wrote earlier before I knew I needed a longer one",
+    topLine: "Current & past",
+    heading: "Projects",
+    description: "See my work through a gallery of completed and in-progress projects.",
     buttonLabel: "See More",
     imgStart: true,
     img: someImgName3,
@@ -60,18 +62,19 @@ export const homeObjThree = {
     buttonLarge: true,
     buttonLightBg: true,
     buttonLightText: true,
-    buttonLargeText: false
+    buttonLargeText: false,
+    buttonDestination: 'projects'
 }
 
 
 export const homeObjFour = {
-    id: 'hireMe',
+    id: 'contact',
     lightBg: true,
     lightText: false,
     lightTextDesc: false,
-    topLine: "Topline",
-    heading: "Headline",
-    description: "This is a much longer description designed to take up more space on the page than the last description I wrote earlier before I knew I needed a longer one",
+    topLine: "",
+    heading: "Contact Me",
+    description: "Send an e-mail in-site and find out where else to reach out for opportunities or bookings.",
     buttonLabel: "See More",
     imgStart: false,
     img: someImgName2,
@@ -81,6 +84,7 @@ export const homeObjFour = {
     buttonLarge: true,
     buttonLightBg: false,
     buttonLightText: true,
-    buttonLargeText: false
+    buttonLargeText: false,
+    buttonDestination: 'contact'
 }
 

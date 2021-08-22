@@ -12,9 +12,9 @@ import {
     NavLinks,
     NavBtn,
     NavBtnLink
-    } from './NavBarElements.js';
+    } from './LinkBarElements.js';
 
-const NavBar = ({ toggle }) => {
+const LinkBar = ({ toggle, title}) => {
     const [scrollNav, setScrollNav] = useState(false);
 
     const changeNav = () => {
@@ -38,14 +38,14 @@ const NavBar = ({ toggle }) => {
         <IconContext.Provider value={{color: '#fff'}}>
             <Nav scrollNav = {scrollNav}>
                 <NavBarContainer>
-                    <NavLogo to='/' onClick={toggleHome}>Henry Jones</NavLogo>
+                    <NavLogo to='/' onClick={toggleHome}>{title}</NavLogo>
                     <MobileIcon onClick={toggle}>
                         <FaBars />
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
                             <NavLinks 
-                                to="about"
+                                to="/about"
                                 smooth={true}
                                 duration={500}
                                 spy={true}
@@ -55,7 +55,7 @@ const NavBar = ({ toggle }) => {
                         </NavItem>
                         <NavItem>
                             <NavLinks 
-                                to="photography"
+                                to="/gallery"
                                 smooth={true}
                                 duration={500}
                                 spy={true}
@@ -65,7 +65,7 @@ const NavBar = ({ toggle }) => {
                         </NavItem>
                         <NavItem>
                             <NavLinks 
-                                to="projects"
+                                to="/projects"
                                 smooth={true}
                                 duration={500}
                                 spy={true}
@@ -75,7 +75,7 @@ const NavBar = ({ toggle }) => {
                         </NavItem>
                         <NavItem>
                             <NavLinks 
-                                to="contact"
+                                to="/contact"
                                 smooth={true}
                                 duration={500}
                                 spy={true}
@@ -94,4 +94,4 @@ const NavBar = ({ toggle }) => {
     )
 }
 
-export default NavBar
+export default LinkBar

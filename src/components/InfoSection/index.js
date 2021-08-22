@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../ButtonElements'
+import { RouteButton as Button } from '../ButtonElements'
 import { 
     InfoContainer,
     InfoWrapper,
@@ -18,7 +18,7 @@ import {
 
 const InfoSection = ({lightBg,id,imgStart,topLine,lightText,heading,
                     lightTextDesc,description,buttonLabel,img,alt,
-                    buttonLarge, buttonLightBg,buttonLightText,buttonLargeText}) => {
+                    buttonLarge, buttonLightBg,buttonLightText,buttonLargeText,buttonDestination}) => {
     return (
         <>
             {/* <InfoContainer id={id}> */}
@@ -37,7 +37,7 @@ const InfoSection = ({lightBg,id,imgStart,topLine,lightText,heading,
                                         spy={true}
                                         exact ="true"
                                         offset={-80}
-                                        to="home"
+                                        to={buttonDestination}
                                         primary = {buttonLightBg}
                                         big = {buttonLarge}
                                         dark = {!buttonLightText}

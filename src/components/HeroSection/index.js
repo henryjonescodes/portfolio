@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import SplashVideo from '../../videos/splashVideo.mp4'
-import {Button} from '../ButtonElements'
+import {RouteButton as Button} from '../ButtonElements'
 import { 
     HeroContainer,
     HeroBackground,
@@ -32,12 +32,12 @@ const HeroSection = () => {
                 </HeroP>
                 <HeroBtnWrapper>
                     <Button 
-                        to="signup" 
                         onMouseEnter={onHover} onMouseLeave={onHover}
                         primary ="true"
                         big = "true"
                         fontBig = "true"
                         dark = "true"
+                        to = 'about'
                     >
                         Get Started {hover ? <ArrowForward /> : <ArrowRight />}
                     </Button>
