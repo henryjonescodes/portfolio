@@ -15,6 +15,24 @@ const ThreeDOrbiter = ( {position, color, speed, args}) => {
         scale: expand ? [1.4, 1.4, 1.4] : [1, 1, 1],
     });
 
+    // document.addEventListener('mousemove', onDocumentMouseMove)
+
+    // let mouseX = 0
+    // let mouseY = 0
+    // let targetX = 0
+    // let targetY = 0
+
+    // const windowX = window.innerWidth / 2
+    // const windowY = window.innerWidth / 2
+
+    // function onDocumentMouseMove(event) {
+    //     mouseX = (event.clientX - windowX)
+    //     mouseY = (event.clientY - windowY)
+    // }
+
+    // useFrame(() => (mesh.current.rotation.x += .5 * (targetY - mesh.current.rotation.x)));
+    // useFrame(() => (mesh.current.rotation.y += .5 * (targetX - mesh.current.rotation.y)));
+
     return (
         <a.mesh
             position={position}
