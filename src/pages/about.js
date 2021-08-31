@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import LinkBar from '../components/LinkBar'
-import RoutedSideBar from '../components/RoutedSideBar'
-import ThreeDPanel from '../components/ThreeDPanel'
+import LinkBar from '../components/Common/LinkBar'
+import RoutedSideBar from '../components/Common/RoutedSideBar'
+import ThreeDPanel from '../components/About/ThreeDPanel'
 
 
 const About = () => {

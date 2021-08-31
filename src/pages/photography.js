@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import LinkBar from '../components/LinkBar'
-import RoutedSideBar from '../components/RoutedSideBar'
+import LinkBar from '../components/Common/LinkBar'
+import RoutedSideBar from '../components/Common/RoutedSideBar'
 
 const Photography = () => {
     const [isOpen, setIsOpen] = useState(false)

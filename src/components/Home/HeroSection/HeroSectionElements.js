@@ -32,16 +32,16 @@ export const HeroBackground = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;S
+    overflow: hidden;
 `
 
 export const VideoBackground = styled.video`
     width: 100%;
-    position: cemter;
+    position: center;
     height: 100%;
     -o-object-fit: cover;
     object-fit: cover;
-    background: #232a34
+    background: #232a34;
 `
 
 export const HeroContent = styled.div`

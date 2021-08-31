@@ -2,7 +2,7 @@ import { OrbitControls } from "@react-three/drei";
 import React from "react";
 import { Canvas } from "@react-three/fiber";
 import { Box } from "@react-three/drei";
-import Buildings from "./Buildings.js"
+// import Buildings from "./Buildings.js"
 
 export default function ThreeDBackground() {
     return (

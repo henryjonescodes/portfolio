@@ -1,31 +1,25 @@
 import React, {useState} from 'react'
-import SplashVideo from '../../videos/splashVideo.mp4'
-import {RouteButton as Button} from '../ButtonElements'
+// import {RouteButton as Button} from '../../Common/ButtonElements'
+import ThreeDBackground from '../ThreeDBackground'
+
 import { 
     HeroContainer,
-    HeroBackground,
-    VideoBackground,
-    HeroContent,
-    HeroH1,
-    HeroP,
-    HeroBtnWrapper,
-    ArrowRight,
-    ArrowForward
-    } from './HeroSectionElements'
+    HeroBackground
+    } from './ThreeDPanelElements'
 
-const HeroSection = () => { 
-    const [hover, setHover] = useState(false)
+const ThreeDPanel = () => { 
+    // const [hover, setHover] = useState(false)
 
-    const onHover = () => {
-        setHover(!hover)
-    }
+    // const onHover = () => {
+    //     setHover(!hover)
+    // }
 
     return (
         <HeroContainer id ="home">
             <HeroBackground>
-                <VideoBackground autoPlay loop muted src={SplashVideo} type = 'splashVideo/mp4'/>
+                <ThreeDBackground/>
             </HeroBackground>
-            <HeroContent>
+            {/* <HeroContent>
                 <HeroH1>Henry Jones</HeroH1>
                 <HeroP>
                     Computer Scientist and 3D Artist
@@ -42,9 +36,9 @@ const HeroSection = () => {
                         Get Started {hover ? <ArrowForward /> : <ArrowRight />}
                     </Button>
                 </HeroBtnWrapper>
-            </HeroContent> 
+            </HeroContent>  */}
         </HeroContainer>
     )
 }
 
-export default HeroSection
+export default ThreeDPanel

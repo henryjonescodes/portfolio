@@ -1,6 +1,6 @@
-import someImgName from '../../images/svg-1.svg'
-import someImgName2 from '../../images/svg-2.svg'
-import someImgName3 from '../../images/svg-3.svg'
+import someImgName from '../../../images/svg-1.svg'
+import someImgName2 from '../../../images/svg-2.svg'
+import someImgName3 from '../../../images/svg-3.svg'
 
 
 export const homeObjOne = {
