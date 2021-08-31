@@ -2,8 +2,10 @@ import styled from 'styled-components'
 import {Link as LinkR} from 'react-router-dom'
 // import {Link as LinkS} from 'react-scroll'
 
-export const Nav = styled.nav`
-    background: ${({scrollNav}) => (scrollNav ? '#000' : '#000')};
+export const Nav = styled.nav` 
+    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
+    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#000')};
+    background: var(--background);
     height: 80px;
     // margin-top: -80px;
     display: flex;
@@ -31,7 +33,9 @@ export const NavBarContainer = styled.div`
 `
 
 export const NavLogo = styled(LinkR)`
-    color: #fff;
+    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
+    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
+    color: var(--foreground);
     justify-self: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
@@ -43,6 +47,8 @@ export const NavLogo = styled(LinkR)`
 `
 
 export const MobileIcon = styled.div`
+    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
+    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
     display: none;
 
     @media screen and (max-width: 768px){
@@ -53,7 +59,7 @@ export const MobileIcon = styled.div`
         transform: translate(-100%, 60%);
         font-size: 1.8rem;
         cursor: pointer;
-        color: #fff;
+        color: var(--foreground);
     }
 `
 
@@ -74,7 +80,9 @@ export const NavItem = styled.li`
 `
 
 export const NavLinks = styled(LinkR)`
-    color: #fff;
+    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
+    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
+    color: var(--foreground);
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -95,11 +103,15 @@ export const NavBtn = styled.nav`
     }
 `
 export const NavBtnLink = styled(LinkR)`
+    --background: ${({lightColor}) => (lightColor ? '#01bf71' : '#010606')};
+    --foreground: ${({lightColor}) => (lightColor ? '#010606' : '#01bf71')};
+    --b1: ${({lightColor}) => (lightColor ? '#fff' : '#333')};
+    --f1: ${({lightColor}) => (lightColor ? '#333' : '#fff')};
     border-radius: 50px;
-    background: #01bf71;
+    background: var(--foreground);
     white-space: nowrap;
     padding: 10px 20px;
-    color: #010606;
+    color: var(--background);
     font-size: 16px;
     outling: none;
     border: none;
@@ -109,7 +121,7 @@ export const NavBtnLink = styled(LinkR)`
 
     &:hover {
         transition: all 0.2s ease-in-out;
-        background: #121;
-        color: #010606;
+        background: var(--b1);
+        color: var(--f1);
     }
 `

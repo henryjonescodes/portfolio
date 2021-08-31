@@ -17,7 +17,7 @@ const Photography = () => {
     return (
         <>
             <RoutedSideBar isOpen = {isOpen} toggle = {toggle} />
-            <LinkBar toggle = {toggle} title = "Photography"/>
+            <LinkBar toggle = {toggle} lightColor={false} title = "Photography"/>
             <UploadForm/>
             <ImageGrid setSelectedImg ={setSelectedImg}/>
             {selectedImg && <Modal selectedImg={selectedImg} setSelectedImg ={setSelectedImg}/>}

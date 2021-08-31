@@ -21,7 +21,7 @@ const Modal = ({selectedImg, setSelectedImg }) => {
                 src={selectedImg} 
                 alt="enlarged image"
                 initial={{y: "-100vh"}}
-                animate={{y: "0vh"}}
+                animate={{y: "+10vh"}}
                 transition={{ ease: "easeOut", duration: .5 }}
             />
         </ModalContainer>
