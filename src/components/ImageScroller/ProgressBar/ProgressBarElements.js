@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 export const ProgressContainer = styled.div`
-    max-width: 100%;
+    min-width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,6 +1,8 @@
 import React, {useState} from 'react'
 import LinkBar from '../components/Common/LinkBar'
 import RoutedSideBar from '../components/Common/RoutedSideBar'
+import ContactForm from '../components/Projects/ContactForm'
+
 
 const Projects = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -13,6 +15,8 @@ const Projects = () => {
         <>
             <RoutedSideBar isOpen = {isOpen} toggle = {toggle} />
             <LinkBar toggle = {toggle} title = "Projects"/>
+            <ContactForm/>
+            <div></div>
         </>
     )
 }
