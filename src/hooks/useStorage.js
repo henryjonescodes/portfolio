@@ -3,7 +3,7 @@ import { projectStorage, projectFireStore } from '../firebase/config';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
-const useStorage = (file) => {
+const useStorage = (col,file, title, desc, location,medium) => {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);
     const [url, setUrl] = useState(null);
@@ -11,15 +11,15 @@ const useStorage = (file) => {
     useEffect(() => {
         //Storage Reference
         const storageRef = ref(projectStorage,file.name);
-        console.log("StorageRef",storageRef);
+        // console.log("StorageRef",storageRef);
 
         //Database Reference
-        const collectionRef = collection(projectFireStore, 'images');
-        console.log("CollectionRef", collectionRef);
+        const collectionRef = collection(projectFireStore, col);
+        // console.log("CollectionRef", collectionRef);
 
         //upload file to reference and attatch listener
         const uploadTask = uploadBytesResumable(storageRef,file);
-        console.log(uploadTask);
+        // console.log(uploadTask);
 
         //Do upload
         uploadTask.on('state_changed', (snap) => {
@@ -41,7 +41,11 @@ const useStorage = (file) => {
                 //Add to database (firestore) and set url
                 addDoc(collectionRef,{
                   downloadURL,
-                  createdAt 
+                  createdAt,
+                  title,
+                  desc,
+                  location,
+                  medium
                 })
                 setUrl(downloadURL);
             });

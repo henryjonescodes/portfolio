@@ -32,9 +32,9 @@ const InfoSection = ({lightBg,id,imgStart,topLine,lightText,heading,
                                 <Subtitle darkText = {lightTextDesc}>{description}</Subtitle>
                                 <BtnWrap>
                                     <Button 
-                                        smooth ={true}
+                                        smooth ="true"
                                         duration ={500}
-                                        spy={true}
+                                        spy="true"
                                         exact ="true"
                                         offset={-80}
                                         to={buttonDestination}

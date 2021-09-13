@@ -4,15 +4,18 @@ import {Link as LinkR} from 'react-router-dom'
 
 export const Nav = styled.nav` 
     --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
-    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#000')};
-    background: var(--background);
+    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
+    background: ${({scrollNav}) => (scrollNav ? 'var(--background)' : 'transparent')};
     height: 80px;
-    // margin-top: -80px;
+    --topmargin: ${({sticky}) => (sticky ? '-80px' : '0px')};
+    margin-top: var(--topmargin);
     display: flex;
     justify-content: center;
     font-size: 1rem;
-    position: sticky;
-    top: 0;
+    position: ${({sticky}) => (sticky ? 'sticky' : 'absolute')};
+    top: 0;    
+
+    width: 100%;
     z-index: 10;
 
     @media screen and (max-width: 960px) {
@@ -33,7 +36,6 @@ export const NavBarContainer = styled.div`
 `
 
 export const NavLogo = styled(LinkR)`
-    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
     --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
     color: var(--foreground);
     justify-self: flex-start;
@@ -47,7 +49,6 @@ export const NavLogo = styled(LinkR)`
 `
 
 export const MobileIcon = styled.div`
-    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
     --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
     display: none;
 
@@ -80,7 +81,6 @@ export const NavItem = styled.li`
 `
 
 export const NavLinks = styled(LinkR)`
-    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
     --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
     color: var(--foreground);
     display: flex;

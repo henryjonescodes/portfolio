@@ -14,7 +14,7 @@ import {
     NavBtnLink
     } from './LinkBarElements.js';
 
-const LinkBar = ({ toggle, title}) => {
+const LinkBar = ({ toggle, title, lightColor, sticky}) => {
     const [scrollNav, setScrollNav] = useState(false);
 
     const changeNav = () => {
@@ -33,58 +33,75 @@ const LinkBar = ({ toggle, title}) => {
         scroll.scrollToTop()
     }
 
+    let iconColor = ({lightColor}) => (lightColor ? '#123' : '#123');
+
     return (
        <>
         <IconContext.Provider value={{color: '#fff'}}>
-            <Nav scrollNav = {scrollNav}>
+            <Nav scrollNav = {scrollNav} lightColor = {lightColor} sticky ={sticky}>
                 <NavBarContainer>
-                    <NavLogo to='/' onClick={toggleHome}>{title}</NavLogo>
-                    <MobileIcon onClick={toggle}>
-                        <FaBars />
+                    <NavLogo 
+                        to='/' 
+                        onClick={toggleHome} 
+                        lightColor = {lightColor}>
+                        {title}
+                    </NavLogo>
+                    <MobileIcon 
+                        onClick={toggle}
+                        lightColor = {lightColor}>
+                        <FaBars color= {iconColor} />
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
                             <NavLinks 
                                 to="/about"
-                                smooth={true}
+                                smooth="true"
                                 duration={500}
-                                spy={true}
+                                spy="true"
                                 exact='true'
                                 offset={-80}
+                                lightColor = {lightColor}
                             >About</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks 
                                 to="/gallery"
-                                smooth={true}
+                                smooth="true"
                                 duration={500}
-                                spy={true}
+                                spy="true"
                                 exact='true'
                                 offset={-80}
+                                lightColor = {lightColor}
                             >Photography</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks 
                                 to="/projects"
-                                smooth={true}
+                                smooth="true"
                                 duration={500}
-                                spy={true}
+                                spy="true"
                                 exact='true'
                                 offset={-80}
+                                lightColor = {lightColor}
                             >Projects</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks 
                                 to="/contact"
-                                smooth={true}
+                                smooth="true"
                                 duration={500}
-                                spy={true}
+                                spy="true"
                                 exact='true'
                                 offset={-80}
+                                lightColor = {lightColor}
                             >Contact</NavLinks>
                         </NavItem>
                         <NavBtn>
-                            <NavBtnLink to="/signin">Sign In</NavBtnLink>
+                            <NavBtnLink 
+                                to="/signin"
+                                lightColor = {lightColor}>
+                                Sign In
+                            </NavBtnLink>
                         </NavBtn>
                     </NavMenu>
                 </NavBarContainer>

@@ -1,38 +1,35 @@
 import styled from "styled-components";
+import Masonry from "react-masonry-css";
 import { motion } from "framer-motion";
 
 export const ImageContainer = styled.div`
-    max-width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    padding: 40px 40px;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    grid-gap: 16px;
-    padding: 0 50px; 
+    width: 100%;
 
-    @media screen and (max-width: 1000px){
-        grid-template-columns: 1fr 1fr;
-    }
-
-    @media screen and (max-width: 768px){
-        grid-template-columns: 1fr;
-        padding: 0 20px; 
-    }
 `
+
 export const ImageWrap = styled(motion.div)`
-    overflow: hidden;
-    height: 0;
-    padding: 50% 0;
-    /* padding controls height, will always be perfectly square regardless of width */
-    position: relative;
     opacity: 0.8;
 `
-
 export const GalleryImage = styled(motion.img)`
-    min-width: 150%;
-    min-height: 100%;
-    max-width: 150%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    // border: 1px solid red;
+    max-width: 100%;
+    min-width: 100%;
+
+
+    // min-height: 100%;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
+`
+export const StyledMasonry = styled(Masonry)`
+    display: flex;
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    margin-left: -30px; /* gutter size offset */
+    width: auto;
 `

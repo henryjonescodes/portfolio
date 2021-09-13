@@ -7,10 +7,12 @@ import Photography from './pages/photography';
 import Contact from './pages/contact';
 import Projects from './pages/projects';
 import About from './pages/about';
+import ScrollToTopWrapper from './components/Common/ScrollToTopWrapper'
 
 function App() {
   return (
     <Router>
+      <ScrollToTopWrapper>
       <Switch>
         <Route path="/" component={Home} exact/>
         <Route path="/signin" component={SignInPage} exact/>
@@ -19,6 +21,8 @@ function App() {
         <Route path="/projects" component={Projects} exact/>
         <Route path="/about" component={About} exact/>
       </Switch>
+      </ScrollToTopWrapper>
+
     </Router>
   );
 }
