@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import LinkBar from '../components/Common/LinkBar'
 import RoutedSideBar from '../components/Common/RoutedSideBar'
-import ThreeDPanel from '../components/About/ThreeDPanel'
+import { theme } from '../components/About/theme'
 
 
 const About = () => {
@@ -13,9 +13,8 @@ const About = () => {
 
     return (
         <>
-            <RoutedSideBar isOpen = {isOpen} toggle = {toggle} />
-            <LinkBar toggle = {toggle} title = "About"/>
-            <ThreeDPanel/>
+            <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
+            <LinkBar toggle = {toggle} title = "About" theme = {theme}/>
         </>
     )
 }

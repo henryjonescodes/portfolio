@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import {Link as LinkR} from 'react-router-dom'
-// import {Link as LinkS} from 'react-scroll'
 
 export const Nav = styled.nav` 
-    --background: ${({lightColor}) => (lightColor ? '#fff' : '#000')};
-    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
-    background: ${({scrollNav}) => (scrollNav ? 'var(--background)' : 'transparent')};
-    height: 80px;
+    --background: ${props => props.theme.bg};
+    --foreground: ${props => props.theme.fg};
     --topmargin: ${({sticky}) => (sticky ? '-80px' : '0px')};
+
+    background: ${({scrollNav}) => (scrollNav ? 'var(--background)' : 'var(--background)')};
+    height: 80px;
     margin-top: var(--topmargin);
     display: flex;
     justify-content: center;
@@ -24,19 +24,17 @@ export const Nav = styled.nav`
 `
 
 export const NavBarContainer = styled.div`
-    // background: #fff;
     display: flex;
     justify-content: space-between;
     height: 80px;
     z-index: 1;
     width: 100%;
     padding: 0px 24px;
-    // background: #000000;
-    // max-width: 1100px;
+    margin-right: 20px;
 `
 
 export const NavLogo = styled(LinkR)`
-    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
+    --foreground: ${props => props.theme.fg};
     color: var(--foreground);
     justify-self: flex-start;
     cursor: pointer;
@@ -49,7 +47,7 @@ export const NavLogo = styled(LinkR)`
 `
 
 export const MobileIcon = styled.div`
-    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
+    --foreground: ${props => props.theme.fg};
     display: none;
 
     @media screen and (max-width: 768px){
@@ -81,7 +79,7 @@ export const NavItem = styled.li`
 `
 
 export const NavLinks = styled(LinkR)`
-    --foreground: ${({lightColor}) => (lightColor ? '#000' : '#fff')};
+    --foreground: ${props => props.theme.fg};
     color: var(--foreground);
     display: flex;
     align-items: center;
@@ -103,10 +101,10 @@ export const NavBtn = styled.nav`
     }
 `
 export const NavBtnLink = styled(LinkR)`
-    --background: ${({lightColor}) => (lightColor ? '#01bf71' : '#010606')};
-    --foreground: ${({lightColor}) => (lightColor ? '#010606' : '#01bf71')};
-    --b1: ${({lightColor}) => (lightColor ? '#fff' : '#333')};
-    --f1: ${({lightColor}) => (lightColor ? '#333' : '#fff')};
+    --background: ${props => props.theme.bg};
+    --foreground: ${props => props.theme.fg};
+    --b1: ${props => props.theme.active};
+    --f1: ${props => props.theme.fg};
     border-radius: 50px;
     background: var(--foreground);
     white-space: nowrap;

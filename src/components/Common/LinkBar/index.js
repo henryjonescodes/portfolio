@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react'
 import {FaBars} from 'react-icons/fa'
 import {IconContext} from 'react-icons/lib'
 import {animateScroll as scroll} from 'react-scroll'
+import { ThemeProvider } from 'styled-components'
+
 import {
     Nav, 
     NavBarContainer, 
@@ -14,8 +16,10 @@ import {
     NavBtnLink
     } from './LinkBarElements.js';
 
-const LinkBar = ({ toggle, title, lightColor, sticky}) => {
+const LinkBar = ({toggle, title, sticky, theme}) => {
     const [scrollNav, setScrollNav] = useState(false);
+
+    // console.log(theme)
 
     const changeNav = () => {
         if(window.scrollY >= 80) {
@@ -33,23 +37,20 @@ const LinkBar = ({ toggle, title, lightColor, sticky}) => {
         scroll.scrollToTop()
     }
 
-    let iconColor = ({lightColor}) => (lightColor ? '#123' : '#123');
-
     return (
        <>
+        <ThemeProvider theme={theme}>
         <IconContext.Provider value={{color: '#fff'}}>
-            <Nav scrollNav = {scrollNav} lightColor = {lightColor} sticky ={sticky}>
+            <Nav scrollNav = {scrollNav} sticky ={sticky}>
                 <NavBarContainer>
                     <NavLogo 
                         to='/' 
-                        onClick={toggleHome} 
-                        lightColor = {lightColor}>
+                        onClick={toggleHome}>
                         {title}
                     </NavLogo>
                     <MobileIcon 
-                        onClick={toggle}
-                        lightColor = {lightColor}>
-                        <FaBars color= {iconColor} />
+                        onClick={toggle}>
+                        <FaBars color= {theme.fg} />
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
@@ -60,7 +61,6 @@ const LinkBar = ({ toggle, title, lightColor, sticky}) => {
                                 spy="true"
                                 exact='true'
                                 offset={-80}
-                                lightColor = {lightColor}
                             >About</NavLinks>
                         </NavItem>
                         <NavItem>
@@ -71,7 +71,6 @@ const LinkBar = ({ toggle, title, lightColor, sticky}) => {
                                 spy="true"
                                 exact='true'
                                 offset={-80}
-                                lightColor = {lightColor}
                             >Photography</NavLinks>
                         </NavItem>
                         <NavItem>
@@ -81,8 +80,7 @@ const LinkBar = ({ toggle, title, lightColor, sticky}) => {
                                 duration={500}
                                 spy="true"
                                 exact='true'
-                                offset={-80}
-                                lightColor = {lightColor}
+                                offset={-80}   
                             >Projects</NavLinks>
                         </NavItem>
                         <NavItem>
@@ -93,13 +91,11 @@ const LinkBar = ({ toggle, title, lightColor, sticky}) => {
                                 spy="true"
                                 exact='true'
                                 offset={-80}
-                                lightColor = {lightColor}
                             >Contact</NavLinks>
                         </NavItem>
                         <NavBtn>
                             <NavBtnLink 
-                                to="/signin"
-                                lightColor = {lightColor}>
+                                to="/signin">
                                 Sign In
                             </NavBtnLink>
                         </NavBtn>
@@ -107,6 +103,8 @@ const LinkBar = ({ toggle, title, lightColor, sticky}) => {
                 </NavBarContainer>
             </Nav>
         </IconContext.Provider>
+        </ThemeProvider>
+
        </>
     )
 }

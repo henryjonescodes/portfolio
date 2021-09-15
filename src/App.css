@@ -5,23 +5,3 @@
   font-family: "Encode Sans Expanded",
   sans-serif;
 }
-
-.my-masonry-grid_column {
-  padding-left: 20px; /* gutter size */
-  background-clip: padding-box;
-}
-
-/* Style your items */
-.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
-  /* background: grey; */
-  margin-bottom: 20px;
-}
-
-@media (max-width: 1100px) {
-  .my-masonry-grid_column {
-    padding-left: 10px; /* gutter size offset */
-  }
-  .my-masonry-grid_column > div {
-    margin-bottom: 10px; /* space between items */
-  }
-}
