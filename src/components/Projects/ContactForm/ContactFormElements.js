@@ -17,7 +17,7 @@ export const ContentContainer = styled.div`
     max-width: 50em;
 	margin: 0 auto;
 	transform: skewY(11deg);
-    height 100%;
+    height: 100%;
 
     border: 5px solid red;
 `

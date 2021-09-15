@@ -18,7 +18,7 @@ export const Button = styled(LinkS)`
     transition: all 0.2 ease-in-out;
 
     &:hover {
-        transition all 0.2 ease-in-out;
+        transition: all 0.2 ease-in-out;
         background: ${({primary}) => (primary ? '#fff' : '#01bf71')};
     }
 `
@@ -39,7 +39,7 @@ export const RouteButton = styled(LinkR)`
     transition: all 0.2 ease-in-out;
 
     &:hover {
-        transition all 0.2 ease-in-out;
+        transition: all 0.2 ease-in-out;
         background: ${({primary}) => (primary ? '#fff' : '#01bf71')};
     }
 `
@@ -60,7 +60,7 @@ export const LabelButton = styled.label`
     transition: all 0.2 ease-in-out;
 
     &:hover {
-        transition all 0.2 ease-in-out;
+        transition: all 0.2 ease-in-out;
         background: ${({primary}) => (primary ? '#fff' : '#01bf71')};
     }
 `
