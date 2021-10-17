@@ -1,20 +1,24 @@
 import styled from 'styled-components'
 import {Link as LinkR} from 'react-router-dom'
 
+/**
+ * Container
+ */
+
+//Main Container
 export const Nav = styled.nav` 
+    /* --topmargin: ${({sticky}) => (sticky ? '-80px' : '0px')}; */
+    /* margin-top: var(--topmargin); */
+
     --background: ${props => props.theme.bg};
     --foreground: ${props => props.theme.fg};
-    --topmargin: ${({sticky}) => (sticky ? '-80px' : '0px')};
-
     background: ${({scrollNav}) => (scrollNav ? 'var(--background)' : 'var(--background)')};
     height: 80px;
-    margin-top: var(--topmargin);
     display: flex;
     justify-content: center;
     font-size: 1rem;
     position: ${({sticky}) => (sticky ? 'sticky' : 'absolute')};
     top: 0;    
-
     width: 100%;
     z-index: 10;
 
@@ -22,7 +26,7 @@ export const Nav = styled.nav`
         transition: 0.8s all ease;
     }
 `
-
+//Secondary Container
 export const NavBarContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -33,35 +37,7 @@ export const NavBarContainer = styled.div`
     margin-right: 20px;
 `
 
-export const NavLogo = styled(LinkR)`
-    --foreground: ${props => props.theme.fg};
-    color: var(--foreground);
-    justify-self: flex-start;
-    cursor: pointer;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    margin-left: 24px;
-    font-weight: bold;
-    text-decoration: none;
-`
-
-export const MobileIcon = styled.div`
-    --foreground: ${props => props.theme.fg};
-    display: none;
-
-    @media screen and (max-width: 768px){
-        display: block;
-        position: absolute;
-        top: 0;
-        right: 0;
-        transform: translate(-100%, 60%);
-        font-size: 1.8rem;
-        cursor: pointer;
-        color: var(--foreground);
-    }
-`
-
+//Contains Menu Items
 export const NavMenu = styled.ul`
     display: flex;
     align-items: center;
@@ -78,8 +54,42 @@ export const NavItem = styled.li`
     height: 80px;
 `
 
-export const NavLinks = styled(LinkR)`
+/**
+ * Menu Items
+ */
+
+//Page Title
+export const NavLogo = styled(LinkR)`
     --foreground: ${props => props.theme.fg};
+    color: var(--foreground);
+    justify-self: flex-start;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    font-weight: bold;
+    text-decoration: none;
+`
+//Hamburger
+export const MobileIcon = styled.div`
+    --foreground: ${props => props.theme.fg};
+    display: none;
+
+    @media screen and (max-width: 768px){
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(-100%, 60%);
+        font-size: 1.8rem;
+        cursor: pointer;
+        color: var(--foreground);
+    }
+`
+//Link
+export const NavLinks = styled(LinkR)`
+    --foreground: ${props => props.theme.t1};
     color: var(--foreground);
     display: flex;
     align-items: center;
@@ -92,6 +102,8 @@ export const NavLinks = styled(LinkR)`
         border-bottom: 3px solid #01bf71;
     }
 `
+
+//Signin Button
 export const NavBtn = styled.nav`
     display: flex;
     align-items: center;
@@ -101,15 +113,15 @@ export const NavBtn = styled.nav`
     }
 `
 export const NavBtnLink = styled(LinkR)`
-    --background: ${props => props.theme.bg};
-    --foreground: ${props => props.theme.fg};
+    --foreground: ${props => props.theme.bg};
+    --background: ${props => props.theme.fg};
     --b1: ${props => props.theme.active};
     --f1: ${props => props.theme.fg};
     border-radius: 50px;
-    background: var(--foreground);
+    background: var(--background);
     white-space: nowrap;
     padding: 10px 20px;
-    color: var(--background);
+    color: var(--foreground);
     font-size: 16px;
     outline: none;
     border: none;
