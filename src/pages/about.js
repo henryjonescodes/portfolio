@@ -12,6 +12,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import TWEEN from '@tweenjs/tween.js'
+import ProgressBar from '../components/About/ProgressBar'
 
 
 class About extends React.Component{
@@ -20,7 +21,8 @@ class About extends React.Component{
         this.state = {
             isOpen: false,
             doRouting: false,
-            target: null
+            target: null,
+            loaded: false
         }
         this.scene = null
         this.renderer = null
@@ -61,10 +63,11 @@ class About extends React.Component{
         loadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
             console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
         };
-        loadingManager.onLoad = function ( ) {
+        loadingManager.onLoad = () => {
             // const loadingScreen = document.getElementById('loading-screen')
             // loadingScreen.classList.add( 'fade-out' );
             // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+            this.setState({loaded: true})
             console.log( 'Loading complete!');
         };
         loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
@@ -839,6 +842,7 @@ class About extends React.Component{
                 <>
                     <RoutedSideBar isOpen = {this.state.isOpen} toggle = {() => this.setState({isOpen: !this.state.isOpen})} theme = {theme}/>
                     <LinkBar toggle = {() => this.setState({isOpen: !this.state.isOpen})} title = "About" theme = {theme}/>
+                    {!this.state.loaded && <ProgressBar/>}
                     <div ref={ref => (this.mount = ref)} />
                 </>
             )
