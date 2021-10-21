@@ -1,10 +1,18 @@
 import React from 'react'
-import { ProgressBarWrapper } from './ProgressBarElements'
+import { ContentWrapper, ProgressBarPanel, StyledBarWrapper, StyledProgressPercentage, StyledProgressText } from './ProgressBarElements'
 
-const ProgressBar = () => {
+const ProgressBar = ({value, max, text}) => {
     return (
         <>
-            <ProgressBarWrapper/>
+            <ProgressBarPanel>
+                <ContentWrapper>
+                    <StyledBarWrapper>                
+                        <progress value= {value} max ={max}/>
+                        <StyledProgressPercentage>{value}%</StyledProgressPercentage>
+                    </StyledBarWrapper>
+                    <StyledProgressText>{text}</StyledProgressText>
+                </ContentWrapper>
+            </ProgressBarPanel>
         </>
     )
 }
