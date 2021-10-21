@@ -1,40 +1,36 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
-import SplashVideo from '../../../videos/TimeAndTemp2.mp4';
-// import someImgName from '../../../images/svg-1.svg'
-import { FormBackground, 
-    FormContainer, 
-    PageWrapper, 
-    InputContainer, 
-    StyledForm, 
-    StyledInput, 
-    StyledInputField, 
-    VideoBackground,
-    FormRow, 
-    Column1,
-    // Column2,
-    // ImgWrap,
-    // Img,
-    StyledLabel,
-    StyledInputSubmit,
-    InputWrapper,
-    // TopLine,
-    Heading,
-    Subtitle,
-    FormWrapper,
-    DiagonalBox,
-    ShadowBox
-} from './ContactFormElements';
+import SplashVideo from '../../../videos/TimeAndTemp3.mp4';
 import { ThemeProvider } from 'styled-components';
-import { theme } from '../../Common/Theme';
 import { useTransform, useViewportScroll } from 'framer-motion';
 
+import { 
+    StyledInput,
+    StyledInputField,
+    StyledInputSubmit,
+    StyledInputLabel,
+    StyledInputHeading,
+    StyledInputSubtitle
+} from '../../Common/FormElements';
+import { 
+    DiagonalBox, 
+    FormBackground, 
+    FormContainer, 
+    FormPageContainer, 
+    FormWrapper, 
+    InputContainer, 
+    InputWrapper, 
+    PageWrapper, 
+    ShadowBox, 
+    StyledForm, 
+    VideoBackground 
+} from './ContactFormElements';
 
-const ContactForm = ({imgStart}) => {
+const ContactForm = ({theme}) => {
     const { scrollY } = useViewportScroll();
-    const y1 = useTransform(scrollY, [0, 1200], [-300, -1000]);
-    const y2 = useTransform(scrollY, [0, 1200], [700, 250]);
-  
+    const y1 = useTransform(scrollY, [0, 1200], [-300, -900]);
+    const y2 = useTransform(scrollY, [0, 800], [200, 0]);
+    
     function sendEmail(e) {
         e.preventDefault();
 
@@ -45,13 +41,14 @@ const ContactForm = ({imgStart}) => {
                 console.log(error.text);
             });
             e.target.reset();
-        }
+    }
 
     return (
-            <FormContainer>
+        <ThemeProvider theme = {theme}>
+            <FormPageContainer>
                 <FormBackground>
-                    <DiagonalBox/>
-                    <VideoBackground 
+                    {/* <DiagonalBox/> */}
+                    <VideoBackground
                         autoPlay loop muted 
                         src={SplashVideo} 
                         type = 'splashVideo/mp4' 
@@ -59,40 +56,38 @@ const ContactForm = ({imgStart}) => {
                     <ShadowBox/>
                 </FormBackground>
                 <PageWrapper>
-                    <FormRow imgStart = {imgStart} style={{top: y2}}>
-                        <ThemeProvider theme={theme}>
-                            <Column1>
-                                <FormWrapper>
-                                    <Heading>Hmmm</Heading>
-                                    <Subtitle>Fill out the form and ill get back to you</Subtitle>
-                                    <StyledForm onSubmit={sendEmail}>
-                                        <InputWrapper>
-                                            <InputContainer>
-                                                <StyledLabel>Subject</StyledLabel>
-                                                <StyledInput type="text" name="subject"/>
-                                            </InputContainer>
-                                            <InputContainer>
-                                                <StyledLabel>Your Name</StyledLabel>
-                                                <StyledInput type="text" name="from_name"/>
-                                            </InputContainer>
-                                            <InputContainer>
-                                                <StyledLabel>Your Email</StyledLabel>
-                                                <StyledInput type="text" name="reply_to"/>
-                                            </InputContainer>
-                                            <InputContainer>
-                                                <StyledLabel>Message</StyledLabel>
-                                                <StyledInputField name="message"/>
-                                            </InputContainer>
-                                            <StyledInputSubmit type="submit" value="Send" />
-                                        </InputWrapper>
-                                    </StyledForm>
-                                </FormWrapper>
-                            </Column1>
-                        </ThemeProvider>
-                    </FormRow>
+                    <FormContainer style={{top: y2}}>
+                        <FormWrapper>
+                            <StyledInputHeading>Contact Me</StyledInputHeading>
+                            <StyledInputSubtitle>Fill out the form and ill get back to you</StyledInputSubtitle>
+                            <StyledForm onSubmit={sendEmail}>
+                                <InputWrapper>
+                                    <InputContainer>
+                                        <StyledInputLabel>Subject</StyledInputLabel>
+                                        <StyledInput type="text" name="subject"/>
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <StyledInputLabel>Your Name</StyledInputLabel>
+                                        <StyledInput type="text" name="from_name"/>
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <StyledInputLabel>Your Email</StyledInputLabel>
+                                        <StyledInput type="text" name="reply_to"/>
+                                    </InputContainer>
+                                    <InputContainer>
+                                        <StyledInputLabel>Message</StyledInputLabel>
+                                        <StyledInputField name="message"/>
+                                    </InputContainer>
+                                    <StyledInputSubmit type="submit" value="Send" />
+                                </InputWrapper>
+                            </StyledForm>
+                        </FormWrapper>
+                    </FormContainer>
                 </PageWrapper>
-            </FormContainer>
+            </FormPageContainer>
+       </ThemeProvider>
     )
 }
 
-export default ContactForm;
+export default ContactForm
+ 

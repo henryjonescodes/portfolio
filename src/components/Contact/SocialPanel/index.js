@@ -1,11 +1,17 @@
 import React from 'react'
-
 import { ThemeProvider } from 'styled-components'
-import {FaLinkedin, FaInstagram, FaGithub} from 'react-icons/fa'
-import { theme } from '../theme'
-import { CSSVariables, DiagonalContent, DiagonalDiv, SocialButton, SocialContainer, SocialGrid, SocialLabel } from './SocialPanelElements'
+import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa'
+import { 
+    CSSVariables, 
+    DiagonalContent, 
+    DiagonalDiv, 
+    SocialButton, 
+    SocialContainer, 
+    SocialGrid, 
+    SocialLabel 
+} from './SocialPanelElements'
 
-const SocialPanel = () => {
+const SocialPanel = ({theme}) => {
     return (
         <CSSVariables>
             <ThemeProvider theme={theme}>

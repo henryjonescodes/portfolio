@@ -13,7 +13,7 @@ import {
     ArrowForward
     } from './HeroSectionElements'
 
-const HeroSection = ({offsetY}) => { 
+const HeroSection = () => { 
     const [hover, setHover] = useState(false)
 
     const onHover = () => {
@@ -23,7 +23,7 @@ const HeroSection = ({offsetY}) => {
     return (
         <HeroContainer id ="home">
             <HeroBackground>
-                <VideoBackground autoPlay loop muted src={SplashVideo} type = 'splashVideo/mp4' offsetY = {offsetY}/>
+                <VideoBackground autoPlay loop muted src={SplashVideo} type = 'splashVideo/mp4'/>
             </HeroBackground>
             <HeroContent>
                 <HeroH1>Henry Jones</HeroH1>

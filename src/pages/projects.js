@@ -1,8 +1,7 @@
 import React, {useState} from 'react'
 import LinkBar from '../components/Common/LinkBar'
 import RoutedSideBar from '../components/Common/RoutedSideBar'
-import Blurb from '../components/Projects/Blurb'
-import ContactForm from '../components/Projects/ContactForm'
+import { theme } from '../components/Projects/theme'
 
 
 const Projects = () => {
@@ -14,9 +13,8 @@ const Projects = () => {
 
     return (
         <>
-            <RoutedSideBar isOpen = {isOpen} toggle = {toggle} />
-            <LinkBar lightColor='false' toggle = {toggle} title = "Projects"/>
-            <Blurb/>
+            <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
+            <LinkBar toggle = {toggle} title = "Projects" theme = {theme}/>
         </>
     )
 }

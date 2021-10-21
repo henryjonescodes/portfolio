@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 
 export const FooterContainer = styled.footer`
     background-color: #101522;
+    margin-top: ${({padded}) => (padded ? `-280px` : `0px`)};
+    padding-top: ${({padded}) => (padded ? `300px` : `0px`)};
 `
 export const FooterWrap = styled.div`
     padding: 48px 24px;

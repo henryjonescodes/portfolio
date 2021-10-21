@@ -46,9 +46,9 @@ const NavBar = ({ toggle }) => {
                         <NavItem>
                             <NavLinks 
                                 to="about"
-                                smooth="true"
+                                smooth={true}
                                 duration={500}
-                                spy="true"
+                                spy={true}
                                 exact='true'
                                 offset={-80}
                             >About</NavLinks>
@@ -56,9 +56,9 @@ const NavBar = ({ toggle }) => {
                         <NavItem>
                             <NavLinks 
                                 to="photography"
-                                smooth="true"
+                                smooth={true}
                                 duration={500}
-                                spy="true"
+                                spy={true}
                                 exact='true'
                                 offset={-80}
                             >Photography</NavLinks>
@@ -66,9 +66,9 @@ const NavBar = ({ toggle }) => {
                         <NavItem>
                             <NavLinks 
                                 to="projects"
-                                smooth="true"
+                                smooth={true}
                                 duration={500}
-                                spy="true"
+                                spy={true}
                                 exact='true'
                                 offset={-80}
                             >Projects</NavLinks>
@@ -76,9 +76,9 @@ const NavBar = ({ toggle }) => {
                         <NavItem>
                             <NavLinks 
                                 to="contact"
-                                smooth="true"
+                                smooth={true}
                                 duration={500}
-                                spy="true"
+                                spy={true}
                                 exact='true'
                                 offset={-80}
                             >Contact</NavLinks>

@@ -17,13 +17,13 @@ import {
     SocialIcons
     } from './FooterElements'
 
-const Footer = () => {
+const Footer = ({padded}) => {
     const toggleHome = () => {
         scroll.scrollToTop()
     }
 
     return (
-        <FooterContainer>
+        <FooterContainer padded = {padded}>
             <FooterWrap>
                 <FooterLinksContainer>
                     <FooterLinksWrapper>
