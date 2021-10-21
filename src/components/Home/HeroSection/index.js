@@ -35,7 +35,7 @@ const HeroSection = () => {
                         onMouseEnter={onHover} onMouseLeave={onHover}
                         primary ="true"
                         big = "true"
-                        fontBig = "true"
+                        fontbig = "true"
                         dark = "true"
                         to = 'about'
                     >
