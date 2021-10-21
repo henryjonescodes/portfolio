@@ -6,6 +6,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import * as THREE from "three";
 import { Redirect } from 'react-router'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
+import { useLoader } from '@react-three/fiber'
 
 
 class About extends React.Component{
@@ -29,29 +33,135 @@ class About extends React.Component{
         }
     }
     componentDidMount(){
-        let currentIntersect = null
-
         /**
-         * Base
+         * Base--------------------------------------------------------------------------------------
          */
-        // Debug
+
+
         this.route(null)
         this.setState({doRouting: false})
         let gui = new dat.GUI()
         gui.domElement.id = 'gui';
-
-        // Canvas
-        // const canvas = document.querySelector('canvas.webgl')
-
-        // Scene
         this.scene = new THREE.Scene()
+        let currentIntersect = null
+        const mouse = new THREE.Vector2()
+        const fs = require('fs');
+
 
         /**
-         * Objects
+         * Set Up File loaders-----------------------------------------------------------------------
+         */
+
+
+        //Loading Manager
+        const loadingManager = new THREE.LoadingManager()
+
+        loadingManager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+            console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        };
+        loadingManager.onLoad = function ( ) {
+            // const loadingScreen = document.getElementById('loading-screen')
+            // loadingScreen.classList.add( 'fade-out' );
+            // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+            console.log( 'Loading complete!');
+        };
+        loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+            console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        };
+
+        loadingManager.onError = function ( url ) {
+            console.log( 'There was an error loading ' + url );
+        };
+
+        function onTransitionEnd( event ) {
+            event.target.remove();
+        }
+
+        //Models
+        const dracoLoader = new DRACOLoader(loadingManager)
+        dracoLoader.setDecoderPath('./draco/')
+        const gltfLoader = new GLTFLoader(loadingManager)
+        gltfLoader.setDRACOLoader(dracoLoader)
+
+        //Textures
+        const textureLoader = new THREE.TextureLoader(loadingManager)
+        const cubeTextureLoader = new THREE.CubeTextureLoader(loadingManager)
+
+        //Fonts
+        const fontLoader = new FontLoader(loadingManager)
+
+        //Helper functions for main file loading
+        function loadWithPromise(url, loader){
+            return new Promise((resolve, reject) => {
+                loader.load(url, data=> resolve(data), null, reject);
+            });
+        }
+
+        async function doLoading(url, loader, textureUrl, textureLoader, scene){
+            const gltfData = await loadWithPromise(url, loader)
+            const texture = await loadWithPromise(textureUrl, textureLoader)
+            texture.flipY = false
+            const material = new THREE.MeshBasicMaterial({ map: texture})
+            // const material = new THREE.MeshBasicMaterial({ color: '#121212'})
+            gltfData.scene.traverse((child) => {child.material = material});    
+            let model = gltfData.scene
+            applyModelSettings(model)
+            scene.add(model)
+            console.log(scene)
+            return model
+        }
+
+        function applyModelSettings(model){
+            model.scale.set(0.5, 0.5, 0.5)
+        }
+
+
+        /**
+         * Constants----------------------------------------------------------------------------
+         */
+
+
+        const cameraSettings = {
+            cameraPositionX: 0,
+            cameraPositionY: 0,
+            cameraPositionZ: 3,
+            fov: 75,
+            targetx: 0,
+            targety: 0,
+            targetz: 0
+        }
+
+        const sizes = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        }
+
+
+        /**
+         * Imported Models --------------------------------------------------------------------
+         */
+        //Bug Light
+        let BugLight = doLoading(
+            '/models/BugLight/glTF-Draco/BugLight.glb', gltfLoader,
+            '/textures/BugLight/BugLight.png', textureLoader,
+            this.scene
+        )
+
+        
+        // //Fort Gorges
+        // let FortGorges = doLoading(
+        //     '/models/FortGorges/glTF-Draco/FortGorges.glb', gltfLoader,
+        //     '/textures/FortGorges/FortGorges.png', textureLoader,
+        //     this.scene
+        // )
+
+
+        /**
+         * Generated Mesh ---------------------------------------------------------------------
          */
         const object1 = new THREE.Mesh(
             new THREE.SphereGeometry(0.5, 16, 16),
-            new THREE.MeshBasicMaterial({ color: '#ff0000' })
+            new THREE.MeshStandardMaterial({ color: '#ff0000' })
         )
         object1.position.x = - 2
 
@@ -73,18 +183,32 @@ class About extends React.Component{
          */
         const raycaster = new THREE.Raycaster() 
 
+       
         /**
-         * Sizes
+         * Lights ---------------------------------------------------------------------------
          */
-        const sizes = {
-            width: window.innerWidth,
-            height: window.innerHeight
-        }
+
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+        // this.scene.add(ambientLight)
+
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
+        directionalLight.castShadow = true
+        directionalLight.shadow.mapSize.set(1024, 1024)
+        directionalLight.shadow.camera.far = 15
+        directionalLight.shadow.camera.left = - 7
+        directionalLight.shadow.camera.top = 7
+        directionalLight.shadow.camera.right = 7
+        directionalLight.shadow.camera.bottom = - 7
+        directionalLight.position.set(5, 5, 5)
+        this.scene.add(directionalLight)
 
 
         /**
-         * Event Handlers
+         * Event Handlers -------------------------------------------------------------------
          */
+
+
         const handleResize = () => {
             // Update sizes
             sizes.width = window.innerWidth
@@ -150,41 +274,57 @@ class About extends React.Component{
             gui = null
         }
 
-        attatchListeners()
-
+       /**
+        * Scene Setup --------------------------------------------------------------------------
+        */
+        
         /**
-         * Camera
+         * Scene Setup Functions
          */
-        // Base camera
-        this.camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-        this.camera.position.z = 3
-        this.scene.add(this.camera)
+        // Camera
+        const setupCamera = () => {
+            this.camera = new THREE.PerspectiveCamera(cameraSettings.fov, sizes.width / sizes.height, 0.1, 1000)
+            this.camera.position.set(cameraSettings.cameraPositionX,cameraSettings.cameraPositionY,cameraSettings.cameraPositionZ)
+            this.scene.add(this.camera)
+        }
 
-
-        /**
-         * Renderer
-         */
-        this.renderer = new THREE.WebGLRenderer()
-        this.renderer.setSize(sizes.width, sizes.height)
-        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-        // document.body.appendChild( renderer.domElement );
-        this.mount.appendChild( this.renderer.domElement );
+        // Renderer
+        const setupRenderer = () => {
+            this.renderer = new THREE.WebGLRenderer()
+            this.renderer.setSize(sizes.width, sizes.height)
+            this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+            this.mount.appendChild( this.renderer.domElement );
+        }
 
         // Controls
-        this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-        this.controls.enableDamping = true
+        const setupControls = () => {
+            this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+            this.controls.target.set(cameraSettings.targetx,cameraSettings.targety,cameraSettings.targetz)
+            this.controls.enableDamping = true
+        }
 
+        const init = () => {
+            attatchListeners()
+            setupCamera()
+            setupRenderer()
+            setupControls()
+        }
+
+        init()        
+
+        // //Fort Gorges
+        // // let gltfdata = useLoader(GLTFLoader, '/models/FortGorges/glTF-Draco/FortGorges.glb')
+        // let FortGorges = doLoading(
+        //     './models/FortGorges/glTF-Draco/FortGorges.glb', gltfLoader,
+        //     './textures/FortGorges/FortGorges.png', textureLoader,
+        //     this.scene
+        // )
         /**
-         * Animate
+         * Animation Loop ---------------------------------------------------------------------
          */
+
+
         const clock = new THREE.Clock()
-
-        //Initialize Listeners
-        const mouse = new THREE.Vector2()
-        // let currentIntersect = null
-        // initializeListeners()
-
-        
         const tick = () =>
         {
             const elapsedTime = clock.getElapsedTime()
