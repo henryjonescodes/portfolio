@@ -22,7 +22,9 @@ class About extends React.Component{
             isOpen: false,
             doRouting: false,
             target: null,
-            loaded: false
+            loaded: false,
+            progress: 0,
+            progressText: ""
         }
         this.scene = null
         this.renderer = null
@@ -70,7 +72,10 @@ class About extends React.Component{
             this.setState({loaded: true})
             console.log( 'Loading complete!');
         };
-        loadingManager.onProgress = function ( url, itemsLoaded, itemsTotal ) {
+        loadingManager.onProgress = ( url, itemsLoaded, itemsTotal ) => {
+            this.setState({progress: (100/itemsTotal) * itemsLoaded})
+            this.setState({progressText: 'Loading file: ' + url})
+            console.log("Progress", this.state.progress)
             console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
         };
 
@@ -842,7 +847,7 @@ class About extends React.Component{
                 <>
                     <RoutedSideBar isOpen = {this.state.isOpen} toggle = {() => this.setState({isOpen: !this.state.isOpen})} theme = {theme}/>
                     <LinkBar toggle = {() => this.setState({isOpen: !this.state.isOpen})} title = "About" theme = {theme}/>
-                    {!this.state.loaded && <ProgressBar/>}
+                    {!this.state.loaded && <ProgressBar value={Math.ceil(this.state.progress)} max={100} text={this.state.progressText}/>}
                     <div ref={ref => (this.mount = ref)} />
                 </>
             )
