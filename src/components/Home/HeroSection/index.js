@@ -39,7 +39,7 @@ const HeroSection = () => {
                         dark = "true"
                         to = 'about'
                     >
-                        Get Started {hover ? <ArrowForward /> : <ArrowRight />}
+                        View 3D Portfolio {hover ? <ArrowForward /> : <ArrowRight />}
                     </Button>
                 </HeroBtnWrapper>
             </HeroContent> 
