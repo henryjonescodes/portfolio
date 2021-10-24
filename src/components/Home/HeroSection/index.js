@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import SplashVideo from '../../../videos/splashVideo.mp4'
 import {RouteButton as Button} from '../../Common/ButtonElements'
+import { ThemeProvider } from 'styled-components'
 import { 
     HeroContainer,
     HeroBackground,
@@ -13,7 +14,7 @@ import {
     ArrowForward
     } from './HeroSectionElements'
 
-const HeroSection = () => { 
+const HeroSection = ({theme, to}) => { 
     const [hover, setHover] = useState(false)
 
     const onHover = () => {
@@ -21,29 +22,29 @@ const HeroSection = () => {
     }
 
     return (
-        <HeroContainer id ="home">
-            <HeroBackground>
-                <VideoBackground autoPlay loop muted src={SplashVideo} type = 'splashVideo/mp4'/>
-            </HeroBackground>
-            <HeroContent>
-                <HeroH1>Henry Jones</HeroH1>
-                <HeroP>
-                    Computer Scientist and 3D Artist
-                </HeroP>
-                <HeroBtnWrapper>
-                    <Button 
-                        onMouseEnter={onHover} onMouseLeave={onHover}
-                        primary ="true"
-                        big = "true"
-                        fontbig = "true"
-                        dark = "true"
-                        to = 'about'
-                    >
-                        Get Started {hover ? <ArrowForward /> : <ArrowRight />}
-                    </Button>
-                </HeroBtnWrapper>
-            </HeroContent> 
-        </HeroContainer>
+        <ThemeProvider theme={theme}>
+            <HeroContainer id ="home">
+                <HeroBackground>
+                    <VideoBackground autoPlay loop muted src={SplashVideo} type = 'splashVideo/mp4'/>
+                </HeroBackground>
+                <HeroContent>
+                    <HeroH1>Henry Jones</HeroH1>
+                    <HeroP>
+                        Computer Scientist and 3D Artist
+                    </HeroP>
+                    <HeroBtnWrapper>
+                        <Button 
+                            onMouseEnter={onHover} onMouseLeave={onHover}
+                            big = "true"
+                            fontbig = "true"
+                            to={to}
+                        >
+                            View 3D Portfolio {hover ? <ArrowForward /> : <ArrowRight />}
+                        </Button>
+                    </HeroBtnWrapper>
+                </HeroContent> 
+            </HeroContainer>
+        </ThemeProvider>
     )
 }
 
