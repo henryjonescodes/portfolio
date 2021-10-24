@@ -12,7 +12,7 @@ export const Nav = styled.nav`
 
     --background: ${props => props.theme.bg};
     --foreground: ${props => props.theme.fg};
-    background: ${({scrollNav}) => (scrollNav ? 'var(--background)' : 'var(--background)')};
+    background: ${({scrollNav,transparent}) => (scrollNav || transparent ? 'transparent' : 'var(--background)')};
     height: 80px;
     display: flex;
     justify-content: center;
@@ -60,8 +60,8 @@ export const NavItem = styled.li`
 
 //Page Title
 export const NavLogo = styled(LinkR)`
-    --foreground: ${props => props.theme.fg};
-    color: var(--foreground);
+    --text: ${props => props.theme.t1};
+    color: var(--text);
     justify-self: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
@@ -89,8 +89,9 @@ export const MobileIcon = styled.div`
 `
 //Link
 export const NavLinks = styled(LinkR)`
-    --foreground: ${props => props.theme.t1};
-    color: var(--foreground);
+    --text1: ${props => props.theme.t1};
+    --active: ${props => props.theme.active};
+    color: var(--text1);
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -99,7 +100,7 @@ export const NavLinks = styled(LinkR)`
     cursor: pointer;
 
     &.active {
-        border-bottom: 3px solid #01bf71;
+        border-bottom: 3px solid var(--active);
     }
 `
 
@@ -113,15 +114,15 @@ export const NavBtn = styled.nav`
     }
 `
 export const NavBtnLink = styled(LinkR)`
-    --foreground: ${props => props.theme.bg};
-    --background: ${props => props.theme.fg};
-    --b1: ${props => props.theme.active};
-    --f1: ${props => props.theme.fg};
+    --highlight: ${props => props.theme.highlight};
+    --text: ${props => props.theme.t1};
+    --text2: ${props => props.theme.t3};
+    --foreground: ${props => props.theme.fg};
     border-radius: 50px;
-    background: var(--background);
+    background: var(--highlight);
     white-space: nowrap;
     padding: 10px 20px;
-    color: var(--foreground);
+    color: var(--text);
     font-size: 16px;
     outline: none;
     border: none;
@@ -131,7 +132,7 @@ export const NavBtnLink = styled(LinkR)`
 
     &:hover {
         transition: all 0.2s ease-in-out;
-        background: var(--b1);
-        color: var(--f1);
+        background: var(--foreground);
+        color: var(--text2);
     }
 `

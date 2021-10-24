@@ -13,7 +13,6 @@ import {
     StyledInputSubtitle
 } from '../../Common/FormElements';
 import { 
-    DiagonalBox, 
     FormBackground, 
     FormContainer, 
     FormPageContainer, 
@@ -23,7 +22,8 @@ import {
     PageWrapper, 
     ShadowBox, 
     StyledForm, 
-    VideoBackground 
+    VideoBackground,
+    VideoOffsetter 
 } from './ContactFormElements';
 
 const ContactForm = ({theme}) => {
@@ -48,12 +48,13 @@ const ContactForm = ({theme}) => {
             <FormPageContainer>
                 <FormBackground>
                     {/* <DiagonalBox/> */}
-                    <VideoBackground
-                        autoPlay loop muted 
-                        src={SplashVideo} 
-                        type = 'splashVideo/mp4' 
-                        style={{top: y1}}/>
-                    <ShadowBox/>
+                    <VideoOffsetter style={{top: y1}}>
+                        <VideoBackground
+                            autoPlay loop muted 
+                            src={SplashVideo} 
+                            type = 'splashVideo/mp4'/>
+                        <ShadowBox/>
+                    </VideoOffsetter>
                 </FormBackground>
                 <PageWrapper>
                     <FormContainer style={{top: y2}}>

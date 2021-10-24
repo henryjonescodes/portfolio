@@ -16,11 +16,8 @@ import {
     NavBtnLink
     } from './LinkBarElements.js';
 
-const LinkBar = ({toggle, title, sticky, theme}) => {
+const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
     const [scrollNav, setScrollNav] = useState(false);
-
-    // console.log(theme)
-
     const changeNav = () => {
         if(window.scrollY >= 80) {
             setScrollNav(true);
@@ -41,7 +38,7 @@ const LinkBar = ({toggle, title, sticky, theme}) => {
        <>
         <ThemeProvider theme={theme}>
         <IconContext.Provider value={{color: '#fff'}}>
-            <Nav scrollNav = {scrollNav} sticky ={sticky}>
+            <Nav scrollNav = {scrollNav} sticky ={sticky} transparent = {transparent}>
                 <NavBarContainer>
                     <NavLogo 
                         to='/' 
@@ -104,9 +101,13 @@ const LinkBar = ({toggle, title, sticky, theme}) => {
             </Nav>
         </IconContext.Provider>
         </ThemeProvider>
-
        </>
     )
 }
+
+// Specifies the default values for props:
+LinkBar.defaultProps = {
+    transparent: false
+  };
 
 export default LinkBar

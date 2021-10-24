@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 export const InfoContainer = styled.div`
-    color: #fff;
-    background: ${({lightBg}) => (lightBg ? '#f9f9f9' : '#010606')};
+    --background: ${props => props.theme.bg};
+    --foreground: ${props => props.theme.fg};
+    background: ${({lightBg}) => (lightBg ? 'var(--foreground)' : 'var(--background)')};
 
     @media screen and (max-width: 768px){
         padding: 100px 0px;
@@ -49,7 +50,8 @@ export const TextWrapper = styled.div`
 `
 
 export const TopLine = styled.p`
-    color: #01bf71;
+    --text: ${props => props.theme.highlight};
+    color: var(--text);
     font-size: 16px;
     line-height: 16px;
     font-weight: 700;
@@ -58,22 +60,26 @@ export const TopLine = styled.p`
     margin-bottom: 16px;
 `
 export const Heading = styled.h1`
+    --text2: ${props => props.theme.t1};
+    --text: ${props => props.theme.t3};
     margin-bottom: 24px;
     font-size: 48px;
     line-height: 1.1;
     font-weight: 600;
-    color: ${({lightBg}) => (!lightBg ? '#010606' : 'fff')};
+    color: ${({lightBg}) => (lightBg ? 'var(--text)' : 'var(--text2)')};
 
     @media screen and (max-width: 480px){
         font-size: 32px;
     }
 `
 export const Subtitle = styled.p`
+    --text2: ${props => props.theme.t2};
+    --text: ${props => props.theme.t4};
     max-width: 440px;
     margin-bottom: 35px;
     font-size: 18px;
     line-height: 24px;
-    color: ${({lightBg}) => (!lightBg ? '#010606' : '#fff')};
+    color: ${({lightBg}) => (lightBg ? 'var(--text)' : 'var(--text2)')};
 `
 export const BtnWrap = styled.div`
     display: flex;

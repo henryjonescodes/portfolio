@@ -2,9 +2,18 @@ import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
 export const FooterContainer = styled.footer`
-    background-color: #101522;
+    --background: ${props => props.theme.bg};
+    --foreground: ${props => props.theme.fg};    
+    background-color: ${({lightcolor}) => (!lightcolor ? 'var(--background)' : 'var(--foreground)')};
     margin-top: ${({padded}) => (padded ? `-280px` : `0px`)};
-    padding-top: ${({padded}) => (padded ? `300px` : `0px`)};
+    padding-top: ${({padded}) => (padded ? `350px` : `0px`)};
+    padding-right: 10px;
+    padding-left: 10px;
+
+    @media screen and (min-width: 2000px){
+        margin-top: ${({padded}) => (padded ? `-320px` : `0px`)};
+        padding-top: ${({padded}) => (padded ? `380px` : `0px`)};    
+    }
 `
 export const FooterWrap = styled.div`
     padding: 48px 24px;
@@ -40,7 +49,9 @@ export const FooterLinkItems = styled.div`
     text-align: left;
     width: 160px;
     box-sizing: border-box;
-    color: #fff;
+    --text: ${props => props.theme.t3};
+    --text2: ${props => props.theme.t1};
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
 
     @media screen and (max-width: 420px){
         margin: 0px;
@@ -53,7 +64,9 @@ export const FooterLinkTitle = styled.h1`
     margin-bottom: 16px;
 `
 export const FooterLink = styled(Link)`
-    color: #fff;
+    --text: ${props => props.theme.t3};
+    --text2: ${props => props.theme.t1};
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};   
     text-decoration: none;
     margin-bottom: 0.5rem;
     font-size: 14px;
@@ -68,7 +81,9 @@ export const SocialMedia = styled.section`
     width: 100%;
 `
 export const SocialMediaLogo = styled(Link)`
-    color: #fff;
+    --text: ${props => props.theme.t3};
+    --text2: ${props => props.theme.t1};
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')}; 
     justify-self: start;
     cursor: pointer;
     text-decoration: none;
@@ -90,7 +105,9 @@ export const SocialMediaWrap = styled.div`
     }
 `
 export const WebsiteRights = styled.small`
-    color: #fff;
+    --text: ${props => props.theme.t3};
+    --text2: ${props => props.theme.t1};
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')}; 
     margin-bottom: 16px;
 `
 export const SocialIcons = styled.div`
@@ -100,6 +117,8 @@ export const SocialIcons = styled.div`
     width: 240px;
 `
 export const SocialIconLink = styled.a`
-    color: #fff;
+    --text: ${props => props.theme.t3};
+    --text2: ${props => props.theme.t1};
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};   
     font-size: 24px;
 `
