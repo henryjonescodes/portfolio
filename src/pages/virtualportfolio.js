@@ -24,7 +24,7 @@ class virtualportfolio extends React.Component{
             target: null,
             loaded: false,
             progress: 0,
-            progressText: ""
+            progressText: "",
         }
         this.scene = null
         this.renderer = null
@@ -69,13 +69,13 @@ class virtualportfolio extends React.Component{
             // const loadingScreen = document.getElementById('loading-screen')
             // loadingScreen.classList.add( 'fade-out' );
             // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+        
             this.setState({loaded: true})
             console.log( 'Loading complete!');
         };
         loadingManager.onProgress = ( url, itemsLoaded, itemsTotal ) => {
             this.setState({progress: (100/itemsTotal) * itemsLoaded})
             this.setState({progressText: 'Loading file: ' + url})
-            console.log("Progress", this.state.progress)
             console.log( 'Loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
         };
 
@@ -83,9 +83,9 @@ class virtualportfolio extends React.Component{
             console.log( 'There was an error loading ' + url );
         };
 
-        function onTransitionEnd( event ) {
-            event.target.remove();
-        }
+        // function onTransitionEnd( event ) {
+        //     event.target.remove();
+        // }
 
         //Models
         const dracoLoader = new DRACOLoader(loadingManager)
@@ -139,14 +139,23 @@ class virtualportfolio extends React.Component{
         }
         
         const cameraSettings = {
-            cameraPositionX: 79.39020840624255,
-            cameraPositionY: 5.30854889867763,
-            cameraPositionZ: 44.76856193642261,
+            cameraPositionX: 97.04554742862695,
+            cameraPositionY: 2.1777107078658604,
+            cameraPositionZ: 43.93157045658174,
             fov: 8,
             targetx: 0,
             targety: 2,
             targetz: 0
         }
+        // const cameraSettings = {
+        //     cameraPositionX: 79.39020840624255,
+        //     cameraPositionY: 5.30854889867763,
+        //     cameraPositionZ: 44.76856193642261,
+        //     fov: 8,
+        //     targetx: 0,
+        //     targety: 2,
+        //     targetz: 0
+        // }
         const cameraSettings1 = {
             cameraPositionX: 10.09952891398274,
             cameraPositionY: 5.283287750839582,
@@ -205,6 +214,34 @@ class virtualportfolio extends React.Component{
         
         //Move this somewhere :)
         this.scene.background = skyCubeTexture;
+
+        //Islands
+        let IslandGroup = new THREE.Group()
+        let Island_Rocks = doLoading(
+            '/models/Islands/glTF-Draco/Island_Rocks.glb', gltfLoader,
+            '/textures/Islands/Island_Rocks.png', textureLoader,
+            IslandGroup
+        )
+
+        let Peaks_Foliage = doLoading(
+            '/models/Islands/glTF-Draco/Peaks_Foliage.glb', gltfLoader,
+            '/textures/Islands/Peaks_Foliage.png', textureLoader,
+            IslandGroup
+        )
+
+        let Diamond_Foliage_1 = doLoading(
+            '/models/Islands/glTF-Draco/Diamond_Foliage_1.glb', gltfLoader,
+            '/textures/Islands/Diamond_Foliage_1.png', textureLoader,
+            IslandGroup
+        )
+
+        let Diamond_Foliage_2 = doLoading(
+            '/models/Islands/glTF-Draco/Diamond_Foliage_2.glb', gltfLoader,
+            '/textures/Islands/Diamond_Foliage_2.png', textureLoader,
+            IslandGroup
+        )
+
+        this.scene.add(IslandGroup)
 
         //Dock Building
         let DockBuilding_Building = doLoading(
@@ -298,6 +335,7 @@ class virtualportfolio extends React.Component{
             '/textures/City/City_Projected.png', textureLoader,
             this.scene
         )
+
         /**
          * Load Fonts and Matcaps
          */
@@ -458,7 +496,6 @@ class virtualportfolio extends React.Component{
         directionalLight.visible = true
         directionalLight.target = targetObject
         this.scene.add(directionalLight, targetObject)
-        console.log(directionalLight)
 
         const directionalLightHelper = new THREE.DirectionalLightHelper(directionalLight, 0.2)
         directionalLightHelper.visible = false
@@ -763,7 +800,6 @@ class virtualportfolio extends React.Component{
          * Animation Loop ---------------------------------------------------------------------
          */
 
-
         const clock = new THREE.Clock()
         let previousTime = 0
         const raycaster = new THREE.Raycaster() 
@@ -778,7 +814,15 @@ class virtualportfolio extends React.Component{
             water.material.uniforms[ 'time' ].value += 1.0 / oceanSettings.timeModifier;
 
             //cursor
-            if(cursor){ cursor.position.set(params.cursorx,params.cursory,params.cursorz)}    
+            if(cursor){ 
+                cursor.position.set(params.cursorx,params.cursory,params.cursorz)
+                this.camera.lookAt(cursor)
+                this.controls.target.set(
+                    cursor.position.x,
+                    cursor.position.y,
+                    cursor.position.z
+                )
+            }    
 
 
             // Animate objects
