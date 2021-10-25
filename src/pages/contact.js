@@ -26,7 +26,7 @@ const Contact = () => {
             <HeroSection theme = {theme}/>
             <SocialPanel theme = {theme}/>
             <ContactForm theme = {theme}/>
-            <Footer padded ={true} theme = {theme} lightcolor = 'true'/>
+            <Footer padded ={true} theme = {theme} lightcolor = {false}/>
         </Wrapper>
     )
 }

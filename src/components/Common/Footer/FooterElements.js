@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 export const FooterContainer = styled.footer`
     --background: ${props => props.theme.bg};
     --foreground: ${props => props.theme.fg};    
-    background-color: ${({lightcolor}) => (!lightcolor ? 'var(--background)' : 'var(--foreground)')};
+    background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
     margin-top: ${({padded}) => (padded ? `-280px` : `0px`)};
     padding-top: ${({padded}) => (padded ? `350px` : `0px`)};
     padding-right: 10px;
@@ -51,7 +51,7 @@ export const FooterLinkItems = styled.div`
     box-sizing: border-box;
     --text: ${props => props.theme.t3};
     --text2: ${props => props.theme.t1};
-    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};
 
     @media screen and (max-width: 420px){
         margin: 0px;
@@ -66,7 +66,7 @@ export const FooterLinkTitle = styled.h1`
 export const FooterLink = styled(Link)`
     --text: ${props => props.theme.t3};
     --text2: ${props => props.theme.t1};
-    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};   
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};   
     text-decoration: none;
     margin-bottom: 0.5rem;
     font-size: 14px;
@@ -83,7 +83,7 @@ export const SocialMedia = styled.section`
 export const SocialMediaLogo = styled(Link)`
     --text: ${props => props.theme.t3};
     --text2: ${props => props.theme.t1};
-    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')}; 
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')}; 
     justify-self: start;
     cursor: pointer;
     text-decoration: none;
@@ -107,7 +107,7 @@ export const SocialMediaWrap = styled.div`
 export const WebsiteRights = styled.small`
     --text: ${props => props.theme.t3};
     --text2: ${props => props.theme.t1};
-    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')}; 
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')}; 
     margin-bottom: 16px;
 `
 export const SocialIcons = styled.div`
@@ -119,6 +119,6 @@ export const SocialIcons = styled.div`
 export const SocialIconLink = styled.a`
     --text: ${props => props.theme.t3};
     --text2: ${props => props.theme.t1};
-    color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};   
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};   
     font-size: 24px;
 `
