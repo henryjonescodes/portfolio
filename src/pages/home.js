@@ -4,6 +4,7 @@ import { theme } from '../components/Home/theme'
 import HeroSection from '../components/Home/HeroSection';
 import InfoSection from '../components/Home/InfoSection';
 import infoImage1 from '../images/svg-1.svg'
+import headshot from '../images/headshot.jpg'
 import NavBar from '../components/Home/NavBar';
 import Footer from '../components/Common/Footer';
 
@@ -16,7 +17,7 @@ export const infoData = {
     description: "I'm Henry, a 3D designer and software engineer from Portland, Maine. I specialize in Blender modeling, Three.js web development, and Java application design.",
     buttonLabel: "See More",
     imgStart: true,
-    img: infoImage1,
+    img: headshot,
     alt: 'Photo',
     //Button Props
     buttonLarge: true,
@@ -92,7 +93,7 @@ const Home = () => {
             <InfoSection{...infoData2}/>
             <InfoSection{...infoData3}/>
             <InfoSection{...infoData4}/> 
-            <Footer theme={theme} lightcolor ={false} padded ={false}/>
+            <Footer theme={theme} lightcolor ={true} padded ={false}/>
         </>
     )
 }

@@ -15,7 +15,7 @@ export const FormPageContainer = styled.div`
 `
 //Contains Video and shadow effect
 export const FormBackground = styled.div`
-    border: 1px solid red;
+    /* border: 1px solid red; */
     transform: skewY(-11deg);
     position: absolute;
     top: 0px;

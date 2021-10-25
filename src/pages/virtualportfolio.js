@@ -1,7 +1,7 @@
 import React from 'react'
 import LinkBar from '../components/Common/LinkBar'
 import RoutedSideBar from '../components/Common/RoutedSideBar'
-import { theme } from '../components/About/theme'
+import { theme } from '../components/VirtualPortfolio/theme'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
 import * as THREE from "three";
@@ -12,7 +12,7 @@ import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js'
 import { Water } from 'three/examples/jsm/objects/Water.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import TWEEN from '@tweenjs/tween.js'
-import ProgressBar from '../components/About/ProgressBar'
+import ProgressBar from '../components/VirtualPortfolio/ProgressBar'
 
 
 class virtualportfolio extends React.Component{
@@ -46,7 +46,7 @@ class virtualportfolio extends React.Component{
 
         this.route(null)
         this.setState({doRouting: false})
-        let gui = new dat.GUI({ closed: false, width: 400})
+        let gui = new dat.GUI({ closed: false, width: 1000})
         gui.domElement.id = 'gui';
         this.scene = new THREE.Scene()
         const clickableObjects = []
@@ -66,10 +66,18 @@ class virtualportfolio extends React.Component{
             console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
         };
         loadingManager.onLoad = () => {
-            // const loadingScreen = document.getElementById('loading-screen')
-            // loadingScreen.classList.add( 'fade-out' );
-            // loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
-        
+            //Run camera movements in the background to preload
+            cameraToMarker(cameraSettings1, this.camera, this.controls)
+            cameraToMarker(cameraSettings2, this.camera, this.controls)
+            if(sizes.width > 2000){
+                console.log('seting: ultrawide_cameraSettings')
+                cameraToMarker(ultrawide_cameraSettings,this.camera, this.controls)
+            } else {
+                console.log('seting: cameraSettings')
+                cameraToMarker(cameraSettings,this.camera, this.controls)
+            }
+
+            //Set loaded flag and print
             this.setState({loaded: true})
             console.log( 'Loading complete!');
         };
@@ -135,7 +143,11 @@ class virtualportfolio extends React.Component{
             cursorx: 0,
             cursory: 2,
             cursorz: 0,
-            animationDuration: 1000
+            animationDuration: 1000,
+            quaternionChangeFactor: .5,
+            positionChangeFactor: 1,
+            fovChangeFactor: 1,
+            targetChangeFactor: 1,
         }
         
         const cameraSettings = {
@@ -145,21 +157,33 @@ class virtualportfolio extends React.Component{
             fov: 8,
             targetx: 0,
             targety: 2,
-            targetz: 0
+            targetz: -2.25
         }
-        // const cameraSettings = {
-        //     cameraPositionX: 79.39020840624255,
-        //     cameraPositionY: 5.30854889867763,
-        //     cameraPositionZ: 44.76856193642261,
-        //     fov: 8,
-        //     targetx: 0,
-        //     targety: 2,
-        //     targetz: 0
-        // }
+
+        const ultrawide_cameraSettings = {
+            cameraPositionX: 95.97996643956765,
+            cameraPositionY: 1.8174088163604705,
+            cameraPositionZ: 46.76319569208742,
+            fov: 8,
+            targetx: 0,
+            targety: 2,
+            targetz: -2.25
+        }
+        
         const cameraSettings1 = {
             cameraPositionX: 10.09952891398274,
             cameraPositionY: 5.283287750839582,
             cameraPositionZ: 0.6046661058867199,
+            fov: 35,
+            targetx: 9.2,
+            targety: 1.8,
+            targetz: 38
+        }
+        
+        const ultrawide_cameraSettings1 = {
+            cameraPositionX: 10.315275819654154,
+            cameraPositionY: 2.6876164019928384,
+            cameraPositionZ: 4.122858410011901,
             fov: 35,
             targetx: 9.2,
             targety: 1.8,
@@ -174,6 +198,16 @@ class virtualportfolio extends React.Component{
             targetx: 19,
             targety: 1.1,
             targetz: 24
+        }
+        
+        const ultrawide_cameraSettings2 = {
+            cameraPositionX: 19.516065816822447,
+            cameraPositionY: 1.9018917087338703,
+            cameraPositionZ: 14.787505370950727,
+            fov: 42,
+            targetx: 18.85,
+            targety: 1.902,
+            targetz: 19.287
         }
 
         const lightColors = {
@@ -579,7 +613,11 @@ class virtualportfolio extends React.Component{
         // Camera GUI
         var cameraGUI = gui.addFolder("Camera")
         cameraGUI.add(debugObject, 'logCamera')
-        
+        cameraGUI.add(params, 'positionChangeFactor').min(.1).max(1).step(0.001).name("Position Change Factor")
+        cameraGUI.add(params, 'quaternionChangeFactor').min(.1).max(1).step(0.001).name("Quaternion Change Factor")
+        cameraGUI.add(params, 'fovChangeFactor').min(.1).max(1).step(0.001).name("FOV Change Factor")
+        cameraGUI.add(params, 'targetChangeFactor').min(.1).max(1).step(0.001).name("Target Change Factor")
+
         // Ocean GUI
         const oceanFolder = gui.addFolder("Ocean")
         oceanFolder.add(oceanSettings, 'timeModifier').min(0).max(500).step(1)
@@ -637,18 +675,33 @@ class virtualportfolio extends React.Component{
                         this.route("/")
                         break
                     case button1:
-                        console.log('seting: cameraSettings1')
-                        cameraToMarker(cameraSettings1, this.camera, this.controls)
+                        if(sizes.width > 2000){
+                            console.log('seting: ultrawide_cameraSettings1')
+                            cameraToMarker(ultrawide_cameraSettings1,this.camera, this.controls)
+                        } else {
+                            console.log('seting: cameraSettings1')
+                            cameraToMarker(cameraSettings1,this.camera, this.controls)
+                        }
                         break
 
                     case button2:
-                        console.log('seting: cameraSettings2')
-                        cameraToMarker(cameraSettings2,this.camera, this.controls)
+                        if(sizes.width > 2000){
+                            console.log('seting: ultrawide_cameraSettings2')
+                            cameraToMarker(ultrawide_cameraSettings2,this.camera, this.controls)
+                        } else {
+                            console.log('seting: cameraSettings2')
+                            cameraToMarker(cameraSettings2,this.camera, this.controls)
+                        }
                         break
 
                     case button3:
-                        console.log('seting: cameraSettings')
-                        cameraToMarker(cameraSettings,this.camera, this.controls)
+                        if(sizes.width > 2000){
+                            console.log('seting: ultrawide_cameraSettings')
+                            cameraToMarker(ultrawide_cameraSettings,this.camera, this.controls)
+                        } else {
+                            console.log('seting: cameraSettings')
+                            cameraToMarker(cameraSettings,this.camera, this.controls)
+                        }
                         break
                     default:
                         console.log("Unhandled Click Event: ", currentIntersect.object)
@@ -706,10 +759,10 @@ class virtualportfolio extends React.Component{
 
 
             new TWEEN.Tween(time)
-                .to({t: 1}, params.animationDuration/2)
+                .to({t: 1}, params.animationDuration * params.quaternionChangeFactor)
                 .onStart(() =>{
                     new TWEEN.Tween(currentFov)
-                    .to({fov: marker.fov}, params.animationDuration)
+                    .to({fov: marker.fov}, params.animationDuration * params.fovChangeFactor)
                     .onStart(() =>{
                         new TWEEN.Tween(camera.position)
                         .to({
@@ -717,14 +770,14 @@ class virtualportfolio extends React.Component{
                             y: marker.cameraPositionY,
                             // y: camera.position.y,
                             z: marker.cameraPositionZ,
-                        }, params.animationDuration)
+                        }, params.animationDuration * params.positionChangeFactor)
                         .onStart(() => {
                             new TWEEN.Tween(currentTarget)
                             .to({
                                 x: marker.targetx,
                                 y: marker.targety,
                                 z: marker.targetz
-                            }, params.animationDuration)
+                            }, params.animationDuration * params.targetChangeFactor)
                             .easing(TWEEN.Easing.Quadratic.InOut)
                             .onUpdate(() =>{
                                 camera.lookAt(new THREE.Vector3(currentTarget.x, currentTarget.y, currentTarget.z));
@@ -785,6 +838,16 @@ class virtualportfolio extends React.Component{
             this.controls = new OrbitControls(this.camera, this.renderer.domElement)
             this.controls.target.set(cameraSettings.targetx,cameraSettings.targety,cameraSettings.targetz)
             this.controls.enableDamping = true
+            var centerPosition = this.controls.target.clone();
+            centerPosition.y = 0;
+            var groundPosition = this.camera.position.clone();
+            groundPosition.y = 0;
+            var d = (centerPosition.distanceTo(groundPosition));
+
+            var origin = new THREE.Vector2(this.controls.target.y,0);
+            var remote = new THREE.Vector2(0,d); // replace 0 with raycasted ground altitude
+            var angleRadians = Math.atan2(remote.y - origin.y, remote.x - origin.x);
+            this.controls.maxPolarAngle = angleRadians;
         }
 
         const init = () => {

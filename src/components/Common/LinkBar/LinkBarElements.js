@@ -20,7 +20,7 @@ export const Nav = styled.nav`
     position: ${({sticky}) => (sticky ? 'sticky' : 'absolute')};
     top: 0;    
     width: 100%;
-    z-index: 10;
+    z-index: 100;
 
     @media screen and (max-width: 960px) {
         transition: 0.8s all ease;
