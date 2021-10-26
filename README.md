@@ -2,15 +2,18 @@
 _Three.js Homepage_
 Henry Jones, 2021
 
-Development repo for a Three.js powered centerpiece for my portfolio site highlighting the beautiful waterfront scenery of my hometown, Portland Maine. All models, textures, and code developed by myself unless expressly stated below.
+Production repo for my portfolio site and personal homepage [henryjones.xyz]. 
 
 ## Packages and Wisdom used
 - [Three.js] - The webGL rendering backbone of this project
 - [Three.js Journey] - Big thanks to [Bruno Simon] for his wisdom and guidance
 - [Dan Hammond] - Helped me out with daunting camera movements and tweening.
 - [Ken Kozma] - The current normal-based ocean would not be possible without him, thanks!
+- [Nils Binder] - Provided the knowledge to get slanted divs up and running.
+- [Brian Design] - Helped me jump into React with his react website tutorials, his influence is clearly visible in my landing page
 
 ## Blender Knowledge and Resources
+All 3D assets created using [Blender] from scratch unless otherwise credited.
 - [Andrew Price] - Facilitated my happy transition from C4D to Blender, thanks Blender Guru.
 - [Kristof Dedene] - Provided shader node tree used for underwater rocks in-scene.
 
@@ -31,6 +34,8 @@ npm install
 npm run dev
 ```
 
+A stable build of branch MAIN is available for viewing at [henryjones.xyz].
+
    [Three.js]: <https://threejs.org/>
    [Three.js Journey]: <https://threejs-journey.com/>
    [Bruno Simon]: <https://bruno-simon.com/>
@@ -43,3 +48,7 @@ npm run dev
    [eucalyp]: <https://creativemarket.com/eucalyp>
    [monkik]: <https://www.flaticon.com/authors/monkik>
    [Freepik]: <https://www.freepik.com>
+   [Nils Binder]: <https://9elements.com/blog/pure-css-diagonal-layouts/>
+   [Brian Design]: <https://www.youtube.com/channel/UCsKsymTY_4BYR-wytLjex7A>
+   [henryjones.xyz]: <henryjones.xyz>
+   [Blender]: <https://www.blender.org/>
