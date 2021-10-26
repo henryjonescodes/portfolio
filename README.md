@@ -14,6 +14,12 @@ Development repo for a Three.js powered centerpiece for my portfolio site highli
 - [Andrew Price] - Facilitated my happy transition from C4D to Blender, thanks Blender Guru.
 - [Kristof Dedene] - Provided shader node tree used for underwater rocks in-scene.
 
+## Icons
+Some site icons sourced from [FlatIcon]. All creators listed below:
+- [eucalyp]
+- [monkik]
+- [Freepik]
+
 ## Usage
 
 This project requires [Node.js](https://nodejs.org/) to run.
@@ -33,3 +39,7 @@ npm run dev
    [Kristof Dedene]: <https://www.youtube.com/watch?v=FHeBI5tAGP0&t=235s>
    [Andrew Price]: <https://www.youtube.com/user/AndrewPPrice>
    [Loading Screen]: <https://jsfiddle.net/sojzu8a5/1/>
+   [Flat Icon]: <https://www.flaticon.com/>
+   [eucalyp]: <https://creativemarket.com/eucalyp>
+   [monkik]: <https://www.flaticon.com/authors/monkik>
+   [Freepik]: <https://www.freepik.com>
