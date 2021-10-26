@@ -9,9 +9,7 @@ import {
     NavLogo, 
     MobileIcon, 
     NavMenu, 
-    NavItem, 
-    NavBtn,
-    NavBtnLink
+    NavItem
  } from '../../Common/LinkBar/LinkBarElements.js'
 
 import { NavLinks } from './NavBarElements.js'
@@ -106,12 +104,12 @@ const NavBar = ({toggle, title, sticky, theme, transparent}) => {
                                     offset={-80}
                                 >Contact</NavLinks>
                             </NavItem>
-                            <NavBtn>
+                            {/* <NavBtn>
                                 <NavBtnLink 
                                     to="/signin">
                                     Sign In
                                 </NavBtnLink>
-                            </NavBtn>
+                            </NavBtn> */}
                         </NavMenu>
                     </NavBarContainer>
                 </Nav>

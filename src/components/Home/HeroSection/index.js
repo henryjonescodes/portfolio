@@ -17,6 +17,8 @@ import {
 const HeroSection = ({theme, to}) => { 
     const [hover, setHover] = useState(false)
 
+    let buttonMessage = "View 3D Portfolio (In Development)"
+
     const onHover = () => {
         setHover(!hover)
     }
@@ -39,7 +41,7 @@ const HeroSection = ({theme, to}) => {
                             fontbig = "true"
                             to={to}
                         >
-                            View 3D Portfolio {hover ? <ArrowForward /> : <ArrowRight />}
+                            {buttonMessage}{hover ? <ArrowForward /> : <ArrowRight />}
                         </Button>
                     </HeroBtnWrapper>
                 </HeroContent> 
