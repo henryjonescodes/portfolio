@@ -1,24 +1,23 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import {Link as LinkS} from 'react-scroll'
 
-export const ScrollLink = styled(LinkS)`
-    /* color: #fff;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0 1rem; */
-    position: absolute;
-    /* margin: auto auto; */
-    height: 100%;
-    width: 100%;
-    cursor: pointer;
-    /* border: 1px solid pink; */
+// export const ScrollLink = styled(LinkS)`
+//     /* color: #fff;
+//     display: flex;
+//     align-items: center;
+//     text-decoration: none;
+//     padding: 0 1rem; */
+//     position: absolute;
+//     /* margin: auto auto; */
+//     height: 100%;
+//     width: 100%;
+//     cursor: pointer;
+//     /* border: 1px solid pink; */
 
-    /* &.active {
-        border-bottom: 3px solid #01bf71;
-    } */
-`
+//     /* &.active {
+//         border-bottom: 3px solid #01bf71;
+//     } */
+// `
 
 export const CSSVariables = styled.div`
     --width: 100vw;
@@ -51,13 +50,6 @@ export const CSSVariables = styled.div`
     --shadow: ${props => props.theme.shadow};   
     --highlight: ${props => props.theme.highlight};
 `
-export const BigOlDiv = styled.div`
-    /* border: 2px dashed blue; */
-    /* background-color: red; */
-    position: relative;
-    height: 300px;
-    z-index: 100;
-`
 
 export const DiagonalDiv = styled(motion.div)`
     position: relative;
@@ -86,37 +78,6 @@ export const DiagonalDiv = styled(motion.div)`
     }
 `
 
-export const FinalDiv = styled.div`
-    position: relative;
-    padding: var(--skew-padding) 0;
-    margin-top: -1px;
-    /* z-index: ${({above}) => (above? '20' : '1')}; */
-    z-index: ${({zPlane}) => zPlane + 1};
-
-    /* border: 2px dashed purple; */
-
-
-    &:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')};
-        transform: skewY(var(--skewValue));
-        transform-origin: 50% 0;
-        outline: 1px solid transparent;
-        backface-visibility: hidden;
-        /* border: 2px dashed green; */
-        background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
-        box-shadow: ${({hasShadow}) => (hasShadow ? '0px 12px 10px 0px var(--shadow) inset' : 'none')};
-        /* z-index: 10; */
-        /* z-index: ${({zPlane}) => zPlane}; */
-
-    }
-`
-
 export const Content = styled.div`
     max-width: var(--width);
     margin: 0 auto;
@@ -128,36 +89,17 @@ export const Content = styled.div`
 export const Boxes = styled.div`
     display: grid;
     grid-template-columns: repeat(${({boxCount}) => boxCount}, 1fr);
-    grid-gap: 3%;
+    grid-gap: ${({gridGap}) => (gridGap ? gridGap : '3%')};
     /* margin: 2em 0; */
     margin-top: -100px;
-    margin-bottom: 4em;
+    margin-bottom: ${({marginBot}) => (marginBot ? marginBot : '4em')};;
     /* border: 1px solid yellow;  */
 
     @media screen and (max-width: 700px){
-        grid-template-columns: repeat(${({boxCount}) => boxCount/2}, 1fr);;
+        grid-template-columns: repeat(${({boxCountMobile}) => boxCountMobile}, 1fr);;
     }
 `
 
-export const FourBoxes = styled.div`
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 3%;
-    /* margin: 2em 0; */
-    margin-top: 0px;
-    margin-bottom: 4em;
-    /* border: 1px solid yellow;  */
-    
-`
-
-export const TwoBoxes = styled.div`
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 3%;
-    margin-top: 0px;
-    margin-bottom: 4em;
-    /* border: 1px solid yellow;  */
-`
 export const EightBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -235,20 +177,38 @@ export const FourBox = styled.div`
 
     @media screen and (max-width: 700px){
         justify-self: center;
-        width: 80%;
-        &:nth-child(3) {margin-top: 50px}
-        &:nth-child(4) {margin-top: 50px} 
+        width: 50%;
+        /* height: 0px; */
+        &:nth-child(1) {
+            margin-bottom: -20px;
+            margin-top: -30px;
+        }
+        &:nth-child(2) {
+            margin-bottom: -20px;
+            margin-top: -30px;
+        } 
+        &:nth-child(3) {
+            margin-top: 0px;
+            margin-bottom: -100px;
+        }
+        &:nth-child(4) {
+            margin-top: 0px;
+            margin-bottom: -100px;
+        } 
     }
 `
 export const TwoBox = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     /* border: 1px solid #fff; */
     /* background: red; */
     --translation: 0;
-    &:nth-child(1) { --translation: calc(var(--skew-padding) * 2)}
-    &:nth-child(2) { --translation: calc(var(--skew-padding)) }
+    &:nth-child(1) { --translation: calc(var(--skew-padding) * 1.5)}
+    &:nth-child(2) { --translation: calc(var(--skew-padding) * 0.5)}
     transform: translateY( var(--translation) ); 
 
     @media screen and (max-width: 700px){
@@ -267,17 +227,56 @@ export const TopLine = styled.p`
     margin-bottom: 16px;
 `
 
+export const HeadingBox = styled.div`
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: center;
+    justify-content: left;
+    /* width:100%; */
+    /* border: 2px dashed green; */
+`
+
+export const Sepparator = styled.div`
+    background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
+    border-radius: 9px;
+    margin: auto 10px;
+    position: relative;
+    height: 50px;
+    width: 5px;
+    /* border: 2px dashed green; */
+
+`
+export const HeadingSideBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: auto 0;
+    position: relative;
+    /* border: 2px dashed red; */
+`
+
+
+
 export const PageHeading = styled.h1`
     /* margin-bottom: 5px; */
     font-size: 68px;
     line-height: 1.1;
     font-weight: 600;
     color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text1)')};
-    margin-bottom: 70px;
+    /* margin-bottom: 70px; */
 
-    @media screen and (max-width: 480px){
-        font-size: 42px;
+    @media screen and (max-width: 700px){
+        font-size: 38px;
     }
+`
+
+export const HeadingSideText = styled.p`
+    max-width: 440px;
+    /* margin-bottom: -30px; */
+    font-size: 18px;
+    line-height: 24px;
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text2)')};
 `
 
 export const Heading = styled.h1`
@@ -298,38 +297,65 @@ export const Heading = styled.h1`
 
 export const HeaderSkew = styled.div`
     transform:rotate(var(--angle)) translateY(calc(var(--skew-padding) * -1));
+    
+    @media screen and (max-width: 700px){
+        margin-bottom: 40px;    
+    }
+
 `
 export const Subtitle = styled.p`
-    max-width: 440px;
-    /* margin-bottom: 0px; */
-    font-size: 18px;
-    line-height: 24px;
-    color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text2)')};
-`
+    /* border: 2px dashed green; */
 
-export const WiggleBox = styled(motion.div)`
-    color: var(--text1);
-    /* border: 1px solid pink; */
-    justify-self: start;
-    /* cursor: pointer; */
-    text-decoration: none;
-    font-size: 100px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 16px;
-    font-weight: bold;
+    max-width: 440px;
+    /* margin-bottom: -30px; */
+    font-size: 18px;
+    line-height: 22px;
+    text-indent: 10%;
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text1)')};
+
+    @media screen and (max-width: 700px){
+        font-size: 16px;
+        line-height: 20px;    
+    }
+
+    @media screen and (max-width: 620px){
+        font-size: 14px;
+        line-height: 18px;    
+    }
 `
 
 export const StyledLabel = styled.label`
-    color: var(--highlight);
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text)')};
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: 12px;
+    width: 120%;
+    margin-bottom: 10px;
     /* transform: skewY(var(--angle)); */
     text-align: center;
 `
 
 export const Img = styled.img`
+    position: relative;
     width: 100%;
-    margin: 0 0 10px 0;
-    padding-right: 0;
+    /* margin: 0 0 10px 0; */
+    /* padding-right: 0; */
+    /* border: 2px dashed blue; */
+
+    /* @media screen and (max-width: 700px){
+        width: 100%;
+  
+    } */
+`
+
+export const SkillsText = styled.p`
+    /* border: 2px dashed red; */
+    color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text)')};
+    font-size: 9px;
+    text-align: center;
+    width: 160%;
+    line-height: 9px;
+    font-weight: 600;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    margin: 2px 2px;
 `

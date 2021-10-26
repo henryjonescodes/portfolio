@@ -1,5 +1,5 @@
 //Node
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { useTransform, useViewportScroll} from 'framer-motion';
 
@@ -9,7 +9,7 @@ import RoutedSideBar from '../components/Common/RoutedSideBar'
 import { theme } from '../components/About/theme'
 import Footer from '../components/Common/Footer'
 
-//Icons
+//Icons and images
 import Icon1 from '../images/about/icon-02.svg'
 import Icon2 from '../images/about/icon-03.svg'
 import Icon3 from '../images/about/icon-04.svg'
@@ -28,6 +28,9 @@ import AIIcon from '../images/logos/illustrator.svg'
 import APSIcon from '../images/logos/photoshop.svg'
 import APRIcon from '../images/logos/premiere.svg'
 import CinemaIcon from '../images/logos/c4d.png'
+import ThreeJourneyIcon from '../images/logos/ThreeJsJourney.png'
+import UnionIcon from '../images/logos/union.png'
+import CBHSLogo from '../images/logos/cbhs.png'
 
 
 
@@ -38,7 +41,6 @@ import {
     DiagonalDiv, 
     TwoBox,
     Heading,
-    WiggleBox,
     StyledLabel,
     Img,
     PageHeading,
@@ -47,9 +49,15 @@ import {
     Boxes,
     EightBox,
     SixBox,
-    ScrollLink
+    Subtitle,
+    HeadingBox,
+    HeadingSideText,
+    HeadingSideBox,
+    Sepparator,
+    SkillsText,
 } from '../components/About/diagonalDivs'
 import SkillTracker from '../components/About/SkillTracker'
+import DetailPanel from '../components/About/DetailPanel';
 
 export const pageWrapper = styled.div`
     min-width: 650px;
@@ -57,86 +65,50 @@ export const pageWrapper = styled.div`
 const About = () => {
 
     const [isOpen, setIsOpen] = useState(false)
-    // const [stopScroll, setStopScroll] = useState(false)
     let { scrollY } = useViewportScroll();
     scrollY.set(0);
-    // console.log(scrollY)
 
-    // const sizes = {
-    //     width: window.innerWidth,
-    //     height: window.innerHeight
-    // }
-
-    const motionPoints = {
-        stop1: -410,
-        stop2: -585,
-        stop3: -790,
-        scrollPoint: 300
+    const sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight
     }
 
+    const motionPoints = {
+        stop1: -520,
+        stop2: -695,
+        stop3: -900,
+        scrollPoint: 200,
+        storedPoint: 0
+    }
+
+    useEffect(function setupListener() {
+        function handleResize() {
+            sizes.width = window.innerWidth
+            sizes.height = window.innerHeight
+            sizes.storedPoint=scrollY.get();
+            if(window.innerWidth <= 700){
+                scrollY.set(motionPoints.scrollPoint);
+            }
+        }
+        window.addEventListener('resize', handleResize)
     
-    //Framer Motion scrolling/locking logic
-    // let stopScroll = false;
+        return function cleanupListener() {
+          window.removeEventListener('resize', handleResize)
+        }
+    })
 
-    // let y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
-    // let y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
-    // let y3 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop3, 0]);
-
-
-    // React.useEffect(function setupListener() {
-    //     function handleResize() {
-    //         sizes.width = window.innerWidth
-    //         sizes.height = window.innerHeight
-    //         if(window.innerWidth <= 700){
-    //             // stopScroll = true;
-    //             if(!stopScroll){setStopScroll(true)}
-    //             scrollY.set(motionPoints.scrollPoint);
-    //         } else {
-    //             // stopScroll = false;
-    //             if(stopScroll){setStopScroll(false)}
-    //         }
-    //     }
-    //     window.addEventListener('resize', handleResize)
+    useEffect(function setupListener() {
+        function handleScroll() {
+            if(sizes.width <= 700){
+                scrollY.set(motionPoints.scrollPoint);
+            }
+        }
+        window.addEventListener('scroll', handleScroll)
     
-    //     return function cleanupListener() {
-    //       window.removeEventListener('resize', handleResize)
-    //     }
-    // })
-
-    // useEffect(function setupListener() {
-    //     function handleResize() {
-    //         sizes.width = window.innerWidth
-    //         sizes.height = window.innerHeight
-    //         if(window.innerWidth <= 700){
-    //             console.log("huh")
-    //             // stopScroll = true;
-    //             // if(!stopScroll){setStopScroll(prevState => ({...prevState, stopScroll:true}))}
-    //             // scrollY.set(motionPoints.scrollPoint);
-    //         } else {
-    //             // stopScroll = false;
-    //             // if(stopScroll){setStopScroll(false)}
-    //         }
-    //     }
-    //     window.addEventListener('resize', handleResize)
-    
-    //     return function cleanupListener() {
-    //       window.removeEventListener('resize', handleResize)
-    //     }
-    // })
-
-    // React.useEffect(function setupListener() {
-    //     function handleScroll() {
-    //         // if(stopScroll){
-    //         //     console.log("scroll stopped")
-    //         //     scrollY.set(motionPoints.scrollPoint);
-    //         // }
-    //     }
-    //     window.addEventListener('scroll', handleScroll)
-    
-    //     return function cleanupListener() {
-    //       window.removeEventListener('scroll', handleScroll)
-    //     }
-    // })
+        return function cleanupListener() {
+          window.removeEventListener('scroll', handleScroll)
+        }
+    })
 
     const y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     const y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
@@ -156,9 +128,28 @@ const About = () => {
                 <CSSVariables>
                     <DiagonalDiv lightcolor ={true} zPlane={2}>
                         <Content>
-                            <PageHeading>Henry Jones</PageHeading>
-                            {/* <Subtitle>Computer Scientist and 3D artist specializing in 3D web development.</Subtitle> */}
-                            <Boxes boxCount = {4}>
+                            <HeadingBox>
+                                <PageHeading>Henry Jones</PageHeading>
+                                <Sepparator/>
+                                <HeadingSideBox>
+                                    <HeadingSideText>Software Engineer</HeadingSideText>
+                                    <HeadingSideText>3D Artist</HeadingSideText>
+                                </HeadingSideBox>
+                            </HeadingBox>
+                            {/* <HeadingBox>
+                            <Subtitle>
+                                I'm a web developer and multimedia artist from Portland, Maine. 
+                                I'm new to both fields, but ready to dive into any projects or 
+                                opportunites that could broaden my horizons. Since graduating 
+                                from Union College in 2021, I've worked to to steer my focus 
+                                towards visual effects, immersive art, and virtual production
+                                in an effort to combine my two overlapping passions.
+                            </Subtitle>
+                            <ImgWrap>
+                                <Img src ={headshot} alt={"head shot"}/>
+                            </ImgWrap>
+                            </HeadingBox> */}
+                            {/* <Boxes boxCount = {4} gridGap={"20%"}>
                                 <FourBox>
                                     <WiggleBox whileHover={{ scale: 1.2, rotate: 5 }}>
                                         <Img src={Icon1} alt="Three stacked cubes"/>
@@ -211,7 +202,7 @@ const About = () => {
                                     </WiggleBox>
                                     <StyledLabel>Resume</StyledLabel>
                                 </FourBox>
-                            </Boxes>
+                            </Boxes> */}
                         </Content>
                     </DiagonalDiv>
                     <DiagonalDiv 
@@ -224,9 +215,77 @@ const About = () => {
                                 <TopLine lightcolor ={true}>Education | Soft Skills | Career Focus</TopLine>
                             </HeaderSkew>
                             {/* <Subtitle lightcolor ={true}>Subtitle text goes here</Subtitle> */}
-                            <Boxes boxCount = {2}>
-                                <TwoBox/>
-                                <TwoBox/>
+                            <Boxes 
+                                boxCount = {2} 
+                                boxCountMobile = {2}
+                                marginBot = {"7em"}>
+                                <TwoBox>
+                                    <Subtitle lightcolor={true}>
+                                        I'm a web developer and multimedia artist from Portland, Maine. 
+                                        I'm new to both fields, but ready to dive into any projects or 
+                                        opportunites that could broaden my horizons.
+                                    </Subtitle>
+                                    <Subtitle lightcolor={true}>
+                                        Since graduating 
+                                        from Union College in 2021, I've worked to to steer my focus 
+                                        towards visual effects, immersive art, and virtual production
+                                        in an effort to combine my two overlapping passions.
+                                    </Subtitle>
+                                </TwoBox>
+                                <TwoBox>
+                                    <DetailPanel 
+                                        src={UnionIcon} 
+                                        theme={theme}
+                                        header={"Union College"}
+                                        subtitle={"B.S. Computer Science"}
+                                        subsubtitle={"Cum Laude '21"}/>
+                                    <DetailPanel 
+                                        src={ThreeJourneyIcon} 
+                                        theme={theme}
+                                        header={"Three.js Journey"}
+                                        subtitle={"Three.js Bootcamp"}
+                                        subsubtitle={"Course Completed 2021"}/>
+                                    <DetailPanel 
+                                        src={CBHSLogo} 
+                                        theme={theme}
+                                        header={"Casco Bay High School"}
+                                        subtitle={"The Foundation"}
+                                        subsubtitle={"Graduated '16"}/>
+                                </TwoBox>
+                            </Boxes>
+                             <Boxes 
+                                boxCount = {4}
+                                gridGap={"10%"}
+                                boxCountMobile = {2}
+                                marginBot = {"3em"}>
+                                <FourBox>
+                                    <Img src={Icon1} alt="Three stacked cubes"/>
+                                    <StyledLabel lightcolor={true}>Design Principles</StyledLabel>
+                                    <SkillsText lightcolor={true}>Speed and Simplicity</SkillsText>
+                                    <SkillsText lightcolor={true}>Skill2</SkillsText>
+                                    <SkillsText lightcolor={true}>Skill3</SkillsText>
+                                </FourBox>
+                                <FourBox>
+                                    <Img src={Icon2} alt="Computer illustration"/>
+                                    <StyledLabel lightcolor={true}>Analytic Skills</StyledLabel>
+                                    <SkillsText lightcolor={true}>Algorithm Design</SkillsText>
+                                    <SkillsText lightcolor={true}>Data Analysis</SkillsText>
+                                    <SkillsText lightcolor={true}>Skill3</SkillsText>                          
+                                </FourBox>
+                                <FourBox>
+                                    <Img src={Icon3} alt="Smartphone illustration"/> 
+                                    <StyledLabel lightcolor={true}>Soft Skills</StyledLabel>
+                                    <SkillsText lightcolor={true}>Adaptability</SkillsText>
+                                    <SkillsText lightcolor={true}>Life-Long Scholar</SkillsText>
+                                    <SkillsText lightcolor={true}>Curiosity</SkillsText>
+                                </FourBox>
+                                <FourBox>
+                                    <Img src={Icon4} alt="Soft Skills"/>
+                                    <StyledLabel lightcolor={true}>Communication</StyledLabel>
+                                    <SkillsText lightcolor={true}>Advanced spoken spanish</SkillsText>
+                                    <SkillsText lightcolor={true}>Social Media Designer</SkillsText>
+                                    <SkillsText lightcolor={true}>Great Cook</SkillsText>                 
+                               </FourBox>
                             </Boxes>
                         </Content>
                     </DiagonalDiv>
@@ -243,7 +302,9 @@ const About = () => {
                                 <TopLine>Package Proficiency | Language Knowledge</TopLine>
                             </HeaderSkew>
                             {/* <Subtitle>Subtitle text goes here</Subtitle> */}
-                            <Boxes boxCount = {8}>
+                            <Boxes 
+                                boxCount = {8}
+                                boxCountMobile = {4}>
                                 <EightBox>
                                     <SkillTracker 
                                         value ={60} 
@@ -347,7 +408,9 @@ const About = () => {
                                 <TopLine lightcolor ={true}>Software Proficiency | Design Huristics</TopLine>
                             </HeaderSkew>
                             {/* <Subtitle lightcolor ={true} >Subtitle text goes here</Subtitle> */}
-                            <Boxes boxCount = {6}>
+                            <Boxes 
+                                boxCount = {6}
+                                boxCountMobile = {3}>
                                 <SixBox>
                                     <SkillTracker 
                                         value ={80} 
@@ -435,7 +498,9 @@ const About = () => {
                                 <TopLine>Resumé</TopLine>
                             </HeaderSkew>
                             {/* <Subtitle>Subtitle text goes here</Subtitle> */}
-                            <Boxes boxCount = {4}>
+                            <Boxes 
+                                boxCount = {4}
+                                boxCountMobile = {2}>
                                 <FourBox/>
                                 <FourBox/>
                                 <FourBox/>

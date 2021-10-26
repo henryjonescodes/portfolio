@@ -18,16 +18,31 @@ import {
 
 const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
     const [scrollNav, setScrollNav] = useState(false);
-    const changeNav = () => {
-        if(window.scrollY >= 80) {
-            setScrollNav(true);
-        } else {
-            setScrollNav(false);
-        }
-    }
+    // const changeNav = () => {
+    //     if(window.scrollY >= 80) {
+    //         setScrollNav(true);
+    //     } else {
+    //         setScrollNav(false);
+    //     }
+    // }
 
-    useEffect(() => {
-        window.addEventListener('scroll', changeNav);
+    // useEffect(() => {
+    //     window.addEventListener('scroll', changeNav);
+    // })
+
+    useEffect(function setupListener() {
+        function handleScroll() {
+            if(window.scrollY >= 80) {
+                setScrollNav(prevState => ({...prevState, scrollNav:true}))
+            } else {
+                setScrollNav(prevState => ({...prevState, scrollNav:false}))
+            }
+        }
+        window.addEventListener('scroll', handleScroll)
+    
+        return function cleanupListener() {
+          window.removeEventListener('scroll', handleScroll)
+        }
     })
 
     const toggleHome = () => {
