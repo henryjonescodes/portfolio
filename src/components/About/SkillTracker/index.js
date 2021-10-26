@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaGithub, FaStar } from 'react-icons/fa'
+import { FaStar } from 'react-icons/fa'
 import { IconContext } from 'react-icons/lib'
 import { ThemeProvider } from 'styled-components'
 import { Img } from '../diagonalDivs'

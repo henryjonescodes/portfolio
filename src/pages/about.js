@@ -1,7 +1,7 @@
 //Node
-import React, {useState, useLayoutEffect} from 'react'
+import React, {useState} from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { useTransform, useViewportScroll , useMotionValue} from 'framer-motion';
+import { useTransform, useViewportScroll} from 'framer-motion';
 
 //Local
 import LinkBar from '../components/Common/LinkBar'
@@ -33,15 +33,11 @@ import CinemaIcon from '../images/logos/c4d.png'
 
 import { 
     FourBox, 
-    FourBoxes, 
     Content, 
     CSSVariables, 
     DiagonalDiv, 
-    TwoBoxes, 
     TwoBox,
-    FinalDiv,
     Heading,
-    Subtitle,
     WiggleBox,
     StyledLabel,
     Img,
@@ -53,7 +49,6 @@ import {
     SixBox,
     ScrollLink
 } from '../components/About/diagonalDivs'
-import { FaLinkedin } from 'react-icons/fa'
 import SkillTracker from '../components/About/SkillTracker'
 
 export const pageWrapper = styled.div`
@@ -62,14 +57,15 @@ export const pageWrapper = styled.div`
 const About = () => {
 
     const [isOpen, setIsOpen] = useState(false)
+    // const [stopScroll, setStopScroll] = useState(false)
     let { scrollY } = useViewportScroll();
     scrollY.set(0);
     // console.log(scrollY)
 
-    const sizes = {
-        width: window.innerWidth,
-        height: window.innerHeight
-    }
+    // const sizes = {
+    //     width: window.innerWidth,
+    //     height: window.innerHeight
+    // }
 
     const motionPoints = {
         stop1: -410,
@@ -80,44 +76,67 @@ const About = () => {
 
     
     //Framer Motion scrolling/locking logic
-    let stopScroll = false;
+    // let stopScroll = false;
 
     // let y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     // let y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
     // let y3 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop3, 0]);
 
 
-    React.useEffect(function setupListener() {
-        function handleResize() {
-            sizes.width = window.innerWidth
-            sizes.height = window.innerHeight
-            if(window.innerWidth <= 700){
-                stopScroll = true;
-                scrollY.set(motionPoints.scrollPoint);
-            } else {
-                stopScroll = false;
-            }
-        }
-        window.addEventListener('resize', handleResize)
+    // React.useEffect(function setupListener() {
+    //     function handleResize() {
+    //         sizes.width = window.innerWidth
+    //         sizes.height = window.innerHeight
+    //         if(window.innerWidth <= 700){
+    //             // stopScroll = true;
+    //             if(!stopScroll){setStopScroll(true)}
+    //             scrollY.set(motionPoints.scrollPoint);
+    //         } else {
+    //             // stopScroll = false;
+    //             if(stopScroll){setStopScroll(false)}
+    //         }
+    //     }
+    //     window.addEventListener('resize', handleResize)
     
-        return function cleanupListener() {
-          window.removeEventListener('resize', handleResize)
-        }
-    })
+    //     return function cleanupListener() {
+    //       window.removeEventListener('resize', handleResize)
+    //     }
+    // })
 
-    React.useEffect(function setupListener() {
-        function handleScroll() {
-            if(stopScroll){
-                console.log("scroll stopped")
-                scrollY.set(motionPoints.scrollPoint);
-            }
-        }
-        window.addEventListener('scroll', handleScroll)
+    // useEffect(function setupListener() {
+    //     function handleResize() {
+    //         sizes.width = window.innerWidth
+    //         sizes.height = window.innerHeight
+    //         if(window.innerWidth <= 700){
+    //             console.log("huh")
+    //             // stopScroll = true;
+    //             // if(!stopScroll){setStopScroll(prevState => ({...prevState, stopScroll:true}))}
+    //             // scrollY.set(motionPoints.scrollPoint);
+    //         } else {
+    //             // stopScroll = false;
+    //             // if(stopScroll){setStopScroll(false)}
+    //         }
+    //     }
+    //     window.addEventListener('resize', handleResize)
     
-        return function cleanupListener() {
-          window.removeEventListener('scroll', handleScroll)
-        }
-    })
+    //     return function cleanupListener() {
+    //       window.removeEventListener('resize', handleResize)
+    //     }
+    // })
+
+    // React.useEffect(function setupListener() {
+    //     function handleScroll() {
+    //         // if(stopScroll){
+    //         //     console.log("scroll stopped")
+    //         //     scrollY.set(motionPoints.scrollPoint);
+    //         // }
+    //     }
+    //     window.addEventListener('scroll', handleScroll)
+    
+    //     return function cleanupListener() {
+    //       window.removeEventListener('scroll', handleScroll)
+    //     }
+    // })
 
     const y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     const y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
