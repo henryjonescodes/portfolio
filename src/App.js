@@ -27,7 +27,6 @@ function App() {
           <Route path="/virtualportfolio" component={virtualportfolio} exact/>
         </Switch>
       </ScrollToTopWrapper>
-
     </Router>
   );
 }

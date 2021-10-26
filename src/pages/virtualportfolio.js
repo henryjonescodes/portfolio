@@ -251,25 +251,25 @@ class virtualportfolio extends React.Component{
 
         //Islands
         let IslandGroup = new THREE.Group()
-        let Island_Rocks = doLoading(
+        doLoading(
             '/models/Islands/glTF-Draco/Island_Rocks.glb', gltfLoader,
             '/textures/Islands/Island_Rocks.png', textureLoader,
             IslandGroup
         )
 
-        let Peaks_Foliage = doLoading(
+        doLoading(
             '/models/Islands/glTF-Draco/Peaks_Foliage.glb', gltfLoader,
             '/textures/Islands/Peaks_Foliage.png', textureLoader,
             IslandGroup
         )
 
-        let Diamond_Foliage_1 = doLoading(
+        doLoading(
             '/models/Islands/glTF-Draco/Diamond_Foliage_1.glb', gltfLoader,
             '/textures/Islands/Diamond_Foliage_1.png', textureLoader,
             IslandGroup
         )
 
-        let Diamond_Foliage_2 = doLoading(
+        doLoading(
             '/models/Islands/glTF-Draco/Diamond_Foliage_2.glb', gltfLoader,
             '/textures/Islands/Diamond_Foliage_2.png', textureLoader,
             IslandGroup
@@ -278,93 +278,93 @@ class virtualportfolio extends React.Component{
         this.scene.add(IslandGroup)
 
         //Dock Building
-        let DockBuilding_Building = doLoading(
+        doLoading(
             '/models/DockBuilding/glTF-Draco/DockBuilding_Model_Building.glb', gltfLoader,
             '/textures/DockBuilding/DockBuilding_Building.png', textureLoader,
             this.scene
         )
-        let DockBuilding_Surface = doLoading(
+        doLoading(
             '/models/DockBuilding/glTF-Draco/DockBuilding_Model_Surface.glb', gltfLoader,
             '/textures/DockBuilding/DockBuilding_Surface.png', textureLoader,
             this.scene
         )
-        let DockBuilding_Pylons = doLoading(
+        doLoading(
             '/models/DockBuilding/glTF-Draco/DockBuilding_Model_Pylons.glb', gltfLoader,
             '/textures/DockBuilding/DockBuilding_Pylons.png', textureLoader,
             this.scene
         )
-        let DockBuilding_Deco = doLoading(
+        doLoading(
             '/models/DockBuilding/glTF-Draco/DockBuilding_Model_Deco.glb', gltfLoader,
             '/textures/DockBuilding/DockBuilding_Deco.png', textureLoader,
             this.scene
         )
 
         //Maine State Pier
-        let MaineStatePier_Building = doLoading(
+        doLoading(
             '/models/MaineStatePier/glTF-Draco/MaineStatePier_Model_Building_8K.glb', gltfLoader,
             '/textures/MaineStatePier/MaineStatePier_Building_8K.png', textureLoader,
             this.scene
         )
-        let MaineStatePier_Surface = doLoading(
+        doLoading(
             '/models/MaineStatePier/glTF-Draco/MaineStatePier_Model_Surface.glb', gltfLoader,
             '/textures/MaineStatePier/MaineStatePier_Surface.png', textureLoader,
             this.scene
         )
-        let MaineStatePier_Pylons = doLoading(
+        doLoading(
             '/models/MaineStatePier/glTF-Draco/MaineStatePier_Model_Pylons.glb', gltfLoader,
             '/textures/MaineStatePier/MaineStatePier_Pylons.png', textureLoader,
             this.scene
         )
-        let MaineStatePier_Deco = doLoading(
+        doLoading(
             '/models/MaineStatePier/glTF-Draco/MaineStatePier_Model_Deco.glb', gltfLoader,
             '/textures/MaineStatePier/MaineStatePier_Deco.png', textureLoader,
             this.scene
         )
 
         //Park
-        let Park_Surface = doLoading(
+        doLoading(
             '/models/Park/glTF-Draco/Park_Surface.glb', gltfLoader,
             '/textures/Park/Park_Surface.png', textureLoader,
             this.scene
         )
-        let Park_Foliage = doLoading(
+        doLoading(
             '/models/Park/glTF-Draco/Park_Foliage.glb', gltfLoader,
             '/textures/Park/Park_Foliage.png', textureLoader,
             this.scene
         )
-        let Park_Deco = doLoading(
+        doLoading(
             '/models/Park/glTF-Draco/Park_Deco.glb', gltfLoader,
             '/textures/Park/Park_Deco.png', textureLoader,
             this.scene
         )
-        let Park_Rocks = doLoading(
+        doLoading(
             '/models/Park/glTF-Draco/Park_Rocks.glb', gltfLoader,
             '/textures/Park/Park_Rocks.png', textureLoader,
             this.scene
         )
 
         //Bug Light
-        let BugLight = doLoading(
+        doLoading(
             '/models/BugLight/glTF-Draco/BugLight.glb', gltfLoader,
             '/textures/BugLight/BugLight.png', textureLoader,
             this.scene
         )
         
         //Fort Gorges
-        let FortGorges = doLoading(
+        doLoading(
             '/models/FortGorges/glTF-Draco/FortGorges.glb', gltfLoader,
             '/textures/FortGorges/FortGorges.png', textureLoader,
             this.scene
         )
 
         //City
-        let City_Modeled = doLoading(
+        doLoading(
             '/models/City/glTF-Draco/City_Modeled.glb', gltfLoader,
             '/textures/City/City_Modeled.png', textureLoader,
             this.scene
         )
 
-        let City_Projected = doLoading(
+        doLoading(
             '/models/City/glTF-Draco/City_Projected.glb', gltfLoader,
             '/textures/City/City_Projected.png', textureLoader,
             this.scene
@@ -405,7 +405,7 @@ class virtualportfolio extends React.Component{
             return textGeometry
         }
         //Generate Scene Text after Font/Matcap Load
-        let greetingText, cityText, cityText1, overViewText
+        let greetingText, cityText, cityText1
         Promise.all([fontLoadPromise, matcapTexturePromise]).then(() => {
             const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 
@@ -458,7 +458,7 @@ class virtualportfolio extends React.Component{
             water.rotation.x =- Math.PI / 2;
             scene.add(water);
             
-            const waterUniforms = water.material.uniforms;
+            // const waterUniforms = water.material.uniforms;
             return water;
         }
 
@@ -864,14 +864,14 @@ class virtualportfolio extends React.Component{
          */
 
         const clock = new THREE.Clock()
-        let previousTime = 0
+        // let previousTime = 0
         const raycaster = new THREE.Raycaster() 
 
         const tick = () =>
         {
             const elapsedTime = clock.getElapsedTime()
-            const deltaTime = elapsedTime - previousTime
-            previousTime = elapsedTime
+            // const deltaTime = elapsedTime - previousTime
+            // previousTime = elapsedTime
 
             //Water
             water.material.uniforms[ 'time' ].value += 1.0 / oceanSettings.timeModifier;
