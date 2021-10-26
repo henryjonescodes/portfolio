@@ -18,16 +18,32 @@ import { NavLinks } from './NavBarElements.js'
 
 const NavBar = ({toggle, title, sticky, theme, transparent}) => {
     const [scrollNav, setScrollNav] = useState(false);
-    const changeNav = () => {
-        if(window.scrollY >= 80) {
-            setScrollNav(true);
-        } else {
-            setScrollNav(false);
-        }
-    }
+    // const changeNav = () => {
+    //     if(window.scrollY >= 80) {
+    //         setScrollNav(true);
+    //     } else {
+    //         setScrollNav(false);
+    //     }
+    // }
+    
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     window.addEventListener('scroll', changeNav);
+    // })
+
+    React.useEffect(function setupListener() {
+        function changeNav() {
+            if(window.scrollY >= 80) {
+                setScrollNav(true);
+            } else {
+                setScrollNav(false);
+            }
+        }
         window.addEventListener('scroll', changeNav);
+    
+        return function cleanupListener() {
+            window.removeEventListener('scroll', changeNav)
+        }
     })
 
     const toggleHome = () => {
