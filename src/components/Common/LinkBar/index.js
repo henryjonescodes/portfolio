@@ -12,8 +12,6 @@ import {
     NavMenu, 
     NavItem, 
     NavLinks,
-    NavBtn,
-    NavBtnLink
     } from './LinkBarElements.js';
 
 const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
@@ -77,7 +75,7 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                         </NavItem>
                         <NavItem>
                             <NavLinks 
-                                to="/gallery"
+                                to="/photography"
                                 smooth="true"
                                 duration={500}
                                 spy="true"
@@ -105,12 +103,12 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                                 offset={-80}
                             >Contact</NavLinks>
                         </NavItem>
-                        <NavBtn>
+                        {/* <NavBtn>
                             <NavBtnLink 
                                 to="/signin">
                                 Sign In
                             </NavBtnLink>
-                        </NavBtn>
+                        </NavBtn> */}
                     </NavMenu>
                 </NavBarContainer>
             </Nav>

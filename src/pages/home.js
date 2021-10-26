@@ -3,8 +3,10 @@ import RoutedSideBar from '../components/Common/RoutedSideBar'
 import { theme } from '../components/Home/theme'
 import HeroSection from '../components/Home/HeroSection';
 import InfoSection from '../components/Home/InfoSection';
-import infoImage1 from '../images/svg-1.svg'
 import headshot from '../images/headshot.jpg'
+import PhotoIcon from '../images/logos/camera.svg'
+import ProjectsIcon from '../images/logos/conveyor.svg'
+import ContactIcon from '../images/logos/plane.svg'
 import NavBar from '../components/Home/NavBar';
 import Footer from '../components/Common/Footer';
 
@@ -30,11 +32,11 @@ export const infoData2 = {
     id: 'photography',
     lightBg: false,
     topLine: "Gallery | Instagram | Blog",
-    heading: "Photogrphy",
+    heading: "Photography",
     description: "Follow me through my camera: view my most recent photography and linked social media.",
     buttonLabel: "See More",
     imgStart: false,
-    img: infoImage1,
+    img: PhotoIcon,
     alt: 'Photo',
     //Button Props
     buttonLarge: true,
@@ -51,7 +53,7 @@ export const infoData3 = {
     description: "Explore my past projects and works in 3D art and programming",
     buttonLabel: "See More",
     imgStart: true,
-    img: infoImage1,
+    img: ProjectsIcon,
     alt: 'Photo',
     //Button Props
     buttonLarge: true,
@@ -68,7 +70,7 @@ export const infoData4 = {
     description: "Contact me directly via my site or connect with me via my social media accounts.",
     buttonLabel: "Say Hi",
     imgStart: false,
-    img: infoImage1,
+    img: ContactIcon,
     alt: 'Photo',
     //Button Props
     buttonLarge: true,

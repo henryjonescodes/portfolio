@@ -136,73 +136,6 @@ const About = () => {
                                     <HeadingSideText>3D Artist</HeadingSideText>
                                 </HeadingSideBox>
                             </HeadingBox>
-                            {/* <HeadingBox>
-                            <Subtitle>
-                                I'm a web developer and multimedia artist from Portland, Maine. 
-                                I'm new to both fields, but ready to dive into any projects or 
-                                opportunites that could broaden my horizons. Since graduating 
-                                from Union College in 2021, I've worked to to steer my focus 
-                                towards visual effects, immersive art, and virtual production
-                                in an effort to combine my two overlapping passions.
-                            </Subtitle>
-                            <ImgWrap>
-                                <Img src ={headshot} alt={"head shot"}/>
-                            </ImgWrap>
-                            </HeadingBox> */}
-                            {/* <Boxes boxCount = {4} gridGap={"20%"}>
-                                <FourBox>
-                                    <WiggleBox whileHover={{ scale: 1.2, rotate: 5 }}>
-                                        <Img src={Icon1} alt="Three stacked cubes"/>
-                                        <ScrollLink
-                                            to="Overview"
-                                            smooth="true"
-                                            duration={500}
-                                            spy={true}
-                                            exact='true'
-                                            offset={50}/>
-                                    </WiggleBox>
-                                    <StyledLabel>Overview</StyledLabel>
-                                </FourBox>
-                                <FourBox>
-                                    <WiggleBox whileHover={{ scale: 1.2, rotate: 5 }}>
-                                        <Img src={Icon2} alt="Computer illustration"/>
-                                        <ScrollLink
-                                            to="DevSkills"
-                                            smooth="true"
-                                            duration={500}
-                                            spy={true}
-                                            exact='true'
-                                            offset={400}/>
-                                    </WiggleBox>
-                                    <StyledLabel>Dev Skills</StyledLabel>
-                                </FourBox>
-                                <FourBox>
-                                    <WiggleBox whileHover={{ scale: 1.2, rotate: 5 }}>
-                                        <Img src={Icon3} alt="Smartphone illustration"/>
-                                        <ScrollLink
-                                            to="CreativeSkills"
-                                            smooth="true"
-                                            duration={500}
-                                            spy={true}
-                                            exact='true'
-                                            offset={400}/>
-                                    </WiggleBox>
-                                    <StyledLabel>Creative Skills</StyledLabel>
-                                </FourBox>
-                                <FourBox>
-                                    <WiggleBox whileHover={{ scale: 1.2, rotate: 5 }}>
-                                        <Img src={Icon4} alt="Earth illustrtation"/>
-                                        <ScrollLink
-                                            to="DevSkills"
-                                            smooth="true"
-                                            duration={500}
-                                            spy={true}
-                                            exact='true'
-                                            offset={-80}/>
-                                    </WiggleBox>
-                                    <StyledLabel>Resume</StyledLabel>
-                                </FourBox>
-                            </Boxes> */}
                         </Content>
                     </DiagonalDiv>
                     <DiagonalDiv 
@@ -506,20 +439,16 @@ const About = () => {
                                 <FourBox/>
                                 <FourBox/>
                             </Boxes>
+                            <Boxes 
+                                boxCount = {4}
+                                boxCountMobile = {2}>
+                                <FourBox/>
+                                <FourBox/>
+                                <FourBox/>
+                                <FourBox/>
+                            </Boxes>
                         </Content>
                     </DiagonalDiv>
-                    {/* <FinalDiv above ={false} hasShadow={true}>
-                        <Content>
-                        <HeaderSkew>
-                            <Heading lightcolor ={true}>Projects</Heading>
-                        </HeaderSkew>
-                            <Subtitle lightcolor ={true}>Subtitle text goes here</Subtitle>
-                            <TwoBoxes>
-                                <TwoBox/>
-                                <TwoBox/>
-                            </TwoBoxes>
-                        </Content>
-                    </FinalDiv> */}
                 </CSSVariables>
             </ThemeProvider>
             <Footer theme={theme} lightcolor ={false} padded ={true} id="footer"/>
