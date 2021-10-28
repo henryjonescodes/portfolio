@@ -1,23 +1,24 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import { Link as LinkS } from "react-scroll";
 
-// export const ScrollLink = styled(LinkS)`
-//     /* color: #fff;
-//     display: flex;
-//     align-items: center;
-//     text-decoration: none;
-//     padding: 0 1rem; */
-//     position: absolute;
-//     /* margin: auto auto; */
-//     height: 100%;
-//     width: 100%;
-//     cursor: pointer;
-//     /* border: 1px solid pink; */
+export const ScrollLink = styled(LinkS)`
+    /* color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0 1rem; */
+    position: absolute;
+    /* margin: auto auto; */
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    /* border: 1px solid pink; */
 
-//     /* &.active {
-//         border-bottom: 3px solid #01bf71;
-//     } */
-// `
+    /* &.active {
+        border-bottom: 3px solid #01bf71;
+    } */
+`
 
 export const CSSVariables = styled.div`
     --width: 100vw;
@@ -51,6 +52,7 @@ export const CSSVariables = styled.div`
     --highlight: ${props => props.theme.highlight};
 `
 
+
 export const DiagonalDiv = styled(motion.div)`
     position: relative;
     padding: var(--skew-padding) 0;
@@ -76,6 +78,16 @@ export const DiagonalDiv = styled(motion.div)`
         background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
         box-shadow: ${({hasShadow}) => (hasShadow ? '0px -3px 15px 0px #000' : 'none')};
     }
+`
+
+export const DiagonalBreak = styled.div`
+    position: relative;
+    --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')};
+    transform: skewY(var(--skewValue));
+    background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
+    height: ${({heightValue}) => (heightValue ? heightValue : '10px')};
+    border-radius: 5px;
+    margin-bottom: calc(var(--skew-padding) * 1.5);
 `
 
 export const Content = styled.div`
@@ -178,23 +190,22 @@ export const FourBox = styled.div`
     @media screen and (max-width: 700px){
         justify-self: center;
         width: 50%;
-        /* height: 0px; */
-        &:nth-child(1) {
-            margin-bottom: -20px;
-            margin-top: -30px;
-        }
-        &:nth-child(2) {
-            margin-bottom: -20px;
-            margin-top: -30px;
-        } 
-        &:nth-child(3) {
-            margin-top: 0px;
-            margin-bottom: -100px;
-        }
-        &:nth-child(4) {
-            margin-top: 0px;
-            margin-bottom: -100px;
-        } 
+        &:nth-child(1) {margin-top: -60px;}
+        &:nth-child(2) {margin-top: -60px; } 
+        &:nth-child(3) {margin-bottom: -100px;}
+        &:nth-child(4) {margin-bottom: -100px;} 
+    }
+    @media screen and (max-width: 600px){
+        &:nth-child(1) {margin-top: -30px;}
+        &:nth-child(2) { margin-top: -30px;} 
+        &:nth-child(3) {margin-bottom: -100px;}
+        &:nth-child(4) {margin-bottom: -100px;} 
+    }
+    @media screen and (max-width: 500px){
+        &:nth-child(1) {margin-top: 20px; margin-bottom: 20px;}
+        &:nth-child(2) {margin-top: 20px; margin-bottom: 20px;} 
+        &:nth-child(3) {margin-bottom: -60px;}
+        &:nth-child(4) {margin-bottom: -60px;} 
     }
 `
 export const TwoBox = styled.div`
@@ -207,15 +218,42 @@ export const TwoBox = styled.div`
     /* border: 1px solid #fff; */
     /* background: red; */
     --translation: 0;
-    &:nth-child(1) { --translation: calc(var(--skew-padding) * 1.5)}
-    &:nth-child(2) { --translation: calc(var(--skew-padding) * 0.5)}
+    &:nth-child(1) { --translation: calc(var(--skew-padding) * 2)}
+    &:nth-child(2) { --translation: calc(var(--skew-padding))}
     transform: translateY( var(--translation) ); 
 
     @media screen and (max-width: 700px){
         justify-self: center;
         margin-bottom: 40px;
     }
+
+    @media screen and (max-width: 500px){
+        margin-top: 20px;
+    }
 `
+
+export const DetailContainer = styled.div`
+    margin-top: ${({topMargin}) => (topMargin ? topMargin : '0px')};
+    /* padding-top: 40px; */
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    /* padding-top: 50px; */
+  
+    flex-direction: column;
+    align-items: left;
+    justify-content: center;
+    /* border: 2px solid red; */
+
+    @media screen and (max-width: 500px){
+        padding-top: 50px;
+    }
+    @media screen and (max-width: 400px){
+        padding-top: 70px;
+    }
+`
+
 
 export const TopLine = styled.p`
     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text2)')};
@@ -307,37 +345,50 @@ export const Subtitle = styled.p`
     /* border: 2px dashed green; */
 
     max-width: 440px;
-    /* margin-bottom: -30px; */
-    font-size: 18px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 16px;
     line-height: 22px;
-    text-indent: 10%;
+    /* text-align: justify;
+    text-justify: auto; */
+    letter-spacing: 0.8px;
+    /* text-indent: 10%; */
     color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text1)')};
 
     @media screen and (max-width: 700px){
-        font-size: 16px;
+        font-size: 14px;
         line-height: 20px;    
     }
 
     @media screen and (max-width: 620px){
-        font-size: 14px;
+        font-size: 13px;
         line-height: 18px;    
+    }
+    @media screen and (max-width: 450px){
+        font-size: 12px;
+        line-height: 14px;    
+    }
+    @media screen and (max-width: 375px){
+        font-size: 11px;
+        line-height: 13px;    
     }
 `
 
-export const StyledLabel = styled.label`
-    color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text)')};
-    text-transform: uppercase;
-    font-size: 12px;
-    width: 120%;
-    margin-bottom: 10px;
-    /* transform: skewY(var(--angle)); */
-    text-align: center;
-`
+// export const StyledLabel = styled.label`
+//     color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text)')};
+//     text-transform: uppercase;
+//     font-size: 12px;
+//     width: 120%;
+//     margin-bottom: 10px;
+//     /* transform: skewY(var(--angle)); */
+//     text-align: center;
+// `
 
 export const Img = styled.img`
     position: relative;
     width: 100%;
-    /* margin: 0 0 10px 0; */
+    /* margin: 10px 10px; */
+    padding: 0px 10px;
     /* padding-right: 0; */
     /* border: 2px dashed blue; */
 
@@ -347,15 +398,15 @@ export const Img = styled.img`
     } */
 `
 
-export const SkillsText = styled.p`
-    /* border: 2px dashed red; */
-    color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text)')};
-    font-size: 9px;
-    text-align: center;
-    width: 160%;
-    line-height: 9px;
-    font-weight: 600;
-    letter-spacing: .3px;
-    text-transform: uppercase;
-    margin: 2px 2px;
-`
+// export const SkillsText = styled.p`
+//     /* border: 2px dashed red; */
+//     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text)')};
+//     font-size: 9px;
+//     text-align: center;
+//     width: 160%;
+//     line-height: 9px;
+//     font-weight: 600;
+//     letter-spacing: .3px;
+//     text-transform: uppercase;
+//     margin: 2px 2px;
+// `

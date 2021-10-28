@@ -32,6 +32,8 @@ import ThreeJourneyIcon from '../images/logos/ThreeJsJourney.png'
 import UnionIcon from '../images/logos/union.png'
 import CBHSLogo from '../images/logos/cbhs.png'
 
+import TacoTruckImage from '../images/tacotruck.jpg'
+
 
 
 import { 
@@ -41,8 +43,8 @@ import {
     DiagonalDiv, 
     TwoBox,
     Heading,
-    StyledLabel,
-    Img,
+    // StyledLabel,
+    // Img,
     PageHeading,
     HeaderSkew,
     TopLine,
@@ -54,10 +56,15 @@ import {
     HeadingSideText,
     HeadingSideBox,
     Sepparator,
-    SkillsText,
+    // SkillsText,
+    DetailContainer,
+    Img,
+    DiagonalBreak,
+    ScrollLink,
 } from '../components/About/diagonalDivs'
 import SkillTracker from '../components/About/SkillTracker'
 import DetailPanel from '../components/About/DetailPanel';
+import IconList from '../components/About/IconList';
 
 export const pageWrapper = styled.div`
     min-width: 650px;
@@ -74,9 +81,11 @@ const About = () => {
     }
 
     const motionPoints = {
-        stop1: -520,
-        stop2: -695,
-        stop3: -900,
+        stop1: -580,
+        stop2: -775,
+        stop3: -980,
+        stop4: -1985,
+        stop5: -2530,
         scrollPoint: 200,
         storedPoint: 0
     }
@@ -113,6 +122,8 @@ const About = () => {
     const y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     const y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
     const y3 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop3, 0]);
+    const y4 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop4, 0]);
+    const y5 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop5, 0]);
 
     // console.log(y1)
 
@@ -144,6 +155,13 @@ const About = () => {
                         id="Overview">
                         <Content>
                             <HeaderSkew>
+                                <ScrollLink
+                                    to={"Overview"}
+                                    smooth="true"
+                                    duration={500}
+                                    spy={true}
+                                    exact='true'
+                                    offset={0}/>
                                 <Heading lightcolor ={true}>Overview</Heading>
                                 <TopLine lightcolor ={true}>Education | Soft Skills | Career Focus</TopLine>
                             </HeaderSkew>
@@ -151,7 +169,8 @@ const About = () => {
                             <Boxes 
                                 boxCount = {2} 
                                 boxCountMobile = {2}
-                                marginBot = {"7em"}>
+                                marginBot = {"10em"}
+                                gridGap={"1%"}>
                                 <TwoBox>
                                     <Subtitle lightcolor={true}>
                                         I'm a web developer and multimedia artist from Portland, Maine. 
@@ -166,24 +185,29 @@ const About = () => {
                                     </Subtitle>
                                 </TwoBox>
                                 <TwoBox>
-                                    <DetailPanel 
-                                        src={UnionIcon} 
-                                        theme={theme}
-                                        header={"Union College"}
-                                        subtitle={"B.S. Computer Science"}
-                                        subsubtitle={"Cum Laude '21"}/>
-                                    <DetailPanel 
-                                        src={ThreeJourneyIcon} 
-                                        theme={theme}
-                                        header={"Three.js Journey"}
-                                        subtitle={"Three.js Bootcamp"}
-                                        subsubtitle={"Course Completed 2021"}/>
-                                    <DetailPanel 
-                                        src={CBHSLogo} 
-                                        theme={theme}
-                                        header={"Casco Bay High School"}
-                                        subtitle={"The Foundation"}
-                                        subsubtitle={"Graduated '16"}/>
+                                    <DetailContainer>
+                                        <DetailPanel
+                                            src={UnionIcon} 
+                                            theme={theme}
+                                            header={"Union College"}
+                                            subtitle={"B.S. Computer Science"}
+                                            subsubtitle={"Cum Laude '21"}
+                                            lightcolor = {true}/>
+                                        <DetailPanel 
+                                            src={ThreeJourneyIcon} 
+                                            theme={theme}
+                                            header={"Three.js Journey"}
+                                            subtitle={"Three.js Bootcamp"}
+                                            subsubtitle={"Course Completed 2021"}
+                                            lightcolor = {true}/>
+                                        <DetailPanel 
+                                            src={CBHSLogo} 
+                                            theme={theme}
+                                            header={"Casco Bay High School"}
+                                            subtitle={"The Foundation"}
+                                            subsubtitle={"Graduated '16"}
+                                            lightcolor = {true}/>
+                                    </DetailContainer>
                                 </TwoBox>
                             </Boxes>
                              <Boxes 
@@ -192,32 +216,41 @@ const About = () => {
                                 boxCountMobile = {2}
                                 marginBot = {"3em"}>
                                 <FourBox>
-                                    <Img src={Icon1} alt="Three stacked cubes"/>
-                                    <StyledLabel lightcolor={true}>Design Principles</StyledLabel>
-                                    <SkillsText lightcolor={true}>Speed and Simplicity</SkillsText>
-                                    <SkillsText lightcolor={true}>Skill2</SkillsText>
-                                    <SkillsText lightcolor={true}>Skill3</SkillsText>
+                                    <IconList
+                                        src={Icon1}
+                                        alt="Three stacked cubes"
+                                        title="Design Principles"
+                                        skill1="Speed and Simplicity"
+                                        skill2="Skill2"
+                                        skill3="Skill3"/>
                                 </FourBox>
                                 <FourBox>
-                                    <Img src={Icon2} alt="Computer illustration"/>
-                                    <StyledLabel lightcolor={true}>Analytic Skills</StyledLabel>
-                                    <SkillsText lightcolor={true}>Algorithm Design</SkillsText>
-                                    <SkillsText lightcolor={true}>Data Analysis</SkillsText>
-                                    <SkillsText lightcolor={true}>Skill3</SkillsText>                          
+                                    <IconList
+                                        src={Icon2}
+                                        alt="Computer illustration"
+                                        title="Analytic Skills"
+                                        skill1="Algorithm Design"
+                                        skill2="Data Analysis"
+                                        skill3="Skill3"/>
                                 </FourBox>
                                 <FourBox>
-                                    <Img src={Icon3} alt="Smartphone illustration"/> 
-                                    <StyledLabel lightcolor={true}>Soft Skills</StyledLabel>
-                                    <SkillsText lightcolor={true}>Adaptability</SkillsText>
-                                    <SkillsText lightcolor={true}>Life-Long Scholar</SkillsText>
-                                    <SkillsText lightcolor={true}>Curiosity</SkillsText>
+                                    <IconList
+                                        src={Icon3}
+                                        alt="Smartphone illustration"
+                                        title="Soft Skills"
+                                        skill1="Adaptability"
+                                        skill2="Life-Long Scholar"
+                                        skill3="Curiosity"/>
+                                  
                                 </FourBox>
                                 <FourBox>
-                                    <Img src={Icon4} alt="Soft Skills"/>
-                                    <StyledLabel lightcolor={true}>Communication</StyledLabel>
-                                    <SkillsText lightcolor={true}>Advanced spoken spanish</SkillsText>
-                                    <SkillsText lightcolor={true}>Social Media Designer</SkillsText>
-                                    <SkillsText lightcolor={true}>Great Cook</SkillsText>                 
+                                    <IconList
+                                        src={Icon4}
+                                        alt="Smartphone illustration"
+                                        title="Communication"
+                                        skill1="Advanced spoken spanish"
+                                        skill2="Social Media Designer"
+                                        skill3="Great Cook"/>
                                </FourBox>
                             </Boxes>
                         </Content>
@@ -231,13 +264,21 @@ const About = () => {
                         >
                         <Content>
                             <HeaderSkew>
+                                <ScrollLink
+                                    to={"DevSkills"}
+                                    smooth="true"
+                                    duration={500}
+                                    spy={true}
+                                    exact='true'
+                                    offset={600}/>
                                 <Heading>Dev Skills</Heading>
                                 <TopLine>Package Proficiency | Language Knowledge</TopLine>
                             </HeaderSkew>
                             {/* <Subtitle>Subtitle text goes here</Subtitle> */}
                             <Boxes 
                                 boxCount = {8}
-                                boxCountMobile = {4}>
+                                boxCountMobile = {4}
+                                gridGap = {"0%"}>
                                 <EightBox>
                                     <SkillTracker 
                                         value ={60} 
@@ -337,6 +378,13 @@ const About = () => {
                         id={"CreativeSkills"}>
                         <Content>
                             <HeaderSkew>
+                                <ScrollLink
+                                    to="CreativeSkills"
+                                    smooth="true"
+                                    duration={500}
+                                    spy={true}
+                                    exact='true'
+                                    offset={800}/>
                                 <Heading lightcolor ={true}>Creative Skills</Heading>
                                 <TopLine lightcolor ={true}>Software Proficiency | Design Huristics</TopLine>
                             </HeaderSkew>
@@ -424,29 +472,146 @@ const About = () => {
                         lightcolor ={true} 
                         zPlane={10} 
                         style={{top: y3}}
-                        id={"EverythingElse"}>
+                        id={"Career"}>
                         <Content>
                             <HeaderSkew>
-                                <Heading>Everything Else</Heading>
-                                <TopLine>Resumé</TopLine>
+                                <ScrollLink
+                                    to="Career"
+                                    smooth="true"
+                                    duration={500}
+                                    spy={true}
+                                    exact='true'
+                                    offset={1000}/>
+                                <Heading>Career</Heading>
+                                <TopLine>Past Jobs | Notable Achievements</TopLine>
                             </HeaderSkew>
                             {/* <Subtitle>Subtitle text goes here</Subtitle> */}
                             <Boxes 
-                                boxCount = {4}
-                                boxCountMobile = {2}>
-                                <FourBox/>
-                                <FourBox/>
-                                <FourBox/>
-                                <FourBox/>
+                                boxCount = {2} 
+                                boxCountMobile = {2}
+                                marginBot = {"10em"}
+                                gridGap={"5%"}>
+                                <TwoBox>
+                                    <DetailContainer>
+                                        <DetailPanel
+                                            src={UnionIcon} 
+                                            theme={theme}
+                                            header={"PHS Robotics"}
+                                            subtitle={"General Dev/Op"}
+                                            subsubtitle={"2014 - 2015"}/>
+                                        <DetailPanel 
+                                            src={ThreeJourneyIcon} 
+                                            theme={theme}
+                                            header={"Tumblr"}
+                                            subtitle={"Systems Intern"}
+                                            subsubtitle={"February 2015"}/>
+                                    </DetailContainer>
+                                </TwoBox>
+                                <TwoBox>
+                                    <TopLine>Tech Background</TopLine>
+                                    <Img src={TacoTruckImage}/>
+                                    {/* <Subtitle lightcolor={false}>
+                                        I'm a web developer and multimedia artist from Portland, Maine. 
+                                        I'm new to both fields, but ready to dive into any projects or 
+                                        opportunites that could broaden my horizons.
+                                    </Subtitle> */}
+                                    <Subtitle lightcolor={false}>
+                                        Growing up in Portland, I immersed myself in the local restaurant culture
+                                        from a young age, working across multiple renowned Portland kitchens in many roles.
+                                    </Subtitle>
+                                </TwoBox>
                             </Boxes>
+                            <DiagonalBreak/>
                             <Boxes 
-                                boxCount = {4}
-                                boxCountMobile = {2}>
-                                <FourBox/>
-                                <FourBox/>
-                                <FourBox/>
-                                <FourBox/>
+                                boxCount = {2} 
+                                boxCountMobile = {2}
+                                marginBot = {"12em"}
+                                gridGap={"5%"}>
+                                <TwoBox>
+                                    <TopLine>Restaurant Work</TopLine>
+                                    <Img src={TacoTruckImage}/>
+                                    <Subtitle lightcolor={false}>
+                                        Growing up in Portland, I immersed myself in the local restaurant culture
+                                        from a young age, working across multiple renowned Portland kitchens in many roles.
+                                    </Subtitle>
+                                </TwoBox>
+                                <TwoBox>
+                                    <DetailContainer topMargin={"60px"}>
+                                        <DetailPanel
+                                            src={UnionIcon} 
+                                            theme={theme}
+                                            header={"Salvage BBQ"}
+                                            subtitle={"Prep Cook | Baker"}
+                                            subsubtitle={"2014 - 2016"}/>
+                                        <DetailPanel 
+                                            src={ThreeJourneyIcon} 
+                                            theme={theme}
+                                            header={"Local 188"}
+                                            subtitle={"Line Cook"}
+                                            subsubtitle={"2016 - 2017"}/>
+                                        <DetailPanel 
+                                            src={CBHSLogo} 
+                                            theme={theme}
+                                            header={"OhNo Café"}
+                                            subtitle={"Line Cook | FOH"}
+                                            subsubtitle={"Winter 2017"}/>
+                                        <DetailPanel 
+                                            src={CBHSLogo} 
+                                            theme={theme}
+                                            header={"Bayside Bowl"}
+                                            subtitle={"Line Cook | FOH"}
+                                            subsubtitle={"2017 - 2019"}/>
+                                        <DetailPanel 
+                                            src={CBHSLogo} 
+                                            theme={theme}
+                                            header={"2DineIn"}
+                                            subtitle={"Delivery Driver"}
+                                            subsubtitle={"2017 - 2019"}/>
+                                    </DetailContainer>
+                                </TwoBox>
                             </Boxes>
+                        </Content>
+                    </DiagonalDiv>
+                    <DiagonalDiv 
+                        hasShadow={true} 
+                        lightcolor ={false} 
+                        zPlane={12} 
+                        style={{top: y4}}
+                        id={"Research"}>
+                        <Content>
+                            <HeaderSkew>
+                                <ScrollLink
+                                    to="Research"
+                                    smooth="true"
+                                    duration={500}
+                                    spy={true}
+                                    exact='true'
+                                    offset={1900}/>
+                                <Heading lightcolor ={true}>Research</Heading>
+                                <TopLine lightcolor ={true}>Projects | Publications</TopLine>
+                            </HeaderSkew>
+                            <DiagonalBreak heightValue = {"300px"}/>
+                        </Content>
+                    </DiagonalDiv>
+                    <DiagonalDiv 
+                        hasShadow={true} 
+                        lightcolor ={true} 
+                        zPlane={14} 
+                        style={{top: y5}}
+                        id={"Empty"}>
+                        <Content>
+                            <HeaderSkew>
+                                <ScrollLink
+                                    to="Empty"
+                                    smooth="true"
+                                    duration={500}
+                                    spy={true}
+                                    exact='true'
+                                    offset={2500}/>
+                                <Heading lightcolor ={false}>Everything Else</Heading>
+                                <TopLine lightcolor ={false}>Resume | CV</TopLine>
+                            </HeaderSkew>
+                            <DiagonalBreak heightValue = {"300px"} lightcolor = {true}/>
                         </Content>
                     </DiagonalDiv>
                 </CSSVariables>

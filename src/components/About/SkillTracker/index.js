@@ -2,7 +2,6 @@ import React from 'react'
 import { FaStar } from 'react-icons/fa'
 import { IconContext } from 'react-icons/lib'
 import { ThemeProvider } from 'styled-components'
-import { Img } from '../diagonalDivs'
 import { 
     ContentWrapper,
     ImgButton,
@@ -10,6 +9,7 @@ import {
     StarContainer,
     StarsContainer,
     StyledBarWrapper, 
+    Img
 } from './SkillTrackerElements'
 
 const SkillTracker = ({value, max, text, src, alt, theme, dest, scale, lightcolor}) => {

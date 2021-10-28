@@ -2,7 +2,7 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import {  Img, ImgWrap, DetailWrapper, TextWrapper, UpperCaseLine, SubtitleUpperCase, SubtitleItalic } from './DetailPanelElements'
 
-const DetailPanel = ({theme, src, header, subtitle, subsubtitle}) => {
+const DetailPanel = ({theme, src, header, subtitle, subsubtitle, lightcolor}) => {
     return (
         <ThemeProvider theme={theme}>
             <DetailWrapper>
@@ -10,9 +10,9 @@ const DetailPanel = ({theme, src, header, subtitle, subsubtitle}) => {
                     <Img src ={src}/>
                 </ImgWrap>
                 <TextWrapper>
-                    <UpperCaseLine>{header}</UpperCaseLine>
-                    <SubtitleUpperCase>{subtitle}</SubtitleUpperCase>
-                    <SubtitleItalic>{subsubtitle}</SubtitleItalic>
+                    <UpperCaseLine lightcolor={lightcolor}>{header}</UpperCaseLine>
+                    <SubtitleUpperCase lightcolor={lightcolor}>{subtitle}</SubtitleUpperCase>
+                    <SubtitleItalic lightcolor={lightcolor}>{subsubtitle}</SubtitleItalic>
                 </TextWrapper>
             </DetailWrapper>
         </ThemeProvider>

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { motion } from "framer-motion";
 
 export const ContentWrapper = styled.div`
-    position: absolute;
+    position: relative;
     top: -10px;
     width: 80px;
     display: flex;
@@ -68,10 +68,11 @@ export const Label = styled.label`
 `
 
 export const Img = styled.img`
-
+    position: relative;
+    width: 100%;
     /* width: 50%; */
     /* margin: 0 0 10px 0; */
-    padding-right: 0;
+    /* padding-right: 0; */
 `
 export const StarsContainer = styled.div`
     display: flex;
