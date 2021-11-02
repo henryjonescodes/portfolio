@@ -88,6 +88,20 @@ export const DiagonalBreak = styled.div`
     height: ${({heightValue}) => (heightValue ? heightValue : '10px')};
     border-radius: 5px;
     margin-bottom: calc(var(--skew-padding) * 1.5);
+    z-index: -10;
+
+    @media screen and (max-width: 700px){
+        margin-top: 75px;
+    }
+    @media screen and (max-width: 500px){
+        margin-top: 100px;
+    }
+    @media screen and (max-width: 400px){
+        margin-top: 150px;
+    }
+    @media screen and (max-width: 330px){
+        margin-top: 200px;
+    }
 `
 
 export const Content = styled.div`
@@ -108,7 +122,8 @@ export const Boxes = styled.div`
     /* border: 1px solid yellow;  */
 
     @media screen and (max-width: 700px){
-        grid-template-columns: repeat(${({boxCountMobile}) => boxCountMobile}, 1fr);;
+        margin-top: -120px;
+        grid-template-columns: repeat(${({boxCountMobile}) => boxCountMobile}, 1fr);
     }
 `
 
@@ -119,7 +134,7 @@ export const EightBox = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 100%;
-    /* border: 1px solid red; */
+    /* border: 1px dashed green; */
     /* background: red; */
     --translation: 0;
     &:nth-child(1) { --translation: calc(var(--skew-padding) * 1.75)}
@@ -151,7 +166,7 @@ export const SixBox = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 100%;
-    /* border: 1px solid red; */
+    /* border: 1px dashed green; */
     /* background: red; */
     --translation: 0;
     &:nth-child(1) { --translation: calc(var(--skew-padding) * 2)}
@@ -198,20 +213,26 @@ export const FourBox = styled.div`
     @media screen and (max-width: 600px){
         &:nth-child(1) {margin-top: -30px;}
         &:nth-child(2) { margin-top: -30px;} 
-        &:nth-child(3) {margin-bottom: -100px;}
-        &:nth-child(4) {margin-bottom: -100px;} 
+        &:nth-child(3) {margin-bottom: -70px;}
+        &:nth-child(4) {margin-bottom: -70px;} 
     }
     @media screen and (max-width: 500px){
-        &:nth-child(1) {margin-top: 20px; margin-bottom: 20px;}
-        &:nth-child(2) {margin-top: 20px; margin-bottom: 20px;} 
-        &:nth-child(3) {margin-bottom: -60px;}
-        &:nth-child(4) {margin-bottom: -60px;} 
+        &:nth-child(1) {margin-top: 20px; margin-bottom: 30px;}
+        &:nth-child(2) {margin-top: 20px; margin-bottom: 30px;} 
+        &:nth-child(3) {margin-bottom: -30px;}
+        &:nth-child(4) {margin-bottom: -30px;} 
+    }
+    @media screen and (max-width: 360px){
+        &:nth-child(1) {margin-top: 20px; margin-bottom: 40px;}
+        &:nth-child(2) {margin-top: 20px; margin-bottom: 40px;} 
+        &:nth-child(3) {margin-bottom: -10px;}
+        &:nth-child(4) {margin-bottom: -10px;} 
     }
 `
 export const TwoBox = styled.div`
     width: 100%;
     height: 0;
-    padding-bottom: 100%;
+    padding-bottom: ${({padTop}) => (padTop ? padTop : '100%')};
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -225,11 +246,19 @@ export const TwoBox = styled.div`
     @media screen and (max-width: 700px){
         justify-self: center;
         margin-bottom: 40px;
+        &:nth-child(2) { margin-bottom: -30px;}
     }
 
     @media screen and (max-width: 500px){
         margin-top: 20px;
+        &:nth-child(2) { margin-bottom: 0px;}
     }
+    @media screen and (max-width: 360px){
+        /* margin-top: 20px; */
+        /* margin-bottom: 130px; */
+    }
+
+
 `
 
 export const DetailContainer = styled.div`
@@ -238,7 +267,7 @@ export const DetailContainer = styled.div`
     position: absolute;
     display: flex;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     /* padding-top: 50px; */
   
     flex-direction: column;
@@ -247,10 +276,10 @@ export const DetailContainer = styled.div`
     /* border: 2px solid red; */
 
     @media screen and (max-width: 500px){
-        padding-top: 50px;
+        /* padding-top: 50px; */
     }
     @media screen and (max-width: 400px){
-        padding-top: 70px;
+        /* padding-top: -50px; */
     }
 `
 
@@ -263,6 +292,10 @@ export const TopLine = styled.p`
     letter-spacing: 1.4px;
     text-transform: uppercase;
     margin-bottom: 16px;
+
+    @media screen and (max-width: 400px){
+        margin-bottom: 50px;
+    }
 `
 
 export const HeadingBox = styled.div`
@@ -273,6 +306,7 @@ export const HeadingBox = styled.div`
     justify-content: left;
     /* width:100%; */
     /* border: 2px dashed green; */
+    
 `
 
 export const Sepparator = styled.div`
@@ -305,7 +339,17 @@ export const PageHeading = styled.h1`
     /* margin-bottom: 70px; */
 
     @media screen and (max-width: 700px){
-        font-size: 38px;
+        font-size: 42px;
+    }
+
+    @media screen and (max-width: 500px){
+        font-size: 28px;
+    }
+    @media screen and (max-width: 400px){
+        font-size: 22px;
+    }
+    @media screen and (max-width: 320px){
+        font-size: 18px;
     }
 `
 
@@ -315,6 +359,24 @@ export const HeadingSideText = styled.p`
     font-size: 18px;
     line-height: 24px;
     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text2)')};
+
+    @media screen and (max-width: 700px){
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    @media screen and (max-width: 500px){
+        font-size: 14px;
+        line-height: 18px;
+    }
+    @media screen and (max-width: 400px){
+        font-size: 12px;
+        line-height: 16px;
+    }
+    @media screen and (max-width: 320px){
+        font-size: 10px;
+        line-height: 14px;
+    }
 `
 
 export const Heading = styled.h1`
@@ -384,19 +446,19 @@ export const Subtitle = styled.p`
 //     text-align: center;
 // `
 
-export const Img = styled.img`
-    position: relative;
-    width: 100%;
-    /* margin: 10px 10px; */
-    padding: 0px 10px;
-    /* padding-right: 0; */
-    /* border: 2px dashed blue; */
+// export const Img = styled.img`
+//     position: relative;
+//     width: 100%;
+//     /* margin: 10px 10px; */
+//     padding: 0px 10px;
+//     /* padding-right: 0; */
+//     /* border: 2px dashed blue; */
 
-    /* @media screen and (max-width: 700px){
-        width: 100%;
+//     /* @media screen and (max-width: 700px){
+//         width: 100%;
   
-    } */
-`
+//     } */
+// `
 
 // export const SkillsText = styled.p`
 //     /* border: 2px dashed red; */

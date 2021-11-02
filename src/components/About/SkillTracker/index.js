@@ -9,7 +9,8 @@ import {
     StarContainer,
     StarsContainer,
     StyledBarWrapper, 
-    Img
+    Img,
+    BarContainer
 } from './SkillTrackerElements'
 
 const SkillTracker = ({value, max, text, src, alt, theme, dest, scale, lightcolor}) => {
@@ -31,37 +32,39 @@ const SkillTracker = ({value, max, text, src, alt, theme, dest, scale, lightcolo
                             whileHover={{ scale: 1.2, rotate: 5 }}>
                             <Img src={src} alt={alt}/>
                         </ImgButton>
-                        <Label lightcolor={lightcolor}>{text}</Label>
-                        <StyledBarWrapper>                
-                            <progress value= {value} max ={max}/>
-                        </StyledBarWrapper>
-                        <StarsContainer>
-                            {stars >= 1 &&  
-                                <StarContainer>
-                                    <FaStar/>
-                                </StarContainer>
-                            }
-                            {stars >= 2 &&  
-                                <StarContainer>
-                                    <FaStar/>
-                                </StarContainer>
-                            }
-                            {stars >= 3 &&  
-                                <StarContainer>
-                                    <FaStar/>
-                                </StarContainer>
-                            }
-                            {stars >= 4 &&  
-                                <StarContainer>
-                                    <FaStar/>
-                                </StarContainer>
-                            }
-                            {stars >= 5 &&  
-                                <StarContainer>
-                                    <FaStar/>
-                                </StarContainer>
-                            }
-                        </StarsContainer>
+                        <BarContainer>
+                            <Label lightcolor={lightcolor}>{text}</Label>
+                            <StyledBarWrapper>                
+                                <progress value= {value} max ={max}/>
+                            </StyledBarWrapper>
+                            <StarsContainer>
+                                {stars >= 1 &&  
+                                    <StarContainer>
+                                        <FaStar/>
+                                    </StarContainer>
+                                }
+                                {stars >= 2 &&  
+                                    <StarContainer>
+                                        <FaStar/>
+                                    </StarContainer>
+                                }
+                                {stars >= 3 &&  
+                                    <StarContainer>
+                                        <FaStar/>
+                                    </StarContainer>
+                                }
+                                {stars >= 4 &&  
+                                    <StarContainer>
+                                        <FaStar/>
+                                    </StarContainer>
+                                }
+                                {stars >= 5 &&  
+                                    <StarContainer>
+                                        <FaStar/>
+                                    </StarContainer>
+                                }
+                            </StarsContainer>
+                        </BarContainer>
                     </ContentWrapper>
                 </ThemeProvider>
             </IconContext.Provider>
