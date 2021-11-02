@@ -33,6 +33,12 @@ import UnionIcon from '../images/logos/union.png'
 import CBHSLogo from '../images/logos/cbhs.png'
 
 import TacoTruckImage from '../images/tacotruck.jpg'
+import SalvageImage from '../images/salvage.jpeg'
+import LocalImage from '../images/local188.jpg'
+import OhnoImage from '../images/ohno.jpg'
+import VexImage from '../images/vex.jpg'
+import UnionImage from '../images/union.jpg'
+import TumblrImage from '../images/tumblr.jpg'
 
 
 
@@ -58,13 +64,15 @@ import {
     Sepparator,
     // SkillsText,
     DetailContainer,
-    Img,
+    // Img,
     DiagonalBreak,
     ScrollLink,
 } from '../components/About/diagonalDivs'
 import SkillTracker from '../components/About/SkillTracker'
 import DetailPanel from '../components/About/DetailPanel';
 import IconList from '../components/About/IconList';
+import PositionDetails from '../components/About/PositionDetails';
+import { BaysideDetails, LocalDetails, OhnoDetails, SalvageDetails, ThesisDetails, TumblrDetails, VexDetails } from '../components/About/content';
 
 export const pageWrapper = styled.div`
     min-width: 650px;
@@ -84,8 +92,8 @@ const About = () => {
         stop1: -580,
         stop2: -775,
         stop3: -980,
-        stop4: -1985,
-        stop5: -2530,
+        stop4: -1555,
+        stop5: -2130,
         scrollPoint: 200,
         storedPoint: 0
     }
@@ -169,7 +177,7 @@ const About = () => {
                             <Boxes 
                                 boxCount = {2} 
                                 boxCountMobile = {2}
-                                marginBot = {"10em"}
+                                marginBot = {"3em"}
                                 gridGap={"1%"}>
                                 <TwoBox>
                                     <Subtitle lightcolor={true}>
@@ -210,6 +218,7 @@ const About = () => {
                                     </DetailContainer>
                                 </TwoBox>
                             </Boxes>
+                            <DiagonalBreak heightValue="20px" lightcolor = {true}/>
                              <Boxes 
                                 boxCount = {4}
                                 gridGap={"10%"}
@@ -482,94 +491,62 @@ const About = () => {
                                     spy={true}
                                     exact='true'
                                     offset={1000}/>
-                                <Heading>Career</Heading>
-                                <TopLine>Past Jobs | Notable Achievements</TopLine>
+                                <Heading>Career - Tech</Heading>
+                                <TopLine>Tech Experience and Past Work</TopLine>
                             </HeaderSkew>
                             {/* <Subtitle>Subtitle text goes here</Subtitle> */}
                             <Boxes 
                                 boxCount = {2} 
-                                boxCountMobile = {2}
-                                marginBot = {"10em"}
+                                boxCountMobile = {1}
+                                marginBot = {"8em"}
                                 gridGap={"5%"}>
-                                <TwoBox>
-                                    <DetailContainer>
-                                        <DetailPanel
-                                            src={UnionIcon} 
-                                            theme={theme}
-                                            header={"PHS Robotics"}
-                                            subtitle={"General Dev/Op"}
-                                            subsubtitle={"2014 - 2015"}/>
-                                        <DetailPanel 
-                                            src={ThreeJourneyIcon} 
-                                            theme={theme}
-                                            header={"Tumblr"}
-                                            subtitle={"Systems Intern"}
-                                            subsubtitle={"February 2015"}/>
-                                    </DetailContainer>
+                                <TwoBox padTop = "70%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={false}
+                                        heading="Tumblr"
+                                        caption="Intern"
+                                        timeline="February 2015"
+                                        posts ={TumblrDetails}
+                                        img={TumblrImage}/>
                                 </TwoBox>
-                                <TwoBox>
-                                    <TopLine>Tech Background</TopLine>
-                                    <Img src={TacoTruckImage}/>
-                                    {/* <Subtitle lightcolor={false}>
-                                        I'm a web developer and multimedia artist from Portland, Maine. 
-                                        I'm new to both fields, but ready to dive into any projects or 
-                                        opportunites that could broaden my horizons.
-                                    </Subtitle> */}
-                                    <Subtitle lightcolor={false}>
-                                        Growing up in Portland, I immersed myself in the local restaurant culture
-                                        from a young age, working across multiple renowned Portland kitchens in many roles.
-                                    </Subtitle>
+                                <TwoBox padTop = "70%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={false}
+                                        heading="VEX Robotics"
+                                        caption="Pilot | Engineer | Programmer"
+                                        timeline="2014"
+                                        posts ={VexDetails}
+                                        img={VexImage}/>
                                 </TwoBox>
-                            </Boxes>
-                            <DiagonalBreak/>
+                            </Boxes>    
                             <Boxes 
                                 boxCount = {2} 
-                                boxCountMobile = {2}
-                                marginBot = {"12em"}
+                                boxCountMobile = {1}
+                                marginBot = {"5em"}
                                 gridGap={"5%"}>
-                                <TwoBox>
-                                    <TopLine>Restaurant Work</TopLine>
-                                    <Img src={TacoTruckImage}/>
-                                    <Subtitle lightcolor={false}>
-                                        Growing up in Portland, I immersed myself in the local restaurant culture
-                                        from a young age, working across multiple renowned Portland kitchens in many roles.
-                                    </Subtitle>
+                                <TwoBox padTop = "70%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={false}
+                                        heading="Union College"
+                                        caption="UI Scientist | Java Developer"
+                                        timeline="Spring 2020 - Spring 2021"
+                                        posts ={ThesisDetails}
+                                        img = {UnionImage}/>
                                 </TwoBox>
-                                <TwoBox>
-                                    <DetailContainer topMargin={"60px"}>
-                                        <DetailPanel
-                                            src={UnionIcon} 
-                                            theme={theme}
-                                            header={"Salvage BBQ"}
-                                            subtitle={"Prep Cook | Baker"}
-                                            subsubtitle={"2014 - 2016"}/>
-                                        <DetailPanel 
-                                            src={ThreeJourneyIcon} 
-                                            theme={theme}
-                                            header={"Local 188"}
-                                            subtitle={"Line Cook"}
-                                            subsubtitle={"2016 - 2017"}/>
-                                        <DetailPanel 
-                                            src={CBHSLogo} 
-                                            theme={theme}
-                                            header={"OhNo Café"}
-                                            subtitle={"Line Cook | FOH"}
-                                            subsubtitle={"Winter 2017"}/>
-                                        <DetailPanel 
-                                            src={CBHSLogo} 
-                                            theme={theme}
-                                            header={"Bayside Bowl"}
-                                            subtitle={"Line Cook | FOH"}
-                                            subsubtitle={"2017 - 2019"}/>
-                                        <DetailPanel 
-                                            src={CBHSLogo} 
-                                            theme={theme}
-                                            header={"2DineIn"}
-                                            subtitle={"Delivery Driver"}
-                                            subsubtitle={"2017 - 2019"}/>
-                                    </DetailContainer>
-                                </TwoBox>
-                            </Boxes>
+                                {/* <TwoBox padTop = "60%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={false}
+                                        heading="Bayside Bowl"
+                                        caption="Line/Prep Cook | FOH"
+                                        timeline="2016 - 2017"
+                                        posts ={BaysideDetails}
+                                        img={TacoTruckImage}/>
+                                </TwoBox> */}
+                            </Boxes>    
                         </Content>
                     </DiagonalDiv>
                     <DiagonalDiv 
@@ -577,20 +554,72 @@ const About = () => {
                         lightcolor ={false} 
                         zPlane={12} 
                         style={{top: y4}}
-                        id={"Research"}>
+                        id={"Career2"}>
                         <Content>
                             <HeaderSkew>
                                 <ScrollLink
-                                    to="Research"
+                                    to="Career2"
                                     smooth="true"
                                     duration={500}
                                     spy={true}
                                     exact='true'
-                                    offset={1900}/>
-                                <Heading lightcolor ={true}>Research</Heading>
-                                <TopLine lightcolor ={true}>Projects | Publications</TopLine>
+                                    offset={1500}/>
+                                <Heading lightcolor ={true}>Career - Cook</Heading>
+                                <TopLine lightcolor ={true}>Food service experience</TopLine>
                             </HeaderSkew>
-                            <DiagonalBreak heightValue = {"300px"}/>
+                            <Boxes 
+                                boxCount = {2} 
+                                boxCountMobile = {1}
+                                marginBot = {"8em"}
+                                gridGap={"5%"}>
+                                <TwoBox padTop = "70%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={true}
+                                        heading="Salvage BBQ"
+                                        caption="Line cook | baker"
+                                        timeline="2014 - 2016"
+                                        posts ={SalvageDetails}
+                                        img={SalvageImage}/>
+                                </TwoBox>
+                                <TwoBox padTop = "70%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={true}
+                                        heading="Local 188"
+                                        caption="Line/Prep Cook "
+                                        timeline="2016 - 2017"
+                                        posts ={LocalDetails}
+                                        img={LocalImage}/>
+                                </TwoBox>
+                            </Boxes>    
+                            <Boxes 
+                                boxCount = {2} 
+                                boxCountMobile = {1}
+                                marginBot = {"5em"}
+                                gridGap={"5%"}>
+                                <TwoBox padTop = "70%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={true}
+                                        heading="OhNo Café"
+                                        caption="Line cook | FOH"
+                                        timeline="Winter 2017"
+                                        posts ={OhnoDetails}
+                                        img = {OhnoImage}/>
+                                </TwoBox>
+                                <TwoBox padTop = "70%">
+                                    <PositionDetails 
+                                        theme = {theme} 
+                                        lightcolor={true}
+                                        heading="Bayside Bowl"
+                                        caption="Line/Prep Cook | FOH"
+                                        timeline="2016 - 2017"
+                                        posts ={BaysideDetails}
+                                        img={TacoTruckImage}/>
+                                </TwoBox>
+                            </Boxes>    
+                            {/* <DiagonalBreak heightValue = {"300px"}/> */}
                         </Content>
                     </DiagonalDiv>
                     <DiagonalDiv 

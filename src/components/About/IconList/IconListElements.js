@@ -28,6 +28,7 @@ export const SkillsText = styled.p`
     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text)')};
     font-size: 9px;
     text-align: center;
+    /* justify-content: center; */
     width: 160%;
     line-height: 9px;
     font-weight: 600;

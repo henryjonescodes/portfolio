@@ -2,23 +2,33 @@ import styled from 'styled-components'
 import { motion } from "framer-motion";
 
 export const ContentWrapper = styled.div`
-    position: relative;
+    position: absolute;
     top: -10px;
     width: 80px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid yellow; */
+    /* border: 1px dotted red; */
+    @media screen and (max-width: 600px){
+        width: 60px;
+    }
+`
+export const BarContainer = styled.div`
+    /* border: 1px solid red; */
+    position:relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `
 
 export const StyledBarWrapper = styled.div`
     position: relative;
-    top: 70px;
+    /* top: 70px; */
     display: flex;
     flex-direction: row;
     --width: 60px;
     --height: 8px;
-
+    margin: 2px auto;
     progress {
 
     }
@@ -45,7 +55,7 @@ export const StyledBarWrapper = styled.div`
 `
 
 export const ImgButton = styled(motion.a)`
-    position: absolute;
+    position: relative;
     --scalefactor: ${({scale}) => scale};
     width: var(--scalefactor);
     color: red;
@@ -55,16 +65,26 @@ export const ImgButton = styled(motion.a)`
     display: flex;
     align-items: center;
     font-weight: bold;
+    /* border: 1px solid violet; */
 `
 export const Label = styled.label`
     --text2: ${props => props.theme.t2};
     --text4: ${props => props.theme.t4};
 
     position: relative;
-    top: 70px;
+    /* top: 70px; */
     color:  ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text2)')};
     font-size: 16px;
     text-align: center;
+    width: 120%;
+    margin: 2px 0px;
+
+    @media screen and (max-width: 600px){
+        font-size: 13px;
+        /* top: 60px; */
+    }
+
+    /* border: 1px solid blue; */
 `
 
 export const Img = styled.img`
@@ -73,6 +93,7 @@ export const Img = styled.img`
     /* width: 50%; */
     /* margin: 0 0 10px 0; */
     /* padding-right: 0; */
+   
 `
 export const StarsContainer = styled.div`
     display: flex;
@@ -82,7 +103,7 @@ export const StarsContainer = styled.div`
     position: relative;
     height: 10px;
     width: 92%;
-    top: 72px;
+    /* top: 72px; */
     /* border: 1px solid red; */
 `
 
@@ -98,6 +119,7 @@ export const StarContainer = styled.div`
     left: var(--left);
     height: 15px;
     width: 15px;
+    margin: 2px 0px;
     /* top: 72px; */
     /* border: 1px solid green; */
 `
