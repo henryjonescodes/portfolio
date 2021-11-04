@@ -39,6 +39,15 @@ export const PositionContainer = styled(motion.div)`
     /* background: ${({lightcolor}) => (lightcolor ? 'var(--background2)' : 'var(--background)')}; */
 `
 
+export const PositionModal = styled.div`
+    position: absolute;
+    /* width: 100vw; */
+    /* height: 100vh; */
+    left:0;
+    right:0;
+    border: 4px dashed red;
+`
+
 export const Gradient = styled.div`
     position: absolute;
     height: 100%;

@@ -109,7 +109,7 @@ export const Content = styled.div`
     margin: 0 auto;
     padding: 1.5em;
     position: relative;
-    /* border: 2px dashed pink; */
+    border: 2px dashed pink;
 `
 
 export const Boxes = styled.div`
