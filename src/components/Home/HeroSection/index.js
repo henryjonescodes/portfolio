@@ -17,7 +17,7 @@ import {
 const HeroSection = ({theme, to}) => { 
     const [hover, setHover] = useState(false)
 
-    let buttonMessage = "View 3D Portfolio (In Development)"
+    let buttonMessage = "About Me"
 
     const onHover = () => {
         setHover(!hover)

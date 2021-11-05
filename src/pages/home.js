@@ -3,10 +3,6 @@ import RoutedSideBar from '../components/Common/RoutedSideBar'
 import { theme } from '../components/Home/theme'
 import HeroSection from '../components/Home/HeroSection';
 import InfoSection from '../components/Home/InfoSection';
-import headshot from '../images/headshot.jpg'
-import PhotoIcon from '../images/logos/camera.svg'
-import ProjectsIcon from '../images/logos/conveyor.svg'
-import ContactIcon from '../images/logos/plane.svg'
 import NavBar from '../components/Home/NavBar';
 import Footer from '../components/Common/Footer';
 
@@ -19,7 +15,7 @@ export const infoData = {
     description: "I'm Henry, a 3D designer and software engineer from Portland, Maine. I specialize in Blender modeling, Three.js web development, and Java application design.",
     buttonLabel: "See More",
     imgStart: true,
-    img: headshot,
+    img: "/images/home/headshot.jpg",
     alt: 'Photo',
     //Button Props
     buttonLarge: true,
@@ -36,7 +32,7 @@ export const infoData2 = {
     description: "Follow me through my camera: view my most recent photography and linked social media.",
     buttonLabel: "See More",
     imgStart: false,
-    img: PhotoIcon,
+    img: "/images/home/camera.svg",
     alt: 'Photo',
     //Button Props
     buttonLarge: true,
@@ -53,7 +49,7 @@ export const infoData3 = {
     description: "Explore my past projects and works in 3D art and programming",
     buttonLabel: "See More",
     imgStart: true,
-    img: ProjectsIcon,
+    img: "/images/home/conveyor.svg",
     alt: 'Photo',
     //Button Props
     buttonLarge: true,
@@ -70,7 +66,7 @@ export const infoData4 = {
     description: "Contact me directly via my site or connect with me via my social media accounts.",
     buttonLabel: "Say Hi",
     imgStart: false,
-    img: ContactIcon,
+    img:  "/images/home/plane.svg",
     alt: 'Photo',
     //Button Props
     buttonLarge: true,
@@ -90,7 +86,7 @@ const Home = () => {
         <>
             <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
             <NavBar toggle = {toggle} title = "Home" theme = {theme} sticky ={true}/>
-            <HeroSection theme = {theme} to={"virtualportfolio"} />
+            <HeroSection theme = {theme} to={"about"} />
             <InfoSection{...infoData}/>
             <InfoSection{...infoData2}/>
             <InfoSection{...infoData3}/>
