@@ -61,7 +61,6 @@ export const DiagonalDiv = styled(motion.div)`
     z-index: ${({zPlane}) => zPlane + 1};
     /* border: 2px dashed purple; */
 
-
     &:before {
         content: "";
         position: absolute;
@@ -109,7 +108,7 @@ export const Content = styled.div`
     margin: 0 auto;
     padding: 1.5em;
     position: relative;
-    border: 2px dashed pink;
+    /* border: 2px dashed pink; */
 `
 
 export const Boxes = styled.div`
@@ -433,6 +432,35 @@ export const Subtitle = styled.p`
     @media screen and (max-width: 375px){
         font-size: 11px;
         line-height: 13px;    
+    }
+`
+
+
+export const DiagonalButton = styled.a`
+    --highlight: ${props => props.theme.highlight};
+    --foreground: ${props => props.theme.fg};
+    --background: ${props => props.theme.bg};
+    --text2: ${props => props.theme.t1};
+    --text: ${props => props.theme.t3};
+    border-radius: 50px;
+    /* background: ${({lightbg}) => (lightbg ? 'var(--foreground)' : 'var(--background)')}; */
+    background: var(--highlight);
+    white-space: nowrap;
+    padding: ${({big}) => (big ? '14px 48px' : '12px 30px')};
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
+    font-size: ${({fontbig}) => (fontbig ? '20px' : '16px')};
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2 ease-in-out;
+    margin-top: 50px;
+    margin-bottom: -100px;
+    &:hover {
+        transition: all 0.2 ease-in-out;
+        background: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
     }
 `
 

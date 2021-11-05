@@ -3,43 +3,17 @@ import React, {useState, useEffect} from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import { useTransform, useViewportScroll} from 'framer-motion';
 
+
+import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { MasonryGrid } from "../components/About/MasonryGrid/MasonryGrid";
+import { MasonryItem } from "../components/About/MasonryGrid/MasonryItem";
+
 //Local
 import LinkBar from '../components/Common/LinkBar'
 import RoutedSideBar from '../components/Common/RoutedSideBar'
 import { theme } from '../components/About/theme'
 import Footer from '../components/Common/Footer'
-
-//Icons and images
-import Icon1 from '../images/about/icon-02.svg'
-import Icon2 from '../images/about/icon-03.svg'
-import Icon3 from '../images/about/icon-04.svg'
-import Icon4 from '../images/about/icon-05.svg'
-import ReactIcon from '../images/logos/react.svg'
-import CIcon from '../images/logos/c.svg'
-import CPlusPlusIcon from '../images/logos/c++.svg'
-import JavaIcon from '../images/logos/java.svg'
-import NodeIcon from '../images/logos/node-js.svg'
-import PythonIcon from '../images/logos/python.svg'
-import TexIcon from '../images/logos/tex.svg'
-import ThreeIcon from '../images/logos/threejs.svg'
-import BlenderIcon from '../images/logos/blender.svg'
-import AEIcon from '../images/logos/after-effects.svg'
-import AIIcon from '../images/logos/illustrator.svg'
-import APSIcon from '../images/logos/photoshop.svg'
-import APRIcon from '../images/logos/premiere.svg'
-import CinemaIcon from '../images/logos/c4d.png'
-import ThreeJourneyIcon from '../images/logos/ThreeJsJourney.png'
-import UnionIcon from '../images/logos/union.png'
-import CBHSLogo from '../images/logos/cbhs.png'
-
-import TacoTruckImage from '../images/tacotruck.jpg'
-import SalvageImage from '../images/salvage.jpeg'
-import LocalImage from '../images/local188.jpg'
-import OhnoImage from '../images/ohno.jpg'
-import VexImage from '../images/vex.jpg'
-import UnionImage from '../images/union.jpg'
-import TumblrImage from '../images/tumblr.jpg'
-
 
 
 import { 
@@ -67,16 +41,31 @@ import {
     // Img,
     DiagonalBreak,
     ScrollLink,
+    DiagonalButton,
 } from '../components/About/diagonalDivs'
 import SkillTracker from '../components/About/SkillTracker'
 import DetailPanel from '../components/About/DetailPanel';
 import IconList from '../components/About/IconList';
-import PositionDetails from '../components/About/PositionDetails';
-import { BaysideDetails, LocalDetails, OhnoDetails, SalvageDetails, ThesisDetails, TumblrDetails, VexDetails } from '../components/About/content';
+import { Container } from '../components/About/MasonryGrid/MasonryElements';
 
 export const pageWrapper = styled.div`
     min-width: 650px;
 `
+
+function Store({ match }) {
+    let { id } = match.params;
+    const imageHasLoaded = true;
+  
+    return (
+      <>
+        <MasonryGrid selectedId={id} />
+        <AnimatePresence>
+          {id && imageHasLoaded && <MasonryItem id={id} key="item" />}
+        </AnimatePresence>
+      </>
+    );
+}
+
 const About = () => {
 
     const [isOpen, setIsOpen] = useState(false)
@@ -92,8 +81,8 @@ const About = () => {
         stop1: -580,
         stop2: -775,
         stop3: -980,
-        stop4: -1555,
-        stop5: -2130,
+        stop4: -2260,
+        stop5: -2390,
         scrollPoint: 200,
         storedPoint: 0
     }
@@ -195,21 +184,21 @@ const About = () => {
                                 <TwoBox>
                                     <DetailContainer>
                                         <DetailPanel
-                                            src={UnionIcon} 
+                                            src={"/images/about/logos/union.png"} 
                                             theme={theme}
                                             header={"Union College"}
                                             subtitle={"B.S. Computer Science"}
                                             subsubtitle={"Cum Laude '21"}
                                             lightcolor = {true}/>
                                         <DetailPanel 
-                                            src={ThreeJourneyIcon} 
+                                            src={"/images/about/logos/ThreeJsJourney.png"} 
                                             theme={theme}
                                             header={"Three.js Journey"}
                                             subtitle={"Three.js Bootcamp"}
                                             subsubtitle={"Course Completed 2021"}
                                             lightcolor = {true}/>
                                         <DetailPanel 
-                                            src={CBHSLogo} 
+                                            src={"/images/about/logos/cbhs.png"} 
                                             theme={theme}
                                             header={"Casco Bay High School"}
                                             subtitle={"The Foundation"}
@@ -226,25 +215,25 @@ const About = () => {
                                 marginBot = {"3em"}>
                                 <FourBox>
                                     <IconList
-                                        src={Icon1}
+                                        src={"/images/about/logos/stackedCubes.svg"}
                                         alt="Three stacked cubes"
                                         title="Design Principles"
                                         skill1="Speed and Simplicity"
-                                        skill2="Skill2"
-                                        skill3="Skill3"/>
+                                        skill2="Visual Design"
+                                        skill3="User-First"/>
                                 </FourBox>
                                 <FourBox>
                                     <IconList
-                                        src={Icon2}
+                                        src={"/images/about/logos/computer.svg"}
                                         alt="Computer illustration"
                                         title="Analytic Skills"
                                         skill1="Algorithm Design"
                                         skill2="Data Analysis"
-                                        skill3="Skill3"/>
+                                        skill3="Multithreading"/>
                                 </FourBox>
                                 <FourBox>
                                     <IconList
-                                        src={Icon3}
+                                        src={"/images/about/logos/phone.svg"}
                                         alt="Smartphone illustration"
                                         title="Soft Skills"
                                         skill1="Adaptability"
@@ -254,7 +243,7 @@ const About = () => {
                                 </FourBox>
                                 <FourBox>
                                     <IconList
-                                        src={Icon4}
+                                        src={"/images/about/logos/globe.svg"}
                                         alt="Smartphone illustration"
                                         title="Communication"
                                         skill1="Advanced spoken spanish"
@@ -293,7 +282,7 @@ const About = () => {
                                         value ={60} 
                                         max ={100} 
                                         text={"React"} 
-                                        src={ReactIcon} 
+                                        src={"/images/about/logos/react.svg"} 
                                         alt={"React.js Logo"} 
                                         theme={theme} 
                                         scale={"120%"}
@@ -304,7 +293,7 @@ const About = () => {
                                         value ={50} 
                                         max ={100} 
                                         text={"Node.js"} 
-                                        src={NodeIcon} 
+                                        src={"/images/about/logos/node-js.svg"} 
                                         alt={"Node.js Logo"} 
                                         theme={theme} 
                                         scale={"100%"}
@@ -315,7 +304,7 @@ const About = () => {
                                         value ={60} 
                                         max ={100} 
                                         text={"C"} 
-                                        src={CIcon} 
+                                        src={"/images/about/logos/c.svg"} 
                                         alt={"C Logo"} 
                                         theme={theme} 
                                         scale={"80%"}
@@ -326,7 +315,7 @@ const About = () => {
                                         value ={50} 
                                         max ={100} 
                                         text={"C++"} 
-                                        src={CPlusPlusIcon} 
+                                        src={"/images/about/logos/c++.svg"} 
                                         alt={"C++ Logo"} 
                                         theme={theme}
                                         scale={"80%"}
@@ -337,7 +326,7 @@ const About = () => {
                                         value ={60} 
                                         max ={100} 
                                         text={"Three.js"} 
-                                        src={ThreeIcon} 
+                                        src={"/images/about/logos/threejs.svg"} 
                                         alt={"Three.js Logo"} 
                                         theme={theme} 
                                         scale={"100%"}
@@ -348,7 +337,7 @@ const About = () => {
                                         value ={60} 
                                         max ={100} 
                                         text={"Python"} 
-                                        src={PythonIcon} 
+                                        src={"/images/about/logos/python.svg"} 
                                         alt={"Python Logo"} 
                                         theme={theme} 
                                         scale={"80%"}
@@ -359,7 +348,7 @@ const About = () => {
                                         value ={80} 
                                         max ={100} 
                                         text={"Java"} 
-                                        src={JavaIcon} 
+                                        src={"/images/about/logos/java.svg"} 
                                         alt={"Java Logo"} 
                                         theme={theme} 
                                         scale={"80%"}
@@ -370,7 +359,7 @@ const About = () => {
                                         value ={70} 
                                         max ={100} 
                                         text={"Latex"} 
-                                        src={TexIcon} 
+                                        src={"/images/about/logos/tex.svg"} 
                                         alt={"Generic Tex Logo"} 
                                         theme={theme} 
                                         scale={"70%"}
@@ -406,7 +395,7 @@ const About = () => {
                                         value ={80} 
                                         max ={100} 
                                         text={"Blender"} 
-                                        src={BlenderIcon} 
+                                        src={"/images/about/logos/blender.svg"} 
                                         alt={"Blender Logo"} 
                                         theme={theme} 
                                         scale={"80%"}
@@ -418,7 +407,7 @@ const About = () => {
                                         value ={40} 
                                         max ={100} 
                                         text={"Cinema4D"} 
-                                        src={CinemaIcon} 
+                                        src={"/images/about/logos/c4d.png"} 
                                         alt={"Cinema4D Logo"} 
                                         theme={theme} 
                                         scale={"80%"}
@@ -430,7 +419,7 @@ const About = () => {
                                         value ={60} 
                                         max ={100} 
                                         text={"Photoshop"} 
-                                        src={APSIcon} 
+                                        src={"/images/about/logos/photoshop.svg"} 
                                         alt={"Adobe Photoshop Logo"} 
                                         theme={theme} 
                                         scale={"70%"}
@@ -442,7 +431,7 @@ const About = () => {
                                         value ={50} 
                                         max ={100} 
                                         text={"Illustrator"} 
-                                        src={AIIcon} 
+                                        src={"/images/about/logos/illustrator.svg"} 
                                         alt={"Adobe Illustrator Logo"} 
                                         theme={theme}
                                         scale={"70%"}
@@ -454,7 +443,7 @@ const About = () => {
                                         value ={60} 
                                         max ={100} 
                                         text={"Premiere"} 
-                                        src={APRIcon} 
+                                        src={"/images/about/logos/premiere.svg"} 
                                         alt={"Adobe Premiere Logo"} 
                                         theme={theme} 
                                         scale={"70%"}
@@ -466,7 +455,7 @@ const About = () => {
                                         value ={50} 
                                         max ={100} 
                                         text={"After Effects"} 
-                                        src={AEIcon} 
+                                        src={"/images/about/logos/after-effects.svg"} 
                                         alt={"Adobe After Effects Logo"} 
                                         theme={theme} 
                                         scale={"70%"}
@@ -482,7 +471,7 @@ const About = () => {
                         zPlane={10} 
                         style={{top: y3}}
                         id={"Career"}>
-                        <Content>
+                       <Content>
                             <HeaderSkew>
                                 <ScrollLink
                                     to="Career"
@@ -491,135 +480,42 @@ const About = () => {
                                     spy={true}
                                     exact='true'
                                     offset={1000}/>
-                                <Heading>Career - Tech</Heading>
-                                <TopLine>Tech Experience and Past Work</TopLine>
+                                <Heading lightcolor ={false}>Career</Heading>
+                                <TopLine lightcolor ={false}>Past Work | Notable Achievements</TopLine>
                             </HeaderSkew>
-                            {/* <Subtitle>Subtitle text goes here</Subtitle> */}
-                            <Boxes 
-                                boxCount = {2} 
-                                boxCountMobile = {1}
-                                marginBot = {"8em"}
-                                gridGap={"5%"}>
-                                <TwoBox padTop = "70%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={false}
-                                        heading="Tumblr"
-                                        caption="Intern"
-                                        timeline="February 2015"
-                                        posts ={TumblrDetails}
-                                        img={TumblrImage}/>
-                                </TwoBox>
-                                <TwoBox padTop = "70%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={false}
-                                        heading="VEX Robotics"
-                                        caption="Pilot | Engineer | Programmer"
-                                        timeline="2014"
-                                        posts ={VexDetails}
-                                        img={VexImage}/>
-                                </TwoBox>
-                            </Boxes>    
-                            <Boxes 
-                                boxCount = {2} 
-                                boxCountMobile = {1}
-                                marginBot = {"5em"}
-                                gridGap={"5%"}>
-                                <TwoBox padTop = "70%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={false}
-                                        heading="Union College"
-                                        caption="UI Scientist | Java Developer"
-                                        timeline="Spring 2020 - Spring 2021"
-                                        posts ={ThesisDetails}
-                                        img = {UnionImage}/>
-                                </TwoBox>
-                                {/* <TwoBox padTop = "60%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={false}
-                                        heading="Bayside Bowl"
-                                        caption="Line/Prep Cook | FOH"
-                                        timeline="2016 - 2017"
-                                        posts ={BaysideDetails}
-                                        img={TacoTruckImage}/>
-                                </TwoBox> */}
-                            </Boxes>    
                         </Content>
+                            <Container>
+                                <AnimateSharedLayout type="crossfade">
+                                    <Router>
+                                        <Route path={["/about/:id", "/about/"]} component={Store} />
+                                    </Router>
+                                </AnimateSharedLayout>
+                            </Container>
+                        {/* </Content> */}
                     </DiagonalDiv>
                     <DiagonalDiv 
                         hasShadow={true} 
                         lightcolor ={false} 
                         zPlane={12} 
                         style={{top: y4}}
-                        id={"Career2"}>
+                        id={"resume"}>
                         <Content>
                             <HeaderSkew>
                                 <ScrollLink
-                                    to="Career2"
+                                    to="resume"
                                     smooth="true"
                                     duration={500}
                                     spy={true}
                                     exact='true'
                                     offset={1500}/>
-                                <Heading lightcolor ={true}>Career - Cook</Heading>
-                                <TopLine lightcolor ={true}>Food service experience</TopLine>
+                                <Heading lightcolor ={true}>Everything Else</Heading>
+                                <TopLine lightcolor ={true}>Resumé</TopLine>
                             </HeaderSkew>
-                            <Boxes 
-                                boxCount = {2} 
-                                boxCountMobile = {1}
-                                marginBot = {"8em"}
-                                gridGap={"5%"}>
-                                <TwoBox padTop = "70%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={true}
-                                        heading="Salvage BBQ"
-                                        caption="Line cook | baker"
-                                        timeline="2014 - 2016"
-                                        posts ={SalvageDetails}
-                                        img={SalvageImage}/>
-                                </TwoBox>
-                                <TwoBox padTop = "70%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={true}
-                                        heading="Local 188"
-                                        caption="Line/Prep Cook "
-                                        timeline="2016 - 2017"
-                                        posts ={LocalDetails}
-                                        img={LocalImage}/>
-                                </TwoBox>
-                            </Boxes>    
-                            <Boxes 
-                                boxCount = {2} 
-                                boxCountMobile = {1}
-                                marginBot = {"5em"}
-                                gridGap={"5%"}>
-                                <TwoBox padTop = "70%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={true}
-                                        heading="OhNo Café"
-                                        caption="Line cook | FOH"
-                                        timeline="Winter 2017"
-                                        posts ={OhnoDetails}
-                                        img = {OhnoImage}/>
-                                </TwoBox>
-                                <TwoBox padTop = "70%">
-                                    <PositionDetails 
-                                        theme = {theme} 
-                                        lightcolor={true}
-                                        heading="Bayside Bowl"
-                                        caption="Line/Prep Cook | FOH"
-                                        timeline="2016 - 2017"
-                                        posts ={BaysideDetails}
-                                        img={TacoTruckImage}/>
-                                </TwoBox>
-                            </Boxes>    
+                            <HeaderSkew>
+                                <DiagonalButton lightcolor = {true} href="HenryJonesResume.pdf" title = "" download>Download Resume</DiagonalButton>
+                            </HeaderSkew>
                             {/* <DiagonalBreak heightValue = {"300px"}/> */}
+                            {/* <AButton lightcolor = {true}>Text</AButton> */}
                         </Content>
                     </DiagonalDiv>
                     <DiagonalDiv 
@@ -629,18 +525,7 @@ const About = () => {
                         style={{top: y5}}
                         id={"Empty"}>
                         <Content>
-                            <HeaderSkew>
-                                <ScrollLink
-                                    to="Empty"
-                                    smooth="true"
-                                    duration={500}
-                                    spy={true}
-                                    exact='true'
-                                    offset={2500}/>
-                                <Heading lightcolor ={false}>Everything Else</Heading>
-                                <TopLine lightcolor ={false}>Resume | CV</TopLine>
-                            </HeaderSkew>
-                            <DiagonalBreak heightValue = {"300px"} lightcolor = {true}/>
+                            <DiagonalBreak heightValue = {"300px"}/>
                         </Content>
                     </DiagonalDiv>
                 </CSSVariables>
