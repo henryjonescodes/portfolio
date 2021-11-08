@@ -3,6 +3,7 @@ export const items = [
       id: "tumblr",
       category: "Intern",
       title: "Tumblr Inc.",
+      dateline: "February 2015",
       pointOfInterest: 80,
       backgroundColor: "#814A0E",
       url: "/images/about/tumblr.jpg",
@@ -14,6 +15,7 @@ export const items = [
       id: "vex",
       category: "Pilot | Engineer | Programmer",
       title: "VEX Robotics",
+      dateline: "2013-2015",
       pointOfInterest: 120,
       backgroundColor: "#959684",
       url: "/images/about/vex.jpg",
@@ -26,6 +28,7 @@ export const items = [
       id: "thesis",
       category: "UI Scientist | Java Developer",
       title: "Union College",
+      dateline: "Spring 2020 - Spring 2021",
       pointOfInterest: 260,
       backgroundColor: "#5DBCD2",
       url: "/images/about/union.jpg",
@@ -38,6 +41,7 @@ export const items = [
       id: "salvage",
       category: "Line cook | baker",
       title: "Salvage BBQ",
+      dateline: "2014 - 2016",
       pointOfInterest: 200,
       backgroundColor: "#8F986D",
       url: "/images/about/salvage.jpeg",
@@ -50,6 +54,7 @@ export const items = [
       id: "local",
       category: "Line Cook | Prep Cook",
       title: "Local 188",
+      dateline: "2016 - 2017",
       pointOfInterest: 150,
       backgroundColor: "#FA6779",
       url: "/images/about/local188.jpg",
@@ -62,6 +67,7 @@ export const items = [
       id: "ohno",
       category: "Line Cook | Prep Cook",
       title: "OhNo Café",
+      dateline: "Winter 2017",
       pointOfInterest: 60,
       backgroundColor: "#282F49",
       url: "/images/about/ohno.jpg",
@@ -73,6 +79,7 @@ export const items = [
       id: "bayside",
       category: "Line Cook | Front of House",
       title: "Bayside Bowl",
+      dateline: "2016 - 2018",
       pointOfInterest: 200,
       backgroundColor: "#AC7441",
       url: "/images/about/tacotruck.jpg",
@@ -85,11 +92,12 @@ export const items = [
       id: "2dinein",
       category: "Delivery Driver",
       title: "2DineIn",
+      dateline: "2017 - 2020",
       pointOfInterest: 260,
       backgroundColor: "#CC555B",
       url: "/images/about/2dinein.png",
       list: [
-        "Delivery driver in the greater Portland area"]
+        "Delivery driver in the greater Portland area for 2DineIn, a locally run food delivery service"]
     }
   ];
 

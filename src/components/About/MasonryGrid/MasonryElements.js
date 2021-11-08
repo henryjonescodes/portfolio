@@ -11,14 +11,15 @@ export const Container = styled.div`
   flex: 1 1 100%;
   display: flex;
   justify-content: center;
-  padding: 45px 25px;
+  padding-bottom: 10px;
   /* border: 1px dashed orange; */
+  top: -30px;
 
-    @media only screen and (max-width: 1000px) {
-        width: 900px;
+    @media only screen and (max-width: 1300px) {
+        width: 90%;
     }     
 
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 800px) {
         width: 100%;
     }     
 `
@@ -63,8 +64,8 @@ export const CardContentContainer = styled.div`
         @media only screen and (max-width: 700px) {
             padding: 0;
             top: 20%;
-            width: 70%;
-            transform: translateX(20%);
+            width: 85%;
+            transform: translateX(8%);
             align-self: center;
         }
     }
@@ -86,7 +87,7 @@ export const CardContent = styled(motion.div)`
         overflow: hidden;
         /* pointer-events: none; */
     }
-    /* border: 1px solid blue; */
+    border: 1px solid blue;
 `
 
 export const CardImageContainer = styled(motion.div)`
@@ -106,7 +107,7 @@ export const CardImageContainer = styled(motion.div)`
         height: 50%;
         width: 100%;
     }
-    /* border: 2px dashed pink; */
+    border: 2px dashed pink;
 `
 
 export const CardImage = styled.img`
@@ -138,14 +139,16 @@ export const TitleContainer = styled(motion.div)`
     left: 15px;
     max-width: 300px;
     z-index:2;
-    /* border: 2px dashed purple; */
+    border: 2px dashed purple;
 
     &.open{
-        position: absolute;
-        max-width: 80%;
+        position: relative;
+        /* top: 50%; */
+        left: 0;
+        /* max-width: 80%; */
         /* top: 53%; */
-        bottom: 36%;
-        left: 40px;
+        /* bottom: 36%; */
+        /* left: 40px; */
         z-index: 1;
     }
 `
@@ -178,7 +181,7 @@ export const ContentContainer = styled(motion.div)`
     max-width: 700px;
     /* width: 90vw; */
     width: 100%;
-    /* border: 5px solid green; */
+    border: 5px solid green;
 /* 
     &.open{
         position: absolute;
@@ -214,7 +217,8 @@ export const Card = styled.li`
         width: 300px;
     }
     @media only screen and (max-width: 700px) {
-        width: 250px;
+        /* width: 250px; */
+        width: 50%;
     }
     @media only screen and (max-width: 600px) {
         width: 50%;

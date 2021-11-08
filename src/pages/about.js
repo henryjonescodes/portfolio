@@ -42,6 +42,7 @@ import {
     DiagonalBreak,
     ScrollLink,
     DiagonalButton,
+    FinalDiv,
 } from '../components/About/diagonalDivs'
 import SkillTracker from '../components/About/SkillTracker'
 import DetailPanel from '../components/About/DetailPanel';
@@ -70,21 +71,26 @@ const About = () => {
 
     const [isOpen, setIsOpen] = useState(false)
     let { scrollY } = useViewportScroll();
-    scrollY.set(0);
+    // scrollY.set(0);
 
     const sizes = {
         width: window.innerWidth,
         height: window.innerHeight
     }
-
+   
     const motionPoints = {
-        stop1: -580,
-        stop2: -775,
-        stop3: -980,
-        stop4: -2260,
+        stop1: -560,
+        stop2: -750,
+        stop3: -920,
+        stop4: -2200,
         stop5: -2390,
+        resize1: "600px",
         scrollPoint: 200,
         storedPoint: 0
+    }
+
+    if(sizes.width <= 700){
+        scrollY.set(motionPoints.scrollPoint);
     }
 
     useEffect(function setupListener() {
@@ -116,11 +122,16 @@ const About = () => {
         }
     })
 
+    useEffect(() => {
+        return scrollY.onChange((v) => console.log(v));
+      }, [scrollY]);
+
     const y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     const y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
     const y3 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop3, 0]);
     const y4 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop4, 0]);
     const y5 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop5, 0]);
+    const resize1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.resize1, "0px"]);
 
     // console.log(y1)
 
@@ -493,7 +504,7 @@ const About = () => {
                             </Container>
                         {/* </Content> */}
                     </DiagonalDiv>
-                    <DiagonalDiv 
+                    <FinalDiv 
                         hasShadow={true} 
                         lightcolor ={false} 
                         zPlane={12} 
@@ -514,20 +525,26 @@ const About = () => {
                             <HeaderSkew>
                                 <DiagonalButton lightcolor = {true} href="HenryJonesResume.pdf" title = "" download>Download Resume</DiagonalButton>
                             </HeaderSkew>
-                            {/* <DiagonalBreak heightValue = {"300px"}/> */}
-                            {/* <AButton lightcolor = {true}>Text</AButton> */}
+                            <DiagonalBreak
+                                heightValue = {"300px"}
+                                // lightcolor={true}
+                                style={{height: resize1}}
+                            />
                         </Content>
-                    </DiagonalDiv>
-                    <DiagonalDiv 
+                    </FinalDiv>
+                    {/* <FinalDiv 
                         hasShadow={true} 
                         lightcolor ={true} 
                         zPlane={14} 
                         style={{top: y5}}
                         id={"Empty"}>
                         <Content>
-                            <DiagonalBreak heightValue = {"300px"}/>
+                            <DiagonalBreak
+                                // heightValue = {"300px"}
+                                style={{height: resize1}}
+                            />
                         </Content>
-                    </DiagonalDiv>
+                    </FinalDiv> */}
                 </CSSVariables>
             </ThemeProvider>
             <Footer theme={theme} lightcolor ={false} padded ={true} id="footer"/>

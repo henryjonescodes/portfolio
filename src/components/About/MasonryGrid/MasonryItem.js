@@ -21,6 +21,7 @@ export function MasonryItem({id}) {
   let category = "no category found"
   let title = "no title found"  
   let url = "url not found"
+  let dateline = "no dateline found"
   let list, itemlist = null
   if(validIds.includes(id)){
     let entry = items.find(item => item.id === id)
@@ -28,6 +29,7 @@ export function MasonryItem({id}) {
     title = entry.title;
     url = entry.url;
     list = entry.list;
+    dateline = entry.dateline;
   }
   
   if(list != null){
@@ -59,26 +61,25 @@ export function MasonryItem({id}) {
           >
             <Gradient  className="open"/>
             <CardImage 
-                className="open" 
-                src={url} 
-                // src={`textures/BugLight/BugLight.png`} 
-                alt="" />
+              className="open" 
+              src={url} 
+              // src={`textures/BugLight/BugLight.png`} 
+              alt="" />
           </CardImageContainer>
-          <TitleContainer
-            className="open"
-            layoutId={`title-container-${id}`}
-          >
-            {/* <Category style={{ fontSize: '22px' }}>{category}</Category> */}
-            <Category>{category}</Category>
-            {/* <StyledH2 style={{ fontSize: '36px' }}>{title}</StyledH2> */}
-            <StyledH2>{title}</StyledH2>
-          </TitleContainer>
           <ContentContainer 
             className="open" 
             animate
           >
+            <TitleContainer
+              className="open"
+              layoutId={`title-container-${id}`}
+            >
+              <Category>{category}</Category>
+              <StyledH2>{title}</StyledH2>
+              <Category>{dateline}</Category>
+            </TitleContainer>
             <DetailList>
-                {itemlist}
+              {itemlist}
             </DetailList>
           </ContentContainer>
         </CardContent>

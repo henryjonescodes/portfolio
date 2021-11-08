@@ -5,12 +5,12 @@ export const FooterContainer = styled.footer`
     --background: ${props => props.theme.bg};
     --foreground: ${props => props.theme.fg};    
     background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
-    margin-top: ${({padded}) => (padded ? `-280px` : `0px`)};
-    padding-top: ${({padded}) => (padded ? `350px` : `0px`)};
+    margin-top: ${({padded}) => (padded ? `-320px` : `0px`)};
+    padding-top: ${({padded}) => (padded ? `400px` : `0px`)};
     padding-right: 10px;
     padding-left: 10px;
 
-    @media screen and (min-width: 2000px){
+    /* @media screen and (min-width: 2000px){
         margin-top: ${({padded}) => (padded ? `-320px` : `0px`)};
         padding-top: ${({padded}) => (padded ? `380px` : `0px`)};    
     }
@@ -18,7 +18,8 @@ export const FooterContainer = styled.footer`
     @media screen and (min-width: 2000px){
         margin-top: ${({padded}) => (padded ? `-320px` : `0px`)};
         padding-top: ${({padded}) => (padded ? `540px` : `0px`)};    
-    }
+    } */
+    overflow: hidden;
 `
 export const FooterWrap = styled.div`
     padding: 48px 24px;
