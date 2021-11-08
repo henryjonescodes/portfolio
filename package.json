@@ -11,6 +11,8 @@
     "dat.gui": "^0.7.7",
     "emailjs-com": "^3.2.0",
     "framer-motion": "^4.1.17",
+    "instafeed.js": "^2.0.0",
+    "isomorphic-fetch": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.2.0",

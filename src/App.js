@@ -23,7 +23,7 @@ function App() {
           <Route path="/contact" component={Contact} exact/>
           <Route path="/photography" component={Photography} exact/>
           <Route path="/projects" component={Projects} exact/>
-          <Route path="/about" component={About} exact/>
+          <Route path={["/about","/about/*"]} component={About} exact/>
           <Route path="/virtualportfolio" component={virtualportfolio} exact/>
         </Switch>
       </ScrollToTopWrapper>

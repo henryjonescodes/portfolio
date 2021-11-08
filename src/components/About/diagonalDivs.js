@@ -56,7 +56,7 @@ export const CSSVariables = styled.div`
 export const DiagonalDiv = styled(motion.div)`
     position: relative;
     padding: var(--skew-padding) 0;
-    margin-top: -1px;
+    /* margin-top: -1px; */
     /* z-index: ${({above}) => (above? '20' : '1')}; */
     z-index: ${({zPlane}) => zPlane + 1};
     /* border: 2px dashed purple; */
@@ -78,13 +78,51 @@ export const DiagonalDiv = styled(motion.div)`
         box-shadow: ${({hasShadow}) => (hasShadow ? '0px -3px 15px 0px #000' : 'none')};
     }
 `
+export const FinalDiv = styled(motion.div)`
+    position: relative;
+    padding: var(--skew-padding) 0;
+    /* margin-top: -1px; */
+    /* z-index: ${({above}) => (above? '20' : '1')}; */
+    z-index: ${({zPlane}) => zPlane + 1};
+    /* border: 2px dashed purple; */
+    --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')};
+    
 
-export const DiagonalBreak = styled.div`
+    &:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        /* --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')}; */
+        transform: skewY(var(--skewValue));
+        transform-origin: 50% 0;
+        outline: 1px solid transparent;
+        backface-visibility: hidden;
+        /* border: 2px dashed green; */
+        background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
+        /* box-shadow: ${({hasShadow}) => (hasShadow ? '0px -4px 15px 0px #000' : 'none')}; */
+    }
+
+    &:after {
+        content: "";
+        position:absolute;
+        transform: skewY(var(--skewValue));
+        width:100%;
+        top:-1px;
+        z-index:-1;
+        /* transform:scale(.9); */
+        box-shadow: 0px -5px 15px 2px #000000;
+    }
+`
+
+export const DiagonalBreak = styled(motion.div)`
     position: relative;
     --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')};
     transform: skewY(var(--skewValue));
     background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
-    height: ${({heightValue}) => (heightValue ? heightValue : '10px')};
+    /* height: ${({heightValue}) => (heightValue ? heightValue : '10px')}; */
     border-radius: 5px;
     margin-bottom: calc(var(--skew-padding) * 1.5);
     z-index: -10;
@@ -101,6 +139,7 @@ export const DiagonalBreak = styled.div`
     @media screen and (max-width: 330px){
         margin-top: 200px;
     }
+    border: 1px solid red;
 `
 
 export const Content = styled.div`

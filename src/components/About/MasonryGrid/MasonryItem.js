@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { items, validIds } from "../../About/data";
 import { 
     CardContent, 
@@ -13,21 +13,41 @@ import {
     CardOpenLink,
     DetailList,
     DetailListItem,
-    Gradient
+    Gradient,
+    TitleTextWrapper,
+    OverlayButton,
+    // ButtonContainer,
+    ArrowForward,
+    ArrowRight
 } from './MasonryElements';
 
 export function MasonryItem({id}) {
-//   const { category, title } = items.find(item => item.id === id);
+
+  const [hover, setHover] = useState(false)
+
+  const onHover = () => {
+      setHover(!hover)
+  }
+
   let category = "no category found"
   let title = "no title found"  
   let url = "url not found"
+  let dateline = "no dateline found"
+  let buttonText, buttonDestination = null;
   let list, itemlist = null
+
   if(validIds.includes(id)){
     let entry = items.find(item => item.id === id)
     category = entry.category;
     title = entry.title;
     url = entry.url;
     list = entry.list;
+    dateline = entry.dateline;
+
+    if(entry.buttonText !== ""){
+      buttonText = entry.buttonText;
+      buttonDestination = entry.buttonDestination;
+    }
   }
   
   if(list != null){
@@ -59,26 +79,36 @@ export function MasonryItem({id}) {
           >
             <Gradient  className="open"/>
             <CardImage 
-                className="open" 
-                src={url} 
-                // src={`textures/BugLight/BugLight.png`} 
-                alt="" />
+              className="open" 
+              src={url} 
+              // src={`textures/BugLight/BugLight.png`} 
+              alt="" />
           </CardImageContainer>
-          <TitleContainer
-            className="open"
-            layoutId={`title-container-${id}`}
-          >
-            {/* <Category style={{ fontSize: '22px' }}>{category}</Category> */}
-            <Category>{category}</Category>
-            {/* <StyledH2 style={{ fontSize: '36px' }}>{title}</StyledH2> */}
-            <StyledH2>{title}</StyledH2>
-          </TitleContainer>
           <ContentContainer 
             className="open" 
             animate
           >
+            <TitleTextWrapper>
+              <TitleContainer
+                className="open"
+                layoutId={`title-container-${id}`}
+              >
+                <Category>{category}</Category>
+                <StyledH2>{title}</StyledH2>
+                <Category>{dateline}</Category>
+              </TitleContainer>
+              {buttonText != null && 
+                <OverlayButton 
+                href={buttonDestination}
+                onMouseEnter={onHover} 
+                onMouseLeave={onHover}
+                >
+                  {buttonText}
+                  {hover ? <ArrowForward /> : <ArrowRight />}
+                </OverlayButton>}
+            </TitleTextWrapper>
             <DetailList>
-                {itemlist}
+              {itemlist}
             </DetailList>
           </ContentContainer>
         </CardContent>

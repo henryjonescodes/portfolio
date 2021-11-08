@@ -14,7 +14,7 @@ import {
     TitleContainer
 } from './MasonryElements';
 
-function MasonryCard({ id, title, category, url}) {
+function MasonryCard({ id, title, category, url, dateline}) {
     return (
     <Card>
       <CardContentContainer>
@@ -31,6 +31,7 @@ function MasonryCard({ id, title, category, url}) {
           <TitleContainer layoutId={`title-container-${id}`}>
             <Category>{category}</Category>
             <StyledH2>{title}</StyledH2>
+            <Category>{dateline}</Category>
           </TitleContainer>
         </CardContent>
       </CardContentContainer>
