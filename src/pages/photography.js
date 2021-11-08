@@ -4,8 +4,10 @@ import LinkBar from '../components/Common/LinkBar'
 import RoutedSideBar from '../components/Common/RoutedSideBar'
 import { theme } from '../components/Photography/theme'
 
+
 const Photography = () => {
     const [isOpen, setIsOpen] = useState(false)
+
 
     const toggle = () => {
         setIsOpen(!isOpen)

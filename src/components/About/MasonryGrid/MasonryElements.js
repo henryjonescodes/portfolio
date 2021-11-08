@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import {MdKeyboardArrowRight, MdArrowForward} from 'react-icons/md'
 
 export const Container = styled.div`
   position: relative;
@@ -13,7 +14,7 @@ export const Container = styled.div`
   justify-content: center;
   padding-bottom: 10px;
   /* border: 1px dashed orange; */
-  top: -30px;
+  top: -15px;
 
     @media only screen and (max-width: 1300px) {
         width: 90%;
@@ -86,8 +87,10 @@ export const CardContent = styled(motion.div)`
         max-width: 700px;
         overflow: hidden;
         /* pointer-events: none; */
+        display: flex;
+        flex-direction: column;
     }
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 `
 
 export const CardImageContainer = styled(motion.div)`
@@ -102,12 +105,12 @@ export const CardImageContainer = styled(motion.div)`
     width: 100vw; */
 
     &.open{
-        position: absolute;
+        position: relative;
         z-index: 1;
-        height: 50%;
+        height: 300px;
         width: 100%;
     }
-    border: 2px dashed pink;
+    /* border: 2px dashed pink; */
 `
 
 export const CardImage = styled.img`
@@ -137,20 +140,38 @@ export const TitleContainer = styled(motion.div)`
     /* top: 15px; */
     bottom: 20px;
     left: 15px;
-    max-width: 300px;
+    max-width: 85%;
     z-index:2;
-    border: 2px dashed purple;
+    /* border: 2px dashed purple; */
 
+    /* @media only screen and (max-width: 700px) {
+         max-width: 90%;
+         left: 15px;
+    } */
     &.open{
         position: relative;
         /* top: 50%; */
         left: 0;
-        /* max-width: 80%; */
+        bottom: 0;
+        padding: 10px 0;
+        max-width: 60%;
         /* top: 53%; */
         /* bottom: 36%; */
         /* left: 40px; */
+        padding-right: auto;
         z-index: 1;
     }
+`
+
+export const TitleTextWrapper = styled.div`
+    /* border: 2px solid red; */
+    margin-right: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
 `
 
 export const Category = styled.span`
@@ -176,12 +197,12 @@ export const StyledH2 = styled.h2`
 
 export const ContentContainer = styled(motion.div)`
     /* padding: 460px 35px 35px 35px; */
-    margin-top: 460px;
+    /* margin-top: 460px; */
     padding: 0px 20px 15px 40px;
     max-width: 700px;
     /* width: 90vw; */
     width: 100%;
-    border: 5px solid green;
+    /* border: 5px solid green; */
 /* 
     &.open{
         position: absolute;
@@ -227,7 +248,7 @@ export const Card = styled.li`
 
 `
 
-export const CardList = styled.ul`
+export const CardList = styled.ol`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -291,4 +312,46 @@ export const Gradient = styled.div`
         opacity: 0%;
         transition: opacity 4s, visibility 4s;
     }
+`
+// export const ButtonContainer = styled.div`
+//     border: 1px solid violet;
+//     width: auto;
+
+// `
+export const OverlayButton = styled.a`
+    --highlight: ${props => props.theme.highlight};
+    --foreground: ${props => props.theme.fg};
+    --background: ${props => props.theme.bg};
+    --text2: ${props => props.theme.t1};
+    --text: ${props => props.theme.t3};
+    border-radius: 50px;
+    /* background: ${({lightbg}) => (lightbg ? 'var(--foreground)' : 'var(--background)')}; */
+    background: var(--highlight);
+    white-space: nowrap;
+    padding: ${({big}) => (big ? '14px 48px' : '12px 30px')};
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
+    font-size: ${({fontbig}) => (fontbig ? '20px' : '16px')};
+    outline: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2 ease-in-out;
+    z-index: 10;
+
+    &:hover {
+        transition: all 0.2 ease-in-out;
+        background: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
+    }
+`
+
+export const ArrowForward = styled(MdArrowForward)`
+    margin-left: 6px;
+    font-size: 20px;
+`
+
+export const ArrowRight = styled(MdKeyboardArrowRight)`
+    margin-left: 6px;
+    font-size: 20px;
 `

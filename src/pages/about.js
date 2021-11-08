@@ -81,8 +81,8 @@ const About = () => {
     const motionPoints = {
         stop1: -560,
         stop2: -750,
-        stop3: -920,
-        stop4: -2200,
+        stop3: -955,
+        stop4: -2160,
         stop5: -2390,
         resize1: "600px",
         scrollPoint: 200,
@@ -122,15 +122,19 @@ const About = () => {
         }
     })
 
-    useEffect(() => {
-        return scrollY.onChange((v) => console.log(v));
-      }, [scrollY]);
+    // useEffect(() => {
+    //     return scrollY.onChange((v) => console.log(v));
+    //   }, [scrollY]);
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    //     scrollY.set(0);
+    //   }, []);
 
     const y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     const y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
     const y3 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop3, 0]);
     const y4 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop4, 0]);
-    const y5 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop5, 0]);
+    // const y5 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop5, 0]);
     const resize1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.resize1, "0px"]);
 
     // console.log(y1)
