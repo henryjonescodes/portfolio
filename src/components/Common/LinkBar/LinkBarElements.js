@@ -7,12 +7,12 @@ import {Link as LinkR} from 'react-router-dom'
 
 //Main Container
 export const Nav = styled.nav` 
-    /* --topmargin: ${({sticky}) => (sticky ? '-80px' : '0px')}; */
     /* margin-top: var(--topmargin); */
 
     --background: ${props => props.theme.bg};
     --foreground: ${props => props.theme.fg};
-    background: ${({scrollNav,transparent}) => (scrollNav || transparent ? 'transparent' : 'var(--background)')};
+    --bgColor: ${({lightcolor}) => (lightcolor ? 'var(--foreground)' : 'var(--background)')};
+    background: ${({scrollNav,transparent}) => (scrollNav || transparent ? 'transparent' : 'var(--bgColor)')};
     height: 80px;
     display: flex;
     justify-content: center;
@@ -61,7 +61,8 @@ export const NavItem = styled.li`
 //Page Title
 export const NavLogo = styled(LinkR)`
     --text: ${props => props.theme.t1};
-    color: var(--text);
+    --text3: ${props => props.theme.t3};
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text3)')};
     justify-self: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
@@ -74,6 +75,7 @@ export const NavLogo = styled(LinkR)`
 //Hamburger
 export const MobileIcon = styled.div`
     --foreground: ${props => props.theme.fg};
+    --background: ${props => props.theme.fg};
     display: none;
 
     @media screen and (max-width: 768px){
@@ -84,14 +86,15 @@ export const MobileIcon = styled.div`
         transform: translate(-100%, 60%);
         font-size: 1.8rem;
         cursor: pointer;
-        color: var(--foreground);
+        color: ${({lightcolor}) => (!lightcolor ? 'var(--foreground)' : 'var(--background)')};
     }
 `
 //Link
 export const NavLinks = styled(LinkR)`
-    --text1: ${props => props.theme.t1};
+     --text: ${props => props.theme.t1};
+    --text3: ${props => props.theme.t3};
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text3)')};
     --active: ${props => props.theme.active};
-    color: var(--text1);
     display: flex;
     align-items: center;
     text-decoration: none;

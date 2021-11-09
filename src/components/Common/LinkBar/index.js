@@ -15,6 +15,7 @@ import {
     } from './LinkBarElements.js';
 
 const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
+    // let lightcolor = true;
     const [scrollNav, setScrollNav] = useState(false);
     // const changeNav = () => {
     //     if(window.scrollY >= 80) {
@@ -55,12 +56,16 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                 <NavBarContainer>
                     <NavLogo 
                         to='/' 
-                        onClick={toggleHome}>
+                        onClick={toggleHome}
+                        // lightcolor={lightcolor}
+                        >
                         {title}
                     </NavLogo>
                     <MobileIcon 
-                        onClick={toggle}>
-                        <FaBars color= {theme.fg} />
+                        onClick={toggle}
+                        // lightcolor={lightcolor}
+                        >
+                        <FaBars color= {theme.t1} />
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
@@ -71,6 +76,7 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                                 spy="true"
                                 exact='true'
                                 offset={-80}
+                                // lightcolor={lightcolor}
                             >About</NavLinks>
                         </NavItem>
                         <NavItem>
@@ -81,6 +87,7 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                                 spy="true"
                                 exact='true'
                                 offset={-80}
+                                // lightcolor={lightcolor}
                             >Photography</NavLinks>
                         </NavItem>
                         <NavItem>
@@ -91,6 +98,7 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                                 spy="true"
                                 exact='true'
                                 offset={-80}   
+                                // lightcolor={lightcolor}
                             >Projects</NavLinks>
                         </NavItem>
                         <NavItem>
@@ -101,6 +109,7 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                                 spy="true"
                                 exact='true'
                                 offset={-80}
+                                // lightcolor={lightcolor}
                             >Contact</NavLinks>
                         </NavItem>
                         {/* <NavBtn>

@@ -25,7 +25,7 @@ const Footer = ({padded, theme, lightcolor}) => {
 
     return (
         <ThemeProvider theme={theme}>
-            <FooterContainer padded = {+padded} lightcolor= {+lightcolor}>
+            <FooterContainer padded = {padded} lightcolor= {+lightcolor}>
                 <FooterWrap>
                     {/* <FooterLinksContainer>
                         <FooterLinksWrapper>

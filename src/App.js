@@ -12,6 +12,19 @@ import About from './pages/about';
 
 import ScrollToTopWrapper from './components/Common/ScrollToTopWrapper'
 import virtualportfolio from './pages/virtualportfolio';
+import DetailPage from './components/Common/DetailPage';
+import virtualwrapper from './pages/virtualwrapper';
+
+function Store({ match }) {
+  let { id } = match.params;
+  const imageHasLoaded = true;
+
+  return (
+    <>
+        {id && imageHasLoaded && <DetailPage id={id} lightcolor={true} key="page" />}
+    </>
+  );
+}
 
 function App() {
   return (
@@ -21,10 +34,13 @@ function App() {
           <Route path="/" component={Home} exact/>
           <Route path="/signin" component={SignInPage} exact/>
           <Route path="/contact" component={Contact} exact/>
-          <Route path="/photography" component={Photography} exact/>
+          <Route path={["/photography","/photography/*"]} component={Photography} exact/>
           <Route path="/projects" component={Projects} exact/>
           <Route path={["/about","/about/*"]} component={About} exact/>
           <Route path="/virtualportfolio" component={virtualportfolio} exact/>
+          <Route path="/virtualwrapper" component={virtualwrapper} exact/>
+          <Route path="/detailtest" component={DetailPage} exact/>
+          <Route path={["/details/:id", "/details/"]} component={Store} />
         </Switch>
       </ScrollToTopWrapper>
     </Router>
