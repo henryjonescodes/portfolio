@@ -15,6 +15,8 @@ export const PageWrapper = styled.div`
         /* height: 150vh; */
     /* } */
     /* border: 6px dashed pink; */
+    overflow-y: scroll;
+    /* overflow-x: scroll; */
 `
 
 export const TitleContainer = styled.div`
@@ -27,11 +29,11 @@ export const TitleContainer = styled.div`
     align-items: center;
     overflow: hidden;
     padding-top: 100px;
-    /* border: 6px dashed purple; */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
     z-index: -1;
+    min-height: 300px;
     /* &:before {
         content: "";
         position: absolute;
@@ -43,6 +45,9 @@ export const TitleContainer = styled.div`
         z-index: -1;
         background: linear-gradient(to right, rgba(0,0,0,.1) 0%,rgba(0,0,0,.8) 80%);
     } */
+
+    /* border: 6px dashed purple; */
+
 `
 
 export const TextRow = styled.div`
@@ -50,11 +55,13 @@ export const TextRow = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
+    align-items: center;
     width: 100vw;
+    height: 100%;
     max-width: 1000px;
     padding: 0 10px 0 40px;
     &:last-of-type {
-        margin-top: 100px;
+        /* top: 20%; */
         padding: 0 40px 0 10px;
         justify-content: flex-end;
     }
@@ -80,7 +87,7 @@ export const TextBox = styled.div`
     box-shadow: -4px 4px 10px 0px #000;
 
 
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 700px), (max-height: 1000px) {
         width: 275px;
         height: 100px;
         transition: width 1s ease-in-out, height 1s ease-in-out;
@@ -115,7 +122,16 @@ export const DateBox = styled.div`
     align-items: center;
     justify-content: center;
     padding-top: 33px;
-
+    
+    @media only screen and (max-height: 1000px) {
+        height: 40px;
+        top: 0;
+        transition: width 1s ease-in-out, height 1s ease-in-out;
+    }
+    @media only screen and (max-height: 700px) {
+        top: 0;
+        transition: top 1s ease-in-out;
+    }
     &:after {
         content: "";
         z-index: -1;
@@ -143,7 +159,7 @@ export const TopLine = styled.p`
     margin-bottom: 16px;
     border-bottom: 1px solid #ffffff;
 
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 700px),  (max-height: 1000px)  {
         font-size: 14px;
         letter-spacing: .1px;
     }
@@ -160,7 +176,7 @@ export const Heading = styled.h1`
     font-weight: 600;
     color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};
 
-    @media only screen and (max-width: 700px) {
+    @media only screen and (max-width: 700px),  (max-height: 1000px)  {
         font-size: 34px;
     }
     /* @media only screen and (max-width: 500px) {
@@ -184,7 +200,8 @@ export const Dateline = styled.p`
 
 export const Content = styled.div`
     width: 100%;
-    height: 60%;
+    height: auto;
+    min-height: 60%;
     display: flex;
     flex-direction: row;
     align-items: left;
@@ -212,10 +229,12 @@ export const Blurb = styled.p`
     --text: ${props => props.theme.t4};
     color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};
     margin-right: 0;
-    margin-left: 1px;
+    /* margin-left: 1px; */
     margin-bottom: 30px;
     font-size: 20px;
     line-height: 22px;
+    /* border: 4px dashed red; */
+
 `
 
 export const DetailList = styled.ul`

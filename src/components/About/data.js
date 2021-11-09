@@ -1,7 +1,7 @@
 export const items = [
     {
       id: "tumblr",
-      highlightColor: "#f00",
+      highlightColor: "#00f",
       category: "Intern",
       title: "Tumblr Inc.",
       dateline: "February 2015",
@@ -18,7 +18,7 @@ export const items = [
     },
     {
       id: "vex",
-      highlightColor: "#f00",
+      highlightColor: "#0f0",
       category: "Pilot | Engineer | Programmer",
       title: "VEX Robotics",
       dateline: "2013 - 2015",
@@ -36,7 +36,7 @@ export const items = [
     },
     {
       id: "thesis",
-      highlightColor: "#f00",
+      highlightColor: "#69001a",
       category: "UI Scientist | Java Developer",
       title: "Union College",
       dateline: "Spring 2020 - Spring 2021",
@@ -54,7 +54,7 @@ export const items = [
     },
     {
       id: "salvage",
-      highlightColor: "#f00",
+      highlightColor: "#ba6102",
       category: "Line cook | baker",
       title: "Salvage BBQ",
       dateline: "2014 - 2016",
@@ -72,7 +72,7 @@ export const items = [
     },
     {
       id: "local",
-      highlightColor: "#f00",
+      highlightColor: "#850000",
       category: "Line Cook | Prep Cook",
       title: "Local 188",
       dateline: "2016 - 2017",
@@ -90,7 +90,7 @@ export const items = [
     },
     {
       id: "ohno",
-      highlightColor: "#f00",
+      highlightColor: "#70cf51",
       category: "Line Cook | Prep Cook",
       title: "OhNo Café",
       dateline: "Winter 2017",
@@ -107,7 +107,7 @@ export const items = [
     },
     {
       id: "bayside",
-      highlightColor: "#f00",
+      highlightColor: "#f7662d",
       category: "Line Cook | Front of House",
       title: "Bayside Bowl",
       dateline: "2016 - 2018",
@@ -125,7 +125,7 @@ export const items = [
     },
     {
       id: "2dinein",
-      highlightColor: "#f00",
+      highlightColor: "#ffb700",
       category: "Delivery Driver",
       title: "2DineIn",
       dateline: "2017 - 2020",
