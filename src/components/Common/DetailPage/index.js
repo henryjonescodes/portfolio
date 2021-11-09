@@ -85,14 +85,11 @@ const DetailPage = ({id, lightcolor}) => {
                 <Content lightcolor = {lightcolor}>
                     <TextContainer>
                         <TopLine lightcolor = {lightcolor}>Summary</TopLine>
-                        {/* <Blurb lightcolor = {lightcolor} >{blurb}</Blurb> */}
                         {splitBlurb(blurb)}
                         <TopLine lightcolor = {lightcolor}>Roles | Experience</TopLine>
                         <DetailList>
                             {itemlist}
                         </DetailList>
-                    {/* <VerticalSpacer/> */}
-                    {/* <SideBarContainer> */}
                         {linkDestination != null &&
                             <Button 
                             href={linkDestination}
@@ -105,9 +102,7 @@ const DetailPage = ({id, lightcolor}) => {
                             </Button>
                         }
                     </TextContainer>
-                    {/* </SideBarContainer> */}
                 </Content>
-                    {/* <Footer theme={theme} lightcolor ={true}  id="footer"/> */}
             </ThemeProvider>
         </PageWrapper>
         </>

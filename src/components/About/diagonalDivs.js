@@ -133,12 +133,12 @@ export const DiagonalBreak = styled(motion.div)`
     @media screen and (max-width: 500px){
         margin-top: 100px;
     }
-    @media screen and (max-width: 400px){
-        margin-top: 150px;
-    }
-    @media screen and (max-width: 330px){
+    /* @media screen and (max-width: 400px){
         margin-top: 200px;
     }
+    @media screen and (max-width: 330px){
+        margin-top: 230px;
+    } */
     border: 1px solid red;
 `
 
@@ -245,26 +245,26 @@ export const FourBox = styled.div`
         width: 50%;
         &:nth-child(1) {margin-top: -60px;}
         &:nth-child(2) {margin-top: -60px; } 
-        &:nth-child(3) {margin-bottom: -100px;}
-        &:nth-child(4) {margin-bottom: -100px;} 
+        &:nth-child(3) {margin-bottom: -50px;}
+        &:nth-child(4) {margin-bottom: -50px;} 
     }
     @media screen and (max-width: 600px){
-        &:nth-child(1) {margin-top: -30px;}
-        &:nth-child(2) { margin-top: -30px;} 
-        &:nth-child(3) {margin-bottom: -70px;}
-        &:nth-child(4) {margin-bottom: -70px;} 
+        &:nth-child(1) {margin-top: -20px;}
+        &:nth-child(2) {margin-top: -20px;} 
+        &:nth-child(3) {margin-bottom: -60px;}
+        &:nth-child(4) {margin-bottom: -60px;} 
     }
-    @media screen and (max-width: 500px){
-        &:nth-child(1) {margin-top: 20px; margin-bottom: 30px;}
-        &:nth-child(2) {margin-top: 20px; margin-bottom: 30px;} 
-        &:nth-child(3) {margin-bottom: -30px;}
-        &:nth-child(4) {margin-bottom: -30px;} 
-    }
-    @media screen and (max-width: 360px){
-        &:nth-child(1) {margin-top: 20px; margin-bottom: 40px;}
-        &:nth-child(2) {margin-top: 20px; margin-bottom: 40px;} 
+    @media screen and (max-width: 540px){
+        &:nth-child(1) {margin-top: 40px; margin-bottom: 50px;}
+        &:nth-child(2) {margin-top: 40px; margin-bottom: 50px;} 
         &:nth-child(3) {margin-bottom: -10px;}
         &:nth-child(4) {margin-bottom: -10px;} 
+    }
+    @media screen and (max-width: 400px){
+        &:nth-child(1) {margin-top: 130px; margin-bottom: 40px;}
+        &:nth-child(2) {margin-top: 130px; margin-bottom: 40px;} 
+        &:nth-child(3) {margin-bottom: 0px;}
+        &:nth-child(4) {margin-bottom: 0px;} 
     }
 `
 export const TwoBox = styled.div`
@@ -312,13 +312,6 @@ export const DetailContainer = styled.div`
     align-items: left;
     justify-content: center;
     /* border: 2px solid red; */
-
-    @media screen and (max-width: 500px){
-        /* padding-top: 50px; */
-    }
-    @media screen and (max-width: 400px){
-        /* padding-top: -50px; */
-    }
 `
 
 
@@ -447,6 +440,7 @@ export const Subtitle = styled.p`
     max-width: 440px;
     margin-bottom: 5px;
     margin-top: 5px;
+    padding-right: 20px;
     font-size: 16px;
     line-height: 22px;
     /* text-align: justify;

@@ -8,6 +8,11 @@ export const StyledLabel = styled.label`
     margin-bottom: 10px;
     /* transform: skewY(var(--angle)); */
     text-align: center;
+    @media screen and (max-width: 700px){
+        font-size: 11px;
+        line-height:11px;
+        width: 180%;
+    }
 `
 
 export const Img = styled.img`
@@ -26,13 +31,18 @@ export const Img = styled.img`
 export const SkillsText = styled.p`
     /* border: 2px dashed red; */
     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text)')};
-    font-size: 9px;
+    font-size: 11px;
     text-align: center;
     /* justify-content: center; */
     width: 160%;
-    line-height: 9px;
+    line-height: 12px;
     font-weight: 600;
     letter-spacing: .3px;
     text-transform: uppercase;
     margin: 2px 2px;
+
+    @media screen and (max-width: 700px){
+        font-size: 10px;
+        line-height:10px;
+    }
 `
