@@ -7,8 +7,9 @@ export const FooterContainer = styled.footer`
     background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
     margin-top: ${({padded}) => (padded ? `-320px` : `0px`)};
     padding-top: ${({padded}) => (padded ? `400px` : `0px`)};
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 50px;
 
     /* @media screen and (min-width: 2000px){
         margin-top: ${({padded}) => (padded ? `-320px` : `0px`)};
@@ -22,7 +23,7 @@ export const FooterContainer = styled.footer`
     overflow: hidden;
 `
 export const FooterWrap = styled.div`
-    padding: 48px 24px;
+    padding-top: 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;

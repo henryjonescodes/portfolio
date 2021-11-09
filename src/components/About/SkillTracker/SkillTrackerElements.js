@@ -5,18 +5,21 @@ export const ContentWrapper = styled.div`
     position: absolute;
     top: -10px;
     width: 80px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     align-items: center;
     /* border: 1px dotted red; */
     @media screen and (max-width: 600px){
         width: 60px;
+        height: 100px;
     }
 `
 export const BarContainer = styled.div`
     /* border: 1px solid red; */
-    position:relative;
+    position:absolute;
     display: flex;
+    bottom: 0px;
     flex-direction: column;
     align-items: center;
 `
@@ -102,6 +105,7 @@ export const StarsContainer = styled.div`
     justify-content: left;
     position: relative;
     height: 10px;
+    margin-top: 5px;
     width: 92%;
     /* top: 72px; */
     /* border: 1px solid red; */

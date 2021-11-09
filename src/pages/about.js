@@ -79,10 +79,10 @@ const About = () => {
     }
    
     const motionPoints = {
-        stop1: -560,
-        stop2: -750,
-        stop3: -955,
-        stop4: -2160,
+        stop1: -570,
+        stop2: -770,
+        stop3: -980,
+        stop4: -2190,
         stop5: -2390,
         resize1: "600px",
         scrollPoint: 200,
@@ -121,14 +121,18 @@ const About = () => {
           window.removeEventListener('scroll', handleScroll)
         }
     })
-
+    // function setScroll(value){
+    //     window.scrollTo(value, value);
+    //     scrollY.set(value);
+    // }
     // useEffect(() => {
     //     return scrollY.onChange((v) => console.log(v));
     //   }, [scrollY]);
-    // useEffect(() => {
-    //     window.scrollTo(0, 0);
-    //     scrollY.set(0);
-    //   }, []);
+    useEffect(() => {
+        // setScroll(0)
+        window.scrollTo(0, 0);
+        // scrollY.set(0);
+      }, []);
 
     const y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     const y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);

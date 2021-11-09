@@ -190,10 +190,10 @@ export const EightBox = styled.div`
         &:nth-child(2) {margin-top: 15px}
         &:nth-child(3) {margin-top: 15px}
         &:nth-child(4) {margin-top: 15px}
-        &:nth-child(5) {margin-top: 70px}
-        &:nth-child(6) {margin-top: 70px}
-        &:nth-child(7) {margin-top: 70px}
-        &:nth-child(8) {margin-top: 70px} 
+        &:nth-child(5) {margin-top: 100px}
+        &:nth-child(6) {margin-top: 100px}
+        &:nth-child(7) {margin-top: 100px}
+        &:nth-child(8) {margin-top: 100px} 
        
     }
 `
