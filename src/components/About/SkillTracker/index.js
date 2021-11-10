@@ -14,9 +14,6 @@ import {
 } from './SkillTrackerElements'
 
 const SkillTracker = ({value, max, text, src, alt, theme, dest, scale, lightcolor}) => {
-
-    // const [stars, setStars] = useState(0);
-
     let stars = (value/max) * 5;
 
     return (

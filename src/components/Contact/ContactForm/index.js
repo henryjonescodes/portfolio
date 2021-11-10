@@ -1,6 +1,5 @@
 import React from 'react';
 import emailjs from 'emailjs-com';
-import SplashVideo from '../../../videos/TimeAndTemp3.mp4';
 import { ThemeProvider } from 'styled-components';
 import { useTransform, useViewportScroll } from 'framer-motion';
 
@@ -47,12 +46,11 @@ const ContactForm = ({theme}) => {
         <ThemeProvider theme = {theme}>
             <FormPageContainer>
                 <FormBackground>
-                    {/* <DiagonalBox/> */}
                     <VideoOffsetter style={{top: y1}}>
                         <VideoBackground
                             autoPlay loop muted 
-                            src={SplashVideo} 
-                            type = 'splashVideo/mp4'/>
+                            src={'/videos/TimeAndTemp3.mp4'} 
+                            />
                         <ShadowBox/>
                     </VideoOffsetter>
                 </FormBackground>

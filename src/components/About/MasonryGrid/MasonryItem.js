@@ -16,7 +16,6 @@ import {
     Gradient,
     TitleTextWrapper,
     OverlayButton,
-    // ButtonContainer,
     ArrowForward,
     ArrowRight
 } from './MasonryElements';
@@ -65,7 +64,6 @@ export function MasonryItem({id}) {
         transition={{ duration: 0.2, delay: 0.15 }}
         style={{ pointerEvents: "auto" }}
       >
-        {/* <CardOpenLink to="/" className="open"/> */}
       </Overlay>
       <CardContentContainer className="open">
       <CardOpenLink to="/about" className="open"/>
@@ -81,7 +79,6 @@ export function MasonryItem({id}) {
             <CardImage 
               className="open" 
               src={url} 
-              // src={`textures/BugLight/BugLight.png`} 
               alt="" />
           </CardImageContainer>
           <ContentContainer 

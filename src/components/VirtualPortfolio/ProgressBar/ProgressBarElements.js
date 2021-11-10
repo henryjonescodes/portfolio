@@ -18,6 +18,7 @@ export const ContentWrapper = styled.div`
     grid-template-columns: 1fr;
     justify-items: center;
     align-items: center;
+
     /* border: 1px solid yellow; */
 `
 
@@ -34,6 +35,7 @@ export const StyledBarWrapper = styled.div`
         appearance: none;
         width: 400px;
         height: 30px;
+        
         /* border: 1px solid green; */
     }
 

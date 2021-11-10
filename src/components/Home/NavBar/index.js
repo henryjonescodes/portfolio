@@ -16,18 +16,6 @@ import { NavLinks } from './NavBarElements.js'
 
 const NavBar = ({toggle, title, sticky, theme, transparent}) => {
     const [scrollNav, setScrollNav] = useState(false);
-    // const changeNav = () => {
-    //     if(window.scrollY >= 80) {
-    //         setScrollNav(true);
-    //     } else {
-    //         setScrollNav(false);
-    //     }
-    // }
-    
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', changeNav);
-    // })
 
     React.useEffect(function setupListener() {
         function changeNav() {
@@ -104,12 +92,6 @@ const NavBar = ({toggle, title, sticky, theme, transparent}) => {
                                     offset={-80}
                                 >Contact</NavLinks>
                             </NavItem>
-                            {/* <NavBtn>
-                                <NavBtnLink 
-                                    to="/signin">
-                                    Sign In
-                                </NavBtnLink>
-                            </NavBtn> */}
                         </NavMenu>
                     </NavBarContainer>
                 </Nav>
