@@ -9,39 +9,39 @@ export const ContentWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 1px dotted red; */
+
     @media screen and (max-width: 600px){
         width: 60px;
         height: 100px;
     }
+
+    /* border: 1px dotted red; */
 `
 export const BarContainer = styled.div`
-    /* border: 1px solid red; */
     position:absolute;
     display: flex;
     bottom: 0px;
     flex-direction: column;
     align-items: center;
+
+    /* border: 1px solid red; */
 `
 
 export const StyledBarWrapper = styled.div`
     position: relative;
-    /* top: 70px; */
     display: flex;
     flex-direction: row;
     --width: 60px;
     --height: 8px;
     margin: 2px auto;
-    progress {
 
-    }
+    progress {}
 
     progress[value]{
         -webkit-appearance: none;
         appearance: none;
         width: var(--width);
         height: var(--height);
-        /* border: 1px solid green; */
     }
 
     progress[value]::-webkit-progress-bar{
@@ -68,6 +68,7 @@ export const ImgButton = styled(motion.a)`
     display: flex;
     align-items: center;
     font-weight: bold;
+
     /* border: 1px solid violet; */
 `
 export const Label = styled.label`
@@ -75,7 +76,6 @@ export const Label = styled.label`
     --text4: ${props => props.theme.t4};
 
     position: relative;
-    /* top: 70px; */
     color:  ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text2)')};
     font-size: 16px;
     text-align: center;
@@ -84,7 +84,6 @@ export const Label = styled.label`
 
     @media screen and (max-width: 600px){
         font-size: 13px;
-        /* top: 60px; */
     }
 
     /* border: 1px solid blue; */
@@ -93,10 +92,6 @@ export const Label = styled.label`
 export const Img = styled.img`
     position: relative;
     width: 100%;
-    /* width: 50%; */
-    /* margin: 0 0 10px 0; */
-    /* padding-right: 0; */
-   
 `
 export const StarsContainer = styled.div`
     display: flex;
@@ -107,7 +102,7 @@ export const StarsContainer = styled.div`
     height: 10px;
     margin-top: 5px;
     width: 92%;
-    /* top: 72px; */
+
     /* border: 1px solid red; */
 `
 
@@ -124,6 +119,6 @@ export const StarContainer = styled.div`
     height: 15px;
     width: 15px;
     margin: 2px 0px;
-    /* top: 72px; */
+    
     /* border: 1px solid green; */
 `

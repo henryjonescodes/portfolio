@@ -7,11 +7,10 @@ import {Link as LinkR} from 'react-router-dom'
 
 //Main Container
 export const Nav = styled.nav` 
-    /* margin-top: var(--topmargin); */
-
     --background: ${props => props.theme.bg};
     --foreground: ${props => props.theme.fg};
     --bgColor: ${({lightcolor}) => (lightcolor ? 'var(--foreground)' : 'var(--background)')};
+
     background: ${({scrollNav,transparent}) => (scrollNav || transparent ? 'transparent' : 'var(--bgColor)')};
     height: 80px;
     display: flex;
@@ -62,6 +61,7 @@ export const NavItem = styled.li`
 export const NavLogo = styled(LinkR)`
     --text: ${props => props.theme.t1};
     --text3: ${props => props.theme.t3};
+
     color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text3)')};
     justify-self: flex-start;
     cursor: pointer;
@@ -76,6 +76,7 @@ export const NavLogo = styled(LinkR)`
 export const MobileIcon = styled.div`
     --foreground: ${props => props.theme.fg};
     --background: ${props => props.theme.fg};
+
     display: none;
 
     @media screen and (max-width: 768px){
@@ -93,8 +94,9 @@ export const MobileIcon = styled.div`
 export const NavLinks = styled(LinkR)`
      --text: ${props => props.theme.t1};
     --text3: ${props => props.theme.t3};
-    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text3)')};
     --active: ${props => props.theme.active};
+
+    color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text3)')};
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -121,6 +123,7 @@ export const NavBtnLink = styled(LinkR)`
     --text: ${props => props.theme.t1};
     --text2: ${props => props.theme.t3};
     --foreground: ${props => props.theme.fg};
+    
     border-radius: 50px;
     background: var(--highlight);
     white-space: nowrap;

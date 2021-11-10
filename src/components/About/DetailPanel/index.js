@@ -1,6 +1,13 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
-import {  Img, ImgWrap, DetailWrapper, TextWrapper, UpperCaseLine, SubtitleUpperCase, SubtitleItalic } from './DetailPanelElements'
+import {  
+    Img, 
+    ImgWrap,
+    DetailWrapper, 
+    TextWrapper, 
+    UpperCaseLine, 
+    SubtitleUpperCase, 
+    SubtitleItalic } from './DetailPanelElements'
 
 const DetailPanel = ({theme, src, header, subtitle, subsubtitle, lightcolor}) => {
     return (

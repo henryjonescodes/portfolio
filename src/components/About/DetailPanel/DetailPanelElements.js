@@ -6,9 +6,6 @@ export const DetailWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: left;
-    /* width: 100%; */
-    /* height: 90px; */
-    /* border: 1px solid green; */
     margin: 5px 0px;
 
     @media screen and (max-width: 500px){
@@ -22,7 +19,6 @@ export const ImgWrap = styled.div`
     margin: 5px 5px;
     height: 80px;
     width: 80px;
-    /* border: 1px solid #ff0; */
 
     @media screen and (max-width: 620px){
         margin: 3px 3px;
@@ -35,39 +31,29 @@ export const ImgWrap = styled.div`
         width: 40px;  
     }
 
+    /* border: 1px solid #ff0; */
 `
-
 
 export const Img = styled.img`
     position: relative;
     height: 100%;
-    /* margin: 0 0 10px 0; */
-    /* padding-right: 0; */
-    /* border: 2px dashed blue; */
 `
 
 export const TextWrapper = styled.div`
     position: relative;
-    /* margin: 5px 5px; */
     display: flex;
     flex-direction: column;
     align-items: left;
-    /* justify-content: left; */
-    /* width: 210px; */
-    /* @media screen and (max-width: 620px){
-        width: 160px;
-  
-    }
-    */
+
     @media screen and (max-width: 500px){
         /* justify-content: center; */
         align-items: center;
     }
+
     /* border: 1px solid #f00; */
 `
 
 export const UpperCaseLine = styled.p`
-    /* border: 1px solid violet; */
     --text: ${props => props.theme.t1};
     --text2: ${props => props.theme.t3};
     color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
@@ -94,10 +80,11 @@ export const UpperCaseLine = styled.p`
         line-height: 12px;   
         letter-spacing: 0.7px; 
     }
+
+    /* border: 1px solid violet; */
 `
 
 export const SubtitleUpperCase = styled.p`
-    /* border: 1px solid violet; */
     --text: ${props => props.theme.t2};
     --text2: ${props => props.theme.t4};
     color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
@@ -116,9 +103,10 @@ export const SubtitleUpperCase = styled.p`
     @media screen and (max-width: 500px){
         text-align: center;
     }
+
+    /* border: 1px solid violet; */
 `
 export const SubtitleItalic = styled.p`
-    /* border: 1px solid violet; */
     --text: ${props => props.theme.t2};
     --text2: ${props => props.theme.t4};
     color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
@@ -132,4 +120,6 @@ export const SubtitleItalic = styled.p`
     @media screen and (max-width: 500px){
         text-align: center;
     }
+    
+    /* border: 1px solid violet; */
 `

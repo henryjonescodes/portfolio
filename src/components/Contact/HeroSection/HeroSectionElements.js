@@ -4,9 +4,6 @@ import styled from "styled-components";
  * Container
  */
 export const HeroContainer = styled.div`
-    /* border: 1px solid green; */
-
-    /* background: ${props => props.theme.bg}; */
     display: flex;
     justify-content: left;
     align-items: center;
@@ -14,11 +11,13 @@ export const HeroContainer = styled.div`
     height: 400px;
     position: relative;
     z-index: 1;
-
+    
     @media screen and (max-width: 700px){
         height: 300px;
         padding-top: 50px;
     }
+
+    /* border: 1px solid green; */
 `
 
 
@@ -43,7 +42,6 @@ export const HeroContent = styled.div`
     z-index: 3; 
     max-width: 1200px;
     position: absolute;
-    /* padding: 8px 24px; */
     left: 10%;
     display: flex;
     flex-direction: comumn;

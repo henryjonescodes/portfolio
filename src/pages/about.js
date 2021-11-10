@@ -23,8 +23,6 @@ import {
     DiagonalDiv, 
     TwoBox,
     Heading,
-    // StyledLabel,
-    // Img,
     PageHeading,
     HeaderSkew,
     TopLine,
@@ -36,9 +34,7 @@ import {
     HeadingSideText,
     HeadingSideBox,
     Sepparator,
-    // SkillsText,
     DetailContainer,
-    // Img,
     DiagonalBreak,
     ScrollLink,
     DiagonalButton,
@@ -68,10 +64,8 @@ function Store({ match }) {
 }
 
 const About = () => {
-
     const [isOpen, setIsOpen] = useState(false)
     let { scrollY } = useViewportScroll();
-    // scrollY.set(0);
 
     const sizes = {
         width: window.innerWidth,
@@ -83,7 +77,6 @@ const About = () => {
         stop2: -770,
         stop3: -980,
         stop4: -2190,
-        stop5: -2390,
         resize1: "600px",
         scrollPoint: 200,
         storedPoint: 0
@@ -121,27 +114,16 @@ const About = () => {
           window.removeEventListener('scroll', handleScroll)
         }
     })
-    // function setScroll(value){
-    //     window.scrollTo(value, value);
-    //     scrollY.set(value);
-    // }
-    // useEffect(() => {
-    //     return scrollY.onChange((v) => console.log(v));
-    //   }, [scrollY]);
+ 
     useEffect(() => {
-        // setScroll(0)
         window.scrollTo(0, 0);
-        // scrollY.set(0);
       }, []);
 
     const y1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop1, 0]);
     const y2 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop2, 0]);
     const y3 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop3, 0]);
     const y4 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop4, 0]);
-    // const y5 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.stop5, 0]);
     const resize1 = useTransform(scrollY, [0, motionPoints.scrollPoint], [motionPoints.resize1, "0px"]);
-
-    // console.log(y1)
 
     const toggle = () => {
         setIsOpen(!isOpen)
@@ -181,7 +163,6 @@ const About = () => {
                                 <Heading lightcolor ={true}>Overview</Heading>
                                 <TopLine lightcolor ={true}>Education | Soft Skills | Career Focus</TopLine>
                             </HeaderSkew>
-                            {/* <Subtitle lightcolor ={true}>Subtitle text goes here</Subtitle> */}
                             <Boxes 
                                 boxCount = {2} 
                                 boxCountMobile = {2}
@@ -291,7 +272,6 @@ const About = () => {
                                 <Heading>Dev Skills</Heading>
                                 <TopLine>Package Proficiency | Language Knowledge</TopLine>
                             </HeaderSkew>
-                            {/* <Subtitle>Subtitle text goes here</Subtitle> */}
                             <Boxes 
                                 boxCount = {8}
                                 boxCountMobile = {4}
@@ -405,7 +385,6 @@ const About = () => {
                                 <Heading lightcolor ={true}>Creative Skills</Heading>
                                 <TopLine lightcolor ={true}>Software Proficiency | Design Huristics</TopLine>
                             </HeaderSkew>
-                            {/* <Subtitle lightcolor ={true} >Subtitle text goes here</Subtitle> */}
                             <Boxes 
                                 boxCount = {6}
                                 boxCountMobile = {3}>
@@ -510,7 +489,6 @@ const About = () => {
                                     </Router>
                                 </AnimateSharedLayout>
                             </Container>
-                        {/* </Content> */}
                     </DiagonalDiv>
                     <FinalDiv 
                         hasShadow={true} 
@@ -535,24 +513,10 @@ const About = () => {
                             </HeaderSkew>
                             <DiagonalBreak
                                 heightValue = {"300px"}
-                                // lightcolor={true}
                                 style={{height: resize1}}
                             />
                         </Content>
                     </FinalDiv>
-                    {/* <FinalDiv 
-                        hasShadow={true} 
-                        lightcolor ={true} 
-                        zPlane={14} 
-                        style={{top: y5}}
-                        id={"Empty"}>
-                        <Content>
-                            <DiagonalBreak
-                                // heightValue = {"300px"}
-                                style={{height: resize1}}
-                            />
-                        </Content>
-                    </FinalDiv> */}
                 </CSSVariables>
             </ThemeProvider>
             <Footer theme={theme} lightcolor ={false} padded ={true} id="footer"/>

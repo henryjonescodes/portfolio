@@ -1,5 +1,9 @@
 import React from 'react'
-import { Img, SkillsText, StyledLabel } from './IconListElements'
+import { 
+    Img, 
+    SkillsText, 
+    StyledLabel 
+} from './IconListElements'
 
 const IconList = ({src, alt, title, skill1, skill2, skill3}) => {
     return (
