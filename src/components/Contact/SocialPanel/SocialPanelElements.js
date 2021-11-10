@@ -7,11 +7,11 @@ import { motion } from "framer-motion";
 
 //Skews background
 export const DiagonalDiv = styled.div`
-    /* background: ${props => props.theme.bg1}; */
-    background: linear-gradient(169deg, ${props => props.theme.bg1} 0%, #333333 100%);
-    transform: skewY(-11deg);
     --height-base: 220px;
     --height: calc(var(--skew-padding) + var(--height-base));
+    
+    background: linear-gradient(169deg, ${props => props.theme.bg1} 0%, #333333 100%);
+    transform: skewY(-11deg);
     height: var(--height);
     
     box-shadow: inset 0px 25px 12px -9px ${props => props.theme.shadow};

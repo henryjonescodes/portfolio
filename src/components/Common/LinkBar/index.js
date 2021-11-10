@@ -15,20 +15,8 @@ import {
     } from './LinkBarElements.js';
 
 const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
-    // let lightcolor = true;
     const [scrollNav, setScrollNav] = useState(false);
-    // const changeNav = () => {
-    //     if(window.scrollY >= 80) {
-    //         setScrollNav(true);
-    //     } else {
-    //         setScrollNav(false);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', changeNav);
-    // })
-
+ 
     useEffect(function setupListener() {
         function handleScroll() {
             if(window.scrollY >= 80) {
@@ -112,12 +100,6 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                                 // lightcolor={lightcolor}
                             >Contact</NavLinks>
                         </NavItem>
-                        {/* <NavBtn>
-                            <NavBtnLink 
-                                to="/signin">
-                                Sign In
-                            </NavBtnLink>
-                        </NavBtn> */}
                     </NavMenu>
                 </NavBarContainer>
             </Nav>

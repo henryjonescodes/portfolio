@@ -2,11 +2,26 @@ import React, { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import LinkBar from '../LinkBar'
 import RoutedSideBar from '../RoutedSideBar'
-import { TextRow, Blurb, Content, DateBox, Dateline, DetailList, DetailListItem, Heading, PageWrapper, TextBox, TextContainer, TitleContainer, TopLine, Button, ArrowForward, ArrowRight } from './DetailPageElements'
+import { 
+    TextRow, 
+    Blurb, 
+    Content, 
+    DateBox, 
+    Dateline, 
+    DetailList, 
+    DetailListItem, 
+    Heading, 
+    PageWrapper, 
+    TextBox, 
+    TextContainer, 
+    TitleContainer, 
+    TopLine, 
+    Button, 
+    ArrowForward, 
+    ArrowRight 
+} from './DetailPageElements'
 import { theme } from './theme'
 import { items } from "../../About/data";
-
-// import someImg from '/images/a.jpg'
 
 const DetailPage = ({id, lightcolor}) => {
     const [isOpen, setIsOpen] = useState(false)

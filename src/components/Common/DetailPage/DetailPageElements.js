@@ -2,27 +2,17 @@ import styled from "styled-components";
 import {MdKeyboardArrowRight, MdArrowForward} from 'react-icons/md'
 
 export const PageWrapper = styled.div`
-    
     position: absolute;
-    /* top: 0; */
-    /* display: flex; */
-    /* flex-direction: column; */
-    /* height: 100vh; */
     height: 100%;
     width: 100vw;
-    /* align-items: center; */
-    /* @media only screen and (max-width: 700px) { */
-        /* height: 150vh; */
-    /* } */
-    /* border: 6px dashed pink; */
     overflow-y: scroll;
-    /* overflow-x: scroll; */
+
+    /* border: 6px dashed pink; */
 `
 
 export const TitleContainer = styled.div`
     height: 40%;
     width: 100%;
-    /* padding-top: 80px; */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -34,20 +24,8 @@ export const TitleContainer = styled.div`
     background-position: 50% 50%;
     z-index: -1;
     min-height: 300px;
-    /* &:before {
-        content: "";
-        position: absolute;
-        border: 6px dashed purple;
-        top: 0;
-        bottom: 0;
-        right: 0;
-        left: 0;
-        z-index: -1;
-        background: linear-gradient(to right, rgba(0,0,0,.1) 0%,rgba(0,0,0,.8) 80%);
-    } */
 
     /* border: 6px dashed purple; */
-
 `
 
 export const TextRow = styled.div`
@@ -60,24 +38,22 @@ export const TextRow = styled.div`
     height: 100%;
     max-width: 1000px;
     padding: 0 10px 0 40px;
+
     &:last-of-type {
-        /* top: 20%; */
         padding: 0 40px 0 10px;
         justify-content: flex-end;
     }
 
     /* border: 6px dashed red; */
-
 `
 
 export const TextBox = styled.div`
+    --background: ${props => props.theme.bg};
+    --background2: ${props => props.theme.bg1};  
+
     position: relative;
-    /* top: 120px; */
     width: 350px;
     height: 150px;
-    
-    --background: ${props => props.theme.bg};
-    --background2: ${props => props.theme.bg1};    
     background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--background2)')};    
     display: flex;
     flex-direction: column;
@@ -86,12 +62,12 @@ export const TextBox = styled.div`
     padding: 20px 0 0 15px;
     box-shadow: -4px 4px 10px 0px #000;
 
-
     @media only screen and (max-width: 700px), (max-height: 1000px) {
         width: 275px;
         height: 100px;
         transition: width 1s ease-in-out, height 1s ease-in-out;
     }
+
     &:after {
         content: "";
         position: absolute;
@@ -105,17 +81,15 @@ export const TextBox = styled.div`
         width: 100%;
         background-color: ${({highlight}) => (highlight ? highlight : '#01bf71')};
     }
-
 `
 export const DateBox = styled.div`
+    --background: ${props => props.theme.bg};
+    --background2: ${props => props.theme.bg1};    
+
     position: relative;
-    /* top: 75%; */
-    /* bottom:-60px; */
     box-shadow: 4px 4px 10px 0px #000;
     width: 300px;
     height: 70px;
-    --background: ${props => props.theme.bg};
-    --background2: ${props => props.theme.bg1};    
     background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--background2)')};     
     display: flex;
     flex-direction: column;
@@ -128,10 +102,12 @@ export const DateBox = styled.div`
         top: 0;
         transition: width 1s ease-in-out, height 1s ease-in-out;
     }
+
     @media only screen and (max-height: 700px) {
         top: 0;
         transition: top 1s ease-in-out;
     }
+
     &:after {
         content: "";
         z-index: -1;
@@ -144,12 +120,12 @@ export const DateBox = styled.div`
         width: 100%;
         background-color: ${({highlight}) => (highlight ? highlight : '#01bf71')};
     }
-
 `
 
 export const TopLine = styled.p`
     --text2: ${props => props.theme.t1};
     --text: ${props => props.theme.t3};
+
     color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};
     font-size: 16px;
     line-height: 16px;
@@ -170,6 +146,7 @@ export const TopLine = styled.p`
 export const Heading = styled.h1`
     --text2: ${props => props.theme.t1};
     --text: ${props => props.theme.t3};
+
     margin-bottom: 24px;
     font-size: 48px;
     line-height: 1.1;
@@ -179,13 +156,11 @@ export const Heading = styled.h1`
     @media only screen and (max-width: 700px),  (max-height: 1000px)  {
         font-size: 34px;
     }
-    /* @media only screen and (max-width: 500px) {
-        font-size: 24px;
-    } */
 `
 export const Dateline = styled.p`
     --text2: ${props => props.theme.t2};
     --text: ${props => props.theme.t4};
+
     max-width: 440px;
     margin-bottom: 35px;
     font-size: 20px;
@@ -224,17 +199,16 @@ export const TextContainer = styled.div`
 `
 
 export const Blurb = styled.p`
-    /* max-width: 800px; */
     --text2: ${props => props.theme.t2};
     --text: ${props => props.theme.t4};
+    
     color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};
     margin-right: 0;
-    /* margin-left: 1px; */
     margin-bottom: 30px;
     font-size: 20px;
     line-height: 22px;
-    /* border: 4px dashed red; */
 
+    /* border: 4px dashed red; */
 `
 
 export const DetailList = styled.ul`
@@ -246,14 +220,17 @@ export const DetailList = styled.ul`
 export const DetailListItem = styled.li`
     --text2: ${props => props.theme.t2};
     --text: ${props => props.theme.t4};
+
     color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};    margin-bottom: 5px;
     font-size: 22px;
     list-style-position: outside;
     margin-left: 20px;
     padding: 5px 0;
+
     @media only screen and (max-width: 700px) {
         font-size: 18px;
     }
+
     @media only screen and (max-width: 500px) {
         font-size: 15px;
     }
@@ -265,6 +242,7 @@ export const Button = styled.a`
     --background: ${props => props.theme.bg};
     --text2: ${props => props.theme.t1};
     --text: ${props => props.theme.t2};
+    
     border-radius: 50px;
     background: var(--highlight);
     white-space: nowrap;

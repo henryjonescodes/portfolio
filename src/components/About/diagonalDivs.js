@@ -3,21 +3,12 @@ import { motion } from "framer-motion";
 import { Link as LinkS } from "react-scroll";
 
 export const ScrollLink = styled(LinkS)`
-    /* color: #fff;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    padding: 0 1rem; */
     position: absolute;
-    /* margin: auto auto; */
     height: 100%;
     width: 100%;
     cursor: pointer;
-    /* border: 1px solid pink; */
 
-    /* &.active {
-        border-bottom: 3px solid #01bf71;
-    } */
+    /* border: 1px solid pink; */
 `
 
 export const CSSVariables = styled.div`
@@ -56,9 +47,8 @@ export const CSSVariables = styled.div`
 export const DiagonalDiv = styled(motion.div)`
     position: relative;
     padding: var(--skew-padding) 0;
-    /* margin-top: -1px; */
-    /* z-index: ${({above}) => (above? '20' : '1')}; */
     z-index: ${({zPlane}) => zPlane + 1};
+
     /* border: 2px dashed purple; */
 
     &:before {
@@ -73,20 +63,19 @@ export const DiagonalDiv = styled(motion.div)`
         transform-origin: 50% 0;
         outline: 1px solid transparent;
         backface-visibility: hidden;
-        /* border: 2px dashed green; */
         background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
         box-shadow: ${({hasShadow}) => (hasShadow ? '0px -3px 15px 0px #000' : 'none')};
+
+        /* border: 2px dashed green; */
     }
 `
 export const FinalDiv = styled(motion.div)`
     position: relative;
     padding: var(--skew-padding) 0;
-    /* margin-top: -1px; */
-    /* z-index: ${({above}) => (above? '20' : '1')}; */
     z-index: ${({zPlane}) => zPlane + 1};
-    /* border: 2px dashed purple; */
     --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')};
     
+    /* border: 2px dashed purple; */
 
     &:before {
         content: "";
@@ -95,14 +84,13 @@ export const FinalDiv = styled(motion.div)`
         top: 0;
         right: 0;
         bottom: 0;
-        /* --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')}; */
         transform: skewY(var(--skewValue));
         transform-origin: 50% 0;
         outline: 1px solid transparent;
         backface-visibility: hidden;
-        /* border: 2px dashed green; */
         background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
-        /* box-shadow: ${({hasShadow}) => (hasShadow ? '0px -4px 15px 0px #000' : 'none')}; */
+
+        /* border: 2px dashed green; */
     }
 
     &:after {
@@ -112,7 +100,6 @@ export const FinalDiv = styled(motion.div)`
         width:100%;
         top:-1px;
         z-index:-1;
-        /* transform:scale(.9); */
         box-shadow: 0px -5px 15px 2px #000000;
     }
 `
@@ -122,7 +109,6 @@ export const DiagonalBreak = styled(motion.div)`
     --skewValue: ${({skewRight}) => (skewRight? 'calc(var(--angle) * -1)' : 'var(--angle)')};
     transform: skewY(var(--skewValue));
     background-color: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
-    /* height: ${({heightValue}) => (heightValue ? heightValue : '10px')}; */
     border-radius: 5px;
     margin-bottom: calc(var(--skew-padding) * 1.5);
     z-index: -10;
@@ -133,13 +119,8 @@ export const DiagonalBreak = styled(motion.div)`
     @media screen and (max-width: 500px){
         margin-top: 100px;
     }
-    /* @media screen and (max-width: 400px){
-        margin-top: 200px;
-    }
-    @media screen and (max-width: 330px){
-        margin-top: 230px;
-    } */
-    border: 1px solid red;
+    
+    border: 1px solid transparent;
 `
 
 export const Content = styled.div`
@@ -147,6 +128,7 @@ export const Content = styled.div`
     margin: 0 auto;
     padding: 1.5em;
     position: relative;
+
     /* border: 2px dashed pink; */
 `
 
@@ -154,15 +136,15 @@ export const Boxes = styled.div`
     display: grid;
     grid-template-columns: repeat(${({boxCount}) => boxCount}, 1fr);
     grid-gap: ${({gridGap}) => (gridGap ? gridGap : '3%')};
-    /* margin: 2em 0; */
     margin-top: -100px;
     margin-bottom: ${({marginBot}) => (marginBot ? marginBot : '4em')};;
-    /* border: 1px solid yellow;  */
-
+    
     @media screen and (max-width: 700px){
         margin-top: -120px;
         grid-template-columns: repeat(${({boxCountMobile}) => boxCountMobile}, 1fr);
     }
+
+    /* border: 1px solid yellow;  */
 `
 
 export const EightBox = styled.div`
@@ -172,8 +154,7 @@ export const EightBox = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 100%;
-    /* border: 1px dashed green; */
-    /* background: red; */
+    
     --translation: 0;
     &:nth-child(1) { --translation: calc(var(--skew-padding) * 1.75)}
     &:nth-child(2) { --translation: calc(var(--skew-padding) * 1.5)}
@@ -184,7 +165,7 @@ export const EightBox = styled.div`
     &:nth-child(7) { --translation: calc(var(--skew-padding) * 0.25)}
     &:nth-child(8) { --translation: calc(var(--skew-padding) * 0)} 
     transform: translateY( var(--translation) ); 
-
+    
     @media screen and (max-width: 700px){
         &:nth-child(1) {margin-top: 15px}
         &:nth-child(2) {margin-top: 15px}
@@ -194,8 +175,9 @@ export const EightBox = styled.div`
         &:nth-child(6) {margin-top: 100px}
         &:nth-child(7) {margin-top: 100px}
         &:nth-child(8) {margin-top: 100px} 
-       
     }
+
+    /* border: 1px dashed green; */
 `
 export const SixBox = styled.div`
     display: flex;
@@ -204,8 +186,7 @@ export const SixBox = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 100%;
-    /* border: 1px dashed green; */
-    /* background: red; */
+    
     --translation: 0;
     &:nth-child(1) { --translation: calc(var(--skew-padding) * 2)}
     &:nth-child(2) { --translation: calc(var(--skew-padding) * 1.66)}
@@ -214,7 +195,7 @@ export const SixBox = styled.div`
     &:nth-child(5) { --translation: calc(var(--skew-padding) * 0.66)}
     &:nth-child(6) { --translation: calc(var(--skew-padding) * 0.33)}
     transform: translateY( var(--translation) ); 
-
+    
     @media screen and (max-width: 700px){
         &:nth-child(1) {margin-top: 15px}
         &:nth-child(2) {margin-top: 15px}
@@ -223,7 +204,10 @@ export const SixBox = styled.div`
         &:nth-child(5) {margin-top: 70px}
         &:nth-child(6) {margin-top: 70px}  
     }
+
+    /* border: 1px dashed green; */
 `
+
 export const FourBox = styled.div`
     display: flex;
     flex-direction: column;
@@ -231,15 +215,14 @@ export const FourBox = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 100%;
-    /* border: 1px solid red; */
-    /* background: red; */
+    
     --translation: 0;
     &:nth-child(1) { --translation: calc(var(--skew-padding) * 1.5)}
     &:nth-child(2) { --translation: calc(var(--skew-padding) * 1)}
     &:nth-child(3) { --translation: calc(var(--skew-padding) * 0.5)}
     &:nth-child(4) { --translation: calc(var(--skew-padding) * 0)} 
     transform: translateY( var(--translation) ); 
-
+    
     @media screen and (max-width: 700px){
         justify-self: center;
         width: 50%;
@@ -266,6 +249,8 @@ export const FourBox = styled.div`
         &:nth-child(3) {margin-bottom: 0px;}
         &:nth-child(4) {margin-bottom: 0px;} 
     }
+
+    /* border: 1px solid red; */
 `
 export const TwoBox = styled.div`
     width: 100%;
@@ -274,43 +259,35 @@ export const TwoBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* border: 1px solid #fff; */
-    /* background: red; */
+    
     --translation: 0;
     &:nth-child(1) { --translation: calc(var(--skew-padding) * 2)}
     &:nth-child(2) { --translation: calc(var(--skew-padding))}
     transform: translateY( var(--translation) ); 
-
+    
     @media screen and (max-width: 700px){
         justify-self: center;
         margin-bottom: 40px;
         &:nth-child(2) { margin-bottom: -30px;}
     }
-
+    
     @media screen and (max-width: 500px){
         margin-top: 20px;
         &:nth-child(2) { margin-bottom: 0px;}
     }
-    @media screen and (max-width: 360px){
-        /* margin-top: 20px; */
-        /* margin-bottom: 130px; */
-    }
-
-
+        
+    /* border: 1px solid #fff; */
 `
 
 export const DetailContainer = styled.div`
     margin-top: ${({topMargin}) => (topMargin ? topMargin : '0px')};
-    /* padding-top: 40px; */
     position: absolute;
     display: flex;
     width: 100%;
-    /* height: 100%; */
-    /* padding-top: 50px; */
-  
     flex-direction: column;
     align-items: left;
     justify-content: center;
+
     /* border: 2px solid red; */
 `
 
@@ -335,9 +312,8 @@ export const HeadingBox = styled.div`
     position: relative;
     align-items: center;
     justify-content: left;
-    /* width:100%; */
+
     /* border: 2px dashed green; */
-    
 `
 
 export const Sepparator = styled.div`
@@ -347,8 +323,8 @@ export const Sepparator = styled.div`
     position: relative;
     height: 50px;
     width: 5px;
-    /* border: 2px dashed green; */
 
+    /* border: 2px dashed green; */
 `
 export const HeadingSideBox = styled.div`
     display: flex;
@@ -356,18 +332,17 @@ export const HeadingSideBox = styled.div`
     align-items: left;
     margin: auto 0;
     position: relative;
+
     /* border: 2px dashed red; */
 `
 
 
 
 export const PageHeading = styled.h1`
-    /* margin-bottom: 5px; */
     font-size: 68px;
     line-height: 1.1;
     font-weight: 600;
     color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text1)')};
-    /* margin-bottom: 70px; */
 
     @media screen and (max-width: 700px){
         font-size: 42px;
@@ -386,7 +361,6 @@ export const PageHeading = styled.h1`
 
 export const HeadingSideText = styled.p`
     max-width: 440px;
-    /* margin-bottom: -30px; */
     font-size: 18px;
     line-height: 24px;
     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text2)')};
@@ -411,19 +385,14 @@ export const HeadingSideText = styled.p`
 `
 
 export const Heading = styled.h1`
-    /* border: 1px solid #fff; */
     margin-bottom: 5px;
     font-size: 48px;
     line-height: 1.1;
     font-weight: 600;
     color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text1)')};
     backface-visibility:hidden;
-    /* transform:skewY(var(--angle)); */
-    /* transform: translateY(calc(var(--skew-padding) * -1));  */
-
-    @media screen and (max-width: 480px){
-        /* font-size: 32px; */
-    }
+    
+    /* border: 1px solid #fff; */
 `
 
 export const HeaderSkew = styled.div`
@@ -435,18 +404,13 @@ export const HeaderSkew = styled.div`
 
 `
 export const Subtitle = styled.p`
-    /* border: 2px dashed green; */
-
     max-width: 440px;
     margin-bottom: 5px;
     margin-top: 5px;
     padding-right: 20px;
     font-size: 16px;
     line-height: 22px;
-    /* text-align: justify;
-    text-justify: auto; */
     letter-spacing: 0.8px;
-    /* text-indent: 10%; */
     color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text1)')};
 
     @media screen and (max-width: 700px){
@@ -466,6 +430,8 @@ export const Subtitle = styled.p`
         font-size: 11px;
         line-height: 13px;    
     }
+
+    /* border: 2px dashed green; */
 `
 
 
@@ -475,8 +441,8 @@ export const DiagonalButton = styled.a`
     --background: ${props => props.theme.bg};
     --text2: ${props => props.theme.t1};
     --text: ${props => props.theme.t3};
+
     border-radius: 50px;
-    /* background: ${({lightbg}) => (lightbg ? 'var(--foreground)' : 'var(--background)')}; */
     background: var(--highlight);
     white-space: nowrap;
     padding: ${({big}) => (big ? '14px 48px' : '12px 30px')};
@@ -496,40 +462,3 @@ export const DiagonalButton = styled.a`
         background: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
     }
 `
-
-// export const StyledLabel = styled.label`
-//     color: ${({lightcolor}) => (lightcolor ? 'var(--text3)' : 'var(--text)')};
-//     text-transform: uppercase;
-//     font-size: 12px;
-//     width: 120%;
-//     margin-bottom: 10px;
-//     /* transform: skewY(var(--angle)); */
-//     text-align: center;
-// `
-
-// export const Img = styled.img`
-//     position: relative;
-//     width: 100%;
-//     /* margin: 10px 10px; */
-//     padding: 0px 10px;
-//     /* padding-right: 0; */
-//     /* border: 2px dashed blue; */
-
-//     /* @media screen and (max-width: 700px){
-//         width: 100%;
-  
-//     } */
-// `
-
-// export const SkillsText = styled.p`
-//     /* border: 2px dashed red; */
-//     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text)')};
-//     font-size: 9px;
-//     text-align: center;
-//     width: 160%;
-//     line-height: 9px;
-//     font-weight: 600;
-//     letter-spacing: .3px;
-//     text-transform: uppercase;
-//     margin: 2px 2px;
-// `

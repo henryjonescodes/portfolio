@@ -6,7 +6,6 @@ export const StyledLabel = styled.label`
     font-size: 12px;
     width: 120%;
     margin-bottom: 10px;
-    /* transform: skewY(var(--angle)); */
     text-align: center;
     @media screen and (max-width: 700px){
         font-size: 11px;
@@ -18,22 +17,12 @@ export const StyledLabel = styled.label`
 export const Img = styled.img`
     position: relative;
     width: 100%;
-    /* margin: 0 0 10px 0; */
-    /* padding-right: 0; */
-    /* border: 2px dashed blue; */
-
-    /* @media screen and (max-width: 700px){
-        width: 100%;
-  
-    } */
 `
 
 export const SkillsText = styled.p`
-    /* border: 2px dashed red; */
     color: ${({lightcolor}) => (lightcolor ? 'var(--text4)' : 'var(--text)')};
     font-size: 11px;
     text-align: center;
-    /* justify-content: center; */
     width: 160%;
     line-height: 12px;
     font-weight: 600;

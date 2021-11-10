@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import SplashVideo from '../../../videos/splashVideo.mp4'
 import {RouteButton as Button} from '../../Common/ButtonElements'
 import { ThemeProvider } from 'styled-components'
 import { 
@@ -27,7 +26,7 @@ const HeroSection = ({theme, to}) => {
         <ThemeProvider theme={theme}>
             <HeroContainer id ="home">
                 <HeroBackground>
-                    <VideoBackground autoPlay loop muted src={SplashVideo} type = 'splashVideo/mp4'/>
+                    <VideoBackground autoPlay loop muted src='/videos/splashVideo.mp4' type = 'splashVideo/mp4'/>
                 </HeroBackground>
                 <HeroContent>
                     <HeroH1>Henry Jones</HeroH1>

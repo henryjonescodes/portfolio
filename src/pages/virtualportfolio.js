@@ -123,12 +123,10 @@ class virtualportfolio extends React.Component{
             const texture = await loadWithPromise(textureUrl, textureLoader)
             texture.flipY = false
             const material = new THREE.MeshBasicMaterial({ map: texture})
-            // const material = new THREE.MeshBasicMaterial({ color: '#121212'})
             gltfData.scene.traverse((child) => {child.material = material});    
             let model = gltfData.scene
             applyModelSettings(model)
             scene.add(model)
-            // console.log(scene)
             return model
         }
 
@@ -461,7 +459,6 @@ class virtualportfolio extends React.Component{
             water.rotation.x =- Math.PI / 2;
             scene.add(water);
             
-            // const waterUniforms = water.material.uniforms;
             return water;
         }
 
@@ -771,7 +768,6 @@ class virtualportfolio extends React.Component{
                         .to({
                             x: marker.cameraPositionX,
                             y: marker.cameraPositionY,
-                            // y: camera.position.y,
                             z: marker.cameraPositionZ,
                         }, params.animationDuration * params.positionChangeFactor)
                         .onStart(() => {
@@ -900,7 +896,6 @@ class virtualportfolio extends React.Component{
             if(this.camera != null && this.state.doRouting){
                 raycaster.setFromCamera(mouse,  this.camera)
 
-                // const clickableObjects = [object1, object2, object3, button1, button2, button3]
                 let intersects = null
                 intersects = raycaster.intersectObjects(clickableObjects)
 
@@ -946,8 +941,6 @@ class virtualportfolio extends React.Component{
         this.camera = null
         this.renderer = null
         this.controls = null
-        // test.remove()
-        // window.removeEventListener("click",  {})
     }
     render(){
         if(this.state.target != null){
