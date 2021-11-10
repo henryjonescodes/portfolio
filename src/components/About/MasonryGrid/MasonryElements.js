@@ -65,8 +65,8 @@ export const CardContentContainer = styled.div`
         @media only screen and (max-width: 700px) {
             padding: 0;
             top: 20%;
-            width: 85%;
-            transform: translateX(8%);
+            width: 90%;
+            transform: translateX(6%);
             align-self: center;
         }
     }
@@ -142,6 +142,7 @@ export const TitleContainer = styled(motion.div)`
     left: 15px;
     max-width: 85%;
     z-index:2;
+    pointer-events: none;
     /* border: 2px dashed purple; */
 
     /* @media only screen and (max-width: 700px) {
@@ -325,12 +326,13 @@ export const OverlayButton = styled.a`
     --text2: ${props => props.theme.t1};
     --text: ${props => props.theme.t3};
     border-radius: 50px;
-    /* background: ${({lightbg}) => (lightbg ? 'var(--foreground)' : 'var(--background)')}; */
+    width: 40%;
+    margin-left: 20px;
     background: var(--highlight);
     white-space: nowrap;
-    padding: ${({big}) => (big ? '14px 48px' : '12px 30px')};
+    padding: 10px 20px;
     color: ${({lightcolor}) => (!lightcolor ? 'var(--text)' : 'var(--text2)')};
-    font-size: ${({fontbig}) => (fontbig ? '20px' : '16px')};
+    font-size: 16px;
     outline: none;
     border: none;
     cursor: pointer;
@@ -344,6 +346,9 @@ export const OverlayButton = styled.a`
         transition: all 0.2 ease-in-out;
         background: ${({lightcolor}) => (lightcolor ? 'var(--background)' : 'var(--foreground)')};
     }
+
+    /* border: 2px dashed yellow; */
+
 `
 
 export const ArrowForward = styled(MdArrowForward)`
