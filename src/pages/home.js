@@ -26,7 +26,7 @@ export const infoData = {
 export const infoData2 = {
     //Info Panel Props 
     id: 'photography',
-    lightBg: false,
+    lightBg: true,
     topLine: "Gallery | Instagram | Blog",
     heading: "Photography",
     description: "Follow me through my camera: view my most recent photography and linked social media.",
@@ -43,10 +43,10 @@ export const infoData2 = {
 export const infoData3 = {
     //Info Panel Props 
     id: 'projects',
-    lightBg: true,
+    lightBg: false,
     topLine: "3D Renders | Software",
-    heading: "Projects",
-    description: "Explore my past projects and works in 3D art and programming",
+    heading: "Virtual Portfolio",
+    description: "Explore my virtual portfolio written using Three.js (in development)",
     buttonLabel: "See More",
     imgStart: true,
     img: "/images/home/conveyor.svg",
@@ -88,8 +88,8 @@ const Home = () => {
             <NavBar toggle = {toggle} title = "Home" theme = {theme} sticky ={true}/>
             <HeroSection theme = {theme} to={"about"} />
             <InfoSection{...infoData}/>
-            <InfoSection{...infoData2}/>
             <InfoSection{...infoData3}/>
+            <InfoSection{...infoData2}/>
             <InfoSection{...infoData4}/> 
             <Footer theme={theme} lightcolor ={true} padded ={false}/>
         </>

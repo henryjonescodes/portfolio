@@ -69,6 +69,17 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                         </NavItem>
                         <NavItem>
                             <NavLinks 
+                                to="/projects"
+                                smooth="true"
+                                duration={500}
+                                spy="true"
+                                exact='true'
+                                offset={-80}   
+                                // lightcolor={lightcolor}
+                            >Virtual Portfolio</NavLinks>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinks 
                                 to="/photography"
                                 smooth="true"
                                 duration={500}
@@ -77,17 +88,6 @@ const LinkBar = ({toggle, title, sticky, theme, transparent}) => {
                                 offset={-80}
                                 // lightcolor={lightcolor}
                             >Photography</NavLinks>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinks 
-                                to="/projects"
-                                smooth="true"
-                                duration={500}
-                                spy="true"
-                                exact='true'
-                                offset={-80}   
-                                // lightcolor={lightcolor}
-                            >Projects</NavLinks>
                         </NavItem>
                         <NavItem>
                             <NavLinks 

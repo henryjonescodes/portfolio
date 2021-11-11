@@ -11,14 +11,14 @@ export const PageWrapper = styled.div`
 `
 
 export const TitleContainer = styled.div`
-    height: 40%;
+    height: 50%;
     width: 100%;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow: hidden;
-    padding-top: 100px;
+    /* padding-top: 100px; */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50% 50%;
@@ -205,8 +205,19 @@ export const Blurb = styled.p`
     color: ${({lightcolor}) => (lightcolor ? 'var(--text)' : 'var(--text2)')};
     margin-right: 0;
     margin-bottom: 30px;
-    font-size: 20px;
-    line-height: 22px;
+    font-size: 22px;
+    line-height: 23px;
+    letter-spacing: .3px;
+
+    @media only screen and (max-width: 700px) {
+        font-size: 20px;
+        line-height: 21px;
+    }
+
+    @media only screen and (max-width: 500px) {
+        font-size: 18px;
+        line-height: 19px;
+    }
 
     /* border: 4px dashed red; */
 `
@@ -228,11 +239,11 @@ export const DetailListItem = styled.li`
     padding: 5px 0;
 
     @media only screen and (max-width: 700px) {
-        font-size: 18px;
+        font-size: 20px;
     }
 
     @media only screen and (max-width: 500px) {
-        font-size: 15px;
+        font-size: 18px;
     }
 `
 
@@ -246,10 +257,10 @@ export const Button = styled.a`
     border-radius: 50px;
     background: var(--highlight);
     white-space: nowrap;
-    padding: 20px 30px;
-    margin: 50px 100px;
+    padding: 20px 0px;
+    margin: 50px 20%;
     color: var(--text2);
-    font-size: 15px;
+    font-size: 20px;
     outline: none;
     border: none;
     cursor: pointer;
@@ -258,13 +269,6 @@ export const Button = styled.a`
     align-items: center;
     transition: all 0.2 ease-in-out;
     z-index: 10;
-
-    @media only screen and (max-width: 700px) {
-        margin: 50px 50px;
-    }
-    @media only screen and (max-width: 500px) {
-        margin: 50px 10px;
-    }
 
     &:hover {
         transition: all 0.2 ease-in-out;

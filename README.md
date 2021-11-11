@@ -11,6 +11,7 @@ Production repo for my portfolio site and personal homepage [henryjones.xyz].
 - [Ken Kozma] - The current normal-based ocean would not be possible without him, thanks!
 - [Nils Binder] - Provided the knowledge to get slanted divs up and running.
 - [Brian Design] - Helped me jump into React with his react website tutorials, his influence is clearly visible in my landing page
+- [Matt Perry] - Provided demo code on the Framer Motion homepage that I used to format my previous career experience section
 
 ## Blender Knowledge and Resources
 All 3D assets created using [Blender] from scratch unless otherwise credited.
@@ -52,3 +53,4 @@ A stable build of branch MAIN is available for viewing at [henryjones.xyz].
    [Brian Design]: <https://www.youtube.com/channel/UCsKsymTY_4BYR-wytLjex7A>
    [henryjones.xyz]: <henryjones.xyz>
    [Blender]: <https://www.blender.org/>
+   [Matt Perry]: <https://codesandbox.io/s/framer-motion-animatesharedlayout-app-store-demo-i1kct?from-embed>

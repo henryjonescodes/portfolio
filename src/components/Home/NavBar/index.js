@@ -64,6 +64,16 @@ const NavBar = ({toggle, title, sticky, theme, transparent}) => {
                             </NavItem>
                             <NavItem>
                                 <NavLinks 
+                                    to="projects"
+                                    smooth="true"
+                                    duration={500}
+                                    spy={true}
+                                    exact='true'
+                                    offset={-80}   
+                                >Virtual Portfolio</NavLinks>
+                            </NavItem>
+                            <NavItem>
+                                <NavLinks 
                                     to="photography"
                                     smooth="true"
                                     duration={500}
@@ -71,16 +81,6 @@ const NavBar = ({toggle, title, sticky, theme, transparent}) => {
                                     exact='true'
                                     offset={-80}
                                 >Photography</NavLinks>
-                            </NavItem>
-                            <NavItem>
-                                <NavLinks 
-                                    to="projects"
-                                    smooth="true"
-                                    duration={500}
-                                    spy={true}
-                                    exact='true'
-                                    offset={-80}   
-                                >Projects</NavLinks>
                             </NavItem>
                             <NavItem>
                                 <NavLinks 
