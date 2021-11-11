@@ -39,7 +39,7 @@ export function MasonryItem({id}) {
     let entry = items.find(item => item.id === id)
     category = entry.category;
     title = entry.title;
-    url = entry.url;
+    url = entry.url[0].url;
     list = entry.list;
     dateline = entry.dateline;
 

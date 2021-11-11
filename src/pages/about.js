@@ -73,8 +73,8 @@ const About = () => {
     }
    
     const motionPoints = {
-        stop1: -570,
-        stop2: -770,
+        stop1: -580,
+        stop2: -775,
         stop3: -980,
         stop4: -2190,
         resize1: "600px",
@@ -171,8 +171,8 @@ const About = () => {
                                 <TwoBox>
                                     <Subtitle lightcolor={true}>
                                         I'm a web developer and multimedia artist from Portland, Maine. 
-                                        I'm new to both fields, but ready to dive into any projects or 
-                                        opportunites that could broaden my horizons.
+                                        I'm new to both fields and ready to dive into any projects or 
+                                        opportunites that will broaden my horizons.
                                     </Subtitle>
                                     <Subtitle lightcolor={true}>
                                         Since graduating 
@@ -212,7 +212,7 @@ const About = () => {
                                 boxCount = {4}
                                 gridGap={"10%"}
                                 boxCountMobile = {2}
-                                marginBot = {"3em"}>
+                                marginBot = {"4em"}>
                                 <FourBox>
                                     <IconList
                                         src={"/images/about/logos/stackedCubes.svg"}

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 import LinkBar from '../LinkBar'
 import RoutedSideBar from '../RoutedSideBar'
+import SimpleImageSlider from "react-simple-image-slider";
 import { 
     TextRow, 
     Blurb, 
@@ -28,28 +29,30 @@ const DetailPage = ({id, lightcolor}) => {
 
     let category = "no category found"
     let title = "no title found"  
-    let url = "url not found"
+    // let url = "url not found"
     let dateline = "no dateline found"
     let blurb = "lorem ipsum"
-    let linkDestination = null;
+    let linkDestination, linkText = null;
     let list, itemlist = null
     let highlightColor = null;
+    let imageList = [];
 
     if(items.find(item => item.id === id)){
         let entry = items.find(item => item.id === id)
         category = entry.category;
         title = entry.title;
-        url = entry.url;
+        // url = entry.url[0].url;
+        imageList = entry.url;
         list = entry.list;
         dateline = entry.dateline;
         blurb = entry.blurb
         highlightColor = entry.highlightColor
         if(entry.linkDestination !== ""){
             linkDestination = entry.linkDestination;
+            linkText = entry.linkText;
         }
     }
-
-
+    
     function splitBlurb(blurb){
         const arr = blurb.split("^")
         let out = []
@@ -83,7 +86,18 @@ const DetailPage = ({id, lightcolor}) => {
             <ThemeProvider theme={theme}>
                 <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
                 <LinkBar toggle = {toggle} title = "Home" theme = {theme} transparent={true}/>
-                <TitleContainer style={{backgroundImage: `url(${url})`}}>
+                <TitleContainer>
+                    <SimpleImageSlider
+                        width={'100%'}
+                        height={'100%'}
+                        images={imageList}
+                        style={{zIndex:-1}}
+                        showBullets={false}
+                        showNavs={false}
+                        autoPlay={true}
+                        autoPlayDelay={4}
+                        slideDuration={3}
+                    />
                     {/* <BackgroundImage src ={url}/> */}
                     <TextRow>
                         <TextBox highlight={highlightColor} lightcolor = {lightcolor}>
@@ -112,7 +126,7 @@ const DetailPage = ({id, lightcolor}) => {
                             onMouseLeave={onHover}
                             highlight={highlightColor}
                             >
-                                See More
+                                {linkText}
                                 {hover ? <ArrowForward /> : <ArrowRight />}
                             </Button>
                         }

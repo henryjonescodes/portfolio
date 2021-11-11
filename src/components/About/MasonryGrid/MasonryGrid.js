@@ -23,7 +23,7 @@ function MasonryCard({ id, title, category, url, dateline}) {
           <CardImageContainer layoutId={`card-image-container-${id}`} >
             <Gradient/>
             <CardImage 
-                src={url} 
+                src={url[0].url} 
                 // src={`textures/BugLight/BugLight.png`} 
                 alt="" 
             />

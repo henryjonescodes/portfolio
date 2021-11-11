@@ -2,7 +2,7 @@ require('isomorphic-fetch');
 const axios = require('axios').default;
 
 // const url = `https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f2fc8602a0fd&variables=%7B%22id%22%3A%2220460177%22%2C%22first%22%3A12%2C%22after%22%3A%22QVFCUXdBNlJrLUxmTFNPYW5ONnZtTURLcXZkN1pRSFJWZ2pmWnJrc1lseDhLUTAtdDQwYzRWYnpaRTh4Y0MwSDVYNXV1bUJFMVRpTFdRTGNhYU5vTncyYQ%3D%3D%22%7D`;
-const url = `https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f2fc8602a0fd&variables={"id":"20460177", "first":12}`;
+// const url = `https://www.instagram.com/graphql/query/?query_hash=8c2a529969ee035a5063f2fc8602a0fd&variables={"id":"20460177", "first":12}`;
 // const url = `https://www.instagram.com/graphql/query/?query_hash=d4d88dc1500312af6f937f7b804c68c3&variables=%7B%22user_id%22%3A%2220460177%22%2C%22include_chaining%22%3Afalse%2C%22include_reel%22%3Afalse%2C%22include_suggested_users%22%3Afalse%2C%22include_logged_out_extras%22%3Atrue%2C%22include_highlight_reels%22%3Atrue%2C%22include_live_status%22%3Afalse%7D`;
 
 const cache = {

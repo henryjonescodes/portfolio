@@ -39,7 +39,11 @@ const Photography = () => {
         <>
             <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
             <LinkBar toggle = {toggle} title = "Photography" theme = {theme} transparent = {true}/>
-            <ImageBackground src ={'/images/photography/collage.jpg'}/>
+            <ImageBackground 
+                src ={'/images/photography/collage.jpg'}
+                message={"Coming Soon!"}
+                subtitle={"I'm still working on this one, check back soon!"}
+                />
             {/* <Container>
                 <AnimateSharedLayout type="crossfade">
                     <Router>

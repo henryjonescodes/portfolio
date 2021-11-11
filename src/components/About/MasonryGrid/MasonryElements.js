@@ -157,6 +157,9 @@ export const Category = styled.span`
     color: #fff;
     font-size: 16px;
     text-transform: uppercase;
+    @media only screen and (max-width: 600px) {
+        font-size: 14px;
+    }
 `
 
 export const StyledH1 = styled.h1`
@@ -217,7 +220,7 @@ export const CardList = styled.ol`
   flex-wrap: wrap;
   align-content: flex-start;
   justify-content: center;
-
+  max-width: 100%;
   /* border: 1px solid violet; */
 `
 
