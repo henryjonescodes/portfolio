@@ -11,7 +11,8 @@ export const PageWrapper = styled.div`
 `
 
 export const TitleContainer = styled.div`
-    height: 50%;
+    height: 70%;
+    max-height: 100vh;
     width: 100%;
     position: relative;
     display: flex;
@@ -23,7 +24,7 @@ export const TitleContainer = styled.div`
     background-repeat: no-repeat;
     background-position: 50% 50%;
     z-index: -1;
-    min-height: 300px;
+    min-height: 400px;
 
     /* border: 6px dashed purple; */
 `
@@ -62,7 +63,7 @@ export const TextBox = styled.div`
     padding: 20px 0 0 15px;
     box-shadow: -4px 4px 10px 0px #000;
 
-    @media only screen and (max-width: 700px), (max-height: 1000px) {
+    @media only screen and (max-width: 700px){
         width: 275px;
         height: 100px;
         transition: width 1s ease-in-out, height 1s ease-in-out;
