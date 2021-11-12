@@ -34,4 +34,10 @@ export const SkillsText = styled.p`
         font-size: 10px;
         line-height:10px;
     }
+    @media screen and (max-width: 500px){
+        font-size: 10px;
+        line-height:10px;
+        width: 200%;
+        letter-spacing: .2px;
+    }
 `

@@ -12,6 +12,11 @@ export const FooterContainer = styled.footer`
     padding-left: 50px;
     padding-bottom: 50px;
     overflow: hidden;
+
+    @media screen and (min-width: 2800px){
+        margin-top: ${({padded}) => (padded ? `-320px` : `0px`)};
+        padding-top: ${({padded}) => (padded ? `500px` : `0px`)};
+    }
 `
 export const FooterWrap = styled.div`
     padding-top: 48px;

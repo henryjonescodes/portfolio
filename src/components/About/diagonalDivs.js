@@ -140,8 +140,11 @@ export const Boxes = styled.div`
     margin-bottom: ${({marginBot}) => (marginBot ? marginBot : '4em')};;
     
     @media screen and (max-width: 700px){
-        margin-top: -120px;
+        margin-top: -90px;
         grid-template-columns: repeat(${({boxCountMobile}) => boxCountMobile}, 1fr);
+    }
+    @media screen and (max-width: 440px){
+        margin-top: -80px;
     }
 
     /* border: 1px solid yellow;  */
@@ -215,6 +218,7 @@ export const FourBox = styled.div`
     width: 100%;
     height: 0;
     padding-bottom: 100%;
+    margin-bottom: 5px;
     
     --translation: 0;
     &:nth-child(1) { --translation: calc(var(--skew-padding) * 1.5)}
@@ -228,34 +232,34 @@ export const FourBox = styled.div`
         width: 50%;
         &:nth-child(1) {margin-top: -60px;}
         &:nth-child(2) {margin-top: -60px; } 
+        &:nth-child(3) {margin-bottom: -110px;}
+        &:nth-child(4) {margin-bottom: -110px;} 
+    }
+    @media screen and (max-width: 600px){
+        &:nth-child(1) {margin-top: -40px;}
+        &:nth-child(2) {margin-top: -40px;} 
+        &:nth-child(3) {margin-bottom: -100px;}
+        &:nth-child(4) {margin-bottom: -100px;} 
+    }
+    @media screen and (max-width: 540px){
+        &:nth-child(1) {margin-bottom: 20px;}
+        &:nth-child(2) {margin-bottom: 20px;} 
         &:nth-child(3) {margin-bottom: -50px;}
         &:nth-child(4) {margin-bottom: -50px;} 
     }
-    @media screen and (max-width: 600px){
-        &:nth-child(1) {margin-top: -20px;}
-        &:nth-child(2) {margin-top: -20px;} 
-        &:nth-child(3) {margin-bottom: -60px;}
-        &:nth-child(4) {margin-bottom: -60px;} 
-    }
-    @media screen and (max-width: 540px){
-        &:nth-child(1) {margin-top: 40px; margin-bottom: 50px;}
-        &:nth-child(2) {margin-top: 40px; margin-bottom: 50px;} 
-        &:nth-child(3) {margin-bottom: -10px;}
-        &:nth-child(4) {margin-bottom: -10px;} 
-    }
     @media screen and (max-width: 400px){
-        &:nth-child(1) {margin-top: 130px; margin-bottom: 40px;}
-        &:nth-child(2) {margin-top: 130px; margin-bottom: 40px;} 
-        &:nth-child(3) {margin-bottom: 0px;}
-        &:nth-child(4) {margin-bottom: 0px;} 
+        &:nth-child(1) {margin-bottom: 40px;}
+        &:nth-child(2) {margin-bottom: 40px;} 
+        &:nth-child(3) {margin-bottom: -30px;}
+        &:nth-child(4) {margin-bottom: -30px;} 
     }
 
     /* border: 1px solid red; */
 `
 export const TwoBox = styled.div`
     width: 100%;
-    height: 0;
-    padding-bottom: ${({padTop}) => (padTop ? padTop : '100%')};
+    height: auto;
+    /* padding-bottom: ${({padTop}) => (padTop ? padTop : '100%')}; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -267,12 +271,12 @@ export const TwoBox = styled.div`
     
     @media screen and (max-width: 700px){
         justify-self: center;
-        margin-bottom: 40px;
+        /* margin-bottom: 40px; */
         &:nth-child(2) { margin-bottom: -30px;}
     }
     
     @media screen and (max-width: 500px){
-        margin-top: 20px;
+        /* margin-top: 20px; */
         &:nth-child(2) { margin-bottom: 0px;}
     }
         
@@ -312,7 +316,7 @@ export const HeadingBox = styled.div`
     position: relative;
     align-items: center;
     justify-content: left;
-
+    margin-bottom: 50px;
     /* border: 2px dashed green; */
 `
 

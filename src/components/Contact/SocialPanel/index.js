@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import { FaLinkedin, FaInstagram, FaGithub } from 'react-icons/fa'
+import { SiUpwork } from 'react-icons/si'
 import { 
     CSSVariables, 
     DiagonalContent, 
@@ -50,13 +51,13 @@ const SocialPanel = ({theme}) => {
                             </SocialContainer>
                             <SocialContainer>
                                 <SocialButton 
-                                    href="//www.linkedin.com/in/henryjonescodes/" 
+                                    href="https://www.upwork.com/freelancers/~01257598b098bc7dc8?viewMode=1" 
                                     target="_black" 
-                                    aria-label="LinkedIn"
+                                    aria-label="UpWork"
                                     whileHover={{ scale: 1.2, rotate: 5 }}>
-                                    <FaLinkedin/>
+                                    <SiUpwork/>
                                 </SocialButton>
-                                <SocialLabel>LinkedIn</SocialLabel>
+                                <SocialLabel>UpWork</SocialLabel>
                             </SocialContainer>
                         </SocialGrid>
                     </DiagonalContent>
