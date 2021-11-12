@@ -28,7 +28,7 @@ import {
 const ContactForm = ({theme}) => {
     const { scrollY } = useViewportScroll();
     const y1 = useTransform(scrollY, [0, 1200], [-300, -900]);
-    const y2 = useTransform(scrollY, [0, 800], [200, 0]);
+    const y2 = useTransform(scrollY, [0, 800], [300, 0]);
     
     function sendEmail(e) {
         e.preventDefault();

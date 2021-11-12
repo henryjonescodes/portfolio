@@ -61,7 +61,7 @@ const Footer = ({padded, theme, lightcolor}) => {
                         <SocialMediaWrap>
                             <SocialMediaLogo lightcolor= {+lightcolor} to='/' onClick={toggleHome}>Henry Jones</SocialMediaLogo>
                             <WebsiteRights lightcolor= {+lightcolor}>
-                                Made 1hundo pa'cent by Henry Jones in {new Date().getFullYear()}
+                                Hand made with love
                             </WebsiteRights>
                             <SocialIcons>
                                 <SocialIconLink lightcolor= {+lightcolor} href="//www.instagram.com/theycallmezonez/" target="_black" aria-label="Instagram">

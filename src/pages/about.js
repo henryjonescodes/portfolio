@@ -73,10 +73,10 @@ const About = () => {
     }
    
     const motionPoints = {
-        stop1: -580,
-        stop2: -775,
-        stop3: -980,
-        stop4: -2190,
+        stop1: -610,
+        stop2: -760,
+        stop3: -925,
+        stop4: -2135,
         resize1: "600px",
         scrollPoint: 200,
         storedPoint: 0
@@ -166,7 +166,7 @@ const About = () => {
                             <Boxes 
                                 boxCount = {2} 
                                 boxCountMobile = {2}
-                                marginBot = {"3em"}
+                                marginBot = {"14em"}
                                 gridGap={"1%"}>
                                 <TwoBox>
                                     <Subtitle lightcolor={true}>
@@ -207,7 +207,7 @@ const About = () => {
                                     </DetailContainer>
                                 </TwoBox>
                             </Boxes>
-                            <DiagonalBreak heightValue="20px" lightcolor = {true}/>
+                            {/* <DiagonalBreak heightValue="20px" lightcolor = {true}/> */}
                              <Boxes 
                                 boxCount = {4}
                                 gridGap={"10%"}
@@ -275,11 +275,10 @@ const About = () => {
                             <Boxes 
                                 boxCount = {8}
                                 boxCountMobile = {4}
-                                gridGap = {"0%"}>
+                                gridGap = {"0%"}
+                                marginBot = {"1em"}>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={60} 
-                                        max ={100} 
                                         text={"React"} 
                                         src={"/images/about/logos/react.svg"} 
                                         alt={"React.js Logo"} 
@@ -289,52 +288,42 @@ const About = () => {
                                 </EightBox>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={50} 
-                                        max ={100} 
                                         text={"Node.js"} 
                                         src={"/images/about/logos/node-js.svg"} 
                                         alt={"Node.js Logo"} 
                                         theme={theme} 
-                                        scale={"100%"}
+                                        scale={"90%"}
                                         dest={"https://nodejs.org/en/"}/>
                                 </EightBox>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={60} 
-                                        max ={100} 
                                         text={"C"} 
                                         src={"/images/about/logos/c.svg"} 
                                         alt={"C Logo"} 
                                         theme={theme} 
-                                        scale={"80%"}
+                                        scale={"75%"}
                                         dest={"https://en.wikipedia.org/wiki/C_(programming_language)"}/>
                                 </EightBox>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={50} 
-                                        max ={100} 
                                         text={"C++"} 
                                         src={"/images/about/logos/c++.svg"} 
                                         alt={"C++ Logo"} 
                                         theme={theme}
-                                        scale={"80%"}
+                                        scale={"75%"}
                                         dest={"https://en.wikipedia.org/wiki/C%2B%2B"}/>
                                 </EightBox>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={60} 
-                                        max ={100} 
                                         text={"Three.js"} 
                                         src={"/images/about/logos/threejs.svg"} 
                                         alt={"Three.js Logo"} 
                                         theme={theme} 
-                                        scale={"100%"}
+                                        scale={"90%"}
                                         dest={"https://threejs.org/"}/>
                                 </EightBox>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={60} 
-                                        max ={100} 
                                         text={"Python"} 
                                         src={"/images/about/logos/python.svg"} 
                                         alt={"Python Logo"} 
@@ -344,8 +333,6 @@ const About = () => {
                                 </EightBox>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={80} 
-                                        max ={100} 
                                         text={"Java"} 
                                         src={"/images/about/logos/java.svg"} 
                                         alt={"Java Logo"} 
@@ -355,13 +342,11 @@ const About = () => {
                                 </EightBox>
                                 <EightBox>
                                     <SkillTracker 
-                                        value ={70} 
-                                        max ={100} 
                                         text={"Latex"} 
                                         src={"/images/about/logos/tex.svg"} 
                                         alt={"Generic Tex Logo"} 
                                         theme={theme} 
-                                        scale={"70%"}
+                                        scale={"80%"}
                                         dest={"https://www.latex-project.org/"}/>
                                 </EightBox>    
                             </Boxes>
@@ -387,23 +372,20 @@ const About = () => {
                             </HeaderSkew>
                             <Boxes 
                                 boxCount = {6}
-                                boxCountMobile = {3}>
+                                boxCountMobile = {3}
+                                marginBot = {"1.2em"}>
                                 <SixBox>
                                     <SkillTracker 
-                                        value ={80} 
-                                        max ={100} 
                                         text={"Blender"} 
                                         src={"/images/about/logos/blender.svg"} 
                                         alt={"Blender Logo"} 
                                         theme={theme} 
-                                        scale={"80%"}
+                                        scale={"85%"}
                                         dest={"https://www.blender.org/"}
                                         lightcolor={true}/>
                                 </SixBox>
                                 <SixBox>
                                     <SkillTracker 
-                                        value ={40} 
-                                        max ={100} 
                                         text={"Cinema4D"} 
                                         src={"/images/about/logos/c4d.png"} 
                                         alt={"Cinema4D Logo"} 
@@ -414,49 +396,41 @@ const About = () => {
                                 </SixBox>
                                 <SixBox>
                                     <SkillTracker 
-                                        value ={60} 
-                                        max ={100} 
                                         text={"Photoshop"} 
                                         src={"/images/about/logos/photoshop.svg"} 
                                         alt={"Adobe Photoshop Logo"} 
                                         theme={theme} 
-                                        scale={"70%"}
+                                        scale={"80%"}
                                         dest={"https://www.adobe.com/products/photoshop.html"}
                                         lightcolor={true}/>
                                 </SixBox>
                                 <SixBox>
                                     <SkillTracker 
-                                        value ={50} 
-                                        max ={100} 
                                         text={"Illustrator"} 
                                         src={"/images/about/logos/illustrator.svg"} 
                                         alt={"Adobe Illustrator Logo"} 
                                         theme={theme}
-                                        scale={"70%"}
+                                        scale={"80%"}
                                         dest={"https://www.adobe.com/products/illustrator.html"}
                                         lightcolor={true}/>
                                 </SixBox>
                                 <SixBox>
                                     <SkillTracker 
-                                        value ={60} 
-                                        max ={100} 
                                         text={"Premiere"} 
                                         src={"/images/about/logos/premiere.svg"} 
                                         alt={"Adobe Premiere Logo"} 
                                         theme={theme} 
-                                        scale={"70%"}
+                                        scale={"80%"}
                                         dest={"https://www.adobe.com/products/premiere.html"}
                                         lightcolor={true}/>
                                 </SixBox>
                                 <SixBox>
                                     <SkillTracker 
-                                        value ={50} 
-                                        max ={100} 
                                         text={"After Effects"} 
                                         src={"/images/about/logos/after-effects.svg"} 
                                         alt={"Adobe After Effects Logo"} 
                                         theme={theme} 
-                                        scale={"70%"}
+                                        scale={"80%"}
                                         dest={"https://www.adobe.com/products/aftereffects.html"}
                                         lightcolor={true}/>
                                 </SixBox>

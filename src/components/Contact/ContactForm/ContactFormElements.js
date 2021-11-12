@@ -62,7 +62,7 @@ export const FormWrapper = styled.div`
     background: ${props => props.theme.bg};
     border-radius: 10px;
     padding: 20px 10px;
-    box-shadow: 0px 5px 6px 3px ${props => props.theme.shadow};
+    box-shadow: 0px 12px 20px 1px ${props => props.theme.shadow};
 `
 
 //Form

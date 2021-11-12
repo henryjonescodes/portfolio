@@ -1,20 +1,15 @@
 import React from 'react'
-import { FaStar } from 'react-icons/fa'
 import { IconContext } from 'react-icons/lib'
 import { ThemeProvider } from 'styled-components'
 import { 
     ContentWrapper,
     ImgButton,
     Label,
-    StarContainer,
-    StarsContainer,
-    StyledBarWrapper, 
     Img,
     BarContainer
 } from './SkillTrackerElements'
 
-const SkillTracker = ({value, max, text, src, alt, theme, dest, scale, lightcolor}) => {
-    let stars = (value/max) * 5;
+const SkillTracker = ({text, src, alt, theme, dest, scale, lightcolor}) => {
 
     return (
         <>
@@ -31,36 +26,6 @@ const SkillTracker = ({value, max, text, src, alt, theme, dest, scale, lightcolo
                         </ImgButton>
                         <BarContainer>
                             <Label lightcolor={lightcolor}>{text}</Label>
-                            <StyledBarWrapper>                
-                                <progress value= {value} max ={max}/>
-                            </StyledBarWrapper>
-                            <StarsContainer>
-                                {stars >= 1 &&  
-                                    <StarContainer>
-                                        <FaStar/>
-                                    </StarContainer>
-                                }
-                                {stars >= 2 &&  
-                                    <StarContainer>
-                                        <FaStar/>
-                                    </StarContainer>
-                                }
-                                {stars >= 3 &&  
-                                    <StarContainer>
-                                        <FaStar/>
-                                    </StarContainer>
-                                }
-                                {stars >= 4 &&  
-                                    <StarContainer>
-                                        <FaStar/>
-                                    </StarContainer>
-                                }
-                                {stars >= 5 &&  
-                                    <StarContainer>
-                                        <FaStar/>
-                                    </StarContainer>
-                                }
-                            </StarsContainer>
                         </BarContainer>
                     </ContentWrapper>
                 </ThemeProvider>
