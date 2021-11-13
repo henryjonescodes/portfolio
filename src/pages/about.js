@@ -172,11 +172,11 @@ const About = () => {
                                     <Subtitle lightcolor={true}>
                                         I'm a web developer and multimedia artist from Portland, Maine. 
                                         I'm new to both fields and ready to dive into any projects or 
-                                        opportunites that will broaden my horizons.
+                                        opportunities  that will broaden my horizons.
                                     </Subtitle>
                                     <Subtitle lightcolor={true}>
                                         Since graduating 
-                                        from Union College in 2021, I've worked to to steer my focus 
+                                        from Union College in 2021, I've worked to steer my focus 
                                         towards visual effects, immersive art, and virtual production
                                         in an effort to combine my two overlapping passions.
                                     </Subtitle>
