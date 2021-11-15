@@ -6,10 +6,8 @@ import {
     CloseIcon,
     Icon,
     SideBarLink,
-    SideBarRoute,
     SideBarWrapper,
     SideBarMenu,
-    SideBtnWrap
  } from './RoutedSideBarElements'
 
 const RoutedSideBar = ({isOpen, toggle, theme}) => {
@@ -26,9 +24,6 @@ const RoutedSideBar = ({isOpen, toggle, theme}) => {
                         <SideBarLink to ="/projects" onClick = {toggle}>Projects</SideBarLink>
                         <SideBarLink to ="/contact" onClick = {toggle}>Contact Me</SideBarLink>
                     </SideBarMenu>
-                        <SideBtnWrap>
-                            <SideBarRoute to="/signin">Sign In</SideBarRoute>
-                        </SideBtnWrap>
                 </SideBarWrapper>
             </SideBarContainer>
             </ThemeProvider>

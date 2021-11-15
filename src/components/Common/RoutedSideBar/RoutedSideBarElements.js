@@ -18,7 +18,7 @@ export const SideBarContainer = styled.aside`
 `
 
 export const CloseIcon = styled(FaTimes)`
-    color: ${props => props.theme.fg};
+    color: #ddd;
 `
 
 export const Icon = styled.div`
@@ -43,7 +43,7 @@ export const SideBarLink = styled(LinkR)`
     list-style: none;
     transition: 0.2s ease-in-out;
     text-decoration: none;
-    color: ${props => props.theme.fg};
+    color: #eee;
     cursor: pointer;
 
     &:hover {
@@ -59,29 +59,5 @@ export const SideBarMenu = styled.ul`
 
     @media screen and (max-width: 480){
         grid-template-rows: repeat(6, 60px);
-    }
-`
-
-export const SideBtnWrap = styled.div`
-    display: flex;
-    justify-content: center;
-`
-export const SideBarRoute = styled(LinkR)`
-    border-radius: 50px;
-    background: ${props => props.theme.highlight};
-    white-space: no-wrap;
-    padding: 16px 64px;
-    color: ${props => props.theme.fg};
-    font-size: 16px;
-    outline: none;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    text-decoration: none;
-
-    &:hover {
-        transition: 0.2s ease-in-out;
-        background: ${props => props.theme.focus};;
-        color: ${props => props.theme.fg};
     }
 `
