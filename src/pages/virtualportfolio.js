@@ -944,7 +944,7 @@ class virtualportfolio extends React.Component{
     }
     render(){
         if(this.state.target != null){
-            return <Redirect to={this.state.target}/>
+            return <Redirect target="_blank" to={this.state.target}/>
         } else {
             return (
                 <>
