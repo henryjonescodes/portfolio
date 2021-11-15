@@ -46,7 +46,8 @@ class virtualportfolio extends React.Component{
 
         this.route(null)
         this.setState({doRouting: false})
-        let gui = new dat.GUI({ closed: false, width: 1000})
+        let gui = new dat.GUI({ closed: true, width: 500})
+        dat.GUI.toggleHide();
         gui.domElement.id = 'gui';
         this.scene = new THREE.Scene()
         const clickableObjects = []
@@ -486,26 +487,27 @@ class virtualportfolio extends React.Component{
         button3.position.set(19,1.8,24)
         this.scene.add(button3)
 
-        const object1 = new THREE.Mesh(
-            new THREE.SphereGeometry(0.5, 16, 16),
-            new THREE.MeshStandardMaterial({ color: '#ff0000' })
-        )
-        object1.position.x = - 2
+        // const object1 = new THREE.Mesh(
+        //     new THREE.SphereGeometry(0.5, 16, 16),
+        //     new THREE.MeshStandardMaterial({ color: '#ff0000' })
+        // )
+        // object1.position.x = - 2
 
-        const object2 = new THREE.Mesh(
-            new THREE.SphereGeometry(0.5, 16, 16),
-            new THREE.MeshBasicMaterial({ color: '#ff0000' })
-        )
+        // const object2 = new THREE.Mesh(
+        //     new THREE.SphereGeometry(0.5, 16, 16),
+        //     new THREE.MeshBasicMaterial({ color: '#ff0000' })
+        // )
 
-        const object3 = new THREE.Mesh(
-            new THREE.SphereGeometry(0.5, 16, 16),
-            new THREE.MeshBasicMaterial({ color: '#ff0000' })
-        )
-        object3.position.x = 2
+        // const object3 = new THREE.Mesh(
+        //     new THREE.SphereGeometry(0.5, 16, 16),
+        //     new THREE.MeshBasicMaterial({ color: '#ff0000' })
+        // )
+        // object3.position.x = 2
 
-        this.scene.add(object1, object2, object3)
-
-        clickableObjects.push(button1, button2, button3, object1, object2, object3)
+        // this.scene.add(object1, object2, object3)
+        
+        // clickableObjects.push(object1, object2, object3)
+        clickableObjects.push(button1, button2, button3)
        
 
         /**
@@ -657,23 +659,23 @@ class virtualportfolio extends React.Component{
             {
                 switch(currentIntersect.object)
                 {
-                    case object1:
-                        console.log('click on object 1')
-                        removeListeners()
-                        this.route("/projects")
-                        break
+                    // case object1:
+                    //     console.log('click on object 1')
+                    //     removeListeners()
+                    //     this.route("/projects")
+                    //     break
 
-                    case object2:
-                        console.log('click on object 2')
-                        removeListeners()
-                        this.route("/photography")
-                        break
+                    // case object2:
+                    //     console.log('click on object 2')
+                    //     removeListeners()
+                    //     this.route("/photography")
+                    //     break
 
-                    case object3:
-                        console.log('click on object 3')
-                        removeListeners()
-                        this.route("/")
-                        break
+                    // case object3:
+                    //     console.log('click on object 3')
+                    //     removeListeners()
+                    //     this.route("/")
+                    //     break
                     case button1:
                         if(sizes.width > 2000){
                             console.log('seting: ultrawide_cameraSettings1')
@@ -717,16 +719,16 @@ class virtualportfolio extends React.Component{
             window.addEventListener('click', handleClick) 
         }
 
-        //Remove Listeners From Window, also dismantles gui
-        function removeListeners(){
-            window.removeEventListener('resize',handleResize)
-            window.removeEventListener('mousemove',handleMouseMove)
-            window.removeEventListener('click',handleClick)
+        // //Remove Listeners From Window, also dismantles gui
+        // function removeListeners(){
+        //     window.removeEventListener('resize',handleResize)
+        //     window.removeEventListener('mousemove',handleMouseMove)
+        //     window.removeEventListener('click',handleClick)
 
-            //Hide the gui first so it doesnt require reload to go away
-            gui.hide()
-            gui = null
-        }
+        //     //Hide the gui first so it doesnt require reload to go away
+        //     gui.hide()
+        //     gui = null
+        // }
 
 
         /**
@@ -862,13 +864,13 @@ class virtualportfolio extends React.Component{
          * Animation Loop ---------------------------------------------------------------------
          */
 
-        const clock = new THREE.Clock()
+        // const clock = new THREE.Clock()
         // let previousTime = 0
         const raycaster = new THREE.Raycaster() 
 
         const tick = () =>
         {
-            const elapsedTime = clock.getElapsedTime()
+            // const elapsedTime = clock.getElapsedTime()
             // const deltaTime = elapsedTime - previousTime
             // previousTime = elapsedTime
 
@@ -888,9 +890,9 @@ class virtualportfolio extends React.Component{
 
 
             // Animate objects
-            object1.position.y = Math.sin(elapsedTime * 0.3) * 1.5
-            object2.position.y = Math.sin(elapsedTime * 0.8) * 1.5
-            object3.position.y = Math.sin(elapsedTime * 1.4) * 1.5
+            // object1.position.y = Math.sin(elapsedTime * 0.3) * 1.5
+            // object2.position.y = Math.sin(elapsedTime * 0.8) * 1.5
+            // object3.position.y = Math.sin(elapsedTime * 1.4) * 1.5
 
             //Raycasting from mouse pointer
             if(this.camera != null && this.state.doRouting){
