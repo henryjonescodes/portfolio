@@ -597,6 +597,7 @@ class virtualportfolio extends React.Component{
 
 
         //3d Buttons
+
         // const buttonMaterial = new THREE.MeshBasicMaterial({ color: '#ff0000' })
         // const buttonGeometry = new THREE.SphereGeometry(0.5, 16, 16)
         // const button1 = new THREE.Mesh(buttonGeometry,buttonMaterial)
@@ -611,6 +612,7 @@ class virtualportfolio extends React.Component{
         // object1.position.x = - 2
         // this.scene.add(object1)
         // clickableObjects.push(object1)
+
        
 
         /**
@@ -838,6 +840,7 @@ class virtualportfolio extends React.Component{
             window.addEventListener('mousemove', handleMouseMove)
             window.addEventListener('click', handleClick) 
         }
+
 
         //Remove Listeners From Window, also dismantles gui
         // function removeListeners(){
