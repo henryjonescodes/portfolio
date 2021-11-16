@@ -13,6 +13,7 @@ import { Water } from 'three/examples/jsm/objects/Water.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js'
 import TWEEN from '@tweenjs/tween.js'
 import ProgressBar from '../components/VirtualPortfolio/ProgressBar'
+import FooterController from '../components/VirtualPortfolio/FooterController'
 
 
 class virtualportfolio extends React.Component{
@@ -25,6 +26,13 @@ class virtualportfolio extends React.Component{
             loaded: false,
             progress: 0,
             progressText: "",
+            camHistory: {
+                previous: null,
+                current: null,
+                next: null,
+            },
+            doCameraMove: null,
+            windowSize: "medium"
         }
         this.scene = null
         this.mixer = null
@@ -39,6 +47,11 @@ class virtualportfolio extends React.Component{
             console.log("routing")
         }
     }
+    navigate = (direction) => {
+        if(this.state.loaded){
+            this.setState({doCameraMove: direction})
+        }
+    }
     componentDidMount(){
         /**
          * Base--------------------------------------------------------------------------------------
@@ -47,7 +60,8 @@ class virtualportfolio extends React.Component{
 
         this.route(null)
         this.setState({doRouting: false})
-        let gui = new dat.GUI({ closed: false, width: 1000})
+        let gui = new dat.GUI({ closed: true, width: 700})
+        dat.GUI.toggleHide();
         gui.domElement.id = 'gui';
         this.scene = new THREE.Scene()
         const clickableObjects = []
@@ -71,16 +85,13 @@ class virtualportfolio extends React.Component{
         };
         loadingManager.onLoad = () => {
             //Run camera movements in the background to preload
-            cameraToMarker(cameraSettings1, this.camera, this.controls)
-            cameraToMarker(cameraSettings2, this.camera, this.controls)
-            if(sizes.width > 2000){
-                console.log('seting: ultrawide_cameraSettings')
-                cameraToMarker(ultrawide_cameraSettings,this.camera, this.controls)
-            } else {
-                console.log('seting: cameraSettings')
-                cameraToMarker(cameraSettings,this.camera, this.controls)
-            }
+            changeScene(cameraSettings.cam1, this.camera, this.controls)
+            changeScene(cameraSettings.cam2, this.camera, this.controls)
+            changeScene(cameraSettings.cam3, this.camera, this.controls)
+            changeScene(cameraSettings.cam0, this.camera, this.controls)
 
+            adjustScene()
+         
             //Set loaded flag and print
             this.setState({loaded: true})
             console.log( 'Loading complete!');
@@ -145,72 +156,153 @@ class virtualportfolio extends React.Component{
             cursorx: 0,
             cursory: 2,
             cursorz: 0,
+            focusx: 0,
+            focusy: 2,
+            focusz: 0,
             animationDuration: 1000,
             quaternionChangeFactor: .5,
             positionChangeFactor: 1,
             fovChangeFactor: 1,
             targetChangeFactor: 1,
         }
-        
         const cameraSettings = {
-            cameraPositionX: 97.04554742862695,
-            cameraPositionY: 2.1777107078658604,
-            cameraPositionZ: 43.93157045658174,
-            fov: 8,
-            targetx: 0,
-            targety: 2,
-            targetz: -2.25
-        }
-
-        const ultrawide_cameraSettings = {
-            cameraPositionX: 95.97996643956765,
-            cameraPositionY: 1.8174088163604705,
-            cameraPositionZ: 46.76319569208742,
-            fov: 8,
-            targetx: 0,
-            targety: 2,
-            targetz: -2.25
+            cam0: {
+                name: "camera0",
+                next: "camera1",
+                previous: "camera3",
+                base:{
+                    cameraPositionX: 40.9235445832725,
+                    cameraPositionY: 0.9102533027335034,
+                    cameraPositionZ: 25.147989013507928,
+                    fov: 8,
+                    targetx: 5.347,
+                    targety: -0.176,
+                    targetz: 0
+                },
+                ultrawide: {
+                    cameraPositionX: 40.9235445832725,
+                    cameraPositionY: 0.9102533027335034,
+                    cameraPositionZ: 25.147989013507928,
+                    fov: 8,
+                    targetx: 3.012,
+                    targety: -0.1,
+                    targetz: 0
+                },
+                mobile: {
+                    cameraPositionX: 56.45587462939155,
+                    cameraPositionY: 2.270209735117911,
+                    cameraPositionZ: 35.86198830571717,
+                    fov: 8,
+                    targetx: 6.461,
+                    targety: -1.152,
+                    targetz: 0
+                }
+            },
+            cam1: {
+                name: "camera1",
+                next: "camera2",
+                previous: "camera0",
+                base:{
+                    cameraPositionX: 97.04554742862695,
+                    cameraPositionY: 2.1777107078658604,
+                    cameraPositionZ: 43.93157045658174,
+                    fov: 8,
+                    targetx: 0,
+                    targety: 2,
+                    targetz: -2.25
+                },
+                ultrawide: {
+                    cameraPositionX: 95.97996643956765,
+                    cameraPositionY: 1.8174088163604705,
+                    cameraPositionZ: 46.76319569208742,
+                    fov: 8,
+                    targetx: 0,
+                    targety: 2,
+                    targetz: -2.25
+                },
+                mobile: {
+                    cameraPositionX: 92.03087141178693,
+                    cameraPositionY: 4.921262221262806,
+                    cameraPositionZ: 53.2356786736392,
+                    fov: 8,
+                    targetx: 1.471,
+                    targety: 1.471,
+                    targetz: 0
+                }
+            },
+            cam2 :{
+                name: "camera2",
+                next: "camera3",
+                previous: "camera1",
+                base:{
+                    cameraPositionX: 10.09952891398274,
+                    cameraPositionY: 5.283287750839582,
+                    cameraPositionZ: 0.6046661058867199,
+                    fov: 35,
+                    targetx: 9.2,
+                    targety: 1.8,
+                    targetz: 38
+                },
+                ultrawide: {
+                    cameraPositionX: 10.315275819654154,
+                    cameraPositionY: 2.6876164019928384,
+                    cameraPositionZ: 4.122858410011901,
+                    fov: 35,
+                    targetx: 9.2,
+                    targety: 1.8,
+                    targetz: 38
+                },
+                mobile: {
+                    cameraPositionX: 10.524802974225377,
+                    cameraPositionY: 4.338794001610231,
+                    cameraPositionZ: -13.05502816449912,
+                    fov: 37,
+                    targetx: 9.594,
+                    targety: 1.8,
+                    targetz: 38
+                }
+            },
+            cam3: {
+                name: "camera3",
+                next: "camera0",
+                previous: "camera2",
+                base:{
+                    cameraPositionX: 19.516065816822447,
+                    cameraPositionY: 1.9018917087338703,
+                    cameraPositionZ: 14.787505370950727,
+                    fov: 42,
+                    targetx: 18.85,
+                    targety: 1.902,
+                    targetz: 19.287
+                },
+                ultrawide: {
+                    cameraPositionX: 19.516065816822447,
+                    cameraPositionY: 1.9018917087338703,
+                    cameraPositionZ: 14.787505370950727,
+                    fov: 42,
+                    targetx: 18.85,
+                    targety: 1.902,
+                    targetz: 19.287
+                },
+                mobile: {
+                    cameraPositionX: 19.549670902554276,
+                    cameraPositionY: 1.9951785273600007,
+                    cameraPositionZ: 12.074181724836727,
+                    fov: 40,
+                    targetx: 19,
+                    targety: 1.1,
+                    targetz: 24
+                }
+            }
         }
         
-        const cameraSettings1 = {
-            cameraPositionX: 10.09952891398274,
-            cameraPositionY: 5.283287750839582,
-            cameraPositionZ: 0.6046661058867199,
-            fov: 35,
-            targetx: 9.2,
-            targety: 1.8,
-            targetz: 38
-        }
-        
-        const ultrawide_cameraSettings1 = {
-            cameraPositionX: 10.315275819654154,
-            cameraPositionY: 2.6876164019928384,
-            cameraPositionZ: 4.122858410011901,
-            fov: 35,
-            targetx: 9.2,
-            targety: 1.8,
-            targetz: 38
-        }
-        
-        const cameraSettings2 = {
-            cameraPositionX: 19.549670902554276,
-            cameraPositionY: 1.9951785273600007,
-            cameraPositionZ: 12.074181724836727,
-            fov: 40,
-            targetx: 19,
-            targety: 1.1,
-            targetz: 24
-        }
-        
-        const ultrawide_cameraSettings2 = {
-            cameraPositionX: 19.516065816822447,
-            cameraPositionY: 1.9018917087338703,
-            cameraPositionZ: 14.787505370950727,
-            fov: 42,
-            targetx: 18.85,
-            targety: 1.902,
-            targetz: 19.287
-        }
+        this.setState({
+            camHistory:{
+                previous: cameraSettings.cam3,
+                current: cameraSettings.cam0,
+                next: cameraSettings.cam1,
+            }
+        })
 
         const lightColors = {
             ambientLightColor: 0xffffff,
@@ -419,44 +511,50 @@ class virtualportfolio extends React.Component{
             return textGeometry
         }
         //Generate Scene Text after Font/Matcap Load
-        let greetingText, cityText, cityText1
+        let greetingText, cityText, professionText, professionText1
         Promise.all([fontLoadPromise, matcapTexturePromise, boatsAndFloatsPromise, boatsAndFloatsTexturePromise]).then(() => {
             const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 
             //Greeting Text
             const greetingTextGeometry = generateTextGeometry('Hi, I\'m Henry',helvetica, 0.5, 0.2)
             greetingText = new THREE.Mesh(greetingTextGeometry, textMaterial)
-            greetingText.position.set(-50,5.5,-30)
-            greetingText.scale.set(5,5,5)
+            greetingText.position.set(19,1.2,9.6)
+            greetingText.scale.set(.7,.7,.7)
             greetingText.rotation.y = .4* Math.PI
             this.scene.add(greetingText)
 
+            //Profession Text
+            const professionTextGeometry = generateTextGeometry('I\'m a 3D Artist',helvetica, 0.5, 0.2)
+            professionText = new THREE.Mesh(professionTextGeometry, textMaterial)
+            professionText.scale.set(3.5,3.5,3.5)
+            professionText.position.set(-57.2,9.5,-30)
+            professionText.rotation.y = .4* Math.PI
+            this.scene.add(professionText)
+
+            //Profession Text
+            const professionText1Geometry = generateTextGeometry('and Software Engineer',helvetica, 0.5, 0.2)
+            professionText1 = new THREE.Mesh(professionText1Geometry, textMaterial)
+            professionText1.position.set(-57.2,7.5,-30)
+            professionText1.scale.set(2.7,2.7,2.7)
+            professionText1.rotation.y = .4* Math.PI
+            this.scene.add(professionText1)
+
             //City Text
-            const cityTextGeometry = generateTextGeometry('I\'m a 3D Artist',helvetica, 0.5, 0.2)
+            const cityTextGeometry = generateTextGeometry('from Portland Maine',helvetica, 0.5, 0.2)
             cityText = new THREE.Mesh(cityTextGeometry, textMaterial)
-            cityText.position.set(9.5,11,41.3)
-            cityText.scale.set(5,5,5)
+            cityText.position.set(9.5,4.2,55.374)
+            cityText.scale.set(4,4,4)
             cityText.rotation.y = 1* Math.PI
             this.scene.add(cityText)
 
-            //City Text2
-            const cityTextGeometry1 = generateTextGeometry('and Software Engineer',helvetica, 0.5, 0.2)
-            cityText1 = new THREE.Mesh(cityTextGeometry1, textMaterial)
-            cityText1.position.set(9.5,8,41.3)
-            cityText1.scale.set(3,3,3)
-            cityText1.rotation.y = 1* Math.PI
-            this.scene.add(cityText1)
-
             //handle boats
-            console.log(boatsAndFloats)
-            console.log(boatsAndFloatsTexture)
             boatsAndFloatsTexture.flipY = false
             const boatsAndFloatsMaterial = new THREE.MeshBasicMaterial({map: boatsAndFloatsTexture})
             boatsAndFloats.scene.traverse((child) => {child.material = boatsAndFloatsMaterial});    
             boatsAndFloats.scene.scale.set(0.5, 0.5, 0.5)
             this.scene.add(boatsAndFloats.scene)
 
-            //Add animations to mixer
+            //Add boat animations to mixer
             this.mixer = new THREE.AnimationMixer(boatsAndFloats.scene)
             boatsAndFloats.animations.forEach((animation) =>{
                 const action = this.mixer.clipAction(animation)
@@ -499,41 +597,20 @@ class virtualportfolio extends React.Component{
 
 
         //3d Buttons
-        const buttonMaterial = new THREE.MeshBasicMaterial({ color: '#ff0000' })
-        const buttonGeometry = new THREE.SphereGeometry(0.5, 16, 16)
+        // const buttonMaterial = new THREE.MeshBasicMaterial({ color: '#ff0000' })
+        // const buttonGeometry = new THREE.SphereGeometry(0.5, 16, 16)
+        // const button1 = new THREE.Mesh(buttonGeometry,buttonMaterial)
+        // button1.position.set(10.7,1.8,6.2)
+        // this.scene.add(button1)
+        // clickableObjects.push(button1)
 
-        const button1 = new THREE.Mesh(buttonGeometry,buttonMaterial)
-        button1.position.set(10.7,1.8,6.2)
-        this.scene.add(button1)
-
-        const button2 = new THREE.Mesh(buttonGeometry,buttonMaterial)
-        button2.position.set(9.5,2,26)
-        this.scene.add(button2)
-
-        const button3 = new THREE.Mesh(buttonGeometry,buttonMaterial)
-        button3.position.set(19,1.8,24)
-        this.scene.add(button3)
-
-        const object1 = new THREE.Mesh(
-            new THREE.SphereGeometry(0.5, 16, 16),
-            new THREE.MeshStandardMaterial({ color: '#ff0000' })
-        )
-        object1.position.x = - 2
-
-        const object2 = new THREE.Mesh(
-            new THREE.SphereGeometry(0.5, 16, 16),
-            new THREE.MeshBasicMaterial({ color: '#ff0000' })
-        )
-
-        const object3 = new THREE.Mesh(
-            new THREE.SphereGeometry(0.5, 16, 16),
-            new THREE.MeshBasicMaterial({ color: '#ff0000' })
-        )
-        object3.position.x = 2
-
-        this.scene.add(object1, object2, object3)
-
-        clickableObjects.push(button1, button2, button3, object1, object2, object3)
+        // const object1 = new THREE.Mesh(
+        //     new THREE.SphereGeometry(0.5, 16, 16),
+        //     new THREE.MeshStandardMaterial({ color: '#ff0000' })
+        // )
+        // object1.position.x = - 2
+        // this.scene.add(object1)
+        // clickableObjects.push(object1)
        
 
         /**
@@ -569,8 +646,8 @@ class virtualportfolio extends React.Component{
          */
         
 
-        //3D Cursor 
-        let cursor = null
+        //Focus and cursor
+        let focus,cursor = null
         const boxGeometry = new THREE.BoxGeometry(1, 1, 1)
         const boxMaterial = new THREE.MeshStandardMaterial({
             metalness: 0.3,
@@ -586,11 +663,47 @@ class virtualportfolio extends React.Component{
             return mesh
         }
 
+        function getCamByWindowWidth(camSetting){
+            if(sizes.width > 2000){
+                return(camSetting.ultrawide)
+            } 
+            else if(sizes.width < 1000){
+                return(camSetting.mobile)
+            } 
+            else {
+                return(camSetting.base)
+            }
+        }
         //Debug functions
         const debugObject = {}
-        debugObject.placeCursor = () => {
+        debugObject.placefocus = () => {
+            let setting = getCamByWindowWidth(this.state.camHistory.current)
+            params.focusx = setting.targetx
+            params.focusy = setting.targety
+            params.focusz = setting.targetz
+            console.log("placing focus", params.focusx,  params.focusy,  params.focusz )
+            if(!focus){
+                focus = createBox(
+                    1,
+                    1,
+                    1,
+                {
+                    x: params.focusx,
+                    y: params.focusy,
+                    z: params.focusz,
+                })
+                this.scene.add(focus)
+            } else {
+                focus.position.set(
+                    params.focusx,
+                    params.focusy,
+                    params.focusz
+                    );
+            }
+        }
+        debugObject.placecursor = () => {
+            console.log("placing cursor", params.cursorx,  params.cursory,  params.cursorz )
             if(!cursor){
-                console.log("placing 3D cursor")
                 cursor = createBox(
                     1,
                     1,
@@ -598,9 +711,16 @@ class virtualportfolio extends React.Component{
                 {
                     x: params.cursorx,
                     y: params.cursory,
-                    z: params.cursorz
+                    z: params.cursorz,
                 })
                 this.scene.add(cursor)
+            } 
+        }
+        debugObject.toggleControls = () =>{
+            if(this.controls){
+                this.controls.enabled = !this.controls.enabled
+            } else {
+                console.log("controls not found")
             }
         }
 
@@ -631,9 +751,16 @@ class virtualportfolio extends React.Component{
         directionalGUI.add(directionalLightHelper, 'visible').name('helper')
 
         
-        // 3D Cursor
+        // Focus
+        var focusGUI = gui.addFolder("Focus Object")
+        focusGUI.add(debugObject, 'placefocus')
+        focusGUI.add(params, 'focusx').min(-100).max(100).step(0.001)
+        focusGUI.add(params, 'focusy').min(-100).max(100).step(0.001)
+        focusGUI.add(params, 'focusz').min(-100).max(100).step(0.001)
+
+        // Cursor
         var cursorGUI = gui.addFolder("3D Cursor")
-        cursorGUI.add(debugObject, 'placeCursor')
+        cursorGUI.add(debugObject, 'placecursor')
         cursorGUI.add(params, 'cursorx').min(-100).max(100).step(0.001)
         cursorGUI.add(params, 'cursory').min(-100).max(100).step(0.001)
         cursorGUI.add(params, 'cursorz').min(-100).max(100).step(0.001)
@@ -645,6 +772,7 @@ class virtualportfolio extends React.Component{
         cameraGUI.add(params, 'quaternionChangeFactor').min(.1).max(1).step(0.001).name("Quaternion Change Factor")
         cameraGUI.add(params, 'fovChangeFactor').min(.1).max(1).step(0.001).name("FOV Change Factor")
         cameraGUI.add(params, 'targetChangeFactor').min(.1).max(1).step(0.001).name("Target Change Factor")
+        cameraGUI.add(debugObject, 'toggleControls').name('Toggle Controls')
 
         // Ocean GUI
         const oceanFolder = gui.addFolder("Ocean")
@@ -673,6 +801,10 @@ class virtualportfolio extends React.Component{
                 this.renderer.setSize(sizes.width, sizes.height)
                 this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
             }
+            //adjust text
+            if(this.state.loaded){
+                adjustScene()
+            }
         }
 
         const handleMouseMove = (evt) => {
@@ -685,52 +817,14 @@ class virtualportfolio extends React.Component{
             {
                 switch(currentIntersect.object)
                 {
-                    case object1:
-                        console.log('click on object 1')
-                        removeListeners()
-                        this.route("/projects")
-                        break
-
-                    case object2:
-                        console.log('click on object 2')
-                        removeListeners()
-                        this.route("/photography")
-                        break
-
-                    case object3:
-                        console.log('click on object 3')
-                        removeListeners()
-                        this.route("/")
-                        break
-                    case button1:
-                        if(sizes.width > 2000){
-                            console.log('seting: ultrawide_cameraSettings1')
-                            cameraToMarker(ultrawide_cameraSettings1,this.camera, this.controls)
-                        } else {
-                            console.log('seting: cameraSettings1')
-                            cameraToMarker(cameraSettings1,this.camera, this.controls)
-                        }
-                        break
-
-                    case button2:
-                        if(sizes.width > 2000){
-                            console.log('seting: ultrawide_cameraSettings2')
-                            cameraToMarker(ultrawide_cameraSettings2,this.camera, this.controls)
-                        } else {
-                            console.log('seting: cameraSettings2')
-                            cameraToMarker(cameraSettings2,this.camera, this.controls)
-                        }
-                        break
-
-                    case button3:
-                        if(sizes.width > 2000){
-                            console.log('seting: ultrawide_cameraSettings')
-                            cameraToMarker(ultrawide_cameraSettings,this.camera, this.controls)
-                        } else {
-                            console.log('seting: cameraSettings')
-                            cameraToMarker(cameraSettings,this.camera, this.controls)
-                        }
-                        break
+                    // case object1:
+                    //     console.log('click on object 1')
+                    //     removeListeners()
+                    //     this.route("/projects")
+                    //     break
+                    // case button1:
+                    //     changeScene(cameraSettings.cam2, this.camera, this.controls)
+                    //     break
                     default:
                         console.log("Unhandled Click Event: ", currentIntersect.object)
                         break
@@ -746,21 +840,97 @@ class virtualportfolio extends React.Component{
         }
 
         //Remove Listeners From Window, also dismantles gui
-        function removeListeners(){
-            window.removeEventListener('resize',handleResize)
-            window.removeEventListener('mousemove',handleMouseMove)
-            window.removeEventListener('click',handleClick)
+        // function removeListeners(){
+        //     window.removeEventListener('resize',handleResize)
+        //     window.removeEventListener('mousemove',handleMouseMove)
+        //     window.removeEventListener('click',handleClick)
 
-            //Hide the gui first so it doesnt require reload to go away
-            gui.hide()
-            gui = null
-        }
+        //     //Hide the gui first so it doesnt require reload to go away
+        //     gui.hide()
+        //     gui = null
+        // }
 
 
         /**
         * Camera Movement ---------------------------------------------------------------------
         */
+        const adjustScene = () => {
 
+            let size = ""
+            if( sizes.width > 2000 ){ size='large' } 
+            else if( sizes.width < 1000 ){ size='small' } 
+            else { size='medium' }
+
+            if(this.state.windowSize !== size){
+                switch(size){
+                    case 'small':
+                        console.log("windowSize:", size)
+                        greetingText.scale.set(.8,.8,.8)
+                        greetingText.position.set(19.9,1.2,9.6)
+
+                        professionText.scale.set(1.7,1.7,1.7)
+                        professionText.position.set(-49,7,-30)
+                        
+                        professionText1.scale.set(1.5,1.5,1.5)
+                        professionText1.position.set(-49,5.9,-30)
+
+                        cityText.position.set(9.5,6,55.374)
+                        cityText.scale.set(4,4,4)
+                        changeScene(this.state.camHistory.current, this.camera, this.controls)
+                        this.setState({windowSize: "small"})
+                        break
+                    case 'medium':
+                        console.log("windowSize:", size)
+                        greetingText.scale.set(.7,.7,.7)
+                        greetingText.position.set(19,1.2,9.6)
+
+                        professionText.scale.set(3.5,3.5,3.5)
+                        professionText.position.set(-57.2,9.5,-30)
+
+                        professionText1.position.set(-57.2,7.5,-30)
+                        professionText1.scale.set(2.7,2.7,2.7)
+
+                        cityText.position.set(9.5,4.7,55.374)
+                        cityText.scale.set(4,4,4)
+                        changeScene(this.state.camHistory.current, this.camera, this.controls)
+                        this.setState({windowSize: "medium"})
+                        break
+                    case 'large':
+                        console.log("windowSize:", size)
+                        greetingText.scale.set(1,1,1)
+                        greetingText.position.set(19,1.2,9.6)
+
+                        professionText.scale.set(5,5,5)
+                        professionText.position.set(-55,11,-30)
+
+                        professionText1.scale.set(3.5,3.5,3.5)
+                        professionText1.position.set(-55,7.5,-30)
+
+                        cityText.position.set(9.5,5.5,55.374)
+                        cityText.scale.set(4,4,4)
+                        changeScene(this.state.camHistory.current, this.camera, this.controls)
+                        this.setState({windowSize: "large"})
+                        break
+                    default:
+                        console.log("invalid text size, nothing set")
+                        break
+                }
+            }
+        }
+        function changeScene(camSetting, camera, controls){
+            if(sizes.width > 2000){
+                // console.log('seting: ultrawide ', camSetting.name)
+                cameraToMarker(camSetting.ultrawide,camera, controls)
+            } 
+            else if(sizes.width < 1000){
+                // console.log('seting: mobile ', camSetting.name)
+                cameraToMarker(camSetting.mobile,camera,controls)
+            } 
+            else {
+                // console.log('s eting: base ', camSetting.name)
+                cameraToMarker(camSetting.base,camera, controls)
+            }
+        }
 
         /**
          * Big Boi Tween Time
@@ -847,8 +1017,8 @@ class virtualportfolio extends React.Component{
          */
         // Camera
         const setupCamera = () => {
-            this.camera = new THREE.PerspectiveCamera(cameraSettings.fov, sizes.width / sizes.height, 0.1, 1000)
-            this.camera.position.set(cameraSettings.cameraPositionX,cameraSettings.cameraPositionY,cameraSettings.cameraPositionZ)
+            this.camera = new THREE.PerspectiveCamera(cameraSettings.cam0.base.fov, sizes.width / sizes.height, 0.1, 1000)
+            this.camera.position.set(cameraSettings.cam0.base.cameraPositionX,cameraSettings.cam0.base.cameraPositionY,cameraSettings.cam0.base.cameraPositionZ)
             this.scene.add(this.camera)
         }
 
@@ -863,7 +1033,7 @@ class virtualportfolio extends React.Component{
         // Controls
         const setupControls = () => {
             this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-            this.controls.target.set(cameraSettings.targetx,cameraSettings.targety,cameraSettings.targetz)
+            this.controls.target.set(cameraSettings.cam0.base.targetx,cameraSettings.cam0.base.targety,cameraSettings.cam0.base.targetz)
             this.controls.enableDamping = true
             var centerPosition = this.controls.target.clone();
             centerPosition.y = 0;
@@ -875,6 +1045,7 @@ class virtualportfolio extends React.Component{
             var remote = new THREE.Vector2(0,d); // replace 0 with raycasted ground altitude
             var angleRadians = Math.atan2(remote.y - origin.y, remote.x - origin.x);
             this.controls.maxPolarAngle = angleRadians;
+            this.controls.enabled = false;
         }
 
         const init = () => {
@@ -903,25 +1074,70 @@ class virtualportfolio extends React.Component{
             //Water
             water.material.uniforms[ 'time' ].value += 1.0 / oceanSettings.timeModifier;
 
-            //cursor
+            // Focus
+            if(focus){ 
+                focus.position.set(params.focusx,params.focusy,params.focusz)
+                this.camera.lookAt(focus)
+                this.controls.target.set(
+                    focus.position.x,
+                    focus.position.y,
+                    focus.position.z
+                )
+            }
+            //3D cursor    
             if(cursor){ 
                 cursor.position.set(params.cursorx,params.cursory,params.cursorz)
-                this.camera.lookAt(cursor)
-                this.controls.target.set(
-                    cursor.position.x,
-                    cursor.position.y,
-                    cursor.position.z
-                )
             }    
 
             if(this.mixer){
                 this.mixer.update(deltaTime)
             }
 
+            //camera moves
+            if(this.state.doCameraMove != null){
+                let next = this.state.camHistory.next;
+                let previous = this.state.camHistory.previous;
+                let current = this.state.camHistory.current;
+                let newSetting = null
+
+                for(var setting in cameraSettings){
+                    let data = cameraSettings[setting]
+                    if(this.state.doCameraMove === "forward" && data.name === next.next){
+                        newSetting = data
+                    } else if (this.state.doCameraMove === "back" && data.name === previous.previous){
+                        newSetting = data
+                    }
+                }
+               
+                switch(this.state.doCameraMove){
+                    case "forward":
+                        // console.log("Navigate forward")
+                        changeScene(next, this.camera, this.controls)
+                        this.setState({camHistory: {
+                            previous: current,
+                            current: next,
+                            next: newSetting
+                        }})
+                        break
+                    case "back":
+                        // console.log("Navigate back")
+                        changeScene(previous, this.camera, this.controls)
+                        this.setState({camHistory: {
+                            previous: newSetting,
+                            current: previous,
+                            next: current
+                        }})
+                        break
+                    default:
+                        console.log("invalid doCameraMove value")
+                        break
+                }
+                // console.log(this.state.camHistory)
+                this.setState({doCameraMove: null})
+            }
+
             // Animate objects
-            object1.position.y = Math.sin(elapsedTime * 0.3) * 1.5
-            object2.position.y = Math.sin(elapsedTime * 0.8) * 1.5
-            object3.position.y = Math.sin(elapsedTime * 1.4) * 1.5
+            // object1.position.y = Math.sin(elapsedTime * 0.3) * 1.5
 
             //Raycasting from mouse pointer
             if(this.camera != null && this.state.doRouting){
@@ -948,6 +1164,8 @@ class virtualportfolio extends React.Component{
                 }
             }
 
+           
+           
             // Update controls
             if(this.controls != null){
                 this.controls.update()
@@ -984,6 +1202,7 @@ class virtualportfolio extends React.Component{
                     <LinkBar toggle = {() => this.setState({isOpen: !this.state.isOpen})} title = "About" theme = {theme} transparent = {true}/>
                     {!this.state.loaded && <ProgressBar value={Math.ceil(this.state.progress)} max={100} text={this.state.progressText}/>}
                     <div ref={ref => (this.mount = ref)} />
+                    {this.state.loaded && <FooterController nav={this.navigate}/>}
                 </>
             )
         }
