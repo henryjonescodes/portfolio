@@ -27,6 +27,7 @@ class virtualportfolio extends React.Component{
             progressText: "",
         }
         this.scene = null
+        this.mixer = null
         this.renderer = null
         this.camera = null
         this.controls = null
@@ -370,6 +371,18 @@ class virtualportfolio extends React.Component{
             '/textures/City/City_Projected.png', textureLoader,
             this.scene
         )
+        
+        //Boats and Floats
+       
+        // this.mixer = new THREE.AnimationMixer(boatsAndFloats)
+        // const action = this.mixer.clipAction(boatsAndFloats.animations[0])
+        // action.play()
+
+        // console.log(boatsAndFloats);
+        let boatsAndFloats, boatsAndFloatsTexture
+        let boatsAndFloatsPromise = loadWithPromise('/models/BoatsAndFloats/glTF-Draco/BoatsAndFloats.glb', gltfLoader).then(result => { boatsAndFloats = result })
+        let boatsAndFloatsTexturePromise = loadWithPromise('/textures/BoatsAndFloats/BoatsAndFloats.png', textureLoader).then(result => { boatsAndFloatsTexture = result })
+
 
         /**
          * Load Fonts and Matcaps
@@ -407,7 +420,7 @@ class virtualportfolio extends React.Component{
         }
         //Generate Scene Text after Font/Matcap Load
         let greetingText, cityText, cityText1
-        Promise.all([fontLoadPromise, matcapTexturePromise]).then(() => {
+        Promise.all([fontLoadPromise, matcapTexturePromise, boatsAndFloatsPromise, boatsAndFloatsTexturePromise]).then(() => {
             const textMaterial = new THREE.MeshMatcapMaterial({ matcap: matcapTexture })
 
             //Greeting Text
@@ -433,8 +446,23 @@ class virtualportfolio extends React.Component{
             cityText1.scale.set(3,3,3)
             cityText1.rotation.y = 1* Math.PI
             this.scene.add(cityText1)
-            
-            //continue the process
+
+            //handle boats
+            console.log(boatsAndFloats)
+            console.log(boatsAndFloatsTexture)
+            boatsAndFloatsTexture.flipY = false
+            const boatsAndFloatsMaterial = new THREE.MeshBasicMaterial({map: boatsAndFloatsTexture})
+            boatsAndFloats.scene.traverse((child) => {child.material = boatsAndFloatsMaterial});    
+            boatsAndFloats.scene.scale.set(0.5, 0.5, 0.5)
+            this.scene.add(boatsAndFloats.scene)
+
+            //Add animations to mixer
+            this.mixer = new THREE.AnimationMixer(boatsAndFloats.scene)
+            boatsAndFloats.animations.forEach((animation) =>{
+                const action = this.mixer.clipAction(animation)
+                action.play()
+            })
+
             tick()
         });
 
@@ -863,14 +891,14 @@ class virtualportfolio extends React.Component{
          */
 
         const clock = new THREE.Clock()
-        // let previousTime = 0
+        let previousTime = 0
         const raycaster = new THREE.Raycaster() 
 
         const tick = () =>
         {
             const elapsedTime = clock.getElapsedTime()
-            // const deltaTime = elapsedTime - previousTime
-            // previousTime = elapsedTime
+            const deltaTime = elapsedTime - previousTime
+            previousTime = elapsedTime
 
             //Water
             water.material.uniforms[ 'time' ].value += 1.0 / oceanSettings.timeModifier;
@@ -886,6 +914,9 @@ class virtualportfolio extends React.Component{
                 )
             }    
 
+            if(this.mixer){
+                this.mixer.update(deltaTime)
+            }
 
             // Animate objects
             object1.position.y = Math.sin(elapsedTime * 0.3) * 1.5
@@ -941,6 +972,7 @@ class virtualportfolio extends React.Component{
         this.camera = null
         this.renderer = null
         this.controls = null
+        this.mixer = null
     }
     render(){
         if(this.state.target != null){
