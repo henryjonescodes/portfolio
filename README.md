@@ -28,11 +28,15 @@ Some site icons sourced from [FlatIcon]. All creators listed below:
 
 This project requires [Node.js](https://nodejs.org/) to run.
 
-Install the dependencies and devDependencies and start the server.
+Install the dependencies and start the server.
 
 ```sh
 npm install
 npm run dev
+
+or 
+
+netlify dev
 ```
 
 A stable build of branch MAIN is available for viewing at [henryjones.xyz].
