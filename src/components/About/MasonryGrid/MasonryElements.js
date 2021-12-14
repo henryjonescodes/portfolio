@@ -30,10 +30,7 @@ export const Overlay = styled(motion.div)`
     position: fixed;
     top: 0;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%;
-    max-width: 990px;
 
     /* border: 1px solid red; */
 `
