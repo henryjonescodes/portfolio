@@ -2,14 +2,14 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
     /* border: 2px solid green; */
 
     position: relative;
     height: 100%;
     width: 100%;
 `
-export const GalleryContainer = styled.div`
+export const GalleryContainer = styled(motion.div)`
     /* border: 2px solid pink; */
 
     position: relative;
@@ -70,13 +70,18 @@ export const ImgContainer = styled(motion.div)`
     }
 
     &.open{
-        top: 0;
-        left: 0;
-        right: 0;
+        /* left: 0; */
+        /* right: 0; */
         position: fixed;
         z-index: 1;
         overflow: hidden;
-        padding: 40px 10%;
+        /* margin: 40px 10%; */
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 2px solid red;
+        width: 80%;
+        height: 95%;
     }
     
 `
@@ -124,7 +129,7 @@ export const Paragraph = styled.p`
     
 `
 
-export const Img = styled.img`
+export const Img = styled(motion.img)`
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -139,10 +144,10 @@ export const Img = styled.img`
         display: block;
         filter: brightness(1) grayscale(0);
     }
-    &.open{
+    /* &.open{
         position: relative;
         z-index: 1;
         height: 300px;
         width: 100%;
-    }
+    } */
 `
