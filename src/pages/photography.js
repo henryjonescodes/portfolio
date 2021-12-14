@@ -9,6 +9,98 @@ import { theme } from '../components/Photography/theme'
 
 
 const Photography = () => {
+    let items = [
+        {
+            id: "1",
+            href: "images/a.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "2",
+            href: "images/b.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "3",
+            href: "images/c.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "4",
+            href: "images/d.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "5",
+            href: "images/e.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "6",
+            href: "images/f.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "7",
+            href: "images/g.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "8",
+            href: "images/h.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "9",
+            href: "images/a.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "10",
+            href: "images/b.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "11",
+            href: "images/c.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "12",
+            href: "images/d.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "13",
+            href: "images/e.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "14",
+            href: "images/f.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "15",
+            href: "images/g.jpg",
+            aspect: "landscape"
+        },
+        {
+            id: "16",
+            href: "images/h.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "17",
+            href: "images/h.jpg",
+            aspect: "portrait"
+        },
+        {
+            id: "18",
+            href: "images/h.jpg",
+            aspect: "portrait"
+        },
+    ]
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
@@ -19,13 +111,7 @@ const Photography = () => {
         <>
             {/* <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
             <LinkBar toggle = {toggle} title = "Photography" theme = {theme} transparent = {false}/> */}
-            {/* <ImageBackground 
-                src ={'/images/photography/collage.jpg'}
-                message={"Coming Soon!"}
-                subtitle={"I'm still working on this one, check back soon!"}
-                /> */}
-            {/* <GalleryPage/> */}
-            <Gallery/>
+            <Gallery items ={items}/>
         </>
     )
 }

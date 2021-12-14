@@ -146,23 +146,3 @@ export const Img = styled.img`
         width: 100%;
     }
 `
-
-export const OverLay = styled(motion.div)`
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 990px;
-`
-
-export const RouteLink = styled(Link)`
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    border: 2px solid green;
-    z-index: 100;
-`
