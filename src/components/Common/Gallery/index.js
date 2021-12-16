@@ -1,7 +1,6 @@
 import { AnimateSharedLayout, AnimatePresence } from "framer-motion";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import React, { useState } from 'react'
-// import { items } from "./data";
 import { 
     Container, 
     GalleryContainer, 
@@ -17,7 +16,9 @@ import {
     RouteLink} from './GalleryElements'
 import Uploader from "../Uploader";
 
-const Gallery = ({items}) => {
+const Gallery = ({items, routepath, uploadToggle}) => {
+    const [toggleUploader, setToggleUploader] = useState(true)
+    
     function Store({ match }) {
         let { id } = match.params;
         const imageHasLoaded = true;
@@ -36,7 +37,7 @@ const Gallery = ({items}) => {
         return(
             <ImgContainer layoutId={`img-container-${id}`}>
                 <Img src={href}/>
-                <RouteLink to={`/photography/${id}`}/>
+                <RouteLink to={`/${routepath}/${id}`}/>
             </ImgContainer>
         )
     }
@@ -60,7 +61,7 @@ const Gallery = ({items}) => {
                         <ImgContainer className="open" layoutId={`img-container-${id}`}>
                             <Img src={href} className="open"/>
                         </ImgContainer>
-                        <RouteLink to={`/photography/`}/>
+                        <RouteLink to={`/${routepath}/`}/>
                         <ModalInfoWrapper>
                             <ModalTitle>{title}</ModalTitle>
                             <ModalDescription>{description}</ModalDescription>
@@ -81,7 +82,6 @@ const Gallery = ({items}) => {
             </GalleryContainer>
         )
     }
-    const [toggleUploader, setToggleUploader] = useState(true)
     return (
         <Container>
             {toggleUploader && <Uploader/>}
@@ -89,7 +89,7 @@ const Gallery = ({items}) => {
             {/* <Paragraph>Check it Out!</Paragraph> */}
             <AnimateSharedLayout type="crossfade">
                 <Router>
-                    <Route path={["/photography/:id", "/photography/"]} component={Store} />
+                    <Route path={[`/${routepath}/:id`, `/${routepath}/`]} component={Store} />
                 </Router>
             </AnimateSharedLayout>
         </Container>

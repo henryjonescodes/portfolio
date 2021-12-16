@@ -44,9 +44,9 @@ export const infoData3 = {
     //Info Panel Props 
     id: 'projects',
     lightBg: false,
-    topLine: "3D Renders | Software",
-    heading: "Virtual Portfolio",
-    description: "Explore my virtual portfolio written using Three.js (in development)",
+    topLine: "3D Renders | Gallery",
+    heading: "3D Art",
+    description: "Explore my latest 3D art",
     buttonLabel: "See More",
     imgStart: true,
     img: "/images/home/conveyor.svg",
@@ -54,7 +54,7 @@ export const infoData3 = {
     //Button Props
     buttonLarge: true,
     buttonLargeText: false,
-    buttonDestination: 'projects',
+    buttonDestination: 'artgallery',
     theme: theme
 }
 export const infoData4 = {

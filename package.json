@@ -11,6 +11,7 @@
     "axios": "^0.24.0",
     "dat.gui": "^0.7.7",
     "emailjs-com": "^3.2.0",
+    "firebase": "^9.6.1",
     "framer-motion": "^4.1.17",
     "instafeed.js": "^2.0.0",
     "isomorphic-fetch": "^3.0.0",

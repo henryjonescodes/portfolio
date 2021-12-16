@@ -7,7 +7,7 @@ const useFirestore = (col) => {
     const [docs, setDocs] = useState([]);
 
     useEffect(() => {
-        const q = query(collection(projectFireStore, col), orderBy('createdAt','desc'));
+        const q = query(collection(projectFireStore, col), orderBy('key','desc'));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             const documents = [];
             querySnapshot.forEach((doc) => {

@@ -1,9 +1,9 @@
 export const theme = {
     fg: "#ddd", //Light fg
-    bg: "#000", //Dark bg
+    bg: "#fff", //Dark bg
     fg1: "#eee", //Dark fg
-    bg1: "#222", //Light fg
-    t1: "#fff", //Light text
+    bg1: "#000", //Light fg
+    t1: "#000", //Light text
     t2: "#ddd", //Off-Light Text
     t3: "#000", //Dark Text
     t4: "#333", //Off- Dark Text
