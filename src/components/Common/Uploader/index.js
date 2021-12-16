@@ -62,7 +62,6 @@ const Updater = ({collection}) => {
     const { docs } = useFirestore(collection)
     let items = docs;
     items.sort((a,b) => (parseInt(a.key) < parseInt(b.key)) ? 1 : ((parseInt(b.key) < parseInt(a.key)) ? -1 : 0)); 
-    console.log("updater",collection, items)
 
     const handleChange = (e) => {
         updateFormData({
@@ -70,13 +69,12 @@ const Updater = ({collection}) => {
       
             // Trimming any whitespace
             [e.target.name]: e.target.value.trim(),
-            href: items.find(item => item.title == e.target.value.trim()).href
+            href: items.find(item => item.title === e.target.value.trim()).href
           });
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(formData)
         setSelectedImage(formData.href)
     }
     return (
@@ -87,7 +85,7 @@ const Updater = ({collection}) => {
                <DropDownContainer>
                     <Select name="title" onChange={handleChange}>
                         {items.map(card => (
-                            <Option >{card.title}</Option>
+                            <Option key={card.key}>{card.title}</Option>
                         ))}
                     </Select>
                     <ImageSelectIcon>
@@ -172,7 +170,7 @@ const Uploader = ({collection}) => {
     return (
         <Container>
             <Form collection = {collection}/>
-            {/* <Updater collection = {collection}/> */}
+            <Updater collection = {collection}/>
         </Container>
     )
 }

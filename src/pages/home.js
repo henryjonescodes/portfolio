@@ -42,7 +42,7 @@ export const infoData2 = {
 }
 export const infoData3 = {
     //Info Panel Props 
-    id: 'projects',
+    id: 'artgallery',
     lightBg: false,
     topLine: "3D Renders | Gallery",
     heading: "3D Art",

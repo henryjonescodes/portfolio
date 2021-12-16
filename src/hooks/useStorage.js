@@ -44,15 +44,10 @@ const useStorage = (col, file, key, title, description) => {
                   title,
                   description
                 })
-                //Add to database (firestore) and set url
-                // addDoc(collectionRef,{
-                //   downloadURL,
-                //   createdAt,
-                // })
                 setUrl(href);
             });
         })
-    }, [file]);
+    }, [col, file, key, title, description]);
 
     return {progress, url, error};
 }

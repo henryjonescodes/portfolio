@@ -75,49 +75,6 @@ export const ImgContainer = styled(motion.div)`
     pointer-events: none;
     
 `
-export const Heading = styled.h1`
-    position: relative;
-    height: auto;
-    width: 200px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 5% 0 2% 0;
-    text-align: center;
-    font-size: 2.8em;
-    font-weight: 650;
-    letter-spacing: 1.5px;
-    color: #00f;
-    border-left: 5px solid #017bf5;
-    border-right: 5px solid #017bf5;
-    background: rgba(0,0,0,0.05);
-
-    @media screen and (max-width: 768px){
-        font-size: 2em;
-        width: 150px;
-    }
-    @media screen and (max-width: 450px){
-        font-size: 1.2em;
-        width: 100px;
-    }
-`
-export const Paragraph = styled.p`
-    position: relative;
-    height: auto;
-    width: 100%;
-    text-align: center;
-    font-size: 1.8em;
-    font-weight: 500;
-    letter-spacing: 1px;
-    color: #00d;
-
-    @media screen and (max-width: 768px){
-        font-size: 1.2em;
-    }
-    @media screen and (max-width: 450px){
-        font-size: .8em;
-    }
-    
-`
 
 export const Img = styled(motion.img)`
     height: 100%;

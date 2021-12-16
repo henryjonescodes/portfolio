@@ -174,6 +174,7 @@ export const Select = styled.select`
     width: 80%;
     font-size: 16px;
     height: 40px;
+    min-width: 100px;
 `
 
 export const Option = styled.option`
