@@ -15,7 +15,7 @@ const ArtGallery = () => {
     return (
         <>
             <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
-            <LinkBar toggle = {toggle} title = "3D Art" theme = {theme} transparent = {false}/>
+            <LinkBar toggle = {toggle} title = "3D Art" theme = {theme} transparent = {true}/>
             <Gallery routepath={"artgallery"} collection={"gallery1"}/>
         </>
     )
