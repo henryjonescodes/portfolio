@@ -30,10 +30,10 @@ const Gallery = ({routepath, collection}) => {
         
         return (
             <>
-            <List selectedId={id} />
-            <AnimatePresence>
-                {id && imageHasLoaded && <Modal id={id} key="item" />}
-            </AnimatePresence>
+                <List selectedId={id} />
+                <AnimatePresence>
+                    {id && imageHasLoaded && <Modal id={id} key="item" />}
+                </AnimatePresence>
             </>
         );
     }

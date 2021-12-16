@@ -117,7 +117,6 @@ export const StyledInputField = styled.textarea`
 `
 
 export const Container = styled.div`
-    border: 1px solid green;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -129,25 +128,28 @@ export const Container = styled.div`
 `
 
 export const UpdaterContainer = styled.div`
-    border: 1px solid green;
     position: relative;
     max-width: 40%;
-    /* margin-right: 40px; */
-    width: 200px;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     @media screen and (max-width: 1000px){
-        max-width: 80%;
+        max-width: 400px;
     }
 
 `
 
-export const FormContainer = styled.form`
-    border: 1px solid blue;
+export const DropDownContainer = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
 
+export const FormContainer = styled.form`
     position: relative;
     max-width: 40%;
     width: 400px;
-    /* margin-left: 40px; */
 
     @media screen and (max-width: 1000px){
         max-width: 80%;
@@ -155,5 +157,48 @@ export const FormContainer = styled.form`
 `
 
 export const ImageViewer = styled.img`
+    max-height: 60%;
+    object-fit: contain;
+    width: 90%;
+`
 
+export const ImageSelectForm = styled.form`
+    display: flex;
+    padding: 0 100px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+`
+
+export const Select = styled.select`
+    width: 80%;
+    font-size: 16px;
+    height: 40px;
+`
+
+export const Option = styled.option`
+    font-size: 12px;
+`
+
+export const ImageSelectIcon = styled.label`
+    display: block;
+    width: 40px;
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 50%;
+    margin: 10px auto;
+    line-height: 40px;
+    color: black;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+
+    &:hover {
+        background: #ddd;
+    }
+`
+export const ImageSelect = styled.button`
+    height: 0;
+    width: 0;
+    opacity: 0;
 `

@@ -1,20 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { 
     Container, 
+    DropDownContainer, 
     Error, 
     FormContainer, 
     FormInput, 
     FormLabel, 
+    ImageSelect, 
+    ImageSelectForm, 
+    ImageSelectIcon, 
+    ImageViewer, 
     InputContainer, 
+    Option, 
     OutputContainer, 
     ProgressBarSlider, 
     ProgressContainer, 
+    Select, 
     Status, 
     StyledInput, 
     StyledInputField, 
     StyledInputLabel, 
-    UpdaterContainer } from './UploaderElements';
+    UpdaterContainer,
+ } from './UploaderElements';
 import useStorage from '../../../hooks/useStorage';
+import useFirestore from '../../../hooks/useFirestore';
 
 const ProgressBar = ({file, setFile, formData, collection}) => {
     const {url, progress} = useStorage(
@@ -42,11 +51,51 @@ const ProgressBar = ({file, setFile, formData, collection}) => {
     )
 }
 
-const Updater = () => {
+const Updater = ({collection}) => {
+    const initialFormData = Object.freeze({
+        title: "",
+        href: ""
+    })
+    const [formData, updateFormData] = useState(initialFormData);
+    const [selectedImage, setSelectedImage] = useState(null)
 
+    const { docs } = useFirestore(collection)
+    let items = docs;
+    items.sort((a,b) => (parseInt(a.key) < parseInt(b.key)) ? 1 : ((parseInt(b.key) < parseInt(a.key)) ? -1 : 0)); 
+    console.log("updater",collection, items)
+
+    const handleChange = (e) => {
+        updateFormData({
+            ...formData,
+      
+            // Trimming any whitespace
+            [e.target.name]: e.target.value.trim(),
+            href: items.find(item => item.title == e.target.value.trim()).href
+          });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        console.log(formData)
+        setSelectedImage(formData.href)
+    }
     return (
         <UpdaterContainer>
-            here
+            {selectedImage && <ImageViewer src={selectedImage}/>}
+           <ImageSelectForm>
+               {selectedImage && <label>{selectedImage}</label>}
+               <DropDownContainer>
+                    <Select name="title" onChange={handleChange}>
+                        {items.map(card => (
+                            <Option >{card.title}</Option>
+                        ))}
+                    </Select>
+                    <ImageSelectIcon>
+                        <ImageSelect type="button" onClick = {handleSubmit}/>
+                        <span>View</span>
+                    </ImageSelectIcon>
+                </DropDownContainer>
+           </ImageSelectForm>
         </UpdaterContainer>
     )
 }
@@ -123,7 +172,7 @@ const Uploader = ({collection}) => {
     return (
         <Container>
             <Form collection = {collection}/>
-            <Updater/>
+            {/* <Updater collection = {collection}/> */}
         </Container>
     )
 }
