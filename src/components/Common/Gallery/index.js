@@ -16,7 +16,7 @@ import Uploader from "../Uploader";
 import useFirestore from '../../../hooks/useFirestore';
 
 const Gallery = ({routepath, collection}) => {
-    const [toggleUploader] = useState(true)
+    const [toggleUploader] = useState(false)
     const { docs } = useFirestore(collection)
     let items = docs;
     items.sort((a,b) => (parseInt(a.key) < parseInt(b.key)) ? 1 : ((parseInt(b.key) < parseInt(a.key)) ? -1 : 0)); 
