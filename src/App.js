@@ -12,6 +12,7 @@ import About from './pages/about';
 import ScrollToTopWrapper from './components/Common/ScrollToTopWrapper'
 import virtualportfolio from './pages/virtualportfolio';
 import DetailPage from './components/Common/DetailPage';
+import ArtGallery from './pages/artgallery';
 
 function Store({ match }) {
   let { id } = match.params;
@@ -32,6 +33,7 @@ function App() {
           <Route path="/" component={Home} exact/>
           <Route path="/contact" component={Contact} exact/>
           <Route path={["/photography","/photography/*"]} component={Photography} exact/>
+          <Route path={["/artgallery","/artgallery/*"]} component={ArtGallery} exact/>
           <Route path="/projects" component={Projects} exact/>
           <Route path={["/about","/about/*"]} component={About} exact/>
           <Route path="/virtualportfolio" component={virtualportfolio} exact/>

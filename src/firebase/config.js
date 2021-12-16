@@ -2,17 +2,19 @@
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
+// import { getAnalytics } from "firebase/analytics";
 
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCGH7f1anWDVymTemKoNZaCe1C6bMoNLX8",
-  authDomain: "portfolio-e3d67.firebaseapp.com",
-  projectId: "portfolio-e3d67",
-  storageBucket: "portfolio-e3d67.appspot.com",
-  messagingSenderId: "981183313160",
-  appId: "1:981183313160:web:db1730392e58716d5828bd"
+  apiKey: "AIzaSyBQwaxjcRtU60U7Y68n7ifsGvrebcdJTbc",
+  authDomain: "zonez-portfolio.firebaseapp.com",
+  projectId: "zonez-portfolio",
+  storageBucket: "zonez-portfolio.appspot.com",
+  messagingSenderId: "471713374612",
+  appId: "1:471713374612:web:ef3d4affc93360704caf81",
+  measurementId: "G-00QC8Z42E5"
 };
 
 // Initialize Firebase

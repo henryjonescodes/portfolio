@@ -64,13 +64,13 @@ const NavBar = ({toggle, title, sticky, theme, transparent}) => {
                             </NavItem>
                             <NavItem>
                                 <NavLinks 
-                                    to="projects"
+                                    to="artgallery"
                                     smooth="true"
                                     duration={500}
                                     spy={true}
                                     exact='true'
                                     offset={-80}   
-                                >Virtual Portfolio</NavLinks>
+                                >3D Art</NavLinks>
                             </NavItem>
                             <NavItem>
                                 <NavLinks 

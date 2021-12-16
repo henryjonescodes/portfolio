@@ -3,7 +3,8 @@ import { projectStorage, projectFireStore } from '../firebase/config';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc, Timestamp } from 'firebase/firestore'
 
-const useStorage = (col,file, title, desc, location,medium) => {
+// const useStorage = (col, file, title, desc, location, medium) => {
+const useStorage = (col, file, key, title, description) => {
     const [progress, setProgress] = useState(0);
     const [error, setError] = useState(null);
     const [url, setUrl] = useState(null);
@@ -11,15 +12,12 @@ const useStorage = (col,file, title, desc, location,medium) => {
     useEffect(() => {
         //Storage Reference
         const storageRef = ref(projectStorage,file.name);
-        // console.log("StorageRef",storageRef);
 
         //Database Reference
         const collectionRef = collection(projectFireStore, col);
-        // console.log("CollectionRef", collectionRef);
 
         //upload file to reference and attatch listener
         const uploadTask = uploadBytesResumable(storageRef,file);
-        // console.log(uploadTask);
 
         //Do upload
         uploadTask.on('state_changed', (snap) => {
@@ -30,8 +28,8 @@ const useStorage = (col,file, title, desc, location,medium) => {
             //Trigger error
             setError(err);
         }, async () => {
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                console.log('File available at', downloadURL);
+            getDownloadURL(uploadTask.snapshot.ref).then((href) => {
+                console.log('File available at', href);
                 
                 //Get timestamp
                 const newDate = new Date();
@@ -40,17 +38,16 @@ const useStorage = (col,file, title, desc, location,medium) => {
                 
                 //Add to database (firestore) and set url
                 addDoc(collectionRef,{
-                  downloadURL,
+                  href,
                   createdAt,
+                  key,
                   title,
-                  desc,
-                  location,
-                  medium
+                  description
                 })
-                setUrl(downloadURL);
+                setUrl(href);
             });
         })
-    }, [file]);
+    }, [col, file, key, title, description]);
 
     return {progress, url, error};
 }
