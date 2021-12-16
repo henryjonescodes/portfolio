@@ -8,9 +8,9 @@ import useFirestore from '../hooks/useFirestore';
 
 const Photography = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const {docs} = useFirestore("gallery2")
-    docs.sort((a,b) => (parseInt(a.key) < parseInt(b.key)) ? 1 : ((parseInt(b.key) < parseInt(a.key)) ? -1 : 0)); 
-    console.log(docs)
+    // const {docs} = useFirestore("gallery2")
+    // docs.sort((a,b) => (parseInt(a.key) < parseInt(b.key)) ? 1 : ((parseInt(b.key) < parseInt(a.key)) ? -1 : 0)); 
+    // console.log(docs)
 
     const toggle = () => {
         setIsOpen(!isOpen)
@@ -20,7 +20,7 @@ const Photography = () => {
         <>
             <RoutedSideBar isOpen = {isOpen} toggle = {toggle} theme = {theme}/>
             <LinkBar toggle = {toggle} title = "Photography" theme = {theme} transparent = {false}/>
-            <Gallery items = {docs} routepath={"photography"}/>
+            <Gallery routepath={"photography"} collection={"gallery2"}/>
         </>
     )
 }

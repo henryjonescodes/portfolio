@@ -15,9 +15,14 @@ import {
     Paragraph, 
     RouteLink} from './GalleryElements'
 import Uploader from "../Uploader";
+import useFirestore from '../../../hooks/useFirestore';
 
-const Gallery = ({items, routepath, uploadToggle}) => {
+const Gallery = ({routepath, collection}) => {
     const [toggleUploader, setToggleUploader] = useState(true)
+    const { docs } = useFirestore(collection)
+    let items = docs;
+    items.sort((a,b) => (parseInt(a.key) < parseInt(b.key)) ? 1 : ((parseInt(b.key) < parseInt(a.key)) ? -1 : 0)); 
+    console.log(collection, items)
     
     function Store({ match }) {
         let { id } = match.params;
@@ -84,7 +89,7 @@ const Gallery = ({items, routepath, uploadToggle}) => {
     }
     return (
         <Container>
-            {toggleUploader && <Uploader/>}
+            {toggleUploader && <Uploader collection={collection}/>}
             {/* <Heading>3D Art</Heading> */}
             {/* <Paragraph>Check it Out!</Paragraph> */}
             <AnimateSharedLayout type="crossfade">

@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { Error, FormContainer, FormInput, FormLabel, InputContainer, OutputContainer, ProgressBarSlider, ProgressContainer, Status, StyledInput, StyledInputField, StyledInputLabel } from './UploaderElements';
+import { 
+    Container, 
+    Error, 
+    FormContainer, 
+    FormInput, 
+    FormLabel, 
+    InputContainer, 
+    OutputContainer, 
+    ProgressBarSlider, 
+    ProgressContainer, 
+    Status, 
+    StyledInput, 
+    StyledInputField, 
+    StyledInputLabel, 
+    UpdaterContainer } from './UploaderElements';
 import useStorage from '../../../hooks/useStorage';
 
-const ProgressBar = ({file, setFile, formData}) => {
+const ProgressBar = ({file, setFile, formData, collection}) => {
     const {url, progress} = useStorage(
-        "gallery1",
+        collection,
         file,
         formData.key,
         formData.title, 
@@ -28,7 +42,16 @@ const ProgressBar = ({file, setFile, formData}) => {
     )
 }
 
-const Uploader = () => {
+const Updater = () => {
+
+    return (
+        <UpdaterContainer>
+            here
+        </UpdaterContainer>
+    )
+}
+
+const Form = ({collection}) => {
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const initialFormData = Object.freeze({
@@ -69,8 +92,7 @@ const Uploader = () => {
             setError('Please select a valid format (PNG/JPEG)');
         }
     }
-
-    return (
+    return(
         <FormContainer id="form">
             <InputContainer>
                 <StyledInputLabel>Key</StyledInputLabel>
@@ -91,9 +113,18 @@ const Uploader = () => {
             <OutputContainer>
                 {error && <Error className="error">{error}</Error>}
                 {file && <Status>{file.name}</Status>}
-                {file && <ProgressBar file={file} setFile={setFile} formData={formData}/>}
+                {file && <ProgressBar file={file} setFile={setFile} formData={formData} collection = {collection}/>}
             </OutputContainer>
         </FormContainer>
+    )
+}
+
+const Uploader = ({collection}) => {
+    return (
+        <Container>
+            <Form collection = {collection}/>
+            <Updater/>
+        </Container>
     )
 }
 

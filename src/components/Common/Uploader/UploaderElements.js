@@ -1,13 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export const FormContainer = styled.form`
-    /* border: 1px solid blue; */
 
-    position: relative;
-    max-width: 600px;
-    margin: 1% auto;
-`
 export const FormLabel = styled.label`
     display: block;
     width: 40px;
@@ -120,4 +114,46 @@ export const StyledInputField = styled.textarea`
     text-align:left;
     width:auto;
     display:block;
+`
+
+export const Container = styled.div`
+    border: 1px solid green;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    @media screen and (max-width: 1000px){
+        flex-direction: column;
+        align-items: center;
+    }
+`
+
+export const UpdaterContainer = styled.div`
+    border: 1px solid green;
+    position: relative;
+    max-width: 40%;
+    /* margin-right: 40px; */
+    width: 200px;
+    
+    @media screen and (max-width: 1000px){
+        max-width: 80%;
+    }
+
+`
+
+export const FormContainer = styled.form`
+    border: 1px solid blue;
+
+    position: relative;
+    max-width: 40%;
+    width: 400px;
+    /* margin-left: 40px; */
+
+    @media screen and (max-width: 1000px){
+        max-width: 80%;
+    }
+`
+
+export const ImageViewer = styled.img`
+
 `
