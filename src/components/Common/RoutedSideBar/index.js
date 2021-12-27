@@ -21,7 +21,7 @@ const RoutedSideBar = ({isOpen, toggle, theme}) => {
                     <SideBarMenu>
                         <SideBarLink to ="/about" onClick = {toggle}>About</SideBarLink>
                         <SideBarLink to ="/photography" onClick = {toggle}>Photography</SideBarLink>
-                        <SideBarLink to ="/projects" onClick = {toggle}>Projects</SideBarLink>
+                        <SideBarLink to ="/artgallery" onClick = {toggle}>3D Art</SideBarLink>
                         <SideBarLink to ="/contact" onClick = {toggle}>Contact Me</SideBarLink>
                     </SideBarMenu>
                 </SideBarWrapper>
