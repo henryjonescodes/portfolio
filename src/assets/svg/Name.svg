@@ -1,0 +1,40 @@
+<svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 100.38">
+  <defs>
+    <style>
+      .cls-1 {
+        letter-spacing: 0em;
+      }
+
+      .cls-2 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        fill: #231f20;
+        font-family: Roboto-BlackItalic, 'Roboto Black';
+        font-size: 98.98px;
+        font-style: italic;
+        font-weight: 800;
+      }
+
+      .cls-4 {
+        letter-spacing: -.11em;
+      }
+
+      .cls-5 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs><text class="cls-3" transform="translate(14.76 85.82) scale(.89 1)">
+    <tspan class="cls-1" x="0" y="0">HEN</tspan>
+    <tspan class="cls-5" x="189.19" y="0">R</tspan>
+    <tspan class="cls-4" x="249.69" y="0">Y</tspan>
+    <tspan class="cls-1" x="299.85" y="0"> </tspan>
+    <tspan class="cls-6" x="323.96" y="0">J</tspan>
+    <tspan class="cls-2" x="378.18" y="0">ONES</tspan>
+  </text>
+</svg>
