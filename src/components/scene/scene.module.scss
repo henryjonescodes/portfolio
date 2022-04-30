@@ -1,0 +1,12 @@
+
+.scene{
+    height:100vh;
+    border: 1px dashed green;
+    overflow-y: scroll;
+    overscroll-behavior: auto;
+
+    // &__content{
+    //     height: 800px;
+    //     background-color: gray;
+    // }
+}

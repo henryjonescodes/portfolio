@@ -1,0 +1,29 @@
+$header-height: 70px;
+$subtext-color: #b5b5b5;
+
+.wrapper{
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  position: relative;
+}
+
+.body{
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttons{
+  z-index: 10;
+  bottom: 0px;
+  position: absolute;
+  display: flex;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+

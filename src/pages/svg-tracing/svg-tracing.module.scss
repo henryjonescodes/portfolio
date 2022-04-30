@@ -1,0 +1,42 @@
+.pageWrapper{
+  height: 100%;
+  width: 100%;
+  align-self: center;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%);
+  padding: 100px;
+  overflow: scroll;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  overflow: visible;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.content{
+  height: 100%;
+  width: 100%;
+}
+.stroke{
+  height: 100%;
+  width: auto;
+  overflow: visible;
+
+  display: inline-block;
+  position: absolute;
+}
+
+.tracedName{
+  // fill: red;
+  path{
+  }
+}
+
+.wrapwrap{
+  padding: 30px;
+}

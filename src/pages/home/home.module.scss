@@ -1,0 +1,43 @@
+
+.login{
+  border: 3px solid rgb(56, 56, 56);
+  border-radius: 8px;
+  padding: 12px;
+  background-color: rgb(101, 101, 101);
+  width: min-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+
+  h2{ 
+    font-size: 18px;
+    margin: 0px;
+    min-width: 100px;
+    color: rgb(194, 194, 194);
+  }
+  input{
+    flex: 2;
+    border-radius: 4px;
+    height: 20px;
+    background-color: rgb(158, 158, 158);
+  }
+  span {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: min-content;
+  }
+
+  &Button{
+    width:100%;
+    padding: 0px;
+    height:30px;
+  }
+}

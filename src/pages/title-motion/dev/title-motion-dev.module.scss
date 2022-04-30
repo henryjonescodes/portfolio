@@ -1,0 +1,143 @@
+
+////////////////////////////////
+//       Page Wrapper         //
+////////////////////////////////
+
+.wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+////////////////////////////////
+//       Page Header          //
+////////////////////////////////
+
+.header{
+  height: 100px;
+  width: 100%;
+  background-color: #292929;
+  border-bottom: 4px solid #6c6c6c;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:before{
+    content: "";
+    width: 100%;
+    position: absolute;
+    height: 64px;
+    background: linear-gradient(0deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+    bottom: 4px;
+  }
+}
+
+////////////////////////////////
+//            Body            //
+////////////////////////////////
+
+.body{
+  height: 100%;
+  width: 100%;
+  background-color: aliceblue;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+////////////////////////////////
+//          Footer            //
+////////////////////////////////
+
+.footer{
+  height: 60px;
+  background-color: #292929;
+  width: 100%;
+  position: relative;
+  border-top: 4px solid #6c6c6c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:before{
+    content: "";
+    width: 100%;
+    position: absolute;
+    height: 40px;
+    background: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+    top: 4px;
+  }
+}
+
+
+
+.motionWrapper{
+  &__header{
+    color: white;
+    font-size: 40px;
+  }
+  &__hero{
+
+  }
+}
+.motionText{
+  &__header{
+    color: white;
+    font-size: 40px;
+    margin: 0px;
+  }
+  &__hero{
+    font-size: 120px;
+  }
+}
+
+
+.letters{
+  border: 1px solid red;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__top{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+  }
+  &__bottom{
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+  }
+
+}
+.letter{
+  margin: 0px;
+}
+
+.placeHolder{
+  min-width: 200px;
+  height: 40px;
+}
+
+.letterMotion {
+
+  &__top{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+  }
+  &__bottom{
+
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+  }
+}
+
+
