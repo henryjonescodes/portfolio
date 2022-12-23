@@ -1,0 +1,100 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 16px;
+  overflow: hidden;
+  background-color: skyblue;
+}
+
+.button {
+  z-index: 10;
+  ;
+}
+
+.drip {
+  position: absolute;
+  width: 800px;
+  height: 2000px;
+  background: linear-gradient(149deg, #FF0000 0%, #006CF9 100%);
+  top: -2000px;
+  transition: top 5s linear;
+
+  &Drop {
+    top: 0px;
+  }
+}
+
+.mixBlend {
+  &White {
+    color: black;
+    background-color: white;
+    mix-blend-mode: screen;
+  }
+
+  &Black {
+    color: white;
+    background-color: black;
+    mix-blend-mode: multiply;
+  }
+}
+
+.text {
+  $text-padding: 16px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  border-radius: 16px;
+  overflow: hidden;
+
+  &White{
+    composes: text;
+    mix-blend-mode: screen;
+  }
+  &Black{
+    composes: text;
+    mix-blend-mode: multiply
+  }
+
+  &__header {
+    font-family: arial;
+    font-size: 3em;
+    padding:  $text-padding $text-padding 0px $text-padding;
+    margin: 0;
+
+    &White{
+      composes: text__header; 
+      composes: mixBlendWhite;
+    }
+    &Black{
+      composes: text__header; 
+      composes: mixBlendBlack;
+
+    }
+  }
+
+  &__body {
+    composes: mixBlendWhite;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 0px $text-padding $text-padding $text-padding;
+    margin: 0px;
+
+    &White{
+      composes: text__body; 
+      composes: mixBlendWhite;
+    }
+    &Black{
+      composes: text__body; 
+      composes: mixBlendBlack;
+
+    }
+  }
+
+  // }
+
+}

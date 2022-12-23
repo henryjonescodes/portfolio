@@ -1,0 +1,15 @@
+.pageWrapper {
+  width: 100%;
+}
+
+.pageHome {
+  composes: pageWrapper;
+}
+
+.pageThreeScroller {
+  composes: pageWrapper;
+}
+
+.pageDripText {
+  composes: pageWrapper;
+}

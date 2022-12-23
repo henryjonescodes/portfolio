@@ -1,0 +1,25 @@
+@import './../../styles/colors.scss';
+
+.button{
+  $button-color: $gray;
+  padding: 5px 8px;
+  border: 2px solid $button-color;
+  border-radius: 8px;
+  background-color: lighten($button-color, 30%);
+  transition: background-color .2s ease-in-out;
+  
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+
+  font
+
+  &:hover{
+    background-color: lighten($button-color, 40%);
+    border-color: lighten($button-color, 10%);
+  }
+  &:active {
+    background-color: lighten($button-color, 45%);
+    border-color: lighten($button-color, 20%);
+  }
+}
