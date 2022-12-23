@@ -6,7 +6,7 @@ const styles = css as any
 const Home = () => {
   return (
     <div className={styles.pageHome}>
-      <DevNav />
+      <DevNav showToolBar={true} />
     </div>
   )
 }

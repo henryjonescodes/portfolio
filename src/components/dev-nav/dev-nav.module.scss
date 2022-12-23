@@ -1,3 +1,5 @@
+@import './../../styles/colors.scss';
+
 .devNav {
   display: flex;
   align-items: center;
@@ -12,6 +14,11 @@
   &Hidden{
     top: -100px;
   }
+}
+
+.selected{
+  background-color: lighten($gray, 40%);
+  color: black;
 }
 
 .floater{
