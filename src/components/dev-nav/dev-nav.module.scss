@@ -1,4 +1,4 @@
-@import './../../styles/colors.scss';
+@import 'styles/colors.scss';
 
 .devNav {
   display: flex;
@@ -17,8 +17,8 @@
 }
 
 .selected{
-  background-color: lighten($gray, 40%);
-  color: black;
+  background-color: lighten($gray, 40%) !important;
+  color: black !important;
 }
 
 .floater{

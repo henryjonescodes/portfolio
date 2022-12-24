@@ -1,7 +1,8 @@
-import React, { useState } from "react"
-import css from "./drip-text.module.scss"
 import cn from "classnames"
-import Button from "../../zonez-ui/button/Button"
+import { useState } from "react"
+import Button from "zonez-ui/button/Button"
+
+import css from "./drip-text.module.scss"
 const styles = css as any
 
 const DripTextDisplay = () => {

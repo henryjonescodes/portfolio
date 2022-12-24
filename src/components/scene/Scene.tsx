@@ -1,14 +1,15 @@
-import Loading from "./loading/Loading";
-import css from "./scene.module.scss";
-import { Scroll, ScrollControls, useProgress } from "@react-three/drei";
-import { Suspense, useState } from "react";
-import { Canvas } from "@react-three/fiber";
-import { CamTarget } from "../../types/cam-target";
-import { Box } from "./geometry/MeshGenerator";
-const styles = css as any;
+import { Scroll, ScrollControls, useProgress } from "@react-three/drei"
+import { Canvas } from "@react-three/fiber"
+import { Suspense, useState } from "react"
+import { CamTarget } from "types/cam-target"
+import { Box } from "./geometry/MeshGenerator"
+import Loading from "./loading/Loading"
+
+import css from "./scene.module.scss"
+const styles = css as any
 
 const Scene = () => {
-  const { progress, item } = useProgress();
+  const { progress, item } = useProgress()
 
   const [camTarget, setCamTarget] = useState<CamTarget>({
     x: 3,
@@ -17,7 +18,7 @@ const Scene = () => {
     target_x: 0,
     target_y: 0,
     target_z: 0,
-  });
+  })
 
   return (
     <Suspense
@@ -50,7 +51,7 @@ const Scene = () => {
         </Canvas>
       </div>
     </Suspense>
-  );
-};
+  )
+}
 
-export default Scene;
+export default Scene

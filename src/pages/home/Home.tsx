@@ -1,5 +1,5 @@
-import DevNav from "../../components/dev-nav/DevNav"
-import css from "./../pages.module.scss"
+import DevNav from "components/dev-nav/DevNav"
+import css from "pages/pages.module.scss"
 
 const styles = css as any
 
