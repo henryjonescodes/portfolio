@@ -1,14 +1,14 @@
-import Scene from "components/scene/Scene"
 import About from "components/about/About"
-import DevNav from "components/dev-nav/DevNav"
+import Scene from "components/scene/Scene"
 
+import SiteNav from "components/dev-nav/SiteNav"
 import css from "pages/pages.module.scss"
 const styles = css as any
 
 const ThreeScroller = () => {
   return (
     <div className={styles.pageThreeScroller}>
-      <DevNav showToolBar={true} />
+      <SiteNav showToolbar={true} />
       <Scene />
       <About />
     </div>

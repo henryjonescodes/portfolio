@@ -1,5 +1,6 @@
 .pageWrapper {
-  width: 100%;
+  width: 100vw;
+  height: 100vh;
 }
 
 .pageHome {
@@ -16,4 +17,10 @@
 
 .pageTitleMotion {
   composes: pageWrapper;
+
+  &__nav{
+    position: relative;
+    background-color: #292929;
+    justify-content: center;    
+  }
 }
