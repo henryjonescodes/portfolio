@@ -87,14 +87,38 @@
   align-items: center;
   justify-content: center;
 
+  &__top{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+  }
+  &__bottom{
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+  }
 
 }
 .letter{
   margin: 0px;
-
 }
 
 .placeHolder{
   min-width: 200px;
   height: 40px;
+}
+
+.letterMotion {
+
+  &__top{
+    position: absolute;
+    top: 100px;
+    left: 100px;
+  }
+  &__bottom{
+
+    position: absolute;
+    bottom: 100px;
+    right: 100px;
+  }
 }

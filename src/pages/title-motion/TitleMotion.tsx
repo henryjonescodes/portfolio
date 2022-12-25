@@ -6,6 +6,10 @@ import { useLocation } from "react-router-dom"
 import { useEffect } from "react"
 import TitleMotionDisplay from "./TitleMotionDisplay"
 import TitleMotionDisplay3 from "./TitleMotionDisplay3"
+import TitleMotionDisplay4 from "./TitleMotionDisplay4"
+import TitleMotionDisplay5 from "./TitleMotionDisplay5"
+import TitleMotionDisplay6 from "./TitleMotionDisplay6"
+import TitleMotionDisplay7 from "./TitleMotionDisplay7"
 const styles = css as any
 
 const TitleMotion = () => {
@@ -32,15 +36,34 @@ const TitleMotion = () => {
       buttonText: "Title Motion 3",
       withHash: true,
     },
+    {
+      href: "/title-motion#4",
+      buttonText: "Title Motion 4",
+      withHash: true,
+    },
+    {
+      href: "/title-motion#5",
+      buttonText: "Title Motion 5",
+      withHash: true,
+    },
+    {
+      href: "/title-motion#6",
+      buttonText: "Title Motion 6",
+      withHash: true,
+    },
   ]
 
   return (
     <>
       <div className={styles.pageTitleMotion}>
-        <SiteNav showToolbar={true} />
+        <SiteNav showToolbar={false} />
         {pageName === "0" && <TitleMotionDisplay />}
         {pageName === "1" && <TitleMotionDisplay2 />}
         {pageName === "2" && <TitleMotionDisplay3 />}
+        {pageName === "3" && <TitleMotionDisplay4 />}
+        {pageName === "4" && <TitleMotionDisplay5 />}
+        {pageName === "5" && <TitleMotionDisplay6 />}
+        {pageName === "6" && <TitleMotionDisplay7 />}
       </div>
       <DevNav
         className={styles.pageTitleMotion__nav}

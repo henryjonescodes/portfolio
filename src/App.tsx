@@ -15,7 +15,10 @@ function App() {
     "/title-motion#0",
     "/title-motion#1",
     "/title-motion#2",
-    "/title-motion/3",
+    "/title-motion#3",
+    "/title-motion#4",
+    "/title-motion#5",
+    "/title-motion#6",
   ]
 
   const TitleMotionRoutes = TitleMotionPages.map((path, index) => (
