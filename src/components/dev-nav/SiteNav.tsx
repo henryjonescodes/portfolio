@@ -15,6 +15,10 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
       buttonText: "Title Motion",
     },
     {
+      href: "/letter-motion",
+      buttonText: "Letter Motion",
+    },
+    {
       href: "/drip-text",
       buttonText: "Drip Text",
     },

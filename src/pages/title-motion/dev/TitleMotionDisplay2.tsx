@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import css from "./title-motion.module.scss"
+import css from "./title-motion-dev.module.scss"
 import { motion, AnimatePresence } from "framer-motion"
 import cn from "classnames"
 import Button from "zonez-ui/button/Button"

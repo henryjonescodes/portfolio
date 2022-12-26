@@ -2,7 +2,7 @@ import cn from "classnames"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
 import Button from "zonez-ui/button/Button"
-import css from "./title-motion.module.scss"
+import css from "./title-motion-dev.module.scss"
 const styles = css as any
 
 type LetterMotionProps = {
@@ -27,22 +27,13 @@ const getLetterLists = (text: string) => {
       })
     )
   })
-  // console.log(letterLists)
-
-  // // Add a space ("\u00A0") to the end of each word
-  // letterLists.map((ll, index) => {
-  //   if (index === letterLists.length - 1) {
-  //     return
-  //   }
-  //   return ll.push("\u00A0")
-  // })
 
   return letterLists
 }
 type UseLetterMotionType = {
   letterLists: LetterListType[][]
   currentLetter: CurrentLetterType
-  getStateForLetter: (index: IndexType) => boolean
+  getStateForLetter: (index: IndexType) => boolean | undefined
 }
 
 type IndexType = { i: number; j: number }
@@ -56,7 +47,7 @@ const useLetterMotion = (
   words: string,
   resetExternal?: boolean
 ): UseLetterMotionType => {
-  let letterLists = getLetterLists(words) || []
+  const letterLists = getLetterLists(words) || []
 
   /////////////////////////////////////
   //              STATE              //
@@ -71,38 +62,47 @@ const useLetterMotion = (
   //         GET NEXT LETTER         //
   /////////////////////////////////////
 
-  const getNextLetter = (
-    lists: LetterListType[][],
-    direction?: boolean | null
-  ) => {
-    if (!currentLetter) {
+  const getNextLetter = (direction?: boolean | null) => {
+    if (!currentLetter || !listState) {
       return null
     }
 
-    const numInWord = lists[currentLetter.index.i].length
+    const numInWord = listState[currentLetter.index.i].length
 
     // Try to return from the next word, null if not found
     if (currentLetter.index.j >= numInWord - 1) {
-      if (!lists[currentLetter.index.i + 1]?.length) {
+      if (!listState[currentLetter.index.i + 1]?.length) {
         return null
       }
+      let newList = [...listState]
+      newList[currentLetter.index.i + 1][0].active = direction || false
 
-      lists[currentLetter.index.i + 1][0].active = true
+      setListState(newList)
+
       return {
-        letter: lists[currentLetter.index.i + 1][0],
+        letter: listState[currentLetter.index.i + 1][0],
         index: { i: currentLetter.index.i + 1, j: 0 },
       }
     }
-    lists[currentLetter.index.i][currentLetter.index.j + 1].active = true
+
+    let newList = [...listState]
+    newList[currentLetter.index.i][currentLetter.index.j + 1].active =
+      direction || false
+
+    setListState(newList)
 
     return {
-      letter: lists[currentLetter.index.i][currentLetter.index.j + 1],
+      letter: listState[currentLetter.index.i][currentLetter.index.j + 1],
       index: { i: currentLetter.index.i, j: currentLetter.index.j + 1 },
     }
   }
 
-  const getStateForLetter = (index: IndexType): boolean => {
-    return letterLists[index.i][index.j].active
+  const getStateForLetter = (index: IndexType): boolean | undefined => {
+    if (!listState) {
+      return undefined
+    }
+    console.log(index, listState[index.i][index.j].active)
+    return listState[index.i][index.j].active
   }
 
   /////////////////////////////////////
@@ -110,12 +110,22 @@ const useLetterMotion = (
   /////////////////////////////////////
 
   useEffect(() => {
+    return () => {
+      if (listState) {
+        setListState(null)
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    console.log("RESET", listState, resetExternal)
+
     if (!reset) {
-      console.log(letterLists)
       setReset(true)
+      console.log("set direction: ", resetExternal)
+      setDirection(resetExternal || false)
+      setCurrentLetter(null)
       if (!!resetExternal) {
-        console.log("set direction: ", resetExternal)
-        setDirection(resetExternal)
       }
     }
   }, [resetExternal])
@@ -123,34 +133,43 @@ const useLetterMotion = (
   useEffect(() => {
     if (!listState && !!letterLists) {
       setListState(letterLists)
-    }
-    if (reset) {
-      if (!!letterLists && !currentLetter) {
-        setCurrentLetter({
-          letter: {
-            letter: letterLists[0][0].letter,
-            active: direction,
-          },
-          index: { i: 0, j: 0 },
-        })
-      }
-      setReset(false)
+    } else {
     }
   }, [letterLists])
 
   useEffect(() => {
+    if (!reset) {
+      return
+    }
+    if (reset) {
+      if (!!listState && !currentLetter) {
+        let newList = [...listState]
+        newList[0][0].active = direction || false
+
+        setListState(newList)
+        setCurrentLetter({
+          letter: {
+            letter: listState[0][0].letter,
+            active: direction,
+          },
+          index: { i: 0, j: 0 },
+        })
+        setReset(false)
+      }
+    }
+  }, [listState, reset])
+
+  useEffect(() => {
     if (currentLetter !== null) {
       const timer = setTimeout(() => {
-        console.log("timed out letter: ", currentLetter)
-        const nextLetter = getNextLetter(letterLists, direction)
-        setCurrentLetter(getNextLetter(letterLists))
+        setCurrentLetter(getNextLetter(direction))
       }, 100)
       return () => clearTimeout(timer)
     }
   }, [currentLetter])
 
   return {
-    letterLists,
+    letterLists: listState || [],
     getStateForLetter,
     currentLetter,
   }

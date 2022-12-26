@@ -1,15 +1,15 @@
 import css from "pages/pages.module.scss"
 import DevNav, { DevNavInputType } from "components/dev-nav/DevNav"
-import TitleMotionDisplay2 from "./TitleMotionDisplay2"
+import TitleMotionDisplay2 from "pages/title-motion/dev/TitleMotionDisplay2"
 import SiteNav from "components/dev-nav/SiteNav"
 import { useLocation } from "react-router-dom"
-import { useEffect } from "react"
-import TitleMotionDisplay from "./TitleMotionDisplay"
-import TitleMotionDisplay3 from "./TitleMotionDisplay3"
-import TitleMotionDisplay4 from "./TitleMotionDisplay4"
-import TitleMotionDisplay5 from "./TitleMotionDisplay5"
-import TitleMotionDisplay6 from "./TitleMotionDisplay6"
-import TitleMotionDisplay7 from "./TitleMotionDisplay7"
+import TitleMotionDisplay from "pages/title-motion/dev/TitleMotionDisplay"
+import TitleMotionDisplay3 from "pages/title-motion/dev/TitleMotionDisplay3"
+import TitleMotionDisplay4 from "pages/title-motion/dev/TitleMotionDisplay4"
+import TitleMotionDisplay5 from "pages/title-motion/dev/TitleMotionDisplay5"
+import TitleMotionDisplay6 from "pages/title-motion/dev/TitleMotionDisplay6"
+import TitleMotionDisplay7 from "pages/title-motion/dev/TitleMotionDisplay7"
+import TitleMotionDisplay8 from "pages/title-motion/dev/TitleMotionDisplay8"
 const styles = css as any
 
 const TitleMotion = () => {
@@ -51,6 +51,11 @@ const TitleMotion = () => {
       buttonText: "Title Motion 6",
       withHash: true,
     },
+    {
+      href: "/title-motion#7",
+      buttonText: "Title Motion 7",
+      withHash: true,
+    },
   ]
 
   return (
@@ -64,6 +69,7 @@ const TitleMotion = () => {
         {pageName === "4" && <TitleMotionDisplay5 />}
         {pageName === "5" && <TitleMotionDisplay6 />}
         {pageName === "6" && <TitleMotionDisplay7 />}
+        {pageName === "7" && <TitleMotionDisplay8 />}
       </div>
       <DevNav
         className={styles.pageTitleMotion__nav}

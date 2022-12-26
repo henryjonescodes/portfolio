@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react"
-import css from "./title-motion.module.scss"
+import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import cn from "classnames"
 import Button from "zonez-ui/button/Button"
 import AnimatedText from "./components/AnimatedText"
 import { getLetterLists } from "./hooks/useAnimatedCharacters"
 
+import cn from "classnames"
+import css from "./title-motion-dev.module.scss"
 const styles = css as any
 
 type AnimatedCharactersProps = {
@@ -24,18 +24,16 @@ type AnimatedCharactersProps = {
 
 const Letters = ({
   letterLists,
-  layoutId,
+  layoutId = "letters",
   className,
   letterClassName,
   toggle,
-  ref,
 }: {
   letterLists: string[][]
-  layoutId: string
+  layoutId?: string
   className?: string
   letterClassName?: string
   toggle?: boolean
-  ref?: any
 }) => {
   const internalClassName = className || ""
   const internalLetterClassName = letterClassName || ""
@@ -43,7 +41,7 @@ const Letters = ({
   const lettersVariants = {
     visible: {
       transition: {
-        staggerChildren: 0.025,
+        staggerChildren: 0.2,
       },
     },
     hidden: {},
@@ -61,7 +59,7 @@ const Letters = ({
   return (
     <motion.span
       variants={lettersVariants}
-      initial={toggle ? "visible" : "hidden"}
+      initial="hidden"
       // animate="visible"
       animate={toggle ? "visible" : "hidden"}
       className={cn({
@@ -73,6 +71,9 @@ const Letters = ({
         return (
           <>
             {list.map((letter, index2) => {
+              if (toggle) {
+                return null
+              }
               return (
                 <motion.h3
                   variants={letterVariants}
@@ -94,45 +95,53 @@ const Letters = ({
   )
 }
 
-const TitleMotionDisplay4 = () => {
+const TitleMotionDisplay3 = () => {
   const letterLists = getLetterLists("Hank Tha Tanq")
-  const [toggle, setToggle] = useState(false)
 
-  const firstRef = useRef(null)
-  const secondRef = useRef(null)
+  const [toggle, setToggle] = useState(false)
 
   const handleTransition = () => {
     setToggle(!toggle)
   }
 
-  // Placeholder text data, as if from API
-  const placeholderText = [{ type: "heading1", text: "Henry Jones" }]
-
-  const container = {
-    visible: {
-      transition: {
-        staggerChildren: 0.025,
-      },
-    },
-  }
-
   return (
     <div className={styles.wrapper}>
       {/* <span className={styles.header}></span> */}
+      {/* <div className={styles.body}>
+        <Letters toggle={toggle} letterLists={letterLists} />
+        <Letters toggle={!toggle} letterLists={letterLists} />
+      </div> */}
       <div className={styles.body}>
+        {/* {toggle && (
+            <Letters
+              className={styles.letters__top}
+              toggle={toggle}
+              letterLists={letterLists}
+              layoutId={"letters2"}
+            />
+          )}
+          {!toggle && (
+            <Letters
+              className={styles.letters__bottom}
+              toggle={!toggle}
+              letterLists={letterLists}
+              layoutId={"letters2"}
+            />
+          )} */}
         <Letters
-          ref={firstRef}
+          className={styles.letters__top}
           toggle={toggle}
           letterLists={letterLists}
-          layoutId={"letters"}
+          layoutId={"letters2"}
         />
         <Letters
-          ref={secondRef}
+          className={styles.letters__bottom}
           toggle={!toggle}
           letterLists={letterLists}
-          layoutId={"letters"}
+          layoutId={"letters2"}
         />
       </div>
+
       <span className={styles.footer}>
         <Button className={styles.button} onClick={handleTransition}>
           Transition
@@ -142,4 +151,4 @@ const TitleMotionDisplay4 = () => {
   )
 }
 
-export default TitleMotionDisplay4
+export default TitleMotionDisplay3
