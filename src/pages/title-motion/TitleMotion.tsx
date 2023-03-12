@@ -72,7 +72,7 @@ const TitleMotion = () => {
         {pageName === "7" && <TitleMotionDisplay8 />}
       </div>
       <DevNav
-        className={styles.pageTitleMotion__nav}
+        className={styles.pageNav}
         navItems={localNavItems}
         hiding={false}
         withHash={true}

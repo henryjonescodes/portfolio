@@ -14,13 +14,16 @@
 .pageDripText {
   composes: pageWrapper;
 }
+.pageLoadingAnimations{
+  composes: pageWrapper;
+}
 
 .pageTitleMotion {
   composes: pageWrapper;
+}
 
-  &__nav{
-    position: relative;
-    background-color: #292929;
-    justify-content: center;    
-  }
+.pageNav{
+  position: relative;
+  background-color: #292929;
+  justify-content: center;    
 }

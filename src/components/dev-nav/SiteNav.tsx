@@ -22,6 +22,18 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
       href: "/drip-text",
       buttonText: "Drip Text",
     },
+    {
+      href: "/loading-animations",
+      buttonText: "Loading Animations",
+    },
+    {
+      href: "/intro-animations",
+      buttonText: "Intro Animations",
+    },
+    {
+      href: "/porthole",
+      buttonText: "Porthole",
+    },
   ]
 
   return (

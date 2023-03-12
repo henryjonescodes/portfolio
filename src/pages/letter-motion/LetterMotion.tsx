@@ -30,7 +30,7 @@ const LetterMotion = () => {
         {pageName === "1" && <LetterMotionDisplay />}
       </div>
       <DevNav
-        className={styles.pageTitleMotion__nav}
+        className={styles.pageNav}
         navItems={localNavItems}
         hiding={false}
         withHash={true}
