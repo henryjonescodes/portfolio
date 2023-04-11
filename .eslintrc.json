@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "react/exhaustive-deps": "off",
+    "no-unused-vars": "off"
+  }
+}
