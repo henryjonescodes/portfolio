@@ -46,6 +46,10 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
     },
   ]
 
+  if (!currentUser) {
+    return null
+  }
+
   return (
     <DevNav
       navItems={siteNavItems}
@@ -53,16 +57,14 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
       transition={transition}
       hiding={true}
     >
-      {!!currentUser && (
-        <DevNavButton
-          key={"sign-out"}
-          buttonText={"Sign Out"}
-          onClick={() => {
-            auth.signOut()
-          }}
-          isSelected={false}
-        />
-      )}
+      <DevNavButton
+        key={"sign-out"}
+        buttonText={"Sign Out"}
+        onClick={() => {
+          auth.signOut()
+        }}
+        isSelected={false}
+      />
     </DevNav>
   )
 }

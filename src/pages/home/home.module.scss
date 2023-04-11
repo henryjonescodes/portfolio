@@ -1,9 +1,9 @@
 
 .login{
-  border: 1px solid blue;
+  border: 3px solid rgb(56, 56, 56);
   border-radius: 8px;
   padding: 12px;
-  background-color: darkcyan;
+  background-color: rgb(101, 101, 101);
   width: min-content;
   position: absolute;
   top: 50%;
@@ -12,10 +12,19 @@
   gap: 12px;
   display: flex;
   flex-direction: column;
+  width: 300px;
 
   h2{ 
-    font-size: 20px;
+    font-size: 18px;
     margin: 0px;
+    min-width: 100px;
+    color: rgb(194, 194, 194);
+  }
+  input{
+    flex: 2;
+    border-radius: 4px;
+    height: 20px;
+    background-color: rgb(158, 158, 158);
   }
   span {
     display: flex;
@@ -27,5 +36,8 @@
   }
 
   &Button{
+    width:100%;
+    padding: 0px;
+    height:30px;
   }
 }
