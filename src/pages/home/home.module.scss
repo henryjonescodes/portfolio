@@ -1,0 +1,31 @@
+
+.login{
+  border: 1px solid blue;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: darkcyan;
+  width: min-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
+
+  h2{ 
+    font-size: 20px;
+    margin: 0px;
+  }
+  span {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: min-content;
+  }
+
+  &Button{
+  }
+}

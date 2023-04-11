@@ -1,23 +1,42 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useRoutes,
-} from "react-router-dom"
-import Home from "./pages/home/Home"
-import ThreeScroller from "./pages/three-scroller/ThreeScroller"
-import DripText from "./pages/drip-text/DripText"
-import TitleMotion from "./pages/title-motion/TitleMotion"
+import IntroAnimations from "pages/intro-animations/IntroAnimations"
 import LetterMotion from "pages/letter-motion/LetterMotion"
 import LoadingAnimations from "pages/loading-animations/LoadingAnimations"
-import IntroAnimations from "pages/intro-animations/IntroAnimations"
 import Porthole from "pages/porthole/Porthole"
+import { useContext } from "react"
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom"
+import { AuthContext, AuthProvider } from "./Auth"
+import DripText from "./pages/drip-text/DripText"
+import Home from "./pages/home/Home"
+import ThreeScroller from "./pages/three-scroller/ThreeScroller"
+import TitleMotion from "./pages/title-motion/TitleMotion"
+
+type RequireAuthProps = {
+  children: JSX.Element
+  redirectTo: string
+}
+
+function RequireAuth({ children, redirectTo }: RequireAuthProps) {
+  const { currentUser } = useContext(AuthContext)
+  return !!currentUser ? children : <Navigate to={redirectTo} />
+}
 
 function App() {
   const PortholePages = ["/porthole", "/porthole#1", "/porthole#2"]
   const PortholeRoutes = PortholePages.map((path, index) => (
     <>
-      <Route path={path} element={<Porthole key={index} />} />
+      <Route
+        path={path}
+        element={
+          <RequireAuth redirectTo="/">
+            <Porthole key={index} />
+          </RequireAuth>
+        }
+      />
     </>
   ))
   const IntroAnimationsPages = [
@@ -30,7 +49,14 @@ function App() {
   ]
   const IntroAnimationsRoutes = IntroAnimationsPages.map((path, index) => (
     <>
-      <Route path={path} element={<IntroAnimations key={index} />} />
+      <Route
+        path={path}
+        element={
+          <RequireAuth redirectTo="/">
+            <IntroAnimations key={index} />
+          </RequireAuth>
+        }
+      />
     </>
   ))
   const LoadingAnimationsPages = [
@@ -44,7 +70,14 @@ function App() {
   ]
   const LoadingAnimationsRoutes = LoadingAnimationsPages.map((path, index) => (
     <>
-      <Route path={path} element={<LoadingAnimations key={index} />} />
+      <Route
+        path={path}
+        element={
+          <RequireAuth redirectTo="/">
+            <LoadingAnimations key={index} />
+          </RequireAuth>
+        }
+      />
     </>
   ))
   const LetterMotionPages = [
@@ -61,7 +94,14 @@ function App() {
 
   const LetterMotionRoutes = LetterMotionPages.map((path, index) => (
     <>
-      <Route path={path} element={<LetterMotion key={index} />} />
+      <Route
+        path={path}
+        element={
+          <RequireAuth redirectTo="/">
+            <LetterMotion key={index} />
+          </RequireAuth>
+        }
+      />
     </>
   ))
 
@@ -79,23 +119,46 @@ function App() {
 
   const TitleMotionRoutes = TitleMotionPages.map((path, index) => (
     <>
-      <Route path={path} element={<TitleMotion key={index} />} />
+      <Route
+        path={path}
+        element={
+          <RequireAuth redirectTo="/">
+            <TitleMotion key={index} />
+          </RequireAuth>
+        }
+      />
     </>
   ))
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/three-js" element={<ThreeScroller />} />
-        <Route path="/drip-text" element={<DripText />} />
-        {TitleMotionRoutes}
-        {LetterMotionRoutes}
-        {LoadingAnimationsRoutes}
-        {IntroAnimationsRoutes}
-        {PortholeRoutes}
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/three-js"
+            element={
+              <RequireAuth redirectTo="/">
+                <ThreeScroller />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/drip-text"
+            element={
+              <RequireAuth redirectTo="/">
+                <DripText />
+              </RequireAuth>
+            }
+          />
+          {TitleMotionRoutes}
+          {LetterMotionRoutes}
+          {LoadingAnimationsRoutes}
+          {IntroAnimationsRoutes}
+          {PortholeRoutes}
+        </Routes>
+      </Router>
+    </AuthProvider>
   )
 }
 

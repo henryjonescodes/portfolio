@@ -1,127 +1,29 @@
 $header-height: 70px;
-$subtext-color: #6b6b6b;
+$subtext-color: #b5b5b5;
+
 .wrapper{
   height: 100%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   background-color: #fff;
-}
-
-.header{
-  height: $header-height;
-  display: flex;
-  align-items: center;
-  padding: 0px 16px;
+  position: relative;
 }
 
 .body{
-  flex-grow: 1;
   overflow: hidden;
   position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: $header-height;
-}
-
-.hero{
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  height: min-content;
-  mix-blend-mode: multiply;
-}
-
-.text{
-  margin: 0px;
-  &__header{
-    composes: text;
-    font-size: 1.5rem;
-    line-height: 1.543m;
-  }
-  &__preHero{
-    composes: text;
-    font-size: 2rem;
-    line-height: 2rem;
-    margin-left: 10px;
-    color: $subtext-color;
-  }
-  &__hero{
-    composes: text;
-    font-size: 10em;
-    line-height: 10rem;
-    
-    &:first-of-type{
-      margin-bottom: -2rem;
-    }
-    
-  }
-  &__subHero{
-    composes: text;
-    font-size: 1.5rem;
-    line-height: 1.543m;
-    width: 100%;
-    text-align: end;
-    color: $subtext-color;
-  }
-}
-
-.stripes{
-  z-index: 0;
-  height: 150px;
-  width: 2000px;
-  position: absolute;
-  border: 1px dotted red;
-  display: flex;
-  flex-direction: column;
-  transform: rotate(-30deg);
-}
-
-.stripe{
-  flex-grow: 1;
-  &C{
-    composes: stripe;
-    background-color: #0FF;
-  }
-  &M{
-    composes: stripe;
-    background-color: #F0F;
-  }
-  &Y{
-    composes: stripe;
-    background-color: #fF0;
-  }
-  &K{
-    composes: stripe;
-    background-color: #000;
-  }
-}
-
-.mask{
-  z-index: 2;
-  position: absolute;
   height: 100%;
-  width: 100%;
-  top: 0px;
-  background-color: white;
-  mix-blend-mode: screen;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &:before{
-    content: '';
-    z-index: 0;
-    height: 150px;
-    width: 2000px;
-    position: absolute;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: $header-height;
-    transform: rotate(-30deg);
-  }
 }
+
+.buttons{
+  z-index: 10;
+  bottom: 0px;
+  position: absolute;
+  display: flex;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+

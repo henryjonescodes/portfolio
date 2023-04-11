@@ -13,6 +13,7 @@ type DevNavButtonProps = {
   buttonText?: string
   className?: string
   isSelected?: boolean
+  onClick?: (e: any) => void
 }
 
 export type DevNavInputType = Omit<
@@ -30,6 +31,7 @@ type DevNavProps = {
   buttonClassName?: string
   hiding?: boolean
   withHash?: boolean
+  children?: React.ReactNode
 }
 
 export type DevNavPrefilledProps = Omit<
@@ -37,11 +39,12 @@ export type DevNavPrefilledProps = Omit<
   "navItems" | "className" | "buttonClassName" | "hiding" | "withHash"
 >
 
-const DevNavButton = ({
+export const DevNavButton = ({
   buttonText,
   href,
   className,
   isSelected,
+  onClick,
 }: DevNavButtonProps) => {
   const internalClassName = !!className ? className : ""
   const buttonObject = (
@@ -50,6 +53,7 @@ const DevNavButton = ({
         [styles.selected]: isSelected,
         [internalClassName]: !!className,
       })}
+      onClick={onClick}
     >
       {buttonText}
     </Button>
@@ -73,6 +77,7 @@ const DevNav = ({
   withHash = false,
   className,
   buttonClassName,
+  children,
 }: DevNavProps) => {
   const location = useLocation()
   const [show, setShow] = useState<boolean>(transition || !hiding)
@@ -132,6 +137,7 @@ const DevNav = ({
             />
           )
         })}
+        {children}
       </span>
       {hiding && (
         <span

@@ -1,6 +1,16 @@
-import DevNav, { DevNavInputType, DevNavPrefilledProps } from "./DevNav"
+import { getAuth } from "firebase/auth"
+import DevNav, {
+  DevNavButton,
+  DevNavInputType,
+  DevNavPrefilledProps,
+} from "./DevNav"
+import firebase from "firebaseApp"
+import { useContext } from "react"
+import { AuthContext } from "Auth"
 
 const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
+  const auth = getAuth(firebase)
+  const { currentUser } = useContext(AuthContext)
   const siteNavItems: DevNavInputType[] = [
     {
       href: "/",
@@ -42,7 +52,18 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
       showToolbar={showToolbar}
       transition={transition}
       hiding={true}
-    />
+    >
+      {!!currentUser && (
+        <DevNavButton
+          key={"sign-out"}
+          buttonText={"Sign Out"}
+          onClick={() => {
+            auth.signOut()
+          }}
+          isSelected={false}
+        />
+      )}
+    </DevNav>
   )
 }
 
