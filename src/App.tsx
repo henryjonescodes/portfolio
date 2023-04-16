@@ -14,6 +14,8 @@ import DripText from "./pages/drip-text/DripText"
 import Home from "./pages/home/Home"
 import ThreeScroller from "./pages/three-scroller/ThreeScroller"
 import TitleMotion from "./pages/title-motion/TitleMotion"
+import ThreeHtml from "pages/three-html/ThreeHtml"
+import SvgTracing from "pages/svg-tracing/SvgTracing"
 
 type RequireAuthProps = {
   children: JSX.Element
@@ -148,6 +150,22 @@ function App() {
             element={
               <RequireAuth redirectTo="/">
                 <DripText />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/three-html"
+            element={
+              <RequireAuth redirectTo="/">
+                <ThreeHtml />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/svg-tracing"
+            element={
+              <RequireAuth redirectTo="/">
+                <SvgTracing />
               </RequireAuth>
             }
           />

@@ -4,9 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  max-width: 100vw;
+  overflow: scroll;
   gap: 6px;
   padding: 8px 8px;
-  
+
   &Absolute{
     top: 0;
     z-index: 10000;
@@ -38,3 +40,4 @@
     opacity: .2;
   }
 }
+

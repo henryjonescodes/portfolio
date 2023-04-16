@@ -7,7 +7,9 @@ import DevNav, {
 import firebase from "firebaseApp"
 import { useContext } from "react"
 import { AuthContext } from "Auth"
+import css from "./dev-nav.module.scss"
 
+const styles = css as any
 const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
   const auth = getAuth(firebase)
   const { currentUser } = useContext(AuthContext)
@@ -15,6 +17,10 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
     {
       href: "/",
       buttonText: "Home",
+    },
+    {
+      href: "/svg-tracing",
+      buttonText: "SVG Tracing",
     },
     {
       href: "/three-js",
@@ -44,6 +50,11 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
       href: "/porthole",
       buttonText: "Porthole",
     },
+
+    // {
+    //   href: "/three-html",
+    //   buttonText: "Three HTML",
+    // },
   ]
 
   if (!currentUser) {
@@ -55,6 +66,7 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
       navItems={siteNavItems}
       showToolbar={showToolbar}
       transition={transition}
+      className={styles.siteNav}
       hiding={true}
     >
       <DevNavButton
