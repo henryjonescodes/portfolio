@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Build
+/build/
+/dist/
+
+# OS generated files
+.DS_Store
+Thumbs.db
