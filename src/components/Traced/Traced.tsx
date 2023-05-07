@@ -1,32 +1,32 @@
-import React, { useEffect, useRef, useState } from "react";
-import css from "./traced.module.scss";
+import React, { useEffect, useRef, useState } from 'react'
+import css from './traced.module.scss'
 
-import { motion } from "framer-motion";
-
-const styles = css as any;
+import { motion } from 'framer-motion'
+import cn from 'classnames'
+const styles = css as any
 
 type TracedProps = {
-  children?: React.ReactNode;
-  className?: string;
-  cornerRadius?: number;
-  strokeWidth?: number;
-  color?: string;
-};
+  children?: React.ReactNode
+  className?: string
+  cornerRadius?: number
+  strokeWidth?: number
+  color?: string
+}
 
 type TracedComponentProps = TracedProps & {
-  contentClassName?: string;
-};
+  contentClassName?: string
+}
 
 const Traced = ({
   children,
   className,
   strokeWidth = 1,
   cornerRadius = 5,
-  color = "#7600b6",
+  color = '#7600b6',
 }: TracedProps) => {
-  const containerRef = useRef<any>(null);
-  const [pathLength, setPathLength] = useState<number>(0);
-  const viewboxString = `0 0 100 100`;
+  const containerRef = useRef<any>(null)
+  const [pathLength, setPathLength] = useState<number>(0)
+  const viewboxString = `0 0 100 100`
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -34,13 +34,13 @@ const Traced = ({
         (containerRef?.current?.clientWidth /
           containerRef?.current?.clientHeight) *
           100
-      );
-    }, 100);
+      )
+    }, 100)
 
     return () => {
-      clearTimeout(timer);
-    };
-  }, []);
+      clearTimeout(timer)
+    }
+  }, [])
 
   // Update path length on resize
   useEffect(() => {
@@ -49,12 +49,12 @@ const Traced = ({
         (containerRef?.current?.clientWidth /
           containerRef?.current?.clientHeight) *
           100
-      );
-      console.log(containerRef?.current?.clientHeight);
-    };
+      )
+      console.log(containerRef?.current?.clientHeight)
+    }
 
-    window.addEventListener("resize", handleResize);
-  });
+    window.addEventListener('resize', handleResize)
+  })
 
   return (
     <div className={className}>
@@ -70,9 +70,9 @@ const Traced = ({
             animate={{ pathLength: 1 }}
             transition={{
               duration: 2,
-              ease: "easeInOut",
+              ease: 'easeInOut',
               repeat: Infinity,
-              repeatType: "loop",
+              repeatType: 'loop',
               repeatDelay: 1,
             }}
             strokeWidth={strokeWidth}
@@ -95,16 +95,23 @@ const Traced = ({
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const Div = ({ children, contentClassName, ...rest }: TracedComponentProps) => {
   return (
     <Traced {...rest}>
-      <div className={contentClassName}>{children}</div>
+      <div
+        className={cn({
+          [styles.content]: true,
+          [contentClassName ?? '']: true,
+        })}
+      >
+        {children}
+      </div>
     </Traced>
-  );
-};
+  )
+}
 
 const Span = ({
   children,
@@ -113,14 +120,21 @@ const Span = ({
 }: TracedComponentProps) => {
   return (
     <Traced {...rest}>
-      <span className={contentClassName}>{children}</span>
+      <span
+        className={cn({
+          [styles.content]: true,
+          [contentClassName ?? '']: true,
+        })}
+      >
+        {children}
+      </span>
     </Traced>
-  );
-};
+  )
+}
 
-Div.displayName = "div";
-Traced.div = Div;
-Span.displayName = "span";
-Traced.span = Span;
+Div.displayName = 'div'
+Traced.div = Div
+Span.displayName = 'span'
+Traced.span = Span
 
-export default Traced;
+export default Traced

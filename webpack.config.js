@@ -28,20 +28,12 @@ module.exports = {
         },
       },
       {
-        test: /\.scss$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[name]__[local]__[hash:base64:5]'
-              },
-              importLoaders: 1
-            }
-          },
-          'sass-loader'
-        ]
+        test: /\.(sa|sc|c)ss$/, // styles files
+        use: ["style-loader", "css-loader", "sass-loader"],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-inline-loader'
       }
     ]
   },

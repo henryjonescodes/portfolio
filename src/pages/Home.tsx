@@ -1,9 +1,16 @@
 import Traced from '../components/Traced/Traced'
 import React from 'react'
-import styles from './home.module.scss'
+import styles from './pages.module.scss'
+import NameSvg from '../assets/svg/Name.svg'
 
-const home = () => {
-  return <Traced.div>we333ee</Traced.div>
+const Home = () => {
+  return (
+    <div className={styles.wrapper}>
+      <Traced.div className={styles.home} contentClassName={styles.homeContent}>
+        {/* <NameSvg /> */}
+      </Traced.div>
+    </div>
+  )
 }
 
-export default home
+export default Home

@@ -1,0 +1,20 @@
+.wrapper{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home{
+  height: 80%;
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &Content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
