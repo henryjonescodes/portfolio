@@ -1,9 +1,0 @@
-{
-  "rules": {
-    "react/exhaustive-deps": "off",
-    "no-unused-vars": "off",
-    "semi": [2, "never"],
-    "import/no-unresolved": "off",
-    "semicolon": false,
-  }
-}
