@@ -9,7 +9,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.svg'],
     alias: {
       "@assets": path.resolve(__dirname, "src/assets"),
       "@components": path.resolve(__dirname, "src/components"),
@@ -21,20 +21,34 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.svg$/,
         exclude: /node_modules/,
         use: {
-          loader: "ts-loader",
+          loader: 'svg-react-loader',
+          options: {
+            tag: 'symbol',
+            attrs: {
+              title: 'example',
+            },
+            name: 'MyIcon',
+          },
+        },
+      },
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            cacheDirectory: true,
+            babelrc: true,
+          },
         },
       },
       {
         test: /\.(sa|sc|c)ss$/, // styles files
         use: ["style-loader", "css-loader", "sass-loader"],
       },
-      {
-        test: /\.svg$/,
-        loader: 'svg-inline-loader'
-      }
     ]
   },
   plugins: [
