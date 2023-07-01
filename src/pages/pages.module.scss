@@ -7,8 +7,8 @@
 }
 
 .home{
-  height: 40%;
-  width: 40%;
+  height: 60%;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,22 +16,55 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100%;
+    width: 100%;
   }
 }
 
+
 .name{
-  border: 1px solid red;
   position: relative;
+  height: 100%;
+  width: 100%;
 
   > text {
     fill: none !important;
-    stroke-width: 2px;
-    stroke: blue,
+    stroke-width: 4px;
+    stroke-dasharray: 600px;
+    stroke-dashoffset: 600px;
+    animation: draw-stroke 5s linear forwards;
+    stroke: blue;
   }
 
   path {
     stroke: #f00;
     stroke-width: 2px;
-    animation: draw-stroke 2s linear forwards;
+    animation: draw-stroke 2s linear infinite;
+  }
+}
+.generatedSvgText{
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  > text {
+    fill: none !important;
+    stroke-width: 1px;
+    stroke-dasharray: 600px;
+    stroke-dashoffset: 600px;
+    animation: draw-stroke 5s linear forwards;
+    stroke: blue;
+  }
+
+  path {
+    stroke: #f00;
+    stroke-width: 2px;
+    animation: draw-stroke 2s linear infinite;
+  }
+}
+
+@keyframes draw-stroke {
+  100% {
+    stroke-dashoffset: 0;
   }
 }

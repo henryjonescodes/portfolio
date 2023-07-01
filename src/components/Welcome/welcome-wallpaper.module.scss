@@ -1,0 +1,45 @@
+
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  flex-direction: column;
+}
+
+.text{
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+
+  > rect{
+    z-index: 1;
+    opacity: 0.2;
+  }
+
+  > text {
+    z-index: 2;
+    fill: none !important;
+    stroke-width: 1px;
+    stroke-dasharray: 600px;
+    stroke-dashoffset: 600px;
+    animation: draw-stroke 5s linear forwards;
+    stroke: blue;
+  }
+}
+
+.line{
+  width: 100%;
+  background-color: teal;
+  padding-bottom: 12px;
+}
+
+@keyframes draw-stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

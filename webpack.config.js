@@ -22,18 +22,33 @@ module.exports = {
     rules: [
       {
         test: /\.svg$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'svg-react-loader',
+      use: [
+        {
+          loader: 'babel-loader?cacheDirectory',
+        },
+        {
+          loader: '@svgr/webpack',
           options: {
-            tag: 'symbol',
-            attrs: {
-              title: 'example',
-            },
-            name: 'MyIcon',
+            babel: false,
+            icon: true,
           },
         },
+      ],
       },
+      // {
+      //   test: /\.svg$/,
+      //   exclude: /node_modules/,
+      //   use: {
+      //     loader: 'svg-react-loader',
+      //     options: {
+      //       tag: 'symbol',
+      //       attrs: {
+      //         title: 'example',
+      //       },
+      //       name: 'MyIcon',
+      //     },
+      //   },
+      // },
       {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
