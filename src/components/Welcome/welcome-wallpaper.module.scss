@@ -24,18 +24,37 @@
   > text {
     z-index: 2;
     fill: none !important;
-    stroke-width: 1px;
+    stroke-width: .5px;
     stroke-dasharray: 600px;
     stroke-dashoffset: 600px;
     animation: draw-stroke 5s linear forwards;
-    stroke: blue;
+    stroke: rgb(16, 16, 16);
   }
 }
 
+
 .line{
   width: 100%;
-  background-color: teal;
-  padding-bottom: 12px;
+  position: relative;
+  opacity: 0.4;
+  
+  &Content{
+    transform: translateX(-25%);
+    display: flex;
+    flex-direction: row;
+    width: 400%;
+  }
+  
+  &Right{
+    padding-bottom: 25px;
+
+    background-color: rgb(255, 61, 236);
+  }
+  &Left{
+    background-color: rgb(59, 216, 255);
+    padding-bottom: 25px;
+
+  }
 }
 
 @keyframes draw-stroke {

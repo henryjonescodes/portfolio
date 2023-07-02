@@ -1,32 +1,55 @@
 import cn from 'classnames'
-import { motion, useTime, useTransform } from 'framer-motion'
-import React, { useEffect } from 'react'
+import { motion, useMotionValue, useTime, useTransform } from 'framer-motion'
+import React, { useEffect, useState } from 'react'
 import { useWindowDimensions } from '../../context/WindowDimensionsContext'
 import styles from './welcome-wallpaper.module.scss'
 
 type WelcomeLineProps = {
-  fontSize?: number
-  count?: number
+  fontSize: number
+  count: number
+  singleWidth: number
+  inverted?: boolean
 }
 
-const WelcomeLine = ({ fontSize = 25, count = 5 }: WelcomeLineProps) => {
+const WelcomeLine = ({
+  fontSize,
+  count,
+  singleWidth,
+  inverted,
+}: WelcomeLineProps) => {
+  const { width, height } = useWindowDimensions()
   const welcomeList = []
-  const welcomeWidth = fontSize * 5
   const viewBoxString = `0 0 400 ${fontSize}`
-
-  for (let i = 0; i < count; i++) {
-    welcomeList.push(
-      <motion.text
-        x={i * welcomeWidth}
-        y={'100%'}
-        height="100"
-        width="100"
-        className="small"
-        fontSize={fontSize}
-      >
-        WELCOME
-      </motion.text>
-    )
+  if (inverted) {
+    for (let i = count; i >= 0; i--) {
+      welcomeList.push(
+        <motion.text
+          x={i * singleWidth - fontSize / 6}
+          y={'100%'}
+          height="100"
+          width="100"
+          className="small"
+          fontSize={fontSize}
+        >
+          WELCOME
+        </motion.text>
+      )
+    }
+  } else {
+    for (let i = 0; i < count; i++) {
+      welcomeList.push(
+        <motion.text
+          x={i * singleWidth + fontSize / 3}
+          y={'100%'}
+          height="100"
+          width="100"
+          className="small"
+          fontSize={fontSize}
+        >
+          WELCOME
+        </motion.text>
+      )
+    }
   }
 
   return (
@@ -43,35 +66,109 @@ const WelcomeLine = ({ fontSize = 25, count = 5 }: WelcomeLineProps) => {
 
 const WelcomeWallpaper = () => {
   const { width, height } = useWindowDimensions()
-  const perLineCount = 5
-  const lineCount = 30
+  const [currentMode, setCurrentMode] = useState('off')
+  const perLineCount = 3
+  const lineCount = 10
   const fontSize = 20
+  const singleWidth = fontSize * 5
 
-  const time = useTime()
-  const value = useTransform(
-    time,
-    [0, 4000], // For every 4 seconds...
-    [0, 360], // ...rotate 360deg
-    { clamp: false }
-  )
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCurrentMode('on')
+    }, 4000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [])
+
+  // const backAndForth = {
+  //   off: {},
+  //   on: {
+  //     x: [0, width],
+  //     transition: {
+  //       times: [0, 1],
+  //       repeat: Infinity,
+  //       repeatType: 'reverse',
+  //       type: 'spring',
+  //       stiffness: 20,
+  //       mass: 0.4,
+  //     },
+  //   },
+  // }
+  const backAndForth = {
+    off: {
+      x: 0,
+    },
+    on: {
+      x: [0, width],
+      transition: {
+        times: [0, 1],
+        repeat: Infinity,
+        repeatType: 'reverse',
+        duration: 4,
+      },
+    },
+  }
+  // const backAndForth = {
+  //   off: {},
+  //   on: {
+  //     x: [0, width, 0],
+  //     transition: {
+  //       times: [0, , 0.5, 1],
+  //       repeat: Infinity,
+  //       // duration: 5,
+  //       // type: 'inertia',
+  //       // velocity: 500,
+  //       type: 'spring',
+  //       // bounce: 0.25,
+  //       // type: 'spring',
+  //       // stiffness: 200,
+  //       mass: 0.1,
+  //     },
+  //   },
+  // }
 
   const pageList = []
   for (let i = 0; i < lineCount; i++) {
-    let _y = i * (width / fontSize) - height / 2
     pageList.push(
       <motion.div
-        animate={{ x: value.get() }}
+        // initial={{ x: width / 2 }}
+        variants={backAndForth}
         className={cn({
           [styles.line]: true,
         })}
-        style={{ top: `${_y}px` }}
       >
-        <WelcomeLine count={perLineCount} fontSize={fontSize} />
+        <motion.div className={styles.lineContent}>
+          <motion.div className={styles.lineLeft}>
+            <WelcomeLine
+              inverted={true}
+              count={perLineCount}
+              fontSize={fontSize}
+              singleWidth={singleWidth}
+            />
+          </motion.div>
+          <motion.div className={styles.lineRight}>
+            <WelcomeLine
+              count={perLineCount}
+              fontSize={fontSize}
+              singleWidth={singleWidth}
+            />
+          </motion.div>
+        </motion.div>
       </motion.div>
     )
   }
 
-  return <div className={styles.wrapper}>{pageList}</div>
+  return (
+    <motion.div
+      transition={currentMode === 'on' && { staggerChildren: 0.5 }}
+      animate={currentMode}
+      className={styles.wrapper}
+    >
+      {pageList}
+    </motion.div>
+  )
 }
 
 export default WelcomeWallpaper
