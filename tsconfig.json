@@ -18,7 +18,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es5"
+    "target": "es5",
+    "strictNullChecks": false,
   },
   // "include": ["src", "src/typings/svg.d.ts", "src/typings/style.d.ts"],
   "exclude": ["node_modules"],
