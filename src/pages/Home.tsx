@@ -1,7 +1,15 @@
+import HomePage from '@components/HomePage'
+import Landing from '@components/Landing'
 import SlideGallery from '@components/SlideGallery'
 import React from 'react'
 const Home = () => {
-  return <SlideGallery />
+  return (
+    <>
+      <Landing />
+      <HomePage />
+      {/* <SlideGallery /> */}
+    </>
+  )
 }
 
 export default Home

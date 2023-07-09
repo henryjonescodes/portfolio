@@ -1,0 +1,178 @@
+$pagePadding: 32px;
+
+
+// * ////////////////////////// * //
+// *        ParallaxText        * //
+// * ////////////////////////// * //
+
+.parallax {
+  overflow: hidden;
+  letter-spacing: -2px;
+  line-height: 0.8;
+
+  &Word {
+    $marginVertical: -9px;
+    $marginHorizontal: 5px;
+    margin-top: $marginVertical;
+    margin-bottom: $marginVertical;
+    margin-right: $marginHorizontal !important;
+    margin-left: $marginHorizontal !important;
+
+    >h2 {
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 64px;
+      line-height: 64px;
+      padding-bottom: 6px;
+
+
+      font-family: 'Oswald',
+        sans-serif;
+      font-style: normal;
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+  }
+}
+
+.parallax .scroller {
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.parallax span {
+  display: block;
+  margin-right: 30px;
+}
+
+// * ////////////////////////// * //
+// *          Socials           * //
+// * ////////////////////////// * //
+
+.socials {
+  display: flex;
+  gap: $pagePadding;
+
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: min-content;
+  height: min-content;
+  padding: $pagePadding;
+  z-index: 2;
+
+  &Item {
+    height: 64px;
+    width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    >svg {
+      height: 100%;
+      width: 100%;
+    }
+  }
+}
+
+// * ////////////////////////// * //
+// *           Menu             * //
+// * ////////////////////////// * //
+
+.menu {
+  position: relative;
+  z-index: 2;
+  padding: $pagePadding;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  &Item {
+    color: white;
+    font-size: 72px;
+    line-height: 72px;
+    font-weight: 700;
+    font-family: 'Oswald',
+      sans-serif;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+
+    &Svg {
+      height: 64px;
+      width: 100%;
+      stroke-width: 3px;
+      stroke: white;
+      stroke-dasharray: 600px;
+      stroke-dashoffset: 600px;
+
+      >text {
+        transition: fill 0.5s;
+        fill: transparent;
+        cursor: pointer;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+      }
+
+      &_invisible {
+        // animation: draw-stroke 5s linear reverse;
+      }
+
+      &_drawn {
+        animation: draw-stroke 5s linear forwards;
+
+        >text {
+          &:hover {
+            fill: white
+          }
+
+          &:active {
+            fill: rgba(255, 255, 255, 0.512)
+          }
+        }
+      }
+
+      &_filled {
+
+        >text {
+          fill: white;
+
+          &:hover {
+            fill: transparent
+          }
+
+          &:active {
+            fill: rgba(255, 255, 255, 0.512)
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@keyframes draw-stroke {
+  0% {
+    stroke-dashoffset: 600;
+  }
+
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-stroke-reverse {
+  0% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: 600;
+  }
+}
