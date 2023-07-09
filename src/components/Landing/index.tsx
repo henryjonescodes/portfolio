@@ -6,9 +6,11 @@ import { useWindowDimensions } from './../../context/WindowDimensionsContext'
 import Menu from './components/Menu'
 import ParallaxText from './components/ParallaxText'
 import Socials from './components/Socials'
+import { useNavigate } from 'react-router-dom'
 
 const Landing = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
   const { scrollY, scrollYProgress } = useScroll({ container: scrollRef })
   const { height } = useWindowDimensions()
   const driver = useSpring(0, {
@@ -60,12 +62,15 @@ const Landing = () => {
         visible={visible}
         onClickGallery={() => {
           setVisible(false)
+          navigate('/gallery')
         }}
         onClickAbout={() => {
           setVisible(false)
+          navigate('/')
         }}
         onClickExperience={() => {
           setVisible(false)
+          navigate('/experience')
         }}
       />
       <div
