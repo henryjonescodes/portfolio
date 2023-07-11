@@ -20,19 +20,22 @@ const Landing = () => {
     mass: 10,
   })
   const [visible, setVisible] = useState<boolean>(true)
+  const [opaque, setOpaque] = useState<boolean>(false)
 
   useEffect(() => {
     if (visible) {
+      setOpaque(false)
       driver.set(0)
       return
     }
-    driver.set(-height)
+    driver.set(-height * 1.5)
     if (!scrollRef?.current) {
       return
     }
     // reset backstage
     const timer = setTimeout(() => {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight
+      setOpaque(true)
     }, 2000)
 
     return () => {
@@ -48,7 +51,13 @@ const Landing = () => {
   }, [])
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={styles.wrapper}
+      style={{
+        opacity: opaque ? 0 : 1,
+        pointerEvents: visible ? 'all' : 'none',
+      }}
+    >
       <div
         className={styles.button}
         onClick={() => {
@@ -73,13 +82,7 @@ const Landing = () => {
           navigate('/experience')
         }}
       />
-      <div
-        className={styles.hero}
-        ref={scrollRef}
-        style={{
-          pointerEvents: visible ? 'all' : 'none',
-        }}
-      >
+      <div className={styles.hero} ref={scrollRef}>
         <div className={styles.heroOverflow}>
           <div className={styles.heroScroll}>
             <motion.div className={styles.top} style={{ top: driver }}>

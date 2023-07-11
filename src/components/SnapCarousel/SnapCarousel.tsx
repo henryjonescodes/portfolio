@@ -1,6 +1,42 @@
+import React, { LegacyRef, useRef } from 'react'
+import styles from './snap-carousel.module.scss'
 import { motion, useInView } from 'framer-motion'
-import styles from './about-components.module.scss'
-import React, { useEffect, useRef } from 'react'
+
+const SnapParent = React.forwardRef(
+  (
+    {
+      ...props
+    }: React.DetailedHTMLProps<
+      React.HTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
+    ref: LegacyRef<HTMLDivElement>
+  ) => (
+    <div ref={ref} {...props} className={styles.carousel}>
+      {props.children}
+    </div>
+  )
+)
+
+type CarouselProps = {
+  children: React.ReactNode
+  ref: React.Ref<HTMLDivElement>
+}
+
+const SnapCarousel = ({ children, ref }: CarouselProps) => {
+  return (
+    <div className={styles.wrapper}>
+      <SnapParent
+        ref={ref}
+        style={{
+          position: 'absolute',
+        }}
+      >
+        {children}
+      </SnapParent>
+    </div>
+  )
+}
 
 const CHILD_VARIANTS_SCALE = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
@@ -12,8 +48,7 @@ const CHILD_VARIANTS_LEFT = {
   hidden: { opacity: 0, x: -500 },
 }
 
-type Props = {
-  name: string
+type PaneProps = {
   color?: any
   full?: boolean
   half?: boolean
@@ -24,8 +59,7 @@ type Props = {
   containerRef: React.MutableRefObject<any>
 }
 
-const Box = ({
-  name,
+const Pane = ({
   color,
   full = false,
   half = false,
@@ -34,23 +68,14 @@ const Box = ({
   triggerOnce = false,
   children,
   containerRef,
-}: Props) => {
+}: PaneProps) => {
   const ref = useRef(null)
 
   const inView = useInView(ref, { once: triggerOnce, root: containerRef })
 
-  useEffect(() => {
-    console.log(name, 'is', inView)
-  }, [inView])
-
-  // const { ref, inView, entry } = useInView({
-  //   threshold: 0.75,
-  //   triggerOnce: triggerOnce
-  // });
-  // <p>{`Header inside viewport ${inView}.`}</p>
   return (
     <div
-      className={styles.snapChildCenter}
+      className={styles.pane}
       ref={ref}
       style={{
         marginTop: 2,
@@ -95,4 +120,7 @@ const Box = ({
   )
 }
 
-export default Box
+Pane.displayName = 'Pane'
+SnapCarousel.Pane = Pane
+
+export default SnapCarousel

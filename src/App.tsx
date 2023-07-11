@@ -10,7 +10,7 @@ function App() {
   return (
     <WindowDimensionsProvider>
       <BrowserRouter>
-        {/* <Landing /> */}
+        <Landing />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />

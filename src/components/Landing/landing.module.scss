@@ -1,38 +1,85 @@
 .wrapper {
   height: 100vh;
   width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
   position: absolute;
   overflow: hidden;
+  z-index: 2;
+
+
 }
 
 .hero {
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   position: absolute;
   top: 0;
   z-index: 1;
+  overflow: visible;
   overflow-y: scroll;
+
+
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   &Overflow {
-    max-width: 100vw;
+    max-width: 100%;
     overflow: hidden;
     height: 170%;
     position: relative;
+
+
   }
+
+  border-width: 5px;
+  border-color: yellow;
+  border-style: solid;
 
   &Scroll {
     height: 200%;
     top: -70%;
     position: absolute;
-    border: 1px solid black;
-    width: 400%;
-    transform: rotate(-20deg) translateX(-50%) translateY(-10%);
-  }
+    width: 300%;
+    transition: transform 0.3s;
 
+
+    transform:
+      rotate(-20deg) translateX(-25%) translateY(0%);
+  }
+}
+
+@media (max-width: 500px) {
+  .hero {
+    border-color: red;
+
+    &Scroll {
+      transform: rotate(-20deg) translateX(-25%) translateY(4%);
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .hero {
+    border-color: green;
+
+    &Scroll {
+      transform: rotate(-20deg) translateX(-25%) translateY(-7%);
+    }
+  }
+}
+
+@media (min-width: 1000px) {
+  .hero {
+    border-color: purple;
+
+    &Scroll {
+      transform: rotate(-20deg) translateX(-25%) translateY(-15%);
+    }
+  }
 }
 
 .top,
