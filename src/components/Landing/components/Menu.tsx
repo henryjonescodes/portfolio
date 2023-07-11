@@ -2,6 +2,7 @@ import cn from 'classnames'
 import { MotionValue, useMotionValueEvent } from 'framer-motion'
 import React, { useEffect, useRef, useState } from 'react'
 import styles from './landing-components.module.scss'
+import { Link } from 'react-router-dom'
 
 type ItemStates = 'invisible' | 'drawn' | 'filled'
 
@@ -117,7 +118,7 @@ const Menu = ({
   }, [scrollYProgress, visible])
 
   return (
-    <div className={styles.menu}>
+    <div className={styles.menu} style={{ pointerEvents: 'none' }}>
       <MenuItem state={aboutState} title={'ABOUT'} onClick={onClickAbout} />
       <MenuItem
         state={galleryState}
