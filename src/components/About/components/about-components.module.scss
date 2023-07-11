@@ -1,0 +1,15 @@
+.snaChild {
+  &Start {
+    opacity: 0.5;
+    z-index: 10;
+    scroll-snap-align: start;
+    flex: none;
+  }
+
+  &Center {
+    opacity: 0.5;
+    z-index: 10;
+    scroll-snap-align: center;
+    flex: none;
+  }
+}

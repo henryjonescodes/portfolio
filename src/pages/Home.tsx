@@ -1,3 +1,4 @@
+import About from '@components/About'
 import HomePage from '@components/HomePage'
 import Landing from '@components/Landing'
 import SlideGallery from '@components/SlideGallery'
@@ -7,9 +8,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 const Home = () => {
   return (
     <>
+      <About />
       {/* <Landing /> */}
       {/* <HomePage /> */}
-      <SlideGallery />
+      {/* <SlideGallery /> */}
     </>
   )
 }
