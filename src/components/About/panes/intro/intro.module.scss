@@ -1,0 +1,75 @@
+.intro {
+  height: 70%;
+  width: 70%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: cyan;
+
+  gap: 32px;
+
+  overflow: hidden;
+
+  * {
+    font-family: 'Nunito', sans-serif;
+  }
+
+  &Header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+}
+
+.hello {
+  height: min-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &Im,
+  &Hi {
+    font-weight: 800;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 54px;
+    line-height: 54px;
+  }
+
+}
+
+.name {
+  &Content {
+    font-weight: 1000;
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 30px;
+    line-height: 48px;
+  }
+}
+
+.button {
+  position: absolute;
+  bottom: 0;
+  background-color: green;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 4px;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:active {
+    opacity: 0.3;
+  }
+}

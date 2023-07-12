@@ -1,6 +1,11 @@
 import React, { LegacyRef, useRef } from 'react'
 import styles from './snap-carousel.module.scss'
-import { motion, useInView } from 'framer-motion'
+import { Variant, Variants, motion, useInView } from 'framer-motion'
+import cn from 'classnames'
+import {
+  CHILD_VARIANTS_SCALE,
+  ScrollCarouselPaneVariants,
+} from '@components/About/about.constants'
 
 const SnapParent = React.forwardRef(
   (
@@ -38,83 +43,54 @@ const SnapCarousel = ({ children, ref }: CarouselProps) => {
   )
 }
 
-const CHILD_VARIANTS_SCALE = {
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-  hidden: { opacity: 0, scale: 0.1 },
-}
-
-const CHILD_VARIANTS_LEFT = {
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-  hidden: { opacity: 0, x: -500 },
-}
-
-type PaneProps = {
-  color?: any
-  full?: boolean
-  half?: boolean
-  transLeft?: boolean
-  transScale?: boolean
-  triggerOnce?: boolean
+// ? these variants should have a third member and transition for left and right separately
+export type SnapCarouselPaneProps = {
   children: React.ReactNode
-  containerRef: React.MutableRefObject<any>
+  containerRef: React.MutableRefObject<HTMLDivElement>
+
+  color?: any
+  triggerOnce?: boolean
+
+  className?: string
+  contentClassName?: string
+  contentVariants?: ScrollCarouselPaneVariants
 }
 
 const Pane = ({
   color,
-  full = false,
-  half = false,
-  transLeft = false,
-  transScale = false,
+
   triggerOnce = false,
   children,
   containerRef,
-}: PaneProps) => {
+
+  className,
+  contentClassName,
+
+  contentVariants = null,
+}: SnapCarouselPaneProps) => {
   const ref = useRef(null)
 
   const inView = useInView(ref, { once: triggerOnce, root: containerRef })
 
   return (
     <div
-      className={styles.pane}
+      className={cn({
+        [styles.pane]: true,
+        [className]: !!className,
+      })}
       ref={ref}
-      style={{
-        marginTop: 2,
-        marginBottom: 2,
-        height: full ? '100vh' : half ? '50vh' : 120,
-        width: '100%',
-        backgroundColor: color,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      style={{ backgroundColor: color }}
     >
       <motion.div
-        style={{
-          backgroundColor: 'white',
-          zIndex: 40,
-        }}
+        className={cn({
+          [styles.paneContent]: true,
+          [contentClassName]: !!contentClassName,
+        })}
         initial="hidden"
         animate={inView ? 'visible' : 'hidden'}
-        variants={
-          transLeft
-            ? CHILD_VARIANTS_LEFT
-            : transScale
-            ? CHILD_VARIANTS_SCALE
-            : CHILD_VARIANTS_SCALE
-        }
+        variants={contentVariants}
       >
-        <h2
-          style={{
-            marginLeft: 20,
-            marginRight: 20,
-            marginTop: 10,
-            marginBottom: 10,
-            fontSize: 43,
-          }}
-        >
-          {children}
-        </h2>
+        {children}
       </motion.div>
     </div>
   )
