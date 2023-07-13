@@ -10,17 +10,25 @@
 
 
 .carousel {
-  scroll-snap-type: x mandatory;
   overflow: scroll;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   -webkit-overflow-scrolling: touch;
-
   display: flex;
 
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  &_vertical {
+    scroll-snap-type: y mandatory;
+    flex-direction: column;
+  }
+
+  &_horizonal {
+    scroll-snap-type: y mandatory;
+    flex-direction: row;
   }
 }
 
@@ -34,7 +42,6 @@
 
 
   &Content {
-    // background-color: white;
     z-index: 2
   }
 }

@@ -7,31 +7,45 @@ import {
   ScrollCarouselPaneVariants,
 } from '@components/About/about.constants'
 
+export type SnapParentModes = 'vertical' | 'horizontal'
+
+type SnapParentProps = {
+  mode: SnapParentModes
+} & React.DetailedHTMLProps<
+  React.HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+>
+
+type CarouselProps = {
+  mode?: SnapParentModes
+  children: React.ReactNode
+  ref: React.Ref<HTMLDivElement>
+}
+
 const SnapParent = React.forwardRef(
   (
-    {
-      ...props
-    }: React.DetailedHTMLProps<
-      React.HTMLAttributes<HTMLDivElement>,
-      HTMLDivElement
-    >,
+    { mode = 'vertical', ...props }: SnapParentProps,
     ref: LegacyRef<HTMLDivElement>
   ) => (
-    <div ref={ref} {...props} className={styles.carousel}>
+    <div
+      ref={ref}
+      {...props}
+      className={cn({
+        [styles.carousel]: true,
+        [styles.carousel_vertical]: mode === 'vertical',
+        [styles.carousel_horizontal]: mode === 'horizontal',
+      })}
+    >
       {props.children}
     </div>
   )
 )
 
-type CarouselProps = {
-  children: React.ReactNode
-  ref: React.Ref<HTMLDivElement>
-}
-
-const SnapCarousel = ({ children, ref }: CarouselProps) => {
+const SnapCarousel = ({ children, ref, mode }: CarouselProps) => {
   return (
     <div className={styles.wrapper}>
       <SnapParent
+        mode={mode}
         ref={ref}
         style={{
           position: 'absolute',

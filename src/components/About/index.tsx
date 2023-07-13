@@ -1,7 +1,7 @@
 import styles from './about.module.scss'
 import React, { useRef } from 'react'
-import SnapCarousel from '@components/SnapCarousel/SnapCarousel'
-import Intro from './panes/intro/Intro'
+import SnapCarousel from '@components/snap-carousel/SnapCarousel'
+import Intro from './panes/intro'
 
 const About = () => {
   const containerRef = useRef(null)
