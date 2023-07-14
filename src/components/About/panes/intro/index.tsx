@@ -1,6 +1,4 @@
-import SnapCarousel, {
-  SnapCarouselPaneProps,
-} from '@components/snap-carousel/SnapCarousel'
+import SnapCarousel, { SnapCarouselPaneProps } from '@components/snap-carousel'
 import { Variant } from 'framer-motion'
 import React, { useEffect, useState } from 'react'
 import Greeting from './Greeting'
@@ -51,7 +49,7 @@ const Intro = ({ containerRef }: Props) => {
           Press Me
         </div>
       </div>
-      <WaveBreak />
+      {/* <WaveBreak filled={true} strokeWidth={1} /> */}
     </SnapCarousel.Pane>
   )
 }

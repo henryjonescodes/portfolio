@@ -1,11 +1,8 @@
+import { ScrollCarouselPaneVariants } from '@components/About/about.constants'
+import cn from 'classnames'
+import { motion, useInView } from 'framer-motion'
 import React, { LegacyRef, useRef } from 'react'
 import styles from './snap-carousel.module.scss'
-import { Variant, Variants, motion, useInView } from 'framer-motion'
-import cn from 'classnames'
-import {
-  CHILD_VARIANTS_SCALE,
-  ScrollCarouselPaneVariants,
-} from '@components/About/about.constants'
 
 export type SnapParentModes = 'vertical' | 'horizontal'
 

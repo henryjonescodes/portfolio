@@ -1,6 +1,6 @@
 import styles from './about.module.scss'
 import React, { useRef } from 'react'
-import SnapCarousel from '@components/snap-carousel/SnapCarousel'
+import SnapCarousel from '@components/snap-carousel'
 import Intro from './panes/intro'
 
 const About = () => {
