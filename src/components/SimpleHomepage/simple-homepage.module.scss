@@ -1,14 +1,22 @@
+@import './../../styles/colors.module.scss';
+@import './../../styles/utils.module.scss';
+
+$sider-width: 40px;
 $header-height: 32px;
 
 .wrapper {
   width: 100vw;
   height: 100vh;
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 
 .columns {
   display: flex;
-  height: 100%;
+  flex: 1;
 }
 
 .content {
@@ -22,9 +30,16 @@ $header-height: 32px;
 
 .column {
   height: 100%;
-  border: 1px solid red;
-  width: 20px;
+  background-color: $background-primary;
+
+
+  width: $sider-width;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
 
   &Left {
     composes: column;
@@ -32,5 +47,23 @@ $header-height: 32px;
 
   &Right {
     composes: column;
+  }
+}
+
+.test {
+  &Button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px;
+    width: min-content;
+    height: min-content;
+    padding: 4px;
+    background-color: $background-secondary;
+
+    >h3 {
+      white-space: nowrap;
+    }
   }
 }

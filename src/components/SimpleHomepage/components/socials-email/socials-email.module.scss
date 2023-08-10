@@ -1,0 +1,83 @@
+@import './../../simple-homepage.module.scss';
+
+$sider-bar-width: 4px;
+$sider-bar-color: $background-secondary;
+
+.email,
+.socials {
+  position: relative;
+  width: 100%;
+  padding-bottom: 64px;
+  padding-top: 24px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    background-color: $sider-bar-color;
+    top: 0px;
+    left: 0;
+    transform: translateX(50%);
+    width: 50%;
+    height: $sider-bar-width;
+
+  }
+
+  &Bar {
+    width: $sider-bar-width;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: $sider-bar-color;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
+}
+
+.email {
+  background-color: beige;
+
+  &Content {
+    position: relative;
+    width: 100%;
+    background-color: green;
+    height: 100%;
+  }
+
+  h3 {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 300;
+    -webkit-transform-origin-z: 2;
+    width: 100%;
+  }
+}
+
+.socials {
+
+  &Buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  &Entry {
+    position: relative;
+    z-index: 4;
+    width: 100%;
+    padding: 8px 0;
+    background-color: $background-primary;
+
+    &Button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease-in-out;
+      opacity: 0.6;
+
+      &:hover {
+        transform: translateY(-4px);
+        opacity: 1;
+      }
+    }
+  }
+}

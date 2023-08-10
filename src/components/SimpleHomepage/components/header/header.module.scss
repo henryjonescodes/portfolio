@@ -1,0 +1,71 @@
+@import './../../simple-homepage.module.scss';
+
+.header {
+  width: 100%;
+  background-color: $background-primary;
+  padding: 0px $sider-width;
+  z-index: 2;
+  transition: box-shadow 0.1s ease-in-out;
+
+  &__withShadow {
+    box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.135);
+  }
+
+  &Content {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  &Logo {
+    height: 100%;
+    aspect-ratio: 1;
+    background-color: $background-secondary;
+    border-radius: 100%;
+    padding: 10px;
+  }
+
+  &Buttons {
+    display: flex;
+    gap: 16px;
+  }
+}
+
+
+.button {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+
+  >h2,
+  >h3 {
+    font-family: 'Work Sans', sans-serif;
+  }
+
+  >h2 {
+    font-size: 13px;
+    color: $text-tertiary;
+    font-weight: 300;
+  }
+
+  >h3 {
+    font-size: 14px;
+    color: $text-primary;
+    font-weight: 400;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.9;
+  }
+}

@@ -1,31 +1,36 @@
-import { useScroll } from 'framer-motion'
-import React, { useRef } from 'react'
-import Header from './components/Header'
+import { motion, useScroll } from 'framer-motion'
+import React, { useRef, useState } from 'react'
 import About from './panels/About'
 import Hero from './panels/Hero'
 import styles from './simple-homepage.module.scss'
-
-export const LeftColumn = () => {
-  return <div className={styles.columnLeft}>index</div>
-}
-export const RightColumn = () => {
-  return <div className={styles.columnRight}>index</div>
-}
+import Header from './components/header/Header'
+import { Socials } from './components/socials-email/Socials'
 
 const SimpleHomePage = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const { scrollY, scrollYProgress } = useScroll({ container: scrollRef })
+  const [visible, setVisible] = useState<boolean>(false)
 
   return (
     <div className={styles.wrapper}>
-      <Header scrollY={scrollY} />
+      <Header scrollY={scrollY} visible={visible} />
       <div className={styles.columns}>
-        <LeftColumn />
+        <div className={styles.columnLeft}>
+          <Socials visible={visible} />
+        </div>
         <div className={styles.content} ref={scrollRef}>
-          <Hero />
+          <Hero visible={visible} />
           <About />
         </div>
-        <RightColumn />
+        <div className={styles.columnRight}>{/* <Email /> */}</div>
+      </div>
+      <div
+        className={styles.testButton}
+        onClick={() => {
+          setVisible(!visible)
+        }}
+      >
+        <h3>Toggle{visible ? ' off' : ' on'}</h3>
       </div>
     </div>
   )
