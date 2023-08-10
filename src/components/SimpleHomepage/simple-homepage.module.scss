@@ -1,0 +1,36 @@
+$header-height: 32px;
+
+.wrapper {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.columns {
+  display: flex;
+  height: 100%;
+}
+
+.content {
+  width: 100%;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.column {
+  height: 100%;
+  border: 1px solid red;
+  width: 20px;
+  overflow: hidden;
+
+  &Left {
+    composes: column;
+  }
+
+  &Right {
+    composes: column;
+  }
+}

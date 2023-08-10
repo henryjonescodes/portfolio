@@ -1,14 +1,11 @@
-import About from '@components/About'
-import HomePage from '@components/HomePage'
-import Landing from '@components/Landing'
-import SlideGallery from '@components/SlideGallery'
+import SimpleHomePage from '@components/SimpleHomepage'
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 const Home = () => {
   return (
     <>
-      <About />
+      <SimpleHomePage />
+      {/* <About /> */}
       {/* <Landing /> */}
       {/* <HomePage /> */}
       {/* <SlideGallery /> */}
