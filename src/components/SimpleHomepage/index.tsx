@@ -1,5 +1,5 @@
 import { motion, useScroll } from 'framer-motion'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
 import About from './panels/About'
 import Hero from './panels/Hero'
 import styles from './simple-homepage.module.scss'
@@ -7,11 +7,40 @@ import Header from './components/header/Header'
 import { Socials } from './components/socials-email/Socials'
 
 export const HOMEPAGE_TRANSITION_DURATION_MS = 1500
-
+const SCROLL_PANEL_NAMES = ['about', 'experience'] as const
+export type ScrollPanelNames = (typeof SCROLL_PANEL_NAMES)[number]
+// export type ScrollPanelNames = 'about' | 'experience'
+type ScrollPanelType = {
+  // name: ScrollPanelNames
+  component: React.ReactNode
+  ref: MutableRefObject<any>
+  showInHeader?: boolean
+  snapScroll?: boolean
+}
 const SimpleHomePage = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const { scrollY, scrollYProgress } = useScroll({ container: scrollRef })
   const [visible, setVisible] = useState<boolean>(false)
+
+  const aboutRef = useRef<any>(null)
+  const experienceRef = useRef<any>(null)
+
+  const scrollPanels: { [key in ScrollPanelNames]: ScrollPanelType } = {
+    about: {
+      component: <About ref={aboutRef} />,
+      ref: aboutRef,
+    },
+    experience: {
+      component: <About ref={experienceRef} />,
+      ref: experienceRef,
+    },
+  }
+
+  const scrollToPanel = (panelName: ScrollPanelNames) => {
+    const _panel = scrollPanels[panelName]
+    const { ref } = _panel
+    ref?.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   useEffect(() => {
     if (!visible) {
@@ -24,9 +53,8 @@ const SimpleHomePage = () => {
       <Header
         scrollY={scrollY}
         visible={visible}
-        onNavigate={() => {
-          setVisible(false)
-        }}
+        scrollToPanel={scrollToPanel}
+        panelNames={[...SCROLL_PANEL_NAMES]}
       />
       <div className={styles.columns}>
         <div className={styles.columnLeft}>
@@ -34,7 +62,9 @@ const SimpleHomePage = () => {
         </div>
         <div className={styles.content} ref={scrollRef}>
           <Hero visible={visible} />
-          {/* <About /> */}
+          {SCROLL_PANEL_NAMES.map((name) => {
+            return scrollPanels[name].component
+          })}
         </div>
         <div className={styles.columnRight}>{/* <Email /> */}</div>
       </div>

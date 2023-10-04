@@ -18,11 +18,13 @@ $header-height: 32px;
 .columns {
   display: flex;
   flex: 1;
+  z-index: 1;
 }
 
 .content {
   width: 100%;
   overflow: scroll;
+  scroll-snap-type: y mandatory;
 
   &::-webkit-scrollbar {
     display: none;
@@ -31,12 +33,9 @@ $header-height: 32px;
 
 .column {
   height: 100%;
-  // background-color: $background-primary;
-
-
   width: $sider-width;
   overflow: hidden;
-
+  position: absolute;
   display: flex;
   flex-direction: column;
   align-items: center;

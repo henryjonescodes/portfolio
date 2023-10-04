@@ -2,13 +2,12 @@
 
 $sider-bar-width: 4px;
 $sider-bar-color: $background-secondary;
+$sider-bar-padding-bottom: 64px;
 
 .email,
 .socials {
   position: relative;
   width: 100%;
-  padding-bottom: 64px;
-  padding-top: 24px;
 
   &:before {
     content: '';
@@ -24,13 +23,9 @@ $sider-bar-color: $background-secondary;
 
   &Bar {
     width: $sider-bar-width;
-    height: 100%;
-    position: absolute;
-    bottom: 0;
+    height: $sider-bar-padding-bottom;
     background-color: $sider-bar-color;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
+    bottom: 0;
   }
 }
 
@@ -53,19 +48,30 @@ $sider-bar-color: $background-secondary;
 }
 
 .socials {
-
   &Buttons {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    align-items: center;
   }
 
   &Entry {
     position: relative;
     z-index: 4;
     width: 100%;
-    padding: 8px 0;
-    background-color: $background-primary;
+    padding: 32px 0 8px 0px;
+    // background-color: $background-primary;
+
+    &:before {
+      $gap: 32px;
+      content: '';
+      width: $sider-bar-width;
+      height: calc(100% - $gap);
+      left: 50%;
+      bottom: $gap;
+      background-color: $sider-bar-color;
+      transform: translateX(-50%);
+      position: absolute;
+    }
 
     &Button {
       display: flex;

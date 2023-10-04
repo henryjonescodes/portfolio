@@ -51,7 +51,6 @@ export const Socials = ({ visible }: Props) => {
         damping: 100,
       }}
     >
-      <div className={styles.socialsBar} />
       <div className={styles.socialsButtons}>
         <SocialsEntry href="">
           <GitHubSvg />
@@ -65,6 +64,7 @@ export const Socials = ({ visible }: Props) => {
         <SocialsEntry href="">
           <InstagramSvg />
         </SocialsEntry>
+        <div className={styles.socialsBar} />
       </div>
     </motion.div>
   )
