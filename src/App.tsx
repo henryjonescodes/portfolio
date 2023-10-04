@@ -1,5 +1,5 @@
-import Landing from '@components/Landing'
-import Experience from '@pages/Experience'
+import Contact from '@pages/Contact'
+import ExperiencePage from '@pages/ExperiencePage'
 import Gallery from '@pages/Gallery'
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -14,7 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/gallery" element={<Gallery />} />
-          <Route path="/experience" element={<Experience />} />
+          <Route path="/experience" element={<ExperiencePage />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </BrowserRouter>
     </WindowDimensionsProvider>

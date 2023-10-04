@@ -1,0 +1,8 @@
+@import './../../styles/colors.module.scss';
+@import './../../styles/utils.module.scss';
+
+.wrapper {
+  background-color: $background-primary;
+  height: 100vh;
+  width: 100vw;
+}
