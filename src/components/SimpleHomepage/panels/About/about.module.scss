@@ -9,20 +9,41 @@ $box-padding-x: 12px;
 
 .stats {
   composes: panel;
-  background-color: gray;
+  background-color: black;
   height: 100%;
-
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  padding: 64px 64px;
 
-  flex-direction: column;
+  &Info {
+    z-index: 1;
+    width: 50%;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    gap: 20px;
+    height: 100%;
+  }
+
+  &Character {
+    z-index: 1;
+    width: 50%;
+    border: 1px solid green;
+    height: 100%;
+  }
+
 }
 
 .tools {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  z-index: 1;
 
   &:not(:first-of-type) {
     margin-top: 32px;
@@ -33,6 +54,11 @@ $box-padding-x: 12px;
     font-family: 'Press Start 2P', cursive;
     font-size: 22px;
     margin-left: calc(($tool-size + $inventory-gap + $box-padding-x));
+
+    color: #bc13fe;
+    text-shadow:
+      0 0 3px rgb(255, 121, 143),
+      0 0 7px #bc13fe,
   }
 
   &Skew {
@@ -68,10 +94,9 @@ $box-padding-x: 12px;
 
   >svg {
     // clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-    padding: 4px;
+    padding: 6px;
     height: 100%;
     width: 100%;
-    background-color: aqua;
     border-radius: 8px;
   }
 
@@ -104,11 +129,16 @@ $box-padding-x: 12px;
     width: 100%;
     display: flex;
 
+
+
     &Inner {
       flex: 1;
-      background-color: $background-secondary;
+      background-color: #3f3f3f;
+
     }
   }
+
+
 }
 
 .dynamicSVG {
@@ -118,4 +148,112 @@ $box-padding-x: 12px;
   left: 0;
   position: absolute;
   z-index: 3;
+
+  // &:nth-child(3) {
+  // >svg {
+  //   border-radius: 20px;
+  //   box-shadow:
+  //     0 0 .2rem #fff,
+  //     0 0 .2rem #fff,
+  //     0 0 2rem #bc13fe,
+  //     // 0 0 0.8rem #bc13fe,
+  //     // 0 0 2.8rem #bc13fe,
+  //     // inset 0 0 1.3rem #bc13fe;
+  // }
+
+  // }
+}
+
+.gridWrapper {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  color: #a3c;
+  background-color: #000;
+}
+
+.grid {
+  z-index: 0;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 45%;
+  bottom: 0;
+  border-top: 2px solid #bf578c;
+  background-color: #000;
+  border-color: #000;
+
+  &Shadow {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(#000 0%, transparent);
+  }
+
+  &Lines {
+    height: 100%;
+    perspective: 1000px;
+    perspective-origin: center top;
+
+
+    &Content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-origin: top center;
+      animation: .35s linear infinite retrobg-lines-anim;
+      // animation-duration: 5s;
+    }
+
+    &Vertical,
+    &Horizontal {
+      position: absolute;
+      left: calc((900% - 100%) / -2);
+      width: 900%;
+      height: 500%;
+    }
+
+    &Vertical {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  &Line {
+
+    &Vertical,
+    &Horizontal {
+      width: 100%;
+      height: 100%;
+      background-color: red;
+    }
+
+    &Vertical {
+      width: 3px;
+    }
+
+    &Horizontal {
+      height: 3px;
+    }
+
+    &Horizontal+&Horizontal {
+      margin-top: 98px;
+    }
+
+    &Vertical+&Vertical {
+      margin-left: 48px;
+    }
+  }
+}
+
+
+@keyframes retrobg-lines-anim {
+  from {
+    transform: rotateX(84deg) translateY(0);
+  }
+
+  to {
+    transform: rotateX(84deg) translateY(100px);
+  }
 }

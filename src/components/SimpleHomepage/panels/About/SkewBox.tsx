@@ -56,7 +56,11 @@ const DynamicSVG = ({
       }}
     >
       <motion.svg
-        style={{ transform: `skew(${skewDegrees}deg, 0deg)` }}
+        style={{
+          transform: `skew(${skewDegrees}deg, 0deg)`,
+          borderRadius: `${borderRadius}px`,
+          boxShadow: `0px 0px 1rem ${color}`,
+        }}
         width={svgDimensions.width}
         height={svgDimensions.height}
         xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +103,7 @@ const SkewBox = ({
   strokeWidth,
   inset = false,
 }: SkewBoxProps) => {
-  const colorsArray = ['#f0f0f0', '#3f3f3f', '#232323']
+  const colorsArray = ['#bc13fe', '#ff0052', '#00f3ff', '#9e00ff']
   const outlines = []
 
   for (let i = 0; i < outlineCount; i++) {
