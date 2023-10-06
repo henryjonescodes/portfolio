@@ -29,7 +29,7 @@ const Hero = ({ visible }: PanelProps) => {
       >
         <motion.h3 variants={heroVariants}>Hi, my name is</motion.h3>
         <motion.h1 variants={heroVariants}>Henry Jones</motion.h1>
-        <motion.h1 variants={heroVariants}>I build user interfaces</motion.h1>
+        <motion.h2 variants={heroVariants}>I build user interfaces</motion.h2>
         <motion.p variants={heroVariants}>
           I'm a software engineer passionate about blending the power of modern
           computing with realities of being a human by creating new ways for

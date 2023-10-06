@@ -17,6 +17,21 @@ module.exports = {
       "@hooks": path.resolve(__dirname, "src/hooks"),
       "@constants": path.resolve(__dirname, "src/constants"),
     },
+    fallback: {
+    'stream':  false,
+      'util':false,
+      "buffer": false,
+      "dns": false,
+      "https": false,
+      "http2": false,
+      "os": false,
+      "net": false,
+      "tls": false,
+      "fs": false,
+      "url": false,
+      "zlib": false,
+      "http": false,
+    },
   },
   module: {
     rules: [

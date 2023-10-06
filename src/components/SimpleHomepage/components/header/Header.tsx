@@ -122,7 +122,6 @@ const Header = ({ scrollY, visible, ...props }: Props) => {
     )
 
     // ? Set
-    console.log('setting', _new)
     height.set(_new)
   })
 

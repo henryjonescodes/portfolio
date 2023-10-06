@@ -16,7 +16,7 @@
 
   &Content {
     max-width: 70%;
-    padding-bottom: 35%;
+    padding-bottom: 15%;
 
     h3 {
       font-family: 'Work Sans', sans-serif;
@@ -27,12 +27,22 @@
     h1 {
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
-      line-height: 40px;
-      font-size: 40px;
+      line-height: 64px;
+      font-size: 52px;
 
       &:first-of-type {
         color: $text-primary;
       }
+
+      color: $text-secondary;
+    }
+
+    h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      line-height: 40px;
+      font-size: 40px;
+
 
       color: $text-secondary;
     }
@@ -45,6 +55,17 @@
 }
 
 .about {
+  composes: panel;
+  background-color: gray;
+  height: 100%;
+  padding: 10%;
+
+  div {
+    height: 200px;
+  }
+}
+
+.experience {
   composes: panel;
   background-color: gray;
   height: 100%;

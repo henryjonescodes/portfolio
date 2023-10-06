@@ -1,29 +1,30 @@
-import { motion, useScroll } from 'framer-motion'
+import { useMotionValueEvent, useScroll } from 'framer-motion'
 import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
-import About from './panels/About'
-import Hero from './panels/Hero'
-import styles from './simple-homepage.module.scss'
+import { useWindowDimensions } from './../../context/WindowDimensionsContext'
 import Header from './components/header/Header'
 import { Socials } from './components/socials-email/Socials'
+import Experience from './panels/Experience'
+import styles from './simple-homepage.module.scss'
+import About from './panels/About'
+import Hero from './panels/Hero'
 
 export const HOMEPAGE_TRANSITION_DURATION_MS = 1500
 const SCROLL_PANEL_NAMES = ['about', 'experience'] as const
+// const SCROLL_PANEL_NAMES = ['about'] as const
 export type ScrollPanelNames = (typeof SCROLL_PANEL_NAMES)[number]
-// export type ScrollPanelNames = 'about' | 'experience'
+
 type ScrollPanelType = {
-  // name: ScrollPanelNames
   component: React.ReactNode
   ref: MutableRefObject<any>
-  showInHeader?: boolean
-  snapScroll?: boolean
 }
 const SimpleHomePage = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
   const { scrollY, scrollYProgress } = useScroll({ container: scrollRef })
+  const [pageProgress, setPageProgress] = useState<number>(0)
   const [visible, setVisible] = useState<boolean>(false)
-
   const aboutRef = useRef<any>(null)
   const experienceRef = useRef<any>(null)
+  const { height } = useWindowDimensions()
 
   const scrollPanels: { [key in ScrollPanelNames]: ScrollPanelType } = {
     about: {
@@ -31,7 +32,7 @@ const SimpleHomePage = () => {
       ref: aboutRef,
     },
     experience: {
-      component: <About ref={experienceRef} />,
+      component: <Experience ref={experienceRef} />,
       ref: experienceRef,
     },
   }
@@ -48,6 +49,12 @@ const SimpleHomePage = () => {
     }
   }, [])
 
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    if (!latest) return
+    setPageProgress(latest / height)
+    return
+  })
+
   return (
     <div className={styles.wrapper}>
       <Header
@@ -58,7 +65,7 @@ const SimpleHomePage = () => {
       />
       <div className={styles.columns}>
         <div className={styles.columnLeft}>
-          <Socials visible={visible} />
+          <Socials visible={visible && pageProgress < 0.8} />
         </div>
         <div className={styles.content} ref={scrollRef}>
           <Hero visible={visible} />
