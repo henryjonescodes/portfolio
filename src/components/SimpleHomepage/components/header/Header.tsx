@@ -72,10 +72,12 @@ const HeaderButtons = ({
       initial={'hidden'}
       animate={visible ? 'visible' : 'hidden'}
       transition={{
-        staggerChildren: 0.2,
+        staggerDirection: -1,
+        delayChildren: 4,
+        staggerChildren: 0.4,
       }}
     >
-      {panelNames?.map((name, index) => {
+      {panelNames.reverse()?.map((name, index) => {
         return (
           <Button
             prefix={`0${index + 1}`}
@@ -92,7 +94,7 @@ const HeaderButtons = ({
 
 const Header = ({ scrollY, visible, ...props }: Props) => {
   // ? Header hide logic for scrolling... idk what the fuck this does tho...
-  const HEADER_HEIGHT = 64
+  const HEADER_HEIGHT = 80
   const down = useRef<boolean>(false)
   const prev = useRef<number>(-1)
   const height = useMotionValue(HEADER_HEIGHT)
@@ -130,7 +132,7 @@ const Header = ({ scrollY, visible, ...props }: Props) => {
       style={{ height }}
       className={cn({
         [styles.header]: true,
-        [styles.header__withShadow]: height.get() < HEADER_HEIGHT,
+        // [styles.header__withShadow]: height.get() < HEADER_HEIGHT,
       })}
     >
       <div className={styles.headerContent}>

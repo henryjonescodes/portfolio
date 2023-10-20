@@ -3,14 +3,15 @@ import React, { MutableRefObject, useEffect, useRef, useState } from 'react'
 import { useWindowDimensions } from './../../context/WindowDimensionsContext'
 import Header from './components/header/Header'
 import { Socials } from './components/socials-email/Socials'
-import Experience from './panels/Experience'
+import Contact from './panels/Contact/Contact'
 import styles from './simple-homepage.module.scss'
+import Hero from './panels/Hero/Hero'
+import CMYK from './components/CMYK/CMYK'
+import Projects from './panels/Projects'
 import About from './panels/About'
-import Hero from './panels/Hero'
 
 export const HOMEPAGE_TRANSITION_DURATION_MS = 1500
-const SCROLL_PANEL_NAMES = ['about', 'experience'] as const
-// const SCROLL_PANEL_NAMES = ['about'] as const
+const SCROLL_PANEL_NAMES = ['about', 'projects', 'contact'] as const
 export type ScrollPanelNames = (typeof SCROLL_PANEL_NAMES)[number]
 
 type ScrollPanelType = {
@@ -23,7 +24,8 @@ const SimpleHomePage = () => {
   const [pageProgress, setPageProgress] = useState<number>(0)
   const [visible, setVisible] = useState<boolean>(false)
   const aboutRef = useRef<any>(null)
-  const experienceRef = useRef<any>(null)
+  const projectsRef = useRef<any>(null)
+  const contactRef = useRef<any>(null)
   const { height } = useWindowDimensions()
 
   const scrollPanels: { [key in ScrollPanelNames]: ScrollPanelType } = {
@@ -31,9 +33,13 @@ const SimpleHomePage = () => {
       component: <About ref={aboutRef} />,
       ref: aboutRef,
     },
-    experience: {
-      component: <Experience ref={experienceRef} />,
-      ref: experienceRef,
+    contact: {
+      component: <Contact ref={contactRef} />,
+      ref: contactRef,
+    },
+    projects: {
+      component: <Projects ref={projectsRef} />,
+      ref: projectsRef,
     },
   }
 
@@ -83,6 +89,7 @@ const SimpleHomePage = () => {
       >
         <h3>Toggle{visible ? ' off' : ' on'}</h3>
       </div>
+      {/* <CMYK /> */}
     </div>
   )
 }

@@ -44,7 +44,7 @@ export const Socials = ({ visible }: Props) => {
       initial={'hidden'}
       animate={visible ? 'visible' : 'hidden'}
       transition={{
-        delay: visible ? 0.8 : 0,
+        delay: visible ? 4.5 : 0,
         type: 'spring',
         clamp: true,
         stiffness: 250,

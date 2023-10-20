@@ -2,7 +2,7 @@
 
 .header {
   width: 100%;
-  background-color: $background-primary;
+  // background-color: $background-primary;
   padding: 0px $sider-width;
   z-index: 3;
   transition: box-shadow 0.1s ease-in-out;
@@ -50,13 +50,13 @@
   }
 
   >h2 {
-    font-size: 13px;
+    font-size: 19px;
     color: $text-tertiary;
     font-weight: 300;
   }
 
   >h3 {
-    font-size: 14px;
+    font-size: 20px;
     color: $text-primary;
     font-weight: 400;
   }
