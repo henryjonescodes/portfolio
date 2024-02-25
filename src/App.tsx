@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import WindowDimensionsProvider from './context/WindowDimensionsContext'
-import Home from './pages/Home'
+import Home from './pages/Home/Home'
 
 function App() {
   return (
