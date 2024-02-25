@@ -2,7 +2,11 @@ import SimpleHomePage from '@components/SimpleHomepage'
 import React from 'react'
 
 const Home = () => {
-  return <SimpleHomePage />
+  return (
+    <>
+      <div>hello</div>
+    </>
+  )
 }
 
 export default Home

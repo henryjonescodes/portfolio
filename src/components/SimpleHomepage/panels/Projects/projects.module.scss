@@ -1,7 +1,0 @@
-@import './../../simple-homepage.module.scss';
-@import './../simple-homepage-panels.module.scss';
-
-.projects {
-  composes: panel;
-  height: 100%;
-}
