@@ -1,6 +1,9 @@
 .wrapper {
-  overflow: scroll;
-  border: 3px solid green;
   height: 100vh;
+  max-width: 100vw;
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
+
+  background-color: black;
 }

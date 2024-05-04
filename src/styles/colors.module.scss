@@ -6,6 +6,8 @@ $foreground-primary: #f00;
 $foreground-secondary: #f00;
 $foreground-tertiary: #f00;
 
-$text-primary: rgb(198, 198, 198);
-$text-secondary: $background-secondary;
-$text-tertiary: rgb(0, 203, 88);
+
+$text-primary-dark: black;
+$text-primary: rgb(255, 255, 255);
+$text-secondary: hsl(0, 6%, 60%);
+$text-tertiary: #5A5A5A;
