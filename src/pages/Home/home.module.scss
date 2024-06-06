@@ -1,9 +1,22 @@
-.wrapper {
-  height: 100vh;
-  max-width: 100vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  position: relative;
+@import './../pages.module.scss';
+@import '@styles/layout.module.scss';
+@import '@styles/colors.module.scss';
 
-  background-color: black;
+.wrapper {
+  composes: pageScrollable;
+
+  scroll-snap-type: y mandatory;
+  // gap: 48px;
+}
+
+.section {
+  width: 100%;
+}
+
+
+@media (max-width: $width-medium) {
+  .wrapper {
+    // scroll-snap-type: y mandatory;
+    // gap: 48px;
+  }
 }

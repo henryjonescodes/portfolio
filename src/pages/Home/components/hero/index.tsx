@@ -1,6 +1,6 @@
 import React from 'react'
-import styles from './home-components.module.scss'
-import background from '@assets/landing-background.png'
+import styles from './hero.module.scss'
+import background from '@assets/png/backgrounds/landing.png'
 
 const Hero = () => {
   return (

@@ -1,4 +1,8 @@
-<svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M4.1842 13.6807C4.1842 19.2766 8.72059 23.813 14.3165 23.813C19.9124 23.813 24.4488 19.2766 24.4488 13.6807C24.4488 8.08473 19.9124 3.54834 14.3165 3.54834C8.72059 3.54834 4.1842 8.08473 4.1842 13.6807Z" stroke="white" stroke-width="1.31802" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12.6278 11.9919L18.8198 9.1774L16.0052 15.3694L9.81327 18.1839L12.6278 11.9919Z" stroke="white" stroke-width="1.31802" stroke-linecap="round" stroke-linejoin="round"/>
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Navigation / Compass">
+<g id="Vector">
+<path d="M3 12C3 16.9706 7.02944 21 12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.5 10.5L16 8L13.5 13.5L8 16L10.5 10.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
 </svg>

@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import styles from './home.module.scss'
-import Scroller from './experience/Scroller'
-import Socials from './components/Socials'
-import Hero from './components/Hero'
-import Blurb from './components/Blurb'
+import Hero from './components/hero'
+import Blurb from './components/blurb'
+import Experience from './components/experience'
 
 const Home = () => {
+  const wrapperRef = useRef(null)
+
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={wrapperRef}>
       <Hero />
       <Blurb />
-      <Scroller />
-      <Socials />
+      <Experience scrollParentRef={wrapperRef} />
     </div>
   )
 }

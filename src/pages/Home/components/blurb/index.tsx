@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './home-components.module.scss'
+import styles from './blurb.module.scss'
 
 const Blurb = () => {
   return (

@@ -1,0 +1,107 @@
+@import './../../home.module.scss';
+@import '@styles/colors.module.scss';
+@import '@styles/animation.module.scss';
+
+.hero {
+  composes: section;
+  scroll-snap-align: start;
+  transition: $transition-page-update;
+  min-height: 70vh;
+
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  // border: 1px solid blue;
+  text-align: center;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -30%;
+    left: 0;
+    height: 150%;
+    width: 100%;
+    transition: $transition-page-update;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 20%, $background-primary 80%);
+    z-index: 1;
+  }
+
+  >h1 {
+    z-index: 1;
+    font-size: 10rem;
+    line-height: 10.3rem;
+    color: $text-primary;
+  }
+
+  >h3 {
+    z-index: 1;
+    font-size: 3.5rem;
+    color: $text-secondary;
+  }
+
+  >img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: $width-compact) {
+  .hero {
+    min-height: 60vh;
+
+    &:before {
+      top: -20%;
+    }
+
+    >h1 {
+      font-size: 8rem;
+      line-height: 8.3rem;
+    }
+
+    >h3 {
+      font-size: 2.8rem;
+    }
+  }
+}
+
+
+@media (max-width: $width-small) {
+  .hero {
+    // min-height: 30vh;
+
+    >h1 {
+      font-size: 6rem;
+      line-height: 6.3rem;
+    }
+
+    >h3 {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+@media (max-width: calc(($width-small + $width-mobile)/2)) {
+  .hero {
+    >h1 {
+      font-size: 5rem;
+      line-height: 5.3rem;
+    }
+  }
+}
+
+@media (max-width: $width-mobile) {
+  .hero {
+    min-height: 50vh;
+
+    >h1 {
+      font-size: 4rem;
+      line-height: 4.3rem;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@import '@styles/colors.module.scss';
+
+
+.page {
+  position: relative;
+  max-width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $background-primary;
+
+  &Fixed {
+    composes: page;
+    height: 100vh;
+    overflow-y: hidden;
+    justify-content: center;
+  }
+
+  &Scrollable {
+    composes: page;
+    max-height: 100vh;
+    overflow-y: scroll;
+  }
+}
