@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
-import styles from './experience.module.scss'
 import Experience from './Experience'
-import { ExperienceDetails, mushroomDetails } from './experience.contents'
+import { experienceMap } from './experience.contents'
+import styles from './experience.module.scss'
 
 type OverlayProps = {
   overlayStyle: React.CSSProperties
@@ -13,8 +13,6 @@ type OverlayProps = {
 const Scroller = () => {
   const [selectedId, setSelectedId] = useState<string>(null)
   const [overlayStyle, setOverlayStyle] = useState({})
-
-  const cards = []
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>, id: string) => {
     setSelectedId(id.toString())
@@ -36,27 +34,22 @@ const Scroller = () => {
     setOverlayStyle({})
   }
 
-  for (let i = 1; i <= 3; i++) {
-    const card = (
-      <Experience
-        key={i.toString()}
-        id={i.toString()}
-        selectedId={selectedId}
-        isOverlay={false}
-        onClick={handleClick}
-        details={mushroomDetails}
-      />
-    )
-    cards.push(card)
-  }
-
   return (
     <>
       <div className={styles.scroller}>
         <div className={styles.scrollerCarousel}>
           <h3>Experience</h3>
           <motion.div layoutScroll className={styles.scrollerCarouselContent}>
-            {cards}
+            {Object.keys(experienceMap).map((key) => (
+              <Experience
+                key={key}
+                id={key}
+                selectedId={selectedId}
+                isOverlay={false}
+                onClick={handleClick}
+                details={experienceMap[key]}
+              />
+            ))}
           </motion.div>
         </div>
       </div>
@@ -85,7 +78,7 @@ const Overlay: React.FC<OverlayProps> = ({
           selectedId={selectedId}
           isOverlay={true}
           onClick={dismiss}
-          details={mushroomDetails}
+          details={experienceMap[selectedId]}
         />
       )}
     </div>

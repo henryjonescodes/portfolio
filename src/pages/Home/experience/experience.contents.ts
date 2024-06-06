@@ -28,6 +28,9 @@ export type ExperienceDetails = {
   LogoType: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
 };
 
+type ExperienceMap = {
+  [key: string]: ExperienceDetails;
+};
 
 export const mushroomDetails:ExperienceDetails = {
   date: 'March 2022 - January 2024',
@@ -89,4 +92,9 @@ export const channelDetails:ExperienceDetails = {
   ],
   backgroundImage: mushroomBackground,
   LogoType: MushroomLogotypeSvg
+};
+
+export const experienceMap:ExperienceMap = {
+  "mushroom": mushroomDetails,
+  "channel": channelDetails,
 };
