@@ -57,8 +57,9 @@ const Scroller = () => {
                 key={key}
                 id={key}
                 onClick={handleClick}
+                pageOpen={pageOpen}
                 details={experienceMap[key]}
-                pageOpen={false}
+                inList={true}
               />
             ))}
           </motion.div>

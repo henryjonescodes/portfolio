@@ -10,13 +10,30 @@ export const CARD_ANIMATION_DURATION_SECONDS = 0.35
 type ExperienceProps = {
   id: string
   pageOpen: boolean
+  inList: boolean
   details: ExperienceDetails
   onClick: (event: React.MouseEvent<HTMLDivElement>, id: string) => void
+}
+
+const skillsVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: CARD_ANIMATION_DURATION_SECONDS,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1 },
 }
 
 const Experience = ({
   id,
   pageOpen,
+  inList,
   onClick,
   details: {
     date,
@@ -30,6 +47,8 @@ const Experience = ({
     color,
   },
 }: ExperienceProps) => {
+  const isOpen = pageOpen && !inList
+
   return (
     <LayoutGroup id={id}>
       <motion.div
@@ -37,8 +56,8 @@ const Experience = ({
         layoutId={id}
         className={cn({
           [styles.job]: true,
-          [styles.jobCard]: !pageOpen,
-          [styles.jobPage]: pageOpen,
+          [styles.jobCard]: !isOpen,
+          [styles.jobPage]: isOpen,
         })}
         transition={{ duration: CARD_ANIMATION_DURATION_SECONDS }}
         onClick={(event) => {
@@ -53,8 +72,18 @@ const Experience = ({
             <motion.h3>{date}</motion.h3>
           </motion.span>
         </motion.span>
-        <motion.div layoutId={'body'} className={styles.body}>
-          <motion.div layoutId={'bodyContent'} className={styles.content}>
+        <motion.div
+          layoutId={'body'}
+          className={styles.body}
+          transition={{
+            duration: 0,
+          }}
+        >
+          <motion.div
+            layoutId={'bodyContent'}
+            className={styles.content}
+            transition={{ duration: CARD_ANIMATION_DURATION_SECONDS * 0.9 }}
+          >
             <motion.div layoutId={'bodyTitle'} className={styles.title}>
               <motion.h1>{title}</motion.h1>
               <motion.span>
@@ -62,7 +91,7 @@ const Experience = ({
                 <motion.h3>{location}</motion.h3>
               </motion.span>
             </motion.div>
-            {pageOpen && (
+            {isOpen && (
               <>
                 <motion.div layoutId={'bodyBlurb'} className={styles.blurb}>
                   <motion.p layoutId={'bodyBlurbContents'}>{blurb}</motion.p>
@@ -82,25 +111,43 @@ const Experience = ({
               </>
             )}
           </motion.div>
-          <motion.span layoutId={'bodySkills'} className={styles.skills}>
+          <motion.span
+            className={cn({
+              [styles.skills]: true,
+              [styles.skillsHidden]: pageOpen == true,
+            })}
+          >
             {skills.map((skill, index) => (
-              <skill.icon key={index} />
+              <motion.div key={index}>
+                <skill.icon />
+              </motion.div>
             ))}
           </motion.span>
         </motion.div>
         <motion.div
           layoutId={'background'}
           className={styles.background}
+          transition={
+            {
+              // duration: CARD_ANIMATION_DURATION_SECONDS * 0.6,
+            }
+          }
           style={{ backgroundColor: color }}
         />
         <motion.div
           layoutId={'backgroundImage'}
           className={styles.backgroundImage}
+          transition={{
+            duration: 0,
+          }}
         >
           <motion.img
             layoutId={'backgroundImageImg'}
             src={backgroundImage}
             alt="Background"
+            transition={{
+              duration: CARD_ANIMATION_DURATION_SECONDS,
+            }}
           />
         </motion.div>
       </motion.div>
