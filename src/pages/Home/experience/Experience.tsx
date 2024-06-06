@@ -8,7 +8,12 @@ import PostgresqlSvg from '@assets/svg/tools/postgresql.svg'
 import ReactSvg from '@assets/svg/tools/react-0.svg'
 import TypeScriptSvg from '@assets/svg/tools/typescript-0.svg'
 import cn from 'classnames'
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion'
+import {
+  AnimatePresence,
+  LayoutGroup,
+  motion,
+  MotionConfig,
+} from 'framer-motion'
 import React from 'react'
 import styles from './experience.module.scss'
 
@@ -23,7 +28,7 @@ const Experience = ({
 }) => {
   const isSelected = selectedId === id
   return (
-    <>
+    <LayoutGroup id={id}>
       {isSelected && <div className={styles.jobHidden} />}
       <motion.div
         layout
@@ -123,7 +128,7 @@ const Experience = ({
           />
         </motion.div>
       </motion.div>
-    </>
+    </LayoutGroup>
   )
 }
 

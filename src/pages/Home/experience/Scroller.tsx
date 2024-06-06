@@ -8,7 +8,7 @@ const Scroller = () => {
 
   const cards = []
 
-  for (let i = 1; i <= 1; i++) {
+  for (let i = 1; i <= 3; i++) {
     const card = (
       <Experience
         key={i.toString()}
