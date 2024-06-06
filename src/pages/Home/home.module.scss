@@ -1,9 +1,5 @@
-.wrapper {
-  height: 100vh;
-  max-width: 100vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  position: relative;
+@import './../pages.module.scss';
 
-  background-color: black;
+.wrapper {
+  composes: pageScrollable;
 }

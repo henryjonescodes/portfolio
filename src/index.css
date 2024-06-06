@@ -33,6 +33,11 @@ h3, p {
   margin: 0;
 }
 
+h4 {
+  margin: 0;
+  font-family: "Sansation Bold";
+}
+
 p {
   color: rgb(111, 111, 111);
   font-size: 24px;
