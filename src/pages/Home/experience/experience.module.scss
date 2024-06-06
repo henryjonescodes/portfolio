@@ -38,7 +38,7 @@ $default-transition: 0.4s ease-in-out;
       align-items: center;
       gap: 24px;
       padding: 0px 24px;
-      // overflow: auto;
+      overflow: auto;
 
       &::-webkit-scrollbar {
         display: none;
@@ -183,7 +183,7 @@ $default-transition: 0.4s ease-in-out;
 
   &Card {
     .background {
-      background-color: #F71953;
+      // background-color: #F71953;
       bottom: 0;
       height: calc(100% - $header-height);
     }
@@ -231,7 +231,6 @@ $default-transition: 0.4s ease-in-out;
   }
 
   .background {
-    background-color: #F71953;
     position: absolute;
     width: 100%;
   }

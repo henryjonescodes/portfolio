@@ -5,18 +5,18 @@ import React from 'react'
 import { ExperienceDetails } from './experience.contents'
 import styles from './experience.module.scss'
 
+export const CARD_ANIMATION_DURATION_SECONDS = 0.35
+
 type ExperienceProps = {
   id: string
-  selectedId: string | null
-  isOverlay: boolean
-  onClick: (event: React.MouseEvent<HTMLDivElement>, id: string) => void
+  pageOpen: boolean
   details: ExperienceDetails
+  onClick: (event: React.MouseEvent<HTMLDivElement>, id: string) => void
 }
 
 const Experience = ({
   id,
-  selectedId,
-  isOverlay,
+  pageOpen,
   onClick,
   details: {
     date,
@@ -27,21 +27,20 @@ const Experience = ({
     skills,
     backgroundImage,
     LogoType,
+    color,
   },
 }: ExperienceProps) => {
-  const pageMode = selectedId === id && isOverlay
-
   return (
     <LayoutGroup id={id}>
-      {pageMode && <div className={styles.jobHidden} />}
       <motion.div
         layout
         layoutId={id}
         className={cn({
           [styles.job]: true,
-          [styles.jobCard]: !pageMode,
-          [styles.jobPage]: pageMode,
+          [styles.jobCard]: !pageOpen,
+          [styles.jobPage]: pageOpen,
         })}
+        transition={{ duration: CARD_ANIMATION_DURATION_SECONDS }}
         onClick={(event) => {
           onClick(event, id)
         }}
@@ -63,7 +62,7 @@ const Experience = ({
                 <motion.h3>{location}</motion.h3>
               </motion.span>
             </motion.div>
-            {pageMode && (
+            {pageOpen && (
               <>
                 <motion.div layoutId={'bodyBlurb'} className={styles.blurb}>
                   <motion.p layoutId={'bodyBlurbContents'}>{blurb}</motion.p>
@@ -89,7 +88,11 @@ const Experience = ({
             ))}
           </motion.span>
         </motion.div>
-        <motion.div layoutId={'background'} className={styles.background} />
+        <motion.div
+          layoutId={'background'}
+          className={styles.background}
+          style={{ backgroundColor: color }}
+        />
         <motion.div
           layoutId={'backgroundImage'}
           className={styles.backgroundImage}

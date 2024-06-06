@@ -21,6 +21,7 @@ export type ExperienceDetails = {
   date: string;
   title: string;
   location: string;
+  color: string;
   blurb: string;
   responsibilities: JobResponsibility[];
   skills: JobSkill[];
@@ -36,6 +37,7 @@ export const mushroomDetails:ExperienceDetails = {
   date: 'March 2022 - January 2024',
   title: 'Software Engineer',
   location: 'Palo Alto, CA',
+  color: "#F71953",
   blurb: 'Frontend focused engineer and design/engineering liaison. Balanced technical precision with creative flair to create engaging gamified social media experiences across web, mobile, and Discord.',
   responsibilities: [
     {
@@ -67,6 +69,7 @@ export const channelDetails:ExperienceDetails = {
   date: 'March 2022 - January 2024',
   title: 'Channel Engineer',
   location: 'Palo Alto, CA',
+  color: "#191A1F",
   blurb: 'Frontend focused engineer and design/engineering liaison. Balanced technical precision with creative flair to create engaging gamified social media experiences across web, mobile, and Discord.',
   responsibilities: [
     {

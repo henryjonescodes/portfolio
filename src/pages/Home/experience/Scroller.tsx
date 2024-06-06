@@ -1,17 +1,19 @@
 import { motion } from 'framer-motion'
 import React, { useState } from 'react'
-import Experience from './Experience'
+import Experience, { CARD_ANIMATION_DURATION_SECONDS } from './Experience'
 import { experienceMap } from './experience.contents'
 import styles from './experience.module.scss'
 
 type OverlayProps = {
   overlayStyle: React.CSSProperties
   selectedId: string | null
+  pageOpen: boolean
   dismiss: () => void
 }
 
 const Scroller = () => {
   const [selectedId, setSelectedId] = useState<string>(null)
+  const [pageOpen, setPageOpen] = useState<boolean>(false)
   const [overlayStyle, setOverlayStyle] = useState({})
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>, id: string) => {
@@ -26,10 +28,20 @@ const Scroller = () => {
       height: rect.height,
       position: 'absolute',
     })
+
+    setPageOpen(true)
     console.log(overlayStyle)
   }
 
   const dismissOverlay = () => {
+    setPageOpen(false)
+
+    setTimeout(() => {
+      resetOverlay()
+    }, CARD_ANIMATION_DURATION_SECONDS * 1000 + 100)
+  }
+
+  const resetOverlay = () => {
     setSelectedId(null)
     setOverlayStyle({})
   }
@@ -44,10 +56,9 @@ const Scroller = () => {
               <Experience
                 key={key}
                 id={key}
-                selectedId={selectedId}
-                isOverlay={false}
                 onClick={handleClick}
                 details={experienceMap[key]}
+                pageOpen={false}
               />
             ))}
           </motion.div>
@@ -58,6 +69,7 @@ const Scroller = () => {
           overlayStyle={overlayStyle}
           selectedId={selectedId}
           dismiss={dismissOverlay}
+          pageOpen={pageOpen}
         />
       )}
     </>
@@ -68,6 +80,7 @@ const Overlay: React.FC<OverlayProps> = ({
   overlayStyle,
   selectedId,
   dismiss,
+  pageOpen,
 }) => {
   return (
     <div className={styles.overlay} style={overlayStyle} onClick={dismiss}>
@@ -75,8 +88,7 @@ const Overlay: React.FC<OverlayProps> = ({
         <Experience
           key={selectedId}
           id={selectedId}
-          selectedId={selectedId}
-          isOverlay={true}
+          pageOpen={pageOpen}
           onClick={dismiss}
           details={experienceMap[selectedId]}
         />
