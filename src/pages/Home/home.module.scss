@@ -1,5 +1,7 @@
 @import './../pages.module.scss';
 
 .wrapper {
-  composes: pageScrollable;
+  // composes: pageScrollable;
+  background-color: black;
+
 }

@@ -8,7 +8,7 @@ import Blurb from './components/Blurb'
 const Home = () => {
   return (
     <div className={styles.wrapper}>
-      <Hero />
+      {/* <Hero /> */}
       <Blurb />
       <Scroller />
       <Socials />

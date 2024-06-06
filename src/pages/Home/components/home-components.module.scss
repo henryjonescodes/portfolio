@@ -166,6 +166,7 @@
   }
 
   &Page {
+    z-index: 2;
     position: fixed;
     top: 0;
     left: 0;
@@ -222,6 +223,8 @@
   }
 
   &Card {
+    z-index: 0;
+
     .background {
       background-color: #F71953;
       bottom: 0;

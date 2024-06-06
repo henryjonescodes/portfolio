@@ -6,8 +6,6 @@ import Linkedin from '@assets/svg/socials/linkedin-black.svg'
 import Mail from '@assets/svg/socials/mail.svg'
 import Calendar from '@assets/svg/socials/calendar.svg'
 import Website from '@assets/svg/socials/website.svg'
-
-import IconsGrid from '@assets/svg/backgrounds/IconsGrid.svg'
 import IconsGridSquare from '@assets/svg/backgrounds/IconsGridSquare.svg'
 
 const Links = () => {
