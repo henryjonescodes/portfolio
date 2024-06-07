@@ -54,27 +54,3 @@ p {
   src: local("Sansation-Regular"),
     url("@assets/fonts/Sansation-Regular.ttf") format("truetype");
 }
-
-@font-face {
-  font-family: "Sansation BoldItalic";   /*Can be any text*/
-  src: local("Sansation-BoldItalic"),
-    url("@assets/fonts/Sansation-BoldItalic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Sansation Italic";   /*Can be any text*/
-  src: local("Sansation-Italic"),
-    url("@assets/fonts/Sansation-Italic.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Sansation Light";   /*Can be any text*/
-  src: local("Sansation-Light"),
-    url("@assets/fonts/Sansation-Light.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: "Sansation LightItalic";   /*Can be any text*/
-  src: local("Sansation-LightItalic"),
-    url("@assets/fonts/Sansation-LightItalic.ttf") format("truetype");
-}

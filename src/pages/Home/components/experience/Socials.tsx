@@ -1,5 +1,5 @@
 import React from 'react'
-import LinkedIn from '@assets/svg/socials/linkedin.svg'
+import LinkedIn from '@assets/svg/socials/linkedIn.svg'
 import GitHub from '@assets/svg/socials/github.svg'
 import Instagram from '@assets/svg/socials/Instagram.svg'
 import Calendly from '@assets/svg/socials/calendar.svg'

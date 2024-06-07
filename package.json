@@ -1,11 +1,13 @@
 {
-  "name": "portfolio",
+  "name": "Henry Jones",
   "version": "1.0.0",
-  "description": "",
+  "description": "Henry Jones's software developer portfolio",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "build-basic": "webpack --mode production",
+    "build": "webpack --mode production && cp _redirects dist/_redirects",
     "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
