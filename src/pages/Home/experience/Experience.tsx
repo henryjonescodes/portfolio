@@ -43,8 +43,8 @@ const Experience = ({
     responsibilities,
     skills,
     backgroundImage,
-    LogoType,
     color,
+    logoType,
   },
 }: ExperienceProps) => {
   const isOpen = pageOpen && !inList
@@ -66,7 +66,11 @@ const Experience = ({
       >
         <motion.span layoutId={'header'} className={styles.header}>
           <motion.span layoutId={'headerTitle'} className={styles.title}>
-            <LogoType />
+            <motion.img
+              layoutId={'logotype'}
+              src={logoType}
+              alt="This company's logotype and logo"
+            />
           </motion.span>
           <motion.span layoutId={'date'} className={styles.date}>
             <motion.h3>{date}</motion.h3>
@@ -119,7 +123,7 @@ const Experience = ({
           >
             {skills.map((skill, index) => (
               <motion.div key={index}>
-                <skill.icon />
+                <skill.icon width="auto" />
               </motion.div>
             ))}
           </motion.span>

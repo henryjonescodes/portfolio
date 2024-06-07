@@ -1,8 +1,6 @@
 import mushroomBackground from '@assets/jobs/mushroom-background.png'
 import mushroomLogotype from '@assets/jobs/mushroom-logotype.png'
 
-import MushroomLogotypeSvg from '@assets/jobs/mushroom-logotype.svg'
-
 import channelBackground from '@assets/jobs/channel-background.png'
 import channelLogotype from '@assets/jobs/channel-logotype.png'
 
@@ -18,6 +16,10 @@ import GraphqlSvg from '@assets/svg/tools/graphql.svg'
 import PostgresqlSvg from '@assets/svg/tools/postgresql.svg'
 import ReactSvg from '@assets/svg/tools/react-0.svg'
 import TypeScriptSvg from '@assets/svg/tools/typescript-0.svg'
+import ObjectiveCSvg from '@assets/svg/tools/objective-c.svg'
+import RubySvg from '@assets/svg/tools/ruby.svg'
+import SwiftSvg from '@assets/svg/tools/swift-01.svg'
+import XMPPSvg from '@assets/svg/tools/xmpp.svg'
 
 export type JobResponsibility = {
   title: string;
@@ -38,7 +40,7 @@ export type ExperienceDetails = {
   responsibilities: JobResponsibility[];
   skills: JobSkill[];
   backgroundImage: string;
-  LogoType: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+  logoType: string;
 };
 
 type ExperienceMap = {
@@ -74,7 +76,7 @@ export const mushroomDetails:ExperienceDetails = {
     { icon: FigmaSvg, title: 'Figma' },
   ],
   backgroundImage: mushroomBackground,
-  LogoType: MushroomLogotypeSvg
+  logoType: mushroomLogotype,
 };
 
 export const channelDetails: ExperienceDetails = {
@@ -98,19 +100,19 @@ export const channelDetails: ExperienceDetails = {
     },
   ],
   skills: [
-    // { icon: SwiftSvg, title: 'Swift' },
-    // { icon: ObjectiveCSvg, title: 'Objective-C' },
+    { icon: SwiftSvg, title: 'Swift' },
+    { icon: ObjectiveCSvg, title: 'Objective-C' },
     { icon: FigmaSvg, title: 'Figma' },
   ],
   backgroundImage: channelBackground,
-  LogoType: MushroomLogotypeSvg
+  logoType: channelLogotype,
 };
 
 export const unionCollegeDetails: ExperienceDetails = {
   date: 'Fall 2017 - Spring 2021',
   title: 'B.A. Computer Science',
   location: 'Schenectady, NY',
-  color: '#990000', // Use the color from the logo/banner
+  color: '#892034', // Use the color from the logo/banner
   blurb: 'Studied computer science with a major focus on user interfaces. Took various art classes including 3D Graphics (art/CS cross departmental) and physical computing (microcontroller enhanced art in physical media).',
   responsibilities: [
     {
@@ -127,16 +129,42 @@ export const unionCollegeDetails: ExperienceDetails = {
     },
   ],
   skills: [
-    // { icon: SwiftSvg, title: 'Swift' },
-    // { icon: ObjectiveCSvg, title: 'Objective-C' },
-    { icon: FigmaSvg, title: 'Figma' },
+ 
   ],
   backgroundImage: unionCollegeBackground,
-  LogoType: MushroomLogotypeSvg
+  logoType: unionCollegeLogotype
+};
+
+export const tumblrDetails: ExperienceDetails = {
+  date: 'February 2015',
+  title: 'Software Intern (Systems)',
+  location: 'New York, NY',
+  color: '#001935', // Use the color from the logo/banner
+  blurb: 'Studied computer science with a major focus on user interfaces. Took various art classes including 3D Graphics (art/CS cross departmental) and physical computing (microcontroller enhanced art in physical media).',
+  responsibilities: [
+    {
+      title: 'UI Interoperability Expert',
+      description: 'Seamlessly uniting SwiftUI with UIKit to deliver inclusive, future-forward interfaces that bridge new possibilities with established functionality.',
+    },
+    {
+      title: 'SwiftUI Design System Innovator',
+      description: 'Building and maintaining a SwiftUI-centric design system, ensuring visual and functional excellence throughout our AI-integrated chat interfaces.',
+    },
+    {
+      title: 'GraphQL Integration',
+      description: 'Integrated GraphQL for efficient data management in numerous interfaces and projects.',
+    },
+  ],
+  skills: [
+    { icon: RubySvg, title: 'Ruby' },
+  ],
+  backgroundImage: tumblrBackground,
+  logoType: tumblrLogotype
 };
 
 export const experienceMap: ExperienceMap = {
-  mushroom: mushroomDetails,
-  channel: channelDetails,
-  union: unionCollegeDetails,
+  "mushroom": mushroomDetails,
+  "channel": channelDetails,
+  "union": unionCollegeDetails,
+  "tumblr": tumblrDetails,
 };

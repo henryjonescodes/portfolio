@@ -111,13 +111,6 @@ $transition-fast: 0.2s ease-in-out;
     align-items: center;
     justify-content: space-between;
 
-    .title {
-      >svg {
-        height: 72px;
-        width: 360px;
-      }
-    }
-
     .date {
       white-space: nowrap;
 
@@ -227,7 +220,7 @@ $transition-fast: 0.2s ease-in-out;
       min-height: $skills-height;
       max-height: $skills-height;
       width: min-content;
-      gap: 4px;
+      gap: 8px;
       left: 0;
 
       &Hidden {
@@ -237,9 +230,13 @@ $transition-fast: 0.2s ease-in-out;
 
       transition: opacity $transition-default;
 
-      svg {
-        height: $skills-height;
-        width: $skills-height;
+      >div {
+        width: min-content;
+
+        svg {
+          height: $skills-height;
+          width: auto;
+        }
       }
     }
   }
@@ -293,8 +290,8 @@ $transition-fast: 0.2s ease-in-out;
 
     .header {
       .title {
-        path {
-          fill: white !important;
+        >img {
+          filter: invert(100%) saturate(0%);
         }
       }
 
