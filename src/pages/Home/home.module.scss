@@ -4,19 +4,9 @@
 
 .wrapper {
   composes: pageScrollable;
-
   scroll-snap-type: y mandatory;
-  // gap: 48px;
 }
 
 .section {
   width: 100%;
-}
-
-
-@media (max-width: $width-medium) {
-  .wrapper {
-    // scroll-snap-type: y mandatory;
-    // gap: 48px;
-  }
 }

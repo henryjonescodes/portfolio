@@ -14,7 +14,7 @@ $header-height: 120px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 300px;
+  gap: 128px;
 
   transition: gap $duration-page-update ease-in-out;
 }
@@ -22,6 +22,12 @@ $header-height: 120px;
 @media (max-width: $width-default) {
   .experience {
     gap: 64px;
+  }
+}
+
+@media (max-width: $width-small) {
+  .experience {
+    gap: 32px;
   }
 }
 
@@ -82,6 +88,10 @@ $header-height: 120px;
 @media (max-width: $width-mobile) {
   .experienceCarousel {
     >.carousel {
+      >.content {
+        gap: 3vw;
+      }
+
       >h3 {
         font-size: 2rem;
       }
@@ -153,16 +163,17 @@ $header-height: 120px;
       .title {
         display: flex;
         flex-direction: column;
-        gap: 4px;
+        gap: 6px;
         width: min-content;
         max-width: 100%;
+        width: 100%;
+
 
         .date {
           display: none;
         }
 
-        h1,
-        h3 {
+        >h3 {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -171,10 +182,7 @@ $header-height: 120px;
         >h1 {
           transition: color $transition-default;
           font-size: 3rem;
-          line-height: 52px;
-          // white-space: nowrap;
-          // overflow: hidden;
-          // text-overflow: ellipsis;
+          line-height: 3.2rem;
         }
 
         >span {
@@ -281,7 +289,7 @@ $header-height: 120px;
 
     >img {
       right: 0;
-      top: -40px;
+      bottom: 0px;
       height: 150%;
       position: absolute;
     }
@@ -398,16 +406,6 @@ $header-height: 120px;
       height: calc(100% - $header-height);
     }
 
-    .backgroundImage {
-      // right: -40px;
-      // bottom: -200px;
-
-      // >img {
-      //   right: -40px;
-      //   bottom: -200px;
-      // }
-    }
-
     .header {
       padding: 0px 32px;
 
@@ -454,11 +452,11 @@ $header-height: 120px;
   .job {
     // ? > Card Mode
 
-    &Card {
-      min-width: 80vw;
-      scroll-snap-align: start;
-      scroll-margin: 10vw;
-    }
+    // &Card {
+    //   min-width: 80vw;
+    //   scroll-snap-align: start;
+    //   scroll-margin: 10vw;
+    // }
   }
 }
 
@@ -489,7 +487,6 @@ $header-height: 120px;
     .backgroundImage {
       >img {
         top: unset;
-        bottom: -30%;
         height: 120%;
       }
     }
@@ -529,21 +526,11 @@ $header-height: 120px;
         .content {
           .title {
             >h1 {
-              font-size: 2.2rem;
+              font-size: 2.4rem;
+              line-height: 2.5rem;
             }
           }
         }
-      }
-
-      .backgroundImage {
-
-        // bottom: -200px;
-        // right: -100px;
-
-        // >img {
-        //   bottom: -200px;
-        //   right: -100px;
-        // }
       }
     }
   }
@@ -556,8 +543,20 @@ $header-height: 120px;
     .backgroundImage {
       >img {
         top: unset;
-        bottom: -20%;
-        height: 100%;
+        height: unset;
+        width: 170%;
+      }
+    }
+
+    &Card {
+      height: 60vh;
+
+      .header {
+        .title {
+          >img {
+            height: 4.2rem;
+          }
+        }
       }
     }
 
@@ -601,12 +600,6 @@ $header-height: 120px;
         }
       }
     }
-
-    &Card {
-      min-width: 90vw;
-      scroll-snap-align: start;
-      scroll-margin: 5vw;
-    }
   }
 }
 
@@ -617,36 +610,58 @@ $header-height: 120px;
     $new-header-height: calc($header-height * 0.7);
 
     .header {
-      padding: 0px 2rem;
-      justify-content: center;
+      padding: 1.5rem;
       height: $new-header-height;
 
       .title {
         >img {
-          height: 4rem;
+          height: 3.5rem;
         }
       }
     }
 
+    .body {
+      padding: 1.5rem;
+    }
+
     .backgroundImage {
       height: calc(100% - $new-header-height);
+
+      >img {
+        width: 170%;
+      }
     }
 
     &Card {
+      min-width: 86vw;
+      scroll-snap-align: start;
+      scroll-margin: 7vw;
+
       .background {
         height: calc(100% - $new-header-height);
       }
 
       .body {
-        padding: 24px;
-
         .content {
-
           .title {
+            gap: 8px;
 
             >h1 {
               font-size: 2rem;
               line-height: 2rem;
+              padding-bottom: 4px;
+            }
+
+            >span {
+              >h3 {
+                font-size: 1.2rem;
+                line-height: 1.3rem;
+              }
+
+              >svg {
+                min-height: 18px;
+                min-width: 18px;
+              }
             }
           }
         }
@@ -659,14 +674,8 @@ $header-height: 120px;
       }
 
       .body {
-        padding: 2rem;
-
         .content {
-          // gap: 8px;
-
           .title {
-            // gap: 4px;
-
             >h1 {
               font-size: 2.3rem;
               line-height: 2.3rem;
@@ -757,17 +766,27 @@ $header-height: 120px;
 }
 
 @media (max-width: $width-small) {
-
-
   .socials {
     .list {
-      gap: 24px;
+      gap: 20px;
     }
   }
 
   .socialsIcon {
-    width: 42px;
-    height: 42px;
-    opacity: 0.8;
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: $width-mobile) {
+  .socials {
+    .list {
+      gap: 16px;
+    }
+  }
+
+  .socialsIcon {
+    width: 28px;
+    height: 28px;
   }
 }
