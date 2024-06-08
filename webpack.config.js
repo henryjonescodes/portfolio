@@ -41,13 +41,25 @@ module.exports = {
         test: /\.svg$/,
         use: [
           {
-            loader: 'babel-loader?cacheDirectory',
+            loader: 'babel-loader',
+            options: { cacheDirectory: true },
           },
           {
             loader: '@svgr/webpack',
             options: {
               babel: false,
               icon: true,
+              svgoConfig: {
+                plugins: [
+                  {
+                    name: 'removeAttrs',
+                    params: {
+                      attrs: '',
+                      preserveCurrentColor: true,
+                    },
+                  },
+                ],
+              },
             },
           },
         ],

@@ -1,0 +1,50 @@
+@import '@styles/colors.module.scss';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  max-width: 100%;
+  width: 800px;
+  height: auto;
+
+  svg,
+  path {
+    animation-timing-function: ease;
+    animation-direction: forwards;
+    animation-fill-mode: forwards;
+  }
+
+  &FillIndividual {
+    >svg {
+      >path {
+        animation-name: line-animation, fill;
+      }
+    }
+  }
+
+  &FillTogether {
+    >svg {
+      >path {
+        animation-name: line-animation;
+      }
+
+      animation-name: fill;
+    }
+  }
+}
+
+@keyframes line-animation {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fill {
+  80% {
+    fill: transparent;
+  }
+
+  100% {
+    fill: $text-primary;
+  }
+}
