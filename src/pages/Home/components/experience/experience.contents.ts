@@ -20,6 +20,10 @@ import ObjectiveCSvg from '@assets/svg/tools/objective-c.svg'
 import RubySvg from '@assets/svg/tools/ruby.svg'
 import SwiftSvg from '@assets/svg/tools/swift-01.svg'
 import XMPPSvg from '@assets/svg/tools/xmpp.svg'
+import UbuntuSvg from '@assets/svg/tools/ubuntu.svg'
+import PythonSvg from '@assets/svg/tools/python-01.svg'
+import JavaSvg from '@assets/svg/tools/java.svg'
+import CLanguageSvg from '@assets/svg/tools/c.svg'
 
 export type JobResponsibility = {
   title: string;
@@ -69,7 +73,7 @@ export const getDateString = (startDate: Date, endDate: Date | null, short?: boo
 export const mushroomDetails:ExperienceDetails = {
   startDate: new Date(2022, 2, 1), 
   endDate: new Date(2024, 0, 1), 
-  title: 'Software Engineer',
+  title: 'Full Stack Engineer',
   location: 'Palo Alto, CA',
   color: "#F71953",
   blurb: 'Frontend focused engineer and design/engineering liaison. Balanced technical precision with creative flair to create engaging gamified social media experiences across web, mobile, and Discord.',
@@ -102,7 +106,7 @@ export const mushroomDetails:ExperienceDetails = {
 export const channelDetails: ExperienceDetails = {
   startDate: new Date(2024, 0, 1),
   endDate: new Date(2024, 4, 1),
-  title: 'Software Engineer',
+  title: 'iOS Developer',
   location: 'Palo Alto, CA',
   color: '#191A1F',
   blurb: 'iOS developer crafting the future of AI-enhanced communication. Design-Tech Bridge facilitating rapid iteration and design system consistency.',
@@ -123,6 +127,7 @@ export const channelDetails: ExperienceDetails = {
   skills: [
     { icon: SwiftSvg, title: 'Swift' },
     { icon: ObjectiveCSvg, title: 'Objective-C' },
+    { icon: XMPPSvg, title: 'XMPP' },
     { icon: FigmaSvg, title: 'Figma' },
   ],
   backgroundImage: channelBackground,
@@ -147,7 +152,11 @@ export const unionCollegeDetails: ExperienceDetails = {
     },
   ],
   skills: [
- 
+    { icon: PythonSvg, title: 'Python' },
+    { icon: JavaSvg, title: 'Java' },
+    { icon: CLanguageSvg, title: 'C' },
+    { icon: UbuntuSvg, title: 'Ubuntu' },
+
   ],
   backgroundImage: unionCollegeBackground,
   logoType: unionCollegeLogotype
@@ -156,10 +165,10 @@ export const unionCollegeDetails: ExperienceDetails = {
 export const tumblrDetails: ExperienceDetails = {
   startDate: new Date(2015,1,1),
   endDate: null,
-  title: 'Software Intern (Systems)',
+  title: 'Systems Intern',
   location: 'New York, NY',
   color: '#001935', // Use the color from the logo/banner
-  blurb: 'Studied computer science with a major focus on user interfaces. Took various art classes including 3D Graphics (art/CS cross departmental) and physical computing (microcontroller enhanced art in physical media).',
+  blurb: 'Interned with the systems department at Tumblr, studying system architecture, dev-ops best practices, and deployment strategies.',
   responsibilities: [
     {
       title: 'Systems Scholar',
@@ -174,8 +183,8 @@ export const tumblrDetails: ExperienceDetails = {
 };
 
 export const experienceMap: ExperienceMap = {
-  "mushroom": mushroomDetails,
   "channel": channelDetails,
+  "mushroom": mushroomDetails,
   "union": unionCollegeDetails,
   "tumblr": tumblrDetails,
 };
