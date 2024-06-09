@@ -1,14 +1,14 @@
-import mushroomBackground from '@assets/jobs/mushroom-background.png'
-import mushroomLogotype from '@assets/jobs/mushroom-logotype.png'
+import mushroomBackground from '@assets/jobs/mushroom-background.webp'
+import mushroomLogotype from '@assets/jobs/mushroom-logotype.webp'
 
-import channelBackground from '@assets/jobs/channel-background.png'
-import channelLogotype from '@assets/jobs/channel-logotype.png'
+import channelBackground from '@assets/jobs/channel-background.webp'
+import channelLogotype from '@assets/jobs/channel-logotype.webp'
 
-import unionCollegeBackground from '@assets/jobs/union-college-background.png'
-import unionCollegeLogotype from '@assets/jobs/union-college-logotype.png'
+import unionCollegeBackground from '@assets/jobs/union-college-background.webp'
+import unionCollegeLogotype from '@assets/jobs/union-college-logotype.webp'
 
-import tumblrBackground from '@assets/jobs/tumblr-background.png'
-import tumblrLogotype from '@assets/jobs/tumblr-logotype.png'
+import tumblrBackground from '@assets/jobs/tumblr-background.webp'
+import tumblrLogotype from '@assets/jobs/tumblr-logotype.webp'
 
 import ExpoSvg from '@assets/svg/tools/expo-0.svg'
 import FigmaSvg from '@assets/svg/tools/figma.svg'

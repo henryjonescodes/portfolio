@@ -132,6 +132,16 @@ $header-height: 120px;
     align-items: center;
     justify-content: space-between;
 
+    .title {
+      height: 5.6rem;
+
+      >img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
     .date {
       white-space: nowrap;
       color: $text-primary;
@@ -542,14 +552,6 @@ $header-height: 120px;
 
     &Card {
       height: 60vh;
-
-      .header {
-        .title {
-          >img {
-            height: 4.2rem;
-          }
-        }
-      }
     }
 
     &Page {
@@ -606,9 +608,7 @@ $header-height: 120px;
       height: $new-header-height;
 
       .title {
-        >img {
-          height: 3.5rem;
-        }
+        height: 3.5rem;
       }
     }
 
