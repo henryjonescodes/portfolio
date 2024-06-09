@@ -36,6 +36,7 @@ export type JobSkill = {
 };
 
 export type ExperienceDetails = {
+  key: string,
   title: string;
   location: string;
   color: string;
@@ -71,6 +72,7 @@ export const getDateString = (startDate: Date, endDate: Date | null, short?: boo
 };
 
 export const mushroomDetails:ExperienceDetails = {
+  key: 'mushroom',
   startDate: new Date(2022, 2, 1), 
   endDate: new Date(2024, 0, 1), 
   title: 'Full Stack Engineer',
@@ -104,6 +106,7 @@ export const mushroomDetails:ExperienceDetails = {
 };
 
 export const channelDetails: ExperienceDetails = {
+  key: 'channel',
   startDate: new Date(2024, 0, 1),
   endDate: new Date(2024, 4, 1),
   title: 'iOS Developer',
@@ -135,6 +138,7 @@ export const channelDetails: ExperienceDetails = {
 };
 
 export const unionCollegeDetails: ExperienceDetails = {
+  key: 'unioncollege',
   startDate: new Date(2017,8,1),
   endDate: new Date(2021,5,1),
   title: 'B.A. Computer Science',
@@ -163,6 +167,7 @@ export const unionCollegeDetails: ExperienceDetails = {
 };
 
 export const tumblrDetails: ExperienceDetails = {
+  key: 'tumblr',
   startDate: new Date(2015,1,1),
   endDate: null,
   title: 'Systems Intern',
@@ -183,8 +188,8 @@ export const tumblrDetails: ExperienceDetails = {
 };
 
 export const experienceMap: ExperienceMap = {
-  "channel": channelDetails,
-  "mushroom": mushroomDetails,
-  "union": unionCollegeDetails,
-  "tumblr": tumblrDetails,
+  [channelDetails.key]: channelDetails,
+  [mushroomDetails.key]: mushroomDetails,
+  [unionCollegeDetails.key]: unionCollegeDetails,
+  [tumblrDetails.key]: tumblrDetails,
 };

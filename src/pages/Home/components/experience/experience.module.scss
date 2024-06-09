@@ -285,12 +285,12 @@ $header-height: 120px;
     overflow-y: hidden;
     overflow-x: visible;
     bottom: 0;
-    right: 0;
 
     >img {
       right: 0;
       bottom: 0px;
-      height: 150%;
+      max-height: 150%;
+      max-width: 100%;
       position: absolute;
     }
   }
@@ -329,11 +329,6 @@ $header-height: 120px;
       overflow-x: visible;
       right: -100%;
       bottom: -100%;
-
-      // >img {
-      //   right: -100%;
-      //   bottom: -100%;
-      // }
     }
 
     .header {
@@ -486,8 +481,7 @@ $header-height: 120px;
 
     .backgroundImage {
       >img {
-        top: unset;
-        height: 120%;
+        min-width: 150%;
       }
     }
 
@@ -542,9 +536,7 @@ $header-height: 120px;
 
     .backgroundImage {
       >img {
-        top: unset;
-        height: unset;
-        width: 170%;
+        min-width: 160%;
       }
     }
 
