@@ -4,10 +4,9 @@
   "description": "Henry Jones's software developer portfolio",
   "main": "index.js",
   "private": true,
-  "homepage": "/",
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --mode production",
+    "build": "webpack --mode production && cp _redirects dist/_redirects",
     "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -40,6 +39,7 @@
     "@types/webpack-env": "^1.18.0",
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^6.7.3",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",

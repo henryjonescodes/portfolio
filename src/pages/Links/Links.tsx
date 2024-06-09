@@ -42,7 +42,7 @@ const Links = () => {
           <LinksRow
             title="Resume"
             icon={Resume}
-            href="/resume.pdf"
+            href="/public/Henry-Jones-Resume.pdf"
             download="Henry-Jones-Resume.pdf"
           />
           <LinksRow title="Website" icon={Website} href="/" />
