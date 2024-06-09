@@ -6,6 +6,8 @@ import Linkedin from '@assets/svg/socials/linkedin-black.svg'
 import Mail from '@assets/svg/socials/mail.svg'
 import Calendar from '@assets/svg/socials/calendar-black.svg'
 import Website from '@assets/svg/socials/website.svg'
+import Resume from '@assets/svg/icons/list-black.svg'
+
 import IconsGridSquare from '@assets/svg/backgrounds/IconsGridSquare.svg'
 import {
   CALENDAR_URL,
@@ -24,20 +26,26 @@ const Links = () => {
           <h3>Creative Developer</h3>
         </div>
         <div className={styles.links}>
-          <LinksRow title="Email" icon={Mail} url={EMAIL_URL} />
-          <LinksRow title="Calendar" icon={Calendar} url={CALENDAR_URL} />
+          <LinksRow title="Email" icon={Mail} href={EMAIL_URL} />
+          <LinksRow title="Calendar" icon={Calendar} href={CALENDAR_URL} />
           <LinksRow
             title="LinkedIn"
             icon={Linkedin}
-            url={LINKEDIN_PROFILE_URL}
+            href={LINKEDIN_PROFILE_URL}
           />
           <LinksRow
             title="Instagram"
             icon={Instagram}
-            url={INSTAGRAM_PROFILE_URL}
+            href={INSTAGRAM_PROFILE_URL}
           />
-          <LinksRow title="Github" icon={GitHub} url={GITHUB_PROFILE_URL} />
-          <LinksRow title="Website" icon={Website} url="/" />
+          <LinksRow title="Github" icon={GitHub} href={GITHUB_PROFILE_URL} />
+          <LinksRow
+            title="Resume"
+            icon={Resume}
+            href="/resume.pdf"
+            download="Henry-Jones-Resume.pdf"
+          />
+          <LinksRow title="Website" icon={Website} href="/" />
         </div>
       </div>
       <div className={styles.background}>
@@ -50,13 +58,20 @@ const Links = () => {
 type LinksRowProps = {
   title: string
   icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>
-  url: string // Add a new prop for the URL
+  href: string
+  download?: string
 }
 
-const LinksRow: React.FC<LinksRowProps> = ({ title, icon: Icon, url }) => {
+const LinksRow: React.FC<LinksRowProps> = ({
+  title,
+  icon: Icon,
+  href,
+  download,
+}) => {
   return (
     <a
-      href={url}
+      href={href}
+      download={download}
       target="_blank"
       rel="noopener noreferrer"
       className={styles.row}
