@@ -132,6 +132,16 @@ $header-height: 120px;
     align-items: center;
     justify-content: space-between;
 
+    .title {
+      height: 5.6rem;
+
+      >img {
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+      }
+    }
+
     .date {
       white-space: nowrap;
       color: $text-primary;
@@ -285,12 +295,12 @@ $header-height: 120px;
     overflow-y: hidden;
     overflow-x: visible;
     bottom: 0;
-    right: 0;
 
     >img {
       right: 0;
       bottom: 0px;
-      height: 150%;
+      max-height: 150%;
+      max-width: 100%;
       position: absolute;
     }
   }
@@ -329,11 +339,6 @@ $header-height: 120px;
       overflow-x: visible;
       right: -100%;
       bottom: -100%;
-
-      // >img {
-      //   right: -100%;
-      //   bottom: -100%;
-      // }
     }
 
     .header {
@@ -486,8 +491,7 @@ $header-height: 120px;
 
     .backgroundImage {
       >img {
-        top: unset;
-        height: 120%;
+        min-width: 150%;
       }
     }
 
@@ -542,22 +546,12 @@ $header-height: 120px;
 
     .backgroundImage {
       >img {
-        top: unset;
-        height: unset;
-        width: 170%;
+        min-width: 160%;
       }
     }
 
     &Card {
       height: 60vh;
-
-      .header {
-        .title {
-          >img {
-            height: 4.2rem;
-          }
-        }
-      }
     }
 
     &Page {
@@ -614,9 +608,7 @@ $header-height: 120px;
       height: $new-header-height;
 
       .title {
-        >img {
-          height: 3.5rem;
-        }
+        height: 3.5rem;
       }
     }
 

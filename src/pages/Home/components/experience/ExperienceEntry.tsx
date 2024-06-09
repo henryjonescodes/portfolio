@@ -17,21 +17,6 @@ type ExperienceProps = {
   onClick: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
-const skillsVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      duration: CARD_ANIMATION_DURATION_SECONDS,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
-}
-
 const Experience = ({
   id,
   pageOpen,
@@ -142,7 +127,7 @@ const Experience = ({
           >
             {skills.map((skill, index) => (
               <motion.div key={index}>
-                <skill.icon width="auto" />
+                <skill.icon />
               </motion.div>
             ))}
           </motion.span>

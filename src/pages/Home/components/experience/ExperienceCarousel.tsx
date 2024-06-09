@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { experienceMap } from './experience.contents'
 import styles from './experience.module.scss'
 import {
@@ -7,6 +7,7 @@ import {
   default as Experience,
   default as ExperienceEntry,
 } from './ExperienceEntry'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 type OverlayProps = {
   overlayStyle: React.CSSProperties
@@ -20,13 +21,31 @@ export type CarouselProps = {
 }
 
 const ExperienceCarousel: React.FC<CarouselProps> = ({ scrollParentRef }) => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const [selectedId, setSelectedId] = useState<string>(null)
   const [pageOpen, setPageOpen] = useState<boolean>(false)
   const [overlayStyle, setOverlayStyle] = useState({})
 
-  const handleClick = (event: React.MouseEvent<HTMLDivElement>, id: string) => {
-    setSelectedId(id.toString())
+  useEffect(() => {
+    const path = location.pathname.split('/')[1]
+    if (path && experienceMap[path]) {
+      setSelectedId(path)
+      setTimeout(() => {
+        setPageOpen(true)
+      }, 10)
+    } else {
+      setSelectedId(null)
+      setPageOpen(false)
+      setOverlayStyle(null)
+    }
+  }, [location])
 
+  const handleClick = (
+    event: React.MouseEvent<HTMLDivElement>,
+    key: string
+  ) => {
     const container = event.currentTarget
     const wrapper = scrollParentRef.current
     const rect = container.getBoundingClientRect()
@@ -40,22 +59,15 @@ const ExperienceCarousel: React.FC<CarouselProps> = ({ scrollParentRef }) => {
       position: 'absolute',
     })
 
-    setTimeout(() => {
-      setPageOpen(true)
-    }, 100)
+    navigate(`/${key}`)
   }
 
   const dismissOverlay = () => {
     setPageOpen(false)
 
     setTimeout(() => {
-      resetOverlay()
+      navigate('/')
     }, CARD_ANIMATION_DURATION_SECONDS * 1000 + 100)
-  }
-
-  const resetOverlay = () => {
-    setSelectedId(null)
-    setOverlayStyle({})
   }
 
   return (

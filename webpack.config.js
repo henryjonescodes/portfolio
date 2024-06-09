@@ -1,6 +1,8 @@
 const path = require('path')
+const fs = require('fs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -80,7 +82,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
+        test: /\.(png|jpe?g|gif|webp)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -95,6 +97,33 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './public/favicon.ico',
+    }),
+    new WebpackManifestPlugin({
+      fileName: 'manifest.json',
+      publicPath: '/',
+      generate: (seed, files, entrypoints) => {
+        const manifestFiles = files.reduce((manifest, file) => {
+          manifest[file.name] = file.path
+          return manifest
+        }, seed)
+
+        // Read the existing web manifest
+        const webManifestPath = path.resolve(
+          __dirname,
+          'public',
+          'manifest.webmanifest'
+        )
+        const webManifest = JSON.parse(fs.readFileSync(webManifestPath, 'utf8'))
+
+        // Merge the asset manifest with the web manifest
+        const mergedManifest = {
+          ...webManifest,
+          ...manifestFiles,
+        }
+
+        return mergedManifest
+      },
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
   ],
