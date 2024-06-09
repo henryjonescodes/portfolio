@@ -4,7 +4,6 @@
   "description": "Henry Jones's software developer portfolio",
   "main": "index.js",
   "private": true,
-  "homepage": "/",
   "scripts": {
     "start": "webpack serve --mode development",
     "build": "webpack --mode production",
