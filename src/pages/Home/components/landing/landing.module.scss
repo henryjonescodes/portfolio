@@ -1,0 +1,86 @@
+@import './../../home.module.scss';
+@import '@styles/colors.module.scss';
+@import '@styles/layout.module.scss';
+@import '@styles/typography.module.scss';
+
+.wrapper {
+  composes: section;
+  composes: fonts;
+  position: relative;
+  padding: 0px $page-padding-default;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  .hero,
+  .blurb {
+    z-index: 1;
+    width: 100%;
+  }
+
+
+  .hero {
+    flex: 1;
+    padding-top: $page-padding-default;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .blurb {
+    padding-bottom: $page-padding-default;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    >h1 {
+      color: $text-primary;
+    }
+
+    >h2 {
+      color: $text-primary;
+    }
+
+    >h3 {
+      color: $text-secondary;
+      max-width: 600px;
+      padding-bottom: 2rem;
+    }
+  }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: flex-start;
+
+    >h3 {
+      color: $text-primary;
+    }
+
+    >p {
+      color: $text-secondary;
+    }
+
+    &Leading {
+      padding-bottom: 2rem;
+    }
+
+    &Trailing {
+      // border: 1px solid green;   
+    }
+  }
+}
+
+@media (max-width: $width-large) {
+  .wrapper {
+    min-height: unset;
+
+    .hero {
+      min-height: 100vh;
+    }
+  }
+}

@@ -3,15 +3,17 @@ import styles from './home.module.scss'
 import Hero from './components/hero'
 import Blurb from './components/blurb'
 import Experience from './components/experience'
+import Landing from './components/landing'
 
 const Home = () => {
   const wrapperRef = useRef(null)
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
-      <Hero />
+      <Landing />
+      {/* <Hero />
       <Blurb />
-      <Experience scrollParentRef={wrapperRef} />
+      <Experience scrollParentRef={wrapperRef} /> */}
     </div>
   )
 }
