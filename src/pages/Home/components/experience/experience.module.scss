@@ -7,6 +7,8 @@ $header-height: 120px;
 
 .experience {
   composes: section;
+
+  background-color: $background-primary;
   min-height: 100vh;
   scroll-snap-align: start;
 
@@ -36,7 +38,7 @@ $header-height: 120px;
 .experienceCarousel {
   composes: section;
   z-index: 0;
-  scroll-snap-align: start;
+  // scroll-snap-align: start;
 
   display: flex;
   flex-direction: column;
@@ -626,7 +628,7 @@ $header-height: 120px;
 
     &Card {
       min-width: 86vw;
-      scroll-snap-align: start;
+      // scroll-snap-align: start;
       scroll-margin: 7vw;
 
       .background {

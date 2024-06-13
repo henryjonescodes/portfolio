@@ -50,9 +50,9 @@ const TracedText: FC<TracedTextProps> = ({
     <div
       ref={wrapperRef}
       className={cn({
-        [styles.wrapper]: true,
-        [styles.wrapperFillIndividual]: mode !== 'together',
-        [styles.wrapperFillTogether]: mode === 'together',
+        [styles.tracedText]: true,
+        [styles.tracedTextFillIndividual]: mode !== 'together',
+        [styles.tracedTextFillTogether]: mode === 'together',
       })}
     >
       <SvgText preserveAspectRatio="xMinYMin meet" width="100%" height="auto" />

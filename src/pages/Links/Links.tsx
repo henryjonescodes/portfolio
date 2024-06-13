@@ -19,7 +19,7 @@ import {
 
 const Links = () => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.links}>
       <div className={styles.list}>
         <div className={styles.header}>
           <h1>Henry Jones</h1>

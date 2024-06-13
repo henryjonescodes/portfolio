@@ -3,7 +3,7 @@
 @import '@styles/layout.module.scss';
 @import '@styles/typography.module.scss';
 
-.wrapper {
+.landing {
   composes: section;
   composes: fonts;
   position: relative;
@@ -20,6 +20,7 @@
 
 
   .hero {
+    scroll-snap-align: start;
     flex: 1;
     padding-top: $page-padding-default;
     display: flex;
@@ -66,7 +67,9 @@
     }
 
     &Leading {
+      scroll-snap-align: start;
       padding-bottom: 2rem;
+      padding-top: $page-padding-default;
     }
 
     &Trailing {
@@ -76,7 +79,7 @@
 }
 
 @media (max-width: $width-large) {
-  .wrapper {
+  .landing {
     min-height: unset;
 
     .hero {

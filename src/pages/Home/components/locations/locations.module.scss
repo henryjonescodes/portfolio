@@ -1,0 +1,31 @@
+@import '@styles/colors.module.scss';
+@import '@styles/layout.module.scss';
+@import '@styles/typography.module.scss';
+
+.locations {
+  display: flex;
+  composes: fonts;
+  padding: 0px $page-padding-default;
+  background-color: $background-primary;
+  gap: 2rem;
+
+  >.blurb {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    >span {
+      >h3 {
+        color: $text-primary;
+
+        &:first-of-type {
+          color: $text-secondary;
+        }
+      }
+    }
+
+    >p {
+      color: $text-secondary;
+    }
+  }
+}

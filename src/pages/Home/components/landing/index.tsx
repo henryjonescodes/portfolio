@@ -8,7 +8,7 @@ import cn from 'classnames'
 import VideoBackground from '@components/video-background'
 const Landing = () => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.landing}>
       <VideoBackground videoSrc={backgroundVideo} />
       <div className={styles.hero}>
         <div className={styles.header}>

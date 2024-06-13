@@ -12,7 +12,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({
   className,
 }) => {
   return (
-    <div className={cn(styles.wrapper, className)}>
+    <div className={cn(styles.videoBackground, className)}>
       <video autoPlay loop muted className={styles.video}>
         <source src={videoSrc} type="video/mp4" />
         Your browser does not support the video tag.

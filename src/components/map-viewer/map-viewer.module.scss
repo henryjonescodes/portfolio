@@ -1,0 +1,259 @@
+@import '@styles/colors.module.scss';
+@import '@styles/layout.module.scss';
+@import '@styles/typography.module.scss';
+
+
+.portland,
+.paloAlto,
+.nyc,
+.schenectady {
+  .details {
+    opacity: 1 !important;
+  }
+}
+
+.portland {
+  $scale: 190%;
+
+  &Pin {
+    left: 91.2%;
+    top: 27.0%;
+  }
+
+  .pinSelected {
+    rotate: 330deg !important;
+  }
+
+  >.map {
+    left: -120%;
+    top: -15%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    left: 96% !important;
+    top: 29% !important;
+  }
+}
+
+.nyc {
+  $scale: 190%;
+
+  &Pin {
+    left: 87%;
+    top: 37.5%;
+  }
+
+  .pinSelected {
+    rotate: 340deg !important;
+  }
+
+  >.map {
+    left: -110%;
+    top: -28%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    left: 91.5% !important;
+    top: 41% !important;
+  }
+}
+
+.paloAlto {
+  $scale: 190%;
+
+  &Pin {
+    left: 6.5%;
+    top: 44%;
+  }
+
+  .pinSelected {
+    rotate: 155deg !important;
+  }
+
+  >.map {
+    left: 35%;
+    top: -20%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    left: -16% !important;
+    top: 30% !important;
+  }
+}
+
+.schenectady {
+  $scale: 190%;
+
+  &Pin {
+    left: 85%;
+    top: 30%;
+  }
+
+  .pinSelected {
+    rotate: 190deg !important;
+  }
+
+  >.map {
+    left: -82%;
+    top: -15%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    left: 65.5% !important;
+    top: 13% !important;
+  }
+}
+
+
+.pin {
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  height: 5.7%;
+  width: auto;
+  rotate: 225deg;
+  transform-origin: top left;
+
+  &Minimized {
+    transform: scale(0.5);
+    opacity: 0.6;
+  }
+
+  path {
+    fill: red;
+    stroke: red;
+  }
+}
+
+
+.mapViewer {
+  composes: fonts;
+  background-color: $background-primary;
+  border: 4px solid white;
+  border-radius: 32px;
+  overflow: hidden;
+  min-width: 700px;
+  aspect-ratio: 1.4;
+  position: relative;
+
+  >.map {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    >.grid {
+      position: absolute;
+      left: -20%;
+      top: -10%;
+      // transform: translateX(-50%) translateY(-50%);
+      height: 140%;
+      width: 140%;
+      z-index: 0;
+      opacity: 0.7;
+      z-index: 0;
+    }
+
+    >.usa {
+      z-index: 1;
+      padding: 4.5%;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+
+      svg,
+      path {
+        fill: black;
+      }
+    }
+
+    >.pins {
+      z-index: 2;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 1;
+
+      >.details {
+        transition: opacity 0.2s ease-in-out;
+        position: absolute;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 12px;
+        left: 50%;
+        top: 50%;
+        opacity: 0;
+
+        >span {
+          width: 100%;
+          display: flex;
+          gap: 4px;
+          align-items: center;
+          justify-content: flex-start;
+          white-space: nowrap;
+
+          h4 {
+            font-size: 1.8rem;
+            line-height: 1.9rem;
+            color: white;
+          }
+
+          h5 {
+            font-size: 1.5rem;
+            line-height: 1.6rem;
+            color: white;
+          }
+
+          svg {
+            height: 16px;
+            width: 16px;
+          }
+        }
+
+        >div {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+
+          >svg {
+            position: absolute;
+
+            &:nth-of-type(2) {
+              right: 0px;
+              transform: rotate(90deg);
+            }
+
+            &:nth-of-type(3) {
+              right: 0px;
+              bottom: 0px;
+              transform: rotate(180deg);
+            }
+
+            &:nth-of-type(4) {
+              left: 0px;
+              bottom: 0px;
+              transform: rotate(270deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+}
