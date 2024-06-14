@@ -49,10 +49,10 @@ const Landing = () => {
             involving Three.js and React, exploring the creative potentials of
             web development.
           </p>
-          <p>
+          {/* <p>
             When I'm not coding, you'll find me rock climbing, reading, or
             exploring the latest tech trends.
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

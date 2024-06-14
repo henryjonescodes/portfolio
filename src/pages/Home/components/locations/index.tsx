@@ -19,20 +19,24 @@ const Locations = () => {
 
   return (
     <div className={styles.locations}>
-      <div className={styles.blurb}>
-        <span>
-          <h3>{prefix}</h3>
-          <h3
-            onClick={() => {
-              setCurrentKey(previousKey)
-            }}
-          >
-            {title}
-          </h3>
-        </span>
-        <p>{description}</p>
+      <div className={styles.content}>
+        <div className={styles.blurb}>
+          <span>
+            <h3>{prefix}</h3>
+            <h3
+              onClick={() => {
+                setCurrentKey(previousKey)
+              }}
+            >
+              {title}
+            </h3>
+          </span>
+          <p>{description}</p>
+        </div>
+        <div className={styles.viewer}>
+          <MapViewer currentKey={currentKey} setCurrentKey={setCurrentKey} />
+        </div>
       </div>
-      <MapViewer currentKey={currentKey} setCurrentKey={setCurrentKey} />
     </div>
   )
 }

@@ -8,7 +8,6 @@ const Experience: React.FC<ExperienceProps> = ({ scrollParentRef }) => {
   return (
     <div className={styles.experience}>
       <ExperienceCarousel scrollParentRef={scrollParentRef} />
-      <Socials />
     </div>
   )
 }

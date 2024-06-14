@@ -7,29 +7,32 @@
   composes: section;
   composes: fonts;
   position: relative;
-  padding: 0px $page-padding-default;
+  padding: 0px $page-padding-large;
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100vh;
 
   .hero,
   .blurb {
     z-index: 1;
     width: 100%;
+    max-width: $max-width-page;
   }
 
 
   .hero {
     scroll-snap-align: start;
     flex: 1;
-    padding-top: $page-padding-default;
+    padding-top: $page-padding-large;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
 
   .blurb {
-    padding-bottom: $page-padding-default;
+    min-height: 15vh;
+    max-height: 15vh;
   }
 
   .header {
@@ -55,8 +58,10 @@
   .about {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: $paragraph-spacing-large;
     align-items: flex-start;
+
+
 
     >h3 {
       color: $text-primary;
@@ -68,13 +73,14 @@
 
     &Leading {
       scroll-snap-align: start;
-      padding-bottom: 2rem;
-      padding-top: $page-padding-default;
+      padding-bottom: $paragraph-spacing-large;
+      padding-top: $page-padding-large;
+      min-height: 35vh;
+      max-height: 35vh;
+      justify-content: flex-end;
     }
 
-    &Trailing {
-      // border: 1px solid green;   
-    }
+    &Trailing {}
   }
 }
 
@@ -84,6 +90,98 @@
 
     .hero {
       min-height: 100vh;
+    }
+
+    .blurb {
+      padding-bottom: 4rem;
+    }
+  }
+}
+
+@media (max-width: $width-default) {
+  .landing {
+    padding: 0px $page-padding-default;
+
+    .hero {
+      padding-top: $page-padding-default;
+    }
+
+    .blurb {
+      padding-bottom: 10rem;
+    }
+
+    .about {
+      &Leading {
+        padding-top: $page-padding-default;
+      }
+    }
+  }
+}
+
+
+@media (max-width: $width-compact) {
+  .landing {
+    padding: 0px $page-padding-compact;
+
+    .hero {
+      padding-top: $page-padding-compact;
+    }
+
+    .about {
+      &Leading {
+        padding-top: $page-padding-compact;
+      }
+    }
+  }
+}
+
+@media (max-width: $width-small) {
+  .landing {
+    padding: 0px $page-padding-small;
+
+    .hero {
+      padding-top: $page-padding-small;
+    }
+
+    .blurb {
+      padding-bottom: unset;
+      min-height: 16.5vh;
+      max-height: 16.5vh;
+    }
+
+    .about {
+      gap: $paragraph-spacing-small;
+
+      &Leading {
+        padding-bottom: $paragraph-spacing-small;
+        min-height: 26vh;
+        max-height: 26vh;
+      }
+    }
+  }
+}
+
+@media (max-width: $width-mobile) {
+  .landing {
+    padding: 0px $page-padding-mobile;
+
+    .header {
+      gap: .3rem
+    }
+
+    .hero {
+      padding-top: $page-padding-mobile;
+    }
+
+    .blurb {
+      min-height: 50vh;
+    }
+
+    .about {
+      &Leading {
+        min-height: 50vh;
+        padding-top: $page-padding-mobile;
+      }
     }
   }
 }

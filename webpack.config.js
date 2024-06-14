@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WebpackQRCodePlugin = require('webpack-dev-server-qr-code')
 
 module.exports = {
   entry: './src/index.tsx',
@@ -17,6 +18,7 @@ module.exports = {
     alias: {
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@components': path.resolve(__dirname, 'src/components'),
+      '@context': path.resolve(__dirname, 'src/context'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@hooks': path.resolve(__dirname, 'src/hooks'),
@@ -142,11 +144,13 @@ module.exports = {
       },
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
+    new WebpackQRCodePlugin(),
   ],
   devServer: {
     static: path.join(__dirname, 'public'),
     port: 3000,
     hot: true,
+    host: '0.0.0.0',
     historyApiFallback: true,
   },
 }

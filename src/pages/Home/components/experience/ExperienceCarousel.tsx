@@ -74,7 +74,9 @@ const ExperienceCarousel: React.FC<CarouselProps> = ({ scrollParentRef }) => {
     <>
       <div className={styles.experienceCarousel}>
         <div className={styles.carousel}>
-          <h3>Experience</h3>
+          <span className={styles.header}>
+            <h3>Experience</h3>
+          </span>
           <motion.div layoutScroll className={styles.content}>
             {Object.keys(experienceMap).map((key) => (
               <ExperienceEntry

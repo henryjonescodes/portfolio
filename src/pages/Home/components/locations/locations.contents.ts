@@ -20,15 +20,15 @@ export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady
       prefix: 'I grew up in',
       title: 'Portland, Maine',
       description:
-        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throuought Portland’s diverse restaurant scene.',
+        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throuot Portland’s diverse restaurant scene.',
       mapTitle: 'PORTLAND, ME',
       mapHighlights: [{ icon: Book, text: 'Casco Bay HS' }],
     },
     paloAlto: {
-      prefix: 'I worked at startups in',
+      prefix: 'I make apps in',
       title: 'Palo Alto, California',
       description:
-        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throuought Portland’s diverse restaurant scene.',
+        'I’ve spent the past few years Immersed in the consumer-tech startup scene building elegant and performant chat and social media UIs for web and mobile.',
       mapTitle: 'PALO ALTO, CA',
       mapHighlights: [
         { icon: Mushroom, text: 'Mushroom.gg' },
@@ -36,10 +36,10 @@ export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady
       ],
     },
     nyc: {
-      prefix: 'I lived and interned in',
-      title: 'New York, New York',
+      prefix: 'I interned at Tumblr in',
+      title: 'New York City',
       description:
-        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throuought Portland’s diverse restaurant scene.',
+        'After an internship with Tumblr early on my journey into software and a stint living in Manhattan during college, I love NYC. I’m currently in process of moving from California, destination Brooklyn.',
       mapTitle: 'NEW YORK, NY',
       mapHighlights: [{ icon: Tumblr, text: 'Tumblr' }],
     },
@@ -47,7 +47,7 @@ export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady
       prefix: 'I went to Union College in',
       title: 'Schenectady, New York',
       description:
-        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throuought Portland’s diverse restaurant scene.',
+        'Focusing on UI research and creative development I earned a B.A. in Computer Science with a minor in Spanish, collecting various 3D design and film studies credits along the way.',
       mapTitle: 'SCHENECTADY, NY',
       mapHighlights: [{ icon: Book, text: 'Union College' }],
     },

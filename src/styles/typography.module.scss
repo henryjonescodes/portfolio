@@ -3,7 +3,7 @@
 
 $font-size-large: 10rem;
 $font-size-medium: 4rem;
-$font-size-small: 3rem;
+$font-size-small: 2.8rem;
 $font-size-tiny: 1.8rem;
 
 .fonts {
@@ -41,7 +41,7 @@ $font-size-tiny: 1.8rem;
 
   p {
     font-size: $font-size-tiny;
-    line-height: calc($font-size-tiny * 1.3);
+    line-height: calc($font-size-tiny * 1.2);
 
     font-family: "Anonymous Pro";
   }
@@ -49,6 +49,32 @@ $font-size-tiny: 1.8rem;
 
 @media (max-width: $width-default) {
   $scalar: 0.8;
+
+  .fonts {
+    h1 {
+      font-size: calc($font-size-large * $scalar);
+      line-height: calc($font-size-large * $scalar);
+    }
+
+    h2 {
+      font-size: calc($font-size-medium * $scalar);
+      line-height: calc($font-size-medium * $scalar * 1.15);
+    }
+
+    h3 {
+      font-size: calc($font-size-small * $scalar);
+      line-height: calc($font-size-small * $scalar * 1.15);
+    }
+
+    p {
+      font-size: calc($font-size-tiny * $scalar);
+      line-height: calc($font-size-tiny * $scalar * 1.3);
+    }
+  }
+}
+
+@media (max-width: $width-compact) {
+  $scalar: 0.7;
 
   .fonts {
     h1 {
@@ -95,6 +121,63 @@ $font-size-tiny: 1.8rem;
     p {
       font-size: calc($font-size-tiny * $scalar);
       line-height: calc($font-size-tiny * $scalar * 1.3);
+    }
+  }
+}
+
+@media (max-width: $width-small) {
+  $scalar: 0.6;
+  $scalar-h1: 0.7;
+  $scalar-h2: 0.8;
+
+  .fonts {
+    h1 {
+      font-size: calc($font-size-large * $scalar * $scalar-h1);
+      line-height: calc($font-size-large * $scalar * $scalar-h1);
+    }
+
+    h2 {
+      font-size: calc($font-size-medium * $scalar * $scalar-h2);
+      line-height: calc($font-size-medium * $scalar * $scalar-h2 * 1.15);
+    }
+
+    h3 {
+      font-size: calc($font-size-small * $scalar);
+      line-height: calc($font-size-small * $scalar * 1.15);
+    }
+
+    p {
+      font-size: calc($font-size-tiny * $scalar);
+      line-height: calc($font-size-tiny * $scalar * 1.3);
+    }
+  }
+}
+
+@media (max-width: $width-mobile) {
+  $scalar: 0.5;
+  $scalar-h1: 0.7;
+  $scalar-h2: 0.9;
+  $scalar-p: 1.2;
+
+  .fonts {
+    h1 {
+      font-size: calc($font-size-large * $scalar * $scalar-h1);
+      line-height: calc($font-size-large * $scalar * $scalar-h1);
+    }
+
+    h2 {
+      font-size: calc($font-size-medium * $scalar * $scalar-h2);
+      line-height: calc($font-size-medium * $scalar * $scalar-h2 * 1.15);
+    }
+
+    h3 {
+      font-size: calc($font-size-small * $scalar);
+      line-height: calc($font-size-small * $scalar * 1.15);
+    }
+
+    p {
+      font-size: calc($font-size-tiny * $scalar * $scalar-p);
+      line-height: calc($font-size-tiny * $scalar * $scalar-p * 1.3);
     }
   }
 }

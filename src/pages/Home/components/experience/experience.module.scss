@@ -1,13 +1,14 @@
 @import './../../home.module.scss';
 @import '@styles/animation.module.scss';
+@import '@styles/typography.module.scss';
 
 $transition-default: 0.4s ease-in-out;
 $transition-fast: 0.2s ease-in-out;
 $header-height: 120px;
 
 .experience {
+  height: 1px;
   composes: section;
-
   background-color: $background-primary;
   min-height: 100vh;
   scroll-snap-align: start;
@@ -35,6 +36,14 @@ $header-height: 120px;
 
 // ** ** ** ** ** ** ** ** ** Experience  ** ** ** ** ** ** ** ** ** //
 
+.header {
+  composes: fonts;
+  width: 100%;
+  max-width: $max-width-page;
+  color: $text-primary;
+  padding: 0px $page-padding-large;
+}
+
 .experienceCarousel {
   composes: section;
   z-index: 0;
@@ -52,19 +61,16 @@ $header-height: 120px;
     align-items: center;
     justify-content: center;
     gap: $spacing-paragraph;
+    padding-bottom: 3rem;
 
-    >h3 {
-      color: $text-secondary;
-      text-transform: uppercase;
-      font-size: 3rem;
-    }
+
 
     >.content {
       width: 100%;
       display: flex;
       align-items: center;
       gap: 24px;
-      padding: 0px 24px;
+      padding: 0px $page-padding-large;
       overflow: auto;
 
       &::-webkit-scrollbar {
@@ -75,15 +81,45 @@ $header-height: 120px;
   }
 }
 
+@media (max-width: $width-default) {
+  .header {
+    padding: 0px $page-padding-default;
+  }
+
+  .experienceCarousel {
+    >.carousel {
+      >.content {
+        padding: 0px $page-padding-default;
+      }
+    }
+  }
+}
+
 @media (max-width: $width-compact) {
   .experienceCarousel {
     >.carousel {
       >.content {
-        padding: 0px;
-        scroll-snap-type: x mandatory;
-        padding: 0 20vw;
+        padding: 0px $page-padding-compact;
       }
     }
+  }
+
+  .header {
+    padding: 0px $page-padding-compact;
+  }
+}
+
+@media (max-width: $width-small) {
+  .experienceCarousel {
+    >.carousel {
+      >.content {
+        padding: 0px $page-padding-small;
+      }
+    }
+  }
+
+  .header {
+    padding: 0px $page-padding-small;
   }
 }
 
@@ -91,6 +127,8 @@ $header-height: 120px;
   .experienceCarousel {
     >.carousel {
       >.content {
+        scroll-snap-type: x mandatory;
+        padding: 0 $page-padding-mobile;
         gap: 3vw;
       }
 
@@ -98,6 +136,10 @@ $header-height: 120px;
         font-size: 2rem;
       }
     }
+  }
+
+  .header {
+    padding: 0px $page-padding-mobile;
   }
 }
 
@@ -627,9 +669,8 @@ $header-height: 120px;
     }
 
     &Card {
-      min-width: 86vw;
-      // scroll-snap-align: start;
-      scroll-margin: 7vw;
+      min-width: calc(100vw - $page-padding-mobile * 2);
+      scroll-margin: $page-padding-mobile;
 
       .background {
         height: calc(100% - $new-header-height);

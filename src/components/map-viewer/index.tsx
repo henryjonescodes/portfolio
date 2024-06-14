@@ -22,7 +22,7 @@ const MapViewer = ({ currentKey, setCurrentKey }: Props) => {
 
   return (
     <motion.div
-      layout
+      // layout
       className={cn({
         [styles.mapViewer]: true,
         [styles.portland]: currentKey === 'portland',
@@ -35,7 +35,7 @@ const MapViewer = ({ currentKey, setCurrentKey }: Props) => {
       }}
     >
       <motion.div className={styles.map} layout>
-        <motion.div className={styles.pins} layout>
+        <motion.div className={styles.pins}>
           <AnimatePresence>
             {!!currentKey && (
               <motion.div className={styles.details} layout>
