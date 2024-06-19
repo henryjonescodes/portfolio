@@ -20,7 +20,7 @@ export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady
       prefix: 'I grew up in',
       title: 'Portland, Maine',
       description:
-        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throuot Portland’s diverse restaurant scene.',
+        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throughout Portland’s diverse restaurant scene.',
       mapTitle: 'PORTLAND, ME',
       mapHighlights: [{ icon: Book, text: 'Casco Bay HS' }],
     },
