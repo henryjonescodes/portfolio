@@ -3,6 +3,7 @@ import Mushroom from '@assets/jobs/mushroom-icon.svg'
 import Tumblr from '@assets/jobs/tumblr-icon.svg'
 import Book from '@assets/svg/icons/book.svg'
 import House from '@assets/svg/icons/house.svg'
+import { PointOfInterest } from './types'
 
 
 
