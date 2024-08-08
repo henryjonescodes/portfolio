@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import styles from './locations.module.scss'
-import MapViewer from '@components/map-viewer'
-import { locationData, LocationPinKeys } from './locations.contents'
+import MapViewer from '@components/map-viewer/MapViewer'
+import { locationData } from '../../../../components/map-viewer/map-viewer.contents'
+import { LocationPinKeys } from '@components/map-viewer/types'
 
 const Locations = () => {
-  const [currentKey, setCurrentKey] = useState<LocationPinKeys>('paloAlto')
+  const [currentKey, setCurrentKey] = useState<LocationPinKeys>('portland')
   const [previousKey, setPreviousKey] = useState<LocationPinKeys>(currentKey)
 
   useEffect(() => {
