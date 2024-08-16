@@ -12,6 +12,8 @@ export type PointOfInterest = {
     icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>
     text: string
   }[]
+  className: string
+  pinClassName: string
 }
 
 const keys = ['portland', 'paloAlto', 'nyc', 'schenectady'] as const
