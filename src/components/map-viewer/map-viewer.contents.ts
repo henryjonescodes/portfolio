@@ -2,27 +2,28 @@ import Channel from '@assets/jobs/channel-icon.svg'
 import Mushroom from '@assets/jobs/mushroom-icon.svg'
 import Tumblr from '@assets/jobs/tumblr-icon.svg'
 import Book from '@assets/svg/icons/book.svg'
+import House from '@assets/svg/icons/house.svg'
+import { PointOfInterest } from './types'
 
-export type PointOfInterest = {
-  prefix: string
-  title: string
-  description: string
-  mapTitle: string
-  mapHighlights: {
-    icon: React.FunctionComponent<React.SVGAttributes<SVGElement>>
-    text: string
-  }[]
-}
+
 
 export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady', PointOfInterest> =
   {
+    // portland: {
+    //   prefix: 'I grew up in',
+    //   title: 'Portland, Maine',
+    //   description:
+    //     'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throughout Portland’s diverse restaurant scene.',
+    //   mapTitle: 'PORTLAND, ME',
+    //   mapHighlights: [{ icon: Book, text: 'Casco Bay HS' }],
+    // },
     portland: {
-      prefix: 'I grew up in',
+      prefix: 'I’m currently based in',
       title: 'Portland, Maine',
       description:
-        'I grew up in the northeast in coastal Maine. I spent my time sailing off rocky shores, hiking and biking around pristine mountains, lakes, and rivers, and cooking at various restaurants throughout Portland’s diverse restaurant scene.',
+        'I’m searching for my next professional adventure in software, enjoying summer on the coast with family and friends, and getting some of my personal projects off of my backlog.',
       mapTitle: 'PORTLAND, ME',
-      mapHighlights: [{ icon: Book, text: 'Casco Bay HS' }],
+      mapHighlights: [{ icon: House, text: 'Home' }],
     },
     paloAlto: {
       prefix: 'I make apps in',
@@ -53,5 +54,3 @@ export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady
     },
   }
 
-const keys = ['portland', 'paloAlto', 'nyc', 'schenectady'] as const
-export type LocationPinKeys = (typeof keys)[number]
