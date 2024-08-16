@@ -3,20 +3,13 @@ import styles from './map-viewer.module.scss'
 import grid from '@assets/png/backgrounds/grid.png'
 import USA from '@assets/svg/backgrounds/usa.svg'
 import Corner from '@assets/svg/icons/corner.svg'
-import {
-  locationData,
-  LocationPinKeys,
-} from '@pages/Home/components/locations/locations.contents'
 import cn from 'classnames'
 import { AnimatePresence, motion } from 'framer-motion'
 import Pin from './Pin'
+import { MapViewerProps } from './types'
+import { locationData } from './map-viewer.contents'
 
-type Props = {
-  currentKey: LocationPinKeys
-  setCurrentKey: React.Dispatch<React.SetStateAction<LocationPinKeys | null>>
-}
-
-const MapViewer = ({ currentKey, setCurrentKey }: Props) => {
+const MapViewer = ({ currentKey, setCurrentKey }: MapViewerProps) => {
   const { mapTitle: title, mapHighlights: highlights } =
     locationData[currentKey] ?? {}
 

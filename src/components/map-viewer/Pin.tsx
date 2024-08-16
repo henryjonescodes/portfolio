@@ -2,7 +2,6 @@ import React from 'react'
 import cn from 'classnames'
 import ArrowIcon from '@assets/svg/icons/arrow.svg'
 import styles from './map-viewer.module.scss'
-import { LocationPinKeys } from '.'
 
 type PinProps = {
   className: string
