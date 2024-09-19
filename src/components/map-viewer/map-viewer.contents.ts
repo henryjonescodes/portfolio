@@ -40,7 +40,7 @@ export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady
       prefix: 'I’m on the job market in',
       title: 'New York City',
       description:
-        'On the lookout for my next challenge in New York City, where I can apply my expertise in React, TypeScript, iOS, and frontend development to build innovative, seamless user experiences. Working on my next big idea in the meantime',
+        'On the lookout for my next challenge in New York City, where I can apply my expertise in React, TypeScript, iOS, and frontend development to build innovative, seamless user experiences. Working on my next big idea in the meantime.',
       mapTitle: 'NEW YORK, NY',
       mapHighlights: [
         // { icon: Tumblr, text: 'Tumblr' },
