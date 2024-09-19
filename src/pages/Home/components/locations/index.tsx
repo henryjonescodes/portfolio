@@ -5,7 +5,7 @@ import { locationData } from '../../../../components/map-viewer/map-viewer.conte
 import { LocationPinKeys } from '@components/map-viewer/types'
 
 const Locations = () => {
-  const [currentKey, setCurrentKey] = useState<LocationPinKeys>('portland')
+  const [currentKey, setCurrentKey] = useState<LocationPinKeys>('nyc')
   const [previousKey, setPreviousKey] = useState<LocationPinKeys>(currentKey)
 
   useEffect(() => {
