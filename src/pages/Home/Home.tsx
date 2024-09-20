@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
-import styles from './home.module.scss'
 import Experience from './components/experience'
 import Landing from './components/landing'
-import Locations from './components/locations'
+import styles from './home.module.scss'
+import MapViewer from '@components/map-viewer'
 
 const Home = () => {
   const wrapperRef = useRef(null)
@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
       <Landing />
-      <Locations />
+      <MapViewer />
       <Experience scrollParentRef={wrapperRef} />
     </div>
   )

@@ -153,7 +153,7 @@ $font-size-tiny: 1.8rem;
   }
 }
 
-@media (max-width: $width-mobile) {
+@media (max-width: $width-small) {
   $scalar: 0.5;
   $scalar-h1: 0.7;
   $scalar-h2: 0.9;

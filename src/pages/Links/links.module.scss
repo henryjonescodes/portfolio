@@ -134,7 +134,7 @@ $background-color: $background-primary;
   }
 }
 
-@media (max-width: $width-mobile) {
+@media (max-width: $width-small) {
   .list {
     gap: 8px;
 

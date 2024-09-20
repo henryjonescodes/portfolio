@@ -2,492 +2,79 @@
 @import '@styles/layout.module.scss';
 @import '@styles/typography.module.scss';
 
+/////////////////////////////////////////////////
+//                MAP VIEWER                   //
+/////////////////////////////////////////////////
 
-
-
-
-.pin {
-  transition: all 0.3s ease-in-out;
-  position: absolute;
-  height: 5.7%;
-  width: auto;
-  rotate: 225deg;
-  transform-origin: top left;
-
-  &Minimized {
-    transform: scale(0.5);
-    opacity: 0.6;
-  }
-
-  path {
-    fill: red;
-    stroke: red;
-  }
-}
-
-
-.mapViewer {
-  composes: fonts;
-  background-color: $background-primary;
-  border: 4px solid white;
-  border-radius: 32px;
-  overflow: hidden;
-  aspect-ratio: 1.4 !important;
+.locations {
   position: relative;
-  min-width: 700px;
-  max-width: 700px;
+  composes: fonts;
+  padding: 0px $page-padding-large $page-padding-large $page-padding-large;
+  max-width: 100%;
+  width: 100%;
+  height: 1px;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
 
-  >.map {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-
+  .content {
+    position: relative;
     display: flex;
-
-    >.grid {
-      position: absolute;
-      left: -28%;
-      top: -10%;
-      height: 155%;
-      width: 155%;
-      z-index: 0;
-      opacity: 0.7;
-      z-index: 0;
-    }
-
-    >.usa {
-      z-index: 1;
-      padding: 4.5%;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-
-      svg,
-      path {
-        fill: black;
-      }
-    }
-
-    >.pins {
-      z-index: 2;
-      position: absolute;
-      height: 100%;
-      width: 100%;
-      top: 0;
-      left: 0;
-      opacity: 1;
-
-      >.details {
-        transition: opacity 0.2s ease-in-out;
-        position: absolute;
-        z-index: 2;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 12px;
-        left: 50%;
-        top: 50%;
-        opacity: 0;
-
-        >span {
-          width: 100%;
-          display: flex;
-          gap: 4px;
-          align-items: center;
-          justify-content: flex-start;
-          white-space: nowrap;
-
-          h4 {
-            font-size: 1.8rem;
-            line-height: 1.9rem;
-            color: white;
-          }
-
-          h5 {
-            font-size: 1.5rem;
-            line-height: 1.6rem;
-            color: white;
-          }
-
-          svg {
-            height: 1.2rem;
-            width: 1.2rem;
-          }
-        }
-
-        >div {
-          position: absolute;
-          height: 100%;
-          width: 100%;
-
-          >svg {
-            position: absolute;
-
-            &:nth-of-type(2) {
-              right: 0px;
-              transform: rotate(90deg);
-            }
-
-            &:nth-of-type(3) {
-              right: 0px;
-              bottom: 0px;
-              transform: rotate(180deg);
-            }
-
-            &:nth-of-type(4) {
-              left: 0px;
-              bottom: 0px;
-              transform: rotate(270deg);
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.portland,
-.paloAlto,
-.nyc,
-.schenectady {
-  .details {
-    opacity: 1 !important;
-  }
-}
-
-.portland {
-  $scale: 190%;
-
-  &Pin {
-    left: 91.2%;
-    top: 27.0%;
-  }
-
-  .pinSelected {
-    rotate: 330deg !important;
-  }
-
-  >.map {
-    left: -120%;
-    top: -15%;
-    min-height: $scale;
-    min-width: $scale;
-  }
-
-  .details {
-    left: 96% !important;
-    top: 29% !important;
-  }
-}
-
-.nyc {
-  $scale: 190%;
-
-  &Pin {
-    left: 87%;
-    top: 37.5%;
-  }
-
-  .pinSelected {
-    rotate: 340deg !important;
-  }
-
-  >.map {
-    left: -110%;
-    top: -28%;
-    min-height: $scale;
-    min-width: $scale;
-  }
-
-  .details {
-    left: 91.5% !important;
-    top: 41% !important;
-  }
-}
-
-.paloAlto {
-  $scale: 190%;
-
-  &Pin {
-    left: 6.5%;
-    top: 44%;
-  }
-
-  .pinSelected {
-    rotate: 155deg !important;
-  }
-
-  >.map {
-    left: 35%;
-    top: -20%;
-    min-height: $scale;
-    min-width: $scale;
-  }
-
-  .details {
-    left: 1.5% !important;
-    top: 41% !important;
-
-    translate: -100% -100%;
-  }
-}
-
-.schenectady {
-  $scale: 190%;
-
-  &Pin {
-    left: 85%;
-    top: 30%;
-  }
-
-  .pinSelected {
-    rotate: 190deg !important;
-  }
-
-  >.map {
-    left: -82%;
-    top: -15%;
-    min-height: $scale;
-    min-width: $scale;
-  }
-
-  .details {
-    translate: -100% -100%;
-    left: 88.5% !important;
-    top: 19% !important;
+    justify-content: space-between;
+    background-color: $background-primary;
+    gap: $paragraph-spacing-large;
+    max-width: $max-width-page;
+    min-height: 100%;
+    width: 100%;
   }
 }
 
 @media (max-width: $width-default) {
-  .mapViewer {
-    min-width: 600px;
-    max-width: 600px;
-  }
+  .locations {
+    padding: 0px $page-padding-default $page-padding-default $page-padding-default;
 
-  .portland {
-    >.map {
-      left: -125%;
-      top: -20%;
-    }
-  }
-
-  .nyc {
-    >.map {
-      left: -115%;
-      top: -27%;
-    }
-  }
-
-  .paloAlto {
-    >.map {
-      left: 39%;
-    }
-  }
-
-  .schenectady {
-    >.map {
-      top: -10%;
-    }
-
-    .details {
-      // left: 62.5% !important;
-      // top: 9% !important;
+    .content {
+      // overflow: hidden;
     }
   }
 }
 
 @media (max-width: $width-compact) {
-  .mapViewer {
-    min-width: 475px;
-    max-width: 475px;
-
-    >.map {
-      >.pins {
-        >.details {
-          >span {
-            h4 {
-              font-size: 1.5rem;
-              line-height: 1.6rem;
-            }
-
-            h5 {
-              font-size: 1.3rem;
-              line-height: 1.4rem;
-            }
-
-            svg {
-              height: 1.1rem;
-              width: 1.1rem;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .portland {
-    $scale: 160%;
-
-    >.map {
-      left: -100%;
-      top: -10%;
-      min-height: $scale;
-      min-width: $scale;
-    }
-  }
-
-  .nyc {
-    >.map {
-      left: -119%;
-      top: -26%;
-    }
-  }
-
-  .paloAlto {
-    $scale: 150%;
-
-    >.map {
-      left: 43%;
-      top: -10%;
-      min-height: $scale;
-      min-width: $scale;
-    }
-  }
-
-  .schenectady {
-    >.map {
-      top: -8%;
-    }
+  .locations {
+    padding: 0px $page-padding-compact $page-padding-compact $page-padding-compact;
   }
 }
 
-@media (max-width: $width-medium) {
-  .mapViewer {
-    min-width: 375px;
-    max-width: 375px;
+@media (max-width: $width-small) {
+  .locations {
 
-    >.map {
+    min-height: 57.5vh;
+    max-height: 57.5vh;
+    padding: 0px $page-padding-small $page-padding-default $page-padding-small;
 
-      >.grid {
-        left: -35%;
-        height: 167%;
-        width: 167%;
-      }
-
-      >.pins {
-        >.details {
-          >span {
-            h4 {
-              font-size: 1.3rem;
-              line-height: 1.35rem;
-            }
-
-            h5 {
-              font-size: 1.2rem;
-              line-height: 1.3rem;
-            }
-
-            svg {
-              height: 1.1rem;
-              width: 1.1rem;
-            }
-          }
-        }
-      }
+    .content {
+      height: 100%;
+      flex-direction: column;
+      justify-content: flex-end;
     }
-  }
 
-  .portland {
-    >.map {
-      left: -105%;
-    }
-  }
-
-  .nyc {
-    >.map {
-      left: -124%;
-    }
-  }
-
-  .paloAlto {
-    >.map {
-      left: 48%;
-    }
-  }
-
-  .schenectady {
-    >.map {
-      top: -4%;
+    .viewer {
+      overflow: hidden;
+      min-height: 1px;
+      min-height: 55%;
+      flex-shrink: 0;
     }
   }
 }
 
 @media (max-width: $width-small) {
-  .mapViewer {
-    max-width: unset;
-  }
+  .locations {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    padding: $page-padding-mobile $page-padding-mobile $page-padding-small $page-padding-mobile;
 
-  .portland {
-    >.map {
-      left: -110%;
+    .content {
+      justify-content: center;
     }
-  }
-
-  .paloAlto {
-    $scale: 190%;
-
-    >.map {
-      min-height: $scale;
-      min-width: $scale;
-    }
-  }
-
-  .schenectady {
-    >.map {
-      top: -0%;
-    }
-
-    .details {
-      left: 85% !important;
-      top: 17.5% !important;
-    }
-  }
-}
-
-@media (max-width: $width-mobile) {
-  .paloAlto {
-    $scale: 180%;
-
-    >.map {
-      left: 53%;
-      min-height: $scale;
-      min-width: $scale;
-    }
-  }
-
-  .nyc {
-    $scale: 180%;
-
-    >.map {
-      min-height: $scale;
-      min-width: $scale;
-    }
-  }
-
-  .schenectady {
-    .details {
-      left: 87% !important;
-      top: 16.5% !important;
-    }
-  }
-}
-
-@media (max-width: $width-mobile) {
-  .mapViewer {
-    min-width: 100%;
-    max-width: 100%;
   }
 }

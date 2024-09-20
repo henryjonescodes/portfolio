@@ -1,0 +1,661 @@
+@import '@styles/colors.module.scss';
+@import '@styles/layout.module.scss';
+@import '@styles/typography.module.scss';
+
+/////////////////////////////////////////////////
+//                   BLURB                    //
+/////////////////////////////////////////////////
+
+.blurb {
+  display: flex;
+  flex-direction: column;
+  gap: $paragraph-spacing-small;
+
+  >span {
+    >h3 {
+      color: $text-primary;
+
+      &:first-of-type {
+        color: $text-secondary;
+      }
+    }
+  }
+
+  >p {
+    color: $text-secondary;
+  }
+}
+
+@media (max-width: $width-small) {
+  .blurb {
+    min-height: 30%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: $width-mobile) {
+  .blurb {
+    min-height: 45%;
+    justify-content: flex-end;
+  }
+}
+
+/////////////////////////////////////////////////
+//                   SLIDER                    //
+/////////////////////////////////////////////////
+
+$line-small-height: 12px;
+$line-small-width: 3px;
+
+$line-medium-height: 17px;
+$line-medium-width: 3px;
+
+$line-large-height: 20px;
+$line-large-width: 4px;
+
+$line-selected-height: 25px;
+$line-selected-width: 5px;
+
+.slider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  position: relative;
+  height: $line-selected-height;
+}
+
+.line,
+.stop {
+  width: 20px;
+  height: 100%;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  &::before {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    transition: background-color 0.3s, height 0.2s, width 0.2s;
+    border-radius: 4px;
+  }
+
+  &:hover::before {
+    background-color: lightgray;
+  }
+
+  &.bulging::before {
+    height: $line-medium-height;
+    width: $line-medium-width;
+    background-color: rgb(251, 82, 82);
+    transition: background-color 0.1s, height 0.02s, width 0.02s;
+  }
+}
+
+.line {
+  &::before {
+    width: $line-small-width;
+    height: $line-small-height;
+    background-color: gray;
+  }
+
+  &:hover::before {
+    height: $line-medium-height;
+    width: $line-medium-width;
+  }
+}
+
+.stop {
+  &::before {
+    width: $line-medium-width;
+    height: $line-medium-height;
+    background-color: white;
+  }
+
+  &.bulging::before {
+    height: $line-large-height;
+    width: $line-large-width;
+  }
+
+  &:hover::before {
+    height: $line-large-height;
+    width: $line-large-width;
+  }
+
+  &:focus,
+  &:active {
+    &::before {
+      height: calc($line-selected-height + 0px);
+      width: $line-selected-width;
+    }
+  }
+
+  &.requested::before {
+    height: calc($line-large-height + 2.5px);
+    width: $line-selected-width;
+  }
+
+  &.selected::before {
+    height: calc($line-selected-height + 5px) !important;
+    width: $line-selected-width;
+    background-color: red;
+  }
+}
+
+/////////////////////////////////////////////////
+//                 MAP PIN                     //
+/////////////////////////////////////////////////
+
+.pin {
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  height: 5.7%;
+  width: auto;
+  rotate: 225deg;
+  transform-origin: top left;
+
+  &Minimized {
+    transform: scale(0.5);
+    opacity: 0.6;
+  }
+
+  path {
+    fill: red;
+    stroke: red;
+  }
+}
+
+
+/////////////////////////////////////////////////
+//                 MAP VIEWER                  //
+/////////////////////////////////////////////////
+
+.mapViewer {
+  min-width: 700px;
+  max-width: 700px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+
+  &Contents {
+    composes: fonts;
+    background-color: $background-primary;
+    border: 4px solid white;
+    border-radius: 32px;
+    overflow: hidden;
+    aspect-ratio: 1.4 !important;
+    position: relative;
+
+
+    >.map {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+
+      >.grid {
+        position: absolute;
+        left: -28%;
+        top: -10%;
+        height: 155%;
+        width: 155%;
+        z-index: 0;
+        opacity: 0.7;
+        z-index: 0;
+      }
+
+      >.usa {
+        z-index: 1;
+        padding: 4.5%;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+
+        svg,
+        path {
+          fill: black;
+        }
+      }
+
+      >.pins {
+        z-index: 2;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        left: 0;
+        opacity: 1;
+
+        >.details {
+          transition: opacity 0.2s ease-in-out;
+          position: absolute;
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 12px;
+          left: 50%;
+          top: 50%;
+          opacity: 0;
+
+          >span {
+            width: 100%;
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            justify-content: flex-start;
+            white-space: nowrap;
+
+            h4 {
+              font-size: 1.8rem;
+              line-height: 1.9rem;
+              color: white;
+            }
+
+            h5 {
+              font-size: 1.5rem;
+              line-height: 1.6rem;
+              color: white;
+            }
+
+            svg {
+              height: 1.2rem;
+              width: 1.2rem;
+            }
+          }
+
+          >div {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+
+            >svg {
+              position: absolute;
+
+              &:nth-of-type(2) {
+                right: 0px;
+                transform: rotate(90deg);
+              }
+
+              &:nth-of-type(3) {
+                right: 0px;
+                bottom: 0px;
+                transform: rotate(180deg);
+              }
+
+              &:nth-of-type(4) {
+                left: 0px;
+                bottom: 0px;
+                transform: rotate(270deg);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.portland,
+.paloAlto,
+.nyc,
+.schenectady {
+  .details {
+    opacity: 1 !important;
+  }
+}
+
+.portland {
+  $scale: 190%;
+
+  &Pin {
+    left: 91.2%;
+    top: 27.0%;
+  }
+
+  .pinSelected {
+    rotate: 330deg !important;
+  }
+
+  >.map {
+    left: -120%;
+    top: -15%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    left: 96% !important;
+    top: 29% !important;
+  }
+}
+
+.nyc {
+  $scale: 190%;
+
+  &Pin {
+    left: 87%;
+    top: 37.5%;
+  }
+
+  .pinSelected {
+    rotate: 340deg !important;
+  }
+
+  >.map {
+    left: -110%;
+    top: -28%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    left: 91.5% !important;
+    top: 41% !important;
+  }
+}
+
+.paloAlto {
+  $scale: 190%;
+
+  &Pin {
+    left: 6.5%;
+    top: 44%;
+  }
+
+  .pinSelected {
+    rotate: 155deg !important;
+  }
+
+  >.map {
+    left: 35%;
+    top: -20%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    left: 1.5% !important;
+    top: 41% !important;
+
+    translate: -100% -100%;
+  }
+}
+
+.schenectady {
+  $scale: 190%;
+
+  &Pin {
+    left: 85%;
+    top: 30%;
+  }
+
+  .pinSelected {
+    rotate: 190deg !important;
+  }
+
+  >.map {
+    left: -82%;
+    top: -15%;
+    min-height: $scale;
+    min-width: $scale;
+  }
+
+  .details {
+    translate: -100% -100%;
+    left: 88.5% !important;
+    top: 19% !important;
+  }
+}
+
+@media (max-width: $width-default) {
+  .mapViewer {
+    min-width: 600px;
+    max-width: 600px;
+
+    &Contents {}
+  }
+
+  .portland {
+    >.map {
+      left: -125%;
+      top: -20%;
+    }
+  }
+
+  .nyc {
+    >.map {
+      left: -115%;
+      top: -27%;
+    }
+  }
+
+  .paloAlto {
+    >.map {
+      left: 39%;
+    }
+  }
+
+  .schenectady {
+    >.map {
+      top: -10%;
+    }
+
+    .details {
+      // left: 62.5% !important;
+      // top: 9% !important;
+    }
+  }
+}
+
+@media (max-width: $width-compact) {
+  .mapViewer {
+    min-width: 475px;
+    max-width: 475px;
+
+    &Contents {
+
+      >.map {
+        >.pins {
+          >.details {
+            >span {
+              h4 {
+                font-size: 1.5rem;
+                line-height: 1.6rem;
+              }
+
+              h5 {
+                font-size: 1.3rem;
+                line-height: 1.4rem;
+              }
+
+              svg {
+                height: 1.1rem;
+                width: 1.1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .portland {
+    $scale: 160%;
+
+    >.map {
+      left: -100%;
+      top: -10%;
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
+
+  .nyc {
+    >.map {
+      left: -119%;
+      top: -26%;
+    }
+  }
+
+  .paloAlto {
+    $scale: 150%;
+
+    >.map {
+      left: 43%;
+      top: -10%;
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
+
+  .schenectady {
+    >.map {
+      top: -8%;
+    }
+  }
+}
+
+@media (max-width: $width-medium) {
+  .mapViewer {
+    min-width: 375px;
+    max-width: 375px;
+
+    &Contents {
+      >.map {
+
+        >.grid {
+          left: -35%;
+          height: 167%;
+          width: 167%;
+        }
+
+        >.pins {
+          >.details {
+            >span {
+              h4 {
+                font-size: 1.3rem;
+                line-height: 1.35rem;
+              }
+
+              h5 {
+                font-size: 1.2rem;
+                line-height: 1.3rem;
+              }
+
+              svg {
+                height: 1.1rem;
+                width: 1.1rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .portland {
+    >.map {
+      left: -105%;
+    }
+  }
+
+  .nyc {
+    >.map {
+      left: -124%;
+    }
+  }
+
+  .paloAlto {
+    >.map {
+      left: 48%;
+    }
+  }
+
+  .schenectady {
+    >.map {
+      top: -4%;
+    }
+  }
+}
+
+@media (max-width: $width-small) {
+  .mapViewer {
+    max-width: unset;
+
+    &Contents {}
+  }
+
+  .portland {
+    >.map {
+      left: -110%;
+    }
+  }
+
+  .paloAlto {
+    $scale: 190%;
+
+    >.map {
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
+
+  .schenectady {
+    >.map {
+      top: -0%;
+    }
+
+    .details {
+      left: 85% !important;
+      top: 17.5% !important;
+    }
+  }
+}
+
+@media (max-width: $width-small) {
+  .paloAlto {
+    $scale: 180%;
+
+    >.map {
+      left: 53%;
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
+
+  .nyc {
+    $scale: 180%;
+
+    >.map {
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
+
+  .schenectady {
+    .details {
+      left: 87% !important;
+      top: 16.5% !important;
+    }
+  }
+}
+
+@media (max-width: $width-small) {
+  .mapViewer {
+    min-width: 100%;
+    max-width: 100%;
+
+    &Contents {}
+  }
+}
