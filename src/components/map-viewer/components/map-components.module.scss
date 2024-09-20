@@ -146,6 +146,12 @@ $line-selected-width: 5px;
   }
 }
 
+@media (max-width: $width-small) {
+  .line {
+    pointer-events: none;
+  }
+}
+
 /////////////////////////////////////////////////
 //                 MAP PIN                     //
 /////////////////////////////////////////////////
