@@ -123,7 +123,7 @@ $header-height: 120px;
   }
 }
 
-@media (max-width: $width-mobile) {
+@media (max-width: $width-small) {
   .experienceCarousel {
     >.carousel {
       >.content {
@@ -341,6 +341,7 @@ $header-height: 120px;
     bottom: 0;
 
     >img {
+      object-fit: cover;
       right: 0;
       bottom: 0px;
       max-height: 150%;
@@ -641,7 +642,7 @@ $header-height: 120px;
   }
 }
 
-@media (max-width: $width-mobile) {
+@media (max-width: $width-small) {
   .job {
     // ? > Card Mode
 
@@ -813,7 +814,7 @@ $header-height: 120px;
   }
 }
 
-@media (max-width: $width-mobile) {
+@media (max-width: $width-small) {
   .socials {
     .list {
       gap: 16px;
