@@ -135,33 +135,33 @@
   }
 }
 
+// @media (max-width: $width-small) {
+  //   .landing {
+  //     padding: 0px $page-padding-small;
+
+  //     .hero {
+  //       padding-top: $page-padding-small;
+  //     }
+
+  //     .blurb {
+  //       padding-bottom: unset;
+  //       min-height: 16.5vh;
+  //       max-height: 16.5vh;
+  //     }
+
+  //     .about {
+  //       gap: $paragraph-spacing-small;
+
+  //       &Leading {
+  //         padding-bottom: $paragraph-spacing-small;
+  //         min-height: 26vh;
+  //         max-height: 26vh;
+  //       }
+  //     }
+  //   }
+  // }
+
 @media (max-width: $width-small) {
-  .landing {
-    padding: 0px $page-padding-small;
-
-    .hero {
-      padding-top: $page-padding-small;
-    }
-
-    .blurb {
-      padding-bottom: unset;
-      min-height: 16.5vh;
-      max-height: 16.5vh;
-    }
-
-    .about {
-      gap: $paragraph-spacing-small;
-
-      &Leading {
-        padding-bottom: $paragraph-spacing-small;
-        min-height: 26vh;
-        max-height: 26vh;
-      }
-    }
-  }
-}
-
-@media (max-width: $width-mobile) {
   .landing {
     padding: 0px $page-padding-mobile;
 
