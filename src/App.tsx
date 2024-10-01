@@ -24,6 +24,7 @@ type RequireAuthProps = {
 
 function RequireAuth({ children, redirectTo }: RequireAuthProps) {
   const { currentUser } = useContext(AuthContext)
+  return children
   return !!currentUser ? children : <Navigate to={redirectTo} />
 }
 

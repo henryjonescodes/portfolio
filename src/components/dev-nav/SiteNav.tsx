@@ -57,9 +57,9 @@ const SiteNav = ({ transition, showToolbar }: DevNavPrefilledProps) => {
     // },
   ]
 
-  if (!currentUser) {
-    return null
-  }
+  // if (!currentUser) {
+  //   return null
+  // }
 
   return (
     <DevNav
