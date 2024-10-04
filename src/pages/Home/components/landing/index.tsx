@@ -25,7 +25,7 @@ const Landing = () => {
         >
           <h3>About</h3>
           <p>
-            My journey into creative development began with a passion for poster
+            My into creative development began with a passion for poster
             and screenprinting design, which quickly evolved into a love for
             coding and web development in my teens. Since then, I’ve had the
             opportunity to build dynamic, customer-facing UIs for dynamic
