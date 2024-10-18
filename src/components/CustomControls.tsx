@@ -1,8 +1,7 @@
 // CustomControls.jsx
-import { useThree, useFrame } from "@react-three/fiber";
-import { useGesture } from "@use-gesture/react";
 import { useSpring } from "@react-spring/three";
-import React from "react";
+import { useFrame, useThree } from "@react-three/fiber";
+import { useGesture } from "@use-gesture/react";
 
 export default function CustomControls({
   maxPolarAngle = Math.PI / 6,

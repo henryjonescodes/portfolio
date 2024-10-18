@@ -2,3 +2,20 @@
   width: 100vw;
   height: 100vh;
 }
+
+.screen {
+  background-color: green;
+  height: 285px !important;
+  width: 549px !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  >video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+}
