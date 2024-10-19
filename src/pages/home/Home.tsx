@@ -2,6 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import CustomControls from "../../components/CustomControls";
 import styles from "./home.module.scss";
 import Model from "./Model";
+import { OrbitControls } from "@react-three/drei";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
         maxPolarAngle={Math.PI / 6}
         maxAzimuthAngle={Math.PI / 6}
       />
+      {/* <OrbitControls /> */}
 
       {/* 3D Models */}
       <Model />

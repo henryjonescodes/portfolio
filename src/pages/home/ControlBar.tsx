@@ -7,15 +7,17 @@ type OverlayProps = {
   position?: Vector3;
 };
 
-export default function Overlay({ position = [0, 0, 0.227] }: OverlayProps) {
+export default function ControlBar({ position = [0, 0, 0.227] }: OverlayProps) {
   return (
     <Html position={position} scale={0.1} transform>
       <motion.div
-        className={styles.screen}
+        className={styles.controlBar}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
-        <video src="landing-01.mp4" autoPlay loop muted />
+        <motion.div className={styles.left}>ARIAL BLACK</motion.div>
+        <motion.div className={styles.center}></motion.div>
+        <motion.div className={styles.right}></motion.div>
       </motion.div>
     </Html>
   );

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { Knob } from "../../components/Knob";
 import useModel from "../../hooks/useModel";
 import useRaycaster from "../../hooks/useRaycaster";
+import Screen from "./Screen";
+import ControlBar from "./Controlbar";
 
 export default function Model() {
   const gizmo = useModel("/models/Gizmo.glb");
@@ -22,6 +24,8 @@ export default function Model() {
 
   return (
     <motion.group scale={3} onPointerMove={handlePointerMove}>
+      <Screen position={[0.001, 0.473, 0.025]} />
+      <ControlBar position={[0.001, 0, 0.059]} />
       <primitive object={gizmo} />
       <primitive object={buttons} />
       <primitive object={colorToggle} />
