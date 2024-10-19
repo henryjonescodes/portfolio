@@ -11,10 +11,10 @@ const Home = () => {
       <directionalLight position={[2, 5, 2]} />
 
       {/* Custom Controls */}
-      {/* <CustomControls
+      <CustomControls
         maxPolarAngle={Math.PI / 6}
         maxAzimuthAngle={Math.PI / 6}
-      /> */}
+      />
 
       {/* 3D Models */}
       <Model />
