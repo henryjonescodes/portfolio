@@ -1,8 +1,11 @@
-// import { useGLTF } from "@react-three/drei";
+import { useGLTF } from "@react-three/drei";
+import { Group, Object3D } from "three";
 
-// const useModel = (url: any) => {
-//   const { scene } = useGLTF(url);
-//   return scene;
-// };
+type GLTFResult = { scene: Object3D };
 
-// export default useModel;
+const useModel = (url: string): Group => {
+  const { scene } = useGLTF(url);
+  return scene;
+};
+
+export default useModel;

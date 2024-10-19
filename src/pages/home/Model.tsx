@@ -1,26 +1,8 @@
-import { useGLTF } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
-import { useState, useEffect } from "react";
-import { useThree } from "@react-three/fiber";
-import { Vector2, Raycaster } from "three";
-
-const useModel = (url) => {
-  if (!url) {
-    return null;
-  }
-  const { scene } = useGLTF(url);
-  return scene;
-};
-
-function getNamedParent(object) {
-  while (object) {
-    if (object.name && object.name !== "") {
-      return object;
-    }
-    object = object.parent;
-  }
-  return null;
-}
+import { useEffect, useState } from "react";
+import { Knob } from "../../components/Knob";
+import useModel from "../../hooks/useModel";
+import useRaycaster from "../../hooks/useRaycaster";
 
 export default function Model() {
   const gizmo = useModel("/models/Gizmo.glb");
@@ -32,66 +14,42 @@ export default function Model() {
   const knobR = useModel("/models/KnobR.glb");
   const knobL = useModel("/models/KnobL.glb");
 
-  const [rotation, setRotation] = useState(0); // Track rotation in radians
-  const { gl, scene, camera } = useThree();
+  const [dialRot, setDialRot] = useState(0);
+  const [knobRotR, setKnobRotR] = useState(0);
+  const [knobRotL, setKnobRotL] = useState(0);
 
-  // Assign names to meshes for identification
-  useEffect(() => {
-    if (dial) {
-      dial.traverse((child) => {
-        if (child.isMesh) {
-          child.name = "Dial";
-        }
-      });
-    }
-    // Repeat for other interactive objects if needed
-  }, [dial]);
-
-  useEffect(() => {
-    const handleWheel = (event) => {
-      // Get mouse coordinates
-      const mouse = new Vector2();
-      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      // Raycast to find intersected objects
-      const raycaster = new Raycaster();
-      raycaster.setFromCamera(mouse, camera);
-      const intersects = raycaster.intersectObjects(scene.children, true);
-
-      if (intersects.length > 0) {
-        const namedParent = getNamedParent(intersects[0].object);
-        if (namedParent && namedParent.name === "Dial") {
-          // Adjust rotation based on scroll wheel delta
-          const deltaY = event.deltaY;
-          const deltaRotation = deltaY * 0.001; // Adjust sensitivity as needed
-          setRotation((prev) => prev + deltaRotation);
-        }
-      }
-    };
-
-    gl.domElement.addEventListener("wheel", handleWheel);
-
-    return () => {
-      gl.domElement.removeEventListener("wheel", handleWheel);
-    };
-  }, [gl, camera, scene]);
+  const { activeObject, handlePointerMove } = useRaycaster();
 
   return (
-    <motion.group scale={3}>
+    <motion.group scale={3} onPointerMove={handlePointerMove}>
       <primitive object={gizmo} />
       <primitive object={buttons} />
       <primitive object={colorToggle} />
       <primitive object={cornerDialR} />
       <primitive object={cornerDialL} />
-      {dial && (
-        <motion.primitive
-          object={dial.children[0]}
-          rotation={[0, 0, rotation]} // Apply rotation to dial
-        />
-      )}
-      <primitive object={knobR} />
-      <primitive object={knobL} />
+      <Knob
+        model={dial}
+        rotation={dialRot}
+        setRotation={setDialRot}
+        activeObject={activeObject}
+        name={"Dial"}
+      />
+      <Knob
+        model={knobR}
+        rotation={knobRotR}
+        setRotation={setKnobRotR}
+        activeObject={activeObject}
+        name={"KnobR"}
+        axis="x"
+      />
+      <Knob
+        model={knobL}
+        rotation={knobRotL}
+        setRotation={setKnobRotL}
+        activeObject={activeObject}
+        name={"KnobL"}
+        axis="x"
+      />
     </motion.group>
   );
 }
