@@ -1,7 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import CustomControls from "../../components/CustomControls";
 import styles from "./home.module.scss";
-import Model from "./Model";
+import Scene from "./Scene";
 import { OrbitControls } from "@react-three/drei";
 import { useParams } from "react-router-dom";
 
@@ -22,7 +22,7 @@ const Home = () => {
       {/* <OrbitControls /> */}
 
       {/* 3D Models */}
-      <Model />
+      <Scene />
     </Canvas>
   );
 };

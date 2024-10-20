@@ -7,7 +7,7 @@ type OverlayProps = {
   position?: Vector3;
 };
 
-export default function ControlBar({ position = [0, 0, 0.227] }: OverlayProps) {
+export default function ToolBar({ position = [0, 0, 0.227] }: OverlayProps) {
   return (
     <Html position={position} scale={0.1} transform>
       <motion.div

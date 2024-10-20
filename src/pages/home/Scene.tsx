@@ -4,9 +4,9 @@ import { Knob } from "../../components/Knob";
 import useModel from "../../hooks/useModel";
 import useRaycaster from "../../hooks/useRaycaster";
 import Screen from "./Screen";
-import ControlBar from "./Controlbar";
+import ToolBar from "./ToolBar";
 
-export default function Model() {
+export default function Scene() {
   const gizmo = useModel("/models/Gizmo.glb");
   const buttons = useModel("/models/Buttons.glb");
   const colorToggle = useModel("/models/ColorToggle.glb");
@@ -25,7 +25,7 @@ export default function Model() {
   return (
     <motion.group scale={3} onPointerMove={handlePointerMove}>
       <Screen position={[0.001, 0.473, 0.025]} />
-      <ControlBar position={[0.001, 0, 0.059]} />
+      <ToolBar position={[0.001, 0, 0.059]} />
       <primitive object={gizmo} />
       <primitive object={buttons} />
       <primitive object={colorToggle} />
