@@ -1,9 +1,8 @@
 import { Canvas } from "@react-three/fiber";
+import { useParams } from "react-router-dom";
 import CustomControls from "../../components/CustomControls";
 import styles from "./home.module.scss";
 import Scene from "./Scene";
-import { OrbitControls } from "@react-three/drei";
-import { useParams } from "react-router-dom";
 
 const Home = () => {
   const { page } = useParams<{ page: string }>();

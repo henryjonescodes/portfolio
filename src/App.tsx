@@ -6,10 +6,7 @@ export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Define a route that takes a string as a parameter */}
-        <Route path="/:page" element={<Home />} />
-        {/* Default route */}
-        <Route path="/" element={<Home />} />
+        <Route path="/:page?" element={<Home />} />
       </Routes>
     </Router>
   );

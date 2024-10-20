@@ -7,17 +7,21 @@ import { useParams, useNavigate } from "react-router-dom";
 import Background from "./components/Background";
 import Page from "./components/Page";
 import Menu from "./components/Menu";
+import { useEffect } from "react";
 
-type OverlayProps = {
-  position?: Vector3;
-};
-
-const Screen = ({ position = [0, 0, 0.227] }: OverlayProps) => {
+const Screen = () => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
 
+  useEffect(() => {
+    console.log("Page updated:", page);
+  }, [page]);
+
   return (
-    <Html position={position} scale={0.1} transform>
+    <Html
+      transform
+      // key={page}
+    >
       <motion.div
         className={styles.screen}
         initial={{ opacity: 0 }}

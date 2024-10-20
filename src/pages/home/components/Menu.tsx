@@ -15,6 +15,10 @@ const textLines: LineData[] = [
   { text: "About", wrapper: "h2", page: "about" },
   { text: "Projects", wrapper: "h2", page: "projects" },
   { text: "Experience", wrapper: "h2", page: "experience" },
+  { text: "Experience", wrapper: "h2", page: "experience" },
+  { text: "Experience", wrapper: "h2", page: "experience" },
+  { text: "Experience", wrapper: "h2", page: "experience" },
+  { text: "Experience", wrapper: "h2", page: "experience" },
 ];
 
 // Animation variants for individual characters (typing effect in/out)
