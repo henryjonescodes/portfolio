@@ -3,8 +3,11 @@ import CustomControls from "../../components/CustomControls";
 import styles from "./home.module.scss";
 import Model from "./Model";
 import { OrbitControls } from "@react-three/drei";
+import { useParams } from "react-router-dom";
 
 const Home = () => {
+  const { page } = useParams<{ page: string }>();
+
   return (
     <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
       {/* Lighting */}
