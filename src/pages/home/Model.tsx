@@ -37,7 +37,7 @@ export default function Model() {
         setRotation={setDialRot}
         activeObject={activeObject}
         name={"Dial"}
-        stops={[-Math.PI * 0.35, 0, Math.PI * 0.35]}
+        // stops={[-Math.PI * 0.35, 0, Math.PI * 0.35]}
       />
       <Knob
         model={knobR}
