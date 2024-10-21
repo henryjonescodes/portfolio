@@ -113,7 +113,7 @@ export default function CustomControls({
         const fullscreenCameraPosition: [number, number, number] = [
           screenPosition.x,
           screenPosition.y + 1,
-          screenPosition.z + 2, // Adjust as needed
+          screenPosition.z + 1.5, // Adjust as needed
         ];
 
         api.start({

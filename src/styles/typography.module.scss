@@ -1,3 +1,5 @@
+@import './colors.module.scss';
+
 @mixin screen-text {
 
   h1,
@@ -7,21 +9,21 @@
   }
 
   h1 {
-    color: #00d67d;
+    color: $foreground-primary;
     font-size: 55px;
   }
 
   h2 {
-    color: #01ab64;
+    color: $foreground-secondary;
     cursor: pointer;
 
     &:hover {
-      color: #00f48e;
+      color: lighten($foreground-secondary, 10%);
     }
   }
 
   h3 {
-    color: #00844d;
+    color: $foreground-tertiary;
     margin-bottom: 16px;
   }
 }

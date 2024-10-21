@@ -21,7 +21,7 @@ const Screen = () => {
       >
         <Background />
         <Menu page={page} navigate={navigate} />
-        <Page page={page} navigate={navigate} />
+        {/* <Page page={page} navigate={navigate} /> */}
       </motion.div>
     </Html>
   );

@@ -1,23 +1,21 @@
+import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
+import AnimatedBorderBox from "../../../components/AnimatedBorderBox";
 import styles from "./components.module.scss";
 import { PageProps } from "./types";
-import cn from "classnames";
-import Background from "./Background";
 
 // Define the variants for the animation
 const pageContentVariants = {
-  initial: { opacity: 0, y: 20 }, // Initial hidden state
+  initial: { opacity: 0 }, // Initial hidden state
   animate: {
     opacity: 1,
-    y: 0,
     transition: {
       duration: 0.3,
-      delay: 1, // Delay only for animate state
+      delay: 1.5, // Delay only for animate state
     },
   },
   exit: {
     opacity: 0,
-    y: -20,
     transition: {
       duration: 0.3, // No delay for exit
     },
@@ -37,7 +35,7 @@ const Page = ({ page, navigate, fullScreen = false }: PageProps) => {
             animate="animate"
             exit="exit"
           >
-            {fullScreen && <Background />}
+            {/* {fullScreen && <Background />} */}
             <h2
               onClick={() => {
                 navigate(`/`);
@@ -45,6 +43,8 @@ const Page = ({ page, navigate, fullScreen = false }: PageProps) => {
             >
               {page.charAt(0).toUpperCase() + page.slice(1)}
             </h2>
+            <AnimatedBorderBox />
+            {/* <AnimatedBorder width={300} height={200} /> */}
             <p>This is the {page} page content.</p>
           </motion.div>
         </>

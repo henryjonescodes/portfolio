@@ -1,0 +1,67 @@
+@mixin retro-scrollbar {
+  overflow-y: scroll;
+  scrollbar-color: $foreground-secondary black; // For Firefox
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {}
+
+  &::-webkit-scrollbar-thumb {}
+
+  &::-webkit-scrollbar-thumb:hover {}
+}
+
+// Mixin for glowing background
+@mixin glowing-background {
+  background-image: radial-gradient($accent-primary 10%, black);
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+// Mixin for full screen positioning
+@mixin full-screen-positioning {
+  display: block;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@keyframes lines {
+  0% {
+    background-position: 0px 0px;
+  }
+
+  50% {
+    background-position: 0px 0px;
+  }
+
+  51% {
+    background-position: 0px 2px;
+  }
+
+  100% {
+    background-position: 0px 2px;
+  }
+}
+
+@mixin scanlines-effect {
+  background: repeating-linear-gradient(transparent 0px 1px,
+      hsl(154, 0%, 0%, 0.3) 3px 4px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  pointer-events: none;
+  animation: lines 0.06666666s linear infinite;
+}

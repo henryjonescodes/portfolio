@@ -1,0 +1,7 @@
+$foreground-primary: #00d67d;
+$foreground-secondary: desaturate($foreground-primary, 30%);
+$foreground-tertiary: desaturate($foreground-primary, 60%);
+
+$accent-primary: #003333;
+$accent-secondary: desaturate($accent-primary, 60%);
+$accent-tertiary: desaturate($accent-primary, 60%);

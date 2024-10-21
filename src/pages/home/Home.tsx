@@ -12,7 +12,7 @@ const Home = () => {
   return (
     <motion.div className={styles.home}>
       <Page page={page} navigate={navigate} fullScreen={true} />
-      <Scene />;
+      {/* <Scene />; */}
     </motion.div>
   );
 };

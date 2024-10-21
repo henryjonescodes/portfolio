@@ -1,5 +1,9 @@
+@import '@styles/mixins.module.scss';
+@import '@styles/colors.module.scss';
+
 .menu,
 .page {
+  @include retro-scrollbar;
   position: absolute;
   top: 0;
   left: 0;
@@ -16,71 +20,13 @@
   align-items: flex-start;
   gap: 8px;
 
-  overflow: scroll;
+  overflow: auto;
 }
 
 .page {
   &FullScreen {
-    // background-color: red;
     z-index: 1;
   }
-}
-
-$primary-color: #003333;
-$background-color: #000;
-$glow-color: #00CCCC;
-
-// Mixin for glowing background
-@mixin glowing-background {
-  background-image: radial-gradient($primary-color 10%, $background-color);
-  overflow: hidden;
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-// Mixin for full screen positioning
-@mixin full-screen-positioning {
-  display: block;
-  position: absolute;
-  z-index: -1;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-}
-
-@keyframes lines {
-  0% {
-    background-position: 0px 0px;
-  }
-
-  50% {
-    background-position: 0px 0px;
-  }
-
-  51% {
-    background-position: 0px 2px;
-  }
-
-  100% {
-    background-position: 0px 2px;
-  }
-}
-
-@mixin scanlines-effect {
-  background: repeating-linear-gradient(transparent 0px 1px,
-      hsl(154, 0%, 0%, 0.3) 3px 4px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-  pointer-events: none;
-  animation: lines 0.06666666s linear infinite;
 }
 
 // Applying the backdrop
@@ -91,4 +37,30 @@ $glow-color: #00CCCC;
 
 .scanlines {
   @include scanlines-effect;
+  @include full-screen-positioning;
+}
+
+// .box {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   position: relative;
+//   overflow: hidden;
+// }
+
+.animatedBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  /* Prevent interaction with the border itself */
+}
+
+.content {
+  position: relative;
+  padding: 20px;
+  background-color: #f0f0f0;
+  width: 300px;
+  height: 200px;
+  /* Adjust dimensions here for testing */
 }
