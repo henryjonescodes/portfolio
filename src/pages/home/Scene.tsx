@@ -1,13 +1,15 @@
-import { motion } from "framer-motion-3d";
-import { useEffect, useState, useRef } from "react";
-import { useFrame, useThree } from "@react-three/fiber";
+// Scene.tsx
+import { Canvas } from "@react-three/fiber";
+import { useRef, useState } from "react";
+import { useParams } from "react-router-dom";
+import * as THREE from "three";
+import CustomControls from "../../components/CustomControls";
 import { Knob } from "../../components/Knob";
 import useModel from "../../hooks/useModel";
 import useRaycaster from "../../hooks/useRaycaster";
+import styles from "./home.module.scss";
 import Screen from "./Screen";
 import ToolBar from "./ToolBar";
-import { useParams } from "react-router-dom";
-import * as THREE from "three";
 
 export default function Scene() {
   const gizmo = useModel("/models/Gizmo.glb");
@@ -28,71 +30,55 @@ export default function Scene() {
 
   // Ref for the screen group
   const screenGroupRef = useRef<THREE.Group>(null);
-
-  // Access the camera
-  const { camera } = useThree();
-
-  // // Animate the camera to focus on the screen group when the page param is set
-  // useFrame(() => {
-  //   if (page && screenGroupRef.current) {
-  //     // Get the screen group's position
-  //     const screenPosition = screenGroupRef.current.position.clone();
-
-  //     // Smoothly move the camera closer to the screen group and orient it toward the screen
-  //     camera.position.lerp(
-  //       new THREE.Vector3(
-  //         screenPosition.x,
-  //         screenPosition.y,
-  //         screenPosition.z + 2
-  //       ),
-  //       0.15
-  //     );
-  //     camera.lookAt(screenPosition);
-
-  //     // Ensure the camera projection matrix is updated
-  //     camera.updateProjectionMatrix();
-  //   }
-  // });
-
   return (
-    <motion.group scale={3} onPointerMove={handlePointerMove}>
-      {/* Group containing the screen, referenced with screenGroupRef */}
-      <motion.group
-        ref={screenGroupRef}
-        position={[0.001, 0.473, 0.025]}
-        scale={0.1}
-      >
-        <Screen />
-      </motion.group>
-      <ToolBar position={[0.001, 0, 0.059]} />
-      <primitive object={gizmo} />
-      <primitive object={buttons} />
-      <primitive object={colorToggle} />
-      <primitive object={cornerDialR} />
-      <primitive object={cornerDialL} />
-      <Knob
-        model={dial}
-        rotation={dialRot}
-        setRotation={setDialRot}
-        activeObject={activeObject}
-        name={"Dial"}
+    <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[2, 5, 2]} />
+      <CustomControls
+        fullScreen={!!page}
+        targetRef={screenGroupRef}
+        maxPolarAngle={Math.PI / 6}
+        maxAzimuthAngle={Math.PI / 6}
       />
-      <Knob
-        model={knobR}
-        rotation={knobRotR}
-        setRotation={setKnobRotR}
-        activeObject={activeObject}
-        name={"KnobR"}
-        axis="x"
-      />
-      <Knob
-        model={knobL}
-        rotation={knobRotL}
-        setRotation={setKnobRotL}
-        activeObject={activeObject}
-        name={"KnobL"}
-        axis="x"
-      />
-    </motion.group>
+      <group scale={3} onPointerMove={handlePointerMove}>
+        {/* Group containing the screen, referenced with screenGroupRef */}
+        <group
+          ref={screenGroupRef}
+          position={[0.001, 0.473, 0.025]}
+          scale={0.1}
+        >
+          <Screen />
+        </group>
+        <ToolBar position={[0.001, 0, 0.059]} />
+        {gizmo && <primitive object={gizmo} />}
+        {buttons && <primitive object={buttons} />}
+        {colorToggle && <primitive object={colorToggle} />}
+        {cornerDialR && <primitive object={cornerDialR} />}
+        {cornerDialL && <primitive object={cornerDialL} />}
+        <Knob
+          model={dial}
+          rotation={dialRot}
+          setRotation={setDialRot}
+          activeObject={activeObject}
+          name={"Dial"}
+        />
+        <Knob
+          model={knobR}
+          rotation={knobRotR}
+          setRotation={setKnobRotR}
+          activeObject={activeObject}
+          name={"KnobR"}
+          axis="x"
+        />
+        <Knob
+          model={knobL}
+          rotation={knobRotL}
+          setRotation={setKnobRotL}
+          activeObject={activeObject}
+          name={"KnobL"}
+          axis="x"
+        />
+      </group>
+    </Canvas>
   );
 }

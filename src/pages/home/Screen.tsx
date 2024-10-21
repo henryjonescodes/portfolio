@@ -1,27 +1,18 @@
 import { Html } from "@react-three/drei";
-import { motion, AnimatePresence } from "framer-motion";
-import { Vector3 } from "@react-three/fiber";
-import styles from "./home.module.scss";
 import cn from "classnames";
-import { useParams, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { useNavigate, useParams } from "react-router-dom";
 import Background from "./components/Background";
-import Page from "./components/Page";
 import Menu from "./components/Menu";
-import { useEffect } from "react";
+import Page from "./components/Page";
+import styles from "./home.module.scss";
 
 const Screen = () => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
 
-  useEffect(() => {
-    console.log("Page updated:", page);
-  }, [page]);
-
   return (
-    <Html
-      transform
-      // key={page}
-    >
+    <Html transform>
       <motion.div
         className={styles.screen}
         initial={{ opacity: 0 }}
