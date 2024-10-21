@@ -20,10 +20,8 @@ const Screen = () => {
         exit={{ opacity: 0 }}
       >
         <Background />
-        <motion.div className={cn(styles.body)}>
-          <Menu page={page} navigate={navigate} />
-          <Page page={page} navigate={navigate} />
-        </motion.div>
+        <Menu page={page} navigate={navigate} />
+        <Page page={page} navigate={navigate} />
       </motion.div>
     </Html>
   );

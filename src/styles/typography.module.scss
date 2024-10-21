@@ -1,0 +1,27 @@
+@mixin screen-text {
+
+  h1,
+  h2,
+  h3 {
+    margin: 0px;
+  }
+
+  h1 {
+    color: #00d67d;
+    font-size: 55px;
+  }
+
+  h2 {
+    color: #01ab64;
+    cursor: pointer;
+
+    &:hover {
+      color: #00f48e;
+    }
+  }
+
+  h3 {
+    color: #00844d;
+    margin-bottom: 16px;
+  }
+}

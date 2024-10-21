@@ -30,6 +30,7 @@ export default function Scene() {
 
   // Ref for the screen group
   const screenGroupRef = useRef<THREE.Group>(null);
+
   return (
     <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
       <ambientLight intensity={0.5} />

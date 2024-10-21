@@ -1,6 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./components.module.scss";
 import { PageProps } from "./types";
+import cn from "classnames";
+import Background from "./Background";
 
 // Define the variants for the animation
 const pageContentVariants = {
@@ -22,27 +24,30 @@ const pageContentVariants = {
   },
 };
 
-const Page = ({ page, navigate }: PageProps) => {
+const Page = ({ page, navigate, fullScreen = false }: PageProps) => {
   return (
     <AnimatePresence>
       {page && (
-        <motion.div
-          className={styles.page}
-          key="pageContent"
-          variants={pageContentVariants} // Use variants for animation
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          <h2
-            onClick={() => {
-              navigate(`/`);
-            }}
+        <>
+          <motion.div
+            className={cn(styles.page, { [styles.pageFullScreen]: fullScreen })}
+            key="pageContent"
+            variants={pageContentVariants} // Use variants for animation
+            initial="initial"
+            animate="animate"
+            exit="exit"
           >
-            {page.charAt(0).toUpperCase() + page.slice(1)}
-          </h2>
-          <p>This is the {page} page content.</p>
-        </motion.div>
+            {fullScreen && <Background />}
+            <h2
+              onClick={() => {
+                navigate(`/`);
+              }}
+            >
+              {page.charAt(0).toUpperCase() + page.slice(1)}
+            </h2>
+            <p>This is the {page} page content.</p>
+          </motion.div>
+        </>
       )}
     </AnimatePresence>
   );

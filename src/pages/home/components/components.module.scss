@@ -19,7 +19,12 @@
   overflow: scroll;
 }
 
-.page {}
+.page {
+  &FullScreen {
+    // background-color: red;
+    z-index: 1;
+  }
+}
 
 $primary-color: #003333;
 $background-color: #000;
