@@ -1,33 +1,42 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import AnimatedBorderBox from "../../../components/AnimatedBorderBox";
-import styles from "./components.module.scss";
-import { PageProps } from "./types";
+import { ReactNode } from "react";
 import Background from "./Background";
-import TypewriterText from "../../../components/TypewriterText";
+import styles from "./components.module.scss";
+import { ScreenProps } from "./types";
 
 // Define the variants for the animation
 const pageContentVariants = {
-  initial: { opacity: 0 }, // Initial hidden state
+  initial: {
+    opacity: 0,
+  },
   animate: {
     opacity: 1,
     transition: {
       duration: 0.3,
-      delay: 1.5, // Delay only for animate state
+      delay: 0.5,
+      staggerChildren: 0.2,
+      delayChildren: 3.1, // Optional: Delay the start of child animations
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.3, // No delay for exit
+      duration: 0.3,
     },
   },
 };
 
-const Page = ({ page, navigate, fullScreen = false }: PageProps) => {
+type PageProps = {
+  fullScreen?: boolean;
+  children?: ReactNode;
+  visible: boolean;
+};
+
+const Page = ({ visible, fullScreen = false, children }: PageProps) => {
   return (
     <AnimatePresence>
-      {page && (
+      {visible && (
         <>
           <motion.div
             className={cn(styles.page, { [styles.pageFullScreen]: fullScreen })}
@@ -38,18 +47,7 @@ const Page = ({ page, navigate, fullScreen = false }: PageProps) => {
             exit="exit"
           >
             {fullScreen && <Background />}
-            <h1
-              onClick={() => {
-                navigate(`/`);
-              }}
-            >
-              {page.charAt(0).toUpperCase() + page.slice(1)}
-            </h1>
-            <AnimatedBorderBox className={styles.content}>
-              <p>
-                <TypewriterText text={`This is the ${page} page content.`} />
-              </p>
-            </AnimatedBorderBox>
+            {children}
           </motion.div>
         </>
       )}

@@ -1,5 +1,4 @@
-export type PageProps = {
+export type ScreenProps = {
   page: string | undefined;
   navigate: (path: string) => void;
-  fullScreen?: boolean
 };

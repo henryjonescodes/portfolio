@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import styles from "./components.module.scss";
-import { PageProps } from "./types";
+import { ScreenProps } from "./types";
 
 type LineData = {
   text: string;
@@ -56,7 +56,7 @@ const DynamicWrapper = ({
   return <Tag {...rest}>{children}</Tag>; // Render the correct tag dynamically
 };
 
-const Menu = ({ page, navigate }: PageProps) => {
+const Menu = ({ page, navigate }: ScreenProps) => {
   return (
     <AnimatePresence>
       {!page && (

@@ -1,6 +1,7 @@
 import { Html } from "@react-three/drei";
 import { motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
+import About from "../about";
 import Background from "./components/Background";
 import Menu from "./components/Menu";
 import Page from "./components/Page";
@@ -24,7 +25,11 @@ const Screen = ({ fullScreen }: ScreenProps) => {
       >
         <Background />
         <Menu page={page} navigate={navigate} />
-        {!fullScreen && <Page page={page} navigate={navigate} />}
+        {!fullScreen && (
+          <Page visible={page !== undefined} fullScreen={true}>
+            <About navigate={navigate} />
+          </Page>
+        )}
       </motion.div>
     </Html>
   );

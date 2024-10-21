@@ -91,10 +91,10 @@ export default function CustomControls({
   );
 
   useEffect(() => {
-    // Only proceed if fullScreen state has changed
-    if (prevFullScreen.current !== fullScreen) {
-      if (fullScreen && targetRef?.current) {
-        // Entering fullscreen
+    // Only proceed if fullScreen state has changed or if it starts as true
+    if (prevFullScreen.current !== fullScreen || fullScreen) {
+      if (fullScreen && targetRef?.current && !isAnimating) {
+        // Entering fullscreen or starting in fullscreen
         // Disable user drag
         setDragEnabled(false);
         setIsAnimating(true);
@@ -113,7 +113,7 @@ export default function CustomControls({
         const fullscreenCameraPosition: [number, number, number] = [
           screenPosition.x,
           screenPosition.y + 1,
-          screenPosition.z + 1.5, // Adjust as needed
+          screenPosition.z + 2.5, // Adjust as needed
         ];
 
         api.start({
@@ -123,7 +123,7 @@ export default function CustomControls({
             setIsAnimating(false);
           },
         });
-      } else if (!fullScreen && prevFullScreen.current) {
+      } else if (!fullScreen && prevFullScreen.current && !isAnimating) {
         // Exiting fullscreen
         setIsAnimating(true);
 
@@ -141,7 +141,14 @@ export default function CustomControls({
       // Update the previous fullScreen state
       prevFullScreen.current = fullScreen;
     }
-  }, [fullScreen, targetRef, api, initialCameraPosition, initialSpherical]);
+  }, [
+    fullScreen,
+    targetRef,
+    api,
+    // initialCameraPosition,
+    // initialSpherical,
+    // isAnimating,
+  ]);
 
   // Update camera position each frame
   useFrame(() => {

@@ -8,6 +8,7 @@ interface AnimatedBorderProps {
   height: number;
   borderWidth: number;
   borderColor: string;
+  borderRadius?: number;
 }
 
 const AnimatedBorder = ({
@@ -15,9 +16,8 @@ const AnimatedBorder = ({
   height,
   borderWidth,
   borderColor,
+  borderRadius = 20,
 }: AnimatedBorderProps) => {
-  const borderRadius = 20; // Adjust the border radius
-
   const pathVariants = {
     hidden: {
       pathLength: 0,
@@ -62,7 +62,9 @@ const AnimatedBorder = ({
 interface AnimatedBorderBoxProps {
   borderWidth?: number;
   borderColor?: string;
+  borderRadius?: number;
   className?: string;
+  contentClassName?: string;
   children: ReactNode;
 }
 
@@ -71,6 +73,8 @@ const AnimatedBorderBox = ({
   borderColor = "#00d67d", // Default to black
   className,
   children,
+  contentClassName,
+  borderRadius = 20,
 }: AnimatedBorderBoxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -84,15 +88,27 @@ const AnimatedBorderBox = ({
   }, []);
 
   return (
-    <motion.div ref={containerRef} className={cn(styles.content, className)}>
+    <motion.div
+      ref={containerRef}
+      className={cn(styles.borderBox, className)}
+      style={{
+        padding: `${borderWidth}px`,
+      }}
+    >
       {/* The AnimatedBorder component now takes the dynamic size and customizable props */}
       <AnimatedBorder
         width={dimensions.width}
         height={dimensions.height}
         borderWidth={borderWidth}
         borderColor={borderColor}
+        borderRadius={borderRadius}
       />
-      {children}
+      <motion.div
+        style={{ borderRadius: `${borderRadius}px` }}
+        className={cn(styles.content, contentClassName)}
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 };
