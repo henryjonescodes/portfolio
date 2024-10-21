@@ -9,11 +9,11 @@ import { useState } from "react";
 const Home = () => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
-  // const [fullScreen, setFullScreen] = useState(false);
-  const fullScreen = false;
+  const [fullScreen, setFullScreen] = useState(false);
+
   return (
     <>
-      {/* <div className={styles.tools}>
+      <div className={styles.tools}>
         <button
           type="button"
           onClick={() => {
@@ -22,7 +22,7 @@ const Home = () => {
         >
           {fullScreen ? "fullScreen off" : "fullScreen on"}
         </button>
-      </div> */}
+      </div>
       <motion.div className={styles.home}>
         {fullScreen && (
           <Page visible={page !== undefined} fullScreen={true}>

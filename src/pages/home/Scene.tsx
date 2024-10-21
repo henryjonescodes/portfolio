@@ -39,7 +39,8 @@ export default function Scene({ fullScreen }: SceneProps) {
       <ambientLight intensity={0.5} />
       <directionalLight position={[2, 5, 2]} />
       <CustomControls
-        fullScreen={!!page}
+        zoomIn={!!page}
+        fullScreen={fullScreen}
         targetRef={screenGroupRef}
         maxPolarAngle={Math.PI / 6}
         maxAzimuthAngle={Math.PI / 6}

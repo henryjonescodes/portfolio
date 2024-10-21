@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode } from "react";
 import Background from "./Background";
 import styles from "./components.module.scss";
-import { ScreenProps } from "./types";
 
 // Define the variants for the animation
 const pageContentVariants = {

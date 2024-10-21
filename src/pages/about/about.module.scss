@@ -20,12 +20,16 @@
   justify-content: center;
 
   gap: 16px;
+  padding: 16px 0px;
 
+  &Fullscreen {
+    padding: 32px 0px;
+  }
 }
 
 .viewer {
   height: 100%;
-  margin-bottom: 32px;
+  // margin-bottom: 32px;
 
   &Content {
     padding: 0px 12px;

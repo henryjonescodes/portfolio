@@ -7,7 +7,7 @@ const staggeredChar = (lineIndex: number, delay: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: delay + lineIndex * 0.5 + charIndex * 0.008, // Adjust for line delay and stagger
+      delay: delay + lineIndex * 0.5 + charIndex * 0.005, // Adjust for line delay and stagger
       duration: 0.2,
     },
   }),
