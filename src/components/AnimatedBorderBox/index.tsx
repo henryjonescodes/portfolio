@@ -1,15 +1,22 @@
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, ReactNode } from "react";
+import cn from "classnames"; // Import classnames
 import styles from "./local.module.scss";
 
 interface AnimatedBorderProps {
   width: number;
   height: number;
+  borderWidth: number;
+  borderColor: string;
 }
 
-const AnimatedBorder = ({ width, height }: AnimatedBorderProps) => {
+const AnimatedBorder = ({
+  width,
+  height,
+  borderWidth,
+  borderColor,
+}: AnimatedBorderProps) => {
   const borderRadius = 20; // Adjust the border radius
-  const strokeWidth = 4; // Line width for the stroke
 
   const pathVariants = {
     hidden: {
@@ -37,22 +44,34 @@ const AnimatedBorder = ({ width, height }: AnimatedBorderProps) => {
     >
       {/* Animated Rounded Rectangle */}
       <motion.rect
-        x={strokeWidth / 2}
-        y={strokeWidth / 2}
+        x={borderWidth / 2}
+        y={borderWidth / 2}
         rx={borderRadius}
         ry={borderRadius}
-        width={width - strokeWidth}
-        height={height - strokeWidth}
-        stroke="black"
+        width={width - borderWidth}
+        height={height - borderWidth}
+        stroke={borderColor}
         fill="transparent"
-        strokeWidth={strokeWidth}
+        strokeWidth={borderWidth}
         variants={pathVariants}
       />
     </motion.svg>
   );
 };
 
-const AnimatedBorderBox = () => {
+interface AnimatedBorderBoxProps {
+  borderWidth?: number;
+  borderColor?: string;
+  className?: string;
+  children: ReactNode;
+}
+
+const AnimatedBorderBox = ({
+  borderWidth = 4, // Default to 4
+  borderColor = "#00d67d", // Default to black
+  className,
+  children,
+}: AnimatedBorderBoxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
 
@@ -65,10 +84,15 @@ const AnimatedBorderBox = () => {
   }, []);
 
   return (
-    <motion.div ref={containerRef} className={styles.content}>
-      {/* The AnimatedBorder component now takes the dynamic size */}
-      <AnimatedBorder width={dimensions.width} height={dimensions.height} />
-      <h3>I'm in the box</h3>
+    <motion.div ref={containerRef} className={cn(styles.content, className)}>
+      {/* The AnimatedBorder component now takes the dynamic size and customizable props */}
+      <AnimatedBorder
+        width={dimensions.width}
+        height={dimensions.height}
+        borderWidth={borderWidth}
+        borderColor={borderColor}
+      />
+      {children}
     </motion.div>
   );
 };

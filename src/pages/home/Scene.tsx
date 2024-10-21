@@ -11,7 +11,10 @@ import styles from "./home.module.scss";
 import Screen from "./Screen";
 import ToolBar from "./ToolBar";
 
-export default function Scene() {
+type SceneProps = {
+  fullScreen?: boolean;
+};
+export default function Scene({ fullScreen }: SceneProps) {
   const gizmo = useModel("/models/Gizmo.glb");
   const buttons = useModel("/models/Buttons.glb");
   const colorToggle = useModel("/models/ColorToggle.glb");
@@ -48,7 +51,7 @@ export default function Scene() {
           position={[0.001, 0.473, 0.025]}
           scale={0.1}
         >
-          <Screen />
+          <Screen fullScreen={fullScreen} />
         </group>
         <ToolBar position={[0.001, 0, 0.059]} />
         {gizmo && <primitive object={gizmo} />}

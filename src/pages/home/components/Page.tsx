@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import AnimatedBorderBox from "../../../components/AnimatedBorderBox";
 import styles from "./components.module.scss";
 import { PageProps } from "./types";
+import Background from "./Background";
+import TypewriterText from "../../../components/TypewriterText";
 
 // Define the variants for the animation
 const pageContentVariants = {
@@ -35,17 +37,19 @@ const Page = ({ page, navigate, fullScreen = false }: PageProps) => {
             animate="animate"
             exit="exit"
           >
-            {/* {fullScreen && <Background />} */}
-            <h2
+            {fullScreen && <Background />}
+            <h1
               onClick={() => {
                 navigate(`/`);
               }}
             >
               {page.charAt(0).toUpperCase() + page.slice(1)}
-            </h2>
-            <AnimatedBorderBox />
-            {/* <AnimatedBorder width={300} height={200} /> */}
-            <p>This is the {page} page content.</p>
+            </h1>
+            <AnimatedBorderBox className={styles.content}>
+              <p>
+                <TypewriterText text={`This is the ${page} page content.`} />
+              </p>
+            </AnimatedBorderBox>
           </motion.div>
         </>
       )}
