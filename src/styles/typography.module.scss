@@ -1,10 +1,15 @@
+@use "sass:color";
 @import './colors.module.scss';
 
 @mixin screen-text {
 
   h1,
   h2,
-  h3 {
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
     margin: 0px;
   }
 
@@ -18,13 +23,13 @@
     cursor: pointer;
 
     &:hover {
-      color: lighten($foreground-secondary, 10%);
+      color: color.adjust($foreground-secondary, $lightness: 10%)
     }
   }
 
   h3 {
     color: $foreground-tertiary;
-    margin-bottom: 16px;
+    // margin-bottom: 16px;
   }
 
   p {
