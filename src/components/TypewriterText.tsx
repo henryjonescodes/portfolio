@@ -1,51 +1,47 @@
 import { motion } from "framer-motion";
 
 // Define the staggered character typing effect
-const staggeredChar = (lineIndex: number, delay: number) => ({
-  hidden: { opacity: 0, y: 20 }, // Characters come from below
-  visible: ([charIndex, charCount]: [number, number]) => ({
+const staggeredChar = {
+  initial: { opacity: 0, y: 20 },
+  animate: {
     opacity: 1,
     y: 0,
     transition: {
-      delay: delay + lineIndex * 0.5 + charIndex * 0.005, // Adjust for line delay and stagger
       duration: 0.2,
     },
-  }),
-  exit: ([charIndex, charCount]: [number, number]) => ({
+  },
+  exit: {
     opacity: 0,
     y: 0,
     transition: {
-      delay: delay + (charCount - charIndex) * 0.008,
       duration: 0.2,
     },
-  }),
-});
+  },
+};
 
-// Component to animate text with staggered characters
 const TypewriterText = ({
   text,
-  lineIndex = 0,
-  delay = 0, // Add a delay prop
+  staggerChildren = 0.005,
 }: {
   text: string;
-  lineIndex?: number;
-  delay?: number;
+  staggerChildren?: number;
 }) => {
   return (
-    <>
+    <motion.span
+      variants={{
+        animate: {
+          transition: {
+            staggerChildren: staggerChildren, // Time between each character's appearance
+          },
+        },
+      }}
+    >
       {text.split("").map((char, index) => (
-        <motion.span
-          key={index}
-          variants={staggeredChar(lineIndex, delay)}
-          custom={[index, text.length]}
-          initial="hidden"
-          animate="visible"
-          exit="exit"
-        >
+        <motion.span key={index} variants={staggeredChar}>
           {char}
         </motion.span>
       ))}
-    </>
+    </motion.span>
   );
 };
 

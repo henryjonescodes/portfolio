@@ -40,10 +40,10 @@ const Page = ({ visible, fullScreen = false, children }: PageProps) => {
           <motion.div
             className={cn(styles.page, { [styles.pageFullScreen]: fullScreen })}
             key="pageContent"
-            variants={pageContentVariants} // Use variants for animation
-            initial="initial"
-            animate="animate"
-            exit="exit"
+            // variants={pageContentVariants} // Use variants for animation
+            // initial="initial"
+            // animate="animate"
+            // exit="exit"
           >
             {fullScreen && <Background />}
             {children}

@@ -1,0 +1,80 @@
+@import '@styles/colors.module.scss';
+@import '@styles/layout.module.scss';
+@import '@styles/typography.module.scss';
+
+/////////////////////////////////////////////////
+//                MAP VIEWER                   //
+/////////////////////////////////////////////////
+
+.locations {
+  position: relative;
+  // composes: fonts;
+  // padding: 0px $page-padding-large $page-padding-large $page-padding-large;
+  max-width: 100%;
+  width: 100%;
+  height: 1px;
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+
+  .content {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    gap: 16px;
+    max-width: $max-width-page;
+    min-height: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: $width-default) {
+  .locations {
+    // padding: 0px $page-padding-default $page-padding-default $page-padding-default;
+
+    .content {
+      // overflow: hidden;
+    }
+  }
+}
+
+@media (max-width: $width-compact) {
+  .locations {
+    // padding: 0px $page-padding-compact $page-padding-compact $page-padding-compact;
+  }
+}
+
+@media (max-width: $width-small) {
+  .locations {
+
+    min-height: 57.5vh;
+    max-height: 57.5vh;
+    // padding: 0px $page-padding-small $page-padding-default $page-padding-small;
+
+    .content {
+      height: 100%;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .viewer {
+      overflow: hidden;
+      min-height: 1px;
+      min-height: 55%;
+      flex-shrink: 0;
+    }
+  }
+}
+
+@media (max-width: $width-small) {
+  .locations {
+    min-height: 100vh;
+    scroll-snap-align: start;
+    padding: $page-padding-mobile $page-padding-mobile $page-padding-small $page-padding-mobile;
+
+    .content {
+      justify-content: center;
+    }
+  }
+}
