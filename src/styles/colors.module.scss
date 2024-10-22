@@ -1,7 +1,9 @@
+@use "sass:color";
+
 $foreground-primary: #00d67d;
-$foreground-secondary: desaturate($foreground-primary, 30%);
-$foreground-tertiary: desaturate($foreground-primary, 60%);
+$foreground-secondary: color.adjust($foreground-primary, $saturation: -30%);
+$foreground-tertiary: color.adjust($foreground-primary, $saturation: -60%);
 
 $accent-primary: #003333;
-$accent-secondary: desaturate($accent-primary, 60%);
-$accent-tertiary: desaturate($accent-primary, 60%);
+$accent-secondary: color.adjust($accent-primary, $saturation: -60%);
+$accent-tertiary: color.adjust($accent-primary, $saturation: -60%);
