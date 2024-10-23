@@ -2,6 +2,7 @@ import { motion, useIsPresent, usePresence } from "framer-motion";
 import { useEffect, useRef, useState, ReactNode } from "react";
 import cn from "classnames";
 import styles from "./local.module.scss";
+import { useWindowDimensions } from "../../context/WindowDimensionContext";
 
 interface AnimatedBorderProps {
   width: number;
@@ -82,16 +83,20 @@ const AnimatedBorderBox = ({
 }: AnimatedBorderBoxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const [cssBorderVisible, setCssBorderVisible] = useState<boolean>(false);
+  const { width } = useWindowDimensions();
+  // const [cssBorderVisible, setCssBorderVisible] = useState<boolean>(false);
 
-  const isPresent = useIsPresent();
+  // const isPresent = useIsPresent();
 
-  useEffect(() => {
-    console.log(isPresent);
-    if (cssBorderVisible && !isPresent) {
-      setCssBorderVisible(false);
-    }
-  }, [isPresent, cssBorderVisible]);
+  // useEffect(() => {
+  //   if (containerRef.current) {
+  //     const { offsetWidth, offsetHeight } = containerRef.current;
+  //     setDimensions({ width: offsetWidth, height: offsetHeight });
+  //   }
+  //   if (cssBorderVisible && !isPresent) {
+  //     setCssBorderVisible(false);
+  //   }
+  // }, [isPresent, cssBorderVisible]);
 
   useEffect(() => {
     if (containerRef.current) {
@@ -100,36 +105,31 @@ const AnimatedBorderBox = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (containerRef.current) {
+      const { offsetWidth, offsetHeight } = containerRef.current;
+      setDimensions({ width: offsetWidth, height: offsetHeight });
+    }
+  }, [width]);
+
   return (
-    <motion.div
-      ref={containerRef}
-      className={cn(styles.borderBox, className)}
-      onAnimationStart={(definition) => {
-        console.log(definition);
-        if (definition === "exit") {
-          setCssBorderVisible(false);
-          console.log("edit");
-        }
-      }}
-    >
-      {/* {!cssBorderVisible && ( */}
+    <motion.div ref={containerRef} className={cn(styles.borderBox, className)}>
       <AnimatedBorder
         width={dimensions.width}
         height={dimensions.height}
         borderWidth={borderWidth}
         borderColor={borderColor}
         borderRadius={borderRadius}
-        onAnimationComplete={() => setCssBorderVisible(true)} // Trigger CSS border after animation
+        // onAnimationComplete={() => setCssBorderVisible(true)} // Trigger CSS border after animation
       />
-      {/* )} */}
-      <motion.div
+      {/* <motion.div
         className={styles.cssBorder}
         style={{
           borderRadius: `${borderRadius * 1.13}px`,
           borderWidth: `${borderWidth}px`,
           borderColor: cssBorderVisible ? borderColor : "transparent", // Show CSS border after animation completes
         }}
-      />
+      /> */}
       <motion.div
         style={{ borderRadius: `${borderRadius}px` }}
         className={cn(styles.content, contentClassName)}

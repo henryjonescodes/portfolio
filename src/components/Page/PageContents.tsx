@@ -1,19 +1,23 @@
 import { motion, usePresence } from "framer-motion";
 import { useMemo, ReactNode } from "react";
+import classNames from "classnames";
 import styles from "./page.module.scss";
 
 // Define the props interface
 export type PageContentsProps = {
   initialLoad: boolean;
+  className?: string; // Add an optional className prop
 };
 
 type Props = {
   children: ReactNode;
 } & PageContentsProps;
 
-const PageContents: React.FC<Props> = ({ children, initialLoad }) => {
-  // const [isPresent] = usePresence();
-
+const PageContents: React.FC<Props> = ({
+  children,
+  initialLoad,
+  className,
+}) => {
   // Memoized variants based on initialLoad
   const pageVariants = useMemo(
     () => ({
@@ -41,7 +45,7 @@ const PageContents: React.FC<Props> = ({ children, initialLoad }) => {
 
   return (
     <motion.div
-      className={styles.pageContents}
+      className={classNames(styles.pageContents, className)} // Merge classnames
       variants={pageVariants}
       initial="initial"
       animate="animate"

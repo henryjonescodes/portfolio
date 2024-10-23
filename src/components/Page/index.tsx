@@ -88,15 +88,6 @@ const Page = ({
             variants={pageVariants}
           >
             <motion.div className={styles.contentInner}>
-              {page && (
-                <motion.h1
-                  onClick={() => {
-                    navigate(`/`);
-                  }}
-                >
-                  <TypewriterText text={page} staggerChildren={0.5} />
-                </motion.h1>
-              )}
               <AnimatePresence mode="wait">{children}</AnimatePresence>
             </motion.div>
           </motion.div>

@@ -18,7 +18,7 @@ const staggerVariants = {
     opacity: 0,
     transition: {
       duration: 0.2,
-      staggerChildren: 0.05, // Stagger each child by 0.05s when exiting
+      staggerChildren: 0.02, // Stagger each child by 0.05s when exiting
       staggerDirection: -1, // Reverse the stagger order on exit
       when: "afterChildren", // Ensure parent waits for children to exit
     },
