@@ -51,6 +51,7 @@ type PageProps = {
   fullScreen?: boolean;
   visible: boolean;
   children?: ReactNode;
+  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Page = ({
@@ -58,6 +59,7 @@ const Page = ({
   visible = true,
   fullScreen = false,
   children,
+  setFullScreen,
 }: PageProps) => {
   const { page } = useParams<{ page: string }>();
 
@@ -79,7 +81,7 @@ const Page = ({
               <Background />
             </motion.div>
           )}
-          <NavBar />
+          <NavBar setFullScreen={setFullScreen} fullScreen={fullScreen} />
           <motion.div
             className={cn(styles.content, {
               [styles.contentFullScreen]: fullScreen,

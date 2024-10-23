@@ -40,6 +40,7 @@ const Home = () => {
         <Page
           navigate={navigate}
           fullScreen={fullScreen}
+          setFullScreen={setFullScreen}
           visible={page !== undefined}
         >
           {page === "about" && <About key="about" initialLoad={initialLoad} />}
@@ -51,7 +52,7 @@ const Home = () => {
           )}
         </Page>
       )}
-      <Scene fullScreen={fullScreen} />;
+      <Scene fullScreen={fullScreen} setFullScreen={setFullScreen} />;
     </motion.div>
   );
 };

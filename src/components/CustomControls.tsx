@@ -157,6 +157,7 @@ export default function CustomControls({
     zoomIn,
     targetRef,
     api,
+    fullScreen,
     // initialCameraPosition,
     // initialSpherical,
     // isAnimating,

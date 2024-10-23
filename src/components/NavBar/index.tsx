@@ -5,7 +5,8 @@ import TypewriterText from "../TypewriterText";
 import { useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import closeSVG from "@assets/svg/icons/close.svg";
-import Logo from "./../../assets/svg/icons/close.svg?react";
+import Close from "./../../assets/svg/icons/close.svg?react";
+import Expand from "./../../assets/svg/icons/expand.svg?react";
 
 const navBarVariants = {
   initial: {
@@ -65,7 +66,12 @@ const NavBarButton = ({ onClick, Icon }: NavBarButtonProps) => {
   );
 };
 
-const NavBar = () => {
+type NavBarProps = {
+  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  fullScreen: boolean;
+};
+
+const NavBar = ({ setFullScreen, fullScreen }: NavBarProps) => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
 
@@ -103,8 +109,12 @@ const NavBar = () => {
         </motion.span>
         <motion.span className={styles.right}>
           <NavBarButton
+            onClick={() => setFullScreen(!fullScreen)}
+            Icon={Expand}
+          />
+          <NavBarButton
             onClick={() => navigate(`/`, { replace: true })}
-            Icon={Logo}
+            Icon={Close}
           />
         </motion.span>
       </motion.span>

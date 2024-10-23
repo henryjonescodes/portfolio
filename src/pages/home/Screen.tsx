@@ -6,10 +6,11 @@ import styles from "./home.module.scss";
 import Background from "../../components/Background";
 
 type ScreenProps = {
-  fullScreen?: boolean;
+  fullScreen: boolean;
+  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const Screen = ({ fullScreen }: ScreenProps) => {
+const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
 

@@ -12,9 +12,10 @@ import Screen from "./Screen";
 import ToolBar from "./ToolBar";
 
 type SceneProps = {
-  fullScreen?: boolean;
+  fullScreen: boolean;
+  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
 };
-export default function Scene({ fullScreen }: SceneProps) {
+export default function Scene({ fullScreen, setFullScreen }: SceneProps) {
   const gizmo = useModel("/models/Gizmo.glb");
   const buttons = useModel("/models/Buttons.glb");
   const colorToggle = useModel("/models/ColorToggle.glb");
@@ -52,7 +53,7 @@ export default function Scene({ fullScreen }: SceneProps) {
           position={[0.001, 0.473, 0.025]}
           scale={0.1}
         >
-          <Screen fullScreen={fullScreen} />
+          <Screen fullScreen={fullScreen} setFullScreen={setFullScreen} />
         </group>
         <ToolBar position={[0.001, 0, 0.059]} />
         {gizmo && <primitive object={gizmo} />}
