@@ -2,35 +2,56 @@
 @import '@styles/colors.module.scss';
 @import '@styles/typography.module.scss';
 
-.menu,
-.page {
+.sharedPageStyles {
   @include screen-text;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-
-  padding: 45px;
-
+  z-index: 2;
 }
 
 .menu {
+  composes: sharedPageStyles;
   @include retro-scrollbar;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  padding: 45px;
 
   overflow: auto;
 }
 
 .page {
+  composes: sharedPageStyles;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.navigationBar {
+  z-index: 1;
+  height: 60px;
+  width: 100%;
+  border-bottom: 5px solid $foreground-primary;
+  background-color: $background-secondary;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contents {
   @include retro-scrollbar;
+  overflow: auto;
+  width: 100%;
 
   &FullScreen {
     z-index: 1;
-
   }
 }
 
@@ -38,9 +59,11 @@
 .backdrop {
   @include glowing-background;
   @include full-screen-positioning;
+  z-index: 1;
 }
 
 .scanlines {
   @include scanlines-effect;
   @include full-screen-positioning;
+  z-index: 1;
 }

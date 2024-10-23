@@ -39,10 +39,7 @@ const About = ({
         className={cn(styles.page, { [styles.pageFullScreen]: fullScreen })}
       >
         <motion.div
-          variants={aboutPageVariants} // Parent controls staggering
-          initial="initial"
-          animate="animate"
-          exit="exit"
+          variants={aboutPageVariants}
           className={cn(styles.content, {
             [styles.contentFullScreen]: fullScreen,
           })}

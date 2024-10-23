@@ -7,3 +7,6 @@ $foreground-tertiary: color.adjust($foreground-primary, $saturation: -60%);
 $accent-primary: #003333;
 $accent-secondary: color.adjust($accent-primary, $saturation: -60%);
 $accent-tertiary: color.adjust($accent-primary, $saturation: -60%);
+
+
+$background-secondary: color.adjust($foreground-primary, $lightness: -50%)

@@ -7,9 +7,9 @@ const MapViewer = () => {
   return (
     <motion.div className={styles.locations}>
       <motion.div className={styles.content}>
-        <motion.div className={styles.viewer}>
-          <Map />
-        </motion.div>
+        {/* <motion.div className={styles.viewer}> */}
+        <Map />
+        {/* </motion.div> */}
         <Blurb />
       </motion.div>
     </motion.div>

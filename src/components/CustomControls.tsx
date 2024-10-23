@@ -3,6 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
+import { useWindowDimensions } from "../context/WindowDimensionContext";
 
 interface CustomControlsProps {
   zoomIn?: boolean;
@@ -20,6 +21,7 @@ export default function CustomControls({
   maxAzimuthAngle = Math.PI / 6,
 }: CustomControlsProps) {
   const { camera } = useThree();
+  const { width, height } = useWindowDimensions();
 
   // Initial camera position is [0, 0, 5]
   const initialCameraPosition: [number, number, number] = [0, 0, 5];
@@ -112,7 +114,13 @@ export default function CustomControls({
         // Then animate into fullscreen position
         const screenPosition = targetRef.current.position;
 
-        const zoomModifier = fullScreen ? 1.5 : 2.5;
+        const zoomModifier = fullScreen
+          ? width > 1700
+            ? width > 3000
+              ? 0.5
+              : 0.9
+            : 1.5
+          : 2.5;
 
         const fullscreenCameraPosition: [number, number, number] = [
           screenPosition.x,
