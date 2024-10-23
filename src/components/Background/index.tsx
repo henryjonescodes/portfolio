@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import styles from "./components.module.scss";
+import styles from "./background.module.scss";
 import cn from "classnames";
 
 const Background = () => {
