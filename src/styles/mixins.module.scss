@@ -1,3 +1,5 @@
+@use "sass:color";
+
 @mixin retro-scrollbar {
   overflow-y: scroll;
   scrollbar-color: $foreground-secondary black; // For Firefox
@@ -64,4 +66,27 @@
   z-index: 1;
   pointer-events: none;
   animation: lines 0.06666666s linear infinite;
+}
+
+
+@mixin forgroundPrimaryHover {
+  transition: color 0.2s ease-in-out;
+  color: $foreground-primary;
+
+  &:hover {
+    color: color.adjust($foreground-primary, $lightness: 10%)
+  }
+}
+
+@mixin opacityHover {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
 }

@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import TypewriterText from "../TypewriterText";
 import { useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
+import closeSVG from "@assets/svg/icons/close.svg";
+import Logo from "./../../assets/svg/icons/close.svg?react";
 
 const navBarVariants = {
   initial: {
@@ -48,13 +50,17 @@ const NavBarItem = ({ label, onClick, selected = false }: NavBarItemProps) => {
 // NavBarButton Component
 type NavBarButtonProps = {
   onClick: () => void;
-  icon: React.ReactNode;
+  Icon: React.FunctionComponent<
+    React.SVGProps<SVGSVGElement> & {
+      title?: string;
+    }
+  >;
 };
 
-const NavBarButton = ({ onClick, icon }: NavBarButtonProps) => {
+const NavBarButton = ({ onClick, Icon }: NavBarButtonProps) => {
   return (
     <motion.span className={styles.navButton} onClick={onClick}>
-      {icon}
+      <Icon />
     </motion.span>
   );
 };
@@ -95,7 +101,12 @@ const NavBar = () => {
             />
           </motion.h3>
         </motion.span>
-        <motion.span className={styles.right}>test</motion.span>
+        <motion.span className={styles.right}>
+          <NavBarButton
+            onClick={() => navigate(`/`, { replace: true })}
+            Icon={Logo}
+          />
+        </motion.span>
       </motion.span>
     </motion.span>
   );
