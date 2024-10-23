@@ -1,34 +1,14 @@
 import { motion } from "framer-motion";
 import AnimatedBorderBox from "../../components/AnimatedBorderBox";
+import PageContents, {
+  PageContentsProps,
+} from "../../components/Page/PageContents";
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./projects.module.scss";
 
-const aboutPageVariants = {
-  initial: {
-    opacity: 0,
-    transition: {
-      delay: 2,
-    },
-  },
-  animate: { opacity: 1 },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 2.5,
-      ease: "easeInOut",
-    },
-  },
-};
-const Projects = () => {
+const Projects = ({ initialLoad }: PageContentsProps) => {
   return (
-    <motion.div
-      variants={aboutPageVariants}
-      className={styles.about}
-      // initial="initial"
-      // animate="animate"
-      // exit="exit"
-      key="projects"
-    >
+    <PageContents initialLoad={initialLoad}>
       <AnimatedBorderBox
         className={styles.viewer}
         contentClassName={styles.viewerContent}
@@ -40,7 +20,7 @@ const Projects = () => {
           />
         </motion.p>
       </AnimatedBorderBox>
-    </motion.div>
+    </PageContents>
   );
 };
 

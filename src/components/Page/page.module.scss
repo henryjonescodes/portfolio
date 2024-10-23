@@ -47,3 +47,9 @@
     gap: 24px;
   }
 }
+
+.pageContents {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

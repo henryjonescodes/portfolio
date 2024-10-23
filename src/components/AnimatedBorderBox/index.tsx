@@ -21,7 +21,7 @@ const pathVariants = {
       ease: "easeInOut",
     },
   },
-  exit: { pathLength: 0 },
+  exit: {},
 };
 
 const AnimatedBorder = ({

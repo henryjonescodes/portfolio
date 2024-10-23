@@ -1,15 +1,8 @@
 @import '@styles/mixins.module.scss';
 @import '@styles/colors.module.scss';
 
-.about {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
 .viewer {
   height: min-content;
-  // margin-bottom: 32px;
 
   &Content {
     display: flex;

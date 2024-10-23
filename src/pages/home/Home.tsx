@@ -1,12 +1,12 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useNavigate, useParams } from "react-router-dom";
-import About from "../about";
-import styles from "./home.module.scss";
-import Scene from "./Scene";
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Page from "../../components/Page";
+import About from "../about";
 import Experience from "../experience";
 import Projects from "../projects";
+import styles from "./home.module.scss";
+import Scene from "./Scene";
 
 const Home = () => {
   const { page } = useParams<{ page: string }>();
@@ -22,18 +22,19 @@ const Home = () => {
     }
   }, [page]);
 
+  // <>
+  // {/* <div className={styles.tools}>
+  //   <button
+  //     type="button"
+  //     onClick={() => {
+  //       setFullScreen(!fullScreen);
+  //     }}
+  //   >
+  //     {fullScreen ? "fullScreen off" : "fullScreen on"}
+  //   </button>
+  // </div> */}
+
   return (
-    // <>
-    // {/* <div className={styles.tools}>
-    //   <button
-    //     type="button"
-    //     onClick={() => {
-    //       setFullScreen(!fullScreen);
-    //     }}
-    //   >
-    //     {fullScreen ? "fullScreen off" : "fullScreen on"}
-    //   </button>
-    // </div> */}
     <motion.div className={styles.home}>
       {fullScreen && (
         <Page
@@ -41,18 +42,17 @@ const Home = () => {
           fullScreen={fullScreen}
           visible={page !== undefined}
         >
-          <AnimatePresence mode="wait">
-            {page === "about" && (
-              <About key="about" initialLoad={initialLoad} />
-            )}
-            {page === "experience" && <Experience key="experience" />}
-            {page === "projects" && <Projects key="projects" />}
-          </AnimatePresence>
+          {page === "about" && <About key="about" initialLoad={initialLoad} />}
+          {page === "experience" && (
+            <Experience key="experience" initialLoad={initialLoad} />
+          )}
+          {page === "projects" && (
+            <Projects key="projects" initialLoad={initialLoad} />
+          )}
         </Page>
       )}
       <Scene fullScreen={fullScreen} />;
     </motion.div>
-    // </>
   );
 };
 

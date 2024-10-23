@@ -97,7 +97,7 @@ const Page = ({
                   <TypewriterText text={page} staggerChildren={0.5} />
                 </motion.h1>
               )}
-              {children}
+              <AnimatePresence mode="wait">{children}</AnimatePresence>
             </motion.div>
           </motion.div>
         </motion.div>
