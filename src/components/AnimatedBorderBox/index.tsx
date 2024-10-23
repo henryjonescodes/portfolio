@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useIsPresent, usePresence } from "framer-motion";
 import { useEffect, useRef, useState, ReactNode } from "react";
 import cn from "classnames";
 import styles from "./local.module.scss";
@@ -21,7 +21,13 @@ const pathVariants = {
       ease: "easeInOut",
     },
   },
-  exit: {},
+  exit: {
+    pathLength: 0,
+    transition: {
+      duration: 1,
+      ease: "easeInOut",
+    },
+  },
 };
 
 const AnimatedBorder = ({
@@ -78,6 +84,15 @@ const AnimatedBorderBox = ({
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [cssBorderVisible, setCssBorderVisible] = useState<boolean>(false);
 
+  const isPresent = useIsPresent();
+
+  useEffect(() => {
+    console.log(isPresent);
+    if (cssBorderVisible && !isPresent) {
+      setCssBorderVisible(false);
+    }
+  }, [isPresent, cssBorderVisible]);
+
   useEffect(() => {
     if (containerRef.current) {
       const { offsetWidth, offsetHeight } = containerRef.current;
@@ -86,23 +101,33 @@ const AnimatedBorderBox = ({
   }, []);
 
   return (
-    <motion.div ref={containerRef} className={cn(styles.borderBox, className)}>
-      {!cssBorderVisible && (
-        <AnimatedBorder
-          width={dimensions.width}
-          height={dimensions.height}
-          borderWidth={borderWidth}
-          borderColor={borderColor}
-          borderRadius={borderRadius}
-          onAnimationComplete={() => setCssBorderVisible(true)} // Trigger CSS border after animation
-        />
-      )}
+    <motion.div
+      ref={containerRef}
+      className={cn(styles.borderBox, className)}
+      onAnimationStart={(definition) => {
+        console.log(definition);
+        if (definition === "exit") {
+          setCssBorderVisible(false);
+          console.log("edit");
+        }
+      }}
+    >
+      {/* {!cssBorderVisible && ( */}
+      <AnimatedBorder
+        width={dimensions.width}
+        height={dimensions.height}
+        borderWidth={borderWidth}
+        borderColor={borderColor}
+        borderRadius={borderRadius}
+        onAnimationComplete={() => setCssBorderVisible(true)} // Trigger CSS border after animation
+      />
+      {/* )} */}
       <motion.div
         className={styles.cssBorder}
         style={{
           borderRadius: `${borderRadius * 1.13}px`,
           borderWidth: `${borderWidth}px`,
-          borderColor: cssBorderVisible ? `${borderColor}` : "transparent", // Show CSS border after animation completes
+          borderColor: cssBorderVisible ? borderColor : "transparent", // Show CSS border after animation completes
         }}
       />
       <motion.div

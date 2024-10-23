@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, usePresence } from "framer-motion";
 import { useMemo, ReactNode } from "react";
 import styles from "./page.module.scss";
 
@@ -12,6 +12,8 @@ type Props = {
 } & PageContentsProps;
 
 const PageContents: React.FC<Props> = ({ children, initialLoad }) => {
+  // const [isPresent] = usePresence();
+
   // Memoized variants based on initialLoad
   const pageVariants = useMemo(
     () => ({

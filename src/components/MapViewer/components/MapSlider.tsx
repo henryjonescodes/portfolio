@@ -11,7 +11,16 @@ const staggerVariants = {
     opacity: 1,
     transition: {
       duration: 0.2,
-      staggerChildren: 0.05, // Stagger each child by 0.1s
+      staggerChildren: 0.05, // Stagger each child by 0.05s when entering
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.2,
+      staggerChildren: 0.05, // Stagger each child by 0.05s when exiting
+      staggerDirection: -1, // Reverse the stagger order on exit
+      when: "afterChildren", // Ensure parent waits for children to exit
     },
   },
 };
@@ -19,6 +28,7 @@ const staggerVariants = {
 const lineVariants = {
   initial: { opacity: 0 },
   animate: { opacity: 1 },
+  exit: { opacity: 0 }, // Fade out each child when exiting
 };
 
 const MapSlider = () => {
