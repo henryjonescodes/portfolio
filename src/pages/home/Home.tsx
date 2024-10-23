@@ -9,7 +9,7 @@ import { useState } from "react";
 const Home = () => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
-  const [fullScreen, setFullScreen] = useState(true);
+  const [fullScreen, setFullScreen] = useState(false);
 
   return (
     <>

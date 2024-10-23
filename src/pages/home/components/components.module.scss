@@ -26,6 +26,8 @@
 }
 
 .page {
+  @include retro-scrollbar;
+
   &FullScreen {
     z-index: 1;
 

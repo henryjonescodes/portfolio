@@ -13,7 +13,7 @@ const pageContentVariants = {
     opacity: 1,
     transition: {
       duration: 0.3,
-      delay: 0.5,
+      delay: 1,
       staggerChildren: 0.2,
       delayChildren: 3.1, // Optional: Delay the start of child animations
     },

@@ -26,7 +26,7 @@ const Screen = ({ fullScreen }: ScreenProps) => {
         <Background />
         <Menu page={page} navigate={navigate} />
         {!fullScreen && (
-          <Page visible={page !== undefined} fullScreen={true}>
+          <Page visible={page !== undefined} fullScreen={false}>
             <About navigate={navigate} />
           </Page>
         )}
