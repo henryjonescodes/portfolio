@@ -1,16 +1,42 @@
-import { motion } from "framer-motion";
+import { delay, motion } from "framer-motion";
 import AnimatedBorderBox from "../../components/AnimatedBorderBox";
 import MapViewer from "../../components/MapViewer";
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./about.module.scss";
+import { useMemo } from "react";
 
-const About = () => {
+const About = ({ initialLoad }) => {
+  const aboutPageVariants = useMemo(
+    () => ({
+      initial: {
+        opacity: 0,
+      },
+      animate: {
+        opacity: 1,
+        transition: {
+          delay: initialLoad ? 2 : 0,
+          delayChildren: initialLoad ? 2 : 0,
+          staggerChildren: 0.5,
+        },
+      },
+      exit: {
+        opacity: 0,
+        transition: {
+          duration: 0.5,
+          ease: "easeInOut",
+        },
+      },
+    }),
+    [initialLoad]
+  );
+
   return (
     <motion.div
       className={styles.about}
-      // initial="initial"
-      // animate="animate"
-      // exit="exit"
+      variants={aboutPageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
       <AnimatedBorderBox
         className={styles.viewer}

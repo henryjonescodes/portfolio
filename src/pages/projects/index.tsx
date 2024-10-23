@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import AnimatedBorderBox from "../../components/AnimatedBorderBox";
-import MapViewer from "../../components/MapViewer";
 import TypewriterText from "../../components/TypewriterText";
-import styles from "./experience.module.scss";
+import styles from "./projects.module.scss";
+
 const aboutPageVariants = {
   initial: {
     opacity: 0,
@@ -19,7 +19,7 @@ const aboutPageVariants = {
     },
   },
 };
-const Experience = () => {
+const Projects = () => {
   return (
     <motion.div
       variants={aboutPageVariants}
@@ -27,6 +27,7 @@ const Experience = () => {
       // initial="initial"
       // animate="animate"
       // exit="exit"
+      key="projects"
     >
       <AnimatedBorderBox
         className={styles.viewer}
@@ -43,4 +44,4 @@ const Experience = () => {
   );
 };
 
-export default Experience;
+export default Projects;
