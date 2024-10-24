@@ -1,34 +1,53 @@
 @import '@styles/colors.module.scss';
 @import '@styles/mixins.module.scss';
 
-@mixin navItem {
+// Mixin for common nav item styles
+@mixin navItemCommon {
+  @include forgroundPrimaryHover;
   position: relative;
   transition: all 0.3s ease;
   color: $foreground-primary;
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
 
-  .border {
-    transition: all 0.1s ease;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border-bottom: 0px solid $foreground-primary;
+  .icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
 
-    &.selected {
-      border-bottom-width: 6px !important;
-    }
+    svg,
+    path {
 
-    &:hover {
-      border-bottom-width: 3px;
+      fill: $foreground-primary;
+      stroke: $foreground-primary;
     }
   }
 
+  .label {
+    margin: 0px 8px;
+    display: inline-block;
+    transition: all 0.3s ease;
+  }
 }
 
+// Mixin for hover effect when fullScreen is false
+@mixin navItemHover {
+  &:hover {
+    width: 140px;
+
+    .label {
+      display: inline-block;
+    }
+  }
+}
+
+// Styles for the navigation bar
 .navigationBar {
   z-index: 1;
   height: 45px;
@@ -68,32 +87,53 @@
 }
 
 .right {
-  // background-color: darkblue;
   grid-column: 3 / 4;
   justify-content: flex-end;
 }
 
-
+// Styles for NavBarItem
 .navItem {
-  @include forgroundPrimaryHover;
-  @include navItem;
-  padding: 8px 12px;
-  font-size: 1rem;
+  @include navItemCommon;
+  // padding: 8px 12px;
+  width: auto;
 
+  .label {
+    display: inline-block;
+  }
+
+  .border {
+    transition: all 0.1s ease;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-bottom: 0px solid $foreground-primary;
+
+    &.selected {
+      border-bottom-width: 6px !important;
+    }
+
+    &:hover {
+      border-bottom-width: 3px;
+    }
+  }
+
+  // Styles when fullScreen is false
+  &.fullScreenFalse {
+    width: 50px;
+    justify-content: center;
+
+    .label {
+      display: none;
+    }
+
+    @include navItemHover;
+  }
 }
 
+// Styles for NavBarButton
 .navButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include navItemCommon;
   padding: 8px;
   border-left: 2px solid $foreground-primary;
-
-  svg,
-  path {
-    @include opacityHover;
-    cursor: pointer;
-    fill: $foreground-primary;
-    stroke: $foreground-primary;
-  }
+  justify-content: center;
 }

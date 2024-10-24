@@ -38,13 +38,14 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
     show: {
       opacity: 1,
       transition: {
-        duration: 0.8,
+        delay: 0.2,
+        duration: 1,
       },
     },
     hide: {
       opacity: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.2,
       },
     },
   };

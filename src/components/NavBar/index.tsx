@@ -1,14 +1,18 @@
 import React from "react";
-import styles from "./nav-bar.module.scss";
 import { motion } from "framer-motion";
-import TypewriterText from "../TypewriterText";
-import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
+import { NavigateFunction } from "react-router-dom";
 import cn from "classnames";
-import Close from "./../../assets/svg/icons/close.svg?react";
-import Expand from "./../../assets/svg/icons/expand.svg?react";
+import styles from "./nav-bar.module.scss";
+
+// Importing SVG icons
 import Checklist from "./../../assets/svg/icons/check-list.svg?react";
 import Code from "./../../assets/svg/icons/code.svg?react";
 import User from "./../../assets/svg/icons/user.svg?react";
+import Close from "./../../assets/svg/icons/close.svg?react";
+import Expand from "./../../assets/svg/icons/expand.svg?react";
+
+// Importing TypewriterText component
+import TypewriterText from "../TypewriterText";
 
 const navBarVariants = {
   initial: {
@@ -52,12 +56,17 @@ const NavBarItem = ({
   Icon,
 }: NavBarItemProps) => {
   return (
-    <motion.span className={styles.navItem} onClick={onClick}>
+    <motion.span
+      className={cn(styles.navItem, { [styles.fullScreenFalse]: !fullScreen })}
+      onClick={onClick}
+    >
       <motion.span
         className={cn(styles.border, { [styles.selected]: selected })}
-        onClick={onClick}
       />
-      <TypewriterText text={label} staggerChildren={0.03} />
+      {!fullScreen && <Icon className={styles.icon} />}
+      <motion.span className={styles.label}>
+        <TypewriterText text={label} staggerChildren={0.03} />
+      </motion.span>
     </motion.span>
   );
 };
@@ -75,7 +84,7 @@ type NavBarButtonProps = {
 const NavBarButton = ({ onClick, Icon }: NavBarButtonProps) => {
   return (
     <motion.span className={styles.navButton} onClick={onClick}>
-      <Icon />
+      <Icon className={styles.icon} />
     </motion.span>
   );
 };
@@ -124,7 +133,6 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
             Icon={Code}
           />
         </motion.span>
-        {/* {fullScreen && ( */}
         <motion.span className={styles.center}>
           <motion.h3>
             <TypewriterText
@@ -134,7 +142,6 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
             />
           </motion.h3>
         </motion.span>
-        {/* )} */}
         <motion.span className={styles.right}>
           <NavBarButton
             onClick={() => setFullScreen(!fullScreen)}

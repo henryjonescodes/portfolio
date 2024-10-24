@@ -29,14 +29,14 @@ const Home = () => {
     show: {
       opacity: 1,
       transition: {
-        duration: 0.8,
-        delay: 1,
+        duration: 1.3,
+        delay: 0.6,
       },
     },
     hide: {
       opacity: 0,
       transition: {
-        duration: 0,
+        duration: 0.3,
       },
     },
   };
