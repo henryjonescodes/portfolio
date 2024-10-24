@@ -24,7 +24,7 @@ export default function CustomControls({
   const { width, height } = useWindowDimensions();
 
   // Initial camera position is [0, 0, 5]
-  const initialCameraPosition: [number, number, number] = [0, 0, 5];
+  const initialCameraPosition: [number, number, number] = [0, 0, 4.2];
 
   // Initial spherical coordinates (radius, theta, phi)
   const radius = Math.sqrt(
@@ -111,11 +111,11 @@ export default function CustomControls({
               ? 0.5
               : 0.9
             : 1.5
-          : 2.5;
+          : 2.2;
 
         const fullscreenCameraPosition: [number, number, number] = [
           screenPosition.x,
-          screenPosition.y + 1,
+          screenPosition.y + 0.7,
           screenPosition.z + zoomModifier, // Adjust as needed
         ];
 

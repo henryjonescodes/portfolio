@@ -23,9 +23,9 @@ const navBarVariants = {
     opacity: 1,
     transition: {
       duration: 0.6,
-      delay: 1.2,
+      delay: 0.2,
       staggerChildren: 0.5,
-      delayChildren: 1.5,
+      delayChildren: 0.5,
     },
   },
   exit: {
@@ -56,7 +56,7 @@ const borderVariants = {
     width: "100%",
     transition: {
       duration: 0.5,
-      delay: 2.5, // Delay the border animation by 0.5 seconds
+      delay: 1.5, // Delay the border animation by 0.5 seconds
       ease: "easeInOut",
     },
   },
@@ -168,7 +168,7 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
             <TypewriterText
               key={page}
               text={`$henry-jones/${page}`}
-              staggerChildren={0.09}
+              staggerChildren={0.05}
             />
           </motion.h3>
         </motion.span>

@@ -1,5 +1,5 @@
 import { Html } from "@react-three/drei";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useNavigate, useParams } from "react-router-dom";
 import Menu from "./components/Menu";
 import styles from "./home.module.scss";
@@ -66,33 +66,39 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
           initial="hide"
           animate={isHidden ? "hide" : "show"}
         >
-          {/* {!fullScreen && ( */}
-          <Page
-            navigate={navigate}
-            fullScreen={fullScreen}
-            setFullScreen={setFullScreen}
-            visible={page !== undefined}
-            page={page}
-          >
-            {page === "about" && (
-              <About key="about" fullScreen={false} initialLoad={initialLoad} />
+          <AnimatePresence>
+            {!fullScreen && (
+              <Page
+                navigate={navigate}
+                fullScreen={fullScreen}
+                setFullScreen={setFullScreen}
+                visible={page !== undefined}
+                page={page}
+              >
+                {page === "about" && (
+                  <About
+                    key="about"
+                    fullScreen={false}
+                    initialLoad={initialLoad}
+                  />
+                )}
+                {page === "experience" && (
+                  <Experience
+                    key="experience"
+                    fullScreen={false}
+                    initialLoad={initialLoad}
+                  />
+                )}
+                {page === "projects" && (
+                  <Projects
+                    key="projects"
+                    fullScreen={false}
+                    initialLoad={initialLoad}
+                  />
+                )}
+              </Page>
             )}
-            {page === "experience" && (
-              <Experience
-                key="experience"
-                fullScreen={false}
-                initialLoad={initialLoad}
-              />
-            )}
-            {page === "projects" && (
-              <Projects
-                key="projects"
-                fullScreen={false}
-                initialLoad={initialLoad}
-              />
-            )}
-          </Page>
-          {/* )} */}
+          </AnimatePresence>
         </motion.div>
       </motion.div>
     </Html>
