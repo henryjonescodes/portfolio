@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./nav-bar.module.scss";
 import { motion } from "framer-motion";
 import TypewriterText from "../TypewriterText";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
 import closeSVG from "@assets/svg/icons/close.svg";
 import Close from "./../../assets/svg/icons/close.svg?react";
@@ -69,11 +69,11 @@ const NavBarButton = ({ onClick, Icon }: NavBarButtonProps) => {
 type NavBarProps = {
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
   fullScreen: boolean;
+  navigate: NavigateFunction;
 };
 
-const NavBar = ({ setFullScreen, fullScreen }: NavBarProps) => {
+const NavBar = ({ setFullScreen, fullScreen, navigate }: NavBarProps) => {
   const { page } = useParams<{ page: string }>();
-  const navigate = useNavigate(); // Initialize the navigate function
 
   const handleNavClick = (path: string) => {
     navigate(path);
@@ -99,14 +99,16 @@ const NavBar = ({ setFullScreen, fullScreen }: NavBarProps) => {
             selected={page === "projects"}
           />
         </motion.span>
-        <motion.span className={styles.center}>
-          <motion.h3>
-            <TypewriterText
-              text={`$henry-jones/${page}`}
-              staggerChildren={0.09}
-            />
-          </motion.h3>
-        </motion.span>
+        {fullScreen && (
+          <motion.span className={styles.center}>
+            <motion.h3>
+              <TypewriterText
+                text={`$henry-jones/${page}`}
+                staggerChildren={0.09}
+              />
+            </motion.h3>
+          </motion.span>
+        )}
         <motion.span className={styles.right}>
           <NavBarButton
             onClick={() => setFullScreen(!fullScreen)}

@@ -4,6 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import Menu from "./components/Menu";
 import styles from "./home.module.scss";
 import Background from "../../components/Background";
+import Page from "../../components/Page";
+import About from "../about";
+import Experience from "../experience";
+import Projects from "../projects";
 
 type ScreenProps = {
   fullScreen: boolean;
@@ -24,11 +28,22 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
       >
         <Background />
         <Menu page={page} navigate={navigate} />
-        {/* {!fullScreen && (
-          <Page visible={page !== undefined} fullScreen={false}>
-            <About />
+        {!fullScreen && (
+          <Page
+            navigate={navigate}
+            fullScreen={fullScreen}
+            setFullScreen={setFullScreen}
+            visible={page !== undefined}
+          >
+            {page === "about" && <About key="about" initialLoad={true} />}
+            {page === "experience" && (
+              <Experience key="experience" initialLoad={true} />
+            )}
+            {page === "projects" && (
+              <Projects key="projects" initialLoad={true} />
+            )}
           </Page>
-        )} */}
+        )}
       </motion.div>
     </Html>
   );

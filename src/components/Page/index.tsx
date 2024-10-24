@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode } from "react";
-import { useParams } from "react-router-dom";
+import { NavigateFunction, useParams } from "react-router-dom";
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./page.module.scss";
 import Background from "../Background";
@@ -47,7 +47,7 @@ const backgroundVariants = {
 };
 
 type PageProps = {
-  navigate: (path: string) => void;
+  navigate: NavigateFunction;
   fullScreen?: boolean;
   visible: boolean;
   children?: ReactNode;
@@ -67,7 +67,7 @@ const Page = ({
     <AnimatePresence>
       {visible && (
         <motion.div
-          className={styles.page}
+          className={cn(styles.page, { [styles.pageHandheld]: !fullScreen })}
           initial="initial"
           animate="animate"
           exit="exit"
@@ -81,7 +81,11 @@ const Page = ({
               <Background />
             </motion.div>
           )}
-          <NavBar setFullScreen={setFullScreen} fullScreen={fullScreen} />
+          <NavBar
+            setFullScreen={setFullScreen}
+            fullScreen={fullScreen}
+            navigate={navigate}
+          />
           <motion.div
             className={cn(styles.content, {
               [styles.contentFullScreen]: fullScreen,

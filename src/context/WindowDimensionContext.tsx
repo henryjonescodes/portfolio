@@ -53,7 +53,7 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({
 export const useWindowDimensions = (): WindowDimensionContextProps => {
   const context = useContext(WindowDimensionContext);
   if (!context) {
-    throw new Error("useScreenSize must be used within a ScreenSizeProvider");
+    return { width: 475, height: 308 };
   }
   return context;
 };
