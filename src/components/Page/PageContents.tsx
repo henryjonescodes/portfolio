@@ -27,8 +27,8 @@ const PageContents: React.FC<Props> = ({
       animate: {
         opacity: 1,
         transition: {
-          delay: initialLoad ? 2 : 0.5,
-          delayChildren: initialLoad ? 2 : 0.5,
+          delay: initialLoad ? 2 : 0,
+          delayChildren: initialLoad ? 2 : 0,
           staggerChildren: 0.5,
         },
       },
