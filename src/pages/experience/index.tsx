@@ -1,11 +1,9 @@
 import { motion } from "framer-motion";
-import AnimatedBorderBox from "../../components/AnimatedBorderBox";
+import ExperienceEntry from "../../components/ExperienceEntry";
 import PageContents, {
   PageContentsProps,
 } from "../../components/Page/PageContents";
 import TypewriterText from "../../components/TypewriterText";
-import styles from "./experience.module.scss";
-import ExperienceEntry from "../../components/ExperienceEntry";
 
 const experienceVariants = {
   animate: {

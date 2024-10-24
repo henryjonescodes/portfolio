@@ -1,6 +1,6 @@
-import { motion, usePresence } from "framer-motion";
-import { useMemo, ReactNode } from "react";
 import classNames from "classnames";
+import { motion } from "framer-motion";
+import { ReactNode, useMemo } from "react";
 import styles from "./page.module.scss";
 
 // Define the props interface

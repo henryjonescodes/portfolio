@@ -1,11 +1,10 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode } from "react";
-import { NavigateFunction, useParams } from "react-router-dom";
-import TypewriterText from "../../components/TypewriterText";
-import styles from "./page.module.scss";
+import { NavigateFunction } from "react-router-dom";
 import Background from "../Background";
 import NavBar from "../NavBar";
+import styles from "./page.module.scss";
 
 // Animation variants
 const pageVariants = {

@@ -21,7 +21,7 @@ export default function CustomControls({
   maxAzimuthAngle = Math.PI / 6,
 }: CustomControlsProps) {
   const { camera } = useThree();
-  const { width, height } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   // Initial camera position is [0, 0, 5]
   const initialCameraPosition: [number, number, number] = [0, 0, 4.2];

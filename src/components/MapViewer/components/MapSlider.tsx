@@ -39,7 +39,7 @@ const MapSlider = () => {
   const [bulgingIndex, setBulgingIndex] = useState<number | null>(null);
 
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
-  const numStops = stopKeys.length;
+  // const numStops = stopKeys.length;
 
   useEffect(() => {
     const index = currentKey !== null ? stopKeys.indexOf(currentKey) : -1;
@@ -94,7 +94,7 @@ const MapSlider = () => {
     stopKeys.forEach((key, i) => {
       lines.push(
         <motion.div
-          key={`stop-${i}`}
+          key={`stop-${key}-${i}`}
           className={cn(styles.stop, {
             [styles.selected]: selectedStop === i,
             [styles.requested]: requestedStop === i,

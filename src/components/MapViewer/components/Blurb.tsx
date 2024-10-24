@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
 import { motion } from "framer-motion";
-import styles from "./map-components.module.scss";
-import { MapContext } from "../MapContext";
-import TypewriterText from "../../TypewriterText";
+import { useContext } from "react";
 import AnimatedBorderBox from "../../AnimatedBorderBox";
+import TypewriterText from "../../TypewriterText";
+import { MapContext } from "../MapContext";
+import styles from "./map-components.module.scss";
 
 const Blurb = () => {
   const { currentKey, previousKey, setCurrentKey, locationData } =
