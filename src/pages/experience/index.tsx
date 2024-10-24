@@ -69,14 +69,14 @@ const ExperienceEntry = ({
           <motion.h2>
             <TypewriterText text={institution} />
           </motion.h2>
-          <motion.h3>
-            <TypewriterText text={title} />
-          </motion.h3>
-        </motion.div>
-        <motion.div className={styles.dates}>
           <motion.p>
             <TypewriterText text={dateRange} />
           </motion.p>
+        </motion.div>
+        <motion.div className={styles.subtitle}>
+          <motion.h3>
+            <TypewriterText text={title} />
+          </motion.h3>
         </motion.div>
       </motion.span>
       <AnimatedBorderBox
@@ -94,17 +94,17 @@ const ExperienceEntry = ({
   );
 };
 
-const Experience = ({ initialLoad }: PageContentsProps) => {
+const Experience = ({ initialLoad, fullScreen }: PageContentsProps) => {
   return (
-    <PageContents initialLoad={initialLoad}>
+    <PageContents initialLoad={initialLoad} fullScreen={fullScreen}>
       <motion.div variants={experienceVariants}>
         <motion.h1>
           <TypewriterText text={"Experience"} staggerChildren={0.05} />
         </motion.h1>
 
         <ExperienceEntry
-          institution="Channel (ChannelAI)"
-          title="Frontend iOS Engineer and Design System Lead"
+          institution="ChannelAI"
+          title="iOS Engineer, Design System Lead"
           description={[
             "Delivered interactive UI features and maintained design assets across departments for Channel's AI-powered chat platform.",
             "Worked extensively with Objective-C, Swift, and SwiftUI to implement core iOS features such as user profiles, media galleries, and app settings.",
@@ -115,8 +115,8 @@ const Experience = ({ initialLoad }: PageContentsProps) => {
         />
 
         <ExperienceEntry
-          institution="Mushroom (Mushroom.gg)"
-          title="Full Stack Engineer and Design System Lead"
+          institution="Mushroom.gg"
+          title="Full Stack Engineer, Design System Lead"
           description={[
             "Contributed to the implementation of chat and feed features for a gaming-focused social media platform.",
             "Managed cross-platform development for web and mobile using React, React Native, and GraphQL.",

@@ -7,11 +7,12 @@ import Experience from "../experience";
 import Projects from "../projects";
 import styles from "./home.module.scss";
 import Scene from "./Scene";
+import cn from "classnames";
 
 const Home = () => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
-  const [fullScreen, setFullScreen] = useState(true);
+  const [fullScreen, setFullScreen] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
@@ -22,26 +23,38 @@ const Home = () => {
     }
   }, [page]);
 
-  // <>
-  // {/* <div className={styles.tools}>
-  //   <button
-  //     type="button"
-  //     onClick={() => {
-  //       setFullScreen(!fullScreen);
-  //     }}
-  //   >
-  //     {fullScreen ? "fullScreen off" : "fullScreen on"}
-  //   </button>
-  // </div> */}
+  const isHidden = !fullScreen || page === undefined;
+
+  const wrapperVariants = {
+    show: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        delay: 1,
+      },
+    },
+    hide: {
+      opacity: 0,
+      transition: {
+        duration: 0,
+      },
+    },
+  };
 
   return (
     <motion.div className={styles.home}>
-      {fullScreen && (
+      <motion.div
+        className={cn(styles.wrapper, { [styles.disabled]: isHidden })}
+        variants={wrapperVariants}
+        initial="hide"
+        animate={isHidden ? "hide" : "show"}
+      >
         <Page
           navigate={navigate}
           fullScreen={fullScreen}
           setFullScreen={setFullScreen}
           visible={page !== undefined}
+          page={page}
         >
           {page === "about" && <About key="about" initialLoad={initialLoad} />}
           {page === "experience" && (
@@ -51,7 +64,7 @@ const Home = () => {
             <Projects key="projects" initialLoad={initialLoad} />
           )}
         </Page>
-      )}
+      </motion.div>
       <Scene fullScreen={fullScreen} setFullScreen={setFullScreen} />;
     </motion.div>
   );

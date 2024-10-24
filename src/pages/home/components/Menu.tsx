@@ -78,6 +78,36 @@ const Menu = ({ page, navigate }: ScreenProps) => {
               staggerChildren={textStaggerSeconds}
             />
           </motion.h2>
+          {/* Experience (Link) */}
+          <motion.h2
+            variants={menuVariants}
+            onClick={() => navigate("/experience")}
+          >
+            <TypewriterText
+              text="Experience"
+              staggerChildren={textStaggerSeconds}
+            />
+          </motion.h2>
+          {/* Experience (Link) */}
+          <motion.h2
+            variants={menuVariants}
+            onClick={() => navigate("/experience")}
+          >
+            <TypewriterText
+              text="Experience"
+              staggerChildren={textStaggerSeconds}
+            />
+          </motion.h2>
+          {/* Experience (Link) */}
+          <motion.h2
+            variants={menuVariants}
+            onClick={() => navigate("/experience")}
+          >
+            <TypewriterText
+              text="Experience"
+              staggerChildren={textStaggerSeconds}
+            />
+          </motion.h2>
         </motion.div>
       )}
     </AnimatePresence>

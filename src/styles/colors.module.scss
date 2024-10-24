@@ -1,8 +1,8 @@
 @use "sass:color";
 
 $foreground-primary: #00d67d;
-$foreground-secondary: color.adjust($foreground-primary, $saturation: -30%);
-$foreground-tertiary: color.adjust($foreground-primary, $saturation: -60%);
+$foreground-secondary: color.adjust($foreground-primary, $saturation: -10%);
+$foreground-tertiary: color.adjust($foreground-primary, $saturation: -40%);
 
 
 

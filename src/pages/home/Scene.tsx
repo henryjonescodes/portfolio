@@ -51,7 +51,7 @@ export default function Scene({ fullScreen, setFullScreen }: SceneProps) {
         <group
           ref={screenGroupRef}
           position={[0.001, 0.473, 0.025]}
-          scale={0.1}
+          scale={0.067}
         >
           <Screen fullScreen={fullScreen} setFullScreen={setFullScreen} />
         </group>

@@ -52,6 +52,7 @@ type PageProps = {
   visible: boolean;
   children?: ReactNode;
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
+  page: string | undefined;
 };
 
 const Page = ({
@@ -60,9 +61,8 @@ const Page = ({
   fullScreen = false,
   children,
   setFullScreen,
+  page,
 }: PageProps) => {
-  const { page } = useParams<{ page: string }>();
-
   return (
     <AnimatePresence>
       {visible && (
@@ -85,6 +85,7 @@ const Page = ({
             setFullScreen={setFullScreen}
             fullScreen={fullScreen}
             navigate={navigate}
+            page={page}
           />
           <motion.div
             className={cn(styles.content, {

@@ -8,6 +8,8 @@ import Page from "../../components/Page";
 import About from "../about";
 import Experience from "../experience";
 import Projects from "../projects";
+import { screenSize } from "../../styles/constants";
+import cn from "classnames";
 
 type ScreenProps = {
   fullScreen: boolean;
@@ -17,33 +19,56 @@ type ScreenProps = {
 const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
+  const { width, height } = screenSize;
+
+  const isHidden = fullScreen && page !== undefined;
+
+  const wrapperVariants = {
+    show: {
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        delay: 1,
+      },
+    },
+    hide: {
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
 
   return (
     <Html transform>
       <motion.div
         className={styles.screen}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+        style={{ height: `${height}px`, width: `${width}px` }}
       >
         <Background />
         <Menu page={page} navigate={navigate} />
-        {!fullScreen && (
+        <motion.div
+          className={cn(styles.wrapper, { [styles.disabled]: isHidden })}
+          variants={wrapperVariants}
+          initial="hide"
+          animate={isHidden ? "hide" : "show"}
+        >
           <Page
             navigate={navigate}
             fullScreen={fullScreen}
             setFullScreen={setFullScreen}
             visible={page !== undefined}
+            page={page}
           >
-            {page === "about" && <About key="about" initialLoad={true} />}
+            {page === "about" && <About key="about" fullScreen={false} />}
             {page === "experience" && (
-              <Experience key="experience" initialLoad={true} />
+              <Experience key="experience" fullScreen={false} />
             )}
             {page === "projects" && (
-              <Projects key="projects" initialLoad={true} />
+              <Projects key="projects" fullScreen={false} />
             )}
           </Page>
-        )}
+        </motion.div>
       </motion.div>
     </Html>
   );

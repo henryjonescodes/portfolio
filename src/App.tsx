@@ -1,6 +1,6 @@
 import "./App.scss";
 import { WindowDimensionProvider } from "./context/WindowDimensionContext";
-import Home from "./pages/home/Home";
+import Home from "./pages/home";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 export default function App() {

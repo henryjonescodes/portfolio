@@ -2,17 +2,6 @@
 @import './colors.module.scss';
 
 @mixin screen-text {
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    margin: 0px;
-  }
-
   h1 {
     color: $foreground-primary;
     font-size: 55px;
@@ -29,10 +18,33 @@
 
   h3 {
     color: $foreground-tertiary;
-    // margin-bottom: 16px;
   }
 
   p {
     color: $foreground-tertiary;
   }
+}
+
+@mixin handheld-text {
+  @include screen-text;
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {}
+
+  h5 {}
+
+  h6 {}
+
+  p {}
 }

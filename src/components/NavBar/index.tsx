@@ -70,11 +70,10 @@ type NavBarProps = {
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
   fullScreen: boolean;
   navigate: NavigateFunction;
+  page: string | undefined;
 };
 
-const NavBar = ({ setFullScreen, fullScreen, navigate }: NavBarProps) => {
-  const { page } = useParams<{ page: string }>();
-
+const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
   const handleNavClick = (path: string) => {
     navigate(path);
   };

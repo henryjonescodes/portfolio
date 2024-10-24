@@ -2,7 +2,7 @@
 
 @mixin retro-scrollbar {
   overflow-y: scroll;
-  scrollbar-color: $foreground-secondary black; // For Firefox
+  scrollbar-color: $foreground-secondary transparent; // For Firefox
 
   &::-webkit-scrollbar {
     width: 10px;

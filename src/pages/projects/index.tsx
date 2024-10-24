@@ -6,9 +6,9 @@ import PageContents, {
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./projects.module.scss";
 
-const Projects = ({ initialLoad }: PageContentsProps) => {
+const Projects = ({ initialLoad, fullScreen }: PageContentsProps) => {
   return (
-    <PageContents initialLoad={initialLoad}>
+    <PageContents initialLoad={initialLoad} fullScreen={fullScreen}>
       <motion.h1
         onClick={() => {
           // navigate(`/`);

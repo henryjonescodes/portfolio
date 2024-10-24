@@ -5,8 +5,9 @@ import styles from "./page.module.scss";
 
 // Define the props interface
 export type PageContentsProps = {
-  initialLoad: boolean;
+  initialLoad?: boolean;
   className?: string; // Add an optional className prop
+  fullScreen?: boolean;
 };
 
 type Props = {
@@ -15,8 +16,9 @@ type Props = {
 
 const PageContents: React.FC<Props> = ({
   children,
-  initialLoad,
+  initialLoad = false,
   className,
+  fullScreen = true,
 }) => {
   // Memoized variants based on initialLoad
   const pageVariants = useMemo(
@@ -27,8 +29,8 @@ const PageContents: React.FC<Props> = ({
       animate: {
         opacity: 1,
         transition: {
-          delay: initialLoad ? 2 : 0,
-          delayChildren: initialLoad ? 2 : 0,
+          delay: initialLoad ? 2 : fullScreen ? 0.5 : 1,
+          delayChildren: initialLoad ? 2 : fullScreen ? 0.5 : 1,
           staggerChildren: 0.5,
         },
       },
