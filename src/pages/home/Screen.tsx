@@ -48,7 +48,9 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
         <Background />
         <Menu page={page} navigate={navigate} />
         <motion.div
-          className={cn(styles.wrapper, { [styles.disabled]: isHidden })}
+          className={cn(styles.wrapper, {
+            [styles.disabled]: isHidden || page === undefined,
+          })}
           variants={wrapperVariants}
           initial="hide"
           animate={isHidden ? "hide" : "show"}
