@@ -26,7 +26,6 @@ const pageVariants = {
     },
   },
 };
-
 const backgroundVariants = {
   initial: {
     opacity: 0,

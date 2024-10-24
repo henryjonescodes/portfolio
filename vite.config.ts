@@ -5,6 +5,10 @@ import path from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    host: '0.0.0.0',  // This makes Vite accessible on the local network
+    port: 5173,        // You can change the port if necessary
+  },
   plugins: [react(), svgr()],
   resolve: {
     alias: {

@@ -3,7 +3,7 @@ import USA from "@assets/svg/backgrounds/usa.svg";
 import Corner from "@assets/svg/icons/corner.svg";
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import AnimatedBorderBox from "../../AnimatedBorderBox";
 import { MapContext } from "../MapContext";
 import { LocationPinKeys } from "../types";
@@ -43,10 +43,6 @@ const Map = () => {
     locationData[currentKey ?? "nyc"] ?? {};
 
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
-
-  useEffect(() => {
-    console.log(currentKey);
-  }, [currentKey]);
 
   return (
     <motion.div

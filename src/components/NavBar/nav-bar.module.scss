@@ -39,7 +39,7 @@
 // Mixin for hover effect when fullScreen is false
 @mixin navItemHover {
   &:hover {
-    width: 140px;
+    width: 130px;
 
     .label {
       display: inline-block;
