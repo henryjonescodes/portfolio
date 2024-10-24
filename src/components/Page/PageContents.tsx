@@ -29,9 +29,10 @@ const PageContents: React.FC<Props> = ({
       animate: {
         opacity: 1,
         transition: {
-          delay: initialLoad ? 2 : fullScreen ? 0.5 : 1,
-          delayChildren: initialLoad ? 2 : fullScreen ? 0.5 : 1,
+          delay: initialLoad ? 1 : fullScreen ? 0.2 : 0.2,
+          delayChildren: initialLoad ? 1 : fullScreen ? 0.2 : 0.2,
           staggerChildren: 0.5,
+          // when: !fullScreen ? "beforeChildren" : null, // Ensure parent waits for children to enter
         },
       },
       exit: {

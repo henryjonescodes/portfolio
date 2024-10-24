@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   .border {
     transition: all 0.1s ease;
@@ -22,7 +23,6 @@
     }
 
     &:hover {
-      cursor: pointer;
       border-bottom-width: 3px;
     }
   }
@@ -83,16 +83,16 @@
 }
 
 .navButton {
-  @include opacityHover;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 8px;
-  // border-right: 2px solid $foreground-primary;
   border-left: 2px solid $foreground-primary;
 
   svg,
   path {
+    @include opacityHover;
+    cursor: pointer;
     fill: $foreground-primary;
     stroke: $foreground-primary;
   }

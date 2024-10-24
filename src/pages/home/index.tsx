@@ -12,7 +12,7 @@ import cn from "classnames";
 const Home = () => {
   const { page } = useParams<{ page: string }>();
   const navigate = useNavigate(); // Initialize the navigate function
-  const [fullScreen, setFullScreen] = useState(false);
+  const [fullScreen, setFullScreen] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {

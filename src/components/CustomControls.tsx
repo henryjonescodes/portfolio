@@ -54,7 +54,7 @@ export default function CustomControls({
     theta: initialSpherical.theta,
     phi: initialSpherical.phi,
     position: initialCameraPosition,
-    config: { mass: 1, tension: 25, friction: 7.5 }, // Slowed down animation
+    config: { mass: 1, tension: 25, friction: 7.5 }, // Adjusted animation config
   }));
 
   // Gesture handling
@@ -83,7 +83,8 @@ export default function CustomControls({
           // Update spring values immediately during drag
           api.start({ theta: clampedTheta, phi: clampedPhi, immediate: true });
         } else if (!down && dragEnabled) {
-          // Animate back to initial position when drag ends
+          // Optionally animate back to initial position when drag ends
+          // If you don't want this, you can remove this block
           api.start({
             theta: initialSpherical.theta,
             phi: initialSpherical.phi,
@@ -95,21 +96,11 @@ export default function CustomControls({
   );
 
   useEffect(() => {
-    // Only proceed if fullScreen state has changed or if it starts as true
     if (prevFullScreen.current !== zoomIn || zoomIn) {
       if (zoomIn && targetRef?.current && !isAnimating) {
         // Entering fullscreen or starting in fullscreen
-        // Disable user drag
         setDragEnabled(false);
         setIsAnimating(true);
-
-        // Reset camera to initial position immediately
-        api.start({
-          theta: initialSpherical.theta,
-          phi: initialSpherical.phi,
-          position: initialCameraPosition,
-          immediate: true,
-        });
 
         // Then animate into fullscreen position
         const screenPosition = targetRef.current.position;
@@ -130,7 +121,7 @@ export default function CustomControls({
 
         api.start({
           position: fullscreenCameraPosition,
-          config: { mass: 1, tension: 85, friction: 13 }, // Slowed down animation
+          config: { mass: 1, tension: 85, friction: 13 }, // Adjusted animation config
           onRest: () => {
             setIsAnimating(false);
           },
@@ -142,7 +133,7 @@ export default function CustomControls({
         // Animate back to initial camera position
         api.start({
           position: initialCameraPosition,
-          config: { mass: 1, tension: 85, friction: 13 }, // Slowed down animation
+          config: { mass: 1, tension: 85, friction: 13 }, // Adjusted animation config
           onRest: () => {
             // Re-enable user drag control
             setDragEnabled(true);
@@ -153,24 +144,15 @@ export default function CustomControls({
       // Update the previous fullScreen state
       prevFullScreen.current = zoomIn;
     }
-  }, [
-    zoomIn,
-    targetRef,
-    api,
-    fullScreen,
-    // initialCameraPosition,
-    // initialSpherical,
-    // isAnimating,
-  ]);
+  }, [zoomIn, targetRef, api, fullScreen, width]);
 
   // Update camera position each frame
   useFrame(() => {
-    if (zoomIn || isAnimating) {
-      // In fullscreen mode or animating
+    if (isAnimating || zoomIn) {
+      // During animation or fullscreen mode, use the spring position
       camera.position.set(
         ...(spring.position.get() as [number, number, number])
       );
-      // Optionally set camera.lookAt here
     } else {
       // Normal mode with user drag
       const theta = spring.theta.get();
@@ -184,6 +166,11 @@ export default function CustomControls({
 
       camera.position.set(x, y, z);
       camera.lookAt(0, 0, 0); // Center the camera on the origin
+
+      // Update the spring's position value without animation
+      api.set({
+        position: [x, y, z],
+      });
     }
   });
 

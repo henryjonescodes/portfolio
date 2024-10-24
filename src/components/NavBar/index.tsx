@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import TypewriterText from "../TypewriterText";
 import { NavigateFunction, useNavigate, useParams } from "react-router-dom";
 import cn from "classnames";
-import closeSVG from "@assets/svg/icons/close.svg";
 import Close from "./../../assets/svg/icons/close.svg?react";
 import Expand from "./../../assets/svg/icons/expand.svg?react";
+import Checklist from "./../../assets/svg/icons/check-list.svg?react";
+import Code from "./../../assets/svg/icons/code.svg?react";
+import User from "./../../assets/svg/icons/user.svg?react";
 
 const navBarVariants = {
   initial: {
@@ -17,7 +19,7 @@ const navBarVariants = {
     transition: {
       duration: 0.6,
       delay: 1.2,
-      staggerChildren: 0.2,
+      staggerChildren: 0.5,
       delayChildren: 2.1,
     },
   },
@@ -33,17 +35,29 @@ const navBarVariants = {
 type NavBarItemProps = {
   label: string;
   onClick: () => void;
-  selected?: boolean;
+  selected: boolean;
+  fullScreen: boolean;
+  Icon: React.FunctionComponent<
+    React.SVGProps<SVGSVGElement> & {
+      title?: string;
+    }
+  >;
 };
 
-const NavBarItem = ({ label, onClick, selected = false }: NavBarItemProps) => {
+const NavBarItem = ({
+  label,
+  onClick,
+  selected = false,
+  fullScreen,
+  Icon,
+}: NavBarItemProps) => {
   return (
     <motion.span className={styles.navItem} onClick={onClick}>
       <motion.span
         className={cn(styles.border, { [styles.selected]: selected })}
         onClick={onClick}
       />
-      {label}
+      <TypewriterText text={label} staggerChildren={0.03} />
     </motion.span>
   );
 };
@@ -79,35 +93,48 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
   };
 
   return (
-    <motion.span className={styles.navigationBar} variants={navBarVariants}>
+    <motion.span
+      className={styles.navigationBar}
+      variants={navBarVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
       <motion.span className={styles.contents}>
         <motion.span className={styles.left}>
           <NavBarItem
+            fullScreen={fullScreen}
             label="About"
             onClick={() => handleNavClick("/about")}
             selected={page === "about"}
+            Icon={User}
           />
           <NavBarItem
+            fullScreen={fullScreen}
             label="Experience"
             onClick={() => handleNavClick("/experience")}
             selected={page === "experience"}
+            Icon={Checklist}
           />
           <NavBarItem
+            fullScreen={fullScreen}
             label="Projects"
             onClick={() => handleNavClick("/projects")}
             selected={page === "projects"}
+            Icon={Code}
           />
         </motion.span>
-        {fullScreen && (
-          <motion.span className={styles.center}>
-            <motion.h3>
-              <TypewriterText
-                text={`$henry-jones/${page}`}
-                staggerChildren={0.09}
-              />
-            </motion.h3>
-          </motion.span>
-        )}
+        {/* {fullScreen && ( */}
+        <motion.span className={styles.center}>
+          <motion.h3>
+            <TypewriterText
+              key={page}
+              text={`$henry-jones/${page}`}
+              staggerChildren={0.09}
+            />
+          </motion.h3>
+        </motion.span>
+        {/* )} */}
         <motion.span className={styles.right}>
           <NavBarButton
             onClick={() => setFullScreen(!fullScreen)}
