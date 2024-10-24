@@ -49,14 +49,21 @@
 
 // Styles for the navigation bar
 .navigationBar {
+  position: relative;
   z-index: 1;
   height: 45px;
   width: 100%;
-  border-bottom: 5px solid $foreground-primary;
+  border-bottom: 5px solid transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.navbarBorder {
+  top: unset !important;
+  transform: translateY(100%);
+  bottom: 0;
 }
 
 .contents {

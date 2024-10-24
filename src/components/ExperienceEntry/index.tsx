@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import styles from "./experience-entry.module.scss";
 import TypewriterText from "../TypewriterText";
 import AnimatedBorderBox from "../AnimatedBorderBox";
+import AnimatedLine from "../AnimatedLine";
 
 // Date formatter function
 const formatDateRange = (startDate: Date, endDate?: Date): string => {
@@ -32,25 +33,6 @@ const formatDateRange = (startDate: Date, endDate?: Date): string => {
     const end = endDate.toLocaleDateString("en-US", formatOptions);
     return `${start} - ${end}`;
   }
-};
-
-const borderVariants = {
-  initial: {
-    height: 0,
-  },
-  animate: {
-    height: "100%",
-    transition: {
-      duration: 0.8,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    height: 0,
-    transition: {
-      duration: 0.6,
-    },
-  },
 };
 
 // ExperienceEntry component
@@ -106,15 +88,8 @@ const ExperienceEntry = ({
           ))}
         </motion.div>
         {children && (
-          <motion.div
-            className={styles.childrenWrapper}
-            // style={{ borderWidth: `${borderWidth}px` }}
-          >
-            <motion.div
-              className={styles.animatedBorder}
-              variants={borderVariants}
-              style={{ width: `${borderWidth}px` }}
-            />
+          <motion.div className={styles.childrenWrapper}>
+            <AnimatedLine borderWidth={borderWidth} horizontal={false} />
             {children}
           </motion.div>
         )}

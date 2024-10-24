@@ -66,6 +66,7 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
           initial="hide"
           animate={isHidden ? "hide" : "show"}
         >
+          {/* {!fullScreen && ( */}
           <Page
             navigate={navigate}
             fullScreen={fullScreen}
@@ -91,6 +92,7 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
               />
             )}
           </Page>
+          {/* )} */}
         </motion.div>
       </motion.div>
     </Html>

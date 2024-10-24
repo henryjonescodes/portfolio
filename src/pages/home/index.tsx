@@ -31,6 +31,7 @@ const Home = () => {
       transition: {
         duration: 1.3,
         delay: 0.6,
+        // when: "beforeChildren",
       },
     },
     hide: {

@@ -13,6 +13,7 @@ import Expand from "./../../assets/svg/icons/expand.svg?react";
 
 // Importing TypewriterText component
 import TypewriterText from "../TypewriterText";
+import AnimatedLine from "../AnimatedLine";
 
 const navBarVariants = {
   initial: {
@@ -24,7 +25,7 @@ const navBarVariants = {
       duration: 0.6,
       delay: 1.2,
       staggerChildren: 0.5,
-      delayChildren: 2.1,
+      delayChildren: 1.5,
     },
   },
   exit: {
@@ -47,6 +48,25 @@ type NavBarItemProps = {
     }
   >;
 };
+const borderVariants = {
+  initial: {
+    width: "0%",
+  },
+  animate: {
+    width: "100%",
+    transition: {
+      duration: 0.5,
+      delay: 2.5, // Delay the border animation by 0.5 seconds
+      ease: "easeInOut",
+    },
+  },
+  exit: {
+    width: "0%",
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
 
 const NavBarItem = ({
   label,
@@ -62,6 +82,10 @@ const NavBarItem = ({
     >
       <motion.span
         className={cn(styles.border, { [styles.selected]: selected })}
+        variants={borderVariants} // Apply variants for the border
+        initial="initial"
+        animate="animate"
+        exit="exit"
       />
       {!fullScreen && <Icon className={styles.icon} />}
       <motion.span className={styles.label}>
@@ -109,6 +133,12 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
       animate="animate"
       exit="exit"
     >
+      <AnimatedLine
+        className={styles.navbarBorder}
+        borderWidth={5}
+        horizontal
+      />
+
       <motion.span className={styles.contents}>
         <motion.span className={styles.left}>
           <NavBarItem
