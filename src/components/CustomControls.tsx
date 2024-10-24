@@ -110,7 +110,7 @@ export default function CustomControls({
             ? width > 3000
               ? 0.5
               : 0.9
-            : 1.5
+            : 1.1
           : 2.2;
 
         const fullscreenCameraPosition: [number, number, number] = [

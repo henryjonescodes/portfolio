@@ -33,9 +33,7 @@ const Experience = ({ initialLoad, fullScreen }: PageContentsProps) => {
           ]}
           startDate={new Date(2024, 0)}
           endDate={new Date(2024, 4)}
-        >
-          <h2>test</h2>
-        </ExperienceEntry>
+        />
 
         <ExperienceEntry
           institution="Mushroom.gg"
