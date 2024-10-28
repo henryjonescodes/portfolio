@@ -9,7 +9,9 @@ export type PointOfInterest = {
   description: string
   mapTitle: string
   mapHighlights: {
-    icon: string,
+    icon: React.FunctionComponent<React.SVGProps<SVGSVGElement> & {
+      title?: string;
+  }>,
     text: string
   }[]
   className: string

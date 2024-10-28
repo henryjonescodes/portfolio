@@ -1,6 +1,6 @@
 import grid from "@assets/png/backgrounds/grid.png";
-import USA from "@assets/svg/backgrounds/usa.svg";
-import Corner from "@assets/svg/icons/corner.svg";
+import USA from "@assets/svg/backgrounds/usa.svg?react";
+import Corner from "@assets/svg/icons/corner.svg?react";
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
@@ -78,15 +78,15 @@ const Map = () => {
                   </motion.span>
                   {highlights?.map((highlight, index) => (
                     <motion.span key={index}>
-                      <img src={highlight.icon} />
+                      <highlight.icon />
                       <motion.h5>{highlight.text}</motion.h5>
                     </motion.span>
                   ))}
                   <motion.div>
-                    <img src={Corner} />
-                    <img src={Corner} />
-                    <img src={Corner} />
-                    <img src={Corner} />
+                    <Corner />
+                    <Corner />
+                    <Corner />
+                    <Corner />
                   </motion.div>
                 </motion.div>
               )}
@@ -103,7 +103,7 @@ const Map = () => {
               />
             ))}
           </motion.div>
-          <img src={USA} alt="USA Background" className={styles.usa} />;
+          <USA className={styles.usa} />;
           <motion.img src={grid} className={styles.grid} />
         </motion.div>
         <AnimatedBorderBox

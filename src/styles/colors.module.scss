@@ -3,6 +3,7 @@
 $foreground-primary: #00d67d;
 $foreground-secondary: color.adjust($foreground-primary, $saturation: -10%);
 $foreground-tertiary: color.adjust($foreground-primary, $saturation: -40%);
+$foreground-quaternary: color.adjust($foreground-primary, $saturation: -70%);
 
 
 

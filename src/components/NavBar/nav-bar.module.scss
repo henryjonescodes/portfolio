@@ -1,5 +1,6 @@
 @import '@styles/colors.module.scss';
 @import '@styles/mixins.module.scss';
+@import '@styles/layout.module.scss';
 
 // Mixin for common nav item styles
 @mixin navItemCommon {
@@ -143,4 +144,31 @@
   padding: 8px;
   border-left: 2px solid $foreground-primary;
   justify-content: center;
+}
+
+@media (max-width: $width-mobile) {
+  .contents {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .left,
+  .right,
+  .center {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .left {
+    margin-right: auto;
+  }
+
+  .center {
+    padding: 0px 16px;
+    border-left: 2px solid $foreground-primary;
+  }
+
+  .right {}
 }

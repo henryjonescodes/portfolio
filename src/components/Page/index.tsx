@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { NavigateFunction } from "react-router-dom";
 import Background from "../Background";
 import NavBar from "../NavBar";
@@ -61,6 +61,19 @@ const Page = ({
   setFullScreen,
   page,
 }: PageProps) => {
+  const contentRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const scrollToTop = () => {
+      if (contentRef.current) {
+        setTimeout(() => {
+          contentRef.current?.scrollTo(0, 0);
+        }, 1500);
+      }
+    };
+    scrollToTop();
+  }, [page]);
+
   return (
     <AnimatePresence>
       {visible && (
@@ -92,6 +105,7 @@ const Page = ({
             })}
             key="pageContent"
             variants={pageVariants}
+            ref={contentRef}
           >
             <motion.div className={styles.contentInner}>
               <AnimatePresence>{children}</AnimatePresence>

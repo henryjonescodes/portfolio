@@ -1,7 +1,7 @@
-import Channel from '@assets/jobs/channel-icon.svg'
-import Mushroom from '@assets/jobs/mushroom-icon.svg'
-import Book from '@assets/svg/icons/book.svg'
-import Building from '@assets/svg/icons/building.svg'
+import Channel from '@assets/jobs/channel-icon.svg?react'
+import Mushroom from '@assets/jobs/mushroom-icon.svg?react'
+import Book from '@assets/svg/icons/book.svg?react'
+import Building from '@assets/svg/icons/building.svg?react'
 import styles from './components/map-components.module.scss'
 import { PointOfInterest } from './types'
 

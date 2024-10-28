@@ -1,6 +1,6 @@
 import React from "react";
 import cn from "classnames";
-import ArrowIcon from "@assets/svg/icons/arrow.svg";
+import ArrowIcon from "@assets/svg/icons/arrow.svg?react";
 import styles from "./map-components.module.scss";
 
 type PinProps = {
@@ -16,8 +16,7 @@ const Pin: React.FC<PinProps> = ({
   minimized,
   onClick,
 }) => (
-  <img
-    src={ArrowIcon}
+  <ArrowIcon
     className={cn(className, styles.pin, {
       [styles.pinSelected]: selected,
       [styles.pinMinimized]: minimized,

@@ -66,6 +66,26 @@ type ExperienceEntryProps = {
       }
   );
 
+// Animation variants
+const entryTextVariants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.6,
+    },
+  },
+  exit: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
 const ExperienceEntry = ({
   institution,
   title,
@@ -109,7 +129,14 @@ const ExperienceEntry = ({
           )}
         </motion.div>
         {!!title && (
-          <motion.div className={styles.subtitle}>
+          <motion.div
+            className={styles.subtitle}
+            animate={{
+              transition: {
+                delay: 0.5,
+              },
+            }}
+          >
             <motion.h3>
               <TypewriterText text={title} />
             </motion.h3>
@@ -122,7 +149,10 @@ const ExperienceEntry = ({
         contentClassName={styles.boxContent}
         borderWidth={borderWidth}
       >
-        <motion.div className={styles.descriptionWrapper}>
+        <motion.div
+          className={styles.descriptionWrapper}
+          variants={entryTextVariants}
+        >
           {description.map((desc, index) => (
             <motion.p key={index}>
               <TypewriterText text={desc} />

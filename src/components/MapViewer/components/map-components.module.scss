@@ -37,18 +37,18 @@
 }
 
 // @media (max-width: $width-small) {
-  //   .blurb {
-  //     // min-height: 30%;
-  //     justify-content: flex-end;
-  //   }
-  // }
+//   .blurb {
+//     // min-height: 30%;
+//     justify-content: flex-end;
+//   }
+// }
 
-  // @media (max-width: $width-mobile) {
-  //   .blurb {
-  //     // min-height: 45%;
-  //     justify-content: flex-end;
-  //   }
-  // }
+// @media (max-width: $width-mobile) {
+//   .blurb {
+//     // min-height: 45%;
+//     justify-content: flex-end;
+//   }
+// }
 
 /////////////////////////////////////////////////
 //                   SLIDER                    //
@@ -95,7 +95,7 @@ $line-selected-width: 5px;
   }
 
   &:hover::before {
-    background-color: lightgray;
+    background-color: $foreground-primary;
   }
 
   &.bulging::before {
@@ -110,7 +110,7 @@ $line-selected-width: 5px;
   &::before {
     width: $line-small-width;
     height: $line-small-height;
-    background-color: gray;
+    background-color: $foreground-quaternary;
   }
 
   &:hover::before {
@@ -123,7 +123,7 @@ $line-selected-width: 5px;
   &::before {
     width: $line-medium-width;
     height: $line-medium-height;
-    background-color: white;
+    background-color: $foreground-tertiary;
   }
 
   &.bulging::before {
@@ -167,6 +167,7 @@ $line-selected-width: 5px;
 /////////////////////////////////////////////////
 
 .pin {
+  transform: scale(1.2);
   transition: all 0.3s ease-in-out;
   position: absolute;
   height: 5.7%;
@@ -179,10 +180,14 @@ $line-selected-width: 5px;
     opacity: 0.6;
   }
 
-  // path {
-  //   fill: red;
-  //   stroke: red;
-  // }
+  fill: $foreground-primary;
+  stroke: $foreground-primary;
+
+  path,
+  svg {
+    fill: $foreground-primary;
+    stroke: $foreground-primary;
+  }
 }
 
 
@@ -263,9 +268,8 @@ $line-selected-width: 5px;
         top: 0;
         left: 0;
 
-        svg,
         path {
-          fill: black;
+          stroke: $foreground-quaternary;
         }
       }
 
@@ -311,7 +315,14 @@ $line-selected-width: 5px;
               color: $foreground-secondary;
             }
 
-            img {
+            svg {
+
+              svg,
+              path {
+                stroke: $foreground-secondary;
+                fill: transparent;
+              }
+
               height: 1.2rem;
               width: 1.2rem;
             }
@@ -323,8 +334,13 @@ $line-selected-width: 5px;
             width: 100%;
 
 
-            >img {
+            >svg {
               position: absolute;
+
+              svg,
+              path {
+                fill: $foreground-tertiary;
+              }
 
               &:nth-of-type(2) {
                 right: 0px;
