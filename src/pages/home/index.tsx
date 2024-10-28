@@ -1,18 +1,13 @@
+import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Page from "../../components/Page";
-// import About from "../about";
-// import Experience from "../experience";
-// import Projects from "../projects";
+import About from "../about";
+import Experience from "../experience";
+import Projects from "../projects";
 import styles from "./home.module.scss";
 import Scene from "./Scene";
-import cn from "classnames";
-import React from "react";
-
-const About = React.lazy(() => import("../about"));
-const Experience = React.lazy(() => import("../experience"));
-const Projects = React.lazy(() => import("../projects"));
 
 const Home = () => {
   const { page } = useParams<{ page: string }>();
@@ -51,6 +46,7 @@ const Home = () => {
       <AnimatePresence>
         {fullScreen && (
           <motion.div
+            key={"home"}
             className={cn(styles.wrapper, { [styles.disabled]: isHidden })}
             variants={wrapperVariants}
             initial="hide"
@@ -64,21 +60,15 @@ const Home = () => {
               visible={page !== undefined}
               page={page}
             >
-              <Suspense fallback={<div>Loading...</div>}>
-                {page === "about" && (
-                  <About key="about" initialLoad={initialLoad} />
-                )}
-              </Suspense>
-              <Suspense fallback={<div>Loading...</div>}>
-                {page === "experience" && (
-                  <Experience key="experience" initialLoad={initialLoad} />
-                )}
-              </Suspense>
-              <Suspense fallback={<div>Loading...</div>}>
-                {page === "projects" && (
-                  <Projects key="projects" initialLoad={initialLoad} />
-                )}
-              </Suspense>
+              {page === "about" && (
+                <About key="about" initialLoad={initialLoad} />
+              )}
+              {page === "experience" && (
+                <Experience key="experience" initialLoad={initialLoad} />
+              )}
+              {page === "projects" && (
+                <Projects key="projects" initialLoad={initialLoad} />
+              )}
             </Page>
           </motion.div>
         )}

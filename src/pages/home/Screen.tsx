@@ -5,17 +5,12 @@ import Menu from "./components/Menu";
 import styles from "./home.module.scss";
 import Background from "../../components/Background";
 import Page from "../../components/Page";
-// import About from "../about";
-// import Experience from "../experience";
-// import Projects from "../projects";
+import About from "../about";
+import Experience from "../experience";
+import Projects from "../projects";
 import { screenSize } from "../../styles/constants";
 import cn from "classnames";
 import { Suspense, useEffect, useState } from "react";
-import React from "react";
-
-const About = React.lazy(() => import("../about"));
-const Experience = React.lazy(() => import("../experience"));
-const Projects = React.lazy(() => import("../projects"));
 
 type ScreenProps = {
   fullScreen: boolean;
@@ -74,39 +69,34 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
           <AnimatePresence>
             {!fullScreen && (
               <Page
+                key={"screen"}
                 navigate={navigate}
                 fullScreen={fullScreen}
                 setFullScreen={setFullScreen}
                 visible={page !== undefined}
                 page={page}
               >
-                <Suspense fallback={<div>Loading...</div>}>
-                  {page === "about" && (
-                    <About
-                      key="about"
-                      fullScreen={false}
-                      initialLoad={initialLoad}
-                    />
-                  )}
-                </Suspense>
-                <Suspense fallback={<div>Loading...</div>}>
-                  {page === "experience" && (
-                    <Experience
-                      key="experience"
-                      fullScreen={false}
-                      initialLoad={initialLoad}
-                    />
-                  )}
-                </Suspense>
-                <Suspense fallback={<div>Loading...</div>}>
-                  {page === "projects" && (
-                    <Projects
-                      key="projects"
-                      fullScreen={false}
-                      initialLoad={initialLoad}
-                    />
-                  )}
-                </Suspense>
+                {page === "about" && (
+                  <About
+                    key="about"
+                    fullScreen={false}
+                    initialLoad={initialLoad}
+                  />
+                )}
+                {page === "experience" && (
+                  <Experience
+                    key="experience"
+                    fullScreen={false}
+                    initialLoad={initialLoad}
+                  />
+                )}
+                {page === "projects" && (
+                  <Projects
+                    key="projects"
+                    fullScreen={false}
+                    initialLoad={initialLoad}
+                  />
+                )}
               </Page>
             )}
           </AnimatePresence>

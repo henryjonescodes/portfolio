@@ -55,7 +55,6 @@ const Map = () => {
           [locationData[currentKey ?? "nyc"].className]: currentKey !== null,
         })}
         onClick={() => {
-          console.log("null");
           setCurrentKey(null);
         }}
       >
@@ -73,7 +72,7 @@ const Map = () => {
           <motion.div className={styles.pins}>
             <AnimatePresence>
               {!!currentKey && (
-                <motion.div className={styles.details} layout>
+                <motion.div className={styles.details} layout key={"map"}>
                   <motion.span>
                     <motion.h4>{title ?? ""}</motion.h4>
                   </motion.span>

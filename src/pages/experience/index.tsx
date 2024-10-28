@@ -15,7 +15,11 @@ const experienceVariants = {
 
 const Experience = ({ initialLoad, fullScreen }: PageContentsProps) => {
   return (
-    <PageContents initialLoad={initialLoad} fullScreen={fullScreen}>
+    <PageContents
+      initialLoad={initialLoad}
+      fullScreen={fullScreen}
+      key={"experience"}
+    >
       <motion.div variants={experienceVariants}>
         <motion.h1>
           <TypewriterText text={"Experience"} staggerChildren={0.05} />

@@ -65,6 +65,7 @@ const Page = ({
     <AnimatePresence>
       {visible && (
         <motion.div
+          key={"page"}
           className={cn(styles.page, { [styles.pageHandheld]: !fullScreen })}
           initial="initial"
           animate="animate"
@@ -93,7 +94,7 @@ const Page = ({
             variants={pageVariants}
           >
             <motion.div className={styles.contentInner}>
-              <AnimatePresence mode="wait">{children}</AnimatePresence>
+              <AnimatePresence>{children}</AnimatePresence>
             </motion.div>
           </motion.div>
         </motion.div>

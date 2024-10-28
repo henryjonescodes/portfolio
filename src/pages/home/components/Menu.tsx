@@ -30,6 +30,7 @@ const Menu = ({ page, navigate }: ScreenProps) => {
     <AnimatePresence>
       {!page && (
         <motion.div
+          key={"menu"}
           className={styles.menu}
           variants={menuVariants}
           initial="initial"

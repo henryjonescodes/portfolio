@@ -9,7 +9,11 @@ import styles from "./about.module.scss";
 
 const About = ({ initialLoad, fullScreen }: PageContentsProps) => {
   return (
-    <PageContents initialLoad={initialLoad} fullScreen={fullScreen}>
+    <PageContents
+      initialLoad={initialLoad}
+      fullScreen={fullScreen}
+      key={"about"}
+    >
       <motion.h1
         onClick={() => {
           // navigate(`/`);
