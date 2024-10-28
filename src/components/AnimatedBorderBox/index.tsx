@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useIsPresent } from "framer-motion";
 import { useEffect, useRef, useState, ReactNode } from "react";
 import cn from "classnames";
 import styles from "./local.module.scss";
@@ -48,12 +48,12 @@ const AnimatedBorder = ({
       xmlns="http://www.w3.org/2000/svg"
     >
       <motion.rect
-        x={borderWidth / 2} /* Centers the stroke */
-        y={borderWidth / 2} /* Centers the stroke */
+        x={borderWidth / 2}
+        y={borderWidth / 2}
         rx={borderRadius}
         ry={borderRadius}
-        width={width - borderWidth} /* Adjust to fit within the container */
-        height={height - borderWidth} /* Adjust to fit within the container */
+        width={width - borderWidth}
+        height={height - borderWidth}
         stroke={borderColor}
         fill="transparent"
         strokeWidth={borderWidth}
@@ -83,53 +83,63 @@ const AnimatedBorderBox = ({
 }: AnimatedBorderBoxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
-  const { width } = useWindowDimensions();
-  // const [cssBorderVisible, setCssBorderVisible] = useState<boolean>(false);
+  const { width: windowWidth } = useWindowDimensions();
+  const [cssBorderVisible, setCssBorderVisible] = useState<boolean>(false);
+  const isPresent = useIsPresent();
 
-  // const isPresent = useIsPresent();
-
-  // useEffect(() => {
-  //   if (containerRef.current) {
-  //     const { offsetWidth, offsetHeight } = containerRef.current;
-  //     setDimensions({ width: offsetWidth, height: offsetHeight });
-  //   }
-  //   if (cssBorderVisible && !isPresent) {
-  //     setCssBorderVisible(false);
-  //   }
-  // }, [isPresent, cssBorderVisible]);
-
+  // Update dimensions when the component mounts and when window width changes
   useEffect(() => {
     if (containerRef.current) {
       const { offsetWidth, offsetHeight } = containerRef.current;
       setDimensions({ width: offsetWidth, height: offsetHeight });
     }
+  }, [windowWidth]);
+
+  // Use ResizeObserver to update dimensions when content size changes
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const { width, height } = entry.contentRect;
+        setDimensions({ width, height });
+      }
+    });
+
+    resizeObserver.observe(containerRef.current);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, []);
 
+  // Handle CSS border visibility
   useEffect(() => {
-    if (containerRef.current) {
-      const { offsetWidth, offsetHeight } = containerRef.current;
-      setDimensions({ width: offsetWidth, height: offsetHeight });
+    if (cssBorderVisible && !isPresent) {
+      setCssBorderVisible(false);
     }
-  }, [width]);
+  }, [isPresent, cssBorderVisible]);
 
   return (
     <motion.div ref={containerRef} className={cn(styles.borderBox, className)}>
+      {/* {!cssBorderVisible && ( */}
       <AnimatedBorder
         width={dimensions.width}
         height={dimensions.height}
         borderWidth={borderWidth}
         borderColor={borderColor}
         borderRadius={borderRadius}
-        // onAnimationComplete={() => setCssBorderVisible(true)} // Trigger CSS border after animation
+        onAnimationComplete={() => setCssBorderVisible(true)}
       />
-      {/* <motion.div
+      {/* )} */}
+      <motion.div
         className={styles.cssBorder}
         style={{
           borderRadius: `${borderRadius * 1.13}px`,
           borderWidth: `${borderWidth}px`,
-          borderColor: cssBorderVisible ? borderColor : "transparent", // Show CSS border after animation completes
+          borderColor: cssBorderVisible ? borderColor : "transparent",
         }}
-      /> */}
+      />
       <motion.div
         style={{ borderRadius: `${borderRadius}px` }}
         className={cn(styles.content, contentClassName)}

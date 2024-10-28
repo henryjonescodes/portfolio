@@ -5,6 +5,7 @@ import React, {
   useContext,
   ReactNode,
 } from "react";
+import { screenSize } from "../styles/constants";
 
 // Define the context type
 interface WindowDimensionContextProps {
@@ -53,7 +54,7 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({
 export const useWindowDimensions = (): WindowDimensionContextProps => {
   const context = useContext(WindowDimensionContext);
   if (!context) {
-    return { width: 475, height: 308 };
+    return { width: screenSize.height, height: screenSize.width };
   }
   return context;
 };

@@ -4,6 +4,8 @@ import styles from "./experience-entry.module.scss";
 import TypewriterText from "../TypewriterText";
 import AnimatedBorderBox from "../AnimatedBorderBox";
 import AnimatedLine from "../AnimatedLine";
+import { useWindowDimensions } from "../../context/WindowDimensionContext";
+import { widthMobile } from "../../styles/layout.constants";
 
 // Date formatter function
 const formatDateRange = (startDate: Date, endDate?: Date): string => {
@@ -35,16 +37,24 @@ const formatDateRange = (startDate: Date, endDate?: Date): string => {
   }
 };
 
-// ExperienceEntry component
 type ExperienceEntryProps = {
   institution: string;
-  title: string;
+  title?: string;
   description: string[];
-  startDate: Date;
-  endDate?: Date;
   borderWidth?: number;
   children?: React.ReactNode;
-};
+} & (
+  | {
+      dateString?: string;
+      startDate?: never;
+      endDate?: never;
+    }
+  | {
+      startDate: Date;
+      endDate?: Date;
+      dateString?: never;
+    }
+);
 
 const ExperienceEntry = ({
   institution,
@@ -54,8 +64,13 @@ const ExperienceEntry = ({
   endDate,
   borderWidth = 2.5,
   children,
+  dateString,
 }: ExperienceEntryProps) => {
-  const dateRange = formatDateRange(startDate, endDate);
+  const dateRange = startDate
+    ? formatDateRange(startDate, endDate)
+    : dateString;
+
+  const { width } = useWindowDimensions();
 
   return (
     <motion.div className={styles.entry}>
@@ -64,15 +79,19 @@ const ExperienceEntry = ({
           <motion.h2>
             <TypewriterText text={institution} />
           </motion.h2>
-          <motion.p>
-            <TypewriterText text={dateRange} />
-          </motion.p>
+          {!!dateRange && (
+            <motion.p>
+              <TypewriterText text={dateRange} />
+            </motion.p>
+          )}
         </motion.div>
-        <motion.div className={styles.subtitle}>
-          <motion.h3>
-            <TypewriterText text={title} />
-          </motion.h3>
-        </motion.div>
+        {!!title && (
+          <motion.div className={styles.subtitle}>
+            <motion.h3>
+              <TypewriterText text={title} />
+            </motion.h3>
+          </motion.div>
+        )}
       </motion.span>
 
       <AnimatedBorderBox
@@ -89,8 +108,12 @@ const ExperienceEntry = ({
         </motion.div>
         {children && (
           <motion.div className={styles.childrenWrapper}>
-            <AnimatedLine borderWidth={borderWidth} horizontal={false} />
-            {children}
+            <AnimatedLine
+              borderWidth={borderWidth}
+              horizontal={width < widthMobile}
+              className={styles.line}
+            />
+            <motion.div className={styles.children}>{children}</motion.div>
           </motion.div>
         )}
       </AnimatedBorderBox>

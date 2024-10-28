@@ -1,3 +1,4 @@
+@import '@styles/layout.module.scss';
 @import '@styles/mixins.module.scss';
 @import '@styles/colors.module.scss';
 
@@ -9,5 +10,35 @@
     flex-direction: column;
     padding: 12px;
     gap: 16px;
+  }
+}
+
+.video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  max-width: 400px;
+  overflow: hidden;
+  position: relative;
+
+  video {
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    width: 100%;
+    object-fit: cover; // Ensures the video maintains its aspect ratio and fits within the container
+  }
+}
+
+
+@media (max-width: $width-mobile) {
+  .video {
+    height: min-content;
+    max-width: unset;
+
+    video {
+      object-fit: contain;
+    }
   }
 }

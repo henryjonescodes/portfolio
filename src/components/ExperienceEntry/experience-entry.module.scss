@@ -1,5 +1,6 @@
 @import '@styles/colors.module.scss';
 @import '@styles/mixins.module.scss';
+@import '@styles/layout.module.scss';
 
 .entry {
   margin-bottom: 32px; // Adjust spacing between entries as needed
@@ -22,16 +23,20 @@
   }
 
   .box {
+    position: relative;
+
     &Content {
+      position: relative;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      gap: 16px;
+      overflow: hidden;
     }
   }
 
+
   .descriptionWrapper {
-    flex: 1;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -39,19 +44,41 @@
   }
 
   .childrenWrapper {
+    // aspect-ratio: 1.4;
     display: flex;
     align-items: flex-start;
-    width: min-content;
-    padding-left: 16px;
-    padding: 16px;
     position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    max-width: 50%;
   }
 
-  .animatedBorder {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: $foreground-primary;
-    height: 0;
+
+  .children {
+    z-index: -1;
+    display: flex;
+    height: 100%;
+    position: relative;
+  }
+}
+
+@media (max-width: $width-mobile) {
+  .entry {
+    .box {
+      &Content {
+        flex-direction: column-reverse;
+      }
+    }
+
+    .childrenWrapper {
+      aspect-ratio: unset;
+      max-width: unset;
+    }
+
+    .children {}
+
+    .line {
+      top: 100%;
+    }
   }
 }
