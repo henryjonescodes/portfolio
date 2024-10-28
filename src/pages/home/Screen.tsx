@@ -1,16 +1,16 @@
 import { Html } from "@react-three/drei";
+import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Menu from "./components/Menu";
-import styles from "./home.module.scss";
 import Background from "../../components/Background";
 import Page from "../../components/Page";
+import { screenSize } from "../../styles/constants";
 import About from "../about";
 import Experience from "../experience";
 import Projects from "../projects";
-import { screenSize } from "../../styles/constants";
-import cn from "classnames";
-import { Suspense, useEffect, useState } from "react";
+import Menu from "./components/Menu";
+import styles from "./home.module.scss";
 
 type ScreenProps = {
   fullScreen: boolean;

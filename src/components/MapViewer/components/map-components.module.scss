@@ -175,13 +175,14 @@ $line-selected-width: 5px;
   rotate: 225deg;
   transform-origin: top left;
 
+  fill: $foreground-primary;
+  stroke: $foreground-primary;
+
   &Minimized {
     transform: scale(0.5);
     opacity: 0.6;
   }
 
-  fill: $foreground-primary;
-  stroke: $foreground-primary;
 
   path,
   svg {
