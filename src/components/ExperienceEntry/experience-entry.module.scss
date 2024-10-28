@@ -1,6 +1,26 @@
 @import '@styles/colors.module.scss';
 @import '@styles/mixins.module.scss';
+@import '@styles/typography.module.scss';
 @import '@styles/layout.module.scss';
+
+.link {
+  &Text {
+    * {
+      @include hover-color-foreground-secondary;
+    }
+  }
+
+  &Area {
+    @include hover-opacity;
+    cursor: pointer !important;
+    opacity: 1;
+    transition: opacity 0.2s ease-in-out;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
 
 .entry {
   margin-bottom: 32px; // Adjust spacing between entries as needed
@@ -44,21 +64,26 @@
   }
 
   .childrenWrapper {
-    // aspect-ratio: 1.4;
+    aspect-ratio: 1.5;
     display: flex;
     align-items: flex-start;
     position: relative;
     flex-shrink: 0;
     flex-grow: 0;
-    max-width: 50%;
+    max-width: 40%;
+    max-height: 200px;
   }
 
 
   .children {
-    z-index: -1;
+    z-index: 1;
     display: flex;
     height: 100%;
     position: relative;
+  }
+
+  .line {
+    z-index: 2;
   }
 }
 
@@ -73,6 +98,7 @@
     .childrenWrapper {
       aspect-ratio: unset;
       max-width: unset;
+      max-height: unset;
     }
 
     .children {}

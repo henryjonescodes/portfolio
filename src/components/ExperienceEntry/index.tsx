@@ -6,8 +6,8 @@ import AnimatedBorderBox from "../AnimatedBorderBox";
 import AnimatedLine from "../AnimatedLine";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthMobile } from "../../styles/layout.constants";
+import cn from "classnames";
 
-// Date formatter function
 const formatDateRange = (startDate: Date, endDate?: Date): string => {
   const formatOptions: Intl.DateTimeFormatOptions = {
     month: "short",
@@ -45,16 +45,26 @@ type ExperienceEntryProps = {
   children?: React.ReactNode;
 } & (
   | {
-      dateString?: string;
-      startDate?: never;
-      endDate?: never;
+      url?: string;
+      onClick?: never;
     }
   | {
-      startDate: Date;
-      endDate?: Date;
-      dateString?: never;
+      onClick?: () => void;
+      url?: never;
     }
-);
+) &
+  (
+    | {
+        dateString?: string;
+        startDate?: never;
+        endDate?: never;
+      }
+    | {
+        startDate: Date;
+        endDate?: Date;
+        dateString?: never;
+      }
+  );
 
 const ExperienceEntry = ({
   institution,
@@ -65,20 +75,33 @@ const ExperienceEntry = ({
   borderWidth = 2.5,
   children,
   dateString,
+  url,
+  onClick,
 }: ExperienceEntryProps) => {
   const dateRange = startDate
     ? formatDateRange(startDate, endDate)
     : dateString;
-
   const { width } = useWindowDimensions();
 
   return (
     <motion.div className={styles.entry}>
       <motion.span className={styles.header}>
         <motion.div className={styles.title}>
-          <motion.h2>
-            <TypewriterText text={institution} />
-          </motion.h2>
+          {url ? (
+            <motion.h2>
+              <a href={url} target="_blank" className={styles.linkText}>
+                <TypewriterText text={institution} />
+              </a>
+            </motion.h2>
+          ) : onClick ? (
+            <motion.h2 onClick={onClick} className={styles.linkText}>
+              <TypewriterText text={institution} />
+            </motion.h2>
+          ) : (
+            <motion.h2>
+              <TypewriterText text={institution} />
+            </motion.h2>
+          )}
           {!!dateRange && (
             <motion.p>
               <TypewriterText text={dateRange} />
@@ -113,7 +136,26 @@ const ExperienceEntry = ({
               horizontal={width < widthMobile}
               className={styles.line}
             />
-            <motion.div className={styles.children}>{children}</motion.div>
+            {url ? (
+              <a
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(styles.children, styles.linkArea)}
+              >
+                {children}
+              </a>
+            ) : onClick ? (
+              <motion.div
+                onClick={onClick}
+                className={cn(styles.children, styles.linkArea)}
+                style={{ cursor: "pointer" }}
+              >
+                {children}
+              </motion.div>
+            ) : (
+              <motion.div className={styles.children}>{children}</motion.div>
+            )}
           </motion.div>
         )}
       </AnimatedBorderBox>

@@ -18,4 +18,8 @@
   gap: 8px;
   padding: 45px;
   overflow: auto;
+
+  h2 {
+    @include hover-color-foreground-secondary;
+  }
 }

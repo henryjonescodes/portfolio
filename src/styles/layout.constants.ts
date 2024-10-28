@@ -3,7 +3,7 @@
 export const borderRadiusCard: number = 16;
 export const borderRadiusItem: number = 8;
 
-export const widthMobile: number = 480;
+export const widthMobile: number = 550;
 export const widthSmall: number = 768;
 export const widthMedium: number = 962;
 export const widthCompact: number = 1200;
