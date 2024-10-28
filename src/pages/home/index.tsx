@@ -1,13 +1,18 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Page from "../../components/Page";
-import About from "../about";
-import Experience from "../experience";
-import Projects from "../projects";
+// import About from "../about";
+// import Experience from "../experience";
+// import Projects from "../projects";
 import styles from "./home.module.scss";
 import Scene from "./Scene";
 import cn from "classnames";
+import React from "react";
+
+const About = React.lazy(() => import("../about"));
+const Experience = React.lazy(() => import("../experience"));
+const Projects = React.lazy(() => import("../projects"));
 
 const Home = () => {
   const { page } = useParams<{ page: string }>();
@@ -59,15 +64,21 @@ const Home = () => {
               visible={page !== undefined}
               page={page}
             >
-              {page === "about" && (
-                <About key="about" initialLoad={initialLoad} />
-              )}
-              {page === "experience" && (
-                <Experience key="experience" initialLoad={initialLoad} />
-              )}
-              {page === "projects" && (
-                <Projects key="projects" initialLoad={initialLoad} />
-              )}
+              <Suspense fallback={<div>Loading...</div>}>
+                {page === "about" && (
+                  <About key="about" initialLoad={initialLoad} />
+                )}
+              </Suspense>
+              <Suspense fallback={<div>Loading...</div>}>
+                {page === "experience" && (
+                  <Experience key="experience" initialLoad={initialLoad} />
+                )}
+              </Suspense>
+              <Suspense fallback={<div>Loading...</div>}>
+                {page === "projects" && (
+                  <Projects key="projects" initialLoad={initialLoad} />
+                )}
+              </Suspense>
             </Page>
           </motion.div>
         )}

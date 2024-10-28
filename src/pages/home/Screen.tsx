@@ -5,12 +5,17 @@ import Menu from "./components/Menu";
 import styles from "./home.module.scss";
 import Background from "../../components/Background";
 import Page from "../../components/Page";
-import About from "../about";
-import Experience from "../experience";
-import Projects from "../projects";
+// import About from "../about";
+// import Experience from "../experience";
+// import Projects from "../projects";
 import { screenSize } from "../../styles/constants";
 import cn from "classnames";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import React from "react";
+
+const About = React.lazy(() => import("../about"));
+const Experience = React.lazy(() => import("../experience"));
+const Projects = React.lazy(() => import("../projects"));
 
 type ScreenProps = {
   fullScreen: boolean;
@@ -75,27 +80,33 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
                 visible={page !== undefined}
                 page={page}
               >
-                {page === "about" && (
-                  <About
-                    key="about"
-                    fullScreen={false}
-                    initialLoad={initialLoad}
-                  />
-                )}
-                {page === "experience" && (
-                  <Experience
-                    key="experience"
-                    fullScreen={false}
-                    initialLoad={initialLoad}
-                  />
-                )}
-                {page === "projects" && (
-                  <Projects
-                    key="projects"
-                    fullScreen={false}
-                    initialLoad={initialLoad}
-                  />
-                )}
+                <Suspense fallback={<div>Loading...</div>}>
+                  {page === "about" && (
+                    <About
+                      key="about"
+                      fullScreen={false}
+                      initialLoad={initialLoad}
+                    />
+                  )}
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                  {page === "experience" && (
+                    <Experience
+                      key="experience"
+                      fullScreen={false}
+                      initialLoad={initialLoad}
+                    />
+                  )}
+                </Suspense>
+                <Suspense fallback={<div>Loading...</div>}>
+                  {page === "projects" && (
+                    <Projects
+                      key="projects"
+                      fullScreen={false}
+                      initialLoad={initialLoad}
+                    />
+                  )}
+                </Suspense>
               </Page>
             )}
           </AnimatePresence>

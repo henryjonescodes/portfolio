@@ -17,4 +17,11 @@ export default defineConfig({
       '@components': path.resolve(__dirname, 'src/components'), // Adjust path to where the alias points
     },
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler' // or "modern"
+      }
+    }
+  }
 })
