@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import styles from "./components.module.scss";
 import { ScreenProps } from "./types";
 import TypewriterText from "../../../components/TypewriterText";
+import PageContents from "../../../components/Page/PageContents";
 
 // Define animation variants for the menu with staggered children
 const menuVariants = {
@@ -29,14 +30,7 @@ const Menu = ({ page, navigate }: ScreenProps) => {
   return (
     <AnimatePresence>
       {!page && (
-        <motion.div
-          key={"menu"}
-          className={styles.menu}
-          variants={menuVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
+        <PageContents key={"menu"} className={styles.menu}>
           {/* Henry Jones */}
           <motion.h1 variants={menuVariants}>
             <TypewriterText
@@ -79,7 +73,7 @@ const Menu = ({ page, navigate }: ScreenProps) => {
               staggerChildren={textStaggerSeconds}
             />
           </motion.h2>
-        </motion.div>
+        </PageContents>
       )}
     </AnimatePresence>
   );

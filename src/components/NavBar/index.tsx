@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { NavigateFunction } from "react-router-dom";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthSmall } from "../../styles/layout.constants";
@@ -38,6 +38,24 @@ const navBarVariants = {
   },
 };
 
+const minimalNavBarVariants = {
+  animate: {
+    opacity: 0,
+  },
+  shown: {
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+    },
+  },
+  removed: {
+    opacity: 0,
+    transition: {
+      when: "beforeChildren",
+    },
+  },
+};
+
 type NavBarProps = {
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
   fullScreen: boolean;
@@ -49,6 +67,34 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
   const { width } = useWindowDimensions();
   const { animationDisabled, setAnimationDisabled } = useSettings();
 
+  const [delayedPage, setDelayedPage] = useState(page);
+
+  useEffect(() => {
+    let timerDur = 500;
+    if (animationDisabled) {
+      timerDur = 1000;
+    }
+    const timer = setTimeout(() => setDelayedPage(`${page}`), timerDur);
+    return () => clearTimeout(timer); // Clean up on unmount or page change
+  }, [page, animationDisabled]);
+
+  const { initial, animate, exit, variants } = useMemo(() => {
+    if (animationDisabled) {
+      return {
+        initial: "animate",
+        animate: "shown",
+        exit: "removed",
+        variants: minimalNavBarVariants,
+      };
+    }
+    return {
+      initial: "initial",
+      animate: "animate",
+      exit: "exit",
+      variants: navBarVariants,
+    };
+  }, [delayedPage]);
+
   const handleNavClick = (path: string) => {
     navigate(path);
   };
@@ -59,10 +105,10 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
   return (
     <motion.span
       className={styles.navigationBar}
-      variants={navBarVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
+      variants={variants}
+      initial={initial}
+      animate={animate}
+      exit={exit}
     >
       <AnimatedLine
         className={styles.navbarBorder}

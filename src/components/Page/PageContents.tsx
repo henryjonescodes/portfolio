@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
-import { ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import styles from "./page.module.scss";
 import { useLocation } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
@@ -24,18 +24,17 @@ const PageContents: React.FC<Props> = ({
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
   const { animationDisabled } = useSettings();
-
-  const [initialLoad, setInitialLoad] = useState(true);
+  const [delayedPage, setDelayedPage] = useState(page);
 
   useEffect(() => {
-    if (page !== undefined) {
-      setInitialLoad(false);
-    } else {
-      setInitialLoad(true);
+    let timerDur = 500;
+    if (animationDisabled) {
+      timerDur = 1000;
     }
-  }, [page]);
+    const timer = setTimeout(() => setDelayedPage(`${page}`), timerDur);
+    return () => clearTimeout(timer); // Clean up on unmount or page change
+  }, [page, animationDisabled]);
 
-  // Memoized variants based on initialLoad
   const pageVariants = useMemo(
     () => ({
       initial: {
@@ -44,8 +43,8 @@ const PageContents: React.FC<Props> = ({
       animate: {
         opacity: 1,
         transition: {
-          delay: initialLoad ? 1 : fullScreen ? 0.2 : 0.2,
-          delayChildren: initialLoad ? 1 : fullScreen ? 1.2 : 0.2,
+          delay: fullScreen ? 0.2 : 0.2,
+          delayChildren: fullScreen ? 0.2 : 0.2,
           staggerChildren: 0.5,
         },
       },
@@ -56,7 +55,7 @@ const PageContents: React.FC<Props> = ({
         },
       },
     }),
-    [initialLoad]
+    [fullScreen]
   );
 
   const minimalPageVariants = {
@@ -66,15 +65,13 @@ const PageContents: React.FC<Props> = ({
     shown: {
       opacity: 1,
       transition: {
-        // when: "afterChildren",
-        delay: 0.5,
-        duration: 1.3,
+        duration: 0.5,
       },
     },
     removed: {
       opacity: 0,
       transition: {
-        // when: "beforeChildren",
+        when: "beforeChildren",
       },
     },
   };
@@ -94,7 +91,7 @@ const PageContents: React.FC<Props> = ({
       exit: "exit",
       variants: pageVariants,
     };
-  }, [page]);
+  }, [delayedPage]);
 
   return (
     <motion.div

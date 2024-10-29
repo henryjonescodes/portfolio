@@ -51,9 +51,6 @@ const NavBarItem = ({
       <motion.span
         className={cn(styles.border, { [styles.selected]: selected })}
         variants={borderVariants} // Apply variants for the border
-        initial="initial"
-        animate="animate"
-        exit="exit"
       />
       {mini && (
         <motion.span className={styles.icon}>

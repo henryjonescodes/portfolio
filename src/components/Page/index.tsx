@@ -107,7 +107,7 @@ const Page = ({
             ref={contentRef}
           >
             <motion.div className={styles.contentInner}>
-              <AnimatePresence>
+              <AnimatePresence mode="wait">
                 <AnimatedOutlet key={page} />
               </AnimatePresence>
             </motion.div>
