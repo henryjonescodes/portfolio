@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import React, { useEffect, useMemo, useState } from "react";
+import React from "react";
 import { NavigateFunction } from "react-router-dom";
+import { useSettings } from "../../context/SettingsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthSmall } from "../../styles/layout.constants";
 import AnimatedLine from "../AnimatedLine";
@@ -15,7 +16,6 @@ import User from "./../../assets/svg/icons/user.svg?react";
 import styles from "./nav-bar.module.scss";
 import NavBarButton from "./NavBarButton";
 import NavBarItem from "./NavbarItem";
-import { useSettings } from "../../context/SettingsContext";
 
 const navBarVariants = {
   initial: {
@@ -34,24 +34,6 @@ const navBarVariants = {
     opacity: 0,
     transition: {
       duration: 0.3,
-    },
-  },
-};
-
-const minimalNavBarVariants = {
-  animate: {
-    opacity: 0,
-  },
-  shown: {
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-    },
-  },
-  removed: {
-    opacity: 0,
-    transition: {
-      when: "beforeChildren",
     },
   },
 };

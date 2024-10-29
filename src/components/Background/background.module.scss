@@ -13,3 +13,7 @@
   @include full-screen-positioning;
   z-index: 1;
 }
+
+.noAnimation {
+  animation: none;
+}
