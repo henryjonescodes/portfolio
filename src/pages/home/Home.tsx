@@ -12,7 +12,7 @@ const menuVariants = {
   animate: {
     // opacity: 1,
     transition: {
-      staggerChildren: 0.3, // Stagger the children by 0.3 seconds
+      staggerChildren: 0.05, // Stagger the children by 0.3 seconds
     },
   },
   exit: {
@@ -25,13 +25,13 @@ const menuVariants = {
   },
 };
 
-const Menu = () => {
+const Home = () => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
   const navigate = useNavigate(); // Initialize the navigate function
 
-  const textStaggerSeconds = 0.09;
+  const textStaggerSeconds = 0.03;
   return (
     <AnimatePresence>
       {!page && (
@@ -57,17 +57,6 @@ const Menu = () => {
             <TypewriterText text="About" staggerChildren={textStaggerSeconds} />
           </motion.h2>
 
-          {/* Projects (Link) */}
-          <motion.h2
-            variants={menuVariants}
-            onClick={() => navigate("/projects")}
-          >
-            <TypewriterText
-              text="Projects"
-              staggerChildren={textStaggerSeconds}
-            />
-          </motion.h2>
-
           {/* Experience (Link) */}
           <motion.h2
             variants={menuVariants}
@@ -78,10 +67,21 @@ const Menu = () => {
               staggerChildren={textStaggerSeconds}
             />
           </motion.h2>
+
+          {/* Projects (Link) */}
+          <motion.h2
+            variants={menuVariants}
+            onClick={() => navigate("/projects")}
+          >
+            <TypewriterText
+              text="Projects"
+              staggerChildren={textStaggerSeconds}
+            />
+          </motion.h2>
         </PageContents>
       )}
     </AnimatePresence>
   );
 };
 
-export default Menu;
+export default Home;

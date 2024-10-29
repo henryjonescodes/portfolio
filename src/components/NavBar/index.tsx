@@ -26,8 +26,8 @@ const navBarVariants = {
     transition: {
       duration: 0.6,
       delay: 0.2,
-      staggerChildren: 0.5,
-      delayChildren: 0.5,
+      staggerChildren: 0.2,
+      delayChildren: 0.2,
     },
   },
   exit: {
@@ -67,34 +67,6 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
   const { width } = useWindowDimensions();
   const { animationDisabled, setAnimationDisabled } = useSettings();
 
-  const [delayedPage, setDelayedPage] = useState(page);
-
-  useEffect(() => {
-    let timerDur = 500;
-    if (animationDisabled) {
-      timerDur = 1000;
-    }
-    const timer = setTimeout(() => setDelayedPage(`${page}`), timerDur);
-    return () => clearTimeout(timer); // Clean up on unmount or page change
-  }, [page, animationDisabled]);
-
-  const { initial, animate, exit, variants } = useMemo(() => {
-    if (animationDisabled) {
-      return {
-        initial: "animate",
-        animate: "shown",
-        exit: "removed",
-        variants: minimalNavBarVariants,
-      };
-    }
-    return {
-      initial: "initial",
-      animate: "animate",
-      exit: "exit",
-      variants: navBarVariants,
-    };
-  }, [delayedPage]);
-
   const handleNavClick = (path: string) => {
     navigate(path);
   };
@@ -105,10 +77,10 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
   return (
     <motion.span
       className={styles.navigationBar}
-      variants={variants}
-      initial={initial}
-      animate={animate}
-      exit={exit}
+      variants={animationDisabled ? undefined : navBarVariants}
+      initial={animationDisabled ? "animate" : "initial"}
+      animate={animationDisabled ? "animate" : "animate"}
+      exit={animationDisabled ? "animate" : "exit"}
     >
       <AnimatedLine
         className={styles.navbarBorder}

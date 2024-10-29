@@ -5,7 +5,7 @@ import Background from "../../components/Background";
 import { CustomHTML } from "../../components/CustomHTML";
 import Page from "../../components/Page";
 import { screenSize } from "../../styles/constants";
-import Menu from "../home/Menu";
+import Home from "../home/Home";
 import styles from "./landing.module.scss";
 
 type ScreenProps = {
@@ -46,7 +46,7 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
         style={{ height: `${height}px`, width: `${width}px` }}
       >
         <Background />
-        <Menu />
+        <Home />
         <motion.div
           className={cn(styles.wrapper, {
             [styles.disabled]: isHidden,
