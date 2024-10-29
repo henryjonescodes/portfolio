@@ -1,7 +1,6 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
-import AnimatedOutlet from "../../components/AnimatedOutlet";
 import Background from "../../components/Background";
 import { CustomHTML } from "../../components/CustomHTML";
 import Page from "../../components/Page";

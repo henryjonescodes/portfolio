@@ -2,7 +2,6 @@ import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import AnimatedOutlet from "../../components/AnimatedOutlet";
 import Page from "../../components/Page";
 import styles from "./home.module.scss";
 import Scene from "./Scene";

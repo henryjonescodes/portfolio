@@ -1,11 +1,11 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { NavigateFunction } from "react-router-dom";
+import AnimatedOutlet from "../AnimatedOutlet";
 import Background from "../Background";
 import NavBar from "../NavBar";
 import styles from "./page.module.scss";
-import AnimatedOutlet from "../AnimatedOutlet";
 
 // Animation variants
 const pageVariants = {
