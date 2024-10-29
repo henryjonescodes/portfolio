@@ -1,8 +1,8 @@
 import { AnimatePresence, motion } from "framer-motion";
-import styles from "./components.module.scss";
-import { ScreenProps } from "./types";
-import TypewriterText from "../../../components/TypewriterText";
-import PageContents from "../../../components/Page/PageContents";
+import styles from "./home.module.scss";
+import TypewriterText from "../../components/TypewriterText";
+import PageContents from "../../components/Page/PageContents";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // Define animation variants for the menu with staggered children
 const menuVariants = {
@@ -25,7 +25,12 @@ const menuVariants = {
   },
 };
 
-const Menu = ({ page, navigate }: ScreenProps) => {
+const Menu = () => {
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0];
+  const navigate = useNavigate(); // Initialize the navigate function
+
   const textStaggerSeconds = 0.09;
   return (
     <AnimatePresence>

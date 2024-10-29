@@ -3,10 +3,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Page from "../../components/Page";
-import styles from "./home.module.scss";
+import styles from "./landing.module.scss";
 import Scene from "./Scene";
 
-const Home = () => {
+const Landing = () => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
@@ -33,7 +33,7 @@ const Home = () => {
   };
 
   return (
-    <motion.div className={styles.home}>
+    <motion.div className={styles.landing}>
       <AnimatePresence>
         {fullScreen && (
           <motion.div
@@ -59,4 +59,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Landing;

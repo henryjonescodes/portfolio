@@ -1,7 +1,7 @@
 import { Html } from "@react-three/drei";
 import { motion } from "framer-motion";
 import { Vector3 } from "@react-three/fiber";
-import styles from "./home.module.scss";
+import styles from "./landing.module.scss";
 
 type OverlayProps = {
   position?: Vector3;

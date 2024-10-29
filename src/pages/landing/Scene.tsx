@@ -7,7 +7,7 @@ import CustomControls from "../../components/CustomControls";
 import { Knob } from "../../components/Knob";
 import useModel from "../../hooks/useModel";
 import useRaycaster from "../../hooks/useRaycaster";
-import styles from "./home.module.scss";
+import styles from "./landing.module.scss";
 import Screen from "./Screen";
 import ToolBar from "./ToolBar";
 
