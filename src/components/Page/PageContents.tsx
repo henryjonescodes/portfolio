@@ -1,11 +1,11 @@
 import classNames from "classnames";
 import { motion } from "framer-motion";
-import { ReactNode, useMemo } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import styles from "./page.module.scss";
+import { useLocation } from "react-router-dom";
 
 // Define the props interface
 export type PageContentsProps = {
-  initialLoad?: boolean;
   className?: string; // Add an optional className prop
   fullScreen?: boolean;
 };
@@ -16,10 +16,23 @@ type Props = {
 
 const PageContents: React.FC<Props> = ({
   children,
-  initialLoad = false,
   className,
   fullScreen = true,
 }) => {
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0];
+
+  const [initialLoad, setInitialLoad] = useState(true);
+
+  useEffect(() => {
+    if (page !== undefined) {
+      setInitialLoad(false);
+    } else {
+      setInitialLoad(true);
+    }
+  }, [page]);
+
   // Memoized variants based on initialLoad
   const pageVariants = useMemo(
     () => ({

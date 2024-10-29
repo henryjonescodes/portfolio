@@ -1,14 +1,11 @@
-import { Html } from "@react-three/drei";
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import AnimatedOutlet from "../../components/AnimatedOutlet";
 import Background from "../../components/Background";
+import { CustomHTML } from "../../components/CustomHTML";
 import Page from "../../components/Page";
 import { screenSize } from "../../styles/constants";
-import About from "../about";
-import Experience from "../experience";
-import Projects from "../projects";
 import Menu from "./components/Menu";
 import styles from "./home.module.scss";
 
@@ -18,19 +15,12 @@ type ScreenProps = {
 };
 
 const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
-  const { page } = useParams<{ page: string }>();
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0];
+
   const navigate = useNavigate(); // Initialize the navigate function
   const { width, height } = screenSize;
-
-  const [initialLoad, setInitialLoad] = useState(true);
-
-  useEffect(() => {
-    if (page !== undefined) {
-      setInitialLoad(false);
-    } else {
-      setInitialLoad(true);
-    }
-  }, [page]);
 
   const isHidden = (fullScreen && page !== undefined) || page === undefined;
 
@@ -51,7 +41,7 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
   };
 
   return (
-    <Html transform>
+    <CustomHTML transform>
       <motion.div
         className={styles.screen}
         style={{ height: `${height}px`, width: `${width}px` }}
@@ -76,33 +66,13 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
                 visible={page !== undefined}
                 page={page}
               >
-                {page === "about" && (
-                  <About
-                    key="about"
-                    fullScreen={false}
-                    initialLoad={initialLoad}
-                  />
-                )}
-                {page === "experience" && (
-                  <Experience
-                    key="experience"
-                    fullScreen={false}
-                    initialLoad={initialLoad}
-                  />
-                )}
-                {page === "projects" && (
-                  <Projects
-                    key="projects"
-                    fullScreen={false}
-                    initialLoad={initialLoad}
-                  />
-                )}
+                <AnimatedOutlet key={page} />
               </Page>
             )}
           </AnimatePresence>
         </motion.div>
       </motion.div>
-    </Html>
+    </CustomHTML>
   );
 };
 

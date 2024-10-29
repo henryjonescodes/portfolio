@@ -1,27 +1,19 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import AnimatedOutlet from "../../components/AnimatedOutlet";
 import Page from "../../components/Page";
-import About from "../about";
-import Experience from "../experience";
-import Projects from "../projects";
 import styles from "./home.module.scss";
 import Scene from "./Scene";
 
 const Home = () => {
-  const { page } = useParams<{ page: string }>();
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0];
+
   const navigate = useNavigate(); // Initialize the navigate function
   const [fullScreen, setFullScreen] = useState(true);
-  const [initialLoad, setInitialLoad] = useState(true);
-
-  useEffect(() => {
-    if (page !== undefined) {
-      setInitialLoad(false);
-    } else {
-      setInitialLoad(true);
-    }
-  }, [page]);
 
   const isHidden = !fullScreen || page === undefined;
 
@@ -60,15 +52,7 @@ const Home = () => {
               visible={page !== undefined}
               page={page}
             >
-              {page === "about" && (
-                <About key="about" initialLoad={initialLoad} />
-              )}
-              {page === "experience" && (
-                <Experience key="experience" initialLoad={initialLoad} />
-              )}
-              {page === "projects" && (
-                <Projects key="projects" initialLoad={initialLoad} />
-              )}
+              <AnimatedOutlet key={page} />
             </Page>
           </motion.div>
         )}

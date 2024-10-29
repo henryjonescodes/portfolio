@@ -32,13 +32,9 @@ const entryContentVariants = {
   },
 };
 
-const Projects = ({ initialLoad, fullScreen }: PageContentsProps) => {
+const Projects = ({ fullScreen }: PageContentsProps) => {
   return (
-    <PageContents
-      initialLoad={initialLoad}
-      fullScreen={fullScreen}
-      key={"projects"}
-    >
+    <PageContents fullScreen={fullScreen} key={"projects"}>
       <motion.div variants={projectsVariants} className={styles.projects}>
         <motion.h1>
           <TypewriterText text={"Projects"} staggerChildren={0.05} />

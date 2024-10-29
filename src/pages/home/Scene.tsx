@@ -1,7 +1,7 @@
 // Scene.tsx
 import { Canvas } from "@react-three/fiber";
 import { useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import * as THREE from "three";
 import CustomControls from "../../components/CustomControls";
 import { Knob } from "../../components/Knob";
@@ -30,7 +30,9 @@ export default function Scene({ fullScreen, setFullScreen }: SceneProps) {
   const [knobRotL, setKnobRotL] = useState(0);
 
   const { activeObject, handlePointerMove } = useRaycaster();
-  const { page } = useParams<{ page: string }>();
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0];
 
   // Ref for the screen group
   const screenGroupRef = useRef<THREE.Group>(null);

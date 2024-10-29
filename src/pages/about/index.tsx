@@ -7,18 +7,10 @@ import PageContents, {
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./about.module.scss";
 
-const About = ({ initialLoad, fullScreen }: PageContentsProps) => {
+const About = ({ fullScreen }: PageContentsProps) => {
   return (
-    <PageContents
-      initialLoad={initialLoad}
-      fullScreen={fullScreen}
-      key={"about"}
-    >
-      <motion.h1
-        onClick={() => {
-          // navigate(`/`);
-        }}
-      >
+    <PageContents fullScreen={fullScreen} key={"about"}>
+      <motion.h1>
         <TypewriterText text={"About"} staggerChildren={0.05} />
       </motion.h1>
       <AnimatedBorderBox
