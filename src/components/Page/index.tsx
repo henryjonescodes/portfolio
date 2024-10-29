@@ -5,6 +5,7 @@ import { NavigateFunction } from "react-router-dom";
 import Background from "../Background";
 import NavBar from "../NavBar";
 import styles from "./page.module.scss";
+import AnimatedOutlet from "../AnimatedOutlet";
 
 // Animation variants
 const pageVariants = {
@@ -48,7 +49,6 @@ type PageProps = {
   navigate: NavigateFunction;
   fullScreen?: boolean;
   visible: boolean;
-  children?: ReactNode;
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
   page: string | undefined;
 };
@@ -57,7 +57,6 @@ const Page = ({
   navigate,
   visible = true,
   fullScreen = false,
-  children,
   setFullScreen,
   page,
 }: PageProps) => {
@@ -108,7 +107,9 @@ const Page = ({
             ref={contentRef}
           >
             <motion.div className={styles.contentInner}>
-              <AnimatePresence>{children}</AnimatePresence>
+              <AnimatePresence>
+                <AnimatedOutlet key={page} />
+              </AnimatePresence>
             </motion.div>
           </motion.div>
         </motion.div>

@@ -51,9 +51,7 @@ const Home = () => {
               setFullScreen={setFullScreen}
               visible={page !== undefined}
               page={page}
-            >
-              <AnimatedOutlet key={page} />
-            </Page>
+            />
           </motion.div>
         )}
       </AnimatePresence>

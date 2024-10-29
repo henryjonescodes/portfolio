@@ -1,12 +1,24 @@
+@use "sass:color";
+
 @import '@styles/colors.module.scss';
 @import '@styles/mixins.module.scss';
 @import '@styles/layout.module.scss';
 
-// Mixin for common nav item styles
+$hover-color: color.adjust($foreground-primary, $lightness: -10%);
+$hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
+
+// * * * * * * * Unreferenced Styles * * * * * * * //
+
+.navbarBorder {
+  top: unset !important;
+  transform: translateY(100%);
+  bottom: 0;
+}
+
+// * * * * * * * Mixins * * * * * * * //
+
 @mixin navItemCommon {
-  @include forgroundPrimaryHover;
   position: relative;
-  transition: all 0.3s ease;
   color: $foreground-primary;
   height: 100%;
   display: flex;
@@ -15,18 +27,24 @@
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 
   .icon {
+    position: relative;
     width: 24px;
     height: 24px;
     flex-shrink: 0;
     transition: all 0.3s ease;
 
-    svg,
-    path {
+    .image {
+      height: 100%;
+      width: 100%;
 
-      fill: $foreground-primary;
-      stroke: $foreground-primary;
+      svg,
+      path {
+        transition: fill 0.3s ease-in-out;
+        fill: $foreground-primary;
+      }
     }
   }
 
@@ -37,18 +55,8 @@
   }
 }
 
-// Mixin for hover effect when fullScreen is false
-@mixin navItemHover {
-  &:hover {
-    width: 130px;
+// * * * * * * * Navigation Bar Styles * * * * * * * //
 
-    .label {
-      display: inline-block;
-    }
-  }
-}
-
-// Styles for the navigation bar
 .navigationBar {
   position: relative;
   z-index: 1;
@@ -59,12 +67,6 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-}
-
-.navbarBorder {
-  top: unset !important;
-  transform: translateY(100%);
-  bottom: 0;
 }
 
 .contents {
@@ -99,52 +101,7 @@
   justify-content: flex-end;
 }
 
-// Styles for NavBarItem
-.navItem {
-  @include navItemCommon;
-  // padding: 8px 12px;
-  width: auto;
-
-  .label {
-    display: inline-block;
-  }
-
-  .border {
-    transition: all 0.1s ease;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    border-bottom: 0px solid $foreground-primary;
-
-    &.selected {
-      border-bottom-width: 6px !important;
-    }
-
-    &:hover {
-      border-bottom-width: 3px;
-    }
-  }
-
-  // Styles when fullScreen is false
-  &.fullScreenFalse {
-    width: 50px;
-    justify-content: center;
-
-    .label {
-      display: none;
-    }
-
-    @include navItemHover;
-  }
-}
-
-// Styles for NavBarButton
-.navButton {
-  @include navItemCommon;
-  padding: 8px;
-  border-left: 2px solid $foreground-primary;
-  justify-content: center;
-}
+// * * * * * * * Mobile Styles * * * * * * * //
 
 @media (max-width: $width-mobile) {
   .contents {
@@ -170,5 +127,99 @@
     border-left: 2px solid $foreground-primary;
   }
 
-  .right {}
+  .right {
+    // Add any specific styles if needed
+  }
+}
+
+// * * * * * * * NavBarItem Styles * * * * * * * //
+
+.navItem {
+  @include navItemCommon;
+  width: auto;
+  pointer-events: auto; // Ensures navItem has pointer events enabled
+
+  .label,
+  .border,
+  .icon {
+    pointer-events: inherit; // Passes pointer events to children
+  }
+
+  .label {
+    display: inline-block;
+  }
+
+  &:hover {
+    .label {
+      color: $hover-color;
+    }
+
+    .border {
+      border-bottom-width: 3px;
+    }
+
+  }
+
+  .border {
+    pointer-events: inherit;
+    transition: all 0.1s ease;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border-bottom: 0px solid $foreground-primary;
+
+    &.selected {
+      border-bottom-width: 6px !important;
+    }
+  }
+
+  &.mini {
+    transition: width 0.2s ease-in-out;
+    width: 50px;
+    justify-content: flex-start;
+
+    .label {
+      display: none;
+    }
+
+    .icon {
+      margin-left: 12px;
+    }
+
+    &:hover {
+      width: 130px;
+
+      .label {
+        display: inline-block;
+        color: $hover-color-secondary;
+      }
+
+      .icon .image {
+
+        svg,
+        path {
+          fill: $hover-color-secondary;
+        }
+      }
+    }
+  }
+}
+
+// * * * * * * * NavBarButton Styles * * * * * * * //
+
+.navButton {
+  @include navItemCommon;
+  padding: 8px;
+  border-left: 2px solid $foreground-primary;
+  justify-content: center;
+
+  &:hover {
+    .icon .image {
+
+      svg,
+      path {
+        fill: $hover-color;
+      }
+    }
+  }
 }

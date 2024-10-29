@@ -1,17 +1,21 @@
-import cn from "classnames";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useState } from "react";
 import { NavigateFunction } from "react-router-dom";
-import styles from "./nav-bar.module.scss";
-import Checklist from "./../../assets/svg/icons/check-list.svg?react";
-import Close from "./../../assets/svg/icons/close.svg?react";
-import Code from "./../../assets/svg/icons/code.svg?react";
-import Expand from "./../../assets/svg/icons/expand.svg?react";
-import User from "./../../assets/svg/icons/user.svg?react";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthSmall } from "../../styles/layout.constants";
 import AnimatedLine from "../AnimatedLine";
 import TypewriterText from "../TypewriterText";
+import Checklist from "./../../assets/svg/icons/check-list.svg?react";
+import Close from "./../../assets/svg/icons/close.svg?react";
+import Code from "./../../assets/svg/icons/code.svg?react";
+import Expand from "./../../assets/svg/icons/expand.svg?react";
+import Pause from "./../../assets/svg/icons/pause.svg?react";
+import Play from "./../../assets/svg/icons/play.svg?react";
+import User from "./../../assets/svg/icons/user.svg?react";
+import styles from "./nav-bar.module.scss";
+import NavBarButton from "./NavBarButton";
+import NavBarItem from "./NavbarItem";
+import { useSettings } from "../../context/SettingsContext";
 
 const navBarVariants = {
   initial: {
@@ -34,83 +38,6 @@ const navBarVariants = {
   },
 };
 
-// NavBarItem Component
-type NavBarItemProps = {
-  label: string;
-  onClick: () => void;
-  selected: boolean;
-  mini: boolean;
-  Icon: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & {
-      title?: string;
-    }
-  >;
-};
-const borderVariants = {
-  initial: {
-    width: "0%",
-  },
-  animate: {
-    width: "100%",
-    transition: {
-      duration: 0.5,
-      delay: 1.5, // Delay the border animation by 0.5 seconds
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    width: "0%",
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
-const NavBarItem = ({
-  label,
-  onClick,
-  selected = false,
-  mini,
-  Icon,
-}: NavBarItemProps) => {
-  return (
-    <motion.span
-      className={cn(styles.navItem, { [styles.fullScreenFalse]: mini })}
-      onClick={onClick}
-    >
-      <motion.span
-        className={cn(styles.border, { [styles.selected]: selected })}
-        variants={borderVariants} // Apply variants for the border
-        initial="initial"
-        animate="animate"
-        exit="exit"
-      />
-      {mini && <Icon className={styles.icon} />}
-      <motion.span className={styles.label}>
-        <TypewriterText text={label} staggerChildren={0.03} />
-      </motion.span>
-    </motion.span>
-  );
-};
-
-// NavBarButton Component
-type NavBarButtonProps = {
-  onClick: () => void;
-  Icon: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & {
-      title?: string;
-    }
-  >;
-};
-
-const NavBarButton = ({ onClick, Icon }: NavBarButtonProps) => {
-  return (
-    <motion.span className={styles.navButton} onClick={onClick}>
-      <Icon className={styles.icon} />
-    </motion.span>
-  );
-};
-
 type NavBarProps = {
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
   fullScreen: boolean;
@@ -120,6 +47,8 @@ type NavBarProps = {
 
 const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
   const { width } = useWindowDimensions();
+  const { animationDisabled, setAnimationDisabled } = useSettings();
+
   const handleNavClick = (path: string) => {
     navigate(path);
   };
@@ -175,6 +104,12 @@ const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
           </motion.h3>
         </motion.span>
         <motion.span className={styles.right}>
+          <NavBarButton
+            onClick={() => setAnimationDisabled(!animationDisabled)}
+            Icon={Pause}
+            ActiveIcon={Play}
+            active={animationDisabled}
+          />
           <NavBarButton
             onClick={() => setFullScreen(!fullScreen)}
             Icon={Expand}
