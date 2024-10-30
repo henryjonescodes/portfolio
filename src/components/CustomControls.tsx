@@ -1,7 +1,7 @@
 import { useSpring } from "@react-spring/three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import * as THREE from "three";
 import { Vector3 } from "three";
 import { useWindowDimensions } from "../context/WindowDimensionContext";
@@ -29,22 +29,20 @@ export default function CustomControls({
   const { camera } = useThree();
   const { width } = useWindowDimensions();
 
-  // State for zoomModifier
+  // State for zoomLevel and initialCameraPosition
+  const [zoomLevel2, setZoomLevel2] = useState<ZoomLevel>(zoomLevels.default);
+  const [initialCameraPosition, setInitialCameraPosition] = useState<
+    [number, number, number]
+  >([0, 0, 4.2]);
 
-  // Initial camera position (kept constant)
-  const initialCameraPosition: [number, number, number] = [0, 0, 4.2];
-
-  // Calculate initial spherical coordinates (kept constant)
-  const [x0, y0, z0] = initialCameraPosition;
-  const initialRadius = Math.sqrt(x0 ** 2 + y0 ** 2 + z0 ** 2);
-  const initialTheta = Math.atan2(x0, z0);
-  const initialPhi = Math.acos(y0 / initialRadius);
-
-  const initialSpherical = {
-    radius: initialRadius,
-    theta: initialTheta,
-    phi: initialPhi,
-  };
+  // State for initial spherical coordinates
+  const [initialSpherical, setInitialSpherical] = useState(() => {
+    const [x, y, z] = initialCameraPosition;
+    const radius = Math.sqrt(x ** 2 + y ** 2 + z ** 2);
+    const theta = Math.atan2(x, z);
+    const phi = Math.acos(y / radius);
+    return { radius, theta, phi };
+  });
 
   // State to control user drag and animation
   const [dragEnabled, setDragEnabled] = useState(true);
@@ -54,6 +52,7 @@ export default function CustomControls({
   const [spring, api] = useSpring(() => ({
     theta: initialSpherical.theta,
     phi: initialSpherical.phi,
+    radius: initialSpherical.radius,
     position: initialCameraPosition,
     config: { mass: 1, tension: 25, friction: 7.5 },
   }));
@@ -62,51 +61,118 @@ export default function CustomControls({
   useGesture(
     {
       onDrag: ({ down, movement: [mx, my] }) => {
-        if (down && dragEnabled) {
-          // Calculate new theta and phi based on mouse movement
-          const deltaTheta = (mx / window.innerWidth) * maxAzimuthAngle * 2;
-          const deltaPhi = (my / window.innerHeight) * maxPolarAngle * 2;
+        if (dragEnabled) {
+          if (down) {
+            // User is dragging
+            // Calculate new theta and phi based on mouse movement
+            const deltaTheta = (mx / window.innerWidth) * maxAzimuthAngle * 2;
+            const deltaPhi = (my / window.innerHeight) * maxPolarAngle * 2;
 
-          // Clamp phi to prevent flipping over poles
-          const phi = spring.phi.get() + deltaPhi;
-          const clampedPhi = Math.max(
-            initialSpherical.phi - maxPolarAngle,
-            Math.min(initialSpherical.phi + maxPolarAngle, phi)
-          );
+            const newTheta = spring.theta.get() + deltaTheta;
+            const newPhi = spring.phi.get() + deltaPhi;
 
-          // Clamp theta within specified azimuth angle limits
-          const theta = spring.theta.get() + deltaTheta;
-          const clampedTheta = Math.max(
-            initialSpherical.theta - maxAzimuthAngle,
-            Math.min(initialSpherical.theta + maxAzimuthAngle, theta)
-          );
+            // Clamp phi to prevent flipping over poles
+            const clampedPhi = Math.max(
+              initialSpherical.phi - maxPolarAngle,
+              Math.min(initialSpherical.phi + maxPolarAngle, newPhi)
+            );
 
-          // Update spring values immediately during drag
-          api.start({ theta: clampedTheta, phi: clampedPhi, immediate: true });
+            // Clamp theta within specified azimuth angle limits
+            const clampedTheta = Math.max(
+              initialSpherical.theta - maxAzimuthAngle,
+              Math.min(initialSpherical.theta + maxAzimuthAngle, newTheta)
+            );
+
+            const x =
+              spring.radius.get() *
+              Math.sin(clampedPhi) *
+              Math.sin(clampedTheta);
+            const y = spring.radius.get() * Math.cos(clampedPhi);
+            const z =
+              spring.radius.get() *
+              Math.sin(clampedPhi) *
+              Math.cos(clampedTheta);
+
+            api.start({
+              theta: clampedTheta,
+              phi: clampedPhi,
+              position: [x, y, z],
+              immediate: true,
+            });
+          } else {
+            // User released the drag; animate back to initial position
+            api.start({
+              theta: initialSpherical.theta,
+              phi: initialSpherical.phi,
+              radius: initialSpherical.radius,
+              position: initialCameraPosition,
+              config: { mass: 1, tension: 85, friction: 13 },
+            });
+          }
         }
       },
     },
     { target: window } // Attach events to the window
   );
 
-  const [zoomLevel2, setZoomLevel2] = useState<ZoomLevel>(zoomLevels.default);
-
   useEffect(() => {
     const getZoomLevel2 = () => {
-      if (width > 3000) return zoomLevels.extraLarge;
-      if (width > screenWidths.large) return zoomLevels.large;
-      if (width > screenWidths.default) return zoomLevels.default;
-      if (width > screenWidths.compact) return zoomLevels.compact;
-      if (width > screenWidths.medium) return zoomLevels.medium;
-      if (width > screenWidths.small) return zoomLevels.small;
+      if (width > 3000) {
+        console.log("Current width category: extraLarge");
+        return zoomLevels.extraLarge;
+      }
+      if (width > screenWidths.large) {
+        console.log("Current width category: large");
+        return zoomLevels.large;
+      }
+      if (width > screenWidths.default) {
+        console.log("Current width category: default");
+        return zoomLevels.default;
+      }
+      if (width > screenWidths.compact) {
+        console.log("Current width category: compact");
+        return zoomLevels.compact;
+      }
+      if (width > screenWidths.medium) {
+        console.log("Current width category: medium");
+        return zoomLevels.medium;
+      }
+      if (width > screenWidths.small) {
+        console.log("Current width category: small");
+        return zoomLevels.small;
+      }
+      console.log("Current width category: mobile");
       return zoomLevels.mobile;
     };
 
     const newZoomLevel = getZoomLevel2();
     setZoomLevel2(newZoomLevel);
+    setInitialCameraPosition(
+      newZoomLevel.wide.toArray() as [number, number, number]
+    );
   }, [fullScreen, width]);
 
-  // Update camera position when zoomIn, zoomModifier, or targetRef changes
+  // Update initialSpherical and animate camera when initialCameraPosition changes
+  useEffect(() => {
+    const [x, y, z] = initialCameraPosition;
+    const radius = Math.sqrt(x ** 2 + y ** 2 + z ** 2);
+    const theta = Math.atan2(x, z);
+    const phi = Math.acos(y / radius);
+    setInitialSpherical({ radius, theta, phi });
+
+    // Animate to the new initialCameraPosition if not zoomed in
+    if (!zoomIn) {
+      api.start({
+        theta,
+        phi,
+        radius,
+        position: initialCameraPosition,
+        config: { mass: 1, tension: 85, friction: 13 },
+      });
+    }
+  }, [initialCameraPosition]);
+
+  // Update camera position when zoomIn, zoomLevel2, targetRef, or fullScreen changes
   useEffect(() => {
     const updateCameraPosition = () => {
       if (zoomIn && targetRef?.current) {
@@ -131,14 +197,18 @@ export default function CustomControls({
       const screenPosition = targetRef.current.position.clone();
 
       // Create an offset Vector3 that includes zoomModifier
-      const offset = fullScreen
-        ? new Vector3(0, 0.7, 0).add(zoomLevel2.fullScreen)
-        : new Vector3(0, 0.7, 0).add(zoomLevel2.handheld);
+      // const offset = fullScreen
+      //   ? new Vector3(0, 0, 0).add(zoomLevel2.fullScreen)
+      //   : new Vector3(0, 0, 0).add(zoomLevel2.handheld);
 
-      const cameraPosition = screenPosition.add(offset);
+      // const cameraPosition = screenPosition.add(offset);
+
+      const cameraPosition = fullScreen
+        ? (zoomLevel2.fullScreen.toArray() as [number, number, number])
+        : (zoomLevel2.handheld.toArray() as [number, number, number]);
 
       api.start({
-        position: cameraPosition.toArray() as [number, number, number],
+        position: cameraPosition,
         config: { mass: 1, tension: 85, friction: 13 },
         onRest: () => {
           setIsAnimating(false);
@@ -147,14 +217,15 @@ export default function CustomControls({
     };
 
     const calculateAndStartWideAnimation = () => {
-      // Exiting fullscreen or entering handheld zoom-in mode
+      // Exiting fullscreen or entering wide mode
       setIsAnimating(true);
 
-      // Animate to the handheld position
-      const handheldPosition = new Vector3(0, 0, zoomLevel2.wide.z);
-
+      // Animate to the initialCameraPosition
       api.start({
-        position: handheldPosition.toArray() as [number, number, number],
+        position: initialCameraPosition,
+        theta: initialSpherical.theta,
+        phi: initialSpherical.phi,
+        radius: initialSpherical.radius,
         config: { mass: 1, tension: 85, friction: 13 },
         onRest: () => {
           setDragEnabled(true);
@@ -164,7 +235,7 @@ export default function CustomControls({
     };
 
     updateCameraPosition();
-  }, [zoomIn, zoomLevel2, targetRef, fullScreen]);
+  }, [zoomIn, zoomLevel2, targetRef, fullScreen, initialCameraPosition]);
 
   // Update camera position each frame
   useFrame(() => {
@@ -176,23 +247,9 @@ export default function CustomControls({
     // Always use the spring's position
     camera.position.set(...(spring.position.get() as [number, number, number]));
 
+    // Adjust the camera's target/lookAt
     if (!isAnimating && !zoomIn && dragEnabled) {
-      // Convert spherical coordinates to Cartesian coordinates
-      const theta = spring.theta.get();
-      const phi = spring.phi.get();
-      const radius = initialSpherical.radius;
-
-      const x = radius * Math.sin(phi) * Math.sin(theta);
-      const y = radius * Math.cos(phi);
-      const z = radius * Math.sin(phi) * Math.cos(theta);
-
-      camera.position.set(x, y, z);
       camera.lookAt(0, 0, 0);
-
-      // Update the spring's position value without animation
-      api.set({
-        position: [x, y, z],
-      });
     }
   });
 

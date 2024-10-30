@@ -34,38 +34,38 @@ export type ZoomLevel = {
 // Zoom levels based on screen sizes
 export const zoomLevels: Record<string, ZoomLevel> = {
   mobile: { 
-    fullScreen: new Vector3(0, 0, 1.5), 
-    handheld: new Vector3(0, 0, 6.5), 
-    wide: new Vector3(0, 0, 3) 
+    fullScreen: new Vector3(0, 1.5, 1.5), 
+    handheld: new Vector3(0, 0, 5.8), 
+    wide: new Vector3(0, 0, 5.8) 
   },
   small: { 
-    fullScreen: new Vector3(0, 0, 1.4), 
-    handheld: new Vector3(0, 0, 3), 
-    wide: new Vector3(0, 0, 3) 
+    fullScreen: new Vector3(0, 1.5, 1.4), 
+    handheld: new Vector3(0, 0.5, 3.5),
+    wide: new Vector3(0, 0, 4.5) 
   },
   medium: { 
-    fullScreen: new Vector3(0, 0, 1.3), 
-    handheld: new Vector3(0, 0, 2.5), 
+    fullScreen: new Vector3(0, 1.5, 1.3), 
+    handheld: new Vector3(0, 1, 3), 
     wide: new Vector3(0, 0, 4.2) 
   },
   compact: { 
-    fullScreen: new Vector3(0, 0, 1.2), 
-    handheld: new Vector3(0, 0, 2), 
+    fullScreen: new Vector3(0, 1.5, 1.2), 
+    handheld: new Vector3(0, 1.2, 2.5), 
     wide: new Vector3(0, 0, 4.2) 
   },
   default: { 
-    fullScreen: new Vector3(0, 0, 1.1), 
-    handheld: new Vector3(0, 0, 2), 
+    fullScreen: new Vector3(0, 1.5, 1.1), 
+    handheld: new Vector3(0, 1.2, 2.5), 
     wide: new Vector3(0, 0, 4.2) 
   },
   large: { 
-    fullScreen: new Vector3(0, 0, 0.5), 
-    handheld: new Vector3(0, 0, 2), 
+    fullScreen: new Vector3(0, 1.5, 0.5), 
+    handheld: new Vector3(0, 1.2, 2.5), 
     wide: new Vector3(0, 0, 4.2) 
   },
   extraLarge: { 
-    fullScreen: new Vector3(0, 0, 0.5), 
-    handheld: new Vector3(0, 0, 2), 
+    fullScreen: new Vector3(0, 1.5, 0.5), 
+    handheld: new Vector3(0, 1.2, 2.5), 
     wide: new Vector3(0, 0, 4.2) 
   },
 };
