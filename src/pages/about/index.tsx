@@ -5,7 +5,7 @@ import TypewriterText from "../../components/TypewriterText";
 import styles from "./about.module.scss";
 
 import GitHub from "@assets/svg/socials/github.svg?react";
-import Instagram from "@assets/svg/socials/instagram.svg?react";
+import Instagram from "@assets/svg/socials/Instagram.svg?react";
 import LinkedIn from "@assets/svg/socials/linkedIn.svg?react";
 
 import Book from "@assets/svg/icons/book-01.svg?react";
