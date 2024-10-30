@@ -4,11 +4,16 @@ import PageContents from "../../components/Page/PageContents";
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./about.module.scss";
 
+import Instagram from "@assets/svg/socials/instagram.svg?react";
+import GitHub from "@assets/svg/socials/github.svg?react";
+import LinkedIn from "@assets/svg/socials/linkedIn.svg?react";
+
 import Book from "@assets/svg/icons/book-01.svg?react";
 import Home from "@assets/svg/icons/home.svg?react";
 import AnimatedLine from "../../components/AnimatedLine";
 import MapViewer from "../../components/MapViewer";
 import StatTracker from "./StatTracker";
+import GlitchIcon from "../../components/GlitchIcon";
 
 const About = () => {
   return (
@@ -38,6 +43,20 @@ const About = () => {
               <Book className={styles.icon} />
               <motion.h4 className={styles.text}>Union College</motion.h4>
             </motion.span>
+          </motion.div>
+          <motion.div className={styles.socials}>
+            <motion.div className={styles.social}>
+              {/* <a href="https://github.com/henryjonescodes">
+                <GitHub className={styles.icon} />
+              </a>
+              <a href="https://www.linkedin.com/in/henryjonescodes/">
+                <LinkedIn className={styles.icon} />
+              </a>
+              <a href="https://www.instagram.com/theycallmezonez/">
+                <Instagram className={styles.icon} />
+              </a> */}
+              <GlitchIcon Icon={GitHub} />
+            </motion.div>
           </motion.div>
         </motion.div>
 
@@ -70,6 +89,24 @@ const About = () => {
         <MapViewer />
       </motion.div>
     </PageContents>
+  );
+};
+
+const Socials = () => {
+  return (
+    <motion.div className={styles.socials}>
+      <motion.div className={styles.social}>
+        <a href="https://github.com/henryjonescodes">
+          <GitHub className={styles.icon} />
+        </a>
+        <a href="https://www.linkedin.com/in/henryjonescodes/">
+          <LinkedIn className={styles.icon} />
+        </a>
+        <a href="https://www.instagram.com/theycallmezonez/">
+          <Instagram className={styles.icon} />
+        </a>
+      </motion.div>
+    </motion.div>
   );
 };
 
