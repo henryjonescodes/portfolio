@@ -21,17 +21,18 @@ const characterVariants = {
 };
 
 // Animation variants for the parent container
-const textVariants = (staggerChildren: number) => ({
+const textVariants = (staggerChildren: number, staggerDirection: 1 | -1) => ({
   initial: {},
   animate: {
     transition: {
       staggerChildren: staggerChildren, // Time between each character's appearance
+      staggerDirection: staggerDirection,
     },
   },
   exit: {
     transition: {
       staggerChildren: staggerChildren / 4, // Stagger the children on exit
-      staggerDirection: -1, // Reverse the order for exit
+      staggerDirection: staggerDirection * -1, // Reverse the order for exit
     },
   },
 });
@@ -40,14 +41,16 @@ const textVariants = (staggerChildren: number) => ({
 interface TypewriterTextProps {
   text: string;
   staggerChildren?: number;
+  staggerDirection?: -1 | 1; // Direction for staggering children on exit (default: -1)
 }
 
 const TypewriterText: React.FC<TypewriterTextProps> = ({
   text,
   staggerChildren = 0.009,
+  staggerDirection = 1,
 }) => {
   return (
-    <motion.span variants={textVariants(staggerChildren)}>
+    <motion.span variants={textVariants(staggerChildren, staggerDirection)}>
       {text.split("").map((char, index) => (
         <motion.span key={index} variants={characterVariants}>
           {char}

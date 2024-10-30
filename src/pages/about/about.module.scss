@@ -68,7 +68,7 @@
 
     .stats {
       position: relative;
-      flex-basis: 40%;
+      flex-basis: 45%;
       flex-grow: 0;
       flex-shrink: 1;
 
@@ -99,6 +99,8 @@
       .values {
         display: flex;
         flex-direction: column;
+        padding: 16px;
+        gap: 8px;
       }
     }
   }
@@ -106,4 +108,49 @@
 
   .map {}
 
+}
+
+.statTracker {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  gap: 12px;
+  height: 28px;
+
+
+  .tracker {
+    position: relative;
+    width: 50%;
+
+    &Content {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 7px;
+    }
+
+    .track {
+      height: 100%;
+      max-width: 100%;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4px;
+    }
+
+    .block {
+      transform-origin: right;
+      width: 100%;
+      height: 100%;
+      background-color: $foreground-tertiary;
+    }
+  }
+
+  .label {}
 }
