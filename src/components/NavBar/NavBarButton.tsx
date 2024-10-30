@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import styles from "./nav-bar.module.scss";
+import GlitchIcon from "../GlitchIcon";
 
 // NavBarButton Component
 // Define mutually exclusive types
@@ -53,7 +54,7 @@ export const NavBarButton = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <ActiveIcon className={styles.image} />
+            <GlitchIcon Icon={ActiveIcon} className={styles.image} />
           </motion.span>
         ) : (
           <motion.span
@@ -64,7 +65,7 @@ export const NavBarButton = ({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <Icon className={styles.image} />
+            <GlitchIcon Icon={Icon} className={styles.image} />
           </motion.span>
         )}
       </AnimatePresence>

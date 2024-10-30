@@ -45,8 +45,7 @@ const About = () => {
             </motion.span>
           </motion.div>
           <motion.div className={styles.socials}>
-            <motion.div className={styles.social}>
-              {/* <a href="https://github.com/henryjonescodes">
+            {/* <a href="https://github.com/henryjonescodes">
                 <GitHub className={styles.icon} />
               </a>
               <a href="https://www.linkedin.com/in/henryjonescodes/">
@@ -55,8 +54,21 @@ const About = () => {
               <a href="https://www.instagram.com/theycallmezonez/">
                 <Instagram className={styles.icon} />
               </a> */}
-              <GlitchIcon Icon={GitHub} />
-            </motion.div>
+            <GlitchIcon
+              Icon={GitHub}
+              className={styles.icon}
+              url="https://github.com/henryjonescodes"
+            />
+            <GlitchIcon
+              Icon={LinkedIn}
+              className={styles.icon}
+              url="https://www.linkedin.com/in/henryjonescodes/"
+            />
+            <GlitchIcon
+              Icon={Instagram}
+              className={styles.icon}
+              url="https://www.instagram.com/theycallmezonez/"
+            />
           </motion.div>
         </motion.div>
 

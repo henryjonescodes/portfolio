@@ -32,7 +32,7 @@
     .info {
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 32px;
       flex: 20;
 
       .title {
@@ -64,6 +64,17 @@
               fill: $foreground-primary
             }
           }
+        }
+      }
+
+      .socials {
+        display: flex;
+        flex-direction: row;
+        gap: 32px;
+
+        .icon {
+          width: 72px;
+          height: 72px;
         }
       }
     }
