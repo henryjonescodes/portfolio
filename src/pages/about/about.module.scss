@@ -1,5 +1,6 @@
 @import '@styles/mixins.module.scss';
 @import '@styles/colors.module.scss';
+@import '@styles/layout.module.scss';
 @import '@styles/typography.module.scss';
 
 .viewer {
@@ -85,35 +86,36 @@
       flex-grow: 0;
       flex-shrink: 1;
 
+      .border {
+        .viewer {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 32px 0px;
 
-      .viewer {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 32px 0px;
+          .avatar {
+            width: 80%;
+            aspect-ratio: 1;
 
-        .avatar {
-          width: 80%;
-          aspect-ratio: 1;
-
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-position: center;
-          background-blend-mode: multiply;
-          filter: sepia(100) hue-rotate(100deg) saturate(2);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-blend-mode: multiply;
+            filter: sepia(100) hue-rotate(100deg) saturate(2);
+          }
         }
-      }
 
-      .divider {
-        position: relative;
-      }
+        .divider {
+          position: relative;
+        }
 
-      .values {
-        display: flex;
-        flex-direction: column;
-        padding: 16px;
-        gap: 8px;
+        .values {
+          display: flex;
+          flex-direction: column;
+          padding: 16px;
+          gap: 8px;
+        }
       }
     }
   }
@@ -133,7 +135,7 @@
 
   .tracker {
     position: relative;
-    width: 50%;
+    width: 42%;
     transform: rotate(180deg);
 
     &Content {
@@ -170,5 +172,154 @@
     }
   }
 
-  .label {}
+  .label {
+    height: 100%;
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: $width-medium) {
+  .about {
+    .hero {
+      .info {
+        .title {
+          h1 {
+            font-size: 3.5rem;
+          }
+        }
+
+        .blurb {
+          p {
+            font-size: 1.2rem;
+          }
+        }
+
+        .tags {
+          gap: 16px;
+        }
+
+        .socials {
+          .icon {
+            width: 64px;
+            height: 64px;
+          }
+        }
+      }
+    }
+  }
+
+  .statTracker {
+    .tracker {
+      width: 40%;
+
+      .track {
+        gap: 3px
+      }
+    }
+
+    .label {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media (max-width: $width-small) {
+  .about {
+    .hero {
+      gap: 16px;
+
+      .stats {
+        flex-basis: 55%;
+      }
+
+      .info {
+        .title {
+          h1 {
+            font-size: 2.6rem;
+          }
+
+          h3 {
+            font-size: 1.5rem;
+          }
+        }
+
+        .blurb {
+          p {
+            font-size: 1rem;
+          }
+        }
+
+        .tags {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+
+        .socials {
+          .icon {
+            width: 48px;
+            height: 48px;
+          }
+        }
+      }
+    }
+  }
+
+  .statTracker {
+    .tracker {
+      // width: 30%;
+
+      .track {
+        gap: 1px
+      }
+    }
+
+    .label {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: $width-mobile) {
+  .about {
+    .hero {
+      flex-direction: column;
+      gap: 32px;
+
+      .stats {}
+
+      .info {
+        .title {
+          h1 {}
+
+          h3 {}
+        }
+
+        .blurb {
+          p {}
+        }
+
+        .tags {}
+
+        .socials {
+          .icon {}
+        }
+      }
+    }
+  }
+
+  .statTracker {
+    .tracker {
+      width: 35%;
+
+      .track {
+        gap: 4px;
+      }
+    }
+
+    .label {
+      height: 100%;
+      // font-size: 1.2rem;
+    }
+  }
 }

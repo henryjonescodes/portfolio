@@ -101,9 +101,16 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
   justify-content: flex-end;
 }
 
+@media (max-width: $width-mobile) {
+  .center {
+    display: none;
+  }
+}
+
+
 // * * * * * * * Mobile Styles * * * * * * * //
 
-@media (max-width: $width-mobile) {
+@media (max-width: $width-small) {
   .contents {
     display: flex;
     align-items: center;
@@ -131,6 +138,13 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
     // Add any specific styles if needed
   }
 }
+
+@media (max-width: $width-mobile) {
+  .center {
+    display: none;
+  }
+}
+
 
 // * * * * * * * NavBarItem Styles * * * * * * * //
 

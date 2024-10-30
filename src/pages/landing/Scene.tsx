@@ -10,7 +10,6 @@ import useRaycaster from "../../hooks/useRaycaster";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
 import ToolBar from "./ToolBar";
-import { useSettings } from "../../context/SettingsContext";
 
 export default function Scene() {
   const gizmo = useModel("/models/Gizmo.glb");

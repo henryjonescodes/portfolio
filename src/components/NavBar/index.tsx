@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import { NavigateFunction } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
