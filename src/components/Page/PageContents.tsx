@@ -8,18 +8,14 @@ import styles from "./page.module.scss";
 // Define the props interface
 export type PageContentsProps = {
   className?: string; // Add an optional className prop
-  fullScreen?: boolean;
 };
 
 type Props = {
   children: ReactNode;
 } & PageContentsProps;
 
-const PageContents: React.FC<Props> = ({
-  children,
-  className,
-  fullScreen = true,
-}) => {
+const PageContents: React.FC<Props> = ({ children, className }) => {
+  const { fullScreen } = useSettings();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];

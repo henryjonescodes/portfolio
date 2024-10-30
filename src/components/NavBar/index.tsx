@@ -39,15 +39,14 @@ const navBarVariants = {
 };
 
 type NavBarProps = {
-  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
-  fullScreen: boolean;
   navigate: NavigateFunction;
   page: string | undefined;
 };
 
-const NavBar = ({ setFullScreen, fullScreen, navigate, page }: NavBarProps) => {
+const NavBar = ({ navigate, page }: NavBarProps) => {
   const { width } = useWindowDimensions();
-  const { animationDisabled, setAnimationDisabled } = useSettings();
+  const { animationDisabled, setAnimationDisabled, fullScreen, setFullScreen } =
+    useSettings();
 
   const handleNavClick = (path: string) => {
     navigate(path);

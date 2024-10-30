@@ -1,8 +1,8 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Page from "../../components/Page";
+import { useSettings } from "../../context/SettingsContext";
 import styles from "./landing.module.scss";
 import Scene from "./Scene";
 
@@ -12,7 +12,7 @@ const Landing = () => {
   const page = pathSegments[0];
 
   const navigate = useNavigate(); // Initialize the navigate function
-  const [fullScreen, setFullScreen] = useState(true);
+  const { fullScreen } = useSettings();
 
   const isHidden = !fullScreen || page === undefined;
 
@@ -46,15 +46,13 @@ const Landing = () => {
           >
             <Page
               navigate={navigate}
-              fullScreen={fullScreen}
-              setFullScreen={setFullScreen}
               visible={page !== undefined}
               page={page}
             />
           </motion.div>
         )}
       </AnimatePresence>
-      <Scene fullScreen={fullScreen} setFullScreen={setFullScreen} />;
+      <Scene />;
     </motion.div>
   );
 };

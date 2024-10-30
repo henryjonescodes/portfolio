@@ -9,10 +9,10 @@ import {
   ZoomLevel,
   zoomLevels,
 } from "../styles/layout.constants";
+import { useSettings } from "../context/SettingsContext";
 
 interface CustomControlsProps {
   zoomIn?: boolean;
-  fullScreen?: boolean;
   targetRef?: React.RefObject<THREE.Group>;
   maxPolarAngle?: number;
   maxAzimuthAngle?: number;
@@ -20,13 +20,13 @@ interface CustomControlsProps {
 
 export default function CustomControls({
   zoomIn = false,
-  fullScreen = false,
   targetRef,
   maxPolarAngle = Math.PI / 6,
   maxAzimuthAngle = Math.PI / 6,
 }: CustomControlsProps) {
   const { camera } = useThree();
   const { width } = useWindowDimensions();
+  const { fullScreen } = useSettings();
 
   // State for zoomLevel and initialCameraPosition
   const [zoomLevel2, setZoomLevel2] = useState<ZoomLevel>(zoomLevels.default);

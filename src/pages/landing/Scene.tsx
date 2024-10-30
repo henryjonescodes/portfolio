@@ -10,12 +10,9 @@ import useRaycaster from "../../hooks/useRaycaster";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
 import ToolBar from "./ToolBar";
+import { useSettings } from "../../context/SettingsContext";
 
-type SceneProps = {
-  fullScreen: boolean;
-  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-export default function Scene({ fullScreen, setFullScreen }: SceneProps) {
+export default function Scene() {
   const gizmo = useModel("/models/Gizmo.glb");
   const buttons = useModel("/models/Buttons.glb");
   const colorToggle = useModel("/models/ColorToggle.glb");
@@ -28,7 +25,6 @@ export default function Scene({ fullScreen, setFullScreen }: SceneProps) {
   const [dialRot, setDialRot] = useState(0);
   const [knobRotR, setKnobRotR] = useState(0);
   const [knobRotL, setKnobRotL] = useState(0);
-
   const { activeObject, handlePointerMove } = useRaycaster();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
@@ -43,7 +39,6 @@ export default function Scene({ fullScreen, setFullScreen }: SceneProps) {
       <directionalLight position={[2, 5, 2]} />
       <CustomControls
         zoomIn={!!page}
-        fullScreen={fullScreen}
         targetRef={screenGroupRef}
         maxPolarAngle={Math.PI / 6}
         maxAzimuthAngle={Math.PI / 6}
@@ -55,7 +50,7 @@ export default function Scene({ fullScreen, setFullScreen }: SceneProps) {
           position={[0.001, 0.473, 0.025]}
           scale={0.067}
         >
-          <Screen fullScreen={fullScreen} setFullScreen={setFullScreen} />
+          <Screen />
         </group>
         <ToolBar position={[0.001, 0, 0.059]} />
         {gizmo && <primitive object={gizmo} />}

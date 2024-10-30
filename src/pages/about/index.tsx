@@ -1,24 +1,18 @@
 import { motion } from "framer-motion";
 import AnimatedBorderBox from "../../components/AnimatedBorderBox";
-import PageContents, {
-  PageContentsProps,
-} from "../../components/Page/PageContents";
+import PageContents from "../../components/Page/PageContents";
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./about.module.scss";
 
 import Book from "@assets/svg/icons/book-01.svg?react";
 import Home from "@assets/svg/icons/home.svg?react";
 import AnimatedLine from "../../components/AnimatedLine";
-import StatTracker from "./StatTracker";
 import MapViewer from "../../components/MapViewer";
+import StatTracker from "./StatTracker";
 
-const About = ({ fullScreen }: PageContentsProps) => {
+const About = () => {
   return (
-    <PageContents
-      fullScreen={fullScreen}
-      key={"about"}
-      className={styles.about}
-    >
+    <PageContents key={"about"} className={styles.about}>
       <motion.div className={styles.hero}>
         {/* Info Section (Left/Top) */}
         <motion.div className={styles.info}>

@@ -7,13 +7,10 @@ import Page from "../../components/Page";
 import { screenSize } from "../../styles/constants";
 import Home from "../home/Home";
 import styles from "./landing.module.scss";
+import { useSettings } from "../../context/SettingsContext";
 
-type ScreenProps = {
-  fullScreen: boolean;
-  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
+const Screen = () => {
+  const { fullScreen } = useSettings();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
@@ -60,8 +57,6 @@ const Screen = ({ fullScreen, setFullScreen }: ScreenProps) => {
               <Page
                 key={"screen"}
                 navigate={navigate}
-                fullScreen={fullScreen}
-                setFullScreen={setFullScreen}
                 visible={page !== undefined}
                 page={page}
               />

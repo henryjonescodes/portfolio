@@ -1,17 +1,28 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  SetStateAction,
+  Dispatch,
+} from "react";
 
 // TODO: Use animation disabled setting to smoothly switch between fullscreen and handheld modes
 
 // Define the shape of the context's data
 type SettingsContextType = {
   animationDisabled: boolean;
-  setAnimationDisabled: (value: boolean) => void;
+  setAnimationDisabled: Dispatch<SetStateAction<boolean>>;
+  fullScreen: boolean;
+  setFullScreen: Dispatch<SetStateAction<boolean>>;
 };
 
 // Default context value with animations enabled
 const defaultSettings: SettingsContextType = {
   animationDisabled: false,
   setAnimationDisabled: () => {}, // Placeholder function; will be overwritten in provider
+  fullScreen: true,
+  setFullScreen: () => {}, // Placeholder function; will be overwritten in provider
 };
 
 // Create the context with the default value
@@ -26,14 +37,19 @@ type SettingsProviderProps = {
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   children,
 }) => {
-  // State to hold the animationDisabled setting
+  const [fullScreen, setFullScreen] = useState(defaultSettings.fullScreen);
   const [animationDisabled, setAnimationDisabled] = useState(
     defaultSettings.animationDisabled
   );
 
   return (
     <SettingsContext.Provider
-      value={{ animationDisabled, setAnimationDisabled }}
+      value={{
+        animationDisabled,
+        setAnimationDisabled,
+        fullScreen,
+        setFullScreen,
+      }}
     >
       {children}
     </SettingsContext.Provider>

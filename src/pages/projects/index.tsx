@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import ExperienceEntry from "../../components/ExperienceEntry";
-import PageContents, {
-  PageContentsProps,
-} from "../../components/Page/PageContents";
+import PageContents from "../../components/Page/PageContents";
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./projects.module.scss";
 
@@ -32,9 +30,9 @@ const entryContentVariants = {
   },
 };
 
-const Projects = ({ fullScreen }: PageContentsProps) => {
+const Projects = () => {
   return (
-    <PageContents fullScreen={fullScreen} key={"projects"}>
+    <PageContents key={"projects"}>
       <motion.div variants={projectsVariants} className={styles.projects}>
         <motion.h1>
           <TypewriterText text={"Projects"} staggerChildren={0.05} />

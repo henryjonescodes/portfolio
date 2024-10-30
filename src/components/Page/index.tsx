@@ -6,6 +6,7 @@ import AnimatedOutlet from "../AnimatedOutlet";
 import Background from "../Background";
 import NavBar from "../NavBar";
 import styles from "./page.module.scss";
+import { useSettings } from "../../context/SettingsContext";
 
 // Animation variants
 const pageVariants = {
@@ -47,20 +48,13 @@ const backgroundVariants = {
 
 type PageProps = {
   navigate: NavigateFunction;
-  fullScreen?: boolean;
   visible: boolean;
-  setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
   page: string | undefined;
 };
 
-const Page = ({
-  navigate,
-  visible = true,
-  fullScreen = false,
-  setFullScreen,
-  page,
-}: PageProps) => {
+const Page = ({ navigate, visible = true, page }: PageProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
+  const { fullScreen } = useSettings();
 
   useEffect(() => {
     const scrollToTop = () => {
@@ -92,12 +86,7 @@ const Page = ({
               <Background />
             </motion.div>
           )}
-          <NavBar
-            setFullScreen={setFullScreen}
-            fullScreen={fullScreen}
-            navigate={navigate}
-            page={page}
-          />
+          <NavBar navigate={navigate} page={page} />
           <motion.div
             className={cn(styles.content, {
               [styles.contentFullScreen]: fullScreen,
