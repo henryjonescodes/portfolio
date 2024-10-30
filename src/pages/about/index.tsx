@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
 import AnimatedBorderBox from "../../components/AnimatedBorderBox";
-import MapViewer from "../../components/MapViewer";
 import PageContents, {
   PageContentsProps,
 } from "../../components/Page/PageContents";
 import TypewriterText from "../../components/TypewriterText";
 import styles from "./about.module.scss";
 
-import Home from "@assets/svg/icons/home.svg?react";
 import Book from "@assets/svg/icons/book-01.svg?react";
+import Home from "@assets/svg/icons/home.svg?react";
 import AnimatedLine from "../../components/AnimatedLine";
+import StatTracker from "./StatTracker";
+import MapViewer from "../../components/MapViewer";
 
 const About = ({ fullScreen }: PageContentsProps) => {
   return (
@@ -75,82 +76,6 @@ const About = ({ fullScreen }: PageContentsProps) => {
         <MapViewer />
       </motion.div>
     </PageContents>
-  );
-};
-
-type StatTrackerProps = {
-  label: string;
-  rating: number;
-};
-
-const statTrackerVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.4,
-      staggerDirection: -1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      staggerChildren: 0.1,
-      staggerDirection: 1,
-    },
-  },
-};
-
-const trackerStagger = 0.07;
-
-const trackerVariants = {
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    transition: {
-      staggerChildren: trackerStagger,
-      delayChildren: trackerStagger,
-      staggerDirection: -1,
-    },
-  },
-  exit: { opacity: 0 },
-};
-
-const blockVariants = {
-  initial: { scaleX: 0 },
-  animate: { scaleX: 1, transition: { duration: trackerStagger } },
-  exit: { scaleX: 0, transition: { duration: trackerStagger } },
-};
-
-const StatTracker = ({ label, rating }: StatTrackerProps) => {
-  return (
-    <motion.div className={styles.statTracker} variants={statTrackerVariants}>
-      <AnimatedBorderBox
-        className={styles.tracker}
-        contentClassName={styles.trackerContent}
-        borderRadius={11}
-        borderWidth={3}
-      >
-        <motion.span className={styles.track} variants={trackerVariants}>
-          {Array.from({ length: 16 }).map((_, index) => (
-            <motion.div
-              key={index}
-              className={styles.block}
-              variants={blockVariants}
-            />
-          ))}
-        </motion.span>
-      </AnimatedBorderBox>
-      <motion.h4 className={styles.label}>
-        <TypewriterText
-          text={label}
-          staggerDirection={-1}
-          staggerChildren={0.03}
-        />
-      </motion.h4>
-    </motion.div>
   );
 };
 

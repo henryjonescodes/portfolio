@@ -19,7 +19,9 @@
   flex-direction: column;
   width: 100%;
   height: min-content;
-  padding-top: 32px;
+  padding: 32px 0px;
+
+  gap: 128px;
 
   .hero {
     display: flex;
@@ -121,6 +123,7 @@
   .tracker {
     position: relative;
     width: 50%;
+    transform: rotate(180deg);
 
     &Content {
       position: relative;
@@ -145,10 +148,14 @@
     }
 
     .block {
-      transform-origin: right;
+      transform-origin: left; // needed for framer
       width: 100%;
       height: 100%;
-      background-color: $foreground-tertiary;
+      background-color: $background-primary;
+
+      &Active {
+        background-color: $foreground-primary;
+      }
     }
   }
 

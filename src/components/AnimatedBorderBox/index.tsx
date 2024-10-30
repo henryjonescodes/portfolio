@@ -73,6 +73,7 @@ interface AnimatedBorderBoxProps {
   children?: ReactNode;
 }
 
+// TODO: Add a speed control prop for animation
 const AnimatedBorderBox = ({
   borderWidth = 4,
   borderColor = "#00d67d",
