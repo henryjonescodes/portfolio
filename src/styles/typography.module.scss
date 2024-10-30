@@ -1,7 +1,7 @@
 @use "sass:color";
 @import './colors.module.scss';
 
-@mixin screen-text {
+@mixin text-colors {
   h1 {
     color: $foreground-primary;
     font-size: 55px;
@@ -12,6 +12,18 @@
   }
 
   h3 {
+    color: $foreground-tertiary;
+  }
+
+  h4 {
+    color: $foreground-primary;
+  }
+
+  h5 {
+    color: $foreground-secondary;
+  }
+
+  h6 {
     color: $foreground-tertiary;
   }
 
@@ -32,26 +44,30 @@
   }
 }
 
-@mixin hover-color-foreground-secondary {
-  cursor: pointer;
+@mixin text-large {
+  @include text-colors;
 
-  &:hover {
-    color: color.adjust($foreground-secondary, $lightness: 10%)
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 1.3rem;
   }
 }
 
-@mixin hover-opacity {
-  cursor: pointer;
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
 
-  &:hover {
-    opacity: 0.6;
-  }
-}
 
 @mixin handheld-text {
-  @include screen-text;
+  @include text-colors;
 
   h1 {
     font-size: 5rem;
@@ -72,4 +88,23 @@
   h6 {}
 
   p {}
+}
+
+
+@mixin hover-color-foreground-secondary {
+  cursor: pointer;
+
+  &:hover {
+    color: color.adjust($foreground-secondary, $lightness: 10%)
+  }
+}
+
+@mixin hover-opacity {
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.6;
+  }
 }

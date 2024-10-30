@@ -132,14 +132,14 @@ const AnimatedBorderBox = ({
         onAnimationComplete={() => setCssBorderVisible(true)}
       />
       {/* )} */}
-      <motion.div
+      {/* <motion.div
         className={styles.cssBorder}
         style={{
           borderRadius: `${borderRadius * 1.13}px`,
           borderWidth: `${borderWidth}px`,
           borderColor: cssBorderVisible ? borderColor : "transparent",
         }}
-      />
+      /> */}
       <motion.div
         style={{ borderRadius: `${borderRadius}px` }}
         className={cn(styles.content, contentClassName)}

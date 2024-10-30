@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
+// TODO: Use animation disabled setting to smoothly switch between fullscreen and handheld modes
+
 // Define the shape of the context's data
 type SettingsContextType = {
   animationDisabled: boolean;

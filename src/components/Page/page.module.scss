@@ -4,7 +4,7 @@
 
 
 .page {
-  @include screen-text;
+  @include text-colors;
   position: absolute;
   top: 0;
   left: 0;
