@@ -9,6 +9,7 @@ export const borderRadiusItem: number = 8;
 
 // New screenWidths record for consolidated width values
 export const screenWidths: Record<string, number> = {
+  tiny: 450,
   mobile: 550,
   small: 768,
   medium: 962,
@@ -18,6 +19,7 @@ export const screenWidths: Record<string, number> = {
 };
 
 // Export old constants for backwards compatibility
+export const widthTiny = screenWidths.tiny;
 export const widthMobile = screenWidths.mobile;
 export const widthSmall = screenWidths.small;
 export const widthMedium = screenWidths.medium;
@@ -33,6 +35,11 @@ export type ZoomLevel = {
 
 // Zoom levels based on screen sizes
 export const zoomLevels: Record<string, ZoomLevel> = {
+  tiny: { 
+    fullScreen: new Vector3(0, 1.5, 1.5), 
+    handheld: new Vector3(0, 0, 7), 
+    wide: new Vector3(0, 0, 7) 
+  },
   mobile: { 
     fullScreen: new Vector3(0, 1.5, 1.5), 
     handheld: new Vector3(0, 0, 5.8), 

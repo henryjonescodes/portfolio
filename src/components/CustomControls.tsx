@@ -3,7 +3,6 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
-import { Vector3 } from "three";
 import { useWindowDimensions } from "../context/WindowDimensionContext";
 import {
   screenWidths,
@@ -46,7 +45,6 @@ export default function CustomControls({
 
   // State to control user drag and animation
   const [dragEnabled, setDragEnabled] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
 
   // Spring for smooth animation
   const [spring, api] = useSpring(() => ({
@@ -141,8 +139,12 @@ export default function CustomControls({
         console.log("Current width category: small");
         return zoomLevels.small;
       }
-      console.log("Current width category: mobile");
-      return zoomLevels.mobile;
+      if (width > screenWidths.mobile) {
+        console.log("Current width category: mobile");
+        return zoomLevels.mobile;
+      }
+      console.log("Current width category: tiny");
+      return zoomLevels.tiny;
     };
 
     const newZoomLevel = getZoomLevel2();
@@ -176,10 +178,8 @@ export default function CustomControls({
   useEffect(() => {
     const updateCameraPosition = () => {
       if (zoomIn && targetRef?.current) {
-        console.log("1");
         calculateAndStartFullScreenAnimation();
       } else if (!zoomIn) {
-        console.log("2");
         calculateAndStartWideAnimation();
       }
     };
@@ -189,19 +189,8 @@ export default function CustomControls({
         console.error("Target ref not found");
         return;
       }
-      // Entering fullscreen or starting in fullscreen
+
       setDragEnabled(false);
-      setIsAnimating(true);
-
-      // Then animate into fullscreen position
-      const screenPosition = targetRef.current.position.clone();
-
-      // Create an offset Vector3 that includes zoomModifier
-      // const offset = fullScreen
-      //   ? new Vector3(0, 0, 0).add(zoomLevel2.fullScreen)
-      //   : new Vector3(0, 0, 0).add(zoomLevel2.handheld);
-
-      // const cameraPosition = screenPosition.add(offset);
 
       const cameraPosition = fullScreen
         ? (zoomLevel2.fullScreen.toArray() as [number, number, number])
@@ -210,16 +199,10 @@ export default function CustomControls({
       api.start({
         position: cameraPosition,
         config: { mass: 1, tension: 85, friction: 13 },
-        onRest: () => {
-          setIsAnimating(false);
-        },
       });
     };
 
     const calculateAndStartWideAnimation = () => {
-      // Exiting fullscreen or entering wide mode
-      setIsAnimating(true);
-
       // Animate to the initialCameraPosition
       api.start({
         position: initialCameraPosition,
@@ -227,15 +210,26 @@ export default function CustomControls({
         phi: initialSpherical.phi,
         radius: initialSpherical.radius,
         config: { mass: 1, tension: 85, friction: 13 },
-        onRest: () => {
+        onResolve: () => {
           setDragEnabled(true);
-          setIsAnimating(false);
         },
+        // ! Might need to do something fancier if there are animation conflicts with onResolve()
+        // onRest: () => {
+        //   console.log(
+        //     "[calculateAndStartWideAnimation]: wide animation complete"
+        //   );
+        //   setDragEnabled(true);
+        //   setIsAnimating(false);
+        // },
       });
     };
 
     updateCameraPosition();
   }, [zoomIn, zoomLevel2, targetRef, fullScreen, initialCameraPosition]);
+
+  useEffect(() => {
+    console.log("drag endabled: ", dragEnabled);
+  }, [dragEnabled]);
 
   // Update camera position each frame
   useFrame(() => {
@@ -248,10 +242,10 @@ export default function CustomControls({
     camera.position.set(...(spring.position.get() as [number, number, number]));
 
     // Adjust the camera's target/lookAt
-    if (!isAnimating && !zoomIn && dragEnabled) {
+    if (!zoomIn && dragEnabled) {
       camera.lookAt(0, 0, 0);
     }
   });
 
-  return null; // No visual component rendered
+  return null;
 }
