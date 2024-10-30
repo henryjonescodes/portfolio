@@ -114,7 +114,7 @@ export default function CustomControls({
         calculateAndStartFullScreenAnimation();
       } else if (!zoomIn) {
         console.log("2");
-        calculateAndStartHandheldAnimation();
+        calculateAndStartWideAnimation();
       }
     };
 
@@ -146,7 +146,7 @@ export default function CustomControls({
       });
     };
 
-    const calculateAndStartHandheldAnimation = () => {
+    const calculateAndStartWideAnimation = () => {
       // Exiting fullscreen or entering handheld zoom-in mode
       setIsAnimating(true);
 
