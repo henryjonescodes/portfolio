@@ -13,27 +13,32 @@ const Blurb = () => {
     locationData[keyToShow ?? "portland"] ?? {};
 
   return (
-    <AnimatedBorderBox
-      className={styles.blurbBox}
-      contentClassName={styles.blurb}
-      borderWidth={5}
-    >
-      <span>
-        <motion.h3>
-          <TypewriterText text={prefix ?? ""} />
-        </motion.h3>
+    // <AnimatedBorderBox
+    //   className={styles.blurb}
+    //   contentClassName={styles.content}
+    //   borderWidth={4}
+    // >
+    <motion.div className={styles.blurb}>
+      <span className={styles.header}>
+        {!!prefix && (
+          <motion.h3 className={styles.prefix}>
+            <TypewriterText text={prefix} />
+          </motion.h3>
+        )}
         <motion.h3
+          className={styles.title}
           onClick={() => {
             setCurrentKey(previousKey);
           }}
         >
-          <TypewriterText text={title ?? ""} />
+          <TypewriterText text={title} />
         </motion.h3>
       </span>
-      <motion.p>
-        <TypewriterText text={description ?? ""} />
+      <motion.p className={styles.description}>
+        <TypewriterText text={description} />
       </motion.p>
-    </AnimatedBorderBox>
+    </motion.div>
+    // </AnimatedBorderBox>
   );
 };
 

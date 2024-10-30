@@ -24,13 +24,32 @@
 
   gap: 128px;
 
-  .hero {
+  p {
+    font-size: 1.7rem;
+  }
+
+  .twoColumns {
+    position: relative;
+    border: 1px solid red;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 50px;
+    overflow: hidden;
 
-    .info {
+    .left,
+    .right {
+      position: relative;
+      border: 1px solid blue;
+      height: 100%;
+    }
+
+    .left {
+      position: relative;
+      // flex-basis: 55%;
+      // max-width: 55%;
+
       display: flex;
       flex-direction: column;
       gap: 32px;
@@ -80,9 +99,10 @@
       }
     }
 
-    .stats {
-      position: relative;
+    .right {
       flex-basis: 45%;
+      min-width: 45%;
+
       flex-grow: 0;
       flex-shrink: 1;
 
@@ -180,17 +200,15 @@
 
 @media (max-width: $width-medium) {
   .about {
-    .hero {
-      .info {
+    p {
+      font-size: 1.2rem;
+    }
+
+    .twoColumns {
+      .left {
         .title {
           h1 {
             font-size: 3.5rem;
-          }
-        }
-
-        .blurb {
-          p {
-            font-size: 1.2rem;
           }
         }
 
@@ -225,14 +243,19 @@
 
 @media (max-width: $width-small) {
   .about {
-    .hero {
+    p {
+      font-size: 1rem;
+    }
+
+    .twoColumns {
       gap: 16px;
 
-      .stats {
+
+      .right {
         flex-basis: 55%;
       }
 
-      .info {
+      .left {
         .title {
           h1 {
             font-size: 2.6rem;
@@ -240,12 +263,6 @@
 
           h3 {
             font-size: 1.5rem;
-          }
-        }
-
-        .blurb {
-          p {
-            font-size: 1rem;
           }
         }
 
@@ -282,13 +299,13 @@
 
 @media (max-width: $width-mobile) {
   .about {
-    .hero {
+    .twoColumns {
       flex-direction: column;
       gap: 32px;
 
       .stats {}
 
-      .info {
+      .left {
         .title {
           h1 {}
 

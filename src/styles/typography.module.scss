@@ -1,5 +1,4 @@
-@use "sass:color";
-@import './colors.module.scss';
+@use "sass:color";@import './colors.module.scss';
 
 @mixin text-colors {
   h1 {
@@ -91,13 +90,7 @@
 }
 
 
-@mixin hover-color-foreground-secondary {
-  cursor: pointer;
 
-  &:hover {
-    color: color.adjust($foreground-secondary, $lightness: 10%)
-  }
-}
 
 @mixin hover-opacity {
   cursor: pointer;

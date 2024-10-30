@@ -1,0 +1,10 @@
+@use "sass:color";
+
+
+@mixin hover-color-foreground-secondary {
+  cursor: pointer;
+
+  &:hover {
+    color: color.adjust($foreground-secondary, $lightness: 10%)
+  }
+}

@@ -10,6 +10,7 @@ import { LocationPinKeys } from "../types";
 import styles from "./map-components.module.scss";
 import MapSlider from "./MapSlider";
 import Pin from "./Pin";
+import AnimatedLine from "../../AnimatedLine";
 
 const mapContainerVariants = {
   initial: {},
@@ -51,7 +52,7 @@ const Map = () => {
       className={styles.mapViewer}
     >
       <motion.div
-        className={cn(styles.mapViewerContents, {
+        className={cn(styles.contents, {
           [locationData[currentKey ?? "nyc"].className]: currentKey !== null,
         })}
         onClick={() => {
@@ -106,13 +107,12 @@ const Map = () => {
           <USA className={styles.usa} />;
           <motion.img src={grid} className={styles.grid} />
         </motion.div>
-        <AnimatedBorderBox
-          className={styles.border}
-          borderRadius={32}
-          borderWidth={5}
-        />
       </motion.div>
-      <MapSlider />
+      <AnimatedLine className={styles.divider} horizontal={true} />
+      <motion.div className={styles.slider}>
+        <MapSlider />
+      </motion.div>
+      <AnimatedBorderBox className={styles.border} borderWidth={5} />
     </motion.div>
   );
 };
