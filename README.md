@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# Portfolio
+A personal site created as a space to experiment with new styles and refine my animation skills. It represents my first serious effort to integrate traditional UI with react-three-fiber, blending standard design elements with 3D graphics. Through this project, I aim to push my skills to new heights and explore the creative potential of interactive animations.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Frontend**: React, TypeScript
+- **3D Graphics**: Three.js, React-Three-Fiber, Drei
+- **2D Graphics**: Framer Motion, SVG
+- **Styling**: Sass, Sass Modules
+- **Build**: Vite
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Credits
+- **[STL to ASCII Generator](https://andrewsink.github.io/STL-to-ASCII-Generator/)**:  Special thanks to [Andrew Sink](https://github.com/AndrewSink) for his 3D model to ASCII art shader tool.
 
-- Configure the top-level `parserOptions` property like this:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+<!-- 1. **Installation**: Provide steps for installing dependencies.
+1. **Run**: How to start the project locally or on a server.
+2. **Build**: Steps for building the project for production.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Example: -->
+## Usage
+```bash
+# Install dependencies
+npm install
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+# Run the development server
+npm run dev
+
+# Build for production
+npm run build
