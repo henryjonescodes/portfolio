@@ -1,5 +1,7 @@
 // designConstants.ts
 
+import { Vector3 } from "three";
+
 export const borderRadiusCard: number = 16;
 export const borderRadiusItem: number = 8;
 
@@ -23,22 +25,51 @@ export const widthCompact = screenWidths.compact;
 export const widthDefault = screenWidths.default;
 export const widthLarge = screenWidths.large;
 
-type ZoomLevel = {
-  fullScreen: number;
-  handheld: number;
-  wide: number; // Used for initialCameraPosition
+export type ZoomLevel = {
+  fullScreen: Vector3;
+  handheld: Vector3;
+  wide: Vector3; // Used for initialCameraPosition
 };
 
 // Zoom levels based on screen sizes
 export const zoomLevels: Record<string, ZoomLevel> = {
-  mobile: { fullScreen: 1.5, handheld: 6.5, wide: 4.2 },
-  small: { fullScreen: 1.4, handheld: 3, wide: 4.2 },
-  medium: { fullScreen: 1.3, handheld: 2.5, wide: 4.2 },
-  compact: { fullScreen: 1.2, handheld: 2, wide: 4.2 },
-  default: { fullScreen: 1.1, handheld: 2, wide: 4.2 },
-  large: { fullScreen: 0.5, handheld: 2, wide: 4.2 },
-  extraLarge: { fullScreen: 0.5, handheld: 2, wide: 4.2 },
+  mobile: { 
+    fullScreen: new Vector3(0, 0, 1.5), 
+    handheld: new Vector3(0, 0, 6.5), 
+    wide: new Vector3(0, 0, 3) 
+  },
+  small: { 
+    fullScreen: new Vector3(0, 0, 1.4), 
+    handheld: new Vector3(0, 0, 3), 
+    wide: new Vector3(0, 0, 3) 
+  },
+  medium: { 
+    fullScreen: new Vector3(0, 0, 1.3), 
+    handheld: new Vector3(0, 0, 2.5), 
+    wide: new Vector3(0, 0, 4.2) 
+  },
+  compact: { 
+    fullScreen: new Vector3(0, 0, 1.2), 
+    handheld: new Vector3(0, 0, 2), 
+    wide: new Vector3(0, 0, 4.2) 
+  },
+  default: { 
+    fullScreen: new Vector3(0, 0, 1.1), 
+    handheld: new Vector3(0, 0, 2), 
+    wide: new Vector3(0, 0, 4.2) 
+  },
+  large: { 
+    fullScreen: new Vector3(0, 0, 0.5), 
+    handheld: new Vector3(0, 0, 2), 
+    wide: new Vector3(0, 0, 4.2) 
+  },
+  extraLarge: { 
+    fullScreen: new Vector3(0, 0, 0.5), 
+    handheld: new Vector3(0, 0, 2), 
+    wide: new Vector3(0, 0, 4.2) 
+  },
 };
+
 export const maxWidthPage: number = 2000;
 
 export const spacingParagraph: number = 24;
