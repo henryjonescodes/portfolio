@@ -80,7 +80,7 @@
 .aboutMe {
   .flex {
     .left {
-      gap: 24px;
+      gap: 32px;
 
       .title {
         width: 100%;
@@ -88,30 +88,6 @@
 
       .blurb {
         width: 100%;
-      }
-
-      .tags {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        gap: 32px;
-
-        .tag {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 8px;
-
-          .icon {
-            height: 20px;
-            width: 20px;
-
-            svg,
-            path {
-              fill: $foreground-primary
-            }
-          }
-        }
       }
 
       .socials {
@@ -151,6 +127,33 @@
           position: relative;
         }
 
+
+        .tags {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          gap: 32px;
+          padding: 8px 0px;
+
+          .tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            .icon {
+              height: 20px;
+              width: 20px;
+
+              svg,
+              path {
+                fill: $foreground-primary
+              }
+            }
+          }
+        }
+
         .values {
           display: flex;
           flex-direction: column;
@@ -179,7 +182,7 @@
 
   .tracker {
     position: relative;
-    width: 42%;
+    width: 50%;
     transform: rotate(180deg);
 
     &Content {

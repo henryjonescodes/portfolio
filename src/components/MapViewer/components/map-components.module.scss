@@ -19,7 +19,9 @@
     .prefix,
     .title {}
 
-    .prefix {}
+    .prefix {
+      font-size: 2rem;
+    }
 
     .title {
       @include hover-color-foreground-secondary;
