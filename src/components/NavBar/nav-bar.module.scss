@@ -53,6 +53,13 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
     display: inline-block;
     transition: all 0.3s ease;
   }
+
+  @media (max-width: $width-mobile) {
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
 }
 
 // * * * * * * * Navigation Bar Styles * * * * * * * //
@@ -101,11 +108,6 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
   justify-content: flex-end;
 }
 
-@media (max-width: $width-mobile) {
-  .center {
-    display: none;
-  }
-}
 
 
 // * * * * * * * Mobile Styles * * * * * * * //
@@ -139,11 +141,13 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
   }
 }
 
-@media (max-width: $width-mobile) {
+
+@media (max-width: calc(($width-tiny + $width-mobile) /2)) {
   .center {
     display: none;
   }
 }
+
 
 
 // * * * * * * * NavBarItem Styles * * * * * * * //
@@ -192,6 +196,8 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
     width: 50px;
     justify-content: flex-start;
 
+
+
     .label {
       display: none;
     }
@@ -214,6 +220,14 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
         path {
           fill: $hover-color-secondary;
         }
+      }
+    }
+
+    @media (max-width: $width-mobile) {
+      width: 40px;
+
+      .icon {
+        margin-left: 10px;
       }
     }
   }

@@ -10,6 +10,7 @@ export const borderRadiusItem: number = 8;
 export const screenWidths: Record<string, number> = {
   tiny: 450,
   mobile: 550,
+  mobileLarge: 700,
   small: 800,
   medium: 962,
   compact: 1200,

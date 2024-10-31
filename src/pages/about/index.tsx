@@ -18,6 +18,8 @@ import StatTracker from "./StatTracker";
 import Blurb from "../../components/MapViewer/components/Blurb";
 import { MapProvider } from "../../components/MapViewer/MapContext";
 import cn from "classnames";
+import { useWindowDimensions } from "../../context/WindowDimensionContext";
+import { screenWidths } from "../../styles/layout.constants";
 
 const commonExit = {
   opacity: 0,
@@ -112,6 +114,7 @@ const avatarVariants = {
 };
 
 const About = () => {
+  const { width } = useWindowDimensions();
   return (
     <PageContents key={"about"} className={styles.about}>
       <motion.div className={cn(styles.content, styles.aboutMe)}>
@@ -141,21 +144,30 @@ const About = () => {
 
             {/* Socials */}
             <motion.div className={styles.socials} variants={socialsVariants}>
-              <motion.div variants={iconVariants}>
+              <motion.div
+                variants={iconVariants}
+                className={styles.iconWrapper}
+              >
                 <GlitchIcon
                   Icon={GitHub}
                   className={styles.icon}
                   url="https://github.com/henryjonescodes"
                 />
               </motion.div>
-              <motion.div variants={iconVariants}>
+              <motion.div
+                variants={iconVariants}
+                className={styles.iconWrapper}
+              >
                 <GlitchIcon
                   Icon={LinkedIn}
                   className={styles.icon}
                   url="https://www.linkedin.com/in/henryjonescodes/"
                 />
               </motion.div>
-              <motion.div variants={iconVariants}>
+              <motion.div
+                variants={iconVariants}
+                className={styles.iconWrapper}
+              >
                 <GlitchIcon
                   Icon={Instagram}
                   className={styles.icon}
@@ -167,7 +179,10 @@ const About = () => {
 
           {/* Stats Section (Right/Bottom) */}
           <motion.div className={styles.right} variants={statsVariants}>
-            <AnimatedBorderBox className={styles.border}>
+            <AnimatedBorderBox
+              className={styles.border}
+              contentClassName={styles.borderContent}
+            >
               {/* Avatar */}
               <motion.div className={styles.viewer}>
                 <motion.img
@@ -180,51 +195,62 @@ const About = () => {
 
               <AnimatedLine
                 className={styles.divider}
-                horizontal={true}
+                horizontal={width > screenWidths.mobileLarge}
                 borderWidth={2}
               />
 
               {/* Tags */}
-              <motion.div className={styles.tags} variants={tagsVariants}>
-                <motion.span className={styles.tag}>
-                  <motion.div variants={iconVariants}>
-                    <Home className={styles.icon} />
+              {width > screenWidths.mobileLarge && (
+                <>
+                  <motion.div className={styles.tags} variants={tagsVariants}>
+                    <motion.span className={styles.tag}>
+                      <motion.div
+                        variants={iconVariants}
+                        className={styles.iconWrapper}
+                      >
+                        <Home className={styles.icon} />
+                      </motion.div>
+                      <motion.h4 className={styles.text}>
+                        <TypewriterText
+                          text="Brooklyn, NY"
+                          staggerChildren={0.05}
+                        />
+                      </motion.h4>
+                    </motion.span>
+                    <motion.span className={styles.tag}>
+                      <motion.div
+                        variants={iconVariants}
+                        className={styles.iconWrapper}
+                      >
+                        <Book className={styles.icon} />
+                      </motion.div>
+                      <motion.h4 className={styles.text}>
+                        <TypewriterText
+                          text="Union College"
+                          staggerChildren={0.05}
+                        />
+                      </motion.h4>
+                    </motion.span>
                   </motion.div>
-                  <motion.h4 className={styles.text}>
-                    <TypewriterText
-                      text="Brooklyn, NY"
-                      staggerChildren={0.05}
-                    />
-                  </motion.h4>
-                </motion.span>
-                <motion.span className={styles.tag}>
-                  <motion.div variants={iconVariants}>
-                    <Book className={styles.icon} />
-                  </motion.div>
-                  <motion.h4 className={styles.text}>
-                    <TypewriterText
-                      text="Union College"
-                      staggerChildren={0.05}
-                    />
-                  </motion.h4>
-                </motion.span>
-              </motion.div>
+                  <AnimatedLine
+                    className={styles.divider}
+                    horizontal={width > screenWidths.mobileLarge}
+                    borderWidth={2}
+                  />
+                </>
+              )}
 
-              <AnimatedLine
-                className={styles.divider}
-                horizontal={true}
-                borderWidth={2}
-              />
-
+              {/* <StatTracker label="UI Implementation" rating={10} /> */}
+              {/* <StatTracker label="Design" rating={6} /> */}
+              {/* <StatTracker label="3D Art" rating={5} /> */}
               {/* Values */}
               <motion.div className={styles.values}>
-                {/* <StatTracker label="UI Implementation" rating={10} /> */}
-                {/* <StatTracker label="Design" rating={6} /> */}
-                {/* <StatTracker label="3D Art" rating={5} /> */}
+                {/* <motion.div className={styles.sliders}> */}
                 <StatTracker label="Skiing" rating={14} />
                 <StatTracker label="Rock Climbing" rating={6} />
                 <StatTracker label="Photography" rating={11} />
                 <StatTracker label="Sailing" rating={8} />
+                {/* </motion.div> */}
               </motion.div>
             </AnimatedBorderBox>
           </motion.div>
