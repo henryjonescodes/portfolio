@@ -30,13 +30,13 @@
 
 .content {
   @include retro-scrollbar;
+  scroll-snap-type: y mandatory;
   overflow: auto;
   width: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 8px 32px;
 
   &FullScreen {
     z-index: 1;

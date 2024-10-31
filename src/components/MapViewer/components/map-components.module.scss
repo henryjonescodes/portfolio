@@ -24,6 +24,7 @@
     .title {
       @include hover-color-foreground-secondary;
       color: $foreground-primary;
+      font-size: 2.7rem;
     }
   }
 
@@ -66,7 +67,7 @@ $line-selected-width: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // width: 100%;
+  width: 100%;
   padding: 10px;
   position: relative;
   height: $line-selected-height;
@@ -74,7 +75,6 @@ $line-selected-width: 5px;
 
 .line,
 .stop {
-  width: 20px;
   height: 100%;
   background-color: transparent;
   position: relative;

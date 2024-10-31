@@ -6,7 +6,6 @@ export const borderRadiusCard: number = 16;
 export const borderRadiusItem: number = 8;
 
 
-
 // New screenWidths record for consolidated width values
 export const screenWidths: Record<string, number> = {
   tiny: 450,

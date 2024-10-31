@@ -15,3 +15,16 @@ export const iconVariants = {
     },
   },
 };
+
+// TODO: remove the old ones
+export const commonExit = {
+  opacity: 0,
+  transition: {
+    duration: 0.3,
+    when: "afterChildren",
+  },
+};
+
+export const commonInitial = {
+  opacity: 0,
+};

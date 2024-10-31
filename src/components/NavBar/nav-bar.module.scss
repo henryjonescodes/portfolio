@@ -60,7 +60,7 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
 .navigationBar {
   position: relative;
   z-index: 1;
-  height: 45px;
+  height: $height-nav-bar;
   width: 100%;
   border-bottom: 5px solid transparent;
   display: flex;
