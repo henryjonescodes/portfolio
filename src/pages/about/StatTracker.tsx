@@ -71,13 +71,15 @@ const StatTracker = ({ label, rating }: StatTrackerProps) => {
           ))}
         </motion.span>
       </AnimatedBorderBox>
-      <motion.h4 className={styles.label}>
-        <TypewriterText
-          text={label}
-          staggerDirection={-1}
-          staggerChildren={0.03}
-        />
-      </motion.h4>
+      <motion.div className={styles.label}>
+        <motion.h4 className={styles.label}>
+          <TypewriterText
+            text={label}
+            staggerDirection={-1}
+            staggerChildren={0.03}
+          />
+        </motion.h4>
+      </motion.div>
     </motion.div>
   );
 };

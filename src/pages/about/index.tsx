@@ -115,6 +115,11 @@ const avatarVariants = {
 
 const About = () => {
   const { width } = useWindowDimensions();
+
+  const moveTags =
+    width > screenWidths.mobileLarge || width < screenWidths.tiny;
+
+  const moveSocials = width < screenWidths.tiny;
   return (
     <PageContents key={"about"} className={styles.about}>
       <motion.div className={cn(styles.content, styles.aboutMe)}>
@@ -143,38 +148,40 @@ const About = () => {
             </motion.div>
 
             {/* Socials */}
-            <motion.div className={styles.socials} variants={socialsVariants}>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
-                <GlitchIcon
-                  Icon={GitHub}
-                  className={styles.icon}
-                  url="https://github.com/henryjonescodes"
-                />
+            {!moveSocials && (
+              <motion.div className={styles.socials} variants={socialsVariants}>
+                <motion.div
+                  variants={iconVariants}
+                  className={styles.iconWrapper}
+                >
+                  <GlitchIcon
+                    Icon={GitHub}
+                    className={styles.icon}
+                    url="https://github.com/henryjonescodes"
+                  />
+                </motion.div>
+                <motion.div
+                  variants={iconVariants}
+                  className={styles.iconWrapper}
+                >
+                  <GlitchIcon
+                    Icon={LinkedIn}
+                    className={styles.icon}
+                    url="https://www.linkedin.com/in/henryjonescodes/"
+                  />
+                </motion.div>
+                <motion.div
+                  variants={iconVariants}
+                  className={styles.iconWrapper}
+                >
+                  <GlitchIcon
+                    Icon={Instagram}
+                    className={styles.icon}
+                    url="https://www.instagram.com/theycallmezonez/"
+                  />
+                </motion.div>
               </motion.div>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
-                <GlitchIcon
-                  Icon={LinkedIn}
-                  className={styles.icon}
-                  url="https://www.linkedin.com/in/henryjonescodes/"
-                />
-              </motion.div>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
-                <GlitchIcon
-                  Icon={Instagram}
-                  className={styles.icon}
-                  url="https://www.instagram.com/theycallmezonez/"
-                />
-              </motion.div>
-            </motion.div>
+            )}
           </motion.div>
 
           {/* Stats Section (Right/Bottom) */}
@@ -193,15 +200,14 @@ const About = () => {
                 />
               </motion.div>
 
-              <AnimatedLine
-                className={styles.divider}
-                horizontal={width > screenWidths.mobileLarge}
-                borderWidth={2}
-              />
-
               {/* Tags */}
-              {width > screenWidths.mobileLarge && (
+              {moveTags && (
                 <>
+                  <AnimatedLine
+                    className={styles.divider}
+                    horizontal={true}
+                    borderWidth={2}
+                  />
                   <motion.div className={styles.tags} variants={tagsVariants}>
                     <motion.span className={styles.tag}>
                       <motion.div
@@ -234,7 +240,7 @@ const About = () => {
                   </motion.div>
                   <AnimatedLine
                     className={styles.divider}
-                    horizontal={width > screenWidths.mobileLarge}
+                    horizontal={true}
                     borderWidth={2}
                   />
                 </>
@@ -245,12 +251,12 @@ const About = () => {
               {/* <StatTracker label="3D Art" rating={5} /> */}
               {/* Values */}
               <motion.div className={styles.values}>
-                {/* <motion.div className={styles.sliders}> */}
-                <StatTracker label="Skiing" rating={14} />
-                <StatTracker label="Rock Climbing" rating={6} />
-                <StatTracker label="Photography" rating={11} />
-                <StatTracker label="Sailing" rating={8} />
-                {/* </motion.div> */}
+                <motion.div className={styles.sliders}>
+                  <StatTracker label="Skiing" rating={14} />
+                  <StatTracker label="Rock Climbing" rating={6} />
+                  <StatTracker label="Photography" rating={11} />
+                  <StatTracker label="Sailing" rating={8} />
+                </motion.div>
               </motion.div>
             </AnimatedBorderBox>
           </motion.div>

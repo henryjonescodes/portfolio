@@ -1,10 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
-import AnimatedBorderBox from "../../AnimatedBorderBox";
+import { commonInitial } from "../../../styles/variants";
 import TypewriterText from "../../TypewriterText";
 import { MapContext } from "../MapContext";
 import styles from "./map-components.module.scss";
-import { commonExit, commonInitial } from "../../../styles/variants";
 
 const blurbVariants = {
   initial: commonInitial,
