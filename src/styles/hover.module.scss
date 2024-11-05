@@ -9,3 +9,17 @@
     color: var(--foreground-tertiary);
   }
 }
+
+
+@mixin hover-opacity {
+  transition: opacity 0.2s ease-in-out;
+  opacity: 1;
+
+  &:hover {
+    opacity: 0.6;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+}

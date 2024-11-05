@@ -4,9 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
     "export-sass-variables": "node ./scripts/export-sass-variables.js",
+    "dev": "npm run export-sass-variables && vite",
+    "build": "tsc -b && vite build",
     "generate-qr-code": "node dev-functions.js"
   },
   "dependencies": {

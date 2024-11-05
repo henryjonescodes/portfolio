@@ -86,10 +86,10 @@ export const useColors = () => {
   const derivedColors: DerivedColors = {
     "foreground-secondary": adjustSaturation(foregroundPrimary, -10),
     "foreground-tertiary": adjustSaturation(foregroundPrimary, -40),
-    "foreground-quaternary": adjustSaturation(foregroundPrimary, -70),
+    "foreground-quaternary": adjustLightness(foregroundPrimary, -30),
     "accent-secondary": adjustSaturation(accentPrimary, -60),
     "accent-tertiary": adjustSaturation(accentPrimary, -60),
-    "background-secondary": adjustLightness(backgroundPrimary, -20),
+    "background-secondary": adjustLightness(backgroundPrimary, -8),
   };
 
   // Update the CSS variables in :root whenever colors change
