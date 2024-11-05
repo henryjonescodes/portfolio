@@ -13,4 +13,20 @@ $accent-tertiary: color.adjust($accent-primary, $saturation: -60%);
 
 
 $background-primary: color.adjust($foreground-primary, $lightness: -30%);
-$background-secondary: color.adjust($foreground-primary, $lightness: -50%)
+
+$background-secondary: color.adjust($foreground-primary, $lightness: -50%);
+
+:global {
+  :root {
+    --foreground-primary: #{$foreground-primary};
+    --foreground-secondary: #{$foreground-secondary};
+    --foreground-tertiary: #{$foreground-tertiary};
+
+    --accent-primary: #{$accent-primary};
+    --accent-secondary: #{$accent-secondary};
+    --accent-tertiary: #{$accent-tertiary};
+
+    --background-primary: #{$background-primary};
+    --background-secondary: #{$background-secondary};
+  }
+}

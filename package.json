@@ -5,10 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev-qr": "concurrently \"vite --host\" \"node dev-functions.js\"",
     "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "export-sass-variables": "node ./scripts/export-sass-variables.js",
+    "generate-qr-code": "node dev-functions.js"
   },
   "dependencies": {
     "@react-spring/three": "^9.7.5",
@@ -24,7 +23,6 @@
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
     "react-spring": "^9.7.4",
-    "sass": "^1.79.4",
     "three": "^0.169.0",
     "vite-plugin-svgr": "^4.2.0"
   },
@@ -39,6 +37,8 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
     "qrcode-terminal": "^0.12.0",
+    "sass": "^1.80.6",
+    "sass-export": "^2.1.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.7.0",
     "vite": "^5.4.8"
