@@ -6,6 +6,6 @@ export const colors = {
   "accent-primary": "#003333",
   "accent-secondary": "#0f2424",
   "accent-tertiary": "#0f2424",
-  "background-primary": "#003d24",
-  "background-secondary": "rgb(0, -41, -23.9485981308)"
+  "background-primary": "#002314",
+  "background-secondary": "rgb(0, -220, -125.7142857143)"
 } as const;

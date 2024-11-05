@@ -4,9 +4,6 @@
 @import '@styles/mixins.module.scss';
 @import '@styles/layout.module.scss';
 
-$hover-color: color.adjust($foreground-primary, $lightness: -10%);
-$hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
-
 // * * * * * * * Unreferenced Styles * * * * * * * //
 
 .navbarBorder {
@@ -20,6 +17,7 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
 @mixin navItemCommon {
   position: relative;
   color: $foreground-primary;
+  color: var(--foreground-primary);
   height: 100%;
   display: flex;
   align-items: center;
@@ -44,6 +42,7 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
       path {
         transition: fill 0.3s ease-in-out;
         fill: $foreground-primary;
+        fill: var(--foreground-primary);
       }
     }
   }
@@ -134,6 +133,7 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
   .center {
     padding: 0px 16px;
     border-left: 2px solid $foreground-primary;
+    border-left: 2px solid var(--foreground-primary);
   }
 
   .right {
@@ -169,7 +169,7 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
 
   &:hover {
     .label {
-      color: $hover-color;
+      opacity: 0.8;
     }
 
     .border {
@@ -185,6 +185,7 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
     height: 100%;
     width: 100%;
     border-bottom: 0px solid $foreground-primary;
+    border-bottom: 0px solid var(--foreground-primary);
 
     &.selected {
       border-bottom-width: 6px !important;
@@ -211,14 +212,14 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
 
       .label {
         display: inline-block;
-        color: $hover-color-secondary;
+        opacity: 0.8;
       }
 
       .icon .image {
 
         svg,
         path {
-          fill: $hover-color-secondary;
+          // opacity: 0.8;
         }
       }
     }
@@ -239,10 +240,12 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
   @include navItemCommon;
   padding: 8px;
   border-left: 4px solid $foreground-primary;
+  border-left: 4px solid var(--foreground-primary);
   justify-content: center;
 
   &:last-of-type {
     border-right: 4px solid $foreground-primary;
+    border-right: 4px solid var(--foreground-primary);
   }
 
   &:hover {
@@ -250,7 +253,7 @@ $hover-color-secondary: color.adjust($foreground-primary, $lightness: 10%);
 
       svg,
       path {
-        fill: $hover-color;
+        // opacity: 0.8;
       }
     }
   }

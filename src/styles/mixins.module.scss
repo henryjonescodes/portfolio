@@ -2,7 +2,7 @@
 
 @mixin retro-scrollbar {
   overflow-y: scroll;
-  scrollbar-color: $foreground-secondary transparent; // For Firefox
+  scrollbar-color: var(--foreground-secondary) transparent; // For Firefox
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -21,6 +21,7 @@
 // Mixin for glowing background
 @mixin glowing-background {
   background-image: radial-gradient($accent-primary 10%, black);
+  background-image: radial-gradient(var(--accent-primary) 10%, black);
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -75,6 +76,7 @@
 @mixin forgroundPrimaryHover {
   transition: color 0.2s ease-in-out;
   color: $foreground-primary;
+  color: var(--foreground-primary);
 
   &:hover {
     color: color.adjust($foreground-primary, $lightness: 10%)

@@ -26,6 +26,7 @@
     .title {
       @include hover-color-foreground-secondary;
       color: $foreground-primary;
+      color: var(--foreground-primary);
       font-size: 2.7rem;
     }
   }
@@ -94,6 +95,7 @@ $line-selected-width: 5px;
 
   &:hover::before {
     background-color: $foreground-primary;
+    background-color: var(--foreground-primary);
   }
 
   &.bulging::before {
@@ -109,6 +111,7 @@ $line-selected-width: 5px;
     width: $line-small-width;
     height: $line-small-height;
     background-color: $foreground-quaternary;
+    background-color: var(--foreground-quaternary);
   }
 
   &:hover::before {
@@ -122,6 +125,7 @@ $line-selected-width: 5px;
     width: $line-medium-width;
     height: $line-medium-height;
     background-color: $foreground-tertiary;
+    background-color: var(--foreground-tertiary);
   }
 
   &.bulging::before {
@@ -151,6 +155,7 @@ $line-selected-width: 5px;
     height: calc($line-selected-height + 5px) !important;
     width: $line-selected-width;
     background-color: $foreground-primary;
+    background-color: var(--foreground-primary);
   }
 }
 
@@ -175,6 +180,9 @@ $line-selected-width: 5px;
 
   fill: $foreground-primary;
   stroke: $foreground-primary;
+  fill: var(--foreground-primary);
+  stroke: var(--foreground-primary);
+
 
   &Minimized {
     transform: scale(0.5);
@@ -186,6 +194,8 @@ $line-selected-width: 5px;
   svg {
     fill: $foreground-primary;
     stroke: $foreground-primary;
+    fill: var(--foreground-primary);
+    stroke: var(--foreground-primary);
   }
 }
 
@@ -255,6 +265,7 @@ $line-selected-width: 5px;
 
         path {
           stroke: $foreground-quaternary;
+          stroke: var(--foreground-quaternary);
         }
       }
 
@@ -292,12 +303,14 @@ $line-selected-width: 5px;
               font-size: 1.8rem;
               line-height: 1.9rem;
               color: $foreground-primary;
+              color: var(--foreground-primary);
             }
 
             h5 {
               font-size: 1.5rem;
               line-height: 1.6rem;
               color: $foreground-secondary;
+              color: var(--foreground-secondary);
             }
 
             svg {
@@ -305,6 +318,7 @@ $line-selected-width: 5px;
               svg,
               path {
                 stroke: $foreground-secondary;
+                stroke: var(--foreground-secondary);
                 fill: transparent;
               }
 
@@ -325,6 +339,7 @@ $line-selected-width: 5px;
               svg,
               path {
                 fill: $foreground-tertiary;
+                fill: var(--foreground-tertiary);
               }
 
               &:nth-of-type(2) {

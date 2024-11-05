@@ -5,6 +5,7 @@
   cursor: pointer;
 
   &:hover {
-    color: color.adjust($foreground-secondary, $lightness: 10%)
+    color: $foreground-tertiary;
+    color: var(--foreground-tertiary);
   }
 }

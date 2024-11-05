@@ -1,33 +1,41 @@
-@use "sass:color";@import './colors.module.scss';
+@use "sass:color";
+@import './colors.module.scss';
 
 @mixin text-colors {
   h1 {
     color: $foreground-primary;
+    color: var(--foreground-primary);
     font-size: 55px;
   }
 
   h2 {
     color: $foreground-secondary;
+    color: var(--foreground-secondary);
   }
 
   h3 {
     color: $foreground-tertiary;
+    color: var(--foreground-tertiary);
   }
 
   h4 {
     color: $foreground-primary;
+    color: var(--foreground-primary);
   }
 
   h5 {
     color: $foreground-secondary;
+    color: var(--foreground-secondary);
   }
 
   h6 {
     color: $foreground-tertiary;
+    color: var(--foreground-tertiary);
   }
 
   p {
     color: $foreground-tertiary;
+    color: var(--foreground-tertiary);
   }
 
   a {

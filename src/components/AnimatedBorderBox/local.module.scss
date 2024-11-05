@@ -7,6 +7,8 @@
   left: 0;
   pointer-events: none;
   z-index: 2;
+  stroke: $foreground-primary;
+  stroke: var(--foreground-primary);
 }
 
 .borderBox {

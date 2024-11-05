@@ -8,6 +8,7 @@ import Scene from "./Scene";
 import { useControls } from "leva";
 import { useEffect } from "react";
 import { colors as defaultColors } from "./../../styles/sass-variables";
+import { useColors } from "../../hooks/useColors";
 
 const wrapperVariants = {
   show: {
@@ -34,27 +35,7 @@ const Landing = () => {
   const page = pathSegments[0];
   const isHidden = !fullScreen || page === undefined;
 
-  const colors = useControls({
-    "foreground-primary": defaultColors["foreground-primary"],
-    "foreground-secondary": defaultColors["foreground-secondary"],
-    "foreground-tertiary": defaultColors["foreground-tertiary"],
-    "foreground-quaternary": defaultColors["foreground-quaternary"],
-    "accent-primary": defaultColors["accent-primary"],
-    "accent-secondary": defaultColors["accent-secondary"],
-    "accent-tertiary": defaultColors["accent-tertiary"],
-    "background-primary": defaultColors["background-primary"],
-    "background-secondary": defaultColors["background-secondary"],
-  });
-
-  useEffect(() => {
-    const root = document.documentElement;
-
-    Object.entries(colors).forEach(([key, value]) => {
-      root.style.setProperty(`--${key}`, value);
-    });
-
-    console.log("CSS variables updated with new colors");
-  }, [colors]); //
+  useColors();
 
   return (
     <motion.div className={styles.landing}>
