@@ -8,7 +8,7 @@ import Scene from "./Scene";
 import { useControls } from "leva";
 import { useEffect } from "react";
 import { colors as defaultColors } from "./../../styles/sass-variables";
-import { useColors } from "../../hooks/useColors";
+import { useColors } from "../../context/ColorsContext";
 
 const wrapperVariants = {
   show: {

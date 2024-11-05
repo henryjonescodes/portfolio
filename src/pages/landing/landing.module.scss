@@ -39,41 +39,101 @@
   }
 }
 
-.controlBar {
-  height: 30px !important;
-  width: 328px !important;
 
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+// TODO: style this
+.infoPanel {
+  height: 321px !important;
+  width: 417px !important;
   overflow: hidden;
+}
 
-  >div {
-    overflow: hidden;
-    height: 100%;
-  }
 
-  .left {
-    margin-right: 3px;
-    min-width: 117px;
-    flex: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.infoPanel {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  /* Flex layout for internal elements */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  .center {
-    min-width: 76px;
-    margin-right: 60px;
-    flex: 0;
-  }
+/* Title of the panel */
+.panelTitle {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+  color: #333333;
+}
 
-  .right {
-    flex: 1;
+/* Container for color selection headers */
+.colorSelection {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+
+/* Individual color option */
+.colorOption {
+  cursor: pointer;
+  color: #000000;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+
+  &:hover {
+    background-color: #f0f0f0;
   }
 }
 
-.tools {
-  position: absolute;
-  z-index: 10000;
+/* Highlighted selected color option */
+.selected {
+  background-color: #007bff;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Container for the RGB sliders */
+.sliders {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-bottom: 1.5em;
+}
+
+/* Label for each slider */
+.sliderLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1em;
+  color: #555555;
+}
+
+/* Slider input */
+.slider {
+  width: 60%;
+  margin-left: 1em;
+}
+
+/* Display for the current color value */
+.currentColor {
+  font-size: 1em;
+  color: #333333;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 500px) {
+  .infoPanel {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .slider {
+    width: 50%;
+  }
 }
