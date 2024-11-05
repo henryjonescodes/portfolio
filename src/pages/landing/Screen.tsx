@@ -1,24 +1,15 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
 import Background from "../../components/Background";
 import { CustomHTML } from "../../components/CustomHTML";
 import Page from "../../components/Page";
-import { screenSize } from "../../styles/constants";
-import Home from "../home/Home";
-import styles from "./landing.module.scss";
 import { useSettings } from "../../context/SettingsContext";
+import { screenSize } from "../../styles/constants";
+import styles from "./landing.module.scss";
 
 const Screen = () => {
-  const { fullScreen } = useSettings();
-  const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const page = pathSegments[0];
-
-  const navigate = useNavigate(); // Initialize the navigate function
+  const { zoomLevel } = useSettings();
   const { width, height } = screenSize;
-
-  const isHidden = (fullScreen && page !== undefined) || page === undefined;
 
   const wrapperVariants = {
     show: {
@@ -37,30 +28,22 @@ const Screen = () => {
   };
 
   return (
-    <CustomHTML transform>
+    <CustomHTML transform occlude="blending">
       <motion.div
         className={styles.screen}
         style={{ height: `${height}px`, width: `${width}px` }}
       >
         <Background />
-        <Home />
         <motion.div
           className={cn(styles.wrapper, {
-            [styles.disabled]: isHidden,
+            [styles.disabled]: false,
           })}
           variants={wrapperVariants}
           initial="hide"
-          animate={isHidden ? "hide" : "show"}
+          animate={zoomLevel === "fullscreen" ? "hide" : "show"}
         >
           <AnimatePresence>
-            {!fullScreen && (
-              <Page
-                key={"screen"}
-                navigate={navigate}
-                visible={page !== undefined}
-                page={page}
-              />
-            )}
+            {zoomLevel !== "fullscreen" && <Page key={"screen"} />}
           </AnimatePresence>
         </motion.div>
       </motion.div>

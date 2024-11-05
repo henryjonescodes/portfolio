@@ -11,14 +11,6 @@
   height: min-content;
   gap: 128px;
 
-  p {
-    font-size: 1.6rem;
-  }
-
-  h3 {
-    font-size: 2.2rem;
-  }
-
   >.content {
     scroll-snap-align: start;
     display: flex;
@@ -149,7 +141,8 @@
 
                 svg,
                 path {
-                  fill: $foreground-primary
+                  fill: $foreground-primary;
+                  fill: var(--foreground-primary);
                 }
               }
             }
@@ -197,7 +190,6 @@
 
   .tracker {
     position: relative;
-    // width: 50%;
     transform: rotate(180deg);
 
     &Content {
@@ -226,10 +218,12 @@
       transform-origin: left; // needed for framer
       width: 100%;
       height: 100%;
-      background-color: $background-primary;
+      background-color: $foreground-quaternary;
+      background-color: var(--foreground-quaternary);
 
       &Active {
         background-color: $foreground-primary;
+        background-color: var(--foreground-primary);
       }
     }
   }

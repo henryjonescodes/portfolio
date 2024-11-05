@@ -5,7 +5,10 @@ import React, {
   ReactNode,
   SetStateAction,
   Dispatch,
+  useRef,
+  useEffect,
 } from "react";
+import { useLocation } from "react-router-dom";
 
 // TODO: Use animation disabled setting to smoothly switch between fullscreen and handheld modes
 
@@ -13,16 +16,20 @@ import React, {
 type SettingsContextType = {
   animationDisabled: boolean;
   setAnimationDisabled: Dispatch<SetStateAction<boolean>>;
-  fullScreen: boolean;
-  setFullScreen: Dispatch<SetStateAction<boolean>>;
+  setZoomLevel: (toMode: zoomLevelType) => void;
+  zoomLevel: zoomLevelType;
+  toggleFullScreen: () => void;
+  toggleInfoMode: () => void;
 };
 
 // Default context value with animations enabled
 const defaultSettings: SettingsContextType = {
   animationDisabled: false,
   setAnimationDisabled: () => {}, // Placeholder function; will be overwritten in provider
-  fullScreen: true,
-  setFullScreen: () => {}, // Placeholder function; will be overwritten in provider
+  setZoomLevel: (toMode: zoomLevelType) => {},
+  zoomLevel: "wide",
+  toggleFullScreen: () => {},
+  toggleInfoMode: () => {},
 };
 
 // Create the context with the default value
@@ -33,22 +40,80 @@ type SettingsProviderProps = {
   children: ReactNode;
 };
 
+type handheldZoomType = "handheld" | "info" | "wide";
+type zoomLevelType = "fullscreen" | handheldZoomType;
+
 // Provider component
 export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   children,
 }) => {
-  const [fullScreen, setFullScreen] = useState(defaultSettings.fullScreen);
+  // ? Get Page via React Router
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0];
+
+  // ? Setup States
+  const [zoomLevel, setZoomLevel] = useState<zoomLevelType>("wide");
   const [animationDisabled, setAnimationDisabled] = useState(
     defaultSettings.animationDisabled
   );
+
+  // ? Setup References
+  const handHeldZoomLevel = useRef<handheldZoomType>("wide");
+
+  // ? Update prevZoomMode when page updates
+  useEffect(() => {
+    if (!!page) {
+      // Only update actual zoom when not fullscreen
+      if (zoomLevel !== "fullscreen") {
+        setZoomLevel("handheld");
+      }
+      handHeldZoomLevel.current = "handheld";
+    } else {
+      // Only update actual zoom when not fullscreen
+      if (zoomLevel !== "fullscreen") {
+        setZoomLevel("wide");
+      }
+      handHeldZoomLevel.current = "wide";
+    }
+  }, [page]);
+
+  const toggleFullScreen = () => {
+    if (zoomLevel !== "fullscreen") {
+      setZoomLevel("fullscreen");
+    } else {
+      setZoomLevel(handHeldZoomLevel.current);
+    }
+  };
+
+  const toggleInfoMode = () => {
+    if (zoomLevel === "fullscreen") {
+      return;
+    }
+
+    if (zoomLevel === "info") {
+      setZoomLevel(handHeldZoomLevel.current);
+    } else {
+      handHeldZoomLevel.current = zoomLevel;
+      setZoomLevel("info");
+    }
+  };
+
+  useEffect(() => {
+    console.log(
+      `Updated zoom level: ${zoomLevel} ref: ${handHeldZoomLevel.current}`
+    );
+  }, [zoomLevel, handHeldZoomLevel.current]);
 
   return (
     <SettingsContext.Provider
       value={{
         animationDisabled,
         setAnimationDisabled,
-        fullScreen,
-        setFullScreen,
+        setZoomLevel,
+        zoomLevel,
+        toggleFullScreen,
+        toggleInfoMode,
       }}
     >
       {children}

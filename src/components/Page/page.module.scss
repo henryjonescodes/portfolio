@@ -19,6 +19,10 @@
   &Handheld {
     max-height: 100%;
   }
+
+  &Disabled {
+    pointer-events: none;
+  }
 }
 
 .background {

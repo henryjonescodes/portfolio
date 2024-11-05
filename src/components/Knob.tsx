@@ -1,122 +1,104 @@
-import { useEffect, useState } from "react";
-import { useThree } from "@react-three/fiber";
 import { motion } from "framer-motion-3d";
-import { Group } from "three";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import {
+  InteractionContext,
+  InteractiveElement,
+  InteractiveElementProps,
+} from "../context/InteractionContext";
 
 type KnobProps = {
-  model: Group;
-  rotation: number;
-  setRotation: React.Dispatch<React.SetStateAction<number>>;
-  activeObject: string | null;
-  name: string;
-  axis?: "x" | "y" | "z"; // Optional axis prop
-  stops?: number[]; // Optional array of angles
-};
+  rotation?: number; // Optional, controlled if provided
+  setRotation?: (newVal: number) => void;
+  axis?: "x" | "y" | "z";
+  min?: number; // In degrees
+  max?: number; // In degrees
+  mapMin?: number; // Output range min
+  mapMax?: number; // Output range max
+  onChange?: (value: number) => void;
+  position?: [number, number, number];
+} & InteractiveElementProps;
 
 export function Knob({
-  model,
+  name,
   rotation,
   setRotation,
-  activeObject,
-  name,
-  axis = "z", // Default to 'z' axis if not provided
-  stops,
+  axis = "z",
+  min = 0,
+  max = 360, // Degrees
+  mapMin = 0,
+  mapMax = 360,
+  onChange,
+  position = [0, 0, 0],
+  children,
+  onPointerOver,
+  onPointerOut,
+  onPointerDown,
 }: KnobProps) {
-  const { gl } = useThree();
+  const { activeObject } = useContext(InteractionContext);
+  const [internalRotation, setInternalRotation] = useState(rotation || 0);
 
-  const [focused, setFocused] = useState<boolean>(false);
+  const isControlled = rotation !== undefined && setRotation !== undefined;
+  const currentRotation = isControlled ? rotation : internalRotation;
+
+  const isActive = activeObject === name;
+
+  // Use a ref to store the latest rotation value synchronously
+  const rotationRef = useRef(currentRotation);
 
   useEffect(() => {
-    if (activeObject === name) {
-      setFocused(true);
-    } else {
-      setFocused(false);
-    }
-  }, [activeObject]);
+    rotationRef.current = currentRotation;
+  }, [currentRotation]);
 
-  // Handle null models internally
-  if (!model) {
-    return null; // Safely return null if model is missing
-  }
+  // Convert degrees to radians for internal usage
+  const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
+  const radiansToDegrees = (radians: number) => (radians * 180) / Math.PI;
 
-  // Assign a name to the object for identification
-  if (model.children[0] && model.children[0].name !== name) {
-    model.children[0].name = name;
-  }
-
-  // Handle wheel event when the knob is focused
   useEffect(() => {
-    if (focused) {
+    if (isActive) {
       const handleWheel = (event: WheelEvent) => {
-        const deltaRotation = event.deltaY * 0.0005;
-        setRotation((prev) => {
-          let newRotation = prev + deltaRotation;
+        event.preventDefault();
+        const deltaRotation = -event.deltaY * 0.05; // Adjusting for degree-based control
+        let newRotation = rotationRef.current + deltaRotation;
+        newRotation = Math.max(min, Math.min(newRotation, max));
 
-          // Limit rotation between first and last stops if stops are provided
-          if (stops && stops.length >= 2) {
-            const minRotation = Math.min(stops[0], stops[stops.length - 1]);
-            const maxRotation = Math.max(stops[0], stops[stops.length - 1]);
-            newRotation = Math.max(
-              minRotation,
-              Math.min(newRotation, maxRotation)
-            );
-          }
+        if (onChange) {
+          const normalizedValue =
+            ((newRotation - min) / (max - min)) * (mapMax - mapMin) + mapMin;
+          onChange(normalizedValue);
+        }
 
-          return newRotation;
-        });
-      };
+        rotationRef.current = newRotation;
 
-      gl.domElement.addEventListener("wheel", handleWheel);
-      return () => {
-        gl.domElement.removeEventListener("wheel", handleWheel);
-      };
-    }
-  }, [focused, gl.domElement, setRotation, stops]);
-
-  // Implement snapping when losing focus
-  useEffect(() => {
-    if (!focused && stops && stops.length > 0) {
-      // Find the closest stop to the current rotation
-      const closestStop = stops.reduce((prev, curr) => {
-        return Math.abs(curr - rotation) < Math.abs(prev - rotation)
-          ? curr
-          : prev;
-      });
-
-      // Animate rotation to closest stop
-      const startRotation = rotation;
-      const duration = 200; // Animation duration in milliseconds
-      const startTime = performance.now();
-
-      const animateRotation = (currentTime: number) => {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        const newRotation =
-          startRotation + (closestStop - startRotation) * progress;
-        setRotation(newRotation);
-
-        if (progress < 1) {
-          requestAnimationFrame(animateRotation);
+        if (isControlled) {
+          setRotation && setRotation(newRotation);
+        } else {
+          setInternalRotation(newRotation);
         }
       };
 
-      requestAnimationFrame(animateRotation);
+      window.addEventListener("wheel", handleWheel);
+      return () => {
+        window.removeEventListener("wheel", handleWheel);
+      };
     }
-  }, [focused, rotation, setRotation, stops]);
+  }, [isActive, setRotation, min, max, mapMin, mapMax, onChange, isControlled]);
 
+  // Set rotation array using radians for internal 3D transformation
+  const invertedRotation = max - currentRotation; // Inverting rotation so 0 is fully left
   const rotationArray: [number, number, number] = [0, 0, 0];
-  if (axis === "x") {
-    rotationArray[0] = rotation;
-  } else if (axis === "y") {
-    rotationArray[1] = rotation;
-  } else if (axis === "z") {
-    rotationArray[2] = rotation;
-  }
+  rotationArray[axis === "x" ? 0 : axis === "y" ? 1 : 2] =
+    degreesToRadians(invertedRotation);
 
   return (
-    <motion.primitive
-      object={model.children[0]}
-      rotation={rotationArray} // Apply rotation to the selected axis
-    />
+    <motion.group rotation={rotationArray} position={position}>
+      <InteractiveElement
+        name={name}
+        onPointerOver={onPointerOver}
+        onPointerOut={onPointerOut}
+        onPointerDown={onPointerDown}
+      >
+        {children}
+      </InteractiveElement>
+    </motion.group>
   );
 }

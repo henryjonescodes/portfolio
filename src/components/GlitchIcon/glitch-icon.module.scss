@@ -56,15 +56,16 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   display: block;
   width: 100%;
   height: 100%;
+
+  path,
+  svg {
+    fill: $foreground-primary;
+    fill: var(--foreground-primary);
+  }
 }
 
 .iconPrimary {
   transition: opacity 0.2s ease-in-out;
-
-  svg,
-  path {
-    fill: $color-0;
-  }
 }
 
 .glitch__layers {
@@ -88,24 +89,16 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 
 .glitch__layer0 {
   animation: glitch-flicker $line-flicker-animation-duration infinite;
-  /* Adjust duration as needed */
 
   transform: translate(2%, -2%);
 
   .icon {
-
-    path,
-    svg {
-      fill: $color-0;
-    }
-
     animation: glitch-anim-0 $animation-duration infinite linear reverse;
   }
 }
 
 .glitch__layer1 {
   animation: glitch-flicker $line-flicker-animation-duration infinite;
-  /* Adjust duration as needed */
   animation-delay: 0.3s;
 
   transform: translate(2%, -2%);
@@ -114,7 +107,7 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 
     path,
     svg {
-      fill: $color-1;
+      opacity: 0.8;
     }
 
     animation: glitch-anim-1 $animation-duration infinite linear;
@@ -130,7 +123,7 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 
     path,
     svg {
-      fill: $color-2;
+      opacity: 0.8;
     }
 
     animation: glitch-anim-2 $animation-duration infinite linear alternate;
@@ -148,7 +141,7 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 
     path,
     svg {
-      fill: $color-3;
+      opacity: 1;
     }
 
     animation: glitch-anim-flash $onion-skin-animation-duration infinite linear;
@@ -163,7 +156,7 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 
     path,
     svg {
-      fill: $color-4;
+      opacity: 1;
     }
 
     animation: glitch-anim-flash $onion-skin-animation-duration infinite linear;
