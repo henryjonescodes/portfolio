@@ -37,7 +37,7 @@ const Screen = () => {
   };
 
   return (
-    <CustomHTML transform>
+    <CustomHTML transform occlude="blending">
       <motion.div
         className={styles.screen}
         style={{ height: `${height}px`, width: `${width}px` }}

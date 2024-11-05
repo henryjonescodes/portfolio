@@ -1,6 +1,6 @@
 // Scene.tsx
 import { Canvas } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import * as THREE from "three";
 import CustomControls from "../../components/CustomControls";
@@ -10,6 +10,8 @@ import useRaycaster from "../../hooks/useRaycaster";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
 import ToolBar from "./ToolBar";
+import { SiteMixer } from "../../models/SiteMixer";
+import { OrbitControls } from "@react-three/drei";
 
 export default function Scene() {
   const gizmo = useModel("/models/Gizmo.glb");
@@ -34,7 +36,7 @@ export default function Scene() {
 
   return (
     <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={1} />
       <directionalLight position={[2, 5, 2]} />
       <CustomControls
         zoomIn={!!page}
@@ -42,16 +44,20 @@ export default function Scene() {
         maxPolarAngle={Math.PI / 6}
         maxAzimuthAngle={Math.PI / 6}
       />
+      {/* <OrbitControls /> */}
       <group scale={3} onPointerMove={handlePointerMove}>
         {/* Group containing the screen, referenced with screenGroupRef */}
-        <group
-          ref={screenGroupRef}
-          position={[0.001, 0.473, 0.025]}
-          scale={0.067}
-        >
-          <Screen />
-        </group>
-        <ToolBar position={[0.001, 0, 0.059]} />
+        <Suspense fallback={null}>
+          <group
+            ref={screenGroupRef}
+            position={[-0.243, 0, 0.013]}
+            scale={0.0851}
+          >
+            <Screen />
+          </group>
+          <SiteMixer position={[0, 0, 0]} />
+        </Suspense>
+        {/* <ToolBar position={[0.001, 0, 0.059]} />
         {gizmo && <primitive object={gizmo} />}
         {buttons && <primitive object={buttons} />}
         {colorToggle && <primitive object={colorToggle} />}
@@ -79,7 +85,7 @@ export default function Scene() {
           activeObject={activeObject}
           name={"KnobL"}
           axis="x"
-        />
+        /> */}
       </group>
     </Canvas>
   );
