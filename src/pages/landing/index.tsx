@@ -2,13 +2,13 @@ import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, useNavigate } from "react-router-dom";
 import Page from "../../components/Page";
-import { useSettings } from "../../context/SettingsContext";
+import { SettingsProvider, useSettings } from "../../context/SettingsContext";
 import styles from "./landing.module.scss";
 import Scene from "./Scene";
 import { useControls } from "leva";
 import { useEffect } from "react";
 import { colors as defaultColors } from "./../../styles/sass-variables";
-import { useColors } from "../../context/ColorsContext";
+import { ColorsProvider, useColors } from "../../context/ColorsContext";
 
 const wrapperVariants = {
   show: {
@@ -24,6 +24,16 @@ const wrapperVariants = {
       duration: 0.3,
     },
   },
+};
+
+export const LandingWrapper = () => {
+  return (
+    <SettingsProvider>
+      <ColorsProvider>
+        <Landing />
+      </ColorsProvider>
+    </SettingsProvider>
+  );
 };
 
 const Landing = () => {

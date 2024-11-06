@@ -1,10 +1,11 @@
 // InfoPanel.tsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, MouseEventHandler } from "react";
 import { Html } from "@react-three/drei";
 import { motion } from "framer-motion";
 import styles from "./landing.module.scss";
 import { useColors } from "../../context/ColorsContext";
 import { CustomHTML } from "../../components/CustomHTML";
+import { ThreeEvent } from "@react-three/fiber";
 
 // Define the PrimaryColors type
 interface PrimaryColors {
@@ -19,7 +20,11 @@ const rgbToHex = (r: number, g: number, b: number): string => {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
 
-const InfoPanel = () => {
+type InfoPanelProps = {
+  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
+};
+
+const InfoPanel = ({ onClick }: InfoPanelProps) => {
   // Access primary colors and the updater function from context
   const { primaryColors, setPrimaryColors } = useColors();
 
@@ -78,7 +83,7 @@ const InfoPanel = () => {
 
   return (
     <CustomHTML transform occlude="blending">
-      <motion.div className={styles.infoPanel}>
+      <motion.div className={styles.infoPanel} onClick={onClick}>
         <motion.h3 className={styles.panelTitle}>Color Picker</motion.h3>
 
         <motion.div className={styles.colorSelection}>

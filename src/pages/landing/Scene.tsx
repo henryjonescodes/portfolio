@@ -26,11 +26,6 @@ export default function Scene() {
   // Ref for the screen group
   const screenGroupRef = useRef<THREE.Group>(null);
 
-  const handleInfoClick = (event: ThreeEvent<MouseEvent>) => {
-    console.log("setting");
-    setZoomLevel("info");
-  };
-
   useEffect(() => {
     setZoomLevel(!!page ? "handheld" : undefined);
   }, [page]);
@@ -58,14 +53,12 @@ export default function Scene() {
           >
             <Screen />
           </group>
-          <group
-            position={[0.764, 0.297, 0.038]}
-            scale={0.0351}
-            onClick={() => {
-              console.log("Click");
-            }}
-          >
-            <InfoPanel />
+          <group position={[0.764, 0.297, 0.038]} scale={0.0351}>
+            <InfoPanel
+              onClick={() => {
+                console.log("Click");
+              }}
+            />
           </group>
           <SiteMixer position={[0, 0, 0]} />
         </Suspense>
