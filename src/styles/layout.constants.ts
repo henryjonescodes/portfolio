@@ -29,6 +29,7 @@ export const widthLarge = screenWidths.large;
 
 export type ZoomLevel = {
   fullScreen: Vector3;
+  info: Vector3;
   handheld: Vector3;
   wide: Vector3; // Used for initialCameraPosition
 };
@@ -39,41 +40,49 @@ const leftShift: number = -0.2
 export const zoomLevels: Record<string, ZoomLevel> = {
   tiny: { 
     fullScreen: new Vector3(0, 1.5, 1.5), 
+    info: new Vector3(0, 0, 7), 
     handheld: new Vector3(0, 0, 7), 
     wide: new Vector3(0, 0, 7) 
   },
   mobile: { 
     fullScreen: new Vector3(0, 0, 1.5), 
+    info: new Vector3(0, 0, 5.8), 
     handheld: new Vector3(0, 0, 5.8), 
     wide: new Vector3(0, 0, 5.8) 
   },
   small: { 
     fullScreen: new Vector3(0, 0, 1.4), 
+    info: new Vector3(0, 0.5, 3.5),
     handheld: new Vector3(0, 0.5, 3.5),
     wide: new Vector3(0, 0, 4.5) 
   },
   medium: { 
     fullScreen: new Vector3(0, 0, 1.3), 
+    info: new Vector3(0, 1, 3), 
     handheld: new Vector3(0, 1, 3), 
     wide: new Vector3(0, 0, 4.2) 
   },
   compact: { 
     fullScreen: new Vector3(leftShift, 0, 1.2), 
+    info: new Vector3(leftShift, 0, 2.9), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },
   default: { 
     fullScreen: new Vector3(leftShift, 0, 1.1), 
+    info: new Vector3(leftShift, 0, 2.9), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },
   large: { 
     fullScreen: new Vector3(leftShift, 0, 0.5), 
+    info: new Vector3(leftShift, 0, 2.9), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },
   extraLarge: { 
     fullScreen: new Vector3(leftShift, 0, 0.5), 
+    info: new Vector3(leftShift, 0, 2.9), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },

@@ -29,7 +29,6 @@
 
 .screen {
   position: relative;
-  // border-radius: 45px;
   overflow: hidden;
 
   >video {
@@ -42,9 +41,10 @@
 
 // TODO: style this
 .infoPanel {
+  position: relative;
+  overflow: hidden;
   height: 321px !important;
   width: 417px !important;
-  overflow: hidden;
 }
 
 

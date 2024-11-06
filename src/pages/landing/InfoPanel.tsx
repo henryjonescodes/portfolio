@@ -4,6 +4,7 @@ import { Html } from "@react-three/drei";
 import { motion } from "framer-motion";
 import styles from "./landing.module.scss";
 import { useColors } from "../../context/ColorsContext";
+import { CustomHTML } from "../../components/CustomHTML";
 
 // Define the PrimaryColors type
 interface PrimaryColors {
@@ -18,7 +19,7 @@ const rgbToHex = (r: number, g: number, b: number): string => {
   return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
 };
 
-export default function InfoPanel(props: any) {
+const InfoPanel = () => {
   // Access primary colors and the updater function from context
   const { primaryColors, setPrimaryColors } = useColors();
 
@@ -76,71 +77,65 @@ export default function InfoPanel(props: any) {
   };
 
   return (
-    <group {...props}>
-      <Html transform occlude="blending">
-        <motion.div
-          className={styles.infoPanel}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-        >
-          <h3 className={styles.panelTitle}>Color Picker</h3>
+    <CustomHTML transform occlude="blending">
+      <motion.div className={styles.infoPanel}>
+        <motion.h3 className={styles.panelTitle}>Color Picker</motion.h3>
 
-          <div className={styles.colorSelection}>
-            <h3
-              onClick={() => handleColorSelection("accent")}
-              className={`${styles.colorOption} ${
-                selectedColor === "accent" ? styles.selected : ""
-              }`}
-            >
-              Accent
-            </h3>
-            <h3
-              onClick={() => handleColorSelection("foreground")}
-              className={`${styles.colorOption} ${
-                selectedColor === "foreground" ? styles.selected : ""
-              }`}
-            >
-              Foreground
-            </h3>
-            <h3
-              onClick={() => handleColorSelection("background")}
-              className={`${styles.colorOption} ${
-                selectedColor === "background" ? styles.selected : ""
-              }`}
-            >
-              Background
-            </h3>
-          </div>
-
-          <div className={styles.sliders}>
-            <ColorSlider
-              label="R"
-              value={rgbValues.r}
-              onChange={(value) => handleSliderChange("r", value)}
-            />
-            <ColorSlider
-              label="G"
-              value={rgbValues.g}
-              onChange={(value) => handleSliderChange("g", value)}
-            />
-            <ColorSlider
-              label="B"
-              value={rgbValues.b}
-              onChange={(value) => handleSliderChange("b", value)}
-            />
-          </div>
-
-          <div className={styles.currentColor}>
-            <p>
-              Current {selectedColor} color:{" "}
-              {primaryColors[`${selectedColor}Primary` as keyof PrimaryColors]}
-            </p>
-          </div>
+        <motion.div className={styles.colorSelection}>
+          <motion.h3
+            onClick={() => handleColorSelection("accent")}
+            className={`${styles.colorOption} ${
+              selectedColor === "accent" ? styles.selected : ""
+            }`}
+          >
+            Accent
+          </motion.h3>
+          <motion.h3
+            onClick={() => handleColorSelection("foreground")}
+            className={`${styles.colorOption} ${
+              selectedColor === "foreground" ? styles.selected : ""
+            }`}
+          >
+            Foreground
+          </motion.h3>
+          <motion.h3
+            onClick={() => handleColorSelection("background")}
+            className={`${styles.colorOption} ${
+              selectedColor === "background" ? styles.selected : ""
+            }`}
+          >
+            Background
+          </motion.h3>
         </motion.div>
-      </Html>
-    </group>
+
+        <motion.div className={styles.sliders}>
+          <ColorSlider
+            label="R"
+            value={rgbValues.r}
+            onChange={(value) => handleSliderChange("r", value)}
+          />
+          <ColorSlider
+            label="G"
+            value={rgbValues.g}
+            onChange={(value) => handleSliderChange("g", value)}
+          />
+          <ColorSlider
+            label="B"
+            value={rgbValues.b}
+            onChange={(value) => handleSliderChange("b", value)}
+          />
+        </motion.div>
+
+        <motion.div className={styles.currentColor}>
+          <motion.p>
+            Current {selectedColor} color:{" "}
+            {primaryColors[`${selectedColor}Primary` as keyof PrimaryColors]}
+          </motion.p>
+        </motion.div>
+      </motion.div>
+    </CustomHTML>
   );
-}
+};
 
 interface ColorSliderProps {
   label: "R" | "G" | "B";
@@ -167,3 +162,5 @@ const ColorSlider: React.FC<ColorSliderProps> = ({
     </label>
   );
 };
+
+export default InfoPanel;

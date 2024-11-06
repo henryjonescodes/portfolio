@@ -14,24 +14,33 @@ import { SiteMixer } from "../../models/SiteMixer";
 import { OrbitControls } from "@react-three/drei";
 
 export default function Scene() {
-  const { activeObject, handlePointerMove } = useRaycaster();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
 
-  useEffect(() => {
-    console.log(activeObject);
-  }, [activeObject]);
+  const { activeObject, handlePointerMove } = useRaycaster();
+  const [zoomLevel, setZoomLevel] = useState<"info" | "handheld" | undefined>(
+    !!page ? "handheld" : undefined
+  );
 
   // Ref for the screen group
   const screenGroupRef = useRef<THREE.Group>(null);
+
+  const handleInfoClick = (event: ThreeEvent<MouseEvent>) => {
+    console.log("setting");
+    setZoomLevel("info");
+  };
+
+  useEffect(() => {
+    setZoomLevel(!!page ? "handheld" : undefined);
+  }, [page]);
 
   return (
     <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
       <ambientLight intensity={1} />
       <directionalLight position={[2, 5, 2]} />
       <CustomControls
-        zoomIn={!!page}
+        zoomMode={zoomLevel} // or "handheld" or undefined
         targetRef={screenGroupRef}
         maxPolarAngle={Math.PI / 6}
         maxAzimuthAngle={Math.PI / 6}
@@ -43,14 +52,21 @@ export default function Scene() {
             ref={screenGroupRef}
             position={[-0.243, 0, 0.013]}
             scale={0.0851}
+            onClick={() => {
+              console.log("Click2");
+            }}
           >
             <Screen />
           </group>
-          <InfoPanel
+          <group
             position={[0.764, 0.297, 0.038]}
             scale={0.0351}
-            name="InfoPanel"
-          />
+            onClick={() => {
+              console.log("Click");
+            }}
+          >
+            <InfoPanel />
+          </group>
           <SiteMixer position={[0, 0, 0]} />
         </Suspense>
       </group>

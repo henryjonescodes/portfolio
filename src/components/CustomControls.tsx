@@ -12,14 +12,14 @@ import {
 import { useSettings } from "../context/SettingsContext";
 
 interface CustomControlsProps {
-  zoomIn?: boolean;
+  zoomMode?: "info" | "handheld";
   targetRef?: React.RefObject<THREE.Group>;
   maxPolarAngle?: number;
   maxAzimuthAngle?: number;
 }
 
 export default function CustomControls({
-  zoomIn = false,
+  zoomMode,
   targetRef,
   maxPolarAngle = Math.PI / 6,
   maxAzimuthAngle = Math.PI / 6,
@@ -59,7 +59,7 @@ export default function CustomControls({
   useGesture(
     {
       onDrag: ({ down, movement: [mx, my] }) => {
-        if (dragEnabled) {
+        if (dragEnabled && !zoomMode) {
           if (down) {
             // User is dragging
             // Calculate new theta and phi based on mouse movement
@@ -162,8 +162,8 @@ export default function CustomControls({
     const phi = Math.acos(y / radius);
     setInitialSpherical({ radius, theta, phi });
 
-    // Animate to the new initialCameraPosition if not zoomed in
-    if (!zoomIn) {
+    // Animate to the new initialCameraPosition if zoomMode is undefined
+    if (!zoomMode) {
       api.start({
         theta,
         phi,
@@ -174,17 +174,17 @@ export default function CustomControls({
     }
   }, [initialCameraPosition]);
 
-  // Update camera position when zoomIn, zoomLevel2, targetRef, or fullScreen changes
+  // Update camera position when zoomMode, zoomLevel2, targetRef, or fullScreen changes
   useEffect(() => {
     const updateCameraPosition = () => {
-      if (zoomIn && targetRef?.current) {
-        calculateAndStartFullScreenAnimation();
-      } else if (!zoomIn) {
+      if (zoomMode && targetRef?.current) {
+        calculateAndStartZoomedAnimation();
+      } else {
         calculateAndStartWideAnimation();
       }
     };
 
-    const calculateAndStartFullScreenAnimation = () => {
+    const calculateAndStartZoomedAnimation = () => {
       if (!targetRef?.current) {
         console.error("Target ref not found");
         return;
@@ -192,9 +192,25 @@ export default function CustomControls({
 
       setDragEnabled(false);
 
-      const cameraPosition = fullScreen
-        ? (zoomLevel2.fullScreen.toArray() as [number, number, number])
-        : (zoomLevel2.handheld.toArray() as [number, number, number]);
+      let cameraPosition: [number, number, number];
+
+      switch (zoomMode) {
+        case "handheld":
+          cameraPosition = fullScreen
+            ? (zoomLevel2.fullScreen.toArray() as [number, number, number])
+            : (zoomLevel2.handheld.toArray() as [number, number, number]);
+          break;
+        case "info":
+          cameraPosition = zoomLevel2.info.toArray() as [
+            number,
+            number,
+            number
+          ];
+          break;
+        default:
+          cameraPosition = initialCameraPosition;
+          break;
+      }
 
       api.start({
         position: cameraPosition,
@@ -213,22 +229,22 @@ export default function CustomControls({
         onResolve: () => {
           setDragEnabled(true);
         },
-        // ! Might need to do something fancier if there are animation conflicts with onResolve()
-        // onRest: () => {
-        //   console.log(
-        //     "[calculateAndStartWideAnimation]: wide animation complete"
-        //   );
-        //   setDragEnabled(true);
-        //   setIsAnimating(false);
-        // },
       });
     };
 
     updateCameraPosition();
-  }, [zoomIn, zoomLevel2, targetRef, fullScreen, initialCameraPosition]);
+  }, [
+    zoomMode,
+    zoomLevel2,
+    targetRef,
+    fullScreen,
+    initialCameraPosition,
+    initialSpherical,
+    api,
+  ]);
 
   useEffect(() => {
-    console.log("drag endabled: ", dragEnabled);
+    console.log("Drag enabled: ", dragEnabled);
   }, [dragEnabled]);
 
   // Update camera position each frame
@@ -242,7 +258,7 @@ export default function CustomControls({
     camera.position.set(...(spring.position.get() as [number, number, number]));
 
     // Adjust the camera's target/lookAt
-    if (!zoomIn && dragEnabled) {
+    if (!zoomMode && dragEnabled) {
       camera.lookAt(0, 0, 0);
     }
   });
