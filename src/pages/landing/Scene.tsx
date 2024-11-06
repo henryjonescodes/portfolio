@@ -7,10 +7,12 @@ import { SiteMixer } from "../../models/SiteMixer";
 import InfoPanel from "./InfoPanel";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
+import { useSettings } from "../../context/SettingsContext";
 
 export default function Scene() {
   // const { activeObject, handlePointerMove } = useRaycaster();
   const screenGroupRef = useRef<THREE.Group>(null);
+  const { toggleInfoMode } = useSettings();
 
   return (
     <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
@@ -38,7 +40,7 @@ export default function Scene() {
           <group position={[0.764, 0.297, 0.038]} scale={0.0351}>
             <InfoPanel
               onClick={() => {
-                console.log("Click");
+                toggleInfoMode();
               }}
             />
           </group>

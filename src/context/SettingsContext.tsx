@@ -19,6 +19,7 @@ type SettingsContextType = {
   setZoomLevel: (toMode: zoomLevelType) => void;
   zoomLevel: zoomLevelType;
   toggleFullScreen: () => void;
+  toggleInfoMode: () => void;
 };
 
 // Default context value with animations enabled
@@ -28,6 +29,7 @@ const defaultSettings: SettingsContextType = {
   setZoomLevel: (toMode: zoomLevelType) => {},
   zoomLevel: "wide",
   toggleFullScreen: () => {},
+  toggleInfoMode: () => {},
 };
 
 // Create the context with the default value
@@ -57,7 +59,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   );
 
   // ? Setup References
-  const handHeldZoomMode = useRef<handheldZoomType>("wide");
+  const handHeldZoomLevel = useRef<handheldZoomType>("wide");
 
   // ? Update prevZoomMode when page updates
   useEffect(() => {
@@ -66,13 +68,13 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       if (zoomLevel !== "fullscreen") {
         setZoomLevel("handheld");
       }
-      handHeldZoomMode.current = "handheld";
+      handHeldZoomLevel.current = "handheld";
     } else {
       // Only update actual zoom when not fullscreen
       if (zoomLevel !== "fullscreen") {
         setZoomLevel("wide");
       }
-      handHeldZoomMode.current = "wide";
+      handHeldZoomLevel.current = "wide";
     }
   }, [page]);
 
@@ -80,16 +82,28 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     if (zoomLevel !== "fullscreen") {
       setZoomLevel("fullscreen");
     } else {
-      setZoomLevel(handHeldZoomMode.current);
+      setZoomLevel(handHeldZoomLevel.current);
     }
-    console.log(`Toggling Fullscreen`);
+  };
+
+  const toggleInfoMode = () => {
+    if (zoomLevel === "fullscreen") {
+      return;
+    }
+
+    if (zoomLevel === "info") {
+      setZoomLevel(handHeldZoomLevel.current);
+    } else {
+      handHeldZoomLevel.current = zoomLevel;
+      setZoomLevel("info");
+    }
   };
 
   useEffect(() => {
     console.log(
-      `Updated zoom level: ${zoomLevel} ref: ${handHeldZoomMode.current}`
+      `Updated zoom level: ${zoomLevel} ref: ${handHeldZoomLevel.current}`
     );
-  }, [zoomLevel, handHeldZoomMode.current]);
+  }, [zoomLevel, handHeldZoomLevel.current]);
 
   return (
     <SettingsContext.Provider
@@ -99,6 +113,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
         setZoomLevel,
         zoomLevel,
         toggleFullScreen,
+        toggleInfoMode,
       }}
     >
       {children}

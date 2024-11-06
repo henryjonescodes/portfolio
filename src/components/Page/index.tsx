@@ -73,6 +73,7 @@ const Page = () => {
         key={"page"}
         className={cn(styles.page, {
           [styles.pageHandheld]: zoomLevel !== "fullscreen",
+          [styles.pageDisabled]: zoomLevel === "info",
         })}
         initial="initial"
         animate="animate"

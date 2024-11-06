@@ -35,6 +35,8 @@ export type ZoomLevel = {
 };
 
 const leftShift: number = -0.2
+const infoHorizontalShift: number = 2
+const infoVerticalShift: number = 0.5
 
 // Zoom levels based on screen sizes
 export const zoomLevels: Record<string, ZoomLevel> = {
@@ -64,25 +66,25 @@ export const zoomLevels: Record<string, ZoomLevel> = {
   },
   compact: { 
     fullScreen: new Vector3(leftShift, 0, 1.2), 
-    info: new Vector3(leftShift, 0, 2.9), 
+    info: new Vector3(infoHorizontalShift, infoVerticalShift, 1.5), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },
   default: { 
     fullScreen: new Vector3(leftShift, 0, 1.1), 
-    info: new Vector3(leftShift, 0, 2.9), 
+    info: new Vector3(infoHorizontalShift,infoVerticalShift, 2), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },
   large: { 
     fullScreen: new Vector3(leftShift, 0, 0.5), 
-    info: new Vector3(leftShift, 0, 2.9), 
+    info: new Vector3(infoHorizontalShift, infoVerticalShift, 2), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },
   extraLarge: { 
     fullScreen: new Vector3(leftShift, 0, 0.5), 
-    info: new Vector3(leftShift, 0, 2.9), 
+    info: new Vector3(leftShift, infoVerticalShift, 2.9), 
     handheld: new Vector3(leftShift, 0, 2.9), 
     wide: new Vector3(0, 0, 4.2) 
   },

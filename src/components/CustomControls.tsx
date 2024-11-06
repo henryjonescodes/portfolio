@@ -12,24 +12,24 @@ import {
 import { useSettings } from "../context/SettingsContext";
 
 interface CustomControlsProps {
-  // zoomMode?: "info" | "handheld";
   targetRef?: React.RefObject<THREE.Group>;
   maxPolarAngle?: number;
   maxAzimuthAngle?: number;
 }
 
 export default function CustomControls({
-  // zoomMode,
   targetRef,
   maxPolarAngle = Math.PI / 6,
   maxAzimuthAngle = Math.PI / 6,
 }: CustomControlsProps) {
   const { camera } = useThree();
   const { width } = useWindowDimensions();
-  const { zoomLevel: zoomMode } = useSettings();
+  const { zoomLevel } = useSettings();
 
   // State for zoomLevel and initialCameraPosition
-  const [zoomLevel2, setZoomLevel2] = useState<ZoomLevel>(zoomLevels.default);
+  const [zoomPositions, setZoomPositions] = useState<ZoomLevel>(
+    zoomLevels.default
+  );
   const [initialCameraPosition, setInitialCameraPosition] = useState<
     [number, number, number]
   >([0, 0, 4.2]);
@@ -59,7 +59,7 @@ export default function CustomControls({
   useGesture(
     {
       onDrag: ({ down, movement: [mx, my] }) => {
-        if (dragEnabled && !zoomMode) {
+        if (dragEnabled && zoomLevel === "wide") {
           if (down) {
             // User is dragging
             // Calculate new theta and phi based on mouse movement
@@ -148,12 +148,12 @@ export default function CustomControls({
     };
 
     const newZoomLevel = getZoomLevel2();
-    setZoomLevel2(newZoomLevel);
+    setZoomPositions(newZoomLevel);
     setInitialCameraPosition(
       newZoomLevel.wide.toArray() as [number, number, number]
     );
   }, [width]);
-  // TODO: do we need zoomMode dep?
+
   // Update initialSpherical and animate camera when initialCameraPosition changes
   useEffect(() => {
     const [x, y, z] = initialCameraPosition;
@@ -163,7 +163,7 @@ export default function CustomControls({
     setInitialSpherical({ radius, theta, phi });
 
     // Animate to the new initialCameraPosition if zoomMode is undefined
-    if (!zoomMode) {
+    if (zoomLevel === "wide") {
       api.start({
         theta,
         phi,
@@ -176,15 +176,7 @@ export default function CustomControls({
 
   // Update camera position when zoomMode, zoomLevel2, targetRef, or fullScreen changes
   useEffect(() => {
-    const updateCameraPosition = () => {
-      if (zoomMode && targetRef?.current) {
-        calculateAndStartZoomedAnimation();
-      } else {
-        calculateAndStartWideAnimation();
-      }
-    };
-
-    const calculateAndStartZoomedAnimation = () => {
+    const calculateAndStartAnimation = () => {
       if (!targetRef?.current) {
         console.error("Target ref not found");
         return;
@@ -194,23 +186,37 @@ export default function CustomControls({
 
       let cameraPosition: [number, number, number];
 
-      switch (zoomMode) {
+      if (zoomLevel === "wide") {
+        api.start({
+          position: initialCameraPosition,
+          theta: initialSpherical.theta,
+          phi: initialSpherical.phi,
+          radius: initialSpherical.radius,
+          config: { mass: 1, tension: 85, friction: 13 },
+          onResolve: () => {
+            setDragEnabled(true);
+          },
+        });
+        return;
+      }
+
+      switch (zoomLevel) {
         case "fullscreen":
-          cameraPosition = zoomLevel2.fullScreen.toArray() as [
+          cameraPosition = zoomPositions.fullScreen.toArray() as [
             number,
             number,
             number
           ];
           break;
         case "handheld":
-          cameraPosition = zoomLevel2.handheld.toArray() as [
+          cameraPosition = zoomPositions.handheld.toArray() as [
             number,
             number,
             number
           ];
           break;
         case "info":
-          cameraPosition = zoomLevel2.info.toArray() as [
+          cameraPosition = zoomPositions.info.toArray() as [
             number,
             number,
             number
@@ -226,35 +232,20 @@ export default function CustomControls({
         config: { mass: 1, tension: 85, friction: 13 },
       });
     };
-
-    const calculateAndStartWideAnimation = () => {
-      // Animate to the initialCameraPosition
-      api.start({
-        position: initialCameraPosition,
-        theta: initialSpherical.theta,
-        phi: initialSpherical.phi,
-        radius: initialSpherical.radius,
-        config: { mass: 1, tension: 85, friction: 13 },
-        onResolve: () => {
-          setDragEnabled(true);
-        },
-      });
-    };
-
-    updateCameraPosition();
+    calculateAndStartAnimation();
   }, [
-    zoomMode,
-    zoomLevel2,
+    zoomLevel,
+    zoomPositions,
     targetRef,
-    zoomMode,
+    zoomLevel,
     initialCameraPosition,
     initialSpherical,
     api,
   ]);
 
-  // useEffect(() => {
-  //   console.log("Drag enabled: ", dragEnabled);
-  // }, [dragEnabled]);
+  useEffect(() => {
+    console.log("Drag enabled: ", dragEnabled);
+  }, [dragEnabled]);
 
   // Update camera position each frame
   useFrame(() => {
@@ -267,7 +258,7 @@ export default function CustomControls({
     camera.position.set(...(spring.position.get() as [number, number, number]));
 
     // Adjust the camera's target/lookAt
-    if (!zoomMode && dragEnabled) {
+    if (zoomLevel === "wide" && dragEnabled) {
       camera.lookAt(0, 0, 0);
     }
   });
