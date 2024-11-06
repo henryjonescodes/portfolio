@@ -33,54 +33,48 @@ const Home = () => {
 
   const textStaggerSeconds = 0.03;
   return (
-    <AnimatePresence>
-      {!page && (
-        <PageContents key={"menu"} className={styles.menu}>
-          {/* Henry Jones */}
-          <motion.h1 variants={menuVariants}>
-            <TypewriterText
-              text="Henry Jones"
-              staggerChildren={textStaggerSeconds}
-            />
-          </motion.h1>
+    // <AnimatePresence>
+    //   {!page && (
+    <PageContents key={"menu"} className={styles.menu}>
+      {/* Henry Jones */}
+      <motion.h1 variants={menuVariants}>
+        <TypewriterText
+          text="Henry Jones"
+          staggerChildren={textStaggerSeconds}
+        />
+      </motion.h1>
 
-          {/* Creative Developer */}
-          <motion.h3 variants={menuVariants}>
-            <TypewriterText
-              text="Creative Developer"
-              staggerChildren={textStaggerSeconds}
-            />
-          </motion.h3>
+      {/* Creative Developer */}
+      <motion.h3 variants={menuVariants}>
+        <TypewriterText
+          text="Creative Developer"
+          staggerChildren={textStaggerSeconds}
+        />
+      </motion.h3>
 
-          {/* About (Link) */}
-          <motion.h2 variants={menuVariants} onClick={() => navigate("/about")}>
-            <TypewriterText text="About" staggerChildren={textStaggerSeconds} />
-          </motion.h2>
+      {/* About (Link) */}
+      <motion.h2 variants={menuVariants} onClick={() => navigate("/about")}>
+        <TypewriterText text="About" staggerChildren={textStaggerSeconds} />
+      </motion.h2>
 
-          {/* Experience (Link) */}
-          <motion.h2
-            variants={menuVariants}
-            onClick={() => navigate("/experience")}
-          >
-            <TypewriterText
-              text="Experience"
-              staggerChildren={textStaggerSeconds}
-            />
-          </motion.h2>
+      {/* Experience (Link) */}
+      <motion.h2
+        variants={menuVariants}
+        onClick={() => navigate("/experience")}
+      >
+        <TypewriterText
+          text="Experience"
+          staggerChildren={textStaggerSeconds}
+        />
+      </motion.h2>
 
-          {/* Projects (Link) */}
-          <motion.h2
-            variants={menuVariants}
-            onClick={() => navigate("/projects")}
-          >
-            <TypewriterText
-              text="Projects"
-              staggerChildren={textStaggerSeconds}
-            />
-          </motion.h2>
-        </PageContents>
-      )}
-    </AnimatePresence>
+      {/* Projects (Link) */}
+      <motion.h2 variants={menuVariants} onClick={() => navigate("/projects")}>
+        <TypewriterText text="Projects" staggerChildren={textStaggerSeconds} />
+      </motion.h2>
+    </PageContents>
+    // )}
+    // </AnimatePresence>
   );
 };
 

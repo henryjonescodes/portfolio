@@ -1,12 +1,12 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { NavigateFunction } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useSettings } from "../../context/SettingsContext";
 import AnimatedOutlet from "../AnimatedOutlet";
 import Background from "../Background";
 import NavBar from "../NavBar";
 import styles from "./page.module.scss";
-import { useSettings } from "../../context/SettingsContext";
 
 // Animation variants
 const pageVariants = {
@@ -46,13 +46,13 @@ const backgroundVariants = {
   },
 };
 
-type PageProps = {
-  navigate: NavigateFunction;
-  visible: boolean;
-  page: string | undefined;
-};
+const Page = () => {
+  const navigate = useNavigate(); // Initialize the navigate function
 
-const Page = ({ navigate, visible = true, page }: PageProps) => {
+  const location = useLocation();
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0];
+
   const contentRef = useRef<HTMLDivElement | null>(null);
   const { zoomLevel } = useSettings();
 
@@ -69,42 +69,40 @@ const Page = ({ navigate, visible = true, page }: PageProps) => {
 
   return (
     <AnimatePresence>
-      {visible && (
-        <motion.div
-          key={"page"}
-          className={cn(styles.page, {
-            [styles.pageHandheld]: zoomLevel !== "fullscreen",
-          })}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={pageVariants}
-        >
-          {zoomLevel === "fullscreen" && (
-            <motion.div
-              className={styles.background}
-              variants={backgroundVariants}
-            >
-              <Background />
-            </motion.div>
-          )}
-          <NavBar navigate={navigate} page={page} />
+      <motion.div
+        key={"page"}
+        className={cn(styles.page, {
+          [styles.pageHandheld]: zoomLevel !== "fullscreen",
+        })}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageVariants}
+      >
+        {zoomLevel === "fullscreen" && (
           <motion.div
-            className={cn(styles.content, {
-              [styles.contentFullScreen]: zoomLevel === "fullscreen",
-            })}
-            key="pageContent"
-            variants={pageVariants}
-            ref={contentRef}
+            className={styles.background}
+            variants={backgroundVariants}
           >
-            <motion.div className={styles.contentInner}>
-              <AnimatePresence mode="wait">
-                <AnimatedOutlet key={page} />
-              </AnimatePresence>
-            </motion.div>
+            <Background />
+          </motion.div>
+        )}
+        <NavBar navigate={navigate} page={page} />
+        <motion.div
+          className={cn(styles.content, {
+            [styles.contentFullScreen]: zoomLevel === "fullscreen",
+          })}
+          key="pageContent"
+          variants={pageVariants}
+          ref={contentRef}
+        >
+          <motion.div className={styles.contentInner}>
+            <AnimatePresence mode="wait">
+              <AnimatedOutlet key={page} />
+            </AnimatePresence>
           </motion.div>
         </motion.div>
-      )}
+      </motion.div>
     </AnimatePresence>
   );
 };

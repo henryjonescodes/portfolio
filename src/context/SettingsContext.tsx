@@ -96,28 +96,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     );
   }, [zoomLevel, handHeldZoomMode.current]);
 
-  // // ? Swap between handheld zoom modes
-  // const setZoomLevel = (toLevel: handheldZoomType) => {
-  //   prevZoomMode.current = zoomMode;
-  //   setZoomMode(toLevel);
-
-  //   console.log(`Updated zoomMode on zoom level change: ${zoomMode}`);
-  //   console.log(
-  //     `Updated prevZoomMode on zoom level change: ${prevZoomMode.current}`
-  //   );
-  // };
-
-  // // ? Swap between Full Screen and Handheld modes
-  // const toggleFullScreen = () => {
-  //   if (zoomMode === "fullscreen") {
-  //     setZoomMode(prevZoomMode.current);
-
-  //     if(prevZoomMode.current === "wide"){
-  //       prevZoomMode.current =
-  //     }
-  //   }
-  // };
-
   return (
     <SettingsContext.Provider
       value={{
@@ -145,20 +123,3 @@ export const useSettings = (): SettingsContextType => {
   }
   return context;
 };
-
-// const setInfoMode = () => {
-//   if (zoomMode === "fullscreen") {
-//     return;
-//   }
-//   prevZoomMode.current = zoomMode;
-//   setZoomMode("info");
-// };
-
-// const leaveInfoMode = () => {
-//   setZoomMode(prevZoomMode.current);
-//   prevZoomMode.current = "wide";
-// };
-// const setWideMode = () => {
-//   prevZoomMode.current = "handheld";
-//   setZoomMode("wide");
-// };

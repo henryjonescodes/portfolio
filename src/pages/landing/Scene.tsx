@@ -1,19 +1,15 @@
 // Scene.tsx
 import { Canvas } from "@react-three/fiber";
-import { Suspense, useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Suspense, useRef } from "react";
 import * as THREE from "three";
 import CustomControls from "../../components/CustomControls";
-import { Knob } from "../../components/Knob";
-import useModel from "../../hooks/useModel";
-import useRaycaster from "../../hooks/useRaycaster";
+import { SiteMixer } from "../../models/SiteMixer";
+import InfoPanel from "./InfoPanel";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
-import InfoPanel from "./InfoPanel";
-import { SiteMixer } from "../../models/SiteMixer";
 
 export default function Scene() {
-  const { activeObject, handlePointerMove } = useRaycaster();
+  // const { activeObject, handlePointerMove } = useRaycaster();
   const screenGroupRef = useRef<THREE.Group>(null);
 
   return (
@@ -27,7 +23,10 @@ export default function Scene() {
         maxAzimuthAngle={Math.PI / 6}
       />
       {/* <OrbitControls /> */}
-      <group scale={3} onPointerMove={handlePointerMove}>
+      <group
+        scale={3}
+        // onPointerMove={handlePointerMove}
+      >
         <Suspense fallback={null}>
           <group
             ref={screenGroupRef}

@@ -1,14 +1,10 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation, useNavigate } from "react-router-dom";
 import Page from "../../components/Page";
+import { ColorsProvider, useColors } from "../../context/ColorsContext";
 import { SettingsProvider, useSettings } from "../../context/SettingsContext";
 import styles from "./landing.module.scss";
 import Scene from "./Scene";
-import { useControls } from "leva";
-import { useEffect } from "react";
-import { colors as defaultColors } from "./../../styles/sass-variables";
-import { ColorsProvider, useColors } from "../../context/ColorsContext";
 
 const wrapperVariants = {
   show: {
@@ -37,14 +33,7 @@ export const LandingWrapper = () => {
 };
 
 const Landing = () => {
-  const location = useLocation();
-  const navigate = useNavigate(); // Initialize the navigate function
   const { zoomLevel } = useSettings();
-
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const page = pathSegments[0];
-  const isHidden = zoomLevel !== "fullscreen" || page === undefined;
-
   useColors();
 
   return (
@@ -53,17 +42,15 @@ const Landing = () => {
         {zoomLevel === "fullscreen" && (
           <motion.div
             key={"home"}
-            className={cn(styles.wrapper, { [styles.disabled]: isHidden })}
+            className={cn(styles.wrapper, {
+              [styles.disabled]: zoomLevel !== "fullscreen",
+            })}
             variants={wrapperVariants}
             initial="hide"
-            animate={isHidden ? "hide" : "show"}
+            animate={zoomLevel !== "fullscreen" ? "hide" : "show"}
             exit="hide"
           >
-            <Page
-              navigate={navigate}
-              visible={page !== undefined}
-              page={page}
-            />
+            <Page />
           </motion.div>
         )}
       </AnimatePresence>
