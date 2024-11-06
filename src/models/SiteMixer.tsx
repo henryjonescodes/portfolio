@@ -13,8 +13,6 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
   colorTexture.flipY = true;
   roughnessTexture.flipY = true;
 
-  console.log(materials, nodes);
-
   return (
     <group {...props} dispose={null}>
       <group position={[0, 0, -0.001]}>

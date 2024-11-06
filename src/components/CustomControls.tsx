@@ -1,4 +1,3 @@
-import { useSpring } from "@react-spring/three";
 import { useFrame, useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useEffect, useState } from "react";
@@ -10,6 +9,7 @@ import {
   zoomLevels,
 } from "../styles/layout.constants";
 import { useSettings } from "../context/SettingsContext";
+import { useSpring } from "react-spring";
 
 interface CustomControlsProps {
   targetRef?: React.RefObject<THREE.Group>;
@@ -162,7 +162,7 @@ export default function CustomControls({
     const phi = Math.acos(y / radius);
     setInitialSpherical({ radius, theta, phi });
 
-    // Animate to the new initialCameraPosition if zoomMode is undefined
+    // Animate to the new initialCameraPosition if zoomMode is wide
     if (zoomLevel === "wide") {
       api.start({
         theta,
@@ -247,17 +247,14 @@ export default function CustomControls({
     console.log("Drag enabled: ", dragEnabled);
   }, [dragEnabled]);
 
-  // Update camera position each frame
   useFrame(() => {
     if (!camera) {
       console.error("Camera not found");
       return;
     }
 
-    // Always use the spring's position
     camera.position.set(...(spring.position.get() as [number, number, number]));
 
-    // Adjust the camera's target/lookAt
     if (zoomLevel === "wide" && dragEnabled) {
       camera.lookAt(0, 0, 0);
     }

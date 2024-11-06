@@ -5,7 +5,7 @@ import { LandingWrapper } from "./pages/landing";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Projects from "./pages/projects";
 import About from "./pages/about";
-import Home from "./pages/home/Home";
+import Home from "./pages/home";
 
 export default function App() {
   return (

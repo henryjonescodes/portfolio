@@ -1,170 +1,194 @@
 // InfoPanel.tsx
-import React, { useState, useEffect, MouseEventHandler } from "react";
-import { Html } from "@react-three/drei";
 import { motion } from "framer-motion";
-import styles from "./landing.module.scss";
-import { useColors } from "../../context/ColorsContext";
+import React from "react";
+import Background from "../../components/Background";
 import { CustomHTML } from "../../components/CustomHTML";
-import { ThreeEvent } from "@react-three/fiber";
+import { useColors } from "../../context/ColorsContext";
+import { useSettings } from "../../context/SettingsContext";
+import styles from "./landing.module.scss";
+import Close from "./../../assets/svg/icons/close.svg?react";
+import NavBarButton from "../../components/NavBar/NavBarButton";
+import AnimatedLine from "../../components/AnimatedLine";
+import cn from "classnames";
+type ColorHex = `#${string}`;
 
-// Define the PrimaryColors type
 interface PrimaryColors {
-  foregroundPrimary: string;
-  accentPrimary: string;
-  backgroundPrimary: string;
+  foregroundPrimary: ColorHex;
+  accentPrimary: ColorHex;
+  backgroundPrimary: ColorHex;
 }
 
-// Helper function to convert RGB to Hex
-const rgbToHex = (r: number, g: number, b: number): string => {
-  const toHex = (value: number) => value.toString(16).padStart(2, "0");
-  return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+const hexToHsl = (hex: ColorHex): { h: number; s: number; l: number } => {
+  let r = 0,
+    g = 0,
+    b = 0;
+  if (hex.length === 7) {
+    r = parseInt(hex.slice(1, 3), 16) / 255;
+    g = parseInt(hex.slice(3, 5), 16) / 255;
+    b = parseInt(hex.slice(5, 7), 16) / 255;
+  }
+  const max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
+  let h = 0,
+    s = 0,
+    l = (max + min) / 2;
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
+        break;
+      case g:
+        h = ((b - r) / d + 2) * 60;
+        break;
+      case b:
+        h = ((r - g) / d + 4) * 60;
+        break;
+    }
+  }
+  return { h, s, l };
 };
 
-type InfoPanelProps = {
-  onClick?: MouseEventHandler<HTMLDivElement> | undefined;
-};
-
-const InfoPanel = ({ onClick }: InfoPanelProps) => {
-  // Access primary colors and the updater function from context
-  const { primaryColors, setPrimaryColors } = useColors();
-
-  // State to manage which color is currently selected
-  const [selectedColor, setSelectedColor] = useState<
-    "accent" | "foreground" | "background"
-  >("accent");
-
-  // Function to extract RGB values from a hex color string
-  const getRgbValues = (hex: string) => {
-    const bigint = parseInt(hex.slice(1), 16);
-    return {
-      r: (bigint >> 16) & 255,
-      g: (bigint >> 8) & 255,
-      b: bigint & 255,
+const hslToHex = (h: number, s: number, l: number): ColorHex => {
+  h /= 360;
+  let r = l,
+    g = l,
+    b = l;
+  if (s !== 0) {
+    const hue2rgb = (p: number, q: number, t: number) => {
+      if (t < 0) t += 1;
+      if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
     };
-  };
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hue2rgb(p, q, h + 1 / 3);
+    g = hue2rgb(p, q, h);
+    b = hue2rgb(p, q, h - 1 / 3);
+  }
+  const toHex = (x: number) =>
+    Math.round(x * 255)
+      .toString(16)
+      .padStart(2, "0");
+  return `#${toHex(r)}${toHex(g)}${toHex(b)}` as ColorHex;
+};
 
-  // State to manage RGB values of the selected color
-  const [rgbValues, setRgbValues] = useState(
-    getRgbValues(primaryColors.accentPrimary)
-  );
-
-  // Update RGB values when the selected color changes
-  useEffect(() => {
-    setRgbValues(
-      getRgbValues(
-        primaryColors[`${selectedColor}Primary` as keyof PrimaryColors]
-      )
-    );
-  }, [selectedColor, primaryColors]);
-
-  // Handler to change the selected color category
-  const handleColorSelection = (
-    color: "accent" | "foreground" | "background"
-  ) => {
-    setSelectedColor(color);
-  };
-
-  // Handler to update RGB values and primary colors based on slider input
-  const handleSliderChange = (color: "r" | "g" | "b", value: number) => {
-    const updatedRgbValues = { ...rgbValues, [color]: value };
-    setRgbValues(updatedRgbValues);
-
-    // Convert updated RGB to hex and update the primary color in context
-    const newHexColor = rgbToHex(
-      updatedRgbValues.r,
-      updatedRgbValues.g,
-      updatedRgbValues.b
-    );
-    setPrimaryColors((prevColors) => ({
-      ...prevColors,
-      [`${selectedColor}Primary`]: newHexColor,
-    }));
-  };
+const InfoPanel = () => {
+  const { primaryColors, setPrimaryColors } = useColors();
+  const { toggleInfoMode, zoomLevel } = useSettings();
 
   return (
     <CustomHTML transform occlude="blending">
-      <motion.div className={styles.infoPanel} onClick={onClick}>
-        <motion.h3 className={styles.panelTitle}>Color Picker</motion.h3>
-
-        <motion.div className={styles.colorSelection}>
-          <motion.h3
-            onClick={() => handleColorSelection("accent")}
-            className={`${styles.colorOption} ${
-              selectedColor === "accent" ? styles.selected : ""
-            }`}
-          >
-            Accent
-          </motion.h3>
-          <motion.h3
-            onClick={() => handleColorSelection("foreground")}
-            className={`${styles.colorOption} ${
-              selectedColor === "foreground" ? styles.selected : ""
-            }`}
-          >
-            Foreground
-          </motion.h3>
-          <motion.h3
-            onClick={() => handleColorSelection("background")}
-            className={`${styles.colorOption} ${
-              selectedColor === "background" ? styles.selected : ""
-            }`}
-          >
-            Background
-          </motion.h3>
-        </motion.div>
-
-        <motion.div className={styles.sliders}>
-          <ColorSlider
-            label="R"
-            value={rgbValues.r}
-            onChange={(value) => handleSliderChange("r", value)}
-          />
-          <ColorSlider
-            label="G"
-            value={rgbValues.g}
-            onChange={(value) => handleSliderChange("g", value)}
-          />
-          <ColorSlider
-            label="B"
-            value={rgbValues.b}
-            onChange={(value) => handleSliderChange("b", value)}
-          />
-        </motion.div>
-
-        <motion.div className={styles.currentColor}>
-          <motion.p>
-            Current {selectedColor} color:{" "}
-            {primaryColors[`${selectedColor}Primary` as keyof PrimaryColors]}
-          </motion.p>
+      <motion.div
+        className={styles.infoPanel}
+        onClick={() => {
+          if (zoomLevel === "info") {
+            return;
+          }
+          toggleInfoMode();
+        }}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+      >
+        <motion.div
+          className={cn({
+            [styles.content]: true,
+            [styles.disabled]: zoomLevel !== "info",
+          })}
+        >
+          <motion.div className={styles.background}>
+            <Background />
+          </motion.div>
+          <motion.span className={styles.navbar}>
+            <span />
+            <NavBarButton
+              onClick={() => {
+                toggleInfoMode();
+              }}
+              Icon={Close}
+            />
+            <AnimatedLine
+              className={styles.border}
+              borderWidth={5}
+              horizontal
+            />
+          </motion.span>
+          <motion.div className={styles.colorPicker}>
+            <HueSlider
+              label="Foreground"
+              colorHex={primaryColors.foregroundPrimary}
+              className={styles.foreground}
+              onChange={(newHex) =>
+                setPrimaryColors((prev) => ({
+                  ...prev,
+                  foregroundPrimary: newHex,
+                }))
+              }
+            />
+            <HueSlider
+              label="Background"
+              colorHex={primaryColors.backgroundPrimary}
+              className={styles.background}
+              onChange={(newHex) =>
+                setPrimaryColors((prev) => ({
+                  ...prev,
+                  backgroundPrimary: newHex,
+                }))
+              }
+            />
+            <HueSlider
+              label="Accent"
+              colorHex={primaryColors.accentPrimary}
+              className={styles.accent}
+              onChange={(newHex) =>
+                setPrimaryColors((prev) => ({ ...prev, accentPrimary: newHex }))
+              }
+            />
+          </motion.div>
         </motion.div>
       </motion.div>
     </CustomHTML>
   );
 };
 
-interface ColorSliderProps {
-  label: "R" | "G" | "B";
-  value: number;
-  onChange: (value: number) => void;
+interface HueSliderProps {
+  label: string;
+  colorHex: ColorHex;
+  onChange: (newHex: ColorHex) => void;
+  className: string;
 }
 
-const ColorSlider: React.FC<ColorSliderProps> = ({
+const HueSlider: React.FC<HueSliderProps> = ({
   label,
-  value,
+  colorHex,
   onChange,
+  className,
 }) => {
+  const { h, s, l } = hexToHsl(colorHex);
+
+  const handleHueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const newHue = parseInt(event.target.value, 10);
+    const newHex = hslToHex(newHue, s, l);
+    onChange(newHex as ColorHex);
+  };
+
   return (
-    <label className={styles.sliderLabel}>
-      {label}:
+    <div className={cn(styles.hueSlider, className)}>
       <input
         type="range"
         min="0"
-        max="255"
-        value={value}
-        onChange={(e) => onChange(parseInt(e.target.value))}
+        max="360"
+        value={h}
+        onChange={handleHueChange}
         className={styles.slider}
       />
-    </label>
+      <h4 className={styles.label}>{label}</h4>
+    </div>
   );
 };
 

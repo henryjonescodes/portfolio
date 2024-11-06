@@ -1,40 +1,24 @@
-import { AnimatePresence, motion } from "framer-motion";
-import styles from "./home.module.scss";
-import TypewriterText from "../../components/TypewriterText";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import PageContents from "../../components/Page/PageContents";
-import { useLocation, useNavigate } from "react-router-dom";
+import TypewriterText from "../../components/TypewriterText";
+import styles from "./home.module.scss";
 
 // Define animation variants for the menu with staggered children
 const menuVariants = {
-  initial: {
-    // opacity: 0,
-  },
   animate: {
-    // opacity: 1,
     transition: {
-      staggerChildren: 0.05, // Stagger the children by 0.3 seconds
-    },
-  },
-  exit: {
-    // opacity: 0,
-    transition: {
-      duration: 1.5, // Control exit duration
-      staggerChildren: 0.3, // Stagger the children by 0.3 seconds
-      when: "afterChildren", // Ensure parent waits for children to exit
+      staggerChildren: 0.1,
     },
   },
 };
 
 const Home = () => {
-  const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const page = pathSegments[0];
   const navigate = useNavigate(); // Initialize the navigate function
 
   const textStaggerSeconds = 0.03;
+
   return (
-    // <AnimatePresence>
-    //   {!page && (
     <PageContents key={"menu"} className={styles.menu}>
       {/* Henry Jones */}
       <motion.h1 variants={menuVariants}>
@@ -73,8 +57,6 @@ const Home = () => {
         <TypewriterText text="Projects" staggerChildren={textStaggerSeconds} />
       </motion.h2>
     </PageContents>
-    // )}
-    // </AnimatePresence>
   );
 };
 

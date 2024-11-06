@@ -38,11 +38,7 @@ export default function Scene() {
             <Screen />
           </group>
           <group position={[0.764, 0.297, 0.038]} scale={0.0351}>
-            <InfoPanel
-              onClick={() => {
-                toggleInfoMode();
-              }}
-            />
+            <InfoPanel />
           </group>
           <SiteMixer position={[0, 0, 0]} />
         </Suspense>

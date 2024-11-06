@@ -47,10 +47,7 @@ const NavBar = ({ navigate, page }: NavBarProps) => {
   const {
     animationDisabled,
     setAnimationDisabled,
-    fullScreen,
-    setFullScreen,
     zoomLevel,
-    setZoomLevel,
     toggleFullScreen,
   } = useSettings();
 
@@ -58,8 +55,9 @@ const NavBar = ({ navigate, page }: NavBarProps) => {
     navigate(path);
   };
 
-  const mini = !fullScreen || width < widthSmall;
-  const centerText = mini ? page : `$henry-jones/${page}`;
+  const pageName = !!page ? page : "home";
+  const mini = zoomLevel !== "fullscreen" || width < widthSmall;
+  const centerText = mini ? pageName : `$henry-jones/${pageName}`;
 
   return (
     <motion.span
