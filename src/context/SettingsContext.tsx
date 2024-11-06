@@ -16,8 +16,6 @@ import { useLocation } from "react-router-dom";
 type SettingsContextType = {
   animationDisabled: boolean;
   setAnimationDisabled: Dispatch<SetStateAction<boolean>>;
-  fullScreen: boolean;
-  setFullScreen: Dispatch<SetStateAction<boolean>>;
   setZoomLevel: (toMode: zoomLevelType) => void;
   zoomLevel: zoomLevelType;
   toggleFullScreen: () => void;
@@ -27,8 +25,6 @@ type SettingsContextType = {
 const defaultSettings: SettingsContextType = {
   animationDisabled: false,
   setAnimationDisabled: () => {}, // Placeholder function; will be overwritten in provider
-  fullScreen: false,
-  setFullScreen: () => {}, // Placeholder function; will be overwritten in provider
   setZoomLevel: (toMode: zoomLevelType) => {},
   zoomLevel: "wide",
   toggleFullScreen: () => {},
@@ -56,7 +52,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
 
   // ? Setup States
   const [zoomLevel, setZoomLevel] = useState<zoomLevelType>("wide");
-  const [fullScreen, setFullScreen] = useState(defaultSettings.fullScreen);
   const [animationDisabled, setAnimationDisabled] = useState(
     defaultSettings.animationDisabled
   );
@@ -101,8 +96,6 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       value={{
         animationDisabled,
         setAnimationDisabled,
-        fullScreen,
-        setFullScreen,
         setZoomLevel,
         zoomLevel,
         toggleFullScreen,
