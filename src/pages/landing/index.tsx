@@ -39,18 +39,18 @@ export const LandingWrapper = () => {
 const Landing = () => {
   const location = useLocation();
   const navigate = useNavigate(); // Initialize the navigate function
-  const { fullScreen } = useSettings();
+  const { zoomLevel } = useSettings();
 
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
-  const isHidden = !fullScreen || page === undefined;
+  const isHidden = zoomLevel !== "fullscreen" || page === undefined;
 
   useColors();
 
   return (
     <motion.div className={styles.landing}>
       <AnimatePresence>
-        {fullScreen && (
+        {zoomLevel === "fullscreen" && (
           <motion.div
             key={"home"}
             className={cn(styles.wrapper, { [styles.disabled]: isHidden })}

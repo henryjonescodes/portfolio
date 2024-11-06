@@ -10,7 +10,7 @@ import styles from "./landing.module.scss";
 import { useSettings } from "../../context/SettingsContext";
 
 const Screen = () => {
-  const { fullScreen } = useSettings();
+  const { zoomLevel } = useSettings();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
@@ -18,7 +18,8 @@ const Screen = () => {
   const navigate = useNavigate(); // Initialize the navigate function
   const { width, height } = screenSize;
 
-  const isHidden = (fullScreen && page !== undefined) || page === undefined;
+  const isHidden =
+    (zoomLevel === "fullscreen" && page !== undefined) || page === undefined;
 
   const wrapperVariants = {
     show: {
@@ -53,7 +54,7 @@ const Screen = () => {
           animate={isHidden ? "hide" : "show"}
         >
           <AnimatePresence>
-            {!fullScreen && (
+            {zoomLevel !== "fullscreen" && (
               <Page
                 key={"screen"}
                 navigate={navigate}

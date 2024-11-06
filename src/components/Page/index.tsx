@@ -54,7 +54,7 @@ type PageProps = {
 
 const Page = ({ navigate, visible = true, page }: PageProps) => {
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const { fullScreen } = useSettings();
+  const { zoomLevel } = useSettings();
 
   useEffect(() => {
     const scrollToTop = () => {
@@ -72,13 +72,15 @@ const Page = ({ navigate, visible = true, page }: PageProps) => {
       {visible && (
         <motion.div
           key={"page"}
-          className={cn(styles.page, { [styles.pageHandheld]: !fullScreen })}
+          className={cn(styles.page, {
+            [styles.pageHandheld]: zoomLevel !== "fullscreen",
+          })}
           initial="initial"
           animate="animate"
           exit="exit"
           variants={pageVariants}
         >
-          {fullScreen && (
+          {zoomLevel === "fullscreen" && (
             <motion.div
               className={styles.background}
               variants={backgroundVariants}
@@ -89,7 +91,7 @@ const Page = ({ navigate, visible = true, page }: PageProps) => {
           <NavBar navigate={navigate} page={page} />
           <motion.div
             className={cn(styles.content, {
-              [styles.contentFullScreen]: fullScreen,
+              [styles.contentFullScreen]: zoomLevel === "fullscreen",
             })}
             key="pageContent"
             variants={pageVariants}

@@ -12,21 +12,21 @@ import {
 import { useSettings } from "../context/SettingsContext";
 
 interface CustomControlsProps {
-  zoomMode?: "info" | "handheld";
+  // zoomMode?: "info" | "handheld";
   targetRef?: React.RefObject<THREE.Group>;
   maxPolarAngle?: number;
   maxAzimuthAngle?: number;
 }
 
 export default function CustomControls({
-  zoomMode,
+  // zoomMode,
   targetRef,
   maxPolarAngle = Math.PI / 6,
   maxAzimuthAngle = Math.PI / 6,
 }: CustomControlsProps) {
   const { camera } = useThree();
   const { width } = useWindowDimensions();
-  const { fullScreen } = useSettings();
+  const { zoomLevel: zoomMode } = useSettings();
 
   // State for zoomLevel and initialCameraPosition
   const [zoomLevel2, setZoomLevel2] = useState<ZoomLevel>(zoomLevels.default);
@@ -152,8 +152,8 @@ export default function CustomControls({
     setInitialCameraPosition(
       newZoomLevel.wide.toArray() as [number, number, number]
     );
-  }, [fullScreen, width]);
-
+  }, [width]);
+  // TODO: do we need zoomMode dep?
   // Update initialSpherical and animate camera when initialCameraPosition changes
   useEffect(() => {
     const [x, y, z] = initialCameraPosition;
@@ -195,10 +195,19 @@ export default function CustomControls({
       let cameraPosition: [number, number, number];
 
       switch (zoomMode) {
+        case "fullscreen":
+          cameraPosition = zoomLevel2.fullScreen.toArray() as [
+            number,
+            number,
+            number
+          ];
+          break;
         case "handheld":
-          cameraPosition = fullScreen
-            ? (zoomLevel2.fullScreen.toArray() as [number, number, number])
-            : (zoomLevel2.handheld.toArray() as [number, number, number]);
+          cameraPosition = zoomLevel2.handheld.toArray() as [
+            number,
+            number,
+            number
+          ];
           break;
         case "info":
           cameraPosition = zoomLevel2.info.toArray() as [
@@ -237,15 +246,15 @@ export default function CustomControls({
     zoomMode,
     zoomLevel2,
     targetRef,
-    fullScreen,
+    zoomMode,
     initialCameraPosition,
     initialSpherical,
     api,
   ]);
 
-  useEffect(() => {
-    console.log("Drag enabled: ", dragEnabled);
-  }, [dragEnabled]);
+  // useEffect(() => {
+  //   console.log("Drag enabled: ", dragEnabled);
+  // }, [dragEnabled]);
 
   // Update camera position each frame
   useFrame(() => {

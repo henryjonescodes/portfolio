@@ -51,6 +51,7 @@ const NavBar = ({ navigate, page }: NavBarProps) => {
     setFullScreen,
     zoomLevel,
     setZoomLevel,
+    toggleFullScreen,
   } = useSettings();
 
   const handleNavClick = (path: string) => {
@@ -116,14 +117,8 @@ const NavBar = ({ navigate, page }: NavBarProps) => {
           />
           <NavBarButton
             onClick={() => {
-              if (zoomLevel === "fullscreen") {
-                setZoomLevel("wide");
-              } else {
-                setZoomLevel("fullscreen");
-              }
-              setFullScreen(!fullScreen);
+              toggleFullScreen();
             }}
-            // onClick={() => setFullScreen(!fullScreen)}
             Icon={Expand}
           />
           <NavBarButton

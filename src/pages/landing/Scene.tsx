@@ -11,31 +11,17 @@ import styles from "./landing.module.scss";
 import Screen from "./Screen";
 import InfoPanel from "./InfoPanel";
 import { SiteMixer } from "../../models/SiteMixer";
-import { OrbitControls } from "@react-three/drei";
 
 export default function Scene() {
-  const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const page = pathSegments[0];
-
   const { activeObject, handlePointerMove } = useRaycaster();
-  const [zoomLevel, setZoomLevel] = useState<"info" | "handheld" | undefined>(
-    !!page ? "handheld" : undefined
-  );
-
-  // Ref for the screen group
   const screenGroupRef = useRef<THREE.Group>(null);
-
-  useEffect(() => {
-    setZoomLevel(!!page ? "handheld" : undefined);
-  }, [page]);
 
   return (
     <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
       <ambientLight intensity={1} />
       <directionalLight position={[2, 5, 2]} />
       <CustomControls
-        zoomMode={zoomLevel} // or "handheld" or undefined
+        // zoomMode={zoomLevel} // or "handheld" or undefined
         targetRef={screenGroupRef}
         maxPolarAngle={Math.PI / 6}
         maxAzimuthAngle={Math.PI / 6}
@@ -47,9 +33,6 @@ export default function Scene() {
             ref={screenGroupRef}
             position={[-0.243, 0, 0.013]}
             scale={0.0851}
-            onClick={() => {
-              console.log("Click2");
-            }}
           >
             <Screen />
           </group>
