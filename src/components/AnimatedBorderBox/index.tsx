@@ -8,7 +8,6 @@ interface AnimatedBorderProps {
   width: number;
   height: number;
   borderWidth: number;
-  borderColor: string;
   borderRadius?: number;
   onAnimationComplete?: () => void;
 }
@@ -35,7 +34,6 @@ const AnimatedBorder = ({
   width,
   height,
   borderWidth,
-  borderColor,
   borderRadius = 20,
   onAnimationComplete,
 }: AnimatedBorderProps) => {
@@ -54,7 +52,6 @@ const AnimatedBorder = ({
         ry={borderRadius}
         width={width - borderWidth}
         height={height - borderWidth}
-        stroke={borderColor}
         fill="transparent"
         strokeWidth={borderWidth}
         variants={pathVariants}
@@ -66,7 +63,6 @@ const AnimatedBorder = ({
 
 interface AnimatedBorderBoxProps {
   borderWidth?: number;
-  borderColor?: string;
   borderRadius?: number;
   className?: string;
   contentClassName?: string;
@@ -76,7 +72,6 @@ interface AnimatedBorderBoxProps {
 // TODO: Add a speed control prop for animation
 const AnimatedBorderBox = ({
   borderWidth = 4,
-  borderColor = "#00d67d",
   className,
   children,
   contentClassName,
@@ -128,7 +123,6 @@ const AnimatedBorderBox = ({
         width={dimensions.width}
         height={dimensions.height}
         borderWidth={borderWidth}
-        borderColor={borderColor}
         borderRadius={borderRadius}
         onAnimationComplete={() => setCssBorderVisible(true)}
       />

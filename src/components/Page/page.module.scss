@@ -19,6 +19,10 @@
   &Handheld {
     max-height: 100%;
   }
+
+  &Disabled {
+    pointer-events: none;
+  }
 }
 
 .background {
@@ -32,7 +36,7 @@
 .content {
   @include retro-scrollbar;
   scroll-snap-type: y mandatory;
-  padding: $padding-page;
+  padding: 0px $padding-page;
   overflow: auto;
   width: 100%;
   flex: 1;

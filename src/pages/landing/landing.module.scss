@@ -1,10 +1,12 @@
 @import '@styles/typography.module.scss';
+@import '@styles/layout.module.scss';
 
 .landing {
   width: 100vw;
   height: 100vh;
   position: relative;
   overflow: hidden;
+  pointer-events: auto;
 
 }
 
@@ -29,7 +31,6 @@
 
 .screen {
   position: relative;
-  border-radius: 45px;
   overflow: hidden;
 
   >video {
@@ -39,41 +40,139 @@
   }
 }
 
-.controlBar {
-  height: 30px !important;
-  width: 328px !important;
 
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+.infoPanel {
+  @include text-colors;
+  position: relative;
   overflow: hidden;
+  height: 325px !important;
+  width: 425px !important;
+  border-radius: 16px;
 
-  >div {
-    overflow: hidden;
-    height: 100%;
-  }
 
-  .left {
-    margin-right: 3px;
-    min-width: 117px;
-    flex: 0;
+  >.content {
+    background-color: red;
     display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
 
-  .center {
-    min-width: 76px;
-    margin-right: 60px;
-    flex: 0;
-  }
+    &.disabled {
+      pointer-events: none;
+    }
 
-  .right {
-    flex: 1;
+    >.background {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    >.navbar {
+      position: relative;
+      min-height: $height-nav-bar;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      // width: min-content;
+
+      >.border {
+        top: unset !important;
+        transform: translateY(100%);
+        bottom: 0;
+        width: 100%;
+      }
+    }
+
+    >.colorPicker {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+    }
   }
 }
 
-.tools {
-  position: absolute;
-  z-index: 10000;
+// Updated styles in landing.module.scss
+.hueSlider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+
+  &.foreground {
+    .slider {
+      background: var(--foreground-primary);
+    }
+  }
+
+  &.background {
+    .slider {
+      background: var(--background-primary);
+    }
+  }
+
+  &.accent {
+    .slider {
+      background: var(--accent-primary);
+    }
+  }
+
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 50px;
+    flex: 1;
+    margin-bottom: 8px;
+
+    writing-mode: vertical-lr;
+
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 55px;
+      height: 55px;
+      background: gray;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      // width: 55px;
+      // height: 55px;
+      // background: gray;
+      // cursor: pointer;
+    }
+
+    &::-ms-thumb {
+      // width: 55px;
+      // height: 55px;
+      // background: gray;
+      // cursor: pointer;
+    }
+
+    &::-webkit-slider-runnable-track {
+      // height: 100%;
+      // background: #ddd;
+    }
+
+    &::-moz-range-track {
+      // height: 100%;
+      // background: #ddd;
+    }
+
+    &::-ms-track {
+      // height: 100%;
+      // background: #ddd;
+    }
+  }
+
+  .label {
+    margin-top: 8px;
+  }
 }

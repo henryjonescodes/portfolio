@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import ExperienceEntry from "../../components/ExperienceEntry";
 import PageContents from "../../components/Page/PageContents";
-import TypewriterText from "../../components/TypewriterText";
+import TypewriterText from "../../components/3D/TypewriterText";
 import styles from "./projects.module.scss";
 
 const projectsVariants = {
@@ -32,8 +32,8 @@ const entryContentVariants = {
 
 const Projects = () => {
   return (
-    <PageContents key={"projects"}>
-      <motion.div variants={projectsVariants} className={styles.projects}>
+    <PageContents key={"projects"} className={styles.projects}>
+      <motion.div variants={projectsVariants}>
         <motion.h1>
           <TypewriterText text={"Projects"} staggerChildren={0.05} />
         </motion.h1>

@@ -4,7 +4,7 @@ import { useSettings } from "../../context/SettingsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthSmall } from "../../styles/layout.constants";
 import AnimatedLine from "../AnimatedLine";
-import TypewriterText from "../TypewriterText";
+import TypewriterText from "../3D/TypewriterText";
 import Checklist from "./../../assets/svg/icons/check-list.svg?react";
 import Close from "./../../assets/svg/icons/close.svg?react";
 import Code from "./../../assets/svg/icons/code.svg?react";
@@ -44,15 +44,20 @@ type NavBarProps = {
 
 const NavBar = ({ navigate, page }: NavBarProps) => {
   const { width } = useWindowDimensions();
-  const { animationDisabled, setAnimationDisabled, fullScreen, setFullScreen } =
-    useSettings();
+  const {
+    animationDisabled,
+    setAnimationDisabled,
+    zoomLevel,
+    toggleFullScreen,
+  } = useSettings();
 
   const handleNavClick = (path: string) => {
     navigate(path);
   };
 
-  const mini = !fullScreen || width < widthSmall;
-  const centerText = mini ? page : `$henry-jones/${page}`;
+  const pageName = !!page ? page : "home";
+  const mini = zoomLevel !== "fullscreen" || width < widthSmall;
+  const centerText = mini ? pageName : `$henry-jones/${pageName}`;
 
   return (
     <motion.span
@@ -109,7 +114,9 @@ const NavBar = ({ navigate, page }: NavBarProps) => {
             active={animationDisabled}
           />
           <NavBarButton
-            onClick={() => setFullScreen(!fullScreen)}
+            onClick={() => {
+              toggleFullScreen();
+            }}
             Icon={Expand}
           />
           <NavBarButton

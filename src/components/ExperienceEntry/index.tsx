@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import styles from "./experience-entry.module.scss";
-import TypewriterText from "../TypewriterText";
+import TypewriterText from "../3D/TypewriterText";
 import AnimatedBorderBox from "../AnimatedBorderBox";
 import AnimatedLine from "../AnimatedLine";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";

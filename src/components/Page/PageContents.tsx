@@ -15,7 +15,6 @@ type Props = {
 } & PageContentsProps;
 
 const PageContents: React.FC<Props> = ({ children, className }) => {
-  const { fullScreen } = useSettings();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
@@ -39,8 +38,8 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
       animate: {
         opacity: 1,
         transition: {
-          delay: fullScreen ? 0.2 : 0.2,
-          delayChildren: fullScreen ? 0.2 : 0.2,
+          delay: 0.2,
+          delayChildren: 0.2,
           staggerChildren: 0.5,
         },
       },
@@ -51,7 +50,7 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
         },
       },
     }),
-    [fullScreen]
+    []
   );
 
   const minimalPageVariants = {

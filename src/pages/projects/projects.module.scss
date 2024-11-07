@@ -4,17 +4,8 @@
 @import '@styles/mixins.module.scss';
 @import '@styles/colors.module.scss';
 
-.projects {}
-
-.viewer {
-  height: min-content;
-
-  &Content {
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    gap: 16px;
-  }
+.projects {
+  padding: $padding-page 0px;
 }
 
 .video {

@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import ExperienceEntry from "../../components/ExperienceEntry";
 import PageContents from "../../components/Page/PageContents";
-import TypewriterText from "../../components/TypewriterText";
-
+import TypewriterText from "../../components/3D/TypewriterText";
+import styles from "./experience.module.scss";
 const experienceVariants = {
   animate: {
     transition: {
@@ -13,7 +13,7 @@ const experienceVariants = {
 
 const Experience = () => {
   return (
-    <PageContents key={"experience"}>
+    <PageContents key={"experience"} className={styles.experience}>
       <motion.div variants={experienceVariants}>
         <motion.h1>
           <TypewriterText text={"Experience"} staggerChildren={0.05} />
