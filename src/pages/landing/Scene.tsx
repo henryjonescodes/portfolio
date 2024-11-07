@@ -2,12 +2,12 @@
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useRef } from "react";
 import * as THREE from "three";
-import CustomControls from "../../components/CustomControls";
-import { SiteMixer } from "../../models/SiteMixer";
+import { SiteMixer } from "../../components/3D/SiteMixer";
 import InfoPanel from "./InfoPanel";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
 import { InteractionProvider } from "../../context/InteractionContext";
+import CustomControls from "../../components/3D/CustomControls";
 
 export default function Scene() {
   const screenGroupRef = useRef<THREE.Group>(null);

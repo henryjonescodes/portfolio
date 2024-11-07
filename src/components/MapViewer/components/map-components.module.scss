@@ -14,6 +14,28 @@
   flex-direction: column;
   gap: 1rem;
 
+  &.handheld {
+    gap: 0.2rem;
+
+    .header {
+
+      .prefix {
+        font-size: 0.9rem;
+      }
+
+      .title {
+        font-size: 1.7rem;
+      }
+    }
+  }
+
+  .description {
+    font-size: 1.1rem;
+  }
+
+  // TODO: fullscreen styles?
+  &.fullscreen {}
+
   .header {
 
     .prefix,
@@ -209,6 +231,11 @@ $line-selected-width: 5px;
   flex-direction: column;
   justify-content: center;
 
+  // TODO: fullscreen styles
+  &.handHeld {}
+
+  &.fullscreen {}
+
   .border {
     height: 100%;
     z-index: 1000;
@@ -220,7 +247,7 @@ $line-selected-width: 5px;
   }
 
   >.contents {
-    border-radius: 32px;
+    border-radius: 32px 32px 0 0px;
     overflow: hidden;
     aspect-ratio: 1.4 !important;
     position: relative;
@@ -300,25 +327,25 @@ $line-selected-width: 5px;
             white-space: nowrap;
 
             h4 {
-              font-size: 1.8rem;
+              font-size: 1.7rem;
               line-height: 1.9rem;
               color: $foreground-primary;
               color: var(--foreground-primary);
             }
 
             h5 {
-              font-size: 1.5rem;
+              font-size: 1.4rem;
               line-height: 1.6rem;
-              color: $foreground-secondary;
-              color: var(--foreground-secondary);
+              color: $foreground-tertiary;
+              color: var(--foreground-tertiary);
             }
 
             svg {
 
               svg,
               path {
-                stroke: $foreground-secondary;
-                stroke: var(--foreground-secondary);
+                stroke: $foreground-tertiary;
+                stroke: var(--foreground-tertiary);
                 fill: transparent;
               }
 
@@ -388,7 +415,7 @@ $line-selected-width: 5px;
 }
 
 .portland {
-  $scale: 190%;
+  $scale: 180%;
 
   &Pin {
     left: 91.2%;
@@ -396,19 +423,19 @@ $line-selected-width: 5px;
   }
 
   .pinSelected {
-    rotate: 330deg !important;
+    rotate: 380deg !important;
   }
 
   >.map {
-    left: -133%;
+    left: -127%;
     top: -15%;
     min-height: $scale;
     min-width: $scale;
   }
 
   .details {
-    left: 96% !important;
-    top: 29% !important;
+    left: 90% !important;
+    top: 37% !important;
   }
 }
 
@@ -421,24 +448,24 @@ $line-selected-width: 5px;
   }
 
   .pinSelected {
-    rotate: 340deg !important;
+    rotate: 380deg !important;
   }
 
   >.map {
-    left: -125%;
-    top: -28%;
+    left: -135%;
+    top: -25%;
     min-height: $scale;
     min-width: $scale;
   }
 
   .details {
-    left: 91.5% !important;
-    top: 41% !important;
+    left: 88% !important;
+    top: 44% !important;
   }
 }
 
 .paloAlto {
-  $scale: 190%;
+  $scale: 180%;
 
   &Pin {
     left: 6.5%;
@@ -446,26 +473,26 @@ $line-selected-width: 5px;
   }
 
   .pinSelected {
-    rotate: 155deg !important;
+    rotate: 180deg !important;
   }
 
   >.map {
-    left: 48%;
-    top: -20%;
+    left: 50%;
+    top: 0%;
     min-height: $scale;
     min-width: $scale;
   }
 
   .details {
-    left: 1.5% !important;
-    top: 41% !important;
+    left: 5.5% !important;
+    top: 30% !important;
 
     translate: -100% -100%;
   }
 }
 
 .schenectady {
-  $scale: 190%;
+  $scale: 180%;
 
   &Pin {
     left: 85%;
@@ -477,8 +504,8 @@ $line-selected-width: 5px;
   }
 
   >.map {
-    left: -82%;
-    top: -0%;
+    left: -75%;
+    top: 7%;
     min-height: $scale;
     min-width: $scale;
   }
@@ -486,7 +513,7 @@ $line-selected-width: 5px;
   .details {
     translate: -100% -100%;
     left: 88.5% !important;
-    top: 19% !important;
+    top: 17% !important;
   }
 }
 

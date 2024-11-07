@@ -2,13 +2,13 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { useGesture } from "@use-gesture/react";
 import { useEffect, useState } from "react";
 import * as THREE from "three";
-import { useWindowDimensions } from "../context/WindowDimensionContext";
+import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import {
   screenWidths,
   ZoomLevel,
   zoomLevels,
-} from "../styles/layout.constants";
-import { useSettings } from "../context/SettingsContext";
+} from "../../styles/layout.constants";
+import { useSettings } from "../../context/SettingsContext";
 import { useSpring } from "react-spring";
 
 interface CustomControlsProps {

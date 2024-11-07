@@ -1,57 +1,56 @@
 import { motion } from "framer-motion-3d";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   InteractionContext,
   InteractiveElement,
   InteractiveElementProps,
-} from "../context/InteractionContext";
+} from "../../context/InteractionContext";
 
 type KnobProps = {
-  rotation?: number; // Optional, controlled if provided
-  setRotation?: (newVal: number) => void;
+  position?: [number, number, number];
   axis?: "x" | "y" | "z";
   min?: number; // In degrees
   max?: number; // In degrees
   mapMin?: number; // Output range min
   mapMax?: number; // Output range max
+  rotation?: number; // Optional, controlled if provided
+  setRotation?: (newVal: number) => void;
   onChange?: (value: number) => void;
-  position?: [number, number, number];
 } & InteractiveElementProps;
 
 export function Knob({
-  name,
-  rotation,
-  setRotation,
   axis = "z",
   min = 0,
-  max = 360, // Degrees
+  max = 360,
   mapMin = 0,
   mapMax = 360,
+  rotation,
+  setRotation,
   onChange,
+  name,
   position = [0, 0, 0],
-  children,
-  onPointerOver,
-  onPointerOut,
-  onPointerDown,
+  ...rest
 }: KnobProps) {
-  const { activeObject } = useContext(InteractionContext);
   const [internalRotation, setInternalRotation] = useState(rotation || 0);
+  const { activeObject } = useContext(InteractionContext);
+  const isActive = activeObject === name;
 
   const isControlled = rotation !== undefined && setRotation !== undefined;
   const currentRotation = isControlled ? rotation : internalRotation;
-
-  const isActive = activeObject === name;
-
-  // Use a ref to store the latest rotation value synchronously
   const rotationRef = useRef(currentRotation);
+
+  const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
   useEffect(() => {
     rotationRef.current = currentRotation;
   }, [currentRotation]);
 
-  // Convert degrees to radians for internal usage
-  const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
-  const radiansToDegrees = (radians: number) => (radians * 180) / Math.PI;
+  // effect to synchronize internalRotation with rotation prop when not interacting
+  useEffect(() => {
+    if (!isActive && rotation !== undefined) {
+      setInternalRotation(rotation);
+    }
+  }, [rotation, isActive]);
 
   useEffect(() => {
     if (isActive) {
@@ -91,14 +90,7 @@ export function Knob({
 
   return (
     <motion.group rotation={rotationArray} position={position}>
-      <InteractiveElement
-        name={name}
-        onPointerOver={onPointerOver}
-        onPointerOut={onPointerOut}
-        onPointerDown={onPointerDown}
-      >
-        {children}
-      </InteractiveElement>
+      <InteractiveElement {...rest} name={name} />
     </motion.group>
   );
 }

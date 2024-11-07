@@ -1,16 +1,15 @@
 // ColorsContext.tsx
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-  useMemo,
-} from "react";
 import { colord, extend } from "colord";
 import mixPlugin from "colord/plugins/mix";
-import { colors as defaultColors } from "./../styles/sass-variables";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import useDebounceEffect from "../hooks/useDebouncedEffect";
+import { colors as defaultColors } from "./../styles/sass-variables";
 
 // Extend colord with plugins
 extend([mixPlugin]);

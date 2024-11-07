@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import AnimatedBorderBox from "../../components/AnimatedBorderBox";
 import PageContents from "../../components/Page/PageContents";
-import TypewriterText from "../../components/TypewriterText";
+import TypewriterText from "../../components/3D/TypewriterText";
 import styles from "./about.module.scss";
 import Map from "../../components/MapViewer/components/Map";
 
@@ -20,6 +20,8 @@ import { MapProvider } from "../../components/MapViewer/MapContext";
 import cn from "classnames";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { screenWidths } from "../../styles/layout.constants";
+import { useSettings } from "../../context/SettingsContext";
+import { useColors } from "../../context/ColorsContext";
 
 const commonExit = {
   opacity: 0,
@@ -115,13 +117,30 @@ const avatarVariants = {
 
 const About = () => {
   const { width } = useWindowDimensions();
+  const { zoomLevel } = useSettings();
+
+  const { primaryHues } = useColors();
+
+  const normalizedHue = (primaryHues.foregroundPrimary + 310) % 360;
+
+  const dynamicFilterStyle = {
+    filter: `sepia(100%) hue-rotate(${normalizedHue}deg) saturate(6)`,
+  };
 
   const moveTags =
-    width > screenWidths.mobileLarge || width < screenWidths.tiny;
+    width > screenWidths.mobileLarge ||
+    width < screenWidths.tiny ||
+    zoomLevel !== "fullscreen";
 
-  const moveSocials = width < screenWidths.tiny;
+  const moveSocials = width < screenWidths.tiny && zoomLevel === "fullscreen";
   return (
-    <PageContents key={"about"} className={styles.about}>
+    <PageContents
+      key={"about"}
+      className={cn(styles.about, {
+        [styles.handheld]: zoomLevel !== "fullscreen",
+        [styles.fullscreen]: zoomLevel === "fullscreen",
+      })}
+    >
       <motion.div className={cn(styles.content, styles.aboutMe)}>
         {/* First Page */}
         <motion.div
@@ -197,6 +216,7 @@ const About = () => {
                   alt="Avatar"
                   className={styles.avatar}
                   variants={avatarVariants}
+                  style={dynamicFilterStyle}
                 />
               </motion.div>
 

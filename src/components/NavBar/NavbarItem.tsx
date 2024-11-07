@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { motion } from "framer-motion";
 import React from "react";
-import TypewriterText from "../TypewriterText";
+import TypewriterText from "../3D/TypewriterText";
 import styles from "./nav-bar.module.scss";
 
 // NavBarItem Component

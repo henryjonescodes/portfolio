@@ -1,11 +1,11 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import Background from "../../components/Background";
-import { CustomHTML } from "../../components/CustomHTML";
+import { CustomHTML } from "../../components/3D/CustomHTML";
 import Page from "../../components/Page";
 import { useSettings } from "../../context/SettingsContext";
-import { screenSize } from "../../styles/constants";
 import styles from "./landing.module.scss";
+import { screenSize } from "../../styles/layout.constants";
 
 const Screen = () => {
   const { zoomLevel } = useSettings();

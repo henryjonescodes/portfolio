@@ -4,7 +4,7 @@ import { useSettings } from "../../context/SettingsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthSmall } from "../../styles/layout.constants";
 import AnimatedLine from "../AnimatedLine";
-import TypewriterText from "../TypewriterText";
+import TypewriterText from "../3D/TypewriterText";
 import Checklist from "./../../assets/svg/icons/check-list.svg?react";
 import Close from "./../../assets/svg/icons/close.svg?react";
 import Code from "./../../assets/svg/icons/code.svg?react";

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import React from "react";
 import Background from "../../components/Background";
-import { CustomHTML } from "../../components/CustomHTML";
+import { CustomHTML } from "../../components/3D/CustomHTML";
 import { useColors } from "../../context/ColorsContext";
 import { useSettings } from "../../context/SettingsContext";
 import styles from "./landing.module.scss";

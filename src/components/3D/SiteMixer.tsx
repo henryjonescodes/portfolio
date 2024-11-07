@@ -1,10 +1,12 @@
 import { useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
-import { useEffect, useState } from "react";
 import { TextureLoader } from "three";
 import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader.js";
-import { Knob } from "../components/Knob";
-import { useColors } from "../context/ColorsContext";
+import { Knob } from "./Knob";
+import { useColors } from "../../context/ColorsContext";
+import { useState } from "react";
+import { Button } from "./Button";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
   const { nodes, materials } = useGLTF("/3D/models/site-mixer-sep.glb") as any;
@@ -16,6 +18,29 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
   colorTexture.flipY = true;
   roughnessTexture.flipY = true;
   const { primaryHues, setPrimaryHues } = useColors();
+
+  const [isButtonOn, setIsButtonOn] = useState(false);
+
+  const handleButtonChange = (newState: boolean) => {
+    setIsButtonOn(newState);
+    console.log("Button state:", newState ? "On" : "Off");
+  };
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Extract the current page from the URL path
+  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const page = pathSegments[0] || ""; // Default to '' for the homepage
+
+  // Handle button click with navigation logic
+  const handleClick = (label: string, path: string) => {
+    if (page === label) {
+      navigate("/"); // Go to homepage if already on the same page
+    } else {
+      navigate(path); // Navigate to the new page
+    }
+  };
 
   return (
     <group {...props} dispose={null}>
@@ -91,48 +116,91 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
           onPointerDown={() => {}}
         />
       </Knob>
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes["Button-4"].geometry}
-        material={materials.Material}
+      <Button
+        name="ControlledButton1"
         position={[0.635, -0.045, 0.05]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes["Button-5"].geometry}
-        material={materials.Material}
-        position={[0.764, -0.045, 0.05]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes["Button-6"].geometry}
-        material={materials.Material}
-        position={[0.892, -0.045, 0.05]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes["Button-1"].geometry}
-        material={materials.Material}
+        on={isButtonOn}
+        onChange={handleButtonChange}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes["Button-4"].geometry}
+          material={materials.Material}
+        />
+      </Button>
+
+      <Button name="ControlledButton2" position={[0.764, -0.045, 0.05]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes["Button-5"].geometry}
+          material={materials.Material}
+        />
+      </Button>
+
+      <Button name="ControlledButton3" position={[0.892, -0.045, 0.05]}>
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes["Button-6"].geometry}
+          material={materials.Material}
+        />
+      </Button>
+
+      <Button
+        name="ProjectsButton"
         position={[0.636, -0.158, 0.056]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes["Button-2"].geometry}
-        material={materials.Material}
+        on={page === "projects"}
+        onChange={(val) => {
+          if (val) {
+            handleClick("projects", "/projects");
+          }
+        }}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes["Button-1"].geometry}
+          material={materials.Material}
+        />
+      </Button>
+
+      <Button
+        name="ExperienceButton"
         position={[0.759, -0.156, 0.056]}
-      />
-      <mesh
-        castShadow
-        receiveShadow
-        geometry={nodes["Button-3"].geometry}
-        material={materials.Material}
+        on={page === "experience"}
+        onChange={(val) => {
+          if (val) {
+            handleClick("experience", "/experience");
+          }
+        }}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes["Button-2"].geometry}
+          material={materials.Material}
+        />
+      </Button>
+
+      <Button
+        name="AboutButton"
         position={[0.893, -0.157, 0.055]}
-      />
+        on={page === "about"}
+        onChange={(val) => {
+          if (val) {
+            handleClick("about", "/about");
+          }
+        }}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes["Button-3"].geometry}
+          material={materials.Material}
+        />
+      </Button>
     </group>
   );
 }

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import PageContents from "../../components/Page/PageContents";
-import TypewriterText from "../../components/TypewriterText";
+import TypewriterText from "../../components/3D/TypewriterText";
 import styles from "./home.module.scss";
 
 // Define animation variants for the menu with staggered children

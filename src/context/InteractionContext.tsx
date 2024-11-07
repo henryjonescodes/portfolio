@@ -38,6 +38,7 @@ export type InteractiveElementProps = {
   onPointerUp?: (e: any) => void;
 };
 
+// TODO: Type the name field?
 export const InteractiveElement = ({
   name,
   children,
@@ -46,7 +47,7 @@ export const InteractiveElement = ({
   onPointerDown,
   onPointerUp,
 }: InteractiveElementProps) => {
-  const { activeObject, setActiveObject } = useContext(InteractionContext);
+  const { setActiveObject } = useContext(InteractionContext);
 
   return React.cloneElement(children, {
     onPointerOver: (e: any) => {

@@ -11,6 +11,7 @@ import styles from "./map-components.module.scss";
 import MapSlider from "./MapSlider";
 import Pin from "./Pin";
 import AnimatedLine from "../../AnimatedLine";
+import { useSettings } from "../../../context/SettingsContext";
 
 const mapContainerVariants = {
   initial: {},
@@ -44,12 +45,16 @@ const Map = () => {
     locationData[currentKey ?? "nyc"] ?? {};
 
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
+  const { zoomLevel } = useSettings();
 
   return (
     <motion.div
       key="mapContent"
       variants={mapContainerVariants}
-      className={styles.mapViewer}
+      className={cn(styles.mapViewer, {
+        [styles.fullscreen]: zoomLevel === "fullscreen",
+        [styles.handheld]: zoomLevel !== "fullscreen",
+      })}
     >
       <motion.div
         className={cn(styles.contents, {

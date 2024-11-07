@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
 type SettingsContextType = {
   animationDisabled: boolean;
   setAnimationDisabled: Dispatch<SetStateAction<boolean>>;
-  setZoomLevel: (toMode: zoomLevelType) => void;
+  setZoomLevel: React.Dispatch<React.SetStateAction<zoomLevelType>>;
   zoomLevel: zoomLevelType;
   toggleFullScreen: () => void;
   toggleInfoMode: () => void;
@@ -26,7 +26,7 @@ type SettingsContextType = {
 const defaultSettings: SettingsContextType = {
   animationDisabled: false,
   setAnimationDisabled: () => {}, // Placeholder function; will be overwritten in provider
-  setZoomLevel: (toMode: zoomLevelType) => {},
+  setZoomLevel: () => {},
   zoomLevel: "wide",
   toggleFullScreen: () => {},
   toggleInfoMode: () => {},
@@ -78,10 +78,13 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     }
   }, [page]);
 
+  // TODO: maybe make this timeout, but its kinda nice like this
   const toggleFullScreen = () => {
     if (zoomLevel !== "fullscreen") {
+      setAnimationDisabled(true);
       setZoomLevel("fullscreen");
     } else {
+      setAnimationDisabled(false);
       setZoomLevel(handHeldZoomLevel.current);
     }
   };

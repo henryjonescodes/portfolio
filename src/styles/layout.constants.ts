@@ -5,7 +5,10 @@ import { Vector3 } from "three";
 export const borderRadiusCard: number = 16;
 export const borderRadiusItem: number = 8;
 
-
+export const screenSize = {
+  height: 610,
+  width: 685
+}
 // New screenWidths record for consolidated width values
 export const screenWidths: Record<string, number> = {
   tiny: 450,

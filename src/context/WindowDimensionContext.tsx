@@ -5,7 +5,7 @@ import React, {
   useContext,
   ReactNode,
 } from "react";
-import { screenSize } from "../styles/constants";
+import { screenSize } from "../styles/layout.constants";
 
 // Define the context type
 interface WindowDimensionContextProps {
