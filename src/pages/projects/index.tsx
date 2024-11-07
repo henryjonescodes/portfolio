@@ -32,8 +32,8 @@ const entryContentVariants = {
 
 const Projects = () => {
   return (
-    <PageContents key={"projects"}>
-      <motion.div variants={projectsVariants} className={styles.projects}>
+    <PageContents key={"projects"} className={styles.projects}>
+      <motion.div variants={projectsVariants}>
         <motion.h1>
           <TypewriterText text={"Projects"} staggerChildren={0.05} />
         </motion.h1>

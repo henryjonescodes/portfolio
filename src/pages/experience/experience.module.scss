@@ -1,35 +1,5 @@
-@import '@styles/mixins.module.scss';
-@import '@styles/colors.module.scss';
+@import '@styles/layout.module.scss';
 
-
-.entry {
-  margin-bottom: 32px; // Adjust spacing between entries as needed
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  .header {
-    display: flex;
-    flex-direction: column;
-
-
-    .title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-    }
-
-    .subtitle {}
-  }
-}
-
-.box {
-
-  &Content {
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
+.experience {
+  padding: $padding-page 0px;
 }
