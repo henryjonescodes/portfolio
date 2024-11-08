@@ -22,7 +22,7 @@ export function Button({
   on,
   onChange,
   onClick,
-  travel = 0.02,
+  travel = 0.01,
   children,
   onPointerOver,
   onPointerOut,

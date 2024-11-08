@@ -8,21 +8,57 @@ import styles from "./landing.module.scss";
 import Screen from "./Screen";
 import { InteractionProvider } from "../../context/InteractionContext";
 import CustomControls from "../../components/3D/CustomControls";
+import { OrbitControls } from "@react-three/drei";
+import { folder, useControls } from "leva";
 
 export default function Scene() {
   const screenGroupRef = useRef<THREE.Group>(null);
 
+  const {
+    dirLightPosition,
+    ambientIntensity,
+    dirLightIntensity,
+    maxPolarAngle,
+    maxAzimuthAngle,
+    useOrbitControls,
+  } = useControls({
+    Lights: folder({
+      dirLightPosition: {
+        value: [5.2, 2.1, 6.5],
+        step: 0.1,
+      },
+      dirLightIntensity: { value: 0.4, min: 0, max: 3, step: 0.1 },
+      ambientIntensity: { value: 0.7, min: 0, max: 3, step: 0.1 },
+    }),
+    Controls: folder({
+      maxPolarAngle: { value: Math.PI / 4, min: 0, max: Math.PI, step: 0.01 },
+      maxAzimuthAngle: { value: Math.PI / 4, min: 0, max: Math.PI, step: 0.01 },
+      useOrbitControls: true,
+    }),
+  });
+
   return (
     <InteractionProvider>
-      <Canvas className={styles.canvas} camera={{ position: [0, 0, 5] }}>
-        <ambientLight intensity={1} />
-        <directionalLight position={[2, 5, 2]} />
-        <CustomControls
-          targetRef={screenGroupRef}
-          maxPolarAngle={Math.PI / 6}
-          maxAzimuthAngle={Math.PI / 6}
+      <Canvas
+        className={styles.canvas}
+        camera={{ position: [0, 0, 5] }}
+        shadows
+      >
+        <ambientLight intensity={ambientIntensity} />
+        <directionalLight
+          position={dirLightPosition}
+          intensity={dirLightIntensity}
+          castShadow
         />
-        {/* <OrbitControls /> */}
+        {useOrbitControls ? (
+          <OrbitControls />
+        ) : (
+          <CustomControls
+            targetRef={screenGroupRef}
+            maxPolarAngle={maxPolarAngle}
+            maxAzimuthAngle={maxAzimuthAngle}
+          />
+        )}
         <group scale={3}>
           <Suspense fallback={null}>
             <group
