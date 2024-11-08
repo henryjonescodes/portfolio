@@ -33,7 +33,7 @@ export default function Scene() {
     Controls: folder({
       maxPolarAngle: { value: Math.PI / 4, min: 0, max: Math.PI, step: 0.01 },
       maxAzimuthAngle: { value: Math.PI / 4, min: 0, max: Math.PI, step: 0.01 },
-      useOrbitControls: true,
+      useOrbitControls: false,
     }),
   });
 
