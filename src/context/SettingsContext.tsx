@@ -1,12 +1,10 @@
 import React, {
   createContext,
-  useContext,
-  useState,
   ReactNode,
-  SetStateAction,
-  Dispatch,
-  useRef,
+  useContext,
   useEffect,
+  useRef,
+  useState,
 } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -15,7 +13,7 @@ import { useLocation } from "react-router-dom";
 // Define the shape of the context's data
 type SettingsContextType = {
   animationDisabled: boolean;
-  setAnimationDisabled: Dispatch<SetStateAction<boolean>>;
+  setAnimationDisabled: (value: boolean, userInitiated?: boolean) => void;
   setZoomLevel: React.Dispatch<React.SetStateAction<zoomLevelType>>;
   zoomLevel: zoomLevelType;
   toggleFullScreen: () => void;
@@ -54,7 +52,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
 
   // ? Setup States
   const [zoomLevel, setZoomLevel] = useState<zoomLevelType>("wide");
-  const [animationDisabled, setAnimationDisabled] = useState(
+  const [animationDisabled, setAnimationDisabledInternal] = useState(
     defaultSettings.animationDisabled
   );
 
@@ -77,16 +75,37 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       handHeldZoomLevel.current = "wide";
     }
   }, [page]);
+  const [lockAnimationReEnable, setLockAnimationReEnable] = useState(false);
 
-  // TODO: maybe make this timeout, but its kinda nice like this
+  const setAnimationDisabled = (value: boolean, userInitiated?: boolean) => {
+    if (value === true) {
+      if (userInitiated) {
+        setLockAnimationReEnable(true);
+      }
+      setAnimationDisabledInternal(true);
+    } else {
+      if (userInitiated) {
+        setLockAnimationReEnable(false);
+        setAnimationDisabledInternal(false);
+      } else if (!lockAnimationReEnable) {
+        setAnimationDisabledInternal(false);
+      }
+    }
+  };
+
   const toggleFullScreen = () => {
+    setAnimationDisabled(true, false);
+
     if (zoomLevel !== "fullscreen") {
-      setAnimationDisabled(true);
       setZoomLevel("fullscreen");
     } else {
-      setAnimationDisabled(false);
       setZoomLevel(handHeldZoomLevel.current);
     }
+
+    // Re-enable animation after 1.5 seconds
+    setTimeout(() => {
+      setAnimationDisabled(false, false);
+    }, 500);
   };
 
   const toggleInfoMode = () => {

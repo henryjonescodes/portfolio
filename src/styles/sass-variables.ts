@@ -4,8 +4,8 @@ export const colors = {
   "foreground-tertiary": "#2bab76",
   "foreground-quaternary": "#003d24",
   "accent-primary": "#00de81",
-  "accent-secondary": "#439b76",
-  "accent-tertiary": "#439b76",
+  "accent-secondary": "#0bd37f",
+  "accent-tertiary": "#21bd7c",
   "background-primary": "#005858",
   "background-secondary": "#002f2f"
 } as const;

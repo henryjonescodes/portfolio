@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Color, TextureLoader, Vector2 } from "three";
+import { TextureLoader, Vector2 } from "three";
 import { useColors } from "../../context/ColorsContext";
 import { Button } from "./Button";
 import { Knob } from "./Knob";

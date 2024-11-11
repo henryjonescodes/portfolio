@@ -1,6 +1,7 @@
 @import '@styles/mixins.module.scss';
 @import '@styles/colors.module.scss';
 @import '@styles/typography.module.scss';
+@import '@styles/layout.module.scss';
 @import '@styles/hover.module.scss';
 
 
@@ -14,6 +15,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
+  padding: $padding-page 0px;
 
   h2 {
     @include hover-color-foreground-secondary;

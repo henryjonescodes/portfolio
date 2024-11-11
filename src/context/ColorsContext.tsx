@@ -123,8 +123,8 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
         primaryColors.foregroundPrimary,
         -30
       ),
-      "accent-secondary": adjustSaturation(primaryColors.accentPrimary, -60),
-      "accent-tertiary": adjustSaturation(primaryColors.accentPrimary, -60),
+      "accent-secondary": adjustSaturation(primaryColors.accentPrimary, -10),
+      "accent-tertiary": adjustSaturation(primaryColors.accentPrimary, -30),
       "background-secondary": adjustLightness(
         primaryColors.backgroundPrimary,
         -8

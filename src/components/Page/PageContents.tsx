@@ -38,14 +38,15 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
       animate: {
         opacity: 1,
         transition: {
-          delay: 0.2,
-          delayChildren: 0.2,
+          duration: 0.1, // Control exit duration
+          delay: 0,
+          delayChildren: 0,
           staggerChildren: 0.5,
         },
       },
       exit: {
         transition: {
-          duration: 1.5, // Control exit duration
+          duration: 0.1, // Control exit duration
           when: "afterChildren", // Ensure parent waits for children to exit
         },
       },
