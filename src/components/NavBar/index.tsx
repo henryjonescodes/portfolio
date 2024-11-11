@@ -108,7 +108,7 @@ const NavBar = ({ navigate, page }: NavBarProps) => {
         </motion.span>
         <motion.span className={styles.right}>
           <NavBarButton
-            onClick={() => setAnimationDisabled(!animationDisabled)}
+            onClick={() => setAnimationDisabled(!animationDisabled, true)}
             Icon={Pause}
             ActiveIcon={Play}
             active={animationDisabled}

@@ -37,61 +37,58 @@ export type ZoomLevel = {
   wide: Vector3; // Used for initialCameraPosition
 };
 
-const leftShift: number = -0.2
-const infoHorizontalShift: number = 2.1
-const infoVerticalShift: number = 0.5
 
-// Zoom levels based on screen sizes
 export const zoomLevels: Record<string, ZoomLevel> = {
   tiny: { 
-    fullScreen: new Vector3(0, 1.5, 1.5), 
-    info: new Vector3(infoHorizontalShift + 0.15, infoVerticalShift, 1.8), 
-    handheld: new Vector3(leftShift, 0, 7), 
-    wide: new Vector3(0, 0, 7.4) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(2.29, 0.5, 2.5), 
+    handheld: new Vector3(-0.7, 0, 8), 
+    wide: new Vector3(0, 0, 10), 
   },
   mobile: { 
-    fullScreen: new Vector3(0, 0, 1.5), 
-    info: new Vector3(infoHorizontalShift + 0.15, infoVerticalShift, 1.8), 
-    handheld: new Vector3(-0.7, 0, 5.4), 
-    wide: new Vector3(0, 0, 6.5) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(2.29, 0.5, 2), 
+    handheld: new Vector3(-0.6, 0, 6.5), 
+    wide: new Vector3(0, 0, 8), 
   },
   small: { 
-    fullScreen: new Vector3(0, 0, 1.4), 
-    info: new Vector3(infoHorizontalShift + 0.15, infoVerticalShift, 1.8), 
-    handheld: new Vector3(-0.7, 0, 4.8), 
-    wide: new Vector3(0, 0, 4.5) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(2.29, 0.5, 2), 
+    handheld: new Vector3(0, 0, 5), 
+    wide: new Vector3(0, 0, 6), 
   },
   medium: { 
-    fullScreen: new Vector3(0, 0, 1.3), 
-    info: new Vector3(infoHorizontalShift + 0.15, infoVerticalShift, 1.5), 
-    handheld: new Vector3(-0.7, 0, 4.1), 
-    wide: new Vector3(0, 0, 5.2) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(1.5, 0.7, 2), 
+    handheld: new Vector3(0, 0, 4),  
+    wide: new Vector3(0, 0, 4), 
   },
   compact: { 
-    fullScreen: new Vector3(leftShift, 0, 1.2), 
-    info: new Vector3(infoHorizontalShift, infoVerticalShift, 1.5), 
-    handheld: new Vector3(-0.7, 0, 3.3), 
-    wide: new Vector3(0, 0, 4.2) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(1.5, 0.7, 2), 
+    handheld: new Vector3(0, 0, 3.5),  
+    wide: new Vector3(0, 0, 5), 
   },
   default: { 
-    fullScreen: new Vector3(leftShift, 0, 1.1), 
-    info: new Vector3(infoHorizontalShift,infoVerticalShift, 2), 
-    handheld: new Vector3(-0.2, 0, 2.9), 
-    wide: new Vector3(0, 0, 4.2) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(1.5, 0.7, 2), 
+    handheld: new Vector3(0, 0, 3),  
+    wide: new Vector3(0, 0, 5), 
   },
   large: { 
-    fullScreen: new Vector3(leftShift, 0, 0.5), 
-    info: new Vector3(infoHorizontalShift, infoVerticalShift, 2), 
-    handheld: new Vector3(-0.2, 0, 2.9), 
-    wide: new Vector3(0, 0, 4.2) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(1.5, 0.7, 2), 
+    handheld: new Vector3(0, 0, 3),  
+    wide: new Vector3(0, 0, 5), 
   },
   extraLarge: { 
-    fullScreen: new Vector3(leftShift, 0, 0.5), 
-    info: new Vector3(leftShift, infoVerticalShift, 2.9), 
-    handheld: new Vector3(-0.2, 0, 2.9), 
-    wide: new Vector3(0, 0, 4.2) 
+    fullScreen: new Vector3(-0.7, 0, 1), 
+    info: new Vector3(1.5, 0.7, 2), 
+    handheld: new Vector3(0, 0, 3),  
+    wide: new Vector3(0, 0, 5), 
   },
 };
+
 
 export const maxWidthPage: number = 2000;
 
