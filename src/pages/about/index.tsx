@@ -26,7 +26,7 @@ import { useColors } from "../../context/ColorsContext";
 const commonExit = {
   opacity: 0,
   transition: {
-    duration: 0.3,
+    duration: 0,
     when: "afterChildren",
   },
 };
