@@ -117,6 +117,9 @@ export const ControlsProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   useFrame(() => {
+    if (useOrbitControls) {
+      return;
+    }
     const newPosition = new Vector3(
       position.get()[0],
       position.get()[1],
