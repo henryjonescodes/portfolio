@@ -37,8 +37,9 @@ export type ZoomLevel = {
   wide: Vector3; // Used for initialCameraPosition
 };
 
+export type ScreenWidthKey = 'tiny' | 'mobile' | 'small' | 'medium' | 'compact' | 'default' | 'large' | 'extraLarge';
 
-export const zoomLevels: Record<string, ZoomLevel> = {
+export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
   tiny: { 
     fullScreen: new Vector3(-0.7, 0, 1), 
     info: new Vector3(2.29, 0.5, 2.5), 

@@ -1,0 +1,139 @@
+/* loading-bar.module.scss */
+@import "@styles/colors.module.scss";
+
+.loadingWrapper {
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+
+.spinner {
+  position: relative;
+  display: flex;
+  width: var(--size, 75px);
+  height: var(--size, 75px);
+  transform: rotate(45deg);
+
+  .spinnerItem {
+    position: absolute;
+    width: calc(var(--size, 75px) / 2.5);
+    height: calc(var(--size, 75px) / 2.5);
+    border: 4px solid var(--clr-spinner);
+  }
+
+  .item1 {
+    --clr-spinner: var(--foreground-primary);
+    top: 0;
+    left: 0;
+    animation: spinner3A var(--animation-duration, 5000ms) linear infinite;
+  }
+
+  .item2 {
+    --clr-spinner: var(--accent-primary);
+    top: 0;
+    left: calc(var(--size, 75px) / 2.5);
+    animation: spinner3B var(--animation-duration, 5000ms) linear infinite;
+  }
+
+  .item3 {
+    --clr-spinner: var(--background-primary);
+    top: calc(var(--size, 75px) / 2.5);
+    left: calc(var(--size, 75px) / 2.5);
+    animation: spinner3C var(--animation-duration, 5000ms) linear infinite;
+  }
+}
+
+/* Keyframes for item1 */
+@keyframes spinner3A {
+
+  0%,
+  8.33%,
+  16.66%,
+  100% {
+    transform: translate(0%, 0%);
+  }
+
+  24.99%,
+  33.32%,
+  41.65% {
+    transform: translate(100%, 0%);
+  }
+
+  49.98%,
+  58.31%,
+  66.64% {
+    transform: translate(100%, 100%);
+  }
+
+  74.97%,
+  83.30%,
+  91.63% {
+    transform: translate(0%, 100%);
+  }
+}
+
+/* Keyframes for item2 */
+@keyframes spinner3B {
+
+  0%,
+  8.33%,
+  91.63%,
+  100% {
+    transform: translate(0%, 0%);
+  }
+
+  16.66%,
+  24.99%,
+  33.32% {
+    transform: translate(0%, 100%);
+  }
+
+  41.65%,
+  49.98%,
+  58.31% {
+    transform: translate(-100%, 100%);
+  }
+
+  66.64%,
+  74.97%,
+  83.30% {
+    transform: translate(-100%, 0%);
+  }
+}
+
+/* Keyframes for item3 */
+@keyframes spinner3C {
+
+  0%,
+  83.30%,
+  91.63%,
+  100% {
+    transform: translate(0, 0);
+  }
+
+  8.33%,
+  16.66%,
+  24.99% {
+    transform: translate(-100%, 0);
+  }
+
+  33.32%,
+  41.65%,
+  49.98% {
+    transform: translate(-100%, -100%);
+  }
+
+  58.31%,
+  66.64%,
+  74.97% {
+    transform: translate(0, -100%);
+  }
+}

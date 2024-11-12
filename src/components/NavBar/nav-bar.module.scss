@@ -25,14 +25,12 @@
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  transition: all 0.3s ease-in-out;
 
   .icon {
     position: relative;
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    transition: all 0.3s ease;
 
     .image {
       height: 100%;
@@ -40,7 +38,6 @@
 
       svg,
       path {
-        transition: fill 0.3s ease-in-out;
         fill: $foreground-primary;
         fill: var(--foreground-primary);
       }
@@ -246,15 +243,5 @@
   &:last-of-type {
     border-right: 4px solid $foreground-primary;
     border-right: 4px solid var(--foreground-primary);
-  }
-
-  &:hover {
-    .icon .image {
-
-      svg,
-      path {
-        // opacity: 0.8;
-      }
-    }
   }
 }

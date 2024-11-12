@@ -1,5 +1,11 @@
 import { motion } from "framer-motion-3d";
-import { useContext, useEffect, useRef, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import {
   InteractionContext,
   InteractiveElement,
@@ -9,13 +15,15 @@ import {
 type KnobProps = {
   position?: [number, number, number];
   axis?: "x" | "y" | "z";
-  min?: number; // In degrees
-  max?: number; // In degrees
-  mapMin?: number; // Output range min
-  mapMax?: number; // Output range max
-  rotation?: number; // Optional, controlled if provided
+  min?: number;
+  max?: number;
+  mapMin?: number;
+  mapMax?: number;
+  rotation?: number;
   setRotation?: (newVal: number) => void;
   onChange?: (value: number) => void;
+  name: string;
+  children: React.ReactElement;
 } & InteractiveElementProps;
 
 export function Knob({
@@ -29,6 +37,7 @@ export function Knob({
   onChange,
   name,
   position = [0, 0, 0],
+  children,
   ...rest
 }: KnobProps) {
   const [internalRotation, setInternalRotation] = useState(rotation || 0);
@@ -39,40 +48,48 @@ export function Knob({
   const currentRotation = isControlled ? rotation : internalRotation;
   const rotationRef = useRef(currentRotation);
 
+  const [isDragging, setIsDragging] = useState(false);
+  const startDragPosition = useRef({ x: 0, y: 0 });
+  const sensitivity = 0.5;
+
   const degreesToRadians = (degrees: number) => (degrees * Math.PI) / 180;
 
   useEffect(() => {
     rotationRef.current = currentRotation;
   }, [currentRotation]);
 
-  // effect to synchronize internalRotation with rotation prop when not interacting
   useEffect(() => {
     if (!isActive && rotation !== undefined) {
       setInternalRotation(rotation);
     }
   }, [rotation, isActive]);
 
+  const applyRotation = useCallback(
+    (deltaRotation: number) => {
+      let newRotation = rotationRef.current + deltaRotation;
+      newRotation = Math.max(min, Math.min(newRotation, max));
+
+      const normalizedValue =
+        ((newRotation - min) / (max - min)) * (mapMax - mapMin) + mapMin;
+
+      onChange?.(normalizedValue);
+      rotationRef.current = newRotation;
+
+      if (isControlled) {
+        setRotation?.(newRotation);
+      } else {
+        setInternalRotation(newRotation);
+      }
+    },
+    [isControlled, min, max, mapMin, mapMax, onChange, setRotation]
+  );
+
   useEffect(() => {
-    if (isActive) {
+    if (isActive && !isDragging) {
       const handleWheel = (event: WheelEvent) => {
         event.preventDefault();
-        const deltaRotation = -event.deltaY * 0.05; // Adjusting for degree-based control
-        let newRotation = rotationRef.current + deltaRotation;
-        newRotation = Math.max(min, Math.min(newRotation, max));
-
-        if (onChange) {
-          const normalizedValue =
-            ((newRotation - min) / (max - min)) * (mapMax - mapMin) + mapMin;
-          onChange(normalizedValue);
-        }
-
-        rotationRef.current = newRotation;
-
-        if (isControlled) {
-          setRotation && setRotation(newRotation);
-        } else {
-          setInternalRotation(newRotation);
-        }
+        const deltaRotation = -event.deltaY * 0.05;
+        applyRotation(deltaRotation);
       };
 
       window.addEventListener("wheel", handleWheel);
@@ -80,17 +97,54 @@ export function Knob({
         window.removeEventListener("wheel", handleWheel);
       };
     }
-  }, [isActive, setRotation, min, max, mapMin, mapMax, onChange, isControlled]);
+  }, [isActive, isDragging, applyRotation]);
 
-  // Set rotation array using radians for internal 3D transformation
-  const invertedRotation = max - currentRotation; // Inverting rotation so 0 is fully left
+  useEffect(() => {
+    if (isDragging) {
+      const handlePointerMove = (e: PointerEvent) => {
+        e.preventDefault();
+        const deltaX = e.clientX - startDragPosition.current.x;
+        const deltaY = e.clientY - startDragPosition.current.y;
+
+        const deltaRotation = (deltaX - deltaY) * sensitivity;
+        applyRotation(deltaRotation);
+
+        startDragPosition.current = { x: e.clientX, y: e.clientY };
+      };
+
+      const handlePointerUp = () => {
+        setIsDragging(false);
+      };
+
+      window.addEventListener("pointermove", handlePointerMove);
+      window.addEventListener("pointerup", handlePointerUp);
+
+      return () => {
+        window.removeEventListener("pointermove", handlePointerMove);
+        window.removeEventListener("pointerup", handlePointerUp);
+      };
+    }
+  }, [isDragging, applyRotation, sensitivity]);
+
+  const handlePointerDown = (e: any) => {
+    e.stopPropagation();
+    setIsDragging(true);
+    startDragPosition.current = { x: e.clientX, y: e.clientY };
+  };
+
   const rotationArray: [number, number, number] = [0, 0, 0];
   rotationArray[axis === "x" ? 0 : axis === "y" ? 1 : 2] =
-    degreesToRadians(invertedRotation);
+    degreesToRadians(currentRotation);
 
   return (
     <motion.group rotation={rotationArray} position={position}>
-      <InteractiveElement {...rest} name={name} />
+      <InteractiveElement
+        {...rest}
+        name={name}
+        onPointerDown={handlePointerDown}
+      >
+        {children}
+      </InteractiveElement>
     </motion.group>
   );
 }

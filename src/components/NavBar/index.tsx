@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
-import { NavigateFunction } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
+import { useNavigatePreserveQuery } from "../../hooks/useNavigatePreserveQuery";
 import { widthSmall } from "../../styles/layout.constants";
-import AnimatedLine from "../AnimatedLine";
 import TypewriterText from "../3D/TypewriterText";
+import AnimatedLine from "../AnimatedLine";
 import Checklist from "./../../assets/svg/icons/check-list.svg?react";
-import Close from "./../../assets/svg/icons/close.svg?react";
 import Code from "./../../assets/svg/icons/code.svg?react";
 import Expand from "./../../assets/svg/icons/expand.svg?react";
+import Handheld from "./../../assets/svg/icons/handheld.svg?react";
+import Icon from "./../../assets/svg/icons/icon.svg?react";
 import Pause from "./../../assets/svg/icons/pause.svg?react";
 import Play from "./../../assets/svg/icons/play.svg?react";
 import User from "./../../assets/svg/icons/user.svg?react";
@@ -38,12 +39,13 @@ const navBarVariants = {
 };
 
 type NavBarProps = {
-  navigate: NavigateFunction;
   page: string | undefined;
 };
 
-const NavBar = ({ navigate, page }: NavBarProps) => {
+const NavBar = ({ page }: NavBarProps) => {
   const { width } = useWindowDimensions();
+  const navigate = useNavigatePreserveQuery(); // Initialize the navigate function
+
   const {
     animationDisabled,
     setAnimationDisabled,
@@ -117,11 +119,13 @@ const NavBar = ({ navigate, page }: NavBarProps) => {
             onClick={() => {
               toggleFullScreen();
             }}
+            active={zoomLevel === "fullscreen"}
             Icon={Expand}
+            ActiveIcon={Handheld}
           />
           <NavBarButton
             onClick={() => navigate(`/`, { replace: true })}
-            Icon={Close}
+            Icon={Icon}
           />
         </motion.span>
       </motion.span>

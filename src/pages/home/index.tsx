@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import PageContents from "../../components/Page/PageContents";
 import TypewriterText from "../../components/3D/TypewriterText";
+import PageContents from "../../components/Page/PageContents";
+import { useNavigatePreserveQuery } from "../../hooks/useNavigatePreserveQuery";
 import styles from "./home.module.scss";
 
 // Define animation variants for the menu with staggered children
@@ -14,7 +14,7 @@ const menuVariants = {
 };
 
 const Home = () => {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigatePreserveQuery(); // Initialize the navigate function
 
   const textStaggerSeconds = 0.03;
 

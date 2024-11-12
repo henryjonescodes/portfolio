@@ -1,3 +1,4 @@
+import { Leva } from "leva";
 import React, {
   createContext,
   ReactNode,
@@ -6,37 +7,63 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
-// TODO: Use animation disabled setting to smoothly switch between fullscreen and handheld modes
-
-// Define the shape of the context's data
 type SettingsContextType = {
+  // ? Animation
   animationDisabled: boolean;
   setAnimationDisabled: (value: boolean, userInitiated?: boolean) => void;
-  setZoomLevel: React.Dispatch<React.SetStateAction<zoomLevelType>>;
+
+  // ? Zoom Level
   zoomLevel: zoomLevelType;
+  setZoomLevel: React.Dispatch<React.SetStateAction<zoomLevelType>>;
   toggleFullScreen: () => void;
   toggleInfoMode: () => void;
+
+  // ? Lite mode
+  liteMode: boolean | undefined;
+
+  // ? Debug mode
+  isDebugMode: boolean;
+  toggleDebugMode: () => void;
+
+  // ? Loading
+  loadingState: LoadingStates;
+  setLoadingState: React.Dispatch<React.SetStateAction<LoadingStates>>;
 };
 
-// Default context value with animations enabled
 const defaultSettings: SettingsContextType = {
+  // ? Animation
   animationDisabled: false,
-  setAnimationDisabled: () => {}, // Placeholder function; will be overwritten in provider
+  setAnimationDisabled: () => {},
+
+  // ? Zoom Level
+  zoomLevel: "fullscreen",
   setZoomLevel: () => {},
-  zoomLevel: "wide",
-  toggleFullScreen: () => {},
   toggleInfoMode: () => {},
+  toggleFullScreen: () => {},
+
+  // ? Lite mode
+  liteMode: undefined,
+
+  // ? Debug mode
+  isDebugMode: false,
+  toggleDebugMode: () => {},
+
+  // ? Loading
+  loadingState: "loading",
+  setLoadingState: () => {},
 };
 
-// Create the context with the default value
 const SettingsContext = createContext<SettingsContextType>(defaultSettings);
 
 // * * * * * * * * * * SettingsProvider * * * * * * * * * * //
+
 type SettingsProviderProps = {
   children: ReactNode;
 };
+type LoadingStates = undefined | "loading" | "loaded" | "complete";
 
 type handheldZoomType = "handheld" | "info" | "wide";
 type zoomLevelType = "fullscreen" | handheldZoomType;
@@ -46,18 +73,40 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   children,
 }) => {
   // ? Get Page via React Router
+  const navigate = useNavigate();
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
 
+  // ? Parse query parameters
+  const searchParams = new URLSearchParams(location.search);
+
+  const isDebugMode = searchParams.get("debug") === "true";
+  const isLiteModeParam = searchParams.get("lite") === "true";
+
   // ? Setup States
-  const [zoomLevel, setZoomLevel] = useState<zoomLevelType>("wide");
+  const [liteMode, setLiteMode] = useState(isLiteModeParam || isMobile);
+  const [loadingState, setLoadingState] = useState<LoadingStates>(
+    liteMode ? undefined : "loading"
+  );
+  const [zoomLevel, setZoomLevel] = useState<zoomLevelType>(
+    liteMode ? "fullscreen" : "wide"
+  );
+  const [lockAnimationReEnable, setLockAnimationReEnable] = useState(false);
   const [animationDisabled, setAnimationDisabledInternal] = useState(
     defaultSettings.animationDisabled
   );
 
   // ? Setup References
   const handHeldZoomLevel = useRef<handheldZoomType>("wide");
+
+  // ? Set lite mode param on initial mobile load
+  useEffect(() => {
+    if (isMobile) {
+      searchParams.set("lite", "true");
+      navigate({ search: searchParams.toString() });
+    }
+  }, []);
 
   // ? Update prevZoomMode when page updates
   useEffect(() => {
@@ -75,8 +124,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       handHeldZoomLevel.current = "wide";
     }
   }, [page]);
-  const [lockAnimationReEnable, setLockAnimationReEnable] = useState(false);
 
+  // ?? Manages animation disabled setting/state changes
   const setAnimationDisabled = (value: boolean, userInitiated?: boolean) => {
     if (value === true) {
       if (userInitiated) {
@@ -93,16 +142,23 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     }
   };
 
+  // ? Handles toggling to and from fullscreen with a special case for litemode
   const toggleFullScreen = () => {
     setAnimationDisabled(true, false);
 
     if (zoomLevel !== "fullscreen") {
       setZoomLevel("fullscreen");
     } else {
+      if (liteMode) {
+        const searchParams = new URLSearchParams(location.search);
+        searchParams.delete("lite");
+        setLoadingState("loading");
+        navigate({ search: searchParams.toString() });
+        setLiteMode(false);
+      }
       setZoomLevel(handHeldZoomLevel.current);
     }
 
-    // Re-enable animation after 1.5 seconds
     setTimeout(() => {
       setAnimationDisabled(false, false);
     }, 500);
@@ -121,15 +177,36 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     }
   };
 
+  const toggleDebugMode = () => {
+    const searchParams = new URLSearchParams(location.search);
+    if (isDebugMode) {
+      searchParams.delete("debug");
+    } else {
+      searchParams.set("debug", "true");
+    }
+    navigate({ search: searchParams.toString() });
+  };
+
   useEffect(() => {
+    if (!isDebugMode) return;
     console.log(
-      `Updated zoom level: ${zoomLevel} ref: ${handHeldZoomLevel.current}`
+      `[SettingsContext]: Zoom level updated: ${zoomLevel} ref: ${handHeldZoomLevel.current}`
     );
-  }, [zoomLevel, handHeldZoomLevel.current]);
+  }, [zoomLevel]);
+
+  useEffect(() => {
+    if (!isDebugMode) return;
+    console.log(`[SettingsContext]: loadingState updated: ${loadingState}`);
+  }, [loadingState]);
 
   return (
     <SettingsContext.Provider
       value={{
+        loadingState,
+        setLoadingState,
+        liteMode,
+        toggleDebugMode,
+        isDebugMode,
         animationDisabled,
         setAnimationDisabled,
         setZoomLevel,
@@ -138,6 +215,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
         toggleInfoMode,
       }}
     >
+      <Leva collapsed hidden={!isDebugMode} />
       {children}
     </SettingsContext.Provider>
   );

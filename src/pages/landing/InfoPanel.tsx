@@ -6,14 +6,18 @@ import { CustomHTML } from "../../components/3D/CustomHTML";
 import { useColors } from "../../context/ColorsContext";
 import { useSettings } from "../../context/SettingsContext";
 import styles from "./landing.module.scss";
-import Close from "./../../assets/svg/icons/close.svg?react";
+import Close from "./../../assets/svg/icons/close-01.svg?react";
+import Trash from "./../../assets/svg/icons/trash.svg?react";
+import Locked from "./../../assets/svg/icons/locked.svg?react";
+import Unlocked from "./../../assets/svg/icons/unlocked.svg?react";
 import NavBarButton from "../../components/NavBar/NavBarButton";
 import AnimatedLine from "../../components/AnimatedLine";
 import cn from "classnames";
 
 const InfoPanel = () => {
-  const { primaryHues, setPrimaryHues } = useColors();
-  const { toggleInfoMode, zoomLevel } = useSettings();
+  const { primaryHues, setPrimaryHues, resetColors } = useColors();
+  const { toggleInfoMode, toggleDebugMode, zoomLevel, isDebugMode } =
+    useSettings();
 
   return (
     <CustomHTML transform occlude="blending">
@@ -40,6 +44,20 @@ const InfoPanel = () => {
           </motion.div>
           <motion.span className={styles.navbar}>
             <span />
+            <NavBarButton
+              onClick={() => {
+                toggleDebugMode();
+              }}
+              Icon={Locked}
+              ActiveIcon={Unlocked}
+              active={isDebugMode}
+            />
+            <NavBarButton
+              onClick={() => {
+                resetColors();
+              }}
+              Icon={Trash}
+            />
             <NavBarButton
               onClick={() => {
                 toggleInfoMode();
