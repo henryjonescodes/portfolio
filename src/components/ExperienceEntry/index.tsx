@@ -7,6 +7,7 @@ import AnimatedLine from "../AnimatedLine";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthMobile } from "../../styles/layout.constants";
 import cn from "classnames";
+import { useSettings } from "../../context/SettingsContext";
 
 const formatDateRange = (startDate: Date, endDate?: Date): string => {
   const formatOptions: Intl.DateTimeFormatOptions = {
@@ -102,9 +103,14 @@ const ExperienceEntry = ({
     ? formatDateRange(startDate, endDate)
     : dateString;
   const { width } = useWindowDimensions();
+  const { zoomLevel } = useSettings();
 
   return (
-    <motion.div className={styles.entry}>
+    <motion.div
+      className={cn(styles.entry, {
+        [styles.fullScreen]: zoomLevel === "fullscreen",
+      })}
+    >
       <motion.span className={styles.header}>
         <motion.div className={styles.title}>
           {url ? (

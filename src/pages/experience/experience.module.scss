@@ -1,5 +1,18 @@
 @import '@styles/layout.module.scss';
 
 .experience {
-  padding: $padding-page 0px;
+  @include page-padding-vertical;
+
+  >.content {
+    @include list-flex;
+  }
 }
+// @media (max-width: $width-small) {
+//   .experience {
+//     >.content {
+//       >h1 {
+//         margin-bottom: 8px;
+//       }
+//     }
+//   }
+// }

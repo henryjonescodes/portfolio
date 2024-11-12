@@ -27,3 +27,33 @@ $paragraph-spacing-small: 1.4rem;
 $height-nav-bar: 45px;
 
 $padding-page: 32px;
+$padding-page-mobile: 16px;
+
+@mixin page-padding-horizontal {
+  padding: 0px $padding-page;
+
+  @media (max-width: $width-small) {
+    padding: 0px $padding-page-mobile;
+  }
+}
+
+@mixin page-padding-vertical {
+  padding: $padding-page 0px;
+
+  @media (max-width: $width-small) {
+    padding: $padding-page-mobile 0px;
+  }
+}
+
+@mixin page-padding {
+  @include page-padding-vertical;
+  @include page-padding-horizontal;
+}
+
+@mixin list-flex {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 16px;
+}

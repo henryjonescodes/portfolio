@@ -14,7 +14,7 @@ const experienceVariants = {
 const Experience = () => {
   return (
     <PageContents key={"experience"} className={styles.experience}>
-      <motion.div variants={experienceVariants}>
+      <motion.div variants={experienceVariants} className={styles.content}>
         <motion.h1>
           <TypewriterText text={"Experience"} staggerChildren={0.05} />
         </motion.h1>

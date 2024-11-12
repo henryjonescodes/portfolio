@@ -89,7 +89,7 @@
 }
 
 @media (max-width: $width-mobile) {
-  .entry {
+  .fullScreen {
     .box {
       &Content {
         flex-direction: column-reverse;
@@ -108,4 +108,21 @@
       top: 100%;
     }
   }
+}
+
+@media (max-width: $width-tiny) {
+  .fullScreen {
+
+    .header {
+      gap: 8px;
+
+      .title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+      }
+    }
+  }
+
 }

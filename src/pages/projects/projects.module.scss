@@ -5,7 +5,11 @@
 @import '@styles/colors.module.scss';
 
 .projects {
-  padding: $padding-page 0px;
+  @include page-padding-vertical;
+
+  >.content {
+    @include list-flex;
+  }
 }
 
 .video {

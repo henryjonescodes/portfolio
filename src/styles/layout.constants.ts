@@ -42,9 +42,9 @@ export type ScreenWidthKey = 'tiny' | 'mobile' | 'small' | 'medium' | 'compact' 
 export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
   tiny: { 
     fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(2.29, 0.5, 2.5), 
-    handheld: new Vector3(-0.7, 0, 8), 
-    wide: new Vector3(0, 0, 10), 
+    info: new Vector3(2.29, 0.5, 2.8), 
+    handheld: new Vector3(-0.7, 0, 10), 
+    wide: new Vector3(-0.5, 0, 12), 
   },
   mobile: { 
     fullScreen: new Vector3(-0.7, 0, 1), 
