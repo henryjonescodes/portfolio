@@ -3,7 +3,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 import { folder, useControls } from "leva";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSpring } from "react-spring";
-import { Vector3 } from "three";
+import { Vector3 } from "@three";
 import { useSettings } from "./SettingsContext";
 import { useWindowDimensions } from "./WindowDimensionContext";
 

@@ -1,27 +1,40 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import svgr from 'vite-plugin-svgr'
+import react from '@vitejs/plugin-react';
 import path from 'path';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from 'vite';
+import compression from 'vite-plugin-compression';
+import svgr from 'vite-plugin-svgr';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   server: {
-    host: '0.0.0.0',  // This makes Vite accessible on the local network
-    port: 5173,        // You can change the port if necessary
+    host: '0.0.0.0', // Make Vite accessible on the local network
+    port: 5173,      // Change the port if necessary
   },
-  plugins: [react(), svgr()],
+  plugins: [
+    react(), 
+    svgr(), 
+    visualizer({
+      filename: './dist/stats.html',
+      open: true,
+    }),
+    compression({ algorithm: 'brotliCompress' }),
+  ],
   resolve: {
     alias: {
-      '@styles': path.resolve(__dirname, 'src/styles'), // Adjust path to where the alias points
-      '@assets': path.resolve(__dirname, 'src/assets'), // Adjust path to where the alias points
+      '@three': path.resolve(__dirname, 'src/three.exports.ts'), // Update this line
+      '@styles': path.resolve(__dirname, 'src/styles'),       // Adjust path to where the alias points
+      '@assets': path.resolve(__dirname, 'src/assets'),       // Adjust path to where the alias points
       '@components': path.resolve(__dirname, 'src/components'), // Adjust path to where the alias points
     },
   },
   css: {
+    modules: {
+      localsConvention: 'camelCase', // Optional: enable CSS modules with camelCase
+    },
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler' // or "modern"
-      }
-    }
-  }
-})
+        api: 'modern-compiler', // Use the modern SASS compiler
+      },
+    },
+  },
+});

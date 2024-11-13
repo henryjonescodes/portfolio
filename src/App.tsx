@@ -1,11 +1,14 @@
+import { lazy, Suspense } from "react";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.scss";
 import { WindowDimensionProvider } from "./context/WindowDimensionContext";
-import Experience from "./pages/experience";
 import { LandingWrapper } from "./pages/landing";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Projects from "./pages/projects";
-import About from "./pages/about";
+import { PageLoading } from "./components/Loading";
 import Home from "./pages/home";
+
+const About = lazy(() => import("./pages/about"));
+const Experience = lazy(() => import("./pages/experience"));
+const Projects = lazy(() => import("./pages/projects"));
 
 export default function App() {
   return (
@@ -14,12 +17,30 @@ export default function App() {
         <Routes>
           <Route path="/*" element={<LandingWrapper />}>
             <Route index element={<Home key="home" />} />
-            <Route path="about" element={<About key="about" />} />
+            <Route
+              path="about"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <About key="about" />
+                </Suspense>
+              }
+            />
             <Route
               path="experience"
-              element={<Experience key="experience" />}
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <Experience key="experience" />
+                </Suspense>
+              }
             />
-            <Route path="projects" element={<Projects key="projects" />} />
+            <Route
+              path="projects"
+              element={
+                <Suspense fallback={<PageLoading />}>
+                  <Projects key="projects" />
+                </Suspense>
+              }
+            />
           </Route>
         </Routes>
       </Router>

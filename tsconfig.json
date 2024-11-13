@@ -5,12 +5,13 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "@components/*": ["src/components/*"],
       "@styles/*": ["src/styles/*"],
       "@pages/*": ["src/pages/*"],
-      "@assets/*": ["src/assets/*"]
-    }
-  }
+      "@assets/*": ["src/assets/*"],
+      "@three": ["src/three.exports.ts"], // Update this line
+    },
+  },
 }

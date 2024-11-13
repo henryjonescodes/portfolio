@@ -39,10 +39,12 @@
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
     "qrcode-terminal": "^0.12.0",
+    "rollup-plugin-visualizer": "^5.12.0",
     "sass": "^1.80.6",
     "sass-export": "^2.1.2",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.7.0",
-    "vite": "^5.4.8"
+    "vite": "^5.4.8",
+    "vite-plugin-compression": "^0.5.1"
   }
 }

@@ -44,9 +44,9 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
   });
 
   useEffect(() => {
-    let timerDur = 100;
+    let timerDur = 400;
     if (animationDisabled) {
-      timerDur = 100;
+      timerDur = 400;
     }
     const timer = setTimeout(() => setDelayedPage(`${page}`), timerDur);
     return () => clearTimeout(timer); // Clean up on unmount or page change
