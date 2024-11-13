@@ -56,13 +56,13 @@ export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
     fullScreen: new Vector3(-0.7, 0, 1), 
     info: new Vector3(2.29, 0.5, 2), 
     handheld: new Vector3(0, 0, 5), 
-    wide: new Vector3(0, 0, 6), 
+    wide: new Vector3(0, 0, 7), 
   },
   medium: { 
     fullScreen: new Vector3(-0.7, 0, 1), 
     info: new Vector3(1.5, 0.7, 2), 
     handheld: new Vector3(0, 0, 4),  
-    wide: new Vector3(0, 0, 4), 
+    wide: new Vector3(0, 0, 6), 
   },
   compact: { 
     fullScreen: new Vector3(-0.7, 0, 1), 

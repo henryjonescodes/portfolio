@@ -22,7 +22,9 @@ const InfoPanel = () => {
   return (
     <CustomHTML transform occlude="blending">
       <motion.div
-        className={styles.infoPanel}
+        className={cn(styles.infoPanel, {
+          [styles.button]: zoomLevel !== "info",
+        })}
         onClick={() => {
           if (zoomLevel === "info") {
             return;

@@ -136,8 +136,8 @@
 
                 svg,
                 path {
-                  fill: $foreground-primary;
-                  fill: var(--foreground-primary);
+                  fill: $accent-primary;
+                  fill: var(--accent-primary);
                 }
               }
             }
@@ -217,8 +217,8 @@
       background-color: var(--foreground-quaternary);
 
       &Active {
-        background-color: $foreground-primary;
-        background-color: var(--foreground-primary);
+        background-color: $accent-primary;
+        background-color: var(--accent-primary);
       }
     }
   }
@@ -323,17 +323,17 @@
   }
 
   .statTracker {
-    grid-template-columns: 1fr 1.1fr;
+    grid-template-columns: 1.1fr 1fr;
 
     .tracker {
       .track {
-        gap: 3px;
+        gap: 2px;
       }
     }
 
     .label {
       h4 {
-        font-size: 1rem;
+        font-size: 0.9rem;
       }
     }
   }

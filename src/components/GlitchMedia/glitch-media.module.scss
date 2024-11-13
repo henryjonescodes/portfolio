@@ -1,10 +1,10 @@
 @use "sass:color";
 @import '@styles/colors.module.scss';
 
-$animation-duration: 0.7s;
-$onion-skin-animation-duration: 0.4s;
-$warp-animation-duration: 1.7s;
-$line-flicker-animation-duration: 1s;
+$animation-duration: 1s;
+$onion-skin-animation-duration: 0.6s;
+$warp-animation-duration: 2.2s;
+$line-flicker-animation-duration: 2s;
 
 $color-0: $foreground-primary;
 $color-1: color.adjust($color-0, $lightness: 5%);
@@ -12,12 +12,24 @@ $color-2: color.adjust($color-0, $lightness: -5%);
 $color-3: color.adjust($color-0, $lightness: 5%);
 $color-4: color.adjust($color-0, $lightness: -5%);
 
+
 .glitch {
   position: relative;
-  display: inline-block;
   cursor: pointer !important;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: scale 0.2s ease-in-out;
+  height: 100%; // Changed from min-height to height
+  width: 100%;
+
+  .glitch__warp {
+    display: flex; // Enables Flexbox centering for content inside
+    align-items: center; // Center vertically
+    justify-content: center; // Center horizontally
+    width: 100%;
+    height: 100%;
+  }
 
   &:hover {
     .glitch__layers {
@@ -28,7 +40,8 @@ $color-4: color.adjust($color-0, $lightness: -5%);
       animation: warp-oscillate $warp-animation-duration ease-in-out infinite;
     }
 
-    .iconPrimary {
+    .iconPrimary,
+    .videoWrapper.iconPrimary {
       opacity: 0.8;
     }
   }
@@ -36,7 +49,8 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   &:active {
     transform: scale(0.95);
 
-    .iconPrimary {
+    .iconPrimary,
+    .videoWrapper.iconPrimary {
       opacity: 1;
     }
 
@@ -50,18 +64,31 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   }
 }
 
-.icon {
+.icon,
+.videoWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   z-index: 1;
-  display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 
-  path,
-  svg {
+  svg,
+  path {
     fill: $accent-primary;
     fill: var(--accent-primary);
   }
+}
+
+.videoWrapper {
+  overflow: hidden;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
 }
 
 .iconPrimary {
@@ -84,15 +111,17 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   top: 0;
   width: 100%;
   height: 100%;
-
 }
+
+
 
 .glitch__layer0 {
   animation: glitch-flicker $line-flicker-animation-duration infinite;
 
   transform: translate(2%, -2%);
 
-  .icon {
+  .icon,
+  .videoWrapper {
     animation: glitch-anim-0 $animation-duration infinite linear reverse;
   }
 }
@@ -103,13 +132,9 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 
   transform: translate(2%, -2%);
 
-  .icon {
-
-    path,
-    svg {
-      opacity: 0.8;
-    }
-
+  .icon,
+  .videoWrapper {
+    opacity: 0.8;
     animation: glitch-anim-1 $animation-duration infinite linear;
   }
 }
@@ -119,31 +144,20 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   animation: glitch-flicker $line-flicker-animation-duration infinite;
   animation-delay: 0.5s;
 
-  .icon {
-
-    path,
-    svg {
-      opacity: 0.8;
-    }
-
+  .icon,
+  .videoWrapper {
+    opacity: 0.8;
     animation: glitch-anim-2 $animation-duration infinite linear alternate;
     animation-delay: 0.5s;
   }
-
-  /* Offset animation to alternate with layer1 */
 }
 
 .glitch__layer3 {
   transform: translate(-5%, -2%);
 
-
-  .icon {
-
-    path,
-    svg {
-      opacity: 1;
-    }
-
+  .icon,
+  .videoWrapper {
+    opacity: 1;
     animation: glitch-anim-flash $onion-skin-animation-duration infinite linear;
   }
 }
@@ -151,22 +165,17 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 .glitch__layer4 {
   transform: translate(5%, -2%);
 
-
-  .icon {
-
-    path,
-    svg {
-      opacity: 1;
-    }
-
+  .icon,
+  .videoWrapper {
+    opacity: 1;
     animation: glitch-anim-flash $onion-skin-animation-duration infinite linear;
-    animation-delay: .5s;
+    animation-delay: 0.5s;
   }
 }
 
 @keyframes warp-oscillate {
   0% {
-    transform: skew(3deg, 0deg);
+    transform: skew(1deg, 0deg);
   }
 
   25% {
@@ -174,7 +183,7 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   }
 
   50% {
-    transform: skew(-3deg, 0deg);
+    transform: skew(-1deg, 0deg);
   }
 
   75% {
@@ -239,22 +248,18 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 @keyframes glitch-anim-1 {
   0% {
     clip-path: inset(0% 40% 90% 0%);
-    /* Top horizontal slice */
   }
 
   10% {
     clip-path: inset(5% 40% 85% 0%);
-    /* Slice moves slightly down */
   }
 
   20% {
     clip-path: inset(15% 40% 75% 0%);
-    /* Slice moves further down */
   }
 
   30% {
     clip-path: inset(25% 40% 65% 0%);
-    /* And so on */
   }
 
   40% {
@@ -283,7 +288,6 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 
   100% {
     clip-path: inset(95% 40% 0% 0%);
-    /* Ends at bottom */
   }
 }
 
@@ -334,44 +338,21 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 }
 
 @keyframes glitch-flicker {
-  0% {
-    opacity: 1;
-  }
 
-  9% {
-    opacity: 1;
-  }
-
-  10% {
-    opacity: 0;
-  }
-
-  29% {
-    opacity: 0;
-  }
-
-  30% {
-    opacity: 1;
-  }
-
-  49% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0;
-  }
-
-  69% {
-    opacity: 0;
-  }
-
-  70% {
-    opacity: 1;
-  }
-
+  0%,
+  9%,
+  30%,
+  49%,
+  70%,
   100% {
     opacity: 1;
+  }
+
+  10%,
+  29%,
+  50%,
+  69% {
+    opacity: 0;
   }
 }
 

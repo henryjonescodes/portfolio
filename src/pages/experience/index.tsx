@@ -18,10 +18,9 @@ const Experience = () => {
         <motion.h1>
           <TypewriterText text={"Experience"} staggerChildren={0.05} />
         </motion.h1>
-
         <ExperienceEntry
-          institution="ChannelAI"
-          title="iOS Engineer, Design System Lead"
+          title="ChannelAI"
+          subtitle="iOS Engineer, Design System Lead"
           description={[
             "— Delivered interactive UI features and maintained design assets across departments for Channel's AI-powered chat platform.",
             "— Worked extensively with Objective-C, Swift, and SwiftUI to implement core iOS features such as user profiles, media galleries, and app settings.",
@@ -32,8 +31,8 @@ const Experience = () => {
         />
 
         <ExperienceEntry
-          institution="Mushroom.gg"
-          title="Full Stack Engineer, Design System Lead"
+          title="Mushroom.gg"
+          subtitle="Full Stack Engineer, Design System Lead"
           description={[
             "— Contributed to the implementation of chat and feed features for a gaming-focused social media platform.",
             "— Managed cross-platform development for web and mobile using React, React Native, and GraphQL.",
@@ -44,8 +43,8 @@ const Experience = () => {
         />
 
         <ExperienceEntry
-          institution="Union College"
-          title="UI/UX Researcher"
+          title="Union College"
+          subtitle="UI/UX Researcher"
           description={[
             "— Conducted a research study on user trust in software agents, using a custom Java game environment.",
             "— Designed and analyzed experiments to measure user interactions with varying levels of agent reliability.",
@@ -55,8 +54,8 @@ const Experience = () => {
         />
 
         <ExperienceEntry
-          institution="Tumblr"
-          title="Systems Intern"
+          title="Tumblr"
+          subtitle="Systems Intern"
           description={[
             "— Supported the systems department in various tasks during a high-school internship.",
             "— Gained exposure to the fast-paced environment of a tech startup, learning foundational industry skills.",

@@ -16,8 +16,8 @@
 
 @mixin navItemCommon {
   position: relative;
-  color: $foreground-primary;
-  color: var(--foreground-primary);
+  color: $accent-primary;
+  color: var(--accent-primary);
   height: 100%;
   display: flex;
   align-items: center;
@@ -38,8 +38,8 @@
 
       svg,
       path {
-        fill: $foreground-primary;
-        fill: var(--foreground-primary);
+        fill: $accent-primary;
+        fill: var(--accent-primary);
       }
     }
   }
@@ -61,6 +61,7 @@
 // * * * * * * * Navigation Bar Styles * * * * * * * //
 
 .navigationBar {
+  @include unselectable;
   position: relative;
   z-index: 1;
   height: $height-nav-bar;

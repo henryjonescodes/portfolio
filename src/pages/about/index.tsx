@@ -121,7 +121,7 @@ const About = () => {
 
   const { primaryHues } = useColors();
 
-  const normalizedHue = (primaryHues.foregroundPrimary + 310) % 360;
+  const normalizedHue = (primaryHues.accentPrimary + 335) % 360;
 
   const dynamicFilterStyle = {
     filter: `sepia(100%) hue-rotate(${normalizedHue}deg) saturate(6)`,

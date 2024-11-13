@@ -12,22 +12,23 @@
   }
 
   &Area {
-    @include hover-opacity;
-    cursor: pointer !important;
-    opacity: 1;
-    transition: opacity 0.2s ease-in-out;
+    // @include hover-opacity;
+    // cursor: pointer !important;
+    // opacity: 1;
+    // transition: opacity 0.2s ease-in-out;
+    // pointer-events: auto;
 
-    &:hover {
-      opacity: 0.8;
-    }
+    // &:hover {//   opacity: 0.8;
+    // }
   }
 }
 
 .entry {
-  margin-bottom: 32px; // Adjust spacing between entries as needed
+  margin-bottom: 32px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 
   .header {
     display: flex;
@@ -38,6 +39,11 @@
       justify-content: space-between;
       align-items: center;
       width: 100%;
+
+      p {
+        color: $accent-secondary;
+        color: var(--accent-secondary);
+      }
     }
 
     .subtitle {}
@@ -72,7 +78,7 @@
     flex-shrink: 0;
     flex-grow: 0;
     max-width: 40%;
-    max-height: 200px;
+    max-height: 100%;
   }
 
 

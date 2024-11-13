@@ -20,8 +20,8 @@
 
 // Mixin for glowing background
 @mixin glowing-background {
-  background-image: radial-gradient($background-secondary 10%, black);
-  background-image: radial-gradient(var(--background-secondary) 10%, black);
+  background-image: radial-gradient($background-primary 10%, black);
+  background-image: radial-gradient(var(--background-primary) 10%, black);
   overflow: hidden;
   position: absolute;
   left: 0;
@@ -73,4 +73,17 @@
   z-index: 1;
   pointer-events: none;
   animation: lines 0.1s linear infinite;
+}
+
+@mixin unselectable {
+  -webkit-user-select: none;
+  /* Safari and Chrome */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE and Edge */
+  user-select: none;
+  /* Standard syntax */
+  -webkit-touch-callout: none;
+  /* Disable callout on iOS */
 }

@@ -9,7 +9,7 @@ import Checklist from "./../../assets/svg/icons/check-list.svg?react";
 import Code from "./../../assets/svg/icons/code.svg?react";
 import Expand from "./../../assets/svg/icons/expand.svg?react";
 import Handheld from "./../../assets/svg/icons/handheld.svg?react";
-import Icon from "./../../assets/svg/icons/icon.svg?react";
+import Home from "./../../assets/svg/icons/home.svg?react";
 import Pause from "./../../assets/svg/icons/pause.svg?react";
 import Play from "./../../assets/svg/icons/play.svg?react";
 import User from "./../../assets/svg/icons/user.svg?react";
@@ -125,7 +125,7 @@ const NavBar = ({ page }: NavBarProps) => {
           />
           <NavBarButton
             onClick={() => navigate(`/`, { replace: true })}
-            Icon={Icon}
+            Icon={Home}
           />
         </motion.span>
       </motion.span>

@@ -33,6 +33,7 @@ interface DerivedColors {
   "accent-secondary": ColorHex;
   "accent-tertiary": ColorHex;
   "background-secondary": ColorHex;
+  "background-tertiary": ColorHex;
 }
 
 // Functions to adjust saturation and lightness
@@ -137,6 +138,10 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
       "accent-secondary": adjustSaturation(primaryColors.accentPrimary, -10),
       "accent-tertiary": adjustSaturation(primaryColors.accentPrimary, -30),
       "background-secondary": adjustLightness(
+        primaryColors.backgroundPrimary,
+        -8
+      ),
+      "background-tertiary": adjustSaturation(
         primaryColors.backgroundPrimary,
         -8
       ),
