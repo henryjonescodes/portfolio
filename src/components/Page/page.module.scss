@@ -35,8 +35,8 @@
 
 .content {
   @include retro-scrollbar;
+  @include page-padding-horizontal;
   scroll-snap-type: y mandatory;
-  padding: 0px $padding-page;
   overflow: auto;
   width: 100%;
   flex: 1;
@@ -58,6 +58,7 @@
 }
 
 .pageContents {
+  @include unselectable;
   display: flex;
   flex-direction: column;
   gap: 16px;

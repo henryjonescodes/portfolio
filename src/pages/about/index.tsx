@@ -121,7 +121,7 @@ const About = () => {
 
   const { primaryHues } = useColors();
 
-  const normalizedHue = (primaryHues.foregroundPrimary + 310) % 360;
+  const normalizedHue = (primaryHues.accentPrimary + 335) % 360;
 
   const dynamicFilterStyle = {
     filter: `sepia(100%) hue-rotate(${normalizedHue}deg) saturate(6)`,
@@ -132,7 +132,8 @@ const About = () => {
     width < screenWidths.tiny ||
     zoomLevel !== "fullscreen";
 
-  const moveSocials = width < screenWidths.tiny && zoomLevel === "fullscreen";
+  // const moveSocials = width < screenWidths.tiny && zoomLevel === "fullscreen";
+
   return (
     <PageContents
       key={"about"}
@@ -167,40 +168,40 @@ const About = () => {
             </motion.div>
 
             {/* Socials */}
-            {!moveSocials && (
-              <motion.div className={styles.socials} variants={socialsVariants}>
-                <motion.div
-                  variants={iconVariants}
-                  className={styles.iconWrapper}
-                >
-                  <GlitchIcon
-                    Icon={GitHub}
-                    className={styles.icon}
-                    url="https://github.com/henryjonescodes"
-                  />
-                </motion.div>
-                <motion.div
-                  variants={iconVariants}
-                  className={styles.iconWrapper}
-                >
-                  <GlitchIcon
-                    Icon={LinkedIn}
-                    className={styles.icon}
-                    url="https://www.linkedin.com/in/henryjonescodes/"
-                  />
-                </motion.div>
-                <motion.div
-                  variants={iconVariants}
-                  className={styles.iconWrapper}
-                >
-                  <GlitchIcon
-                    Icon={Instagram}
-                    className={styles.icon}
-                    url="https://www.instagram.com/theycallmezonez/"
-                  />
-                </motion.div>
+            {/* {!moveSocials && ( */}
+            <motion.div className={styles.socials} variants={socialsVariants}>
+              <motion.div
+                variants={iconVariants}
+                className={styles.iconWrapper}
+              >
+                <GlitchIcon
+                  Icon={GitHub}
+                  className={styles.icon}
+                  url="https://github.com/henryjonescodes"
+                />
               </motion.div>
-            )}
+              <motion.div
+                variants={iconVariants}
+                className={styles.iconWrapper}
+              >
+                <GlitchIcon
+                  Icon={LinkedIn}
+                  className={styles.icon}
+                  url="https://www.linkedin.com/in/henryjonescodes/"
+                />
+              </motion.div>
+              <motion.div
+                variants={iconVariants}
+                className={styles.iconWrapper}
+              >
+                <GlitchIcon
+                  Icon={Instagram}
+                  className={styles.icon}
+                  url="https://www.instagram.com/theycallmezonez/"
+                />
+              </motion.div>
+            </motion.div>
+            {/* )} */}
           </motion.div>
 
           {/* Stats Section (Right/Bottom) */}

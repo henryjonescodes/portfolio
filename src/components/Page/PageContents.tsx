@@ -18,7 +18,7 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
-  const { animationDisabled } = useSettings();
+  const { animationDisabled, zoomLevel } = useSettings();
   const [delayedPage, setDelayedPage] = useState(page);
 
   useEffect(() => {
@@ -39,8 +39,8 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
         opacity: 1,
         transition: {
           duration: 0.1, // Control exit duration
-          delay: 0,
-          delayChildren: 0,
+          delay: zoomLevel === "fullscreen" ? 0 : 0.3,
+          delayChildren: zoomLevel === "fullscreen" ? 0 : 0.3,
           staggerChildren: 0.5,
         },
       },

@@ -4,11 +4,6 @@ import { folder, useControls } from "leva";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useSpring } from "react-spring";
 import { Vector3 } from "three";
-import {
-  screenWidths,
-  ZoomLevel,
-  zoomLevels,
-} from "../styles/layout.constants";
 import { useSettings } from "./SettingsContext";
 import { useWindowDimensions } from "./WindowDimensionContext";
 
@@ -16,7 +11,7 @@ interface ControlsContextProps {
   focus: Vector3;
   setFocus: (v: Vector3) => void;
 }
-
+// TODO: no longer needs to be a context, make a controls component
 // Default values for the context
 const defaultControlsContext: ControlsContextProps = {
   focus: new Vector3(0, 0, 0),
@@ -34,13 +29,9 @@ const ControlsContext = createContext<ControlsContextProps>(
 export const ControlsProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [focus, setFocus] = useState<Vector3>(new Vector3(0, 0, 0));
-  const [zoomPositions, setZoomPositions] = useState<ZoomLevel>(
-    zoomLevels.default
-  );
   const { camera } = useThree();
   const { zoomLevel } = useSettings();
-  const { width } = useWindowDimensions();
+  const { zoomPositions } = useWindowDimensions();
 
   // Leva Controls
   const { useOrbitControls } = useControls({
@@ -49,44 +40,7 @@ export const ControlsProvider: React.FC<{ children: React.ReactNode }> = ({
     }),
   });
 
-  // ?? Get offset adjusted for screen size
-  useEffect(() => {
-    const getZoomLevel = () => {
-      if (width > 3000) {
-        console.log("Current width category: extraLarge");
-        return zoomLevels.extraLarge;
-      }
-      if (width > screenWidths.large) {
-        console.log("Current width category: large");
-        return zoomLevels.large;
-      }
-      if (width > screenWidths.default) {
-        console.log("Current width category: default");
-        return zoomLevels.default;
-      }
-      if (width > screenWidths.compact) {
-        console.log("Current width category: compact");
-        return zoomLevels.compact;
-      }
-      if (width > screenWidths.medium) {
-        console.log("Current width category: medium");
-        return zoomLevels.medium;
-      }
-      if (width > screenWidths.small) {
-        console.log("Current width category: small");
-        return zoomLevels.small;
-      }
-      if (width > screenWidths.mobile) {
-        console.log("Current width category: mobile");
-        return zoomLevels.mobile;
-      }
-      console.log("Current width category: tiny");
-      return zoomLevels.tiny;
-    };
-
-    const newZoomLevel = getZoomLevel();
-    setZoomPositions(newZoomLevel);
-  }, [width, zoomLevels]);
+  const [focus, setFocus] = useState<Vector3>(new Vector3(0, 0, 0));
 
   // ?? Adjust focus based on zoom level
   useEffect(() => {

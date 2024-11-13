@@ -3,9 +3,10 @@ export const colors = {
   "foreground-secondary": "#0bcb7b",
   "foreground-tertiary": "#2bab76",
   "foreground-quaternary": "#003d24",
-  "accent-primary": "#00de81",
-  "accent-secondary": "#0bd37f",
-  "accent-tertiary": "#21bd7c",
-  "background-primary": "#005858",
-  "background-secondary": "#002f2f"
+  "accent-primary": "#00dec4",
+  "accent-secondary": "#0bd3bc",
+  "accent-tertiary": "#21bdab",
+  "background-primary": "#003838",
+  "background-secondary": "#010a0a",
+  "background-tertiary": "#062e2e"
 } as const;

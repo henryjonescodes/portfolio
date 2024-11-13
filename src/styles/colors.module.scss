@@ -5,12 +5,14 @@ $foreground-secondary: color.adjust($foreground-primary, $saturation: -10%);
 $foreground-tertiary: color.adjust($foreground-primary, $saturation: -40%);
 $foreground-quaternary: color.adjust($foreground-primary, $lightness: -30%);
 
-$accent-primary: #00de81;
+$accent-primary: #00dec4;
 $accent-secondary: color.adjust($accent-primary, $saturation: -10%);
 $accent-tertiary: color.adjust($accent-primary, $saturation: -30%);
 
-$background-primary: #005858;
+$background-primary: #043030;
+// $background-primary: #003838;
 $background-secondary: color.adjust($background-primary, $lightness: -8%);
+$background-tertiary: color.adjust($background-primary, $saturation: -8%);
 
 
 
@@ -27,5 +29,6 @@ $background-secondary: color.adjust($background-primary, $lightness: -8%);
 
     --background-primary: #{$background-primary};
     --background-secondary: #{$background-secondary};
+    --background-tertiary: #{$background-tertiary};
   }
 }

@@ -27,13 +27,17 @@
         font-size: 1.7rem;
       }
     }
+
+    .description {
+      font-size: 1.1rem;
+    }
+
   }
 
   .description {
-    font-size: 1.1rem;
+    font-size: 1.6rem;
   }
 
-  // TODO: fullscreen styles?
   &.fullscreen {}
 
   .header {
@@ -58,19 +62,70 @@
   }
 }
 
-// @media (max-width: $width-small) {
-//   .blurb {
-//     // min-height: 30%;
-//     justify-content: flex-end;
-//   }
-// }
+@media (max-width: $width-medium) {
+  .blurb {
+    &.fullscreen {
+      .description {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
 
-// @media (max-width: $width-mobile) {
-//   .blurb {
-//     // min-height: 45%;
-//     justify-content: flex-end;
-//   }
-// }
+@media (max-width: $width-small) {
+  .blurb {
+    &.fullscreen {
+      gap: 0.2rem;
+
+      .header {
+
+        .prefix {
+          font-size: 1.3rem;
+        }
+
+        .title {
+          font-size: 2rem;
+        }
+
+        .description {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $width-tiny) {
+  .blurb {
+    &.fullscreen {
+      .description {
+        font-size: 1.1rem;
+      }
+
+    }
+  }
+
+}
+
+
+@media (max-width: $width-mobile-medium) {
+  .blurb {
+    &.fullscreen {
+      gap: 0.2rem;
+
+      .header {
+
+        .prefix {
+          font-size: 1.3rem;
+        }
+
+        .title {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+}
 
 /////////////////////////////////////////////////
 //                   SLIDER                    //
@@ -200,11 +255,6 @@ $line-selected-width: 5px;
   rotate: 225deg;
   transform-origin: top left;
 
-  fill: $foreground-primary;
-  stroke: $foreground-primary;
-  fill: var(--foreground-primary);
-  stroke: var(--foreground-primary);
-
 
   &Minimized {
     transform: scale(0.5);
@@ -214,6 +264,7 @@ $line-selected-width: 5px;
 
   path,
   svg {
+
     fill: $foreground-primary;
     stroke: $foreground-primary;
     fill: var(--foreground-primary);
@@ -291,8 +342,8 @@ $line-selected-width: 5px;
         left: 0;
 
         path {
-          stroke: $foreground-quaternary;
-          stroke: var(--foreground-quaternary);
+          stroke: $accent-tertiary;
+          stroke: var(--accent-tertiary);
         }
       }
 
@@ -313,7 +364,7 @@ $line-selected-width: 5px;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          padding: 12px;
+          padding: 8px;
           left: 50%;
           top: 50%;
           opacity: 0;
@@ -344,8 +395,8 @@ $line-selected-width: 5px;
 
               svg,
               path {
-                stroke: $foreground-tertiary;
-                stroke: var(--foreground-tertiary);
+                stroke: $accent-primary;
+                stroke: var(--accent-primary);
                 fill: transparent;
               }
 
@@ -517,115 +568,77 @@ $line-selected-width: 5px;
   }
 }
 
-// @media (max-width: $width-default) {
-//   .mapViewer {
-//     min-width: 600px;
-//     max-width: 600px;
+@media (max-width: $width-mobile-large) {
+  .fullscreen {
+    >.contents {
+      >.map {
+        >.pins {
+          >.details {
+            padding: 6px;
 
-//     &Contents {}
-//   }
+            >span {
 
-//   .portland {
-//     >.map {
-//       left: -125%;
-//       top: -20%;
-//     }
-//   }
 
-//   .nyc {
-//     >.map {
-//       left: -115%;
-//       top: -27%;
-//     }
-//   }
+              h4 {
+                font-size: 1.2rem;
+                line-height: 1.1rem;
+              }
 
-//   .paloAlto {
-//     >.map {
-//       left: 39%;
-//     }
-//   }
+              h5 {
+                font-size: 1.1rem;
+                line-height: 1.6rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 
-//   .schenectady {
-//     >.map {
-//       top: -10%;
-//     }
+  .portland {
+    $scale: 160%;
 
-//     .details {
-//       // left: 62.5% !important;
-//       // top: 9% !important;
-//     }
-//   }
-// }
+    >.map {
+      left: -105%;
+      // top: -10%;
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
 
-// @media (max-width: $width-small) {
-//   .mapViewer {
-//     min-width: 475px;
-//     max-width: 475px;
+  .nyc {
+    $scale: 160%;
 
-//     &Contents {
+    >.map {
+      left: -100%;
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
 
-//       >.map {
-//         >.pins {
-//           >.details {
-//             >span {
-//               h4 {
-//                 font-size: 1.5rem;
-//                 line-height: 1.6rem;
-//               }
+  .paloAlto {
+    $scale: 150%;
 
-//               h5 {
-//                 font-size: 1.3rem;
-//                 line-height: 1.4rem;
-//               }
+    >.map {
+      left: 43%;
+      // top: -10%;
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
 
-//               svg {
-//                 height: 1.1rem;
-//                 width: 1.1rem;
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
+  .schenectady {
+    $scale: 150%;
 
-//   .portland {
-//     $scale: 160%;
+    >.map {
+      left: -55%;
+      top: 15%;
+      min-height: $scale;
+      min-width: $scale;
+    }
+  }
+}
 
-//     >.map {
-//       left: -100%;
-//       top: -10%;
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .nyc {
-//     >.map {
-//       left: -119%;
-//       top: -26%;
-//     }
-//   }
-
-//   .paloAlto {
-//     $scale: 150%;
-
-//     >.map {
-//       left: 43%;
-//       top: -10%;
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .schenectady {
-//     >.map {
-//       top: -8%;
-//     }
-//   }
-// }
-
-// @media (max-width: $width-small) {
 //   .mapViewer {
 //     min-width: 375px;
 //     max-width: 375px;

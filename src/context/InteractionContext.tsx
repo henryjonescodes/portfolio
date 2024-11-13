@@ -1,5 +1,5 @@
 // InteractionContext.tsx
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 type InteractionContextType = {
   activeObject: string | null;
@@ -18,9 +18,9 @@ export const InteractionProvider = ({
 }) => {
   const [activeObject, setActiveObject] = useState<string | null>(null);
 
-  useEffect(() => {
-    console.log(`active object: ${activeObject}`);
-  }, [activeObject]);
+  // useEffect(() => {
+  //   console.log(`active object: ${activeObject}`);
+  // }, [activeObject]);
 
   return (
     <InteractionContext.Provider value={{ activeObject, setActiveObject }}>
@@ -36,6 +36,7 @@ export type InteractiveElementProps = {
   onPointerOut?: (e: any) => void;
   onPointerDown?: (e: any) => void;
   onPointerUp?: (e: any) => void;
+  onPointerMove?: (e: any) => void;
 };
 
 // TODO: Type the name field?
@@ -46,6 +47,7 @@ export const InteractiveElement = ({
   onPointerOut,
   onPointerDown,
   onPointerUp,
+  onPointerMove,
 }: InteractiveElementProps) => {
   const { setActiveObject } = useContext(InteractionContext);
 
@@ -75,6 +77,12 @@ export const InteractiveElement = ({
       e.stopPropagation();
       if (onPointerUp) {
         onPointerUp(e);
+      }
+    },
+    onPointerMove: (e: any) => {
+      e.stopPropagation();
+      if (onPointerMove) {
+        onPointerMove(e);
       }
     },
   });

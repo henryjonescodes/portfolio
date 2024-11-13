@@ -16,8 +16,8 @@
 
 @mixin navItemCommon {
   position: relative;
-  color: $foreground-primary;
-  color: var(--foreground-primary);
+  color: $accent-primary;
+  color: var(--accent-primary);
   height: 100%;
   display: flex;
   align-items: center;
@@ -25,14 +25,12 @@
   overflow: hidden;
   white-space: nowrap;
   box-sizing: border-box;
-  transition: all 0.3s ease-in-out;
 
   .icon {
     position: relative;
     width: 24px;
     height: 24px;
     flex-shrink: 0;
-    transition: all 0.3s ease;
 
     .image {
       height: 100%;
@@ -40,9 +38,8 @@
 
       svg,
       path {
-        transition: fill 0.3s ease-in-out;
-        fill: $foreground-primary;
-        fill: var(--foreground-primary);
+        fill: $accent-primary;
+        fill: var(--accent-primary);
       }
     }
   }
@@ -64,6 +61,7 @@
 // * * * * * * * Navigation Bar Styles * * * * * * * //
 
 .navigationBar {
+  @include unselectable;
   position: relative;
   z-index: 1;
   height: $height-nav-bar;
@@ -246,15 +244,5 @@
   &:last-of-type {
     border-right: 4px solid $foreground-primary;
     border-right: 4px solid var(--foreground-primary);
-  }
-
-  &:hover {
-    .icon .image {
-
-      svg,
-      path {
-        // opacity: 0.8;
-      }
-    }
   }
 }

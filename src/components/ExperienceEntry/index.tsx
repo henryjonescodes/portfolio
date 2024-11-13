@@ -7,6 +7,7 @@ import AnimatedLine from "../AnimatedLine";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { widthMobile } from "../../styles/layout.constants";
 import cn from "classnames";
+import { useSettings } from "../../context/SettingsContext";
 
 const formatDateRange = (startDate: Date, endDate?: Date): string => {
   const formatOptions: Intl.DateTimeFormatOptions = {
@@ -38,8 +39,8 @@ const formatDateRange = (startDate: Date, endDate?: Date): string => {
 };
 
 type ExperienceEntryProps = {
-  institution: string;
-  title?: string;
+  title: string;
+  subtitle?: string;
   description: string[];
   borderWidth?: number;
   children?: React.ReactNode;
@@ -87,8 +88,8 @@ const entryTextVariants = {
 };
 
 const ExperienceEntry = ({
-  institution,
   title,
+  subtitle,
   description,
   startDate,
   endDate,
@@ -102,24 +103,29 @@ const ExperienceEntry = ({
     ? formatDateRange(startDate, endDate)
     : dateString;
   const { width } = useWindowDimensions();
+  const { zoomLevel } = useSettings();
 
   return (
-    <motion.div className={styles.entry}>
+    <motion.div
+      className={cn(styles.entry, {
+        [styles.fullScreen]: zoomLevel === "fullscreen",
+      })}
+    >
       <motion.span className={styles.header}>
         <motion.div className={styles.title}>
           {url ? (
             <motion.h2>
               <a href={url} target="_blank" className={styles.linkText}>
-                <TypewriterText text={institution} />
+                <TypewriterText text={title} />
               </a>
             </motion.h2>
           ) : onClick ? (
             <motion.h2 onClick={onClick} className={styles.linkText}>
-              <TypewriterText text={institution} />
+              <TypewriterText text={title} />
             </motion.h2>
           ) : (
             <motion.h2>
-              <TypewriterText text={institution} />
+              <TypewriterText text={title} />
             </motion.h2>
           )}
           {!!dateRange && (
@@ -128,7 +134,7 @@ const ExperienceEntry = ({
             </motion.p>
           )}
         </motion.div>
-        {!!title && (
+        {!!subtitle && (
           <motion.div
             className={styles.subtitle}
             animate={{
@@ -138,7 +144,7 @@ const ExperienceEntry = ({
             }}
           >
             <motion.h3>
-              <TypewriterText text={title} />
+              <TypewriterText text={subtitle} />
             </motion.h3>
           </motion.div>
         )}

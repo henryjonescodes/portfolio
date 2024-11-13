@@ -1,7 +1,7 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import AnimatedOutlet from "../AnimatedOutlet";
 import Background from "../Background";
@@ -47,8 +47,6 @@ const backgroundVariants = {
 };
 
 const Page = () => {
-  const navigate = useNavigate(); // Initialize the navigate function
-
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
@@ -88,7 +86,7 @@ const Page = () => {
             <Background />
           </motion.div>
         )}
-        <NavBar navigate={navigate} page={page} />
+        <NavBar page={page} />
         <motion.div
           className={cn(styles.content, {
             [styles.contentFullScreen]: zoomLevel === "fullscreen",

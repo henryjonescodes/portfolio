@@ -4,6 +4,7 @@ import mixPlugin from "colord/plugins/mix";
 import React, {
   createContext,
   ReactNode,
+  useCallback,
   useContext,
   useMemo,
   useState,
@@ -32,6 +33,7 @@ interface DerivedColors {
   "accent-secondary": ColorHex;
   "accent-tertiary": ColorHex;
   "background-secondary": ColorHex;
+  "background-tertiary": ColorHex;
 }
 
 // Functions to adjust saturation and lightness
@@ -57,23 +59,25 @@ const defaultAccentHSL = colord(defaultAccentColor).toHsl();
 const defaultBackgroundHSL = colord(defaultBackgroundColor).toHsl();
 
 // Define the shape of your context
-interface ColorsContextProps {
+type ColorsContextType = {
   primaryHues: PrimaryHues;
   setPrimaryHues: React.Dispatch<React.SetStateAction<PrimaryHues>>;
-}
+  resetColors: () => void;
+};
 
 // Provide default values for the context
-const defaultContextValue: ColorsContextProps = {
+const defaultContextValue: ColorsContextType = {
   primaryHues: {
     foregroundPrimary: defaultForegroundHSL.h,
     accentPrimary: defaultAccentHSL.h,
     backgroundPrimary: defaultBackgroundHSL.h,
   },
   setPrimaryHues: () => {},
+  resetColors: () => {},
 };
 
 // Create the context
-const ColorsContext = createContext<ColorsContextProps>(defaultContextValue);
+const ColorsContext = createContext<ColorsContextType>(defaultContextValue);
 
 // Create the Provider component
 export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
@@ -85,6 +89,14 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
     accentPrimary: defaultAccentHSL.h,
     backgroundPrimary: defaultBackgroundHSL.h,
   });
+
+  const resetColors = useCallback(() => {
+    setPrimaryHues({
+      foregroundPrimary: defaultForegroundHSL.h,
+      accentPrimary: defaultAccentHSL.h,
+      backgroundPrimary: defaultBackgroundHSL.h,
+    });
+  }, []);
 
   // Compute primary colors (hex) based on hues and default saturation/lightness
   const primaryColors = useMemo(
@@ -129,6 +141,10 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
         primaryColors.backgroundPrimary,
         -8
       ),
+      "background-tertiary": adjustSaturation(
+        primaryColors.backgroundPrimary,
+        -8
+      ),
     }),
     [primaryColors]
   );
@@ -159,7 +175,9 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
   );
 
   return (
-    <ColorsContext.Provider value={{ primaryHues, setPrimaryHues }}>
+    <ColorsContext.Provider
+      value={{ primaryHues, setPrimaryHues, resetColors }}
+    >
       {children}
     </ColorsContext.Provider>
   );

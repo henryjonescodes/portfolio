@@ -1,8 +1,9 @@
 import { useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { TextureLoader, Vector2 } from "three";
 import { useColors } from "../../context/ColorsContext";
+import { useNavigatePreserveQuery } from "../../hooks/useNavigatePreserveQuery";
 import { Button } from "./Button";
 import { Knob } from "./Knob";
 
@@ -17,7 +18,7 @@ useGLTF.preload("/3D/models/site-mixer-1.glb");
 
 export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate = useNavigatePreserveQuery();
   const { primaryHues, setPrimaryHues } = useColors();
 
   // ?? Load Scene Components & Textures

@@ -18,8 +18,7 @@ const blurbVariants = {
   exit: {
     opacity: 0,
     transition: {
-      duration: 1.5, // Control exit duration
-      staggerChildren: 0.3, // Stagger the children by 0.3 seconds
+      duration: 0, // Control exit duration
       when: "afterChildren", // Ensure parent waits for children to exit
     },
   },
@@ -59,12 +58,7 @@ const Blurb = () => {
             <TypewriterText text={title} />
           </motion.h3>
         </motion.span>
-        <motion.p
-          className={styles.description}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
+        <motion.p className={styles.description}>
           <TypewriterText text={description} />
         </motion.p>
       </motion.div>

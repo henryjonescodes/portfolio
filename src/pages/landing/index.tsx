@@ -5,6 +5,8 @@ import { ColorsProvider, useColors } from "../../context/ColorsContext";
 import { SettingsProvider, useSettings } from "../../context/SettingsContext";
 import styles from "./landing.module.scss";
 import Scene from "./Scene";
+import GradientBackground from "../../components/GradientBackground";
+import Loading from "../../components/Loading";
 
 const wrapperVariants = {
   show: {
@@ -33,7 +35,7 @@ export const LandingWrapper = () => {
 };
 
 const Landing = () => {
-  const { zoomLevel } = useSettings();
+  const { zoomLevel, liteMode } = useSettings();
   useColors();
 
   return (
@@ -54,7 +56,13 @@ const Landing = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <Scene />;
+      {liteMode === false && (
+        <>
+          <Loading />
+          <Scene />
+          <GradientBackground />
+        </>
+      )}
     </motion.div>
   );
 };
