@@ -1,11 +1,11 @@
+import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
 import { commonInitial } from "../../../styles/variants";
 import TypewriterText from "../../3D/TypewriterText";
+import { usePage } from "../../Page";
 import { MapContext } from "../MapContext";
 import styles from "./map-components.module.scss";
-import cn from "classnames";
-import { useSettings } from "../../../context/SettingsContext";
 const blurbVariants = {
   initial: commonInitial,
   animate: {
@@ -31,14 +31,14 @@ const Blurb = () => {
   const { title, prefix, description } =
     locationData[keyToShow ?? "portland"] ?? {};
 
-  const { zoomLevel } = useSettings();
+  const { embedded } = usePage();
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
         className={cn(styles.blurb, {
-          [styles.fullscreen]: zoomLevel === "fullscreen",
-          [styles.handheld]: zoomLevel !== "fullscreen",
+          [styles.fullscreen]: !embedded,
+          [styles.handheld]: embedded,
         })}
         variants={blurbVariants}
         key={keyToShow}

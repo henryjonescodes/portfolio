@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import styles from "./page.module.scss";
 import { folder, useControls } from "leva";
+import { usePage } from ".";
 
 // Define the props interface
 export type PageContentsProps = {
@@ -19,8 +20,9 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
-  const { animationDisabled, zoomLevel } = useSettings();
+  const { animationDisabled } = useSettings();
   const [delayedPage, setDelayedPage] = useState(page);
+  const { embedded } = usePage();
 
   const {
     transitionDuration,
@@ -59,10 +61,8 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
         opacity: 1,
         transition: {
           duration: transitionDuration, // Controlled by Leva
-          delay:
-            zoomLevel === "fullscreen" ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
-          delayChildren:
-            zoomLevel === "fullscreen" ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
+          delay: !embedded ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
+          delayChildren: !embedded ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
           staggerChildren: staggerChildren, // Controlled by Leva
         },
       },
@@ -79,7 +79,6 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
       notFullscreenDelay,
       staggerChildren,
       exitDuration,
-      zoomLevel,
     ]
   );
 

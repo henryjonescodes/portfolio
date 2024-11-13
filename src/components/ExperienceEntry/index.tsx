@@ -1,13 +1,13 @@
-import React from "react";
+import cn from "classnames";
 import { motion } from "framer-motion";
-import styles from "./experience-entry.module.scss";
+import React from "react";
+import { useWindowDimensions } from "../../context/WindowDimensionContext";
+import { widthMobile } from "../../styles/layout.constants";
 import TypewriterText from "../3D/TypewriterText";
 import AnimatedBorderBox from "../AnimatedBorderBox";
 import AnimatedLine from "../AnimatedLine";
-import { useWindowDimensions } from "../../context/WindowDimensionContext";
-import { widthMobile } from "../../styles/layout.constants";
-import cn from "classnames";
-import { useSettings } from "../../context/SettingsContext";
+import { usePage } from "../Page";
+import styles from "./experience-entry.module.scss";
 
 const formatDateRange = (startDate: Date, endDate?: Date): string => {
   const formatOptions: Intl.DateTimeFormatOptions = {
@@ -103,12 +103,12 @@ const ExperienceEntry = ({
     ? formatDateRange(startDate, endDate)
     : dateString;
   const { width } = useWindowDimensions();
-  const { zoomLevel } = useSettings();
+  const { embedded } = usePage();
 
   return (
     <motion.div
       className={cn(styles.entry, {
-        [styles.fullScreen]: zoomLevel === "fullscreen",
+        [styles.fullScreen]: !embedded,
       })}
     >
       <motion.span className={styles.header}>

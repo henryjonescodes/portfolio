@@ -1,6 +1,6 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { createContext, ReactNode, useContext, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import AnimatedOutlet from "../AnimatedOutlet";
@@ -36,9 +36,9 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
           step: 0.1,
         },
 
-        pageAnimateDelay: { value: 0, min: 0, max: 1, step: 0.1 },
+        pageAnimateDelay: { value: 0.1, min: 0, max: 1, step: 0.1 },
         pageFirstLoadDelay: { value: 0.5, min: 0, max: 1, step: 0.1 },
-        pageExitDuration: { value: 0.3, min: 0, max: 1, step: 0.1 },
+        pageExitDuration: { value: 0.2, min: 0, max: 1, step: 0.1 },
       },
       { collapsed: true }
     ),
@@ -80,42 +80,70 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   }, [page]);
 
   return (
-    <AnimatePresence>
-      <motion.div
-        key={"page"}
-        className={cn(styles.page, {
-          [styles.pageHandheld]: embedded,
-          [styles.pageDisabled]: zoomLevel === "info",
-        })}
-        initial="initial"
-        animate="animate"
-        exit="exit"
-        variants={pageVariants}
-        onAnimationComplete={(definition) => {
-          if (definition === "animate" && firstPageLoad) {
-            setFirstPageLoad(false);
-          }
-        }}
-      >
-        {!embedded && <Background />}
-        <NavBar page={page} />
+    <PageProvider embedded={embedded}>
+      <AnimatePresence>
         <motion.div
-          className={cn(styles.content, {
-            [styles.contentFullScreen]: zoomLevel === "fullscreen",
+          key={"page"}
+          className={cn(styles.page, {
+            [styles.pageHandheld]: embedded,
+            [styles.pageDisabled]: zoomLevel === "info",
           })}
-          key="pageContent"
+          initial="initial"
+          animate="animate"
+          exit="exit"
           variants={pageVariants}
-          ref={contentRef}
+          onAnimationComplete={(definition) => {
+            if (definition === "animate" && firstPageLoad) {
+              setFirstPageLoad(false);
+            }
+          }}
         >
-          <motion.div className={styles.contentInner}>
-            <AnimatePresence mode="wait">
-              <AnimatedOutlet key={page} />
-            </AnimatePresence>
+          {!embedded && <Background />}
+          <NavBar page={page} />
+          <motion.div
+            className={cn(styles.content, {
+              [styles.contentFullScreen]: zoomLevel === "fullscreen",
+            })}
+            key="pageContent"
+            variants={pageVariants}
+            ref={contentRef}
+          >
+            <motion.div className={styles.contentInner}>
+              <AnimatePresence mode="wait">
+                <AnimatedOutlet key={page} />
+              </AnimatePresence>
+            </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+      </AnimatePresence>
+    </PageProvider>
   );
+};
+
+interface PageContextType {
+  embedded?: boolean;
+}
+
+const PageContext = createContext<PageContextType | undefined>(undefined);
+
+export const PageProvider = ({
+  children,
+  embedded,
+}: {
+  children: ReactNode;
+  embedded?: boolean;
+}) => {
+  return (
+    <PageContext.Provider value={{ embedded }}>{children}</PageContext.Provider>
+  );
+};
+
+export const usePage = () => {
+  const context = useContext(PageContext);
+  if (context === undefined) {
+    throw new Error("usePage must be used within an PageProvider");
+  }
+  return context;
 };
 
 export default Page;

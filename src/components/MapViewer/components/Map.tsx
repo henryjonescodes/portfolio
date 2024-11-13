@@ -5,13 +5,13 @@ import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
 import AnimatedBorderBox from "../../AnimatedBorderBox";
+import AnimatedLine from "../../AnimatedLine";
+import { usePage } from "../../Page";
 import { MapContext } from "../MapContext";
 import { LocationPinKeys } from "../types";
 import styles from "./map-components.module.scss";
 import MapSlider from "./MapSlider";
 import Pin from "./Pin";
-import AnimatedLine from "../../AnimatedLine";
-import { useSettings } from "../../../context/SettingsContext";
 
 const mapContainerVariants = {
   initial: {},
@@ -43,17 +43,16 @@ const Map = () => {
   const { currentKey, setCurrentKey, locationData } = useContext(MapContext);
   const { mapTitle: title, mapHighlights: highlights } =
     locationData[currentKey ?? "nyc"] ?? {};
-
+  const { embedded } = usePage();
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
-  const { zoomLevel } = useSettings();
 
   return (
     <motion.div
       key="mapContent"
       variants={mapContainerVariants}
       className={cn(styles.mapViewer, {
-        [styles.fullscreen]: zoomLevel === "fullscreen",
-        [styles.handheld]: zoomLevel !== "fullscreen",
+        [styles.fullscreen]: !embedded,
+        [styles.handheld]: embedded,
       })}
     >
       <motion.div

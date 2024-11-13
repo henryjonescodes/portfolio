@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import AnimatedBorderBox from "../../components/AnimatedBorderBox";
-import PageContents from "../../components/Page/PageContents";
 import TypewriterText from "../../components/3D/TypewriterText";
-import styles from "./about.module.scss";
+import AnimatedBorderBox from "../../components/AnimatedBorderBox";
 import Map from "../../components/MapViewer/components/Map";
+import PageContents from "../../components/Page/PageContents";
+import styles from "./about.module.scss";
 
 import GitHub from "@assets/svg/socials/github.svg?react";
 import Instagram from "@assets/svg/socials/Instagram.svg?react";
@@ -11,17 +11,17 @@ import LinkedIn from "@assets/svg/socials/linkedIn.svg?react";
 
 import Book from "@assets/svg/icons/book-01.svg?react";
 import Home from "@assets/svg/icons/home.svg?react";
+import cn from "classnames";
 import AnimatedLine from "../../components/AnimatedLine";
 import GlitchIcon from "../../components/GlitchIcon";
-import { iconVariants } from "../../styles/variants";
-import StatTracker from "./StatTracker";
 import Blurb from "../../components/MapViewer/components/Blurb";
 import { MapProvider } from "../../components/MapViewer/MapContext";
-import cn from "classnames";
+import { usePage } from "../../components/Page";
+import { useColors } from "../../context/ColorsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { screenWidths } from "../../styles/layout.constants";
-import { useSettings } from "../../context/SettingsContext";
-import { useColors } from "../../context/ColorsContext";
+import { iconVariants } from "../../styles/variants";
+import StatTracker from "./StatTracker";
 
 const commonExit = {
   opacity: 0,
@@ -117,9 +117,9 @@ const avatarVariants = {
 
 const About = () => {
   const { width } = useWindowDimensions();
-  const { zoomLevel } = useSettings();
 
   const { primaryHues } = useColors();
+  const { embedded } = usePage();
 
   const normalizedHue = (primaryHues.accentPrimary + 335) % 360;
 
@@ -128,9 +128,7 @@ const About = () => {
   };
 
   const moveTags =
-    width > screenWidths.mobileLarge ||
-    width < screenWidths.tiny ||
-    zoomLevel !== "fullscreen";
+    width > screenWidths.mobileLarge || width < screenWidths.tiny || embedded;
 
   // const moveSocials = width < screenWidths.tiny && zoomLevel === "fullscreen";
 
@@ -138,8 +136,8 @@ const About = () => {
     <PageContents
       key={"about"}
       className={cn(styles.about, {
-        [styles.handheld]: zoomLevel !== "fullscreen",
-        [styles.fullscreen]: zoomLevel === "fullscreen",
+        [styles.handheld]: embedded,
+        [styles.fullscreen]: !embedded,
       })}
     >
       <motion.div className={cn(styles.content, styles.aboutMe)}>
