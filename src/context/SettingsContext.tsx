@@ -31,6 +31,8 @@ type SettingsContextType = {
   // ? Loading
   loadingState: LoadingStates;
   setLoadingState: React.Dispatch<React.SetStateAction<LoadingStates>>;
+  firstPageLoad: boolean;
+  setFirstPageLoad: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const defaultSettings: SettingsContextType = {
@@ -54,6 +56,8 @@ const defaultSettings: SettingsContextType = {
   // ? Loading
   loadingState: "loading",
   setLoadingState: () => {},
+  firstPageLoad: true,
+  setFirstPageLoad: () => {},
 };
 
 const SettingsContext = createContext<SettingsContextType>(defaultSettings);
@@ -85,6 +89,9 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const isLiteModeParam = searchParams.get("lite") === "true";
 
   // ? Setup States
+  const [firstPageLoad, setFirstPageLoad] = useState<boolean>(
+    defaultSettings.firstPageLoad
+  );
   const [liteMode, setLiteMode] = useState(isLiteModeParam || isMobile);
   const [loadingState, setLoadingState] = useState<LoadingStates>(
     liteMode ? undefined : "loading"
@@ -202,6 +209,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   return (
     <SettingsContext.Provider
       value={{
+        firstPageLoad,
+        setFirstPageLoad,
         loadingState,
         setLoadingState,
         liteMode,
@@ -215,7 +224,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
         toggleInfoMode,
       }}
     >
-      <Leva collapsed hidden={!isDebugMode} />
+      <Leva collapsed hidden={!isDebugMode} oneLineLabels={true} />
       {children}
     </SettingsContext.Provider>
   );

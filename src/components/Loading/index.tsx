@@ -21,8 +21,8 @@ const Loading = () => {
     hidden: {
       opacity: 0,
       transition: {
-        duration: 0.5,
-        delay: 1.7,
+        duration: 0.3,
+        delay: 1.95,
       },
     },
   };

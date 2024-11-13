@@ -7,59 +7,73 @@ import AnimatedOutlet from "../AnimatedOutlet";
 import Background from "../Background";
 import NavBar from "../NavBar";
 import styles from "./page.module.scss";
+import { folder, useControls } from "leva";
 
-// Animation variants
-const pageVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.4,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-const backgroundVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.6,
-      delay: 0,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
-const Page = () => {
+const Page = ({ embedded }: { embedded?: boolean }) => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
 
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const { zoomLevel } = useSettings();
+  const { zoomLevel, firstPageLoad, setFirstPageLoad } = useSettings();
+
+  const {
+    pageAnimateDuration,
+    pageExitDuration,
+    pageAnimateDelay,
+    pageAnimateDelayChildren,
+    pageFirstLoadDelayChildren,
+    pageFirstLoadDelay,
+  } = useControls({
+    PageTransition: folder(
+      {
+        pageAnimateDuration: { value: 0.5, min: 0, max: 1, step: 0.1 },
+        pageAnimateDelayChildren: { value: 0.2, min: 0, max: 1, step: 0.1 },
+        pageFirstLoadDelayChildren: {
+          value: 0.2,
+          min: 0,
+          max: 1,
+          step: 0.1,
+        },
+
+        pageAnimateDelay: { value: 0, min: 0, max: 1, step: 0.1 },
+        pageFirstLoadDelay: { value: 0.5, min: 0, max: 1, step: 0.1 },
+        pageExitDuration: { value: 0.3, min: 0, max: 1, step: 0.1 },
+      },
+      { collapsed: true }
+    ),
+  });
+
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        duration: pageAnimateDuration, // Controlled by Leva
+        delay: firstPageLoad ? pageFirstLoadDelay : pageAnimateDelay, // Controlled by Leva
+        delayChildren: firstPageLoad
+          ? pageFirstLoadDelayChildren
+          : pageAnimateDelayChildren, // Controlled by Leva
+        when: "beforeChildren",
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: pageExitDuration, // Controlled by Leva
+        when: "beforeChildren",
+      },
+    },
+  };
 
   useEffect(() => {
     const scrollToTop = () => {
       if (contentRef.current) {
         setTimeout(() => {
           contentRef.current?.scrollTo(0, 0);
-        }, 1500);
+        }, 1000);
       }
     };
     scrollToTop();
@@ -70,22 +84,20 @@ const Page = () => {
       <motion.div
         key={"page"}
         className={cn(styles.page, {
-          [styles.pageHandheld]: zoomLevel !== "fullscreen",
+          [styles.pageHandheld]: embedded,
           [styles.pageDisabled]: zoomLevel === "info",
         })}
         initial="initial"
         animate="animate"
         exit="exit"
         variants={pageVariants}
+        onAnimationComplete={(definition) => {
+          if (definition === "animate" && firstPageLoad) {
+            setFirstPageLoad(false);
+          }
+        }}
       >
-        {zoomLevel === "fullscreen" && (
-          <motion.div
-            className={styles.background}
-            variants={backgroundVariants}
-          >
-            <Background />
-          </motion.div>
-        )}
+        {!embedded && <Background />}
         <NavBar page={page} />
         <motion.div
           className={cn(styles.content, {

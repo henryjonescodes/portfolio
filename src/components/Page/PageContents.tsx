@@ -4,6 +4,7 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useSettings } from "../../context/SettingsContext";
 import styles from "./page.module.scss";
+import { folder, useControls } from "leva";
 
 // Define the props interface
 export type PageContentsProps = {
@@ -21,10 +22,29 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
   const { animationDisabled, zoomLevel } = useSettings();
   const [delayedPage, setDelayedPage] = useState(page);
 
+  const {
+    transitionDuration,
+    exitDuration,
+    staggerChildren,
+    fullscreenDelay,
+    notFullscreenDelay,
+  } = useControls({
+    PageContentsTransition: folder(
+      {
+        transitionDuration: { value: 0.1, min: 0, max: 0.5, step: 0.1 },
+        exitDuration: { value: 0.1, min: 0, max: 0.5, step: 0.1 },
+        staggerChildren: { value: 0.5, min: 0, max: 1, step: 0.1 },
+        fullscreenDelay: { value: 0.3, min: 0, max: 2, step: 0.1 },
+        notFullscreenDelay: { value: 0.3, min: 0, max: 2, step: 0.1 },
+      },
+      { collapsed: true }
+    ),
+  });
+
   useEffect(() => {
-    let timerDur = 500;
+    let timerDur = 100;
     if (animationDisabled) {
-      timerDur = 1000;
+      timerDur = 100;
     }
     const timer = setTimeout(() => setDelayedPage(`${page}`), timerDur);
     return () => clearTimeout(timer); // Clean up on unmount or page change
@@ -38,20 +58,29 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
       animate: {
         opacity: 1,
         transition: {
-          duration: 0.1, // Control exit duration
-          delay: zoomLevel === "fullscreen" ? 0 : 0.3,
-          delayChildren: zoomLevel === "fullscreen" ? 0 : 0.3,
-          staggerChildren: 0.5,
+          duration: transitionDuration, // Controlled by Leva
+          delay:
+            zoomLevel === "fullscreen" ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
+          delayChildren:
+            zoomLevel === "fullscreen" ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
+          staggerChildren: staggerChildren, // Controlled by Leva
         },
       },
       exit: {
         transition: {
-          duration: 0.1, // Control exit duration
+          duration: exitDuration, // Controlled by Leva
           when: "afterChildren", // Ensure parent waits for children to exit
         },
       },
     }),
-    []
+    [
+      transitionDuration,
+      fullscreenDelay,
+      notFullscreenDelay,
+      staggerChildren,
+      exitDuration,
+      zoomLevel,
+    ]
   );
 
   const minimalPageVariants = {

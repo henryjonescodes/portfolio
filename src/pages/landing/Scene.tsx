@@ -42,18 +42,63 @@ export default function Scene() {
 
 const CanvasContent = ({ ...rest }: GroupProps) => {
   const { zoomLevel } = useSettings();
-  const { dirLightPosition, ambientIntensity, dirLightIntensity } = useControls(
-    {
-      Lights: folder({
+
+  const {
+    dirLightPosition,
+    ambientIntensity,
+    dirLightIntensity,
+    snapMass,
+    snapTension,
+    configMass,
+    configTension,
+    polarLimit,
+    azimuthLimit,
+    global,
+  } = useControls({
+    Lights: folder(
+      {
         dirLightPosition: {
           value: [5.2, 2.1, 6.5],
           step: 0.1,
         },
         dirLightIntensity: { value: 0.4, min: 0, max: 3, step: 0.1 },
         ambientIntensity: { value: 0.7, min: 0, max: 3, step: 0.1 },
-      }),
-    }
-  );
+      },
+      { collapsed: true }
+    ),
+    PresentationControls: folder(
+      {
+        global: { value: false },
+        Spring: folder(
+          {
+            snapMass: { value: 2.5, min: 0, max: 10, step: 0.1 },
+            snapTension: { value: 600, min: 0, max: 1000, step: 10 },
+            configMass: { value: 0.7, min: 0, max: 10, step: 0.1 },
+            configTension: { value: 950, min: 0, max: 1000, step: 10 },
+          },
+          { collapsed: true }
+        ),
+        Limit: folder(
+          {
+            polarLimit: {
+              value: 32,
+              min: 0,
+              max: 90,
+              step: 1,
+            },
+            azimuthLimit: {
+              value: 32,
+              min: 0,
+              max: 90,
+              step: 1,
+            },
+          },
+          { collapsed: true }
+        ),
+      },
+      { collapsed: true }
+    ),
+  });
 
   return (
     <>
@@ -65,13 +110,16 @@ const CanvasContent = ({ ...rest }: GroupProps) => {
           castShadow
         />
         <PresentationControls
-          global={false}
+          global={global}
           enabled={zoomLevel !== "info"}
-          config={{ mass: 0.7, tension: 950 }}
-          snap={{ mass: 2.5, tension: 600 }}
+          config={{ mass: configMass, tension: configTension }}
+          snap={{ mass: snapMass, tension: snapTension }}
           rotation={[0, 0, 0]}
-          polar={[-Math.PI / 2.8, Math.PI / 2.8]}
-          azimuth={[-Math.PI / 2.8, Math.PI / 2.8]}
+          polar={[-(Math.PI * polarLimit) / 180, (Math.PI * polarLimit) / 180]}
+          azimuth={[
+            -(Math.PI * azimuthLimit) / 180,
+            (Math.PI * azimuthLimit) / 180,
+          ]}
           cursor={false}
         >
           <group scale={3}>

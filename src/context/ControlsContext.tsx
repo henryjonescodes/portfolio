@@ -35,9 +35,12 @@ export const ControlsProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // Leva Controls
   const { useOrbitControls } = useControls({
-    Controls: folder({
-      useOrbitControls: false,
-    }),
+    Controls: folder(
+      {
+        useOrbitControls: false,
+      },
+      { collapsed: true }
+    ),
   });
 
   const [focus, setFocus] = useState<Vector3>(new Vector3(0, 0, 0));
