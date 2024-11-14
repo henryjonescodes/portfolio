@@ -28,6 +28,9 @@ const borderVariants = {
       ease: "easeInOut",
     },
   },
+  show: {
+    width: "100%",
+  },
   exit: {
     width: "0%",
     transition: {

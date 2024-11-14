@@ -11,6 +11,10 @@ const characterVariants = {
       duration: 0.2,
     },
   },
+  show: {
+    opacity: 1,
+    y: 0,
+  },
   exit: {
     opacity: 0,
     y: -20, // Characters move upwards on exit
@@ -22,7 +26,9 @@ const characterVariants = {
 
 // Animation variants for the parent container
 const textVariants = (staggerChildren: number, staggerDirection: 1 | -1) => ({
-  initial: {},
+  initial: {
+    opacity: 1,
+  },
   animate: {
     transition: {
       staggerChildren: staggerChildren, // Time between each character's appearance
@@ -33,6 +39,13 @@ const textVariants = (staggerChildren: number, staggerDirection: 1 | -1) => ({
     transition: {
       staggerChildren: staggerChildren / 4, // Stagger the children on exit
       staggerDirection: staggerDirection * -1, // Reverse the order for exit
+    },
+  },
+  hide: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      when: "beforeChildren",
     },
   },
 });

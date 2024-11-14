@@ -2,12 +2,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CustomHTML } from "../../components/3D/CustomHTML";
 import Background from "../../components/Background";
 import Page from "../../components/Page";
-import { useSettings } from "../../context/SettingsContext";
+import { useZoom } from "../../context/ZoomContext";
 import { screenSize } from "../../styles/layout.constants";
 import styles from "./landing.module.scss";
 
 const Screen = () => {
-  const { zoomLevel } = useSettings();
+  const { zoomLevel } = useZoom();
   const { width, height } = screenSize;
 
   return (

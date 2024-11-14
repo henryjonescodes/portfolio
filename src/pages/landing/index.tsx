@@ -2,31 +2,37 @@ import { AnimatePresence, motion } from "framer-motion";
 import GradientBackground from "../../components/GradientBackground";
 import Loading from "../../components/Loading";
 import Page from "../../components/Page";
-import { ColorsProvider, useColors } from "../../context/ColorsContext";
-import { SettingsProvider, useSettings } from "../../context/SettingsContext";
+import { ColorsProvider } from "../../context/ColorsContext";
+import { LoadingProvider, useLoading } from "../../context/LoadingContext";
+import { SettingsProvider } from "../../context/SettingsContext";
+import { useZoom, ZoomProvider } from "../../context/ZoomContext";
 import styles from "./landing.module.scss";
 import Scene from "./Scene";
 
 export const LandingWrapper = () => {
   return (
-    <SettingsProvider>
-      <ColorsProvider>
-        <Landing />
-      </ColorsProvider>
-    </SettingsProvider>
+    <LoadingProvider>
+      <SettingsProvider>
+        <ZoomProvider>
+          <ColorsProvider>
+            <Landing />
+          </ColorsProvider>
+        </ZoomProvider>
+      </SettingsProvider>
+    </LoadingProvider>
   );
 };
 
 const Landing = () => {
-  const { zoomLevel, liteMode } = useSettings();
-  useColors();
+  const { zoomLevel } = useZoom();
+  const { loadingState } = useLoading();
 
   return (
     <motion.div className={styles.landing}>
       <AnimatePresence>
-        {zoomLevel === "fullscreen" && <Page />}
+        {(loadingState === undefined || zoomLevel === "fullscreen") && <Page />}
       </AnimatePresence>
-      {liteMode === false && (
+      {loadingState !== undefined && (
         <>
           <Loading />
           <Scene />

@@ -1,17 +1,14 @@
 import { useProgress } from "@react-three/drei";
 import { useEffect } from "react";
-import { useSettings } from "../../context/SettingsContext";
+import { useLoading } from "../../context/LoadingContext";
 
 const LoadingHelper = () => {
   const { progress } = useProgress();
-  const { loadingState, setLoadingState } = useSettings();
+  const { setProgress } = useLoading();
 
   useEffect(() => {
-    if (progress >= 100) {
-      if (loadingState !== "complete") {
-        setLoadingState("loaded");
-      }
-    }
+    // ?? Update Loading Context Progress State
+    setProgress(progress);
   }, [progress]);
 
   return null;

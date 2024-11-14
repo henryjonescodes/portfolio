@@ -1,20 +1,22 @@
 // Scene.tsx
-import { PresentationControls } from "@react-three/drei";
+import { OrbitControls, PresentationControls } from "@react-three/drei";
 import { Canvas, GroupProps } from "@react-three/fiber";
 import { folder, useControls } from "leva";
 import { Suspense } from "react";
 import { SiteMixer } from "../../components/3D/SiteMixer";
 import LoadingHelper from "../../components/Loading/LoadingHelper";
-import { ControlsProvider } from "../../context/ControlsContext";
 import { InteractionProvider } from "../../context/InteractionContext";
 import { useSettings } from "../../context/SettingsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import InfoPanel from "./InfoPanel";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
+import { useZoom } from "../../context/ZoomContext";
+import CustomControls from "../../components/3D/CustomControls";
 
 export default function Scene() {
-  const { zoomLevel } = useSettings();
+  const { useOrbitControls } = useSettings();
+  const { zoomLevel } = useZoom();
   const { zoomPositions } = useWindowDimensions();
 
   return (
@@ -30,18 +32,18 @@ export default function Scene() {
         }}
       >
         <LoadingHelper />
-        <ControlsProvider>
-          <Suspense fallback={null}>
-            <CanvasContent renderOrder={10} />
-          </Suspense>
-        </ControlsProvider>
+        {!useOrbitControls && <CustomControls />}
+        {useOrbitControls && <OrbitControls />}
+        <Suspense fallback={null}>
+          <CanvasContent renderOrder={10} />
+        </Suspense>
       </Canvas>
     </InteractionProvider>
   );
 }
 
 const CanvasContent = ({ ...rest }: GroupProps) => {
-  const { zoomLevel } = useSettings();
+  const { zoomLevel } = useZoom();
 
   const {
     dirLightPosition,

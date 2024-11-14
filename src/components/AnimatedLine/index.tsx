@@ -44,6 +44,13 @@ const AnimatedLine = ({
               }
             : { duration: 0 },
         },
+    show: horizontal
+      ? {
+          width: "100%",
+        }
+      : {
+          height: "100%",
+        },
     exit: horizontal ? { width: 0 } : { height: 0 },
   };
 

@@ -20,8 +20,8 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
-  const { animationDisabled } = useSettings();
   const [delayedPage, setDelayedPage] = useState(page);
+  const { animationDisabled } = useSettings();
   const { embedded } = usePage();
 
   const {

@@ -13,11 +13,13 @@ import Unlocked from "./../../assets/svg/icons/unlocked.svg?react";
 import NavBarButton from "../../components/NavBar/NavBarButton";
 import AnimatedLine from "../../components/AnimatedLine";
 import cn from "classnames";
+import { useZoom } from "../../context/ZoomContext";
 
 const InfoPanel = () => {
   const { primaryHues, setPrimaryHues, resetColors } = useColors();
-  const { toggleInfoMode, toggleDebugMode, zoomLevel, isDebugMode } =
-    useSettings();
+  const { toggleDebugMode, isDebugMode } = useSettings();
+
+  const { zoomLevel, toggleInfoModeZoomPosition } = useZoom();
 
   return (
     <CustomHTML transform occlude="blending">
@@ -29,7 +31,7 @@ const InfoPanel = () => {
           if (zoomLevel === "info") {
             return;
           }
-          toggleInfoMode();
+          toggleInfoModeZoomPosition();
         }}
         initial="initial"
         animate="animate"
@@ -62,7 +64,7 @@ const InfoPanel = () => {
             />
             <NavBarButton
               onClick={() => {
-                toggleInfoMode();
+                toggleInfoModeZoomPosition();
               }}
               Icon={Close}
             />

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useSettings } from "../../context/SettingsContext";
 import { useWindowDimensions } from "../../context/WindowDimensionContext";
 import { useNavigatePreserveQuery } from "../../hooks/useNavigatePreserveQuery";
@@ -16,6 +16,9 @@ import User from "./../../assets/svg/icons/user.svg?react";
 import styles from "./nav-bar.module.scss";
 import NavBarButton from "./NavBarButton";
 import NavBarItem from "./NavbarItem";
+import { usePage } from "../Page";
+import { useZoom } from "../../context/ZoomContext";
+import { useLoading } from "../../context/LoadingContext";
 
 const navBarVariants = {
   initial: {
@@ -25,9 +28,9 @@ const navBarVariants = {
     opacity: 1,
     transition: {
       duration: 0.6,
-      delay: 0.6,
+      delay: 1.6,
       staggerChildren: 0.2,
-      delayChildren: 0.6,
+      delayChildren: 1.6,
     },
   },
   exit: {
@@ -38,36 +41,54 @@ const navBarVariants = {
   },
 };
 
+const minimalNavBarVariants = {
+  animate: {
+    opacity: 0,
+  },
+  show: {
+    opacity: 1,
+    transition: {
+      delay: 0.7,
+      duration: 0.5,
+      when: "afterChildren",
+    },
+  },
+  hide: {
+    opacity: 0,
+    transition: {
+      duration: 0.3,
+      when: "beforeChildren",
+    },
+  },
+};
+
 type NavBarProps = {
   page: string | undefined;
 };
 
 const NavBar = ({ page }: NavBarProps) => {
-  const { width } = useWindowDimensions();
   const navigate = useNavigatePreserveQuery(); // Initialize the navigate function
-
-  const {
-    animationDisabled,
-    setAnimationDisabled,
-    zoomLevel,
-    toggleFullScreen,
-  } = useSettings();
+  const { width } = useWindowDimensions();
+  const { embedded } = usePage();
+  const { animationDisabled, setAnimationDisabled } = useSettings();
+  const { firstPageLoad } = useLoading();
+  const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
 
   const handleNavClick = (path: string) => {
     navigate(path);
   };
 
   const pageName = !!page ? page : "home";
-  const mini = zoomLevel !== "fullscreen" || width < widthSmall;
+  const mini = embedded || width < widthSmall;
   const centerText = mini ? pageName : `$henry-jones/${pageName}`;
 
   return (
     <motion.span
       className={styles.navigationBar}
-      variants={animationDisabled ? undefined : navBarVariants}
-      initial={animationDisabled ? "animate" : "initial"}
-      animate={animationDisabled ? "animate" : "animate"}
-      exit={animationDisabled ? "animate" : "exit"}
+      variants={firstPageLoad ? navBarVariants : minimalNavBarVariants}
+      initial={firstPageLoad ? "initial" : "animate"}
+      animate={firstPageLoad ? "animate" : "show"}
+      exit={firstPageLoad ? "exit" : "exit"}
     >
       <AnimatedLine
         className={styles.navbarBorder}
@@ -101,11 +122,26 @@ const NavBar = ({ page }: NavBarProps) => {
         </motion.span>
         <motion.span className={styles.center}>
           <motion.h3>
-            <TypewriterText
-              key={page}
-              text={centerText ?? ""}
-              staggerChildren={0.05}
-            />
+            <AnimatePresence>
+              <motion.span
+                initial={animationDisabled ? "animate " : "initial"}
+                animate="animate"
+                exit="exit"
+                variants={{
+                  animate: {
+                    transition: {
+                      delayChildren: firstPageLoad ? 2.6 : 0,
+                    },
+                  },
+                }}
+              >
+                <TypewriterText
+                  key={centerText}
+                  text={centerText ?? ""}
+                  staggerChildren={0.05}
+                />
+              </motion.span>
+            </AnimatePresence>
           </motion.h3>
         </motion.span>
         <motion.span className={styles.right}>
@@ -117,7 +153,7 @@ const NavBar = ({ page }: NavBarProps) => {
           />
           <NavBarButton
             onClick={() => {
-              toggleFullScreen();
+              toggleFullscreenZoomPosition();
             }}
             active={zoomLevel === "fullscreen"}
             Icon={Expand}

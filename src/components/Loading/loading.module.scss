@@ -1,7 +1,10 @@
 /* loading-bar.module.scss */
 @import "@styles/colors.module.scss";
+@import "@styles/typography.module.scss";
 
 .loadingWrapper {
+  @include text-colors;
+  --size: 256px;
   position: fixed;
   top: 0%;
   left: 0%;
@@ -9,10 +12,14 @@
   height: 100vh;
   background-color: black;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000;
+  gap: 16px;
 }
+
+.progress {}
 
 .pageLoading {
   position: absolute;
@@ -37,7 +44,7 @@
     position: absolute;
     width: calc(var(--size, 75px) / 2.5);
     height: calc(var(--size, 75px) / 2.5);
-    border: 4px solid var(--clr-spinner);
+    border: calc(var(--size, 75px) / 15) solid var(--clr-spinner);
   }
 
   .item1 {

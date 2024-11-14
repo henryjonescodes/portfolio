@@ -1,6 +1,11 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import { useSettings } from "../../context/SettingsContext";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValueEvent,
+  useSpring,
+} from "framer-motion";
+import React, { useEffect, useState } from "react";
+import { useLoading } from "../../context/LoadingContext";
 import styles from "./loading.module.scss";
 
 export const Spinner: React.FC = () => {
@@ -40,7 +45,23 @@ export const PageLoading: React.FC = () => {
 };
 
 const Loading = () => {
-  const { loadingState, setLoadingState } = useSettings();
+  const { loadingState, finishLoading, progress } = useLoading();
+
+  const displayedProgress = useSpring(0, {
+    stiffness: 50,
+    damping: 15,
+  });
+
+  const [displayedProgressValue, setDisplayedProgressValue] = useState(0);
+
+  useEffect(() => {
+    displayedProgress.set(progress);
+  }, [progress, displayedProgress]);
+
+  useMotionValueEvent(displayedProgress, "change", (value) => {
+    setDisplayedProgressValue(value);
+    console.log(value);
+  });
 
   const wrapperVariants = {
     visible: { opacity: 1 },
@@ -60,7 +81,7 @@ const Loading = () => {
   return (
     <AnimatePresence
       onExitComplete={() => {
-        setLoadingState("complete");
+        finishLoading();
       }}
     >
       {loadingState === "loading" && (
@@ -72,10 +93,12 @@ const Loading = () => {
           variants={wrapperVariants}
         >
           <Spinner />
+          {/* <motion.h1 className={styles.progress}>
+            {Math.min(100, Math.round(displayedProgressValue))} %
+          </motion.h1> */}
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
-
 export default Loading;

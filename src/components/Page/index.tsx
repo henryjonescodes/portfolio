@@ -1,13 +1,14 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
+import { folder, useControls } from "leva";
 import { createContext, ReactNode, useContext, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { useSettings } from "../../context/SettingsContext";
+import { useLoading } from "../../context/LoadingContext";
+import { useZoom } from "../../context/ZoomContext";
 import AnimatedOutlet from "../AnimatedOutlet";
 import Background from "../Background";
 import NavBar from "../NavBar";
 import styles from "./page.module.scss";
-import { folder, useControls } from "leva";
 
 const Page = ({ embedded }: { embedded?: boolean }) => {
   const location = useLocation();
@@ -15,7 +16,9 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   const page = pathSegments[0];
 
   const contentRef = useRef<HTMLDivElement | null>(null);
-  const { zoomLevel, firstPageLoad, setFirstPageLoad } = useSettings();
+  const { firstPageLoad, setFirstPageLoad } = useLoading();
+
+  const { zoomLevel } = useZoom();
 
   const {
     pageAnimateDuration,
@@ -102,7 +105,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
           <NavBar page={page} />
           <motion.div
             className={cn(styles.content, {
-              [styles.contentFullScreen]: zoomLevel === "fullscreen",
+              [styles.contentFullScreen]: !embedded,
             })}
             key="pageContent"
             variants={pageVariants}
