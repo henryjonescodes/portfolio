@@ -105,6 +105,13 @@
 
         .divider {
           position: relative;
+
+          &V {
+            position: absolute;
+            min-width: 4px;
+            min-height: 100%;
+            left: 100%;
+          }
         }
 
 
@@ -547,7 +554,7 @@
           .border {
 
             &Content {
-              flex-direction: row;
+              flex-direction: row-reverse;
               position: relative;
               height: min-content
             }
@@ -562,11 +569,13 @@
 
             .tags {
               flex: 1;
-              flex-direction: column;
+              flex-direction: row;
               width: min-content;
               align-items: flex-start;
+              justify-content: flex-start;
+              width: 100%;
               gap: 16px;
-              padding: 16px;
+              padding: 0px 16px;
 
 
               .tag {
@@ -584,12 +593,20 @@
             }
 
             .values {
-              flex-grow: 100;
-              width: 100%;
-              height: 100%;
-              padding: 16px 24px 16px 16px;
-              align-items: center;
-              justify-content: center;
+              position: relative;
+              padding: 16px 0px;
+              gap: 12px;
+
+
+              .sliders {
+                padding: 0px 16px;
+              }
+
+              .verticalLine {
+                position: absolute;
+                left: 100%;
+                top: 0%;
+              }
             }
           }
         }
@@ -597,14 +614,17 @@
     }
 
     .statTracker {
-      grid-template-columns: 1fr 1.1fr;
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      min-width: unset;
 
       .tracker {
+        width: 40%;
         order: 1;
       }
 
       .label {
-        justify-content: flex-end;
 
         h4 {
           font-size: 1.2rem;
@@ -657,10 +677,53 @@
       scroll-snap-align: none;
     }
 
+
+    .aboutMe {
+      .flex {
+        .right {
+          .border {
+            .tags {
+              flex-direction: column;
+              align-items: flex-end;
+              flex-grow: 1;
+
+              .tag {
+                flex-direction: row-reverse;
+              }
+            }
+
+            .viewer {
+              aspect-ratio: unset;
+              position: relative;
+              flex-grow: 1;
+
+              .avatar {
+                height: 160px;
+                width: 160px;
+              }
+            }
+
+            .values {
+              width: min-content;
+              min-height: 100%;
+
+              .sliders {
+                gap: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+
     .statTracker {
+      flex-direction: row;
+      height: 1.5rem;
       grid-template-columns: 1.15fr 1fr;
 
       .tracker {
+        min-width: 100px;
+
         .track {
           gap: 2px;
         }
@@ -668,7 +731,7 @@
 
       .label {
         h4 {
-          font-size: 1rem;
+          font-size: 0.8rem;
         }
       }
     }
@@ -680,7 +743,7 @@
 @media (max-width: styles.$width-tiny) {
   .fullscreen {
     margin-bottom: 5vh;
-    gap: 16px;
+    gap: 48px;
 
     >.content {
       height: min-content;
@@ -716,20 +779,30 @@
 
         .right {
           .border {
-            &Content {
-              flex-direction: column;
+            .viewer {
+              .avatar {
+                height: 120px;
+                width: 120px;
+              }
             }
 
-            .viewer {
-              width: 65%;
+            .tags {
+              .tag {
+                .iconWrapper {
+                  .icon {
+                    height: 16px;
+                    width: 16px;
+                  }
+                }
+
+                .text {
+                  font-size: 1rem;
+                }
+              }
             }
 
             .values {
-              .sliders {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-              }
+              .sliders {}
             }
           }
         }
@@ -738,27 +811,50 @@
     }
 
     .statTracker {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      width: min-content;
-      position: relative;
-      width: min-content;
+      gap: 4px;
 
       .tracker {
-        min-width: 50%;
+        min-width: 80px;
+
+        &Content {}
 
         .track {
-          gap: 2px;
+          gap: 0px;
         }
       }
 
       .label {
-        min-width: 90px;
 
         h4 {
           font-size: 0.8rem;
         }
+      }
+    }
+  }
+}
+
+@media (max-width: styles.$width-miniscule) {
+  .fullscreen {
+    .aboutMe {
+      .flex {
+        .right {
+          .border {
+            .viewer {
+              .avatar {
+                height: 100px;
+                width: 100px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .statTracker {
+      gap: 4px;
+
+      .tracker {
+        min-width: 60px;
       }
     }
   }

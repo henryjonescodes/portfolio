@@ -129,8 +129,7 @@ const About = () => {
     filter: `sepia(100%) hue-rotate(${normalizedHue}deg) saturate(6)`,
   };
 
-  const moveTags =
-    width > screenWidths.mobileLarge || width < screenWidths.tiny || embedded;
+  const moveTags = width > screenWidths.mobileLarge || embedded;
 
   // const moveSocials = width < screenWidths.tiny && zoomLevel === "fullscreen";
 
@@ -272,6 +271,50 @@ const About = () => {
               {/* <StatTracker label="3D Art" rating={5} /> */}
               {/* Values */}
               <motion.div className={styles.values}>
+                {!moveTags && (
+                  <>
+                    <AnimatedLine
+                      className={styles.verticalLine}
+                      horizontal={false}
+                      borderWidth={2}
+                    />
+                    <motion.div className={styles.tags} variants={tagsVariants}>
+                      <motion.span className={styles.tag}>
+                        <motion.div
+                          variants={iconVariants}
+                          className={styles.iconWrapper}
+                        >
+                          <Home className={styles.icon} />
+                        </motion.div>
+                        <motion.h4 className={styles.text}>
+                          <TypewriterText
+                            text="Brooklyn, NY"
+                            staggerChildren={0.05}
+                          />
+                        </motion.h4>
+                      </motion.span>
+                      <motion.span className={styles.tag}>
+                        <motion.div
+                          variants={iconVariants}
+                          className={styles.iconWrapper}
+                        >
+                          <Book className={styles.icon} />
+                        </motion.div>
+                        <motion.h4 className={styles.text}>
+                          <TypewriterText
+                            text="Union College"
+                            staggerChildren={0.05}
+                          />
+                        </motion.h4>
+                      </motion.span>
+                    </motion.div>
+                    <AnimatedLine
+                      className={styles.divider}
+                      horizontal={true}
+                      borderWidth={2}
+                    />
+                  </>
+                )}
                 <motion.div className={styles.sliders}>
                   <StatTracker label="Skiing" rating={14} />
                   <StatTracker label="Rock Climbing" rating={6} />
