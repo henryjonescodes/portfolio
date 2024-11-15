@@ -1,9 +1,5 @@
 @use "sass:color";
-
-@import '@styles/colors.module.scss';
-@import '@styles/layout.module.scss';
-@import '@styles/typography.module.scss';
-@import '@styles/hover.module.scss';
+@use '@styles'as styles;
 
 /////////////////////////////////////////////////
 //                   BLURB                    //
@@ -50,8 +46,8 @@
     }
 
     .title {
-      @include hover-color-foreground-secondary;
-      color: $foreground-primary;
+      @include styles.hover-color-foreground-secondary;
+      color: styles.$foreground-primary;
       color: var(--foreground-primary);
       font-size: 2.7rem;
     }
@@ -62,7 +58,7 @@
   }
 }
 
-@media (max-width: $width-medium) {
+@media (max-width: styles.$width-medium) {
   .blurb {
     &.fullscreen {
       .description {
@@ -72,7 +68,7 @@
   }
 }
 
-@media (max-width: $width-small) {
+@media (max-width: styles.$width-small) {
   .blurb {
     &.fullscreen {
       gap: 0.2rem;
@@ -95,7 +91,7 @@
   }
 }
 
-@media (max-width: $width-tiny) {
+@media (max-width: styles.$width-tiny) {
   .blurb {
     &.fullscreen {
       .description {
@@ -108,7 +104,7 @@
 }
 
 
-@media (max-width: $width-mobile-medium) {
+@media (max-width: styles.$width-mobile-medium) {
   .blurb {
     &.fullscreen {
       gap: 0.2rem;
@@ -171,14 +167,14 @@ $line-selected-width: 5px;
   }
 
   &:hover::before {
-    background-color: $foreground-primary;
+    background-color: styles.$foreground-primary;
     background-color: var(--foreground-primary);
   }
 
   &.bulging::before {
     height: $line-medium-height;
     width: $line-medium-width;
-    background-color: color.adjust($foreground-secondary, $saturation: -50%);
+    background-color: color.adjust(styles.$foreground-secondary, $saturation: -50%);
     transition: background-color 0.1s, height 0.02s, width 0.02s;
   }
 }
@@ -187,7 +183,7 @@ $line-selected-width: 5px;
   &::before {
     width: $line-small-width;
     height: $line-small-height;
-    background-color: $foreground-quaternary;
+    background-color: styles.$foreground-quaternary;
     background-color: var(--foreground-quaternary);
   }
 
@@ -201,7 +197,7 @@ $line-selected-width: 5px;
   &::before {
     width: $line-medium-width;
     height: $line-medium-height;
-    background-color: $foreground-tertiary;
+    background-color: styles.$foreground-tertiary;
     background-color: var(--foreground-tertiary);
   }
 
@@ -231,7 +227,7 @@ $line-selected-width: 5px;
   &.selected::before {
     height: calc($line-selected-height + 5px) !important;
     width: $line-selected-width;
-    background-color: $foreground-primary;
+    background-color: styles.$foreground-primary;
     background-color: var(--foreground-primary);
   }
 }
@@ -265,8 +261,8 @@ $line-selected-width: 5px;
   path,
   svg {
 
-    fill: $foreground-primary;
-    stroke: $foreground-primary;
+    fill: styles.$foreground-primary;
+    stroke: styles.$foreground-primary;
     fill: var(--foreground-primary);
     stroke: var(--foreground-primary);
   }
@@ -342,7 +338,7 @@ $line-selected-width: 5px;
         left: 0;
 
         path {
-          stroke: $accent-tertiary;
+          stroke: styles.$accent-tertiary;
           stroke: var(--accent-tertiary);
         }
       }
@@ -380,14 +376,14 @@ $line-selected-width: 5px;
             h4 {
               font-size: 1.7rem;
               line-height: 1.9rem;
-              color: $foreground-primary;
+              color: styles.$foreground-primary;
               color: var(--foreground-primary);
             }
 
             h5 {
               font-size: 1.4rem;
               line-height: 1.6rem;
-              color: $foreground-tertiary;
+              color: styles.$foreground-tertiary;
               color: var(--foreground-tertiary);
             }
 
@@ -395,7 +391,7 @@ $line-selected-width: 5px;
 
               svg,
               path {
-                stroke: $accent-primary;
+                stroke: styles.$accent-primary;
                 stroke: var(--accent-primary);
                 fill: transparent;
               }
@@ -416,7 +412,7 @@ $line-selected-width: 5px;
 
               svg,
               path {
-                fill: $foreground-tertiary;
+                fill: styles.$foreground-tertiary;
                 fill: var(--foreground-tertiary);
               }
 
@@ -568,7 +564,7 @@ $line-selected-width: 5px;
   }
 }
 
-@media (max-width: $width-mobile-large) {
+@media (max-width: styles.$width-mobile-large) {
   .fullscreen {
     >.contents {
       >.map {

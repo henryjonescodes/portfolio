@@ -1,11 +1,26 @@
-import Channel from '@assets/jobs/channel-icon.svg?react'
-import Mushroom from '@assets/jobs/mushroom-icon.svg?react'
+import Channel from '@assets/svg/experience/channel-icon.svg?react'
+import Mushroom from '@assets/svg/experience/mushroom-icon.svg?react'
 import Book from '@assets/svg/icons/book.svg?react'
 import Building from '@assets/svg/icons/building.svg?react'
-import styles from './components/map-components.module.scss'
-import { PointOfInterest } from './types'
+import styles from './map-components.module.scss'
 
+export type PointOfInterest = {
+  prefix: string
+  title: string
+  description: string
+  mapTitle: string
+  mapHighlights: {
+    icon: React.FunctionComponent<React.SVGProps<SVGSVGElement> & {
+      title?: string;
+  }>,
+    text: string
+  }[]
+  className: string
+  pinClassName: string
+}
 
+const keys = ['portland', 'paloAlto', 'nyc', 'schenectady'] as const
+export type LocationPinKeys = (typeof keys)[number]
 
 export const locationData: Record<'portland' | 'paloAlto' | 'nyc' | 'schenectady', PointOfInterest> =
   {

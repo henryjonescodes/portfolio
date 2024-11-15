@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import TypewriterText from "../../components/3D/TypewriterText";
-import PageContents from "../../components/Page/PageContents";
-import { useNavigatePreserveQuery } from "../../hooks/useNavigatePreserveQuery";
+import TypewriterText from "@components/TypewriterText";
+import PageContents from "@components/Page/PageContents";
+import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
 import styles from "./home.module.scss";
 
 // Define animation variants for the menu with staggered children

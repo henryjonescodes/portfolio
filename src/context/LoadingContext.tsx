@@ -1,3 +1,4 @@
+import Loading from "@components/Loading";
 import React, {
   createContext,
   ReactNode,
@@ -151,6 +152,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
         setFirstPageLoad,
       }}
     >
+      <Loading />
       {children}
     </LoadingContext.Provider>
   );

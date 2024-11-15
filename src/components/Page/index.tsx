@@ -3,11 +3,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { folder, useControls } from "leva";
 import { createContext, ReactNode, useContext, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { useLoading } from "../../context/LoadingContext";
-import { useZoom } from "../../context/ZoomContext";
-import AnimatedOutlet from "../AnimatedOutlet";
-import Background from "../Background";
-import NavBar from "../NavBar";
+
+import { useLoading } from "@context/LoadingContext";
+import { useZoom } from "@context/ZoomContext";
+
+import AnimatedOutlet from "@components/AnimatedOutlet";
+import Background from "@components/Background";
+import NavBar from "@components/NavBar";
+
 import styles from "./page.module.scss";
 
 const Page = ({ embedded }: { embedded?: boolean }) => {

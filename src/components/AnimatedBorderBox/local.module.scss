@@ -1,5 +1,4 @@
-@import '@styles/mixins.module.scss';
-@import '@styles/colors.module.scss';
+@use '@styles'as styles;
 
 .animatedBorder {
   position: absolute;
@@ -7,7 +6,7 @@
   left: 0;
   pointer-events: none;
   z-index: 2;
-  stroke: $foreground-primary;
+  stroke: styles.$foreground-primary;
   stroke: var(--foreground-primary);
 }
 
@@ -30,7 +29,7 @@
 }
 
 .content {
-  @include retro-scrollbar;
+  @include styles.retro-scrollbar;
   height: 100%;
   overflow: auto;
 }

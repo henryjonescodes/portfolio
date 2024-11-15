@@ -10,13 +10,10 @@ $accent-secondary: color.adjust($accent-primary, $saturation: -10%);
 $accent-tertiary: color.adjust($accent-primary, $saturation: -30%);
 
 $background-primary: #043030;
-// $background-primary: #003838;
 $background-secondary: color.adjust($background-primary, $lightness: -8%);
 $background-tertiary: color.adjust($background-primary, $saturation: -8%);
 
-
-
-
+// $background-primary: #003838;
 :global {
   :root {
     --foreground-primary: #{$foreground-primary};

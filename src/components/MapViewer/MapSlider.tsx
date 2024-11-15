@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import cn from "classnames";
 import { motion } from "framer-motion";
 import styles from "./map-components.module.scss";
-import { MapContext } from "../MapContext";
-import { LocationPinKeys } from "../types";
+import { MapContext } from "./MapContext";
+import { LocationPinKeys } from "./map-viewer.contents";
 
 const staggerVariants = {
   initial: { opacity: 0 },

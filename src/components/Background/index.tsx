@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styles from "./background.module.scss";
 import cn from "classnames";
-import { useSettings } from "../../context/SettingsContext";
+import { useSettings } from "@context/SettingsContext";
 
 const Background = () => {
   const { animationDisabled } = useSettings();

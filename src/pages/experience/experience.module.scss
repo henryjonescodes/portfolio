@@ -1,18 +1,9 @@
-@import '@styles/layout.module.scss';
+@use '@styles'as styles;
 
 .experience {
-  @include page-padding-vertical;
+  @include styles.page-padding-vertical;
 
   >.content {
-    @include list-flex;
+    @include styles.list-flex;
   }
 }
-// @media (max-width: $width-small) {
-//   .experience {
-//     >.content {
-//       >h1 {
-//         margin-bottom: 8px;
-//       }
-//     }
-//   }
-// }

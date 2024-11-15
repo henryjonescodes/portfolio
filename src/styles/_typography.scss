@@ -1,0 +1,65 @@
+@use "sass:color";
+@use '@styles/color_mixins'as cMix;
+
+@mixin text-large {
+  @include cMix.text-colors;
+
+  h1 {
+    font-size: 4.5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2.2rem;
+  }
+
+  h4 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    font-size: 1.6rem;
+  }
+}
+
+
+
+@mixin handheld-text {
+  @include cMix.text-colors;
+
+  h1 {
+    font-size: 5rem;
+  }
+
+  h2 {
+    font-size: 3rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+  }
+
+  h4 {}
+
+  h5 {}
+
+  h6 {}
+
+  p {}
+}
+
+
+
+
+@mixin hover-opacity {
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 0.6;
+  }
+}

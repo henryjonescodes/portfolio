@@ -1,26 +1,28 @@
 import { motion } from "framer-motion";
-import TypewriterText from "../../components/3D/TypewriterText";
-import AnimatedBorderBox from "../../components/AnimatedBorderBox";
-import Map from "../../components/MapViewer/components/Map";
-import PageContents from "../../components/Page/PageContents";
-import styles from "./about.module.scss";
+import cn from "classnames";
 
 import GitHub from "@assets/svg/socials/github.svg?react";
 import Instagram from "@assets/svg/socials/Instagram.svg?react";
 import LinkedIn from "@assets/svg/socials/linkedIn.svg?react";
-
 import Book from "@assets/svg/icons/book-01.svg?react";
 import Home from "@assets/svg/icons/home.svg?react";
-import cn from "classnames";
-import AnimatedLine from "../../components/AnimatedLine";
-import GlitchIcon from "../../components/GlitchIcon";
-import Blurb from "../../components/MapViewer/components/Blurb";
-import { MapProvider } from "../../components/MapViewer/MapContext";
-import { usePage } from "../../components/Page";
-import { useColors } from "../../context/ColorsContext";
-import { useWindowDimensions } from "../../context/WindowDimensionContext";
-import { screenWidths } from "../../styles/layout.constants";
-import { iconVariants } from "../../styles/variants";
+
+import TypewriterText from "@components/TypewriterText";
+import AnimatedBorderBox from "@components/AnimatedBorderBox";
+import Map from "@components/MapViewer/Map";
+import PageContents from "@components/Page/PageContents";
+import AnimatedLine from "@components/AnimatedLine";
+import GlitchIcon from "@components/GlitchIcon";
+import Blurb from "@components/MapViewer/Blurb";
+import { MapProvider } from "@components/MapViewer/MapContext";
+import { usePage } from "@components/Page";
+import { useColors } from "@context/ColorsContext";
+import { useWindowDimensions } from "@context/WindowDimensionContext";
+
+import { screenWidths } from "@styles/layout.constants.ts";
+import { iconVariants } from "@styles/variants";
+
+import styles from "./about.module.scss";
 import StatTracker from "./StatTracker";
 
 const commonExit = {

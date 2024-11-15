@@ -3,16 +3,16 @@ import { OrbitControls, PresentationControls } from "@react-three/drei";
 import { Canvas, GroupProps } from "@react-three/fiber";
 import { folder, useControls } from "leva";
 import { Suspense } from "react";
-import { SiteMixer } from "../../components/3D/SiteMixer";
-import LoadingHelper from "../../components/Loading/LoadingHelper";
-import { InteractionProvider } from "../../context/InteractionContext";
-import { useSettings } from "../../context/SettingsContext";
-import { useWindowDimensions } from "../../context/WindowDimensionContext";
+import { SiteMixer } from "@components/3D/SiteMixer";
+import LoadingHelper from "@components/Loading/LoadingHelper";
+import { InteractionProvider } from "@context/InteractionContext";
+import { useSettings } from "@context/SettingsContext";
+import { useWindowDimensions } from "@context/WindowDimensionContext";
 import InfoPanel from "./InfoPanel";
 import styles from "./landing.module.scss";
 import Screen from "./Screen";
-import { useZoom } from "../../context/ZoomContext";
-import CustomControls from "../../components/3D/CustomControls";
+import { useZoom } from "@context/ZoomContext";
+import CustomControls from "@components/3D/CustomControls";
 
 export default function Scene() {
   const { useOrbitControls } = useSettings();

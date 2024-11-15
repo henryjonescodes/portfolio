@@ -1,24 +1,27 @@
 // InfoPanel.tsx
 import { motion } from "framer-motion";
 import React from "react";
-import Background from "../../components/Background";
-import { CustomHTML } from "../../components/3D/CustomHTML";
-import { useColors } from "../../context/ColorsContext";
-import { useSettings } from "../../context/SettingsContext";
-import styles from "./landing.module.scss";
-import Close from "./../../assets/svg/icons/close-01.svg?react";
-import Trash from "./../../assets/svg/icons/trash.svg?react";
-import Locked from "./../../assets/svg/icons/locked.svg?react";
-import Unlocked from "./../../assets/svg/icons/unlocked.svg?react";
-import NavBarButton from "../../components/NavBar/NavBarButton";
-import AnimatedLine from "../../components/AnimatedLine";
 import cn from "classnames";
-import { useZoom } from "../../context/ZoomContext";
+
+import styles from "./landing.module.scss";
+
+import Background from "@components/Background";
+import CustomHTML from "@components/3D/CustomHTML";
+import NavBarButton from "@components/NavBar/NavBarButton";
+import AnimatedLine from "@components/AnimatedLine";
+
+import { useColors } from "@context/ColorsContext";
+import { useSettings } from "@context/SettingsContext";
+import { useZoom } from "@context/ZoomContext";
+
+import Close from "@assets/svg/icons/close-01.svg?react";
+import Trash from "@assets/svg/icons/trash.svg?react";
+import Locked from "@assets/svg/icons/locked.svg?react";
+import Unlocked from "@assets/svg/icons/unlocked.svg?react";
 
 const InfoPanel = () => {
   const { primaryHues, setPrimaryHues, resetColors } = useColors();
   const { toggleDebugMode, isDebugMode } = useSettings();
-
   const { zoomLevel, toggleInfoModeZoomPosition } = useZoom();
 
   return (

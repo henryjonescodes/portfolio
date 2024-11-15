@@ -1,13 +1,14 @@
 import cn from "classnames";
 import { motion } from "framer-motion";
 import React from "react";
-import { useWindowDimensions } from "../../context/WindowDimensionContext";
-import { widthMobile } from "../../styles/layout.constants";
-import TypewriterText from "../3D/TypewriterText";
-import AnimatedBorderBox from "../AnimatedBorderBox";
-import AnimatedLine from "../AnimatedLine";
-import { usePage } from "../Page";
+import { useWindowDimensions } from "@context/WindowDimensionContext";
+import { widthMobile } from "@styles/layout.constants.ts";
+import TypewriterText from "@components/TypewriterText";
+import AnimatedBorderBox from "@components/AnimatedBorderBox";
+import AnimatedLine from "@components/AnimatedLine";
 import styles from "./experience-entry.module.scss";
+
+import { usePage } from "@components/Page";
 
 const formatDateRange = (startDate: Date, endDate?: Date): string => {
   const formatOptions: Intl.DateTimeFormatOptions = {

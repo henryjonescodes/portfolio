@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
 import styles from "./glitch-icon.module.scss";
-import { useSettings } from "../../context/SettingsContext";
+import { useSettings } from "@context/SettingsContext";
 
 type GlitchIconProps = {
   Icon: React.FunctionComponent<

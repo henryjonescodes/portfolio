@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import styles from "./nav-bar.module.scss";
-import GlitchIcon from "../GlitchIcon";
+import GlitchIcon from "@components/GlitchIcon";
 
 // NavBarButton Component
 // Define mutually exclusive types

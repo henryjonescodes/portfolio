@@ -12,7 +12,7 @@ import {
   ScreenWidthKey,
   ScreenWidthZoomPositions,
   ZoomLevel,
-} from "../styles/layout.constants";
+} from "@styles/layout.constants.ts";
 
 // Define the context type
 type ScreenSizeType = {

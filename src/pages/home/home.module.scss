@@ -1,12 +1,7 @@
-@import '@styles/mixins.module.scss';
-@import '@styles/colors.module.scss';
-@import '@styles/typography.module.scss';
-@import '@styles/layout.module.scss';
-@import '@styles/hover.module.scss';
-
+@use '@styles'as styles;
 
 .menu {
-  @include text-large;
+  @include styles.text-large;
   margin-bottom: 32px; // Adjust spacing between entries as needed
   display: flex;
   flex-direction: column;
@@ -15,9 +10,9 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 8px;
-  padding: $padding-page 0px;
+  padding: styles.$padding-page 0px;
 
   h2 {
-    @include hover-color-foreground-secondary;
+    @include styles.hover-color-foreground-secondary;
   }
 }

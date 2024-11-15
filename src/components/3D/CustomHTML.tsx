@@ -7,7 +7,7 @@ type CustomHTMLProps = HtmlProps & {
   children: React.ReactNode;
 };
 
-export const CustomHTML = React.forwardRef<HTMLDivElement, CustomHTMLProps>(
+const CustomHTML = React.forwardRef<HTMLDivElement, CustomHTMLProps>(
   function Html({ children, ...props }, ref) {
     const Bridge = useContextBridge();
     return (
@@ -17,3 +17,5 @@ export const CustomHTML = React.forwardRef<HTMLDivElement, CustomHTMLProps>(
     );
   }
 );
+
+export default CustomHTML;

@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import cn from "classnames";
 import styles from "./glitch-media.module.scss";
-import { useSettings } from "../../context/SettingsContext";
+import { useSettings } from "@context/SettingsContext";
 
 type GlitchMediaProps = {
   className?: string;

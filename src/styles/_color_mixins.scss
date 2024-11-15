@@ -1,0 +1,60 @@
+@use '@styles/colors'as colors;
+
+@mixin hover-color-foreground-secondary {
+  cursor: pointer;
+
+  &:hover {
+    color: colors.$foreground-tertiary;
+    color: var(--foreground-tertiary);
+  }
+}
+
+@mixin text-colors {
+  h1 {
+    color: colors.$foreground-primary;
+    color: var(--foreground-primary);
+    font-size: 55px;
+  }
+
+  h2 {
+    color: colors.$foreground-secondary;
+    color: var(--foreground-secondary);
+  }
+
+  h3 {
+    color: colors.$accent-primary;
+    color: var(--accent-primary);
+  }
+
+  h4 {
+    color: colors.$foreground-primary;
+    color: var(--foreground-primary);
+  }
+
+  h5 {
+    color: colors.$foreground-secondary;
+    color: var(--foreground-secondary);
+  }
+
+  h6 {
+    color: colors.$foreground-tertiary;
+    color: var(--foreground-tertiary);
+  }
+
+  p {
+    color: colors.$foreground-tertiary;
+    color: var(--foreground-tertiary);
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    cursor: auto;
+
+    &:hover,
+    &:focus {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+}

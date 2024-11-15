@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { CustomHTML } from "../../components/3D/CustomHTML";
-import Background from "../../components/Background";
-import Page from "../../components/Page";
-import { useZoom } from "../../context/ZoomContext";
-import { screenSize } from "../../styles/layout.constants";
+import CustomHTML from "@components/3D/CustomHTML";
+import Background from "@components/Background";
+import Page from "@components/Page";
+import { useZoom } from "@context/ZoomContext";
+import { screenSize } from "@styles/layout.constants.ts";
 import styles from "./landing.module.scss";
 
 const Screen = () => {

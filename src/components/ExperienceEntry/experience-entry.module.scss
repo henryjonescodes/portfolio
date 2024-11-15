@@ -1,25 +1,10 @@
-@import '@styles/colors.module.scss';
-@import '@styles/mixins.module.scss';
-@import '@styles/typography.module.scss';
-@import '@styles/layout.module.scss';
-@import '@styles/hover.module.scss';
+@use '@styles'as styles;
 
 .link {
   &Text {
     * {
-      @include hover-color-foreground-secondary;
+      @include styles.hover-color-foreground-secondary;
     }
-  }
-
-  &Area {
-    // @include hover-opacity;
-    // cursor: pointer !important;
-    // opacity: 1;
-    // transition: opacity 0.2s ease-in-out;
-    // pointer-events: auto;
-
-    // &:hover {//   opacity: 0.8;
-    // }
   }
 }
 
@@ -41,7 +26,7 @@
       width: 100%;
 
       p {
-        color: $accent-secondary;
+        color: styles.$accent-secondary;
         color: var(--accent-secondary);
       }
     }
@@ -94,7 +79,7 @@
   }
 }
 
-@media (max-width: $width-mobile) {
+@media (max-width: styles.$width-mobile) {
   .fullScreen {
     .box {
       &Content {
@@ -116,7 +101,7 @@
   }
 }
 
-@media (max-width: $width-tiny) {
+@media (max-width: styles.$width-tiny) {
   .fullScreen {
 
     .header {

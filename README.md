@@ -15,6 +15,9 @@ A personal site created as a space to experiment with new styles and refine my a
 - **Styling**: Sass, Sass Modules
 - **Build**: Vite
 
+## Icons
+
+- **[Pixel Icon Library](https://www.figma.com/community/file/1278952394341234192/pixel-icon-library-1440-pixelated-icons-by-hackernoon)**: By Hackernoon
 
 ## Credits
 - **[STL to ASCII Generator](https://andrewsink.github.io/STL-to-ASCII-Generator/)**:  Special thanks to [Andrew Sink](https://github.com/AndrewSink) for his 3D model to ASCII art shader tool.

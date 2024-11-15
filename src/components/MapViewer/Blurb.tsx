@@ -1,11 +1,12 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
-import { commonInitial } from "../../../styles/variants";
-import TypewriterText from "../../3D/TypewriterText";
-import { usePage } from "../../Page";
-import { MapContext } from "../MapContext";
+import { commonInitial } from "@styles/variants";
+import TypewriterText from "@components/TypewriterText";
+import { usePage } from "@components/Page";
+import { MapContext } from "./MapContext";
 import styles from "./map-components.module.scss";
+
 const blurbVariants = {
   initial: commonInitial,
   animate: {

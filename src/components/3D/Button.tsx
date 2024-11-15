@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import {
   InteractiveElement,
   InteractiveElementProps,
-} from "../../context/InteractionContext";
+} from "@context/InteractionContext";
 
 type ButtonProps = {
   position?: [number, number, number];

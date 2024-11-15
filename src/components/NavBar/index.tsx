@@ -1,24 +1,27 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useSettings } from "../../context/SettingsContext";
-import { useWindowDimensions } from "../../context/WindowDimensionContext";
-import { useNavigatePreserveQuery } from "../../hooks/useNavigatePreserveQuery";
-import { widthSmall } from "../../styles/layout.constants";
-import TypewriterText from "../3D/TypewriterText";
-import AnimatedLine from "../AnimatedLine";
-import Checklist from "./../../assets/svg/icons/check-list.svg?react";
-import Code from "./../../assets/svg/icons/code.svg?react";
-import Expand from "./../../assets/svg/icons/expand.svg?react";
-import Handheld from "./../../assets/svg/icons/handheld.svg?react";
-import Home from "./../../assets/svg/icons/home.svg?react";
-import Pause from "./../../assets/svg/icons/pause.svg?react";
-import Play from "./../../assets/svg/icons/play.svg?react";
-import User from "./../../assets/svg/icons/user.svg?react";
+import { useSettings } from "@context/SettingsContext";
+import { useWindowDimensions } from "@context/WindowDimensionContext";
+import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
+import { widthSmall } from "@styles/layout.constants.ts";
+import TypewriterText from "@components/TypewriterText";
+import AnimatedLine from "@components/AnimatedLine";
+
+import Checklist from "@assets/svg/icons/check-list.svg?react";
+import Code from "@assets/svg/icons/code.svg?react";
+import Expand from "@assets/svg/icons/expand.svg?react";
+import Handheld from "@assets/svg/icons/handheld.svg?react";
+import Home from "@assets/svg/icons/home.svg?react";
+import Pause from "@assets/svg/icons/pause.svg?react";
+import Play from "@assets/svg/icons/play.svg?react";
+import User from "@assets/svg/icons/user.svg?react";
+
+import { usePage } from "@components/Page";
+import { useZoom } from "@context/ZoomContext";
+import { useLoading } from "@context/LoadingContext";
+
 import styles from "./nav-bar.module.scss";
 import NavBarButton from "./NavBarButton";
 import NavBarItem from "./NavbarItem";
-import { usePage } from "../Page";
-import { useZoom } from "../../context/ZoomContext";
-import { useLoading } from "../../context/LoadingContext";
 
 const navBarVariants = {
   initial: {

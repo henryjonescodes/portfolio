@@ -1,10 +1,10 @@
-@import '@styles/colors.module.scss';
+@use '@styles'as styles;
 
 .animatedLine {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: $foreground-primary;
+  background-color: styles.$foreground-primary;
   background-color: var(--foreground-primary);
 
   // width: 0; // Default for vertical line (grows height by default)

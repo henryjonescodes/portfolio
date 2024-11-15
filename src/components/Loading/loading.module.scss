@@ -1,9 +1,8 @@
-/* loading-bar.module.scss */
-@import "@styles/colors.module.scss";
-@import "@styles/typography.module.scss";
+@use '@styles'as styles;
+
 
 .loadingWrapper {
-  @include text-colors;
+  @include styles.text-colors;
   --size: 256px;
   position: fixed;
   top: 0%;

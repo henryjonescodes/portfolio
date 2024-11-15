@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // Path to your SCSS file containing variables
-const scssFile = path.resolve(__dirname, "../src/styles/colors.module.scss");
+const scssFile = path.resolve(__dirname, "../src/styles/_colors.scss");
 
 // Helper function to convert RGB(A) to hex
 const rgbToHex = (rgb) => {

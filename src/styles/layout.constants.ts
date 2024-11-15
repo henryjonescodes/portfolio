@@ -1,6 +1,6 @@
 // designConstants.ts
 
-import { Vector3 } from "@three";
+import { Vector3 } from "three";
 
 export const borderRadiusCard: number = 16;
 export const borderRadiusItem: number = 8;

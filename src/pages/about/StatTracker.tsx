@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import AnimatedBorderBox from "../../components/AnimatedBorderBox";
-import TypewriterText from "../../components/3D/TypewriterText";
+import AnimatedBorderBox from "@components/AnimatedBorderBox";
+import TypewriterText from "@components/TypewriterText";
 import styles from "./about.module.scss";
 
 import cn from "classnames";

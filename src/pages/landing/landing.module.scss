@@ -1,6 +1,4 @@
-@import '@styles/typography.module.scss';
-@import '@styles/layout.module.scss';
-@import '@styles/mixins.module.scss';
+@use '@styles'as styles;
 
 .landing {
   width: 100vw;
@@ -43,8 +41,8 @@
 
 
 .infoPanel {
-  @include unselectable;
-  @include text-colors;
+  @include styles.unselectable;
+  @include styles.text-colors;
   position: relative;
   overflow: hidden;
   height: 325px !important;
@@ -67,7 +65,6 @@
   }
 
   >.content {
-    background-color: red;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -88,11 +85,10 @@
 
     >.navbar {
       position: relative;
-      min-height: $height-nav-bar;
+      min-height: styles.$height-nav-bar;
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      // width: min-content;
 
       >.border {
         top: unset !important;
@@ -115,7 +111,6 @@
   }
 }
 
-// Updated styles in landing.module.scss
 .hueSlider {
   display: flex;
   flex-direction: column;

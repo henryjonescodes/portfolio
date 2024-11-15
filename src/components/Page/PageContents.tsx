@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { motion } from "framer-motion";
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { useSettings } from "../../context/SettingsContext";
+import { useSettings } from "@context/SettingsContext";
 import styles from "./page.module.scss";
 import { folder, useControls } from "leva";
 import { usePage } from ".";

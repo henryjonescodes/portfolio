@@ -1,8 +1,6 @@
 @use "sass:color";
 
-@import '@styles/colors.module.scss';
-@import '@styles/mixins.module.scss';
-@import '@styles/layout.module.scss';
+@use '@styles'as styles;
 
 // * * * * * * * Unreferenced Styles * * * * * * * //
 
@@ -16,7 +14,7 @@
 
 @mixin navItemCommon {
   position: relative;
-  color: $accent-primary;
+  color: styles.$accent-primary;
   color: var(--accent-primary);
   height: 100%;
   display: flex;
@@ -38,9 +36,14 @@
 
       svg,
       path {
-        fill: $accent-primary;
+        fill: styles.$accent-primary;
         fill: var(--accent-primary);
       }
+    }
+
+    @media (max-width: styles.$width-mobile) {
+      width: 20px;
+      height: 20px;
     }
   }
 
@@ -50,21 +53,17 @@
     transition: all 0.3s ease;
   }
 
-  @media (max-width: $width-mobile) {
-    .icon {
-      width: 20px;
-      height: 20px;
-    }
-  }
+
 }
+
 
 // * * * * * * * Navigation Bar Styles * * * * * * * //
 
 .navigationBar {
-  @include unselectable;
+  @include styles.unselectable;
   position: relative;
   z-index: 1;
-  height: $height-nav-bar;
+  height: styles.$height-nav-bar;
   width: 100%;
   border-bottom: 5px solid transparent;
   display: flex;
@@ -109,7 +108,7 @@
 
 // * * * * * * * Mobile Styles * * * * * * * //
 
-@media (max-width: $width-small) {
+@media (max-width: styles.$width-small) {
   .contents {
     display: flex;
     align-items: center;
@@ -130,7 +129,7 @@
 
   .center {
     padding: 0px 16px;
-    border-left: 2px solid $foreground-primary;
+    border-left: 2px solid styles.$foreground-primary;
     border-left: 2px solid var(--foreground-primary);
   }
 
@@ -140,7 +139,7 @@
 }
 
 
-@media (max-width: calc(($width-tiny + $width-mobile) /2)) {
+@media (max-width: calc((styles.$width-tiny + styles.$width-mobile) /2)) {
   .center {
     display: none;
   }
@@ -182,7 +181,7 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    border-bottom: 0px solid $foreground-primary;
+    border-bottom: 0px solid styles.$foreground-primary;
     border-bottom: 0px solid var(--foreground-primary);
 
     &.selected {
@@ -222,7 +221,7 @@
       }
     }
 
-    @media (max-width: $width-mobile) {
+    @media (max-width: styles.$width-mobile) {
       width: 40px;
 
       .icon {
@@ -237,12 +236,12 @@
 .navButton {
   @include navItemCommon;
   padding: 8px;
-  border-left: 4px solid $foreground-primary;
+  border-left: 4px solid styles.$foreground-primary;
   border-left: 4px solid var(--foreground-primary);
   justify-content: center;
 
   &:last-of-type {
-    border-right: 4px solid $foreground-primary;
+    border-right: 4px solid styles.$foreground-primary;
     border-right: 4px solid var(--foreground-primary);
   }
 }

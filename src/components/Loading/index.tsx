@@ -1,11 +1,6 @@
-import {
-  AnimatePresence,
-  motion,
-  useMotionValueEvent,
-  useSpring,
-} from "framer-motion";
-import React, { useEffect, useState } from "react";
-import { useLoading } from "../../context/LoadingContext";
+import { useLoading } from "@context/LoadingContext";
+import { AnimatePresence, motion } from "framer-motion";
+import React from "react";
 import styles from "./loading.module.scss";
 
 export const Spinner: React.FC = () => {
@@ -45,23 +40,23 @@ export const PageLoading: React.FC = () => {
 };
 
 const Loading = () => {
-  const { loadingState, finishLoading, progress } = useLoading();
+  const { loadingState, finishLoading } = useLoading();
 
-  const displayedProgress = useSpring(0, {
-    stiffness: 50,
-    damping: 15,
-  });
+  // const displayedProgress = useSpring(0, {
+  //   stiffness: 50,
+  //   damping: 15,
+  // });
 
-  const [displayedProgressValue, setDisplayedProgressValue] = useState(0);
+  // const [displayedProgressValue, setDisplayedProgressValue] = useState(0);
 
-  useEffect(() => {
-    displayedProgress.set(progress);
-  }, [progress, displayedProgress]);
+  // useEffect(() => {
+  //   displayedProgress.set(progress);
+  // }, [progress, displayedProgress]);
 
-  useMotionValueEvent(displayedProgress, "change", (value) => {
-    setDisplayedProgressValue(value);
-    console.log(value);
-  });
+  // useMotionValueEvent(displayedProgress, "change", (value) => {
+  //   setDisplayedProgressValue(value);
+  //   console.log(value);
+  // });
 
   const wrapperVariants = {
     visible: { opacity: 1 },

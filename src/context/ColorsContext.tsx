@@ -9,8 +9,8 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import useDebounceEffect from "../hooks/useDebouncedEffect";
-import { colors as defaultColors } from "./../styles/sass-variables";
+import useDebounceEffect from "@hooks/useDebouncedEffect";
+import { colors as defaultColors } from "@styles/sass-variables";
 
 // Extend colord with plugins
 extend([mixPlugin]);

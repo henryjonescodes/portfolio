@@ -1,14 +1,11 @@
 @use "sass:color";
-
-@import '@styles/layout.module.scss';
-@import '@styles/mixins.module.scss';
-@import '@styles/colors.module.scss';
+@use '@styles'as styles;
 
 .projects {
-  @include page-padding-vertical;
+  @include styles.page-padding-vertical;
 
   >.content {
-    @include list-flex;
+    @include styles.list-flex;
   }
 }
 
@@ -32,7 +29,7 @@
 }
 
 
-@media (max-width: $width-mobile) {
+@media (max-width: styles.$width-mobile) {
   .video {
     height: min-content;
     max-width: unset;

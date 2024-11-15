@@ -1,6 +1,5 @@
 import React, { createContext, useState, useEffect, useRef } from "react";
-import { LocationPinKeys } from "./types";
-import { locationData } from "./map-viewer.contents";
+import { locationData, LocationPinKeys } from "./map-viewer.contents";
 
 interface MapContextProps {
   currentKey: LocationPinKeys | null;

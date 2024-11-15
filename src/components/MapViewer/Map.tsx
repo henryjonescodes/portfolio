@@ -1,17 +1,16 @@
-import grid from "@assets/png/backgrounds/grid.png";
 import USA from "@assets/svg/backgrounds/usa.svg?react";
 import Corner from "@assets/svg/icons/corner.svg?react";
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
-import AnimatedBorderBox from "../../AnimatedBorderBox";
-import AnimatedLine from "../../AnimatedLine";
-import { usePage } from "../../Page";
-import { MapContext } from "../MapContext";
-import { LocationPinKeys } from "../types";
+import AnimatedBorderBox from "@components/AnimatedBorderBox";
+import AnimatedLine from "@components/AnimatedLine";
+import { usePage } from "@components/Page";
+import { MapContext } from "./MapContext";
 import styles from "./map-components.module.scss";
 import MapSlider from "./MapSlider";
 import Pin from "./Pin";
+import { LocationPinKeys } from "./map-viewer.contents";
 
 const mapContainerVariants = {
   initial: {},
@@ -109,7 +108,7 @@ const Map = () => {
             ))}
           </motion.div>
           <USA className={styles.usa} />;
-          <motion.img src={grid} className={styles.grid} />
+          <motion.img src={"/images/grid.png"} className={styles.grid} />
         </motion.div>
       </motion.div>
       <AnimatedLine className={styles.divider} horizontal={true} />

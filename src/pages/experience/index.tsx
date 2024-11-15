@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import ExperienceEntry from "../../components/ExperienceEntry";
-import PageContents from "../../components/Page/PageContents";
-import TypewriterText from "../../components/3D/TypewriterText";
+import ExperienceEntry from "@components/ExperienceEntry";
+import PageContents from "@components/Page/PageContents";
+import TypewriterText from "@components/TypewriterText";
 import styles from "./experience.module.scss";
 const experienceVariants = {
   animate: {

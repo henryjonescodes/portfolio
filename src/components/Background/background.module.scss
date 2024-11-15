@@ -1,16 +1,15 @@
-@import "@styles/mixins.module.scss";
-@import "@styles/colors.module.scss";
-@import "@styles/typography.module.scss";
+@use '@styles'as styles;
+
 
 .backdrop {
-  @include glowing-background;
-  @include full-screen-positioning;
+  @include styles.glowing-background;
+  @include styles.full-screen-positioning;
   z-index: 1;
 }
 
 .scanlines {
-  @include scanlines-effect;
-  @include full-screen-positioning;
+  @include styles.scanlines-effect;
+  @include styles.full-screen-positioning;
   z-index: 1;
 }
 

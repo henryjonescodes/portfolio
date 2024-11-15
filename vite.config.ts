@@ -13,6 +13,11 @@ export default defineConfig({
   plugins: [
     react(), 
     svgr(), 
+    // handle all SVG files:
+    // svgr({
+    //   exportAsDefault: true,
+    //   include: '**/*.svg',
+    // });
     visualizer({
       filename: './dist/stats.html',
       open: true,
@@ -21,10 +26,11 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@three': path.resolve(__dirname, 'src/three.exports.ts'), // Update this line
-      '@styles': path.resolve(__dirname, 'src/styles'),       // Adjust path to where the alias points
-      '@assets': path.resolve(__dirname, 'src/assets'),       // Adjust path to where the alias points
-      '@components': path.resolve(__dirname, 'src/components'), // Adjust path to where the alias points
+      '@styles': path.resolve(__dirname, './src/styles'),       // Adjust path to where the alias points
+      '@assets': path.resolve(__dirname, './src/assets'),       // Adjust path to where the alias points
+      '@components': path.resolve(__dirname, './src/components'), // Adjust path to where the alias points
+      '@context': path.resolve(__dirname, './src/context'), // Adjust path to where the alias points
+      '@hooks': path.resolve(__dirname, './src/hooks'), // Adjust path to where the alias points
     },
   },
   css: {

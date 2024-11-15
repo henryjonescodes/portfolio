@@ -3,8 +3,8 @@ import { useFrame, useThree } from "@react-three/fiber";
 import React, { useEffect, useState } from "react";
 import { useSpring } from "react-spring";
 import { Vector3 } from "three";
-import { useWindowDimensions } from "../../context/WindowDimensionContext";
-import { useZoom } from "../../context/ZoomContext";
+import { useWindowDimensions } from "@context/WindowDimensionContext";
+import { useZoom } from "@context/ZoomContext";
 
 const CustomControls: React.FC = () => {
   const { camera } = useThree();

@@ -1,4 +1,5 @@
 @use "sass:color";
+@use '@styles/colors'as colors;
 
 @mixin retro-scrollbar {
   overflow-y: scroll;
@@ -20,7 +21,7 @@
 
 // Mixin for glowing background
 @mixin glowing-background {
-  background-image: radial-gradient($background-primary 10%, black);
+  background-image: radial-gradient(colors.$background-primary 10%, black);
   background-image: radial-gradient(var(--background-primary) 10%, black);
   overflow: hidden;
   position: absolute;
@@ -62,7 +63,7 @@
 @mixin scanlines-effect {
   opacity: 0.8;
   background: repeating-linear-gradient(transparent 0px 1px,
-      $background-secondary 3px 4px);
+      colors.$background-secondary 3px 4px);
   background: repeating-linear-gradient(transparent 0px 1px,
       var(--background-secondary) 3px 4px);
   position: fixed;

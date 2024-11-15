@@ -10,7 +10,7 @@ import {
   InteractionContext,
   InteractiveElement,
   InteractiveElementProps,
-} from "../../context/InteractionContext";
+} from "@context/InteractionContext";
 
 type KnobProps = {
   position?: [number, number, number];

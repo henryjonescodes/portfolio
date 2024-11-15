@@ -2,7 +2,7 @@ import { motion, useIsPresent } from "framer-motion";
 import { useEffect, useRef, useState, ReactNode } from "react";
 import cn from "classnames";
 import styles from "./local.module.scss";
-import { useWindowDimensions } from "../../context/WindowDimensionContext";
+import { useWindowDimensions } from "@context/WindowDimensionContext";
 
 interface AnimatedBorderProps {
   width: number;
