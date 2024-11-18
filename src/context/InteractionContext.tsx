@@ -1,5 +1,6 @@
 // InteractionContext.tsx
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { useSettings } from "./SettingsContext";
 
 type InteractionContextType = {
   activeObject: string | null;
@@ -17,10 +18,12 @@ export const InteractionProvider = ({
   children: React.ReactNode;
 }) => {
   const [activeObject, setActiveObject] = useState<string | null>(null);
+  const { isDebugMode } = useSettings();
 
-  // useEffect(() => {
-  //   console.log(`active object: ${activeObject}`);
-  // }, [activeObject]);
+  useEffect(() => {
+    if (!isDebugMode) return;
+    console.log(`[InteractionContext]: active object: ${activeObject}`);
+  }, [activeObject]);
 
   return (
     <InteractionContext.Provider value={{ activeObject, setActiveObject }}>

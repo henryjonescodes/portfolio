@@ -6,7 +6,6 @@
   position: relative;
   overflow: hidden;
   pointer-events: auto;
-
 }
 
 .wrapper {
@@ -27,6 +26,11 @@
   height: 100%;
   z-index: 0;
 }
+
+.mobile {
+  touch-action: none;
+}
+
 
 .screen {
   position: relative;

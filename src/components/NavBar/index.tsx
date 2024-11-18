@@ -31,9 +31,9 @@ const navBarVariants = {
     opacity: 1,
     transition: {
       duration: 0.6,
-      delay: 1.6,
+      delay: 0.6,
       staggerChildren: 0.2,
-      delayChildren: 1.6,
+      delayChildren: 0.6,
     },
   },
   exit: {

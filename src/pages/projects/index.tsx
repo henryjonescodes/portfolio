@@ -4,7 +4,8 @@ import PageContents from "@components/Page/PageContents";
 import TypewriterText from "@components/TypewriterText";
 import styles from "./projects.module.scss";
 import GlitchMedia from "@components/GlitchMedia";
-
+import { usePage } from "@components/Page";
+import cn from "classnames";
 const projectsVariants = {
   animate: {
     transition: {
@@ -32,9 +33,14 @@ const entryContentVariants = {
 };
 
 const Projects = () => {
+  const { embedded } = usePage();
+
   return (
     <PageContents key={"projects"} className={styles.projects}>
-      <motion.div variants={projectsVariants} className={styles.content}>
+      <motion.div
+        variants={projectsVariants}
+        className={cn(styles.content, { [styles.fullscreen]: !embedded })}
+      >
         <motion.h1>
           <TypewriterText text={"Projects"} staggerChildren={0.05} />
         </motion.h1>
@@ -54,7 +60,7 @@ const Projects = () => {
                   autoPlay
                   loop
                   muted
-                  src="/video/v2-loop.mp4"
+                  src="video/v2-loop.mp4"
                   style={{ objectPosition: "0%" }}
                 />
               }
@@ -73,7 +79,7 @@ const Projects = () => {
         >
           <motion.div className={styles.video} variants={entryContentVariants}>
             <GlitchMedia
-              video={<video autoPlay loop muted src="/video/tower-loop.mp4" />}
+              video={<video autoPlay loop muted src="video/tower-loop.mp4" />}
             />
           </motion.div>
         </ExperienceEntry>
@@ -87,7 +93,7 @@ const Projects = () => {
           dateString={"2021"}
         >
           <motion.div className={styles.video} variants={entryContentVariants}>
-            <GlitchMedia img={<img src="/images/v1.png" />}></GlitchMedia>
+            <GlitchMedia img={<img src="images/v1.png" />}></GlitchMedia>
           </motion.div>
         </ExperienceEntry>
         <ExperienceEntry
@@ -102,7 +108,7 @@ const Projects = () => {
           endDate={new Date(2021, 5)}
         >
           <motion.div className={styles.video} variants={entryContentVariants}>
-            <GlitchMedia img={<img src="/images/thesis.png" />}></GlitchMedia>
+            <GlitchMedia img={<img src="images/thesis.png" />}></GlitchMedia>
           </motion.div>
         </ExperienceEntry>
       </motion.div>

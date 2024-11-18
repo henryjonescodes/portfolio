@@ -52,29 +52,46 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
   // ? Get initial lite mode value from url
   const searchParams = new URLSearchParams(location.search);
   const liteModeFlag = searchParams.get("lite") === "true";
+
+  // ? Timeout timer setup
   const preventTimeout = useRef(false);
   const loadingTimerMs = useRef<number>(LOADING_TIMEOUT_MS);
+
   // ? Setup States
-  const [liteMode, setLiteMode] = useState<boolean>(liteModeFlag || isMobile);
+  const [liteMode, setLiteModeState] = useState<boolean>(
+    liteModeFlag || isMobile
+  );
   const [progress, setProgress] = useState<number>(0);
   const [loadingState, setLoadingState] = useState<LoadingStates>(
     liteMode ? undefined : "loading"
   );
   const [firstPageLoad, setFirstPageLoad] = useState<boolean>(true);
 
-  // ? Helpers
-  const setLiteModeFlag = (to: boolean) => {
+  // ? Add lite mode query param if lite mode started due to mobile device
+  useEffect(() => {
+    if (isMobile) {
+      updateLiteModeFlag(true);
+    }
+  }, []);
+
+  // ? Lite Mode Updating
+  const setLiteMode = (to: boolean) => {
+    updateLiteModeFlag(to);
+    setLiteModeState(to);
+  };
+
+  // ? Internal
+  const updateLiteModeFlag = (to: boolean) => {
     const searchParams = new URLSearchParams(location.search);
     const liteModeFlag = searchParams.get("lite");
 
     if (to && liteModeFlag !== "true") {
       searchParams.set("lite", "true");
-    } else if (liteModeFlag === "true") {
+      navigate({ search: searchParams.toString() });
+    } else if (!to && liteModeFlag === "true") {
       searchParams.delete("lite");
+      navigate({ search: searchParams.toString() });
     }
-    // Set internal state
-    setLiteMode(to);
-    navigate({ search: searchParams.toString() });
   };
 
   // ? Loading management functions
@@ -83,14 +100,14 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
     console.log("[LoadingContext]: Started loading");
     loadingTimerMs.current = LOADING_TIMEOUT_USER_INITIATED_MS;
     preventTimeout.current = false;
-    setLiteModeFlag(false);
+    setLiteMode(false);
     setLoadingState("loading");
   };
 
   const finishLoading = () => {
     console.log("[LoadingContext]: Completed loading");
 
-    setLiteModeFlag(false);
+    setLiteMode(false);
     setLoadingState("complete");
   };
 
@@ -98,7 +115,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
     if (loadingState === undefined) return;
 
     console.log("[LoadingContext]: Stopped loading");
-    setLiteModeFlag(true);
+    setLiteMode(true);
     setLoadingState(undefined);
   };
 
@@ -123,7 +140,6 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
 
     return () => {
       if (loadingTimer) {
-        console.log("clearing timer");
         clearTimeout(loadingTimer);
       }
     };

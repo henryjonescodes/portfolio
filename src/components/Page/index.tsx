@@ -1,18 +1,25 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
 import { folder, useControls } from "leva";
-import { createContext, ReactNode, useContext, useEffect, useRef } from "react";
+import {
+  createContext,
+  lazy,
+  ReactNode,
+  Suspense,
+  useContext,
+  useEffect,
+  useRef,
+} from "react";
 import { useLocation } from "react-router-dom";
 
 import { useLoading } from "@context/LoadingContext";
 import { useZoom } from "@context/ZoomContext";
 
-import AnimatedOutlet from "@components/AnimatedOutlet";
-import Background from "@components/Background";
-import NavBar from "@components/NavBar";
-
 import styles from "./page.module.scss";
 
+const LazyBackground = lazy(() => import("@components/Background"));
+const LazyNavBar = lazy(() => import("@components/NavBar"));
+const LazyAnimatedOutlet = lazy(() => import("@components/AnimatedOutlet"));
 const Page = ({ embedded }: { embedded?: boolean }) => {
   const location = useLocation();
   const pathSegments = location.pathname.split("/").filter(Boolean);
@@ -52,12 +59,12 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
 
   const pageVariants = {
     initial: {
-      opacity: 0,
+      opacity: firstPageLoad ? 1 : 0,
     },
     animate: {
       opacity: 1,
       transition: {
-        duration: pageAnimateDuration, // Controlled by Leva
+        duration: firstPageLoad ? 0 : pageAnimateDuration, // No delay on first load
         delay: firstPageLoad ? pageFirstLoadDelay : pageAnimateDelay, // Controlled by Leva
         delayChildren: firstPageLoad
           ? pageFirstLoadDelayChildren
@@ -104,8 +111,10 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
             }
           }}
         >
-          {!embedded && <Background />}
-          <NavBar page={page} />
+          <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
+          <Suspense fallback={null}>
+            <LazyNavBar page={page} />
+          </Suspense>
           <motion.div
             className={cn(styles.content, {
               [styles.contentFullScreen]: !embedded,
@@ -116,7 +125,9 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
           >
             <motion.div className={styles.contentInner}>
               <AnimatePresence mode="wait">
-                <AnimatedOutlet key={page} />
+                <Suspense fallback={null}>
+                  <LazyAnimatedOutlet key={page} />
+                </Suspense>
               </AnimatePresence>
             </motion.div>
           </motion.div>

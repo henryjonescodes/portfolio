@@ -1,6 +1,6 @@
 // designConstants.ts
 
-import { Vector3 } from "three";
+import { Vector3 } from "$three";
 
 export const borderRadiusCard: number = 16;
 export const borderRadiusItem: number = 8;
@@ -43,13 +43,13 @@ export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
   tiny: { 
     fullScreen: new Vector3(-0.7, 0, 1), 
     info: new Vector3(2.29, 0.5, 2.8), 
-    handheld: new Vector3(-0.7, 0, 10), 
-    wide: new Vector3(-0.5, 0, 12), 
+    handheld: new Vector3(0, 0, 10), 
+    wide: new Vector3(0, 0, 13), 
   },
   mobile: { 
     fullScreen: new Vector3(-0.7, 0, 1), 
     info: new Vector3(2.29, 0.5, 2), 
-    handheld: new Vector3(-0.6, 0, 6.5), 
+    handheld: new Vector3(0, 0, 7.5), 
     wide: new Vector3(0, 0, 8), 
   },
   small: { 
@@ -89,6 +89,8 @@ export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
     wide: new Vector3(0, 0, 5), 
   },
 };
+
+export const landscapeZoomPositionOffset: number = 2.0
 
 
 export const maxWidthPage: number = 2000;

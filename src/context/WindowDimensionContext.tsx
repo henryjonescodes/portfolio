@@ -13,6 +13,7 @@ import {
   ScreenWidthZoomPositions,
   ZoomLevel,
 } from "@styles/layout.constants.ts";
+import { useSettings } from "./SettingsContext";
 
 // Define the context type
 type ScreenSizeType = {
@@ -33,6 +34,7 @@ const WindowDimensionContext = createContext<
 export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const { isDebugMode } = useSettings();
   const [screenSize, setScreenSize] = useState<ScreenSizeType>({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -65,9 +67,11 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({
 
   const zoomPositions = useMemo(() => {
     const getZoomPositions = (key: ScreenWidthKey) => {
-      console.log(
-        `[WindowDimensionContext]: Zoom level updated on key change: ${key}`
-      );
+      if (isDebugMode) {
+        console.log(
+          `[WindowDimensionContext]: Zoom level updated on key change: ${key}`
+        );
+      }
       switch (key) {
         case "extraLarge":
           return ScreenWidthZoomPositions.extraLarge;

@@ -108,7 +108,7 @@ const Map = () => {
             ))}
           </motion.div>
           <USA className={styles.usa} />;
-          <motion.img src={"/images/grid.png"} className={styles.grid} />
+          <motion.img src={"images/grid.png"} className={styles.grid} />
         </motion.div>
       </motion.div>
       <AnimatedLine className={styles.divider} horizontal={true} />

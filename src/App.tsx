@@ -2,7 +2,7 @@ import { lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.scss";
 import { WindowDimensionProvider } from "./context/WindowDimensionContext";
-import { LandingWrapper } from "./pages/landing";
+import { Landing } from "./pages/landing";
 import { PageLoading } from "./components/Loading";
 import Home from "./pages/home";
 
@@ -12,38 +12,43 @@ const Projects = lazy(() => import("./pages/projects"));
 
 export default function App() {
   return (
-    <WindowDimensionProvider>
-      <Router>
-        <Routes>
-          <Route path="/*" element={<LandingWrapper />}>
-            <Route index element={<Home key="home" />} />
-            <Route
-              path="about"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <About key="about" />
-                </Suspense>
-              }
-            />
-            <Route
-              path="experience"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <Experience key="experience" />
-                </Suspense>
-              }
-            />
-            <Route
-              path="projects"
-              element={
-                <Suspense fallback={<PageLoading />}>
-                  <Projects key="projects" />
-                </Suspense>
-              }
-            />
-          </Route>
-        </Routes>
-      </Router>
-    </WindowDimensionProvider>
+    <Router>
+      <Routes>
+        <Route
+          path="/*"
+          element={
+            <WindowDimensionProvider>
+              <Landing />
+            </WindowDimensionProvider>
+          }
+        >
+          <Route index element={<Home key="home" />} />
+          <Route
+            path="about"
+            element={
+              <Suspense fallback={<PageLoading />}>
+                <About key="about" />
+              </Suspense>
+            }
+          />
+          <Route
+            path="experience"
+            element={
+              <Suspense fallback={<PageLoading />}>
+                <Experience key="experience" />
+              </Suspense>
+            }
+          />
+          <Route
+            path="projects"
+            element={
+              <Suspense fallback={<PageLoading />}>
+                <Projects key="projects" />
+              </Suspense>
+            }
+          />
+        </Route>
+      </Routes>
+    </Router>
   );
 }

@@ -26,11 +26,12 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@styles': path.resolve(__dirname, './src/styles'),       // Adjust path to where the alias points
-      '@assets': path.resolve(__dirname, './src/assets'),       // Adjust path to where the alias points
-      '@components': path.resolve(__dirname, './src/components'), // Adjust path to where the alias points
-      '@context': path.resolve(__dirname, './src/context'), // Adjust path to where the alias points
-      '@hooks': path.resolve(__dirname, './src/hooks'), // Adjust path to where the alias points
+      '@styles': path.resolve(__dirname, './src/styles'),      
+      '@assets': path.resolve(__dirname, './src/assets'),     
+      '@components': path.resolve(__dirname, './src/components'), 
+      '@context': path.resolve(__dirname, './src/context'), 
+      '@hooks': path.resolve(__dirname, './src/hooks'), 
+      '$three': path.resolve(__dirname, './src/three-exports.ts'), 
     },
   },
   css: {

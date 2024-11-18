@@ -1,5 +1,11 @@
 import { folder, Leva, useControls } from "leva";
-import React, { createContext, ReactNode, useContext, useState } from "react";
+import React, {
+  createContext,
+  ReactNode,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 type SettingsContextType = {
@@ -45,8 +51,10 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const location = useLocation();
 
   // ? Parse query parameters
-  const searchParams = new URLSearchParams(location.search);
-  const isDebugMode = searchParams.get("debug") === "true";
+  const isDebugMode = useMemo(() => {
+    const searchParams = new URLSearchParams(location.search);
+    return searchParams.get("debug") === "true";
+  }, [location.search]);
 
   // ? Setup States
   const [lockAnimationReEnable, setLockAnimationReEnable] = useState(false);
@@ -91,16 +99,19 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
     navigate({ search: searchParams.toString() });
   };
 
+  const contextValue = useMemo(
+    () => ({
+      useOrbitControls,
+      toggleDebugMode,
+      isDebugMode,
+      animationDisabled,
+      setAnimationDisabled,
+    }),
+    [useOrbitControls, toggleDebugMode, isDebugMode, animationDisabled]
+  );
+
   return (
-    <SettingsContext.Provider
-      value={{
-        useOrbitControls,
-        toggleDebugMode,
-        isDebugMode,
-        animationDisabled,
-        setAnimationDisabled,
-      }}
-    >
+    <SettingsContext.Provider value={contextValue}>
       <Leva collapsed hidden={!isDebugMode} oneLineLabels={true} />
       {children}
     </SettingsContext.Provider>

@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "export-sass-variables": "node ./scripts/export-sass-variables.js",
-    "dev": "npm run export-sass-variables && vite",
-    "build": "npm run export-sass-variables && tsc -b && vite build",
-    "generate-qr-code": "node dev-functions.js"
+    "generate-terminal-qr-code": "node ./scripts/generate-terminal-qr-code.js",
+    "dev": "npm run generate-terminal-qr-code && vite",
+    "dev-export": "npm run export-sass-variables && npm run dev",
+    "build": "npm run export-sass-variables && tsc -b && vite build"
   },
   "dependencies": {
     "@react-spring/three": "^9.7.5",
@@ -17,7 +18,6 @@
     "classnames": "^2.5.1",
     "colord": "^2.9.3",
     "framer-motion": "^11.11.9",
-    "framer-motion-3d": "^11.11.9",
     "its-fine": "^1.2.5",
     "leva": "^0.9.35",
     "react": "^18.3.1",
@@ -33,10 +33,10 @@
     "@types/react": "^18.3.10",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.2",
-    "concurrently": "^9.0.1",
     "eslint": "^9.11.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
+    "concurrently": "^9.0.1",
     "globals": "^15.9.0",
     "qrcode-terminal": "^0.12.0",
     "rollup-plugin-visualizer": "^5.12.0",

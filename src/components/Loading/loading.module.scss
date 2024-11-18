@@ -18,7 +18,11 @@
   gap: 16px;
 }
 
-.progress {}
+@media (max-width: styles.$width-medium) {
+  .loadingWrapper {
+    --size: 128px;
+  }
+}
 
 .pageLoading {
   position: absolute;

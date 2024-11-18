@@ -2,37 +2,46 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import React, { useEffect, useState } from "react";
 import { useSpring } from "react-spring";
-import { Vector3 } from "three";
+import { Vector3 } from "$three";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 import { useZoom } from "@context/ZoomContext";
+import { useMobileOrientation, isMobile } from "react-device-detect";
+import { landscapeZoomPositionOffset } from "@styles/layout.constants";
 
 const CustomControls: React.FC = () => {
   const { camera } = useThree();
   const { zoomLevel } = useZoom();
   const { zoomPositions } = useWindowDimensions();
+  const { isLandscape } = useMobileOrientation();
 
   const [focus, setFocus] = useState<Vector3>(new Vector3(0, 0, 0));
 
   // Adjust focus based on zoom level
   useEffect(() => {
+    let focusLocal = undefined;
     switch (zoomLevel) {
       case "wide":
-        setFocus(zoomPositions.wide);
+        focusLocal = zoomPositions.wide.clone();
         break;
       case "handheld":
-        setFocus(zoomPositions.handheld);
+        focusLocal = zoomPositions.handheld.clone();
         break;
       case "info":
-        setFocus(zoomPositions.info);
+        focusLocal = zoomPositions.info.clone();
         break;
       case "fullscreen":
-        setFocus(zoomPositions.fullScreen);
+        focusLocal = zoomPositions.fullScreen.clone();
         break;
       default:
-        setFocus(new Vector3(0, 0, 0));
+        focusLocal = new Vector3(0, 0, 0);
         break;
     }
-  }, [zoomLevel, zoomPositions]);
+    // Adjust focus based on landscape orientation
+    if (isLandscape && isMobile) {
+      focusLocal.z = focusLocal.z - landscapeZoomPositionOffset;
+    }
+    setFocus(focusLocal);
+  }, [zoomLevel, zoomPositions, isLandscape, isMobile]);
 
   // Animate camera position
   const { position } = useSpring({

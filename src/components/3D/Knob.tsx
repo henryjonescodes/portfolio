@@ -1,4 +1,3 @@
-import { motion } from "framer-motion-3d";
 import React, {
   useContext,
   useEffect,
@@ -137,7 +136,7 @@ export function Knob({
     degreesToRadians(currentRotation);
 
   return (
-    <motion.group rotation={rotationArray} position={position}>
+    <group rotation={rotationArray} position={position}>
       <InteractiveElement
         {...rest}
         name={name}
@@ -145,6 +144,6 @@ export function Knob({
       >
         {children}
       </InteractiveElement>
-    </motion.group>
+    </group>
   );
 }

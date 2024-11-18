@@ -30,13 +30,15 @@
 
 
 @media (max-width: styles.$width-mobile) {
-  .video {
-    height: min-content;
-    max-width: unset;
+  .fullscreen {
+    .video {
+      height: min-content;
+      max-width: unset;
 
-    video,
-    img {
-      object-fit: contain;
+      video,
+      img {
+        object-fit: contain;
+      }
     }
   }
 }

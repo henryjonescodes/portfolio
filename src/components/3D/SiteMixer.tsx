@@ -1,7 +1,7 @@
 import { useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
-import { TextureLoader, Vector2 } from "three";
+import { TextureLoader, Vector2 } from "$three";
 import { useColors } from "@context/ColorsContext";
 import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
 import { Button } from "./Button";
@@ -9,9 +9,9 @@ import { Knob } from "./Knob";
 
 // ?? Preload Textures
 const texturePaths = [
-  "/3D/images/delit_bake_1.png",
-  "/3D/images/normal_bake_1.png",
-  "/3D/images/roughness_bake_1.png",
+  "3D/images/delit_bake_1.png",
+  "3D/images/normal_bake_1.png",
+  "3D/images/roughness_bake_1.png",
 ];
 texturePaths.forEach((path) => useLoader.preload(TextureLoader, path));
 useGLTF.preload("/3D/models/site-mixer-1.glb");
@@ -22,7 +22,7 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
   const { primaryHues, setPrimaryHues } = useColors();
 
   // ?? Load Scene Components & Textures
-  const { nodes, materials } = useGLTF("/3D/models/site-mixer-1.glb") as any;
+  const { nodes, materials } = useGLTF("3D/models/site-mixer-1.glb") as any;
   const [bakeImage, normalMap, roughnessMap] = useLoader(
     TextureLoader,
     texturePaths

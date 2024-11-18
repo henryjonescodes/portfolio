@@ -42,22 +42,6 @@ export const PageLoading: React.FC = () => {
 const Loading = () => {
   const { loadingState, finishLoading } = useLoading();
 
-  // const displayedProgress = useSpring(0, {
-  //   stiffness: 50,
-  //   damping: 15,
-  // });
-
-  // const [displayedProgressValue, setDisplayedProgressValue] = useState(0);
-
-  // useEffect(() => {
-  //   displayedProgress.set(progress);
-  // }, [progress, displayedProgress]);
-
-  // useMotionValueEvent(displayedProgress, "change", (value) => {
-  //   setDisplayedProgressValue(value);
-  //   console.log(value);
-  // });
-
   const wrapperVariants = {
     visible: { opacity: 1 },
     hidden: {
@@ -88,9 +72,6 @@ const Loading = () => {
           variants={wrapperVariants}
         >
           <Spinner />
-          {/* <motion.h1 className={styles.progress}>
-            {Math.min(100, Math.round(displayedProgressValue))} %
-          </motion.h1> */}
         </motion.div>
       )}
     </AnimatePresence>
