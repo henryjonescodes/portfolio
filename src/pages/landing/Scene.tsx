@@ -11,16 +11,40 @@ import { lazy, Suspense } from "react";
 import styles from "./landing.module.scss";
 import cn from "classnames";
 import { isMobile } from "react-device-detect";
+import Close from "@assets/svg/icons/close-01.svg?react";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Gizmo = lazy(() => import("./Gizmo"));
 
+const closeButtonVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { delay: 1.5, duration: 2 } },
+  exit: { opacity: 0, duration: 1 },
+};
+
 export default function Scene() {
   const { useOrbitControls } = useSettings();
-  const { zoomLevel } = useZoom();
+  const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
   const { zoomPositions } = useWindowDimensions();
 
   return (
     <InteractionProvider>
+      {zoomLevel !== "fullscreen" && isMobile && (
+        <AnimatePresence mode="wait">
+          <motion.div
+            className={styles.close}
+            onClick={() => {
+              toggleFullscreenZoomPosition();
+            }}
+            variants={closeButtonVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <Close />
+          </motion.div>
+        </AnimatePresence>
+      )}
       <Canvas
         className={cn(styles.canvas, {
           [styles.mobile]: isMobile,

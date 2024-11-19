@@ -31,6 +31,27 @@
   touch-action: none;
 }
 
+.close {
+  min-height: 3rem;
+  min-width: 3rem;
+  z-index: 100;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+
+  >svg {
+    height: 100%;
+    width: 100%;
+  }
+
+  path,
+  svg {
+    fill: styles.$accent-primary;
+    fill: var(--accent-primary);
+    stroke: styles.$accent-primary;
+    stroke: var(--accent-primary);
+  }
+}
 
 .screen {
   position: relative;
