@@ -5,6 +5,7 @@ import { WindowDimensionProvider } from "./context/WindowDimensionContext";
 import { Landing } from "./pages/landing";
 import { PageLoading } from "./components/Loading";
 import Home from "./pages/home";
+import Links from "./pages/links";
 
 const About = lazy(() => import("./pages/about"));
 const Experience = lazy(() => import("./pages/experience"));
@@ -22,7 +23,8 @@ export default function App() {
             </WindowDimensionProvider>
           }
         >
-          <Route index element={<Home key="home" />} />
+          <Route index element={<Links key="home" />} />
+          {/* <Route index element={<Home key="home" />} /> */}
           <Route
             path="about"
             element={

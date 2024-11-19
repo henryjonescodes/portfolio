@@ -1,0 +1,64 @@
+@use '@styles'as styles;
+
+.links {
+  @include styles.page-padding-vertical;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  >.content {
+    @include styles.list-flex;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: min-content;
+  }
+}
+
+.entry {
+  width: 100%;
+  overflow: hidden;
+  transform: rotate(180deg);
+  cursor: pointer;
+
+  &Content {
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    position: relative;
+    gap: 0.6rem;
+  }
+}
+
+.background {
+  background-color: styles.$foreground-primary;
+  z-index: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+
+  svg,
+  path {
+    fill: styles.$background-primary !important;
+    stroke: styles.$background-primary !important;
+  }
+
+  // Add styles for the icon as needed
+}
+
+.label {
+  z-index: 1;
+  color: styles.$background-primary !important;
+}

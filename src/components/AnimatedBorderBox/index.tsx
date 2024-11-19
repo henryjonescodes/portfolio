@@ -1,4 +1,4 @@
-import { motion, useIsPresent } from "framer-motion";
+import { motion, useIsPresent, Variants } from "framer-motion";
 import { useEffect, useRef, useState, ReactNode } from "react";
 import cn from "classnames";
 import styles from "./local.module.scss";
@@ -67,6 +67,7 @@ interface AnimatedBorderBoxProps {
   className?: string;
   contentClassName?: string;
   children?: ReactNode;
+  variants?: Variants;
 }
 
 // TODO: Add a speed control prop for animation
@@ -76,6 +77,7 @@ const AnimatedBorderBox = ({
   children,
   contentClassName,
   borderRadius = 20,
+  variants,
 }: AnimatedBorderBoxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
@@ -138,6 +140,7 @@ const AnimatedBorderBox = ({
       <motion.div
         style={{ borderRadius: `${borderRadius}px` }}
         className={cn(styles.content, contentClassName)}
+        variants={variants}
       >
         {children}
       </motion.div>
