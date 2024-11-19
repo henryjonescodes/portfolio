@@ -38,7 +38,7 @@ const CustomControls: React.FC = () => {
     }
     // Adjust focus based on landscape orientation
     if (isLandscape && isMobile) {
-      focusLocal.z = focusLocal.z - landscapeZoomPositionOffset;
+      focusLocal.z = focusLocal.z * landscapeZoomPositionOffset;
     }
     setFocus(focusLocal);
   }, [zoomLevel, zoomPositions, isLandscape, isMobile]);

@@ -212,13 +212,7 @@
         opacity: 0.8;
       }
 
-      .icon .image {
-
-        svg,
-        path {
-          // opacity: 0.8;
-        }
-      }
+      .icon .image {}
     }
 
     @media (max-width: styles.$width-mobile) {

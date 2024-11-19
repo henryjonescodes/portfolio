@@ -90,7 +90,7 @@ export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
   },
 };
 
-export const landscapeZoomPositionOffset: number = 2.0
+export const landscapeZoomPositionOffset: number = 0.6
 
 
 export const maxWidthPage: number = 2000;
