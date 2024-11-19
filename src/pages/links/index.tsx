@@ -1,92 +1,62 @@
+// Links.tsx
+import List from "@assets/svg/icons/list.svg?react";
+import Calendar from "@assets/svg/socials/calendar.svg?react";
+import Github from "@assets/svg/socials/github.svg?react";
+import Instagram from "@assets/svg/socials/Instagram.svg?react";
+import LinkedIn from "@assets/svg/socials/linkedIn.svg?react";
+import Email from "@assets/svg/socials/mail.svg?react";
 import PageContents from "@components/Page/PageContents";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import styles from "./links.module.scss";
-import AnimatedBorderBox from "@components/AnimatedBorderBox";
-import Expand from "@assets/svg/icons/expand.svg?react";
+import LinkEntry from "./LinkEntry";
 import TypewriterText from "@components/TypewriterText";
+
+const linkEntries = [
+  { Icon: Email, label: "Email", stroke: true },
+  { Icon: Calendar, label: "Calendar", stroke: true },
+  { Icon: LinkedIn, label: "Linkedin", fill: true },
+  { Icon: Instagram, label: "Instagram", fill: true },
+  { Icon: Github, label: "Github", fill: true },
+  { Icon: List, label: "Resume", stroke: true },
+];
 
 const linksVariants = {
   animate: {
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.1,
     },
   },
 };
 
 const Links = () => {
+  const [hoveredEntry, setHoveredEntry] = useState<number | null>(null);
+
   return (
     <PageContents key={"links"} className={styles.links}>
+      <motion.h1>
+        <TypewriterText text={"Henry Jones"} staggerChildren={0.05} />
+      </motion.h1>
+      <motion.h3>
+        <TypewriterText text="Creative Developer" />
+      </motion.h3>
       <motion.div variants={linksVariants} className={styles.content}>
-        <LinkEntry Icon={Expand} label="Instagram" />
-        <LinkEntry Icon={Expand} label="Git" />
-        <LinkEntry Icon={Expand} label="Instagram" />
-        <LinkEntry Icon={Expand} label="Git" />
-        <LinkEntry Icon={Expand} label="Instagram" />
-        <LinkEntry Icon={Expand} label="Git" />
-        <LinkEntry Icon={Expand} label="Instagram" />
-        <LinkEntry Icon={Expand} label="Git" />
-        <LinkEntry Icon={Expand} label="Instagram" />
-        <LinkEntry Icon={Expand} label="Git" />
+        {linkEntries.map((entry, index) => (
+          <LinkEntry
+            key={index}
+            index={index}
+            Icon={entry.Icon}
+            label={entry.label}
+            fill={entry.fill}
+            stroke={entry.stroke}
+            isHovered={hoveredEntry === index}
+            isOtherHovered={hoveredEntry !== null && hoveredEntry !== index}
+            onHoverStart={() => setHoveredEntry(index)}
+            onHoverEnd={() => setHoveredEntry(null)}
+          />
+        ))}
       </motion.div>
     </PageContents>
-  );
-};
-
-type EntryProps = {
-  Icon: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & {
-      title?: string;
-    }
-  >;
-  label: string;
-};
-
-const entryVariants = {
-  animate: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const backgroundVariants = {
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 0.6,
-      duration: 1.8,
-    },
-  },
-};
-
-const iconVariants = {
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 0.5,
-      duration: 0.5,
-    },
-  },
-};
-
-const LinkEntry = ({ Icon, label }: EntryProps) => {
-  return (
-    <AnimatedBorderBox
-      className={styles.entry}
-      contentClassName={styles.entryContent}
-      borderWidth={4}
-      variants={entryVariants}
-    >
-      <motion.div className={styles.background} variants={backgroundVariants} />
-      <motion.div className={styles.icon} variants={iconVariants}>
-        <Icon />
-      </motion.div>
-      <motion.h3 className={styles.label}>
-        <TypewriterText text={label} staggerChildren={0.08} />
-      </motion.h3>
-    </AnimatedBorderBox>
   );
 };
 

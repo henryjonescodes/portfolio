@@ -1,27 +1,33 @@
+// links.module.scss
 @use '@styles'as styles;
 
 .links {
   @include styles.page-padding-vertical;
   height: 100%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  // justify-content: center;
+  gap: 0px;
 
   >.content {
     @include styles.list-flex;
+    margin-top: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: min-content;
+    width: 100%;
   }
+}
+
+.entryWrapper {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
 }
 
 .entry {
   width: 100%;
   overflow: hidden;
   transform: rotate(180deg);
-  cursor: pointer;
 
   &Content {
     transform: rotate(180deg);
@@ -49,13 +55,21 @@
   display: flex;
   align-items: center;
 
-  svg,
-  path {
-    fill: styles.$background-primary !important;
-    stroke: styles.$background-primary !important;
+  &Fill {
+
+    svg,
+    path {
+      fill: styles.$background-primary !important;
+    }
   }
 
-  // Add styles for the icon as needed
+  &Stroke {
+
+    svg,
+    path {
+      stroke: styles.$background-primary !important;
+    }
+  }
 }
 
 .label {
