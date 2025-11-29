@@ -31,13 +31,48 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
     fullscreenDelay,
     notFullscreenDelay,
   } = useControls({
-    PageContentsTransition: folder(
+    "Page Contents": folder(
       {
-        transitionDuration: { value: 0.1, min: 0, max: 0.5, step: 0.1 },
-        exitDuration: { value: 0.1, min: 0, max: 0.5, step: 0.1 },
-        staggerChildren: { value: 0.5, min: 0, max: 1, step: 0.1 },
-        fullscreenDelay: { value: 0.3, min: 0, max: 2, step: 0.1 },
-        notFullscreenDelay: { value: 0.3, min: 0, max: 2, step: 0.1 },
+        transitionDuration: {
+          value: 0.1,
+          min: 0,
+          max: 0.5,
+          step: 0.05,
+          label: "Fade In Duration (s)",
+          hint: "How long page contents take to fade in",
+        },
+        exitDuration: {
+          value: 0.1,
+          min: 0,
+          max: 0.5,
+          step: 0.05,
+          label: "Fade Out Duration (s)",
+          hint: "How long page contents take to fade out",
+        },
+        staggerChildren: {
+          value: 0.5,
+          min: 0,
+          max: 1,
+          step: 0.05,
+          label: "Stagger Children (s)",
+          hint: "Delay between animating each child element",
+        },
+        fullscreenDelay: {
+          value: 0.3,
+          min: 0,
+          max: 2,
+          step: 0.1,
+          label: "Fullscreen Mode Delay (s)",
+          hint: "Delay before animating when in fullscreen (2D) mode",
+        },
+        notFullscreenDelay: {
+          value: 0.3,
+          min: 0,
+          max: 2,
+          step: 0.1,
+          label: "3D Embedded Delay (s)",
+          hint: "Delay before animating when embedded in 3D scene",
+        },
       },
       { collapsed: true }
     ),
