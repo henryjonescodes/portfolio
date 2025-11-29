@@ -1,12 +1,14 @@
 import cn from "classnames";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useRef } from "react";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 import { widthMobile } from "@styles/layout.constants.ts";
 import TypewriterText from "@components/TypewriterText";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import AnimatedLine from "@components/AnimatedLine";
 import styles from "./experience-entry.module.scss";
+import { useModal } from "@context/ModalContext";
+import ExperienceModalContent from "@components/Modal/ExperienceModalContent";
 
 import { usePage } from "@components/Page";
 
@@ -113,9 +115,33 @@ const ExperienceEntry = ({
     : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
+  const { openModal, modalState } = useModal();
+  const entryRef = useRef<HTMLDivElement>(null);
+
+  const modalId = `experience-${title.replace(/\s+/g, '-')}`;
+
+  const handleBoxClick = (e: React.MouseEvent) => {
+    // Only open modal if onClick is provided and we're not clicking a link
+    if (onClick && !url) {
+      onClick();
+    } else if (!url && !onClick) {
+      // Open modal for viewing details - use entire entry as source
+      openModal(
+        modalId,
+        <ExperienceModalContent
+          title={title}
+          dateRange={dateRange}
+          isExpanded={modalState.isExpanded}
+          modalId={modalId}
+        />,
+        entryRef.current!
+      );
+    }
+  };
 
   return (
     <motion.div
+      ref={entryRef}
       className={cn(styles.entry, {
         [styles.fullScreen]: !embedded,
       })}
@@ -133,12 +159,12 @@ const ExperienceEntry = ({
               <TypewriterText text={title} />
             </motion.h2>
           ) : (
-            <motion.h2>
+            <motion.h2 layoutId={`${modalId}-title`}>
               <TypewriterText text={title} />
             </motion.h2>
           )}
           {!!dateRange && (
-            <motion.p>
+            <motion.p layoutId={`${modalId}-date`}>
               <TypewriterText text={dateRange} />
             </motion.p>
           )}
@@ -163,6 +189,8 @@ const ExperienceEntry = ({
         className={styles.box}
         contentClassName={styles.boxContent}
         borderWidth={borderWidth}
+        onClick={!url ? handleBoxClick : undefined}
+        style={!url ? { cursor: "pointer" } : undefined}
       >
         <motion.div
           className={styles.descriptionWrapper}

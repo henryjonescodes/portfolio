@@ -1,5 +1,5 @@
 import { motion, useIsPresent } from "framer-motion";
-import { useEffect, useRef, useState, ReactNode } from "react";
+import { useEffect, useRef, useState, ReactNode, forwardRef } from "react";
 import cn from "classnames";
 import styles from "./local.module.scss";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
@@ -67,17 +67,26 @@ interface AnimatedBorderBoxProps {
   className?: string;
   contentClassName?: string;
   children?: ReactNode;
+  onClick?: (e: React.MouseEvent) => void;
+  style?: React.CSSProperties;
 }
 
 // TODO: Add a speed control prop for animation
-const AnimatedBorderBox = ({
-  borderWidth = 4,
-  className,
-  children,
-  contentClassName,
-  borderRadius = 20,
-}: AnimatedBorderBoxProps) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+const AnimatedBorderBox = forwardRef<HTMLDivElement, AnimatedBorderBoxProps>(
+  (
+    {
+      borderWidth = 4,
+      className,
+      children,
+      contentClassName,
+      borderRadius = 20,
+      onClick,
+      style,
+    },
+    ref
+  ) => {
+    const internalRef = useRef<HTMLDivElement>(null);
+    const containerRef = (ref as React.RefObject<HTMLDivElement>) || internalRef;
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const { width: windowWidth } = useWindowDimensions();
   const [cssBorderVisible, setCssBorderVisible] = useState<boolean>(false);
@@ -116,18 +125,23 @@ const AnimatedBorderBox = ({
     }
   }, [isPresent, cssBorderVisible]);
 
-  return (
-    <motion.div ref={containerRef} className={cn(styles.borderBox, className)}>
-      {/* {!cssBorderVisible && ( */}
-      <AnimatedBorder
-        width={dimensions.width}
-        height={dimensions.height}
-        borderWidth={borderWidth}
-        borderRadius={borderRadius}
-        onAnimationComplete={() => setCssBorderVisible(true)}
-      />
-      {/* )} */}
-      {/* <motion.div
+    return (
+      <motion.div
+        ref={containerRef}
+        className={cn(styles.borderBox, className)}
+        onClick={onClick}
+        style={style}
+      >
+        {/* {!cssBorderVisible && ( */}
+        <AnimatedBorder
+          width={dimensions.width}
+          height={dimensions.height}
+          borderWidth={borderWidth}
+          borderRadius={borderRadius}
+          onAnimationComplete={() => setCssBorderVisible(true)}
+        />
+        {/* )} */}
+        {/* <motion.div
         className={styles.cssBorder}
         style={{
           borderRadius: `${borderRadius * 1.13}px`,
@@ -135,14 +149,17 @@ const AnimatedBorderBox = ({
           borderColor: cssBorderVisible ? borderColor : "transparent",
         }}
       /> */}
-      <motion.div
-        style={{ borderRadius: `${borderRadius}px` }}
-        className={cn(styles.content, contentClassName)}
-      >
-        {children}
+        <motion.div
+          style={{ borderRadius: `${borderRadius}px` }}
+          className={cn(styles.content, contentClassName)}
+        >
+          {children}
+        </motion.div>
       </motion.div>
-    </motion.div>
-  );
-};
+    );
+  }
+);
+
+AnimatedBorderBox.displayName = "AnimatedBorderBox";
 
 export default AnimatedBorderBox;

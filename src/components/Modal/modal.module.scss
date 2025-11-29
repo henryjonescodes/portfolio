@@ -1,0 +1,92 @@
+@import "@styles/colors";
+@import "@styles/layout";
+@import "@styles/typography";
+
+.modalOverlay {
+  position: fixed;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.modalOverlayExpanded {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.modalDismissArea {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.modal {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--background-primary);
+  will-change: transform;
+}
+
+.modalCollapsed {
+  // Inherits source element size via overlayStyle
+  pointer-events: none;
+  opacity: 0;
+}
+
+.modalExpanded {
+  position: relative;
+  width: 600px;
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 16px;
+  overflow-y: auto;
+  pointer-events: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  opacity: 1;
+}
+
+// Content wrapper for modal
+.modalContent {
+  padding: 2rem;
+
+  @media (max-width: $width-mobile) {
+    padding: 1.5rem;
+  }
+}
+
+// Modal header styling
+.modalHeader {
+  margin-bottom: 1.5rem;
+}
+
+.modalTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+
+  @media (max-width: $width-mobile) {
+    font-size: 1.5rem;
+  }
+}
+
+.modalDate {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0;
+}
+
+// Modal body styling
+.modalBody {
+  line-height: 1.6;
+}
