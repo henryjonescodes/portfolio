@@ -22,11 +22,26 @@ const closeButtonVariants = {
   exit: { opacity: 0, duration: 1 },
 };
 
+// Component that bridges React contexts into the Canvas (must be inside Canvas)
+function CanvasContent({ useOrbitControls }: { useOrbitControls: boolean }) {
+  const ContextBridge = useContextBridge();
+
+  return (
+    <ContextBridge>
+      <LoadingHelper />
+      {!useOrbitControls && <CustomControls />}
+      {useOrbitControls && <OrbitControls />}
+      <Suspense fallback={null}>
+        <Gizmo renderOrder={10} />
+      </Suspense>
+    </ContextBridge>
+  );
+}
+
 export default function Scene() {
   const { useOrbitControls } = useSettings();
   const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
   const { zoomPositions } = useWindowDimensions();
-  const ContextBridge = useContextBridge();
 
   return (
     <>
@@ -58,14 +73,7 @@ export default function Scene() {
               : zoomPositions.handheld.toArray(),
         }}
       >
-        <ContextBridge>
-          <LoadingHelper />
-          {!useOrbitControls && <CustomControls />}
-          {useOrbitControls && <OrbitControls />}
-          <Suspense fallback={null}>
-            <Gizmo renderOrder={10} />
-          </Suspense>
-        </ContextBridge>
+        <CanvasContent useOrbitControls={useOrbitControls} />
       </Canvas>
     </>
   );
