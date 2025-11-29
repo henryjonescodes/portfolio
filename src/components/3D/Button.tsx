@@ -1,5 +1,6 @@
 import { animated, useSpring } from "@react-spring/three";
 import { useEffect, useState } from "react";
+import { ThreeEvent } from "@react-three/fiber";
 import {
   InteractiveElement,
   InteractiveElementProps,
@@ -57,7 +58,7 @@ export function Button({
   }, [currentOn, flip, travel, axis, position, api]);
 
   // Handle pointer events
-  const handlePointerDown = (e: any) => {
+  const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsPressed(true);
     if (!isControlled) {
@@ -70,7 +71,7 @@ export function Button({
     }
   };
 
-  const handlePointerUp = (e: any) => {
+  const handlePointerUp = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsPressed(false);
     if (!isControlled) {
@@ -87,14 +88,14 @@ export function Button({
     }
   };
 
-  const handlePointerOver = (e: any) => {
+  const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     if (onPointerOver) {
       onPointerOver(e);
     }
   };
 
-  const handlePointerOut = (e: any) => {
+  const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     if (isPressed) {
       setIsPressed(false);

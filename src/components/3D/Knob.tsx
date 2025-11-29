@@ -5,6 +5,7 @@ import React, {
   useState,
   useCallback,
 } from "react";
+import { ThreeEvent } from "@react-three/fiber";
 import {
   InteractionContext,
   InteractiveElement,
@@ -125,7 +126,7 @@ export function Knob({
     }
   }, [isDragging, applyRotation, sensitivity]);
 
-  const handlePointerDown = (e: any) => {
+  const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsDragging(true);
     startDragPosition.current = { x: e.clientX, y: e.clientY };
