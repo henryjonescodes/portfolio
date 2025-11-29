@@ -1,6 +1,5 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import { folder, useControls } from "leva";
 import {
   createContext,
   lazy,
@@ -14,6 +13,7 @@ import { useLocation } from "react-router-dom";
 
 import { useLoading } from "@context/LoadingContext";
 import { useZoom } from "@context/ZoomContext";
+import { useAnimations } from "@context/AnimationContext";
 
 import styles from "./page.module.scss";
 
@@ -29,33 +29,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   const { firstPageLoad, setFirstPageLoad } = useLoading();
 
   const { zoomLevel } = useZoom();
-
-  const {
-    pageAnimateDuration,
-    pageExitDuration,
-    pageAnimateDelay,
-    pageAnimateDelayChildren,
-    pageFirstLoadDelayChildren,
-    pageFirstLoadDelay,
-  } = useControls({
-    PageTransition: folder(
-      {
-        pageAnimateDuration: { value: 0.5, min: 0, max: 1, step: 0.1 },
-        pageAnimateDelayChildren: { value: 0.2, min: 0, max: 1, step: 0.1 },
-        pageFirstLoadDelayChildren: {
-          value: 0.2,
-          min: 0,
-          max: 1,
-          step: 0.1,
-        },
-
-        pageAnimateDelay: { value: 0.1, min: 0, max: 1, step: 0.1 },
-        pageFirstLoadDelay: { value: 0.5, min: 0, max: 1, step: 0.1 },
-        pageExitDuration: { value: 0.2, min: 0, max: 1, step: 0.1 },
-      },
-      { collapsed: true }
-    ),
-  });
+  const { durations } = useAnimations();
 
   const pageVariants = {
     initial: {
@@ -64,18 +38,20 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
     animate: {
       opacity: 1,
       transition: {
-        duration: firstPageLoad ? 0 : pageAnimateDuration, // No delay on first load
-        delay: firstPageLoad ? pageFirstLoadDelay : pageAnimateDelay, // Controlled by Leva
+        duration: firstPageLoad ? 0 : durations.PAGE_FADE_IN,
+        delay: firstPageLoad
+          ? durations.PAGE_FIRST_LOAD_DELAY
+          : durations.PAGE_ENTER_DELAY,
         delayChildren: firstPageLoad
-          ? pageFirstLoadDelayChildren
-          : pageAnimateDelayChildren, // Controlled by Leva
+          ? durations.PAGE_FIRST_LOAD_DELAY_CHILDREN
+          : durations.PAGE_DELAY_CHILDREN,
         when: "beforeChildren",
       },
     },
     exit: {
       opacity: 0,
       transition: {
-        duration: pageExitDuration, // Controlled by Leva
+        duration: durations.PAGE_FADE_OUT,
         when: "beforeChildren",
       },
     },
