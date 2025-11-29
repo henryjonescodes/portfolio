@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-function useDebounceEffect(effect: () => void, deps: any[], delay: number) {
+function useDebounceEffect(effect: () => void, deps: React.DependencyList, delay: number) {
   const handler = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
