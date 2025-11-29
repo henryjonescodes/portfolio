@@ -1,9 +1,38 @@
 import react from '@vitejs/plugin-react';
+import { execSync } from 'child_process';
 import path from 'path';
 import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import compression from 'vite-plugin-compression';
 import svgr from 'vite-plugin-svgr';
+
+/**
+ * Vite plugin to automatically export SASS variables to TypeScript.
+ * Runs on build start and watches for changes to _colors.scss during development.
+ */
+function sassExportPlugin() {
+  return {
+    name: 'sass-export',
+    buildStart() {
+      console.log('[sass-export] Exporting SASS variables...');
+      try {
+        execSync('node ./scripts/export-sass-variables.js', { stdio: 'inherit' });
+      } catch (error) {
+        console.error('[sass-export] Failed to export SASS variables:', error);
+      }
+    },
+    handleHotUpdate({ file }: { file: string }) {
+      if (file.endsWith('_colors.scss')) {
+        console.log('[sass-export] SASS colors changed, re-exporting...');
+        try {
+          execSync('node ./scripts/export-sass-variables.js', { stdio: 'inherit' });
+        } catch (error) {
+          console.error('[sass-export] Failed to export SASS variables:', error);
+        }
+      }
+    },
+  };
+}
 
 export default defineConfig({
   server: {
@@ -11,13 +40,9 @@ export default defineConfig({
     port: 5173,      // Change the port if necessary
   },
   plugins: [
-    react(), 
-    svgr(), 
-    // handle all SVG files:
-    // svgr({
-    //   exportAsDefault: true,
-    //   include: '**/*.svg',
-    // });
+    react(),
+    svgr(),
+    sassExportPlugin(), // Auto-export SASS variables on build and file changes
     visualizer({
       filename: './dist/stats.html',
       open: true,
