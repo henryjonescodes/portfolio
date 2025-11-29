@@ -1,11 +1,38 @@
 import { useGLTF } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
+import * as THREE from "three";
+import { GLTF } from "three-stdlib";
 import { TextureLoader, Vector2 } from "$three";
 import { useColors } from "@context/ColorsContext";
 import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
 import { Button } from "./Button";
 import { Knob } from "./Knob";
+
+// Type definition for GLTF model (generated via gltfjsx)
+type SiteMixerGLTF = GLTF & {
+  nodes: {
+    handheld: THREE.Mesh;
+    button1: THREE.Mesh;
+    button2: THREE.Mesh;
+    button3: THREE.Mesh;
+    button4: THREE.Mesh;
+    button5: THREE.Mesh;
+    button6: THREE.Mesh;
+    knobl: THREE.Mesh;
+    knobc: THREE.Mesh;
+    knobr: THREE.Mesh;
+    button1_emission: THREE.Mesh;
+    button2_emission: THREE.Mesh;
+    button3_emission: THREE.Mesh;
+    screens: THREE.Mesh;
+  };
+  materials: {
+    bake: THREE.MeshStandardMaterial;
+    emission: THREE.MeshStandardMaterial;
+    screen: THREE.MeshStandardMaterial;
+  };
+};
 
 // ?? Preload Textures
 const texturePaths = [
@@ -22,7 +49,7 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
   const { primaryHues, setPrimaryHues } = useColors();
 
   // ?? Load Scene Components & Textures
-  const { nodes, materials } = useGLTF("3D/models/site-mixer-1.glb") as any;
+  const { nodes, materials } = useGLTF("3D/models/site-mixer-1.glb") as SiteMixerGLTF;
   const [bakeImage, normalMap, roughnessMap] = useLoader(
     TextureLoader,
     texturePaths

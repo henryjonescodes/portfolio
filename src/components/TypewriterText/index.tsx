@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
+import { ANIMATION_DURATIONS } from "@config/animations";
 
 // Animation variants for individual characters
 const characterVariants = {
@@ -8,7 +9,7 @@ const characterVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.2,
+      duration: ANIMATION_DURATIONS.TYPEWRITER_CHAR_DURATION,
     },
   },
   show: {
@@ -19,7 +20,7 @@ const characterVariants = {
     opacity: 0,
     y: -20, // Characters move upwards on exit
     transition: {
-      duration: 0.2,
+      duration: ANIMATION_DURATIONS.TYPEWRITER_CHAR_DURATION,
     },
   },
 };

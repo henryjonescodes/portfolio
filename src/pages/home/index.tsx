@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import TypewriterText from "@components/TypewriterText";
 import PageContents from "@components/Page/PageContents";
 import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
+import { ANIMATION_DURATIONS } from "@config/animations";
 import styles from "./home.module.scss";
 
 // Define animation variants for the menu with staggered children
@@ -16,7 +17,7 @@ const menuVariants = {
 const Home = () => {
   const navigate = useNavigatePreserveQuery(); // Initialize the navigate function
 
-  const textStaggerSeconds = 0.03;
+  const textStaggerSeconds = ANIMATION_DURATIONS.TYPEWRITER_CHAR_STAGGER;
 
   return (
     <PageContents key={"menu"} className={styles.menu}>

@@ -1,5 +1,6 @@
 import { animated, useSpring } from "@react-spring/three";
 import { useEffect, useState } from "react";
+import { ThreeEvent } from "@react-three/fiber";
 import {
   InteractiveElement,
   InteractiveElementProps,
@@ -57,26 +58,26 @@ export function Button({
   }, [currentOn, flip, travel, axis, position, api]);
 
   // Handle pointer events
-  const handlePointerDown = (e: any) => {
+  const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsPressed(true);
     if (!isControlled) {
       setInternalOn(true);
     } else {
-      onChange && onChange(true);
+      onChange?.(true);
     }
     if (onPointerDown) {
       onPointerDown(e);
     }
   };
 
-  const handlePointerUp = (e: any) => {
+  const handlePointerUp = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsPressed(false);
     if (!isControlled) {
       setInternalOn(false);
     } else {
-      onChange && onChange(false);
+      onChange?.(false);
     }
     // Fire onClick only once when user clicks the button
     if (onClick) {
@@ -87,21 +88,21 @@ export function Button({
     }
   };
 
-  const handlePointerOver = (e: any) => {
+  const handlePointerOver = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     if (onPointerOver) {
       onPointerOver(e);
     }
   };
 
-  const handlePointerOut = (e: any) => {
+  const handlePointerOut = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     if (isPressed) {
       setIsPressed(false);
       if (!isControlled) {
         setInternalOn(false);
       } else {
-        onChange && onChange(false);
+        onChange?.(false);
       }
     }
     if (onPointerOut) {

@@ -1,12 +1,12 @@
 // Scene.tsx
 import CustomControls from "@components/3D/CustomControls";
 import LoadingHelper from "@components/Loading/LoadingHelper";
-import { InteractionProvider } from "@context/InteractionContext";
 import { useSettings } from "@context/SettingsContext";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 import { useZoom } from "@context/ZoomContext";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { useContextBridge } from "its-fine";
 import { lazy, Suspense } from "react";
 import styles from "./landing.module.scss";
 import cn from "classnames";
@@ -22,13 +22,29 @@ const closeButtonVariants = {
   exit: { opacity: 0, duration: 1 },
 };
 
+// Component that bridges React contexts into the Canvas (must be inside Canvas)
+function CanvasContent({ useOrbitControls }: { useOrbitControls: boolean }) {
+  const ContextBridge = useContextBridge();
+
+  return (
+    <ContextBridge>
+      <LoadingHelper />
+      {!useOrbitControls && <CustomControls />}
+      {useOrbitControls && <OrbitControls />}
+      <Suspense fallback={null}>
+        <Gizmo renderOrder={10} />
+      </Suspense>
+    </ContextBridge>
+  );
+}
+
 export default function Scene() {
   const { useOrbitControls } = useSettings();
   const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
   const { zoomPositions } = useWindowDimensions();
 
   return (
-    <InteractionProvider>
+    <>
       {zoomLevel !== "fullscreen" && isMobile && (
         <AnimatePresence mode="wait">
           <motion.div
@@ -57,13 +73,8 @@ export default function Scene() {
               : zoomPositions.handheld.toArray(),
         }}
       >
-        <LoadingHelper />
-        {!useOrbitControls && <CustomControls />}
-        {useOrbitControls && <OrbitControls />}
-        <Suspense fallback={null}>
-          <Gizmo renderOrder={10} />
-        </Suspense>
+        <CanvasContent useOrbitControls={useOrbitControls} />
       </Canvas>
-    </InteractionProvider>
+    </>
   );
 }

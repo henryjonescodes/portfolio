@@ -6,6 +6,29 @@
 ## About
 A personal site created as a space to experiment with new styles and refine my animation skills. It represents my first serious effort to integrate traditional UI with react-three-fiber, blending standard design elements with 3D graphics. Through this project, I aim to push my skills to new heights and explore the creative potential of interactive animations.
 
+## Page Transition Timeline
+
+All animation timings are defined in `src/config/animations.ts` and can be adjusted globally or via the Leva debug panel (`?debug=true`).
+
+```
+User clicks navigation link
+│
+├─ 0s: Current page starts fading out
+├─ 0s to PAGE_FADE_OUT: Page opacity 1 → 0
+├─ PAGE_FADE_OUT: Route changes (URL updates)
+├─ PAGE_FADE_OUT to (PAGE_FADE_OUT + PAGE_ENTER_DELAY): Wait period
+├─ (PAGE_FADE_OUT + PAGE_ENTER_DELAY): New page starts fading in
+├─ (PAGE_FADE_OUT + PAGE_ENTER_DELAY) to END: Page opacity 0 → 1
+└─ END = PAGE_FADE_OUT + PAGE_ENTER_DELAY + PAGE_FADE_IN: Animation complete
+
+Total transition time: ~0.8s (default values)
+```
+
+**Default Values** (can be customized):
+- `PAGE_FADE_OUT`: 0.2s
+- `PAGE_ENTER_DELAY`: 0.1s
+- `PAGE_FADE_IN`: 0.5s
+
 
 ## Stack
 

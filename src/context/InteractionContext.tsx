@@ -1,5 +1,6 @@
 // InteractionContext.tsx
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { ThreeEvent } from "@react-three/fiber";
 import { useSettings } from "./SettingsContext";
 
 type InteractionContextType = {
@@ -35,14 +36,13 @@ export const InteractionProvider = ({
 export type InteractiveElementProps = {
   name: string;
   children: React.ReactElement;
-  onPointerOver?: (e: any) => void;
-  onPointerOut?: (e: any) => void;
-  onPointerDown?: (e: any) => void;
-  onPointerUp?: (e: any) => void;
-  onPointerMove?: (e: any) => void;
+  onPointerOver?: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerOut?: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerDown?: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerUp?: (e: ThreeEvent<PointerEvent>) => void;
+  onPointerMove?: (e: ThreeEvent<PointerEvent>) => void;
 };
 
-// TODO: Type the name field?
 export const InteractiveElement = ({
   name,
   children,
@@ -55,34 +55,34 @@ export const InteractiveElement = ({
   const { setActiveObject } = useContext(InteractionContext);
 
   return React.cloneElement(children, {
-    onPointerOver: (e: any) => {
+    onPointerOver: (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
       setActiveObject(name);
       if (onPointerOver) {
         onPointerOver(e);
       }
     },
-    onPointerOut: (e: any) => {
+    onPointerOut: (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
       setActiveObject(null);
       if (onPointerOut) {
         onPointerOut(e);
       }
     },
-    onPointerDown: (e: any) => {
+    onPointerDown: (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
       setActiveObject(name);
       if (onPointerDown) {
         onPointerDown(e);
       }
     },
-    onPointerUp: (e: any) => {
+    onPointerUp: (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
       if (onPointerUp) {
         onPointerUp(e);
       }
     },
-    onPointerMove: (e: any) => {
+    onPointerMove: (e: ThreeEvent<PointerEvent>) => {
       e.stopPropagation();
       if (onPointerMove) {
         onPointerMove(e);

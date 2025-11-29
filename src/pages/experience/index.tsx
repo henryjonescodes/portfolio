@@ -19,6 +19,14 @@ const Experience = () => {
           <TypewriterText text={"Experience"} staggerChildren={0.05} />
         </motion.h1>
         <ExperienceEntry
+          title="Arbor"
+          subtitle="Full Stack Engineer"
+          description={[
+            "— Designed and delivered custom email notification system to provide real-time insights to users about their savings with Arbor ",
+          ]}
+          startDate={new Date(2025, 0)}
+        />
+        <ExperienceEntry
           title="ChannelAI"
           subtitle="iOS Engineer, Design System Lead"
           description={[
@@ -60,7 +68,7 @@ const Experience = () => {
             "— Supported the systems department in various tasks during a high-school internship.",
             "— Gained exposure to the fast-paced environment of a tech startup, learning foundational industry skills.",
           ]}
-          startDate={new Date(2014, 1)}
+          endDate={new Date(2014, 1)}
         />
       </motion.div>
     </PageContents>
