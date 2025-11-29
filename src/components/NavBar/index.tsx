@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSettings } from "@context/SettingsContext";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
+import { ANIMATION_DURATIONS } from "@config/animations";
 import { widthSmall } from "@styles/layout.constants.ts";
 import TypewriterText from "@components/TypewriterText";
 import AnimatedLine from "@components/AnimatedLine";
@@ -30,10 +31,10 @@ const navBarVariants = {
   animate: {
     opacity: 1,
     transition: {
-      duration: 0.6,
-      delay: 0.6,
+      duration: ANIMATION_DURATIONS.NAV_ITEM_FADE,
+      delay: ANIMATION_DURATIONS.NAV_ITEM_DELAY,
       staggerChildren: 0.2,
-      delayChildren: 0.6,
+      delayChildren: ANIMATION_DURATIONS.NAV_ITEM_DELAY,
     },
   },
   exit: {

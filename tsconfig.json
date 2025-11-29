@@ -14,6 +14,7 @@
       "@assets/*": ["./src/assets/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@context/*": ["./src/context/*"],
+      "@config/*": ["./src/config/*"],
       "$three": ["src/three-exports.ts"]
     },
   },
