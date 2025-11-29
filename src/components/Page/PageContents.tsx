@@ -4,7 +4,7 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useSettings } from "@context/SettingsContext";
 import styles from "./page.module.scss";
-import { folder, useControls } from "leva";
+import { useControls } from "leva";
 import { usePage } from ".";
 
 // Define the props interface
@@ -30,52 +30,47 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
     staggerChildren,
     fullscreenDelay,
     notFullscreenDelay,
-  } = useControls({
-    "Page Contents": folder(
-      {
-        transitionDuration: {
-          value: 0.1,
-          min: 0,
-          max: 0.5,
-          step: 0.05,
-          label: "Fade In Duration (s)",
-          hint: "How long page contents take to fade in",
-        },
-        exitDuration: {
-          value: 0.1,
-          min: 0,
-          max: 0.5,
-          step: 0.05,
-          label: "Fade Out Duration (s)",
-          hint: "How long page contents take to fade out",
-        },
-        staggerChildren: {
-          value: 0.5,
-          min: 0,
-          max: 1,
-          step: 0.05,
-          label: "Stagger Children (s)",
-          hint: "Delay between animating each child element",
-        },
-        fullscreenDelay: {
-          value: 0.3,
-          min: 0,
-          max: 2,
-          step: 0.1,
-          label: "Fullscreen Mode Delay (s)",
-          hint: "Delay before animating when in fullscreen (2D) mode",
-        },
-        notFullscreenDelay: {
-          value: 0.3,
-          min: 0,
-          max: 2,
-          step: 0.1,
-          label: "3D Embedded Delay (s)",
-          hint: "Delay before animating when embedded in 3D scene",
-        },
-      },
-      { collapsed: true }
-    ),
+  } = useControls("Page Contents", {
+    transitionDuration: {
+      value: 0.1,
+      min: 0,
+      max: 0.5,
+      step: 0.05,
+      label: "Fade In Duration (s)",
+      hint: "How long page contents take to fade in",
+    },
+    exitDuration: {
+      value: 0.1,
+      min: 0,
+      max: 0.5,
+      step: 0.05,
+      label: "Fade Out Duration (s)",
+      hint: "How long page contents take to fade out",
+    },
+    staggerChildren: {
+      value: 0.5,
+      min: 0,
+      max: 1,
+      step: 0.05,
+      label: "Stagger Children (s)",
+      hint: "Delay between animating each child element",
+    },
+    fullscreenDelay: {
+      value: 0.3,
+      min: 0,
+      max: 2,
+      step: 0.1,
+      label: "Fullscreen Mode Delay (s)",
+      hint: "Delay before animating when in fullscreen (2D) mode",
+    },
+    notFullscreenDelay: {
+      value: 0.3,
+      min: 0,
+      max: 2,
+      step: 0.1,
+      label: "3D Embedded Delay (s)",
+      hint: "Delay before animating when embedded in 3D scene",
+    },
   });
 
   useEffect(() => {

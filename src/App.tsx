@@ -1,7 +1,7 @@
 import { lazy, Suspense } from "react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import "./App.scss";
-import { WindowDimensionProvider } from "./context/WindowDimensionContext";
+import { AppProviders } from "./context/AppProviders";
 import { Landing } from "./pages/landing";
 import { PageLoading } from "./components/Loading";
 import Home from "./pages/home";
@@ -17,9 +17,9 @@ export default function App() {
         <Route
           path="/*"
           element={
-            <WindowDimensionProvider>
+            <AppProviders>
               <Landing />
-            </WindowDimensionProvider>
+            </AppProviders>
           }
         >
           <Route index element={<Home key="home" />} />
