@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
+import { LOADING_TIMEOUTS } from "@config/animations";
 
 export type LoadingStates = undefined | "loading" | "loaded" | "complete";
 
@@ -40,8 +41,8 @@ interface LoadingProviderProps {
   children: ReactNode;
 }
 
-const LOADING_TIMEOUT_MS: number = 8000;
-const LOADING_TIMEOUT_USER_INITIATED_MS: number = 30000;
+const LOADING_TIMEOUT_MS: number = LOADING_TIMEOUTS.AUTO_TIMEOUT_MS;
+const LOADING_TIMEOUT_USER_INITIATED_MS: number = LOADING_TIMEOUTS.USER_INITIATED_TIMEOUT_MS;
 export const LoadingProvider: React.FC<LoadingProviderProps> = ({
   children,
 }) => {
