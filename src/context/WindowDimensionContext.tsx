@@ -126,8 +126,8 @@ export const useWindowDimensions = (): WindowDimensionContextProps => {
   // TODO: kill the defaults
   if (!context) {
     return {
-      width: screenSize.height,
-      height: screenSize.width,
+      width: screenSize.width,
+      height: screenSize.height,
       screenWidthKey: "default",
       zoomPositions: ScreenWidthZoomPositions.default,
     };
