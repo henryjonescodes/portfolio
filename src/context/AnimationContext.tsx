@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode } from "react";
-import { useControls } from "leva";
+import { folder, useControls } from "leva";
 import {
   ANIMATION_DURATIONS,
   ANIMATION_SPRINGS,
@@ -47,7 +47,6 @@ const AnimationContext = createContext<AnimationConfig | undefined>(undefined);
 export function AnimationProvider({ children }: { children: ReactNode }) {
   // Create Leva controls for all animation constants
   const controls = useControls("Animation System", {
-    // Global speed multiplier
     speedMultiplier: {
       value: 1.0,
       min: 0.1,
@@ -57,161 +56,172 @@ export function AnimationProvider({ children }: { children: ReactNode }) {
       hint: "Multiply all animation speeds (2 = twice as fast)",
     },
 
-    // Page transitions
-    PAGE_FADE_IN: {
-      value: ANIMATION_DURATIONS.PAGE_FADE_IN,
-      min: 0,
-      max: 2,
-      step: 0.05,
-      label: "Page Fade In (s)",
-      hint: "Duration for page to fade in after route change",
-    },
-    PAGE_FADE_OUT: {
-      value: ANIMATION_DURATIONS.PAGE_FADE_OUT,
-      min: 0,
-      max: 1,
-      step: 0.05,
-      label: "Page Fade Out (s)",
-      hint: "Duration for page to fade out before route change",
-    },
-    PAGE_ENTER_DELAY: {
-      value: ANIMATION_DURATIONS.PAGE_ENTER_DELAY,
-      min: 0,
-      max: 1,
-      step: 0.05,
-      label: "Page Enter Delay (s)",
-      hint: "Wait before starting fade in (allows exit to complete)",
-    },
-    PAGE_FIRST_LOAD_DELAY: {
-      value: ANIMATION_DURATIONS.PAGE_FIRST_LOAD_DELAY,
-      min: 0,
-      max: 2,
-      step: 0.1,
-      label: "First Load Delay (s)",
-      hint: "Delay before animating page on first load",
-    },
-    PAGE_DELAY_CHILDREN: {
-      value: ANIMATION_DURATIONS.PAGE_DELAY_CHILDREN,
-      min: 0,
-      max: 1,
-      step: 0.05,
-      label: "Page Children Delay (s)",
-      hint: "Delay before animating child elements",
-    },
-    PAGE_FIRST_LOAD_DELAY_CHILDREN: {
-      value: ANIMATION_DURATIONS.PAGE_FIRST_LOAD_DELAY_CHILDREN,
-      min: 0,
-      max: 1,
-      step: 0.05,
-      label: "First Load Children Delay (s)",
-      hint: "Delay before animating children on first load",
-    },
+    "Page Transitions": folder({
+      PAGE_FADE_IN: {
+        value: ANIMATION_DURATIONS.PAGE_FADE_IN,
+        min: 0,
+        max: 2,
+        step: 0.05,
+        label: "Fade In",
+        hint: "Duration for page to fade in after route change",
+      },
+      PAGE_FADE_OUT: {
+        value: ANIMATION_DURATIONS.PAGE_FADE_OUT,
+        min: 0,
+        max: 1,
+        step: 0.05,
+        label: "Fade Out",
+        hint: "Duration for page to fade out before route change",
+      },
+      PAGE_ENTER_DELAY: {
+        value: ANIMATION_DURATIONS.PAGE_ENTER_DELAY,
+        min: 0,
+        max: 1,
+        step: 0.05,
+        label: "Enter Delay",
+        hint: "Wait before starting fade in (allows exit to complete)",
+      },
+      PAGE_FIRST_LOAD_DELAY: {
+        value: ANIMATION_DURATIONS.PAGE_FIRST_LOAD_DELAY,
+        min: 0,
+        max: 2,
+        step: 0.1,
+        label: "First Load Delay",
+        hint: "Delay before animating page on first load",
+      },
+      PAGE_DELAY_CHILDREN: {
+        value: ANIMATION_DURATIONS.PAGE_DELAY_CHILDREN,
+        min: 0,
+        max: 1,
+        step: 0.05,
+        label: "Children Delay",
+        hint: "Delay before animating child elements",
+      },
+      PAGE_FIRST_LOAD_DELAY_CHILDREN: {
+        value: ANIMATION_DURATIONS.PAGE_FIRST_LOAD_DELAY_CHILDREN,
+        min: 0,
+        max: 1,
+        step: 0.05,
+        label: "First Load Children Delay",
+        hint: "Delay before animating children on first load",
+      },
+    }, { collapsed: false }),
 
-    // Navigation animations
-    NAV_ITEM_FADE: {
-      value: ANIMATION_DURATIONS.NAV_ITEM_FADE,
-      min: 0,
-      max: 2,
-      step: 0.05,
-      label: "Nav Item Fade (s)",
-      hint: "Duration for navigation items to fade in",
-    },
-    NAV_ITEM_DELAY: {
-      value: ANIMATION_DURATIONS.NAV_ITEM_DELAY,
-      min: 0,
-      max: 2,
-      step: 0.05,
-      label: "Nav Item Delay (s)",
-      hint: "Delay before navigation items appear",
-    },
+    "Navigation": folder({
+      NAV_ITEM_FADE: {
+        value: ANIMATION_DURATIONS.NAV_ITEM_FADE,
+        min: 0,
+        max: 2,
+        step: 0.05,
+        label: "Item Fade",
+        hint: "Duration for navigation items to fade in",
+      },
+      NAV_ITEM_DELAY: {
+        value: ANIMATION_DURATIONS.NAV_ITEM_DELAY,
+        min: 0,
+        max: 2,
+        step: 0.05,
+        label: "Item Delay",
+        hint: "Delay before navigation items appear",
+      },
+    }, { collapsed: true }),
 
-    // Text effects
-    TYPEWRITER_CHAR_DURATION: {
-      value: ANIMATION_DURATIONS.TYPEWRITER_CHAR_DURATION,
-      min: 0,
-      max: 1,
-      step: 0.01,
-      label: "Typewriter Char Duration (s)",
-      hint: "How long each character takes to appear",
-    },
-    TYPEWRITER_CHAR_STAGGER: {
-      value: ANIMATION_DURATIONS.TYPEWRITER_CHAR_STAGGER,
-      min: 0,
-      max: 0.2,
-      step: 0.005,
-      label: "Typewriter Stagger (s)",
-      hint: "Delay between each character appearing",
-    },
+    "Text Effects": folder({
+      TYPEWRITER_CHAR_DURATION: {
+        value: ANIMATION_DURATIONS.TYPEWRITER_CHAR_DURATION,
+        min: 0,
+        max: 1,
+        step: 0.01,
+        label: "Char Duration",
+        hint: "How long each character takes to appear",
+      },
+      TYPEWRITER_CHAR_STAGGER: {
+        value: ANIMATION_DURATIONS.TYPEWRITER_CHAR_STAGGER,
+        min: 0,
+        max: 0.2,
+        step: 0.005,
+        label: "Char Stagger",
+        hint: "Delay between each character appearing",
+      },
+    }, { collapsed: true }),
 
-    // Spring physics
-    BUTTON_TENSION: {
-      value: ANIMATION_SPRINGS.BUTTON_PRESS.tension,
-      min: 50,
-      max: 500,
-      step: 10,
-      label: "Button Spring Tension",
-      hint: "Higher = snappier button press (default: 170)",
-    },
-    BUTTON_FRICTION: {
-      value: ANIMATION_SPRINGS.BUTTON_PRESS.friction,
-      min: 10,
-      max: 100,
-      step: 1,
-      label: "Button Spring Friction",
-      hint: "Higher = less bouncy (default: 26)",
-    },
-    KNOB_TENSION: {
-      value: ANIMATION_SPRINGS.KNOB_ROTATION.tension,
-      min: 50,
-      max: 500,
-      step: 10,
-      label: "Knob Spring Tension",
-      hint: "Higher = snappier knob rotation (default: 280)",
-    },
-    KNOB_FRICTION: {
-      value: ANIMATION_SPRINGS.KNOB_ROTATION.friction,
-      min: 10,
-      max: 100,
-      step: 1,
-      label: "Knob Spring Friction",
-      hint: "Higher = less bouncy (default: 60)",
-    },
+    "Spring Physics": folder({
+      "Button": folder({
+        BUTTON_TENSION: {
+          value: ANIMATION_SPRINGS.BUTTON_PRESS.tension,
+          min: 50,
+          max: 500,
+          step: 10,
+          label: "Tension",
+          hint: "Higher = snappier button press",
+        },
+        BUTTON_FRICTION: {
+          value: ANIMATION_SPRINGS.BUTTON_PRESS.friction,
+          min: 10,
+          max: 100,
+          step: 1,
+          label: "Friction",
+          hint: "Higher = less bouncy",
+        },
+      }, { collapsed: true }),
+      "Knob": folder({
+        KNOB_TENSION: {
+          value: ANIMATION_SPRINGS.KNOB_ROTATION.tension,
+          min: 50,
+          max: 500,
+          step: 10,
+          label: "Tension",
+          hint: "Higher = snappier knob rotation",
+        },
+        KNOB_FRICTION: {
+          value: ANIMATION_SPRINGS.KNOB_ROTATION.friction,
+          min: 10,
+          max: 100,
+          step: 1,
+          label: "Friction",
+          hint: "Higher = less bouncy",
+        },
+      }, { collapsed: true }),
+    }, { collapsed: true }),
 
-    // Performance delays
-    COLOR_UPDATE_DEBOUNCE_MS: {
-      value: DEBOUNCE_DELAYS.COLOR_UPDATE_MS,
-      min: 0,
-      max: 500,
-      step: 50,
-      label: "Color Update Debounce (ms)",
-      hint: "Delay before updating CSS after knob rotation",
-    },
-    RESIZE_DEBOUNCE_MS: {
-      value: DEBOUNCE_DELAYS.RESIZE_MS,
-      min: 0,
-      max: 500,
-      step: 50,
-      label: "Resize Debounce (ms)",
-      hint: "Delay before recalculating layout after resize",
-    },
-
-    // Loading timeouts
-    AUTO_TIMEOUT_MS: {
-      value: LOADING_TIMEOUTS.AUTO_TIMEOUT_MS,
-      min: 1000,
-      max: 30000,
-      step: 1000,
-      label: "Auto Timeout (ms)",
-      hint: "Time before falling back to lite mode (automatic)",
-    },
-    USER_INITIATED_TIMEOUT_MS: {
-      value: LOADING_TIMEOUTS.USER_INITIATED_TIMEOUT_MS,
-      min: 5000,
-      max: 60000,
-      step: 5000,
-      label: "User Initiated Timeout (ms)",
-      hint: "Time before fallback when user clicks load 3D",
-    },
+    "Performance": folder({
+      "Debouncing": folder({
+        COLOR_UPDATE_DEBOUNCE_MS: {
+          value: DEBOUNCE_DELAYS.COLOR_UPDATE_MS,
+          min: 0,
+          max: 500,
+          step: 50,
+          label: "Color Update",
+          hint: "Delay before updating CSS after knob rotation",
+        },
+        RESIZE_DEBOUNCE_MS: {
+          value: DEBOUNCE_DELAYS.RESIZE_MS,
+          min: 0,
+          max: 500,
+          step: 50,
+          label: "Resize",
+          hint: "Delay before recalculating layout after resize",
+        },
+      }, { collapsed: true }),
+      "Loading Timeouts": folder({
+        AUTO_TIMEOUT_MS: {
+          value: LOADING_TIMEOUTS.AUTO_TIMEOUT_MS,
+          min: 1000,
+          max: 30000,
+          step: 1000,
+          label: "Auto Timeout",
+          hint: "Time before falling back to lite mode (automatic)",
+        },
+        USER_INITIATED_TIMEOUT_MS: {
+          value: LOADING_TIMEOUTS.USER_INITIATED_TIMEOUT_MS,
+          min: 5000,
+          max: 60000,
+          step: 5000,
+          label: "User Initiated",
+          hint: "Time before fallback when user clicks load 3D",
+        },
+      }, { collapsed: true }),
+    }, { collapsed: true }),
   });
 
   // Apply speed multiplier to all duration values

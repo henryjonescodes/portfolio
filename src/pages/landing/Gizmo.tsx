@@ -3,7 +3,7 @@ import { SiteMixer } from "@components/3D/SiteMixer";
 import { useZoom } from "@context/ZoomContext";
 import { PresentationControls } from "@react-three/drei";
 import { GroupProps } from "@react-three/fiber";
-import { useControls } from "leva";
+import { folder, useControls } from "leva";
 import InfoPanel from "./InfoPanel";
 import Screen from "./Screen";
 
@@ -22,86 +22,95 @@ const Gizmo = ({ ...rest }: GroupProps) => {
     azimuthLimit,
     global,
   } = useControls("3D Scene", {
-    // Lighting controls
-    dirLightPosition: {
-      value: [5.2, 2.1, 6.5],
-      step: 0.1,
-      label: "Directional Light Position",
-      hint: "Position of the main directional light (x, y, z)",
-    },
-    dirLightIntensity: {
-      value: 0.4,
-      min: 0,
-      max: 3,
-      step: 0.1,
-      label: "Directional Light Intensity",
-      hint: "Brightness of the main light (creates shadows)",
-    },
-    ambientIntensity: {
-      value: 0.7,
-      min: 0,
-      max: 3,
-      step: 0.1,
-      label: "Ambient Light Intensity",
-      hint: "Overall scene brightness (no shadows)",
-    },
+    "Lighting": folder({
+      dirLightPosition: {
+        value: [5.2, 2.1, 6.5],
+        step: 0.1,
+        label: "Dir Light Position",
+        hint: "Position of the main directional light (x, y, z)",
+      },
+      dirLightIntensity: {
+        value: 0.4,
+        min: 0,
+        max: 3,
+        step: 0.1,
+        label: "Dir Light Intensity",
+        hint: "Brightness of the main light (creates shadows)",
+      },
+      ambientIntensity: {
+        value: 0.7,
+        min: 0,
+        max: 3,
+        step: 0.1,
+        label: "Ambient Intensity",
+        hint: "Overall scene brightness (no shadows)",
+      },
+    }, { collapsed: false }),
 
-    // Rotation controls
-    global: {
-      value: false,
-      label: "Global Rotation",
-      hint: "Enable rotating the entire scene with mouse drag",
-    },
-    polarLimit: {
-      value: 32,
-      min: 0,
-      max: 90,
-      step: 1,
-      label: "Vertical Rotation Limit (degrees)",
-      hint: "Max rotation up/down from center",
-    },
-    azimuthLimit: {
-      value: 32,
-      min: 0,
-      max: 90,
-      step: 1,
-      label: "Horizontal Rotation Limit (degrees)",
-      hint: "Max rotation left/right from center",
-    },
+    "Interaction": folder({
+      "Rotation": folder({
+        global: {
+          value: false,
+          label: "Global Rotation",
+          hint: "Enable rotating the entire scene with mouse drag",
+        },
+        polarLimit: {
+          value: 32,
+          min: 0,
+          max: 90,
+          step: 1,
+          label: "Vertical Limit (°)",
+          hint: "Max rotation up/down from center",
+        },
+        azimuthLimit: {
+          value: 32,
+          min: 0,
+          max: 90,
+          step: 1,
+          label: "Horizontal Limit (°)",
+          hint: "Max rotation left/right from center",
+        },
+      }, { collapsed: false }),
 
-    // Spring physics for rotation
-    snapMass: {
-      value: 2.5,
-      min: 0,
-      max: 10,
-      step: 0.1,
-      label: "Snap Mass",
-      hint: "Mass for snap-back animation (higher = slower)",
-    },
-    snapTension: {
-      value: 600,
-      min: 0,
-      max: 1000,
-      step: 10,
-      label: "Snap Tension",
-      hint: "Tension for snap-back (higher = snappier)",
-    },
-    configMass: {
-      value: 0.7,
-      min: 0,
-      max: 10,
-      step: 0.1,
-      label: "Drag Mass",
-      hint: "Mass during drag (higher = heavier feel)",
-    },
-    configTension: {
-      value: 950,
-      min: 0,
-      max: 1000,
-      step: 10,
-      label: "Drag Tension",
-      hint: "Tension during drag (higher = less smooth)",
-    },
+      "Spring Physics": folder({
+        "Snap Back": folder({
+          snapMass: {
+            value: 2.5,
+            min: 0,
+            max: 10,
+            step: 0.1,
+            label: "Mass",
+            hint: "Mass for snap-back animation (higher = slower)",
+          },
+          snapTension: {
+            value: 600,
+            min: 0,
+            max: 1000,
+            step: 10,
+            label: "Tension",
+            hint: "Tension for snap-back (higher = snappier)",
+          },
+        }, { collapsed: true }),
+        "Drag Feel": folder({
+          configMass: {
+            value: 0.7,
+            min: 0,
+            max: 10,
+            step: 0.1,
+            label: "Mass",
+            hint: "Mass during drag (higher = heavier feel)",
+          },
+          configTension: {
+            value: 950,
+            min: 0,
+            max: 1000,
+            step: 10,
+            label: "Tension",
+            hint: "Tension during drag (higher = less smooth)",
+          },
+        }, { collapsed: true }),
+      }, { collapsed: true }),
+    }, { collapsed: false }),
   });
 
   return (
