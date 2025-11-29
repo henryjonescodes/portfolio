@@ -21,50 +21,96 @@ const Gizmo = ({ ...rest }: GroupProps) => {
     polarLimit,
     azimuthLimit,
     global,
-  } = useControls({
-    Lights: folder(
-      {
-        dirLightPosition: {
-          value: [5.2, 2.1, 6.5],
-          step: 0.1,
+  } = useControls("3D Scene", {
+    "Lighting": folder({
+      dirLightPosition: {
+        value: [5.2, 2.1, 6.5],
+        step: 0.1,
+        label: "Dir Light Position",
+        hint: "Position of the main directional light (x, y, z)",
+      },
+      dirLightIntensity: {
+        value: 0.4,
+        min: 0,
+        max: 3,
+        step: 0.1,
+        label: "Dir Light Intensity",
+        hint: "Brightness of the main light (creates shadows)",
+      },
+      ambientIntensity: {
+        value: 0.7,
+        min: 0,
+        max: 3,
+        step: 0.1,
+        label: "Ambient Intensity",
+        hint: "Overall scene brightness (no shadows)",
+      },
+    }, { collapsed: false }),
+
+    "Interaction": folder({
+      "Rotation": folder({
+        global: {
+          value: false,
+          label: "Global Rotation",
+          hint: "Enable rotating the entire scene with mouse drag",
         },
-        dirLightIntensity: { value: 0.4, min: 0, max: 3, step: 0.1 },
-        ambientIntensity: { value: 0.7, min: 0, max: 3, step: 0.1 },
-      },
-      { collapsed: true }
-    ),
-    PresentationControls: folder(
-      {
-        global: { value: false },
-        Spring: folder(
-          {
-            snapMass: { value: 2.5, min: 0, max: 10, step: 0.1 },
-            snapTension: { value: 600, min: 0, max: 1000, step: 10 },
-            configMass: { value: 0.7, min: 0, max: 10, step: 0.1 },
-            configTension: { value: 950, min: 0, max: 1000, step: 10 },
+        polarLimit: {
+          value: 32,
+          min: 0,
+          max: 90,
+          step: 1,
+          label: "Vertical Limit (°)",
+          hint: "Max rotation up/down from center",
+        },
+        azimuthLimit: {
+          value: 32,
+          min: 0,
+          max: 90,
+          step: 1,
+          label: "Horizontal Limit (°)",
+          hint: "Max rotation left/right from center",
+        },
+      }, { collapsed: false }),
+
+      "Spring Physics": folder({
+        "Snap Back": folder({
+          snapMass: {
+            value: 2.5,
+            min: 0,
+            max: 10,
+            step: 0.1,
+            label: "Mass",
+            hint: "Mass for snap-back animation (higher = slower)",
           },
-          { collapsed: true }
-        ),
-        Limit: folder(
-          {
-            polarLimit: {
-              value: 32,
-              min: 0,
-              max: 90,
-              step: 1,
-            },
-            azimuthLimit: {
-              value: 32,
-              min: 0,
-              max: 90,
-              step: 1,
-            },
+          snapTension: {
+            value: 600,
+            min: 0,
+            max: 1000,
+            step: 10,
+            label: "Tension",
+            hint: "Tension for snap-back (higher = snappier)",
           },
-          { collapsed: true }
-        ),
-      },
-      { collapsed: true }
-    ),
+        }, { collapsed: true }),
+        "Drag Feel": folder({
+          configMass: {
+            value: 0.7,
+            min: 0,
+            max: 10,
+            step: 0.1,
+            label: "Mass",
+            hint: "Mass during drag (higher = heavier feel)",
+          },
+          configTension: {
+            value: 950,
+            min: 0,
+            max: 1000,
+            step: 10,
+            label: "Tension",
+            hint: "Tension during drag (higher = less smooth)",
+          },
+        }, { collapsed: true }),
+      }, { collapsed: true }),
+    }, { collapsed: false }),
   });
 
   return (
