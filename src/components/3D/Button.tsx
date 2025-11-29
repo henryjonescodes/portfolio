@@ -64,7 +64,7 @@ export function Button({
     if (!isControlled) {
       setInternalOn(true);
     } else {
-      onChange && onChange(true);
+      onChange?.(true);
     }
     if (onPointerDown) {
       onPointerDown(e);
@@ -77,7 +77,7 @@ export function Button({
     if (!isControlled) {
       setInternalOn(false);
     } else {
-      onChange && onChange(false);
+      onChange?.(false);
     }
     // Fire onClick only once when user clicks the button
     if (onClick) {
@@ -102,7 +102,7 @@ export function Button({
       if (!isControlled) {
         setInternalOn(false);
       } else {
-        onChange && onChange(false);
+        onChange?.(false);
       }
     }
     if (onPointerOut) {
