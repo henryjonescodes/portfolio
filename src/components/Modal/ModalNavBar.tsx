@@ -28,7 +28,12 @@ const ModalNavBar = ({
   };
 
   return (
-    <motion.div className={styles.modalNavBar}>
+    <motion.div
+      className={styles.modalNavBar}
+      initial={"initial"}
+      animate={"animate"}
+      exit={"exit"}
+    >
       <AnimatedLine
         className={styles.navbarBorder}
         borderWidth={5}
