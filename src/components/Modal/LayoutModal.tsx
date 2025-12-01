@@ -57,6 +57,7 @@ const LayoutModal = ({
           [styles.modalOverlayExpanded]: isExpanded,
         })}
         style={!isExpanded ? overlayStyle : undefined}
+        onClick={isExpanded ? handleBackdropClick : undefined}
       >
         <motion.div
           layout
@@ -66,37 +67,16 @@ const LayoutModal = ({
             [styles.modalExpanded]: isExpanded,
           })}
           transition={{
-            duration: 0.35,
+            duration: 2.35,
             ease: [0.4, 0, 0.2, 1],
           }}
           role="dialog"
           aria-modal={isExpanded}
           onClick={(e) => e.stopPropagation()}
         >
-          {isExpanded && (
-            <motion.button
-              className={styles.closeButton}
-              onClick={onDismiss}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.2, delay: 0.1 }}
-              aria-label="Close modal"
-            >
-              ×
-            </motion.button>
-          )}
           {children}
         </motion.div>
       </motion.div>
-      {isExpanded && (
-        <motion.div
-          className={styles.modalDismissArea}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2 }}
-          onClick={handleBackdropClick}
-        />
-      )}
     </LayoutGroup>
   );
 };

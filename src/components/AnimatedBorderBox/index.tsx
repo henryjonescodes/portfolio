@@ -60,6 +60,10 @@ const AnimatedBorder = ({
         onAnimationComplete={onAnimationComplete}
         layoutId={layoutId}
         layout
+        transition={{
+          duration: 2.35,
+          ease: [0.4, 0, 0.2, 1],
+        }}
       />
     </motion.svg>
   );

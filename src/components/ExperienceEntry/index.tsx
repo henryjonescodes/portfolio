@@ -115,7 +115,7 @@ const ExperienceEntry = ({
     : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
-  const { openModal, modalState } = useModal();
+  const { openModal, closeModal, modalState } = useModal();
   const entryRef = useRef<HTMLDivElement>(null);
 
   const modalId = `experience-${title.replace(/\s+/g, '-')}`;
@@ -137,6 +137,7 @@ const ExperienceEntry = ({
           isExpanded={modalState.isExpanded}
           modalId={modalId}
           borderWidth={borderWidth}
+          onClose={closeModal}
         />,
         entryRef.current!
       );
@@ -168,7 +169,7 @@ const ExperienceEntry = ({
             </motion.h2>
           )}
           {!!dateRange && (
-            <motion.p layoutId={`${modalId}-date`}>
+            <motion.p layoutId={!url ? `${modalId}-date` : undefined}>
               <TypewriterText text={dateRange} />
             </motion.p>
           )}

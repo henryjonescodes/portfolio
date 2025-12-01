@@ -1,0 +1,115 @@
+@use '@styles' as styles;
+
+.navbarBorder {
+  top: unset !important;
+  transform: translateY(100%);
+  bottom: 0;
+}
+
+.modalNavBar {
+  @include styles.unselectable;
+  position: relative;
+  z-index: 1;
+  height: styles.$height-nav-bar;
+  width: 100%;
+  border-bottom: 5px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contents {
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.left,
+.right,
+.center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.left {
+  grid-column: 1 / 2;
+  justify-content: flex-start;
+}
+
+.center {
+  grid-column: 2 / 3;
+  justify-self: center;
+}
+
+.navTitle {
+  margin: 0;
+  color: var(--accent-primary);
+  font-size: 1rem;
+  font-weight: 400;
+  white-space: nowrap;
+
+  @media (max-width: styles.$width-mobile) {
+    font-size: 0.9rem;
+  }
+}
+
+.right {
+  grid-column: 3 / 4;
+  justify-content: flex-end;
+}
+
+// Close button styling
+.closeButton {
+  position: relative;
+  width: 2.5rem;
+  height: 100%;
+  border: none;
+  border-left: 4px solid var(--foreground-primary);
+  border-right: 4px solid var(--foreground-primary);
+  background: transparent;
+  color: var(--accent-primary);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:focus {
+    outline: 2px solid var(--foreground-primary);
+    outline-offset: -2px;
+  }
+}
+
+// Mobile responsiveness
+@media (max-width: styles.$width-small) {
+  .contents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .left {
+    flex: 0;
+  }
+
+  .center {
+    flex: 1;
+    justify-content: center;
+    padding: 0 16px;
+  }
+
+  .right {
+    flex: 0;
+  }
+}
