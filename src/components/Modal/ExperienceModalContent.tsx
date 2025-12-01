@@ -67,16 +67,16 @@ const ExperienceModalContent = ({
         />
       </motion.svg>
 
-      <ModalNavBar
+      {/* <ModalNavBar
         title={title}
         modalId={modalId}
         isFullscreen={modalState.isFullscreen}
         onClose={onClose}
         onToggleFullscreen={toggleFullscreen}
-      />
+      /> */}
 
       {/* Header - date and subtitle matching entry header structure */}
-      <motion.div className={styles.modalHeader}>
+      {/* <motion.div className={styles.modalHeader}>
         {dateRange && (
           <motion.p
             layoutId={`${modalId}-date`}
@@ -95,7 +95,7 @@ const ExperienceModalContent = ({
             {subtitle}
           </motion.h3>
         )}
-      </motion.div>
+      </motion.div> */}
 
       {/* Content - descriptions and children matching entry box content */}
       <motion.div className={styles.modalContent}>

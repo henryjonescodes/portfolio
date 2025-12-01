@@ -69,8 +69,12 @@ const LayoutModal = ({
             [styles.modalExpanded]: isExpanded && !isFullscreen,
             [styles.modalFullscreen]: isExpanded && isFullscreen,
           })}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isExpanded ? 1 : 0 }}
+          style={{
+            originX: 0,
+            originY: 1,
+          }}
+          initial={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
           transition={{
             duration: 0.35,
             ease: [0.4, 0, 0.2, 1],
