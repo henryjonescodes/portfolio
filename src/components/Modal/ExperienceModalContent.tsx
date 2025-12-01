@@ -25,36 +25,36 @@ const ExperienceModalContent = ({
   borderWidth = 2.5,
 }: ExperienceModalContentProps) => {
   return (
-    <motion.div className={styles.modalContent}>
-      <motion.div className={styles.modalHeader}>
-        <motion.h2
-          layoutId={`${modalId}-title`}
-          className={styles.modalTitle}
-        >
-          {title}
-        </motion.h2>
-        {dateRange && (
-          <motion.p
-            layoutId={`${modalId}-date`}
-            className={styles.modalDate}
+    <AnimatedBorderBox
+      borderWidth={borderWidth}
+      layoutId={`${modalId}-border`}
+      className={styles.modalBorderBox}
+    >
+      <motion.div className={styles.modalContent}>
+        <motion.div className={styles.modalHeader}>
+          <motion.h2
+            layoutId={`${modalId}-title`}
+            className={styles.modalTitle}
           >
-            {dateRange}
-          </motion.p>
-        )}
-        {subtitle && (
-          <motion.h3
-            layoutId={`${modalId}-subtitle`}
-            className={styles.modalSubtitle}
-          >
-            {subtitle}
-          </motion.h3>
-        )}
-      </motion.div>
-      <AnimatedBorderBox
-        borderWidth={borderWidth}
-        layoutId={`${modalId}-border`}
-        className={styles.modalBox}
-      >
+            {title}
+          </motion.h2>
+          {dateRange && (
+            <motion.p
+              layoutId={`${modalId}-date`}
+              className={styles.modalDate}
+            >
+              {dateRange}
+            </motion.p>
+          )}
+          {subtitle && (
+            <motion.h3
+              layoutId={`${modalId}-subtitle`}
+              className={styles.modalSubtitle}
+            >
+              {subtitle}
+            </motion.h3>
+          )}
+        </motion.div>
         <motion.div className={styles.modalBody}>
           {description.map((desc, index) => (
             <motion.p
@@ -71,8 +71,8 @@ const ExperienceModalContent = ({
             {children}
           </motion.div>
         )}
-      </AnimatedBorderBox>
-    </motion.div>
+      </motion.div>
+    </AnimatedBorderBox>
   );
 };
 

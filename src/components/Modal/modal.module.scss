@@ -56,6 +56,12 @@
   opacity: 1;
 }
 
+// Border box wrapper (AnimatedBorderBox at modal root)
+.modalBorderBox {
+  width: 100%;
+  height: 100%;
+}
+
 // Content wrapper for modal
 .modalContent {
   padding: 2rem;
@@ -95,11 +101,6 @@
   @media (max-width: $width-mobile) {
     font-size: 1.1rem;
   }
-}
-
-// Modal box (AnimatedBorderBox container)
-.modalBox {
-  margin-top: 1.5rem;
 }
 
 // Modal body styling
