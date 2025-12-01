@@ -69,10 +69,12 @@ const LayoutModal = ({
             [styles.modalExpanded]: isExpanded && !isFullscreen,
             [styles.modalFullscreen]: isExpanded && isFullscreen,
           })}
-          // transition={{
-          //   duration: 2.35,
-          //   ease: [0.4, 0, 0.2, 1],
-          // }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: isExpanded ? 1 : 0 }}
+          transition={{
+            duration: 0.35,
+            ease: [0.4, 0, 0.2, 1],
+          }}
           role="dialog"
           aria-modal={isExpanded}
           onClick={(e) => e.stopPropagation()}

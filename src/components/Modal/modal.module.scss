@@ -48,7 +48,7 @@
 .modalCollapsed {
   // Inherits source element size via overlayStyle
   pointer-events: none;
-  opacity: 0;
+  // Keep opacity:1 during animation, Framer Motion will handle the transition
 }
 
 .modalExpanded {
