@@ -29,6 +29,13 @@ const ExperienceModalContent = ({
   onClose,
 }: ExperienceModalContentProps) => {
   const { modalState, toggleFullscreen } = useModal();
+
+  // Shared transition config for all layout animations
+  const layoutTransition = {
+    duration: 0.35,
+    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
+  };
+
   return (
     <motion.div className={styles.modalWrapper}>
       {/* Absolute border SVG wrapping entire modal */}
@@ -56,10 +63,7 @@ const ExperienceModalContent = ({
           stroke="var(--foreground-primary)"
           layoutId={`${modalId}-border`}
           layout
-          // transition={{
-          //   duration: 2.35,
-          //   ease: [0.4, 0, 0.2, 1],
-          // }}
+          transition={layoutTransition}
         />
       </motion.svg>
 
@@ -74,7 +78,11 @@ const ExperienceModalContent = ({
       {/* Header - date and subtitle matching entry header structure */}
       <motion.div className={styles.modalHeader}>
         {dateRange && (
-          <motion.p layoutId={`${modalId}-date`} className={styles.modalDate}>
+          <motion.p
+            layoutId={`${modalId}-date`}
+            className={styles.modalDate}
+            transition={layoutTransition}
+          >
             {dateRange}
           </motion.p>
         )}
@@ -82,6 +90,7 @@ const ExperienceModalContent = ({
           <motion.h3
             layoutId={`${modalId}-subtitle`}
             className={styles.modalSubtitle}
+            transition={layoutTransition}
           >
             {subtitle}
           </motion.h3>
@@ -95,6 +104,7 @@ const ExperienceModalContent = ({
             key={index}
             layoutId={`${modalId}-desc-${index}`}
             className={styles.modalDescription}
+            transition={layoutTransition}
           >
             {desc}
           </motion.p>
@@ -103,6 +113,7 @@ const ExperienceModalContent = ({
           <motion.div
             layoutId={`${modalId}-children`}
             className={styles.modalChildren}
+            transition={layoutTransition}
           >
             {children}
           </motion.div>

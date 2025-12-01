@@ -21,6 +21,12 @@ const ModalNavBar = ({
   onClose,
   onToggleFullscreen,
 }: ModalNavBarProps) => {
+  // Shared transition config matching ExperienceModalContent
+  const layoutTransition = {
+    duration: 0.35,
+    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
+  };
+
   return (
     <motion.div className={styles.modalNavBar}>
       <AnimatedLine
@@ -38,10 +44,7 @@ const ModalNavBar = ({
           <motion.h2
             layoutId={`${modalId}-title`}
             className={styles.navTitle}
-            // transition={{
-            //   duration: 2.35,
-            //   ease: [0.4, 0, 0.2, 1],
-            // }}
+            transition={layoutTransition}
           >
             {title}
           </motion.h2>
