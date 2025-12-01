@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 import { useLoading } from "@context/LoadingContext";
 import { useZoom } from "@context/ZoomContext";
 import { useAnimations } from "@context/AnimationContext";
+import { ModalProvider } from "@context/ModalContext";
 
 import styles from "./page.module.scss";
 
@@ -25,6 +26,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   const pathSegments = location.pathname.split("/").filter(Boolean);
   const page = pathSegments[0];
 
+  const pageRef = useRef<HTMLDivElement | null>(null);
   const contentRef = useRef<HTMLDivElement | null>(null);
   const { firstPageLoad, setFirstPageLoad } = useLoading();
 
@@ -69,52 +71,56 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   }, [page]);
 
   return (
-    <PageProvider embedded={embedded}>
-      <AnimatePresence>
-        <motion.div
-          key={"page"}
-          className={cn(styles.page, {
-            [styles.pageHandheld]: embedded,
-            [styles.pageDisabled]: zoomLevel === "info",
-          })}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={pageVariants}
-          onAnimationComplete={(definition) => {
-            if (definition === "animate" && firstPageLoad) {
-              setFirstPageLoad(false);
-            }
-          }}
-        >
-          <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
-          <Suspense fallback={null}>
-            <LazyNavBar page={page} />
-          </Suspense>
+    <PageProvider embedded={embedded} pageRef={pageRef}>
+      <ModalProvider>
+        <AnimatePresence>
           <motion.div
-            className={cn(styles.content, {
-              [styles.contentFullScreen]: !embedded,
+            key={"page"}
+            ref={pageRef}
+            className={cn(styles.page, {
+              [styles.pageHandheld]: embedded,
+              [styles.pageDisabled]: zoomLevel === "info",
             })}
-            key="pageContent"
+            initial="initial"
+            animate="animate"
+            exit="exit"
             variants={pageVariants}
-            ref={contentRef}
+            onAnimationComplete={(definition) => {
+              if (definition === "animate" && firstPageLoad) {
+                setFirstPageLoad(false);
+              }
+            }}
           >
-            <motion.div className={styles.contentInner}>
-              <AnimatePresence mode="wait">
-                <Suspense fallback={null}>
-                  <LazyAnimatedOutlet key={page} />
-                </Suspense>
-              </AnimatePresence>
+            <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
+            <Suspense fallback={null}>
+              <LazyNavBar page={page} />
+            </Suspense>
+            <motion.div
+              className={cn(styles.content, {
+                [styles.contentFullScreen]: !embedded,
+              })}
+              key="pageContent"
+              variants={pageVariants}
+              ref={contentRef}
+            >
+              <motion.div className={styles.contentInner}>
+                <AnimatePresence mode="wait">
+                  <Suspense fallback={null}>
+                    <LazyAnimatedOutlet key={page} />
+                  </Suspense>
+                </AnimatePresence>
+              </motion.div>
             </motion.div>
           </motion.div>
-        </motion.div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </ModalProvider>
     </PageProvider>
   );
 };
 
 interface PageContextType {
   embedded?: boolean;
+  pageRef: React.RefObject<HTMLDivElement>;
 }
 
 const PageContext = createContext<PageContextType | undefined>(undefined);
@@ -122,12 +128,16 @@ const PageContext = createContext<PageContextType | undefined>(undefined);
 export const PageProvider = ({
   children,
   embedded,
+  pageRef,
 }: {
   children: ReactNode;
   embedded?: boolean;
+  pageRef: React.RefObject<HTMLDivElement>;
 }) => {
   return (
-    <PageContext.Provider value={{ embedded }}>{children}</PageContext.Provider>
+    <PageContext.Provider value={{ embedded, pageRef }}>
+      {children}
+    </PageContext.Provider>
   );
 };
 

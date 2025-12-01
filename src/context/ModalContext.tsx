@@ -6,6 +6,7 @@ import React, {
   ReactNode,
 } from "react";
 import LayoutModal from "@components/Modal/LayoutModal";
+import { usePage } from "@components/Page";
 
 type ModalState = {
   modalId: string | null;
@@ -36,6 +37,7 @@ export const useModal = () => {
 };
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
+  const { pageRef } = usePage();
   const [modalState, setModalState] = useState<ModalState>({
     modalId: null,
     isExpanded: false,
@@ -51,26 +53,31 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
       scrollParent?: HTMLElement | null
     ) => {
       // Stage 1: Calculate position (0ms)
-      const rect = sourceElement.getBoundingClientRect();
+      const sourceRect = sourceElement.getBoundingClientRect();
+      const containerRect = pageRef.current?.getBoundingClientRect();
 
       let overlayStyle: React.CSSProperties;
 
-      if (scrollParent) {
-        const parentRect = scrollParent.getBoundingClientRect();
+      if (containerRect) {
+        // Convert viewport coordinates to container-relative coordinates
+        const scrollTop = scrollParent?.scrollTop || 0;
+        const scrollLeft = scrollParent?.scrollLeft || 0;
+
         overlayStyle = {
-          top: rect.top - parentRect.top + scrollParent.scrollTop,
-          left: rect.left - parentRect.left + scrollParent.scrollLeft,
-          width: rect.width,
-          height: rect.height,
+          top: sourceRect.top - containerRect.top + scrollTop,
+          left: sourceRect.left - containerRect.left + scrollLeft,
+          width: sourceRect.width,
+          height: sourceRect.height,
           position: "absolute" as const,
         };
       } else {
+        // Fallback: use viewport coordinates if container not available
         overlayStyle = {
-          top: rect.top,
-          left: rect.left,
-          width: rect.width,
-          height: rect.height,
-          position: "fixed" as const,
+          top: sourceRect.top,
+          left: sourceRect.left,
+          width: sourceRect.width,
+          height: sourceRect.height,
+          position: "absolute" as const,
         };
       }
 
@@ -90,7 +97,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
         }));
       }, 10);
     },
-    []
+    [pageRef]
   );
 
   const closeModal = useCallback(() => {

@@ -73,6 +73,18 @@ const LayoutModal = ({
           aria-modal={isExpanded}
           onClick={(e) => e.stopPropagation()}
         >
+          {isExpanded && (
+            <motion.button
+              className={styles.closeButton}
+              onClick={onDismiss}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2, delay: 0.1 }}
+              aria-label="Close modal"
+            >
+              ×
+            </motion.button>
+          )}
           {children}
         </motion.div>
       </motion.div>

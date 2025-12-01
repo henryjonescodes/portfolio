@@ -6,7 +6,6 @@ import { ZoomProvider } from "./ZoomContext";
 import { ColorsProvider } from "./ColorsContext";
 import { InteractionProvider } from "./InteractionContext";
 import { AnimationProvider } from "./AnimationContext";
-import { ModalProvider } from "./ModalContext";
 
 /**
  * Application context providers in dependency order.
@@ -20,7 +19,6 @@ import { ModalProvider } from "./ModalContext";
  *             └── ZoomProvider (uses: useLoading, useSettings, useWindowDimensions)
  *                 └── ColorsProvider (uses: useSettings)
  *                     └── InteractionProvider (no deps)
- *                         └── ModalProvider (no deps)
  *
  * Context Dependencies Explained:
  * - WindowDimensionProvider: Provides screen size and responsive zoom positions
@@ -30,7 +28,6 @@ import { ModalProvider } from "./ModalContext";
  * - ZoomProvider: Controls camera zoom levels (depends on loading, settings, dimensions)
  * - ColorsProvider: Manages dynamic color theming (depends on settings for debug logging)
  * - InteractionProvider: Tracks active 3D objects (no dependencies)
- * - ModalProvider: Manages modal state and animations (no dependencies)
  *
  * Important Notes:
  * - Providers must be in this exact order due to hook dependencies
@@ -48,9 +45,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
             <ZoomProvider>
               <ColorsProvider>
                 <InteractionProvider>
-                  <ModalProvider>
-                    {children}
-                  </ModalProvider>
+                  {children}
                 </InteractionProvider>
               </ColorsProvider>
             </ZoomProvider>
