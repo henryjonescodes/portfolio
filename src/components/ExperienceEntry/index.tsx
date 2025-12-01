@@ -130,9 +130,13 @@ const ExperienceEntry = ({
         modalId,
         <ExperienceModalContent
           title={title}
+          subtitle={subtitle}
           dateRange={dateRange}
+          description={description}
+          children={children}
           isExpanded={modalState.isExpanded}
           modalId={modalId}
+          borderWidth={borderWidth}
         />,
         entryRef.current!
       );
@@ -178,7 +182,7 @@ const ExperienceEntry = ({
               },
             }}
           >
-            <motion.h3>
+            <motion.h3 layoutId={`${modalId}-subtitle`}>
               <TypewriterText text={subtitle} />
             </motion.h3>
           </motion.div>
@@ -191,13 +195,14 @@ const ExperienceEntry = ({
         borderWidth={borderWidth}
         onClick={!url ? handleBoxClick : undefined}
         style={!url ? { cursor: "pointer" } : undefined}
+        layoutId={!url ? `${modalId}-border` : undefined}
       >
         <motion.div
           className={styles.descriptionWrapper}
           variants={entryTextVariants}
         >
           {description.map((desc, index) => (
-            <motion.p key={index}>
+            <motion.p key={index} layoutId={!url ? `${modalId}-desc-${index}` : undefined}>
               <TypewriterText text={desc} />
             </motion.p>
           ))}
@@ -227,7 +232,9 @@ const ExperienceEntry = ({
                 {children}
               </motion.div>
             ) : (
-              <motion.div className={styles.children}>{children}</motion.div>
+              <motion.div className={styles.children} layoutId={`${modalId}-children`}>
+                {children}
+              </motion.div>
             )}
           </motion.div>
         )}

@@ -1,19 +1,28 @@
 import { motion } from "framer-motion";
 import React from "react";
+import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import styles from "./modal.module.scss";
 
 type ExperienceModalContentProps = {
   title: string;
+  subtitle?: string;
   dateRange: string | null;
+  description: string[];
+  children?: React.ReactNode;
   isExpanded: boolean;
   modalId: string;
+  borderWidth?: number;
 };
 
 const ExperienceModalContent = ({
   title,
+  subtitle,
   dateRange,
+  description,
+  children,
   isExpanded,
   modalId,
+  borderWidth = 2.5,
 }: ExperienceModalContentProps) => {
   return (
     <motion.div className={styles.modalContent}>
@@ -32,17 +41,37 @@ const ExperienceModalContent = ({
             {dateRange}
           </motion.p>
         )}
+        {subtitle && (
+          <motion.h3
+            layoutId={`${modalId}-subtitle`}
+            className={styles.modalSubtitle}
+          >
+            {subtitle}
+          </motion.h3>
+        )}
       </motion.div>
-      {isExpanded && (
-        <motion.div
-          className={styles.modalBody}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.2, delay: 0.15 }}
-        >
-          {/* Future: Add description and other content here */}
+      <AnimatedBorderBox
+        borderWidth={borderWidth}
+        layoutId={`${modalId}-border`}
+        className={styles.modalBox}
+      >
+        <motion.div className={styles.modalBody}>
+          {description.map((desc, index) => (
+            <motion.p
+              key={index}
+              layoutId={`${modalId}-desc-${index}`}
+              className={styles.modalDescription}
+            >
+              {desc}
+            </motion.p>
+          ))}
         </motion.div>
-      )}
+        {children && (
+          <motion.div layoutId={`${modalId}-children`} className={styles.modalChildren}>
+            {children}
+          </motion.div>
+        )}
+      </AnimatedBorderBox>
     </motion.div>
   );
 };

@@ -10,6 +10,7 @@ interface AnimatedBorderProps {
   borderWidth: number;
   borderRadius?: number;
   onAnimationComplete?: () => void;
+  layoutId?: string;
 }
 
 const pathVariants = {
@@ -36,6 +37,7 @@ const AnimatedBorder = ({
   borderWidth,
   borderRadius = 20,
   onAnimationComplete,
+  layoutId,
 }: AnimatedBorderProps) => {
   return (
     <motion.svg
@@ -56,6 +58,8 @@ const AnimatedBorder = ({
         strokeWidth={borderWidth}
         variants={pathVariants}
         onAnimationComplete={onAnimationComplete}
+        layoutId={layoutId}
+        layout
       />
     </motion.svg>
   );
@@ -69,6 +73,7 @@ interface AnimatedBorderBoxProps {
   children?: ReactNode;
   onClick?: (e: React.MouseEvent) => void;
   style?: React.CSSProperties;
+  layoutId?: string;
 }
 
 // TODO: Add a speed control prop for animation
@@ -82,6 +87,7 @@ const AnimatedBorderBox = forwardRef<HTMLDivElement, AnimatedBorderBoxProps>(
       borderRadius = 20,
       onClick,
       style,
+      layoutId,
     },
     ref
   ) => {
@@ -139,6 +145,7 @@ const AnimatedBorderBox = forwardRef<HTMLDivElement, AnimatedBorderBoxProps>(
           borderWidth={borderWidth}
           borderRadius={borderRadius}
           onAnimationComplete={() => setCssBorderVisible(true)}
+          layoutId={layoutId}
         />
         {/* )} */}
         {/* <motion.div
