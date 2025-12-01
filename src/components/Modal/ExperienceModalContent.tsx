@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import ModalNavBar from "./ModalNavBar";
+import { useModal } from "@context/ModalContext";
 import styles from "./modal.module.scss";
 
 type ExperienceModalContentProps = {
@@ -27,6 +28,7 @@ const ExperienceModalContent = ({
   borderWidth = 2.5,
   onClose,
 }: ExperienceModalContentProps) => {
+  const { modalState, toggleFullscreen } = useModal();
   return (
     <motion.div className={styles.modalWrapper}>
       {/* Absolute border SVG wrapping entire modal */}
@@ -54,26 +56,25 @@ const ExperienceModalContent = ({
           stroke="var(--foreground-primary)"
           layoutId={`${modalId}-border`}
           layout
-          transition={{
-            duration: 2.35,
-            ease: [0.4, 0, 0.2, 1],
-          }}
+          // transition={{
+          //   duration: 2.35,
+          //   ease: [0.4, 0, 0.2, 1],
+          // }}
         />
       </motion.svg>
 
-      {/* <ModalNavBar title={title} modalId={modalId} onClose={onClose} /> */}
+      <ModalNavBar
+        title={title}
+        modalId={modalId}
+        isFullscreen={modalState.isFullscreen}
+        onClose={onClose}
+        onToggleFullscreen={toggleFullscreen}
+      />
 
-      {/* Content */}
+      {/* Header - date and subtitle matching entry header structure */}
       <motion.div className={styles.modalHeader}>
         {dateRange && (
-          <motion.p
-            layoutId={`${modalId}-date`}
-            className={styles.modalDate}
-            transition={{
-              duration: 2.35,
-              ease: [0.4, 0, 0.2, 1],
-            }}
-          >
+          <motion.p layoutId={`${modalId}-date`} className={styles.modalDate}>
             {dateRange}
           </motion.p>
         )}
@@ -81,26 +82,19 @@ const ExperienceModalContent = ({
           <motion.h3
             layoutId={`${modalId}-subtitle`}
             className={styles.modalSubtitle}
-            transition={{
-              duration: 2.35,
-              ease: [0.4, 0, 0.2, 1],
-            }}
           >
             {subtitle}
           </motion.h3>
         )}
       </motion.div>
 
+      {/* Content - descriptions and children matching entry box content */}
       <motion.div className={styles.modalContent}>
         {description.map((desc, index) => (
           <motion.p
             key={index}
             layoutId={`${modalId}-desc-${index}`}
             className={styles.modalDescription}
-            transition={{
-              duration: 2.35,
-              ease: [0.4, 0, 0.2, 1],
-            }}
           >
             {desc}
           </motion.p>
@@ -109,10 +103,6 @@ const ExperienceModalContent = ({
           <motion.div
             layoutId={`${modalId}-children`}
             className={styles.modalChildren}
-            transition={{
-              duration: 2.35,
-              ease: [0.4, 0, 0.2, 1],
-            }}
           >
             {children}
           </motion.div>

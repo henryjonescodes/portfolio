@@ -6,6 +6,7 @@ import cn from "classnames";
 type LayoutModalProps = {
   modalId: string;
   isExpanded: boolean;
+  isFullscreen: boolean;
   overlayStyle: React.CSSProperties;
   onDismiss: () => void;
   children: ReactNode;
@@ -14,6 +15,7 @@ type LayoutModalProps = {
 const LayoutModal = ({
   modalId,
   isExpanded,
+  isFullscreen,
   overlayStyle,
   onDismiss,
   children,
@@ -64,12 +66,13 @@ const LayoutModal = ({
           layoutId={modalId}
           className={cn(styles.modal, {
             [styles.modalCollapsed]: !isExpanded,
-            [styles.modalExpanded]: isExpanded,
+            [styles.modalExpanded]: isExpanded && !isFullscreen,
+            [styles.modalFullscreen]: isExpanded && isFullscreen,
           })}
-          transition={{
-            duration: 2.35,
-            ease: [0.4, 0, 0.2, 1],
-          }}
+          // transition={{
+          //   duration: 2.35,
+          //   ease: [0.4, 0, 0.2, 1],
+          // }}
           role="dialog"
           aria-modal={isExpanded}
           onClick={(e) => e.stopPropagation()}

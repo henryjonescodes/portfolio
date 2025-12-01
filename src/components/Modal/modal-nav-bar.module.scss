@@ -9,7 +9,7 @@
 .modalNavBar {
   @include styles.unselectable;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   height: styles.$height-nav-bar;
   width: 100%;
   border-bottom: 5px solid transparent;
@@ -61,6 +61,16 @@
 .right {
   grid-column: 3 / 4;
   justify-content: flex-end;
+
+  // Apply left border to all direct children (buttons)
+  > * {
+    border-left: 4px solid var(--foreground-primary);
+  }
+
+  // Apply right border only to last child
+  > *:last-child {
+    border-right: 4px solid var(--foreground-primary);
+  }
 }
 
 // Close button styling
@@ -69,8 +79,6 @@
   width: 2.5rem;
   height: 100%;
   border: none;
-  border-left: 4px solid var(--foreground-primary);
-  border-right: 4px solid var(--foreground-primary);
   background: transparent;
   color: var(--accent-primary);
   font-size: 2rem;

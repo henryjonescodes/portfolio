@@ -170,7 +170,7 @@ const ExperienceEntry = ({
           )}
           {!!dateRange && (
             <motion.p layoutId={!url ? `${modalId}-date` : undefined}>
-              <TypewriterText text={dateRange} />
+              {dateRange}
             </motion.p>
           )}
         </motion.div>

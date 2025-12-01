@@ -11,6 +11,7 @@ import { usePage } from "@components/Page";
 type ModalState = {
   modalId: string | null;
   isExpanded: boolean;
+  isFullscreen: boolean;
   overlayStyle: React.CSSProperties | null;
   content: React.ReactNode | null;
 };
@@ -24,6 +25,7 @@ type ModalContextType = {
     scrollParent?: HTMLElement | null
   ) => void;
   closeModal: () => void;
+  toggleFullscreen: () => void;
 };
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -41,6 +43,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [modalState, setModalState] = useState<ModalState>({
     modalId: null,
     isExpanded: false,
+    isFullscreen: false,
     overlayStyle: null,
     content: null,
   });
@@ -85,6 +88,7 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
       setModalState({
         modalId: id,
         isExpanded: false,
+        isFullscreen: false,
         overlayStyle,
         content,
       });
@@ -112,19 +116,28 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
       setModalState({
         modalId: null,
         isExpanded: false,
+        isFullscreen: false,
         overlayStyle: null,
         content: null,
       });
     }, 450);
   }, []);
 
+  const toggleFullscreen = useCallback(() => {
+    setModalState((prev) => ({
+      ...prev,
+      isFullscreen: !prev.isFullscreen,
+    }));
+  }, []);
+
   return (
-    <ModalContext.Provider value={{ modalState, openModal, closeModal }}>
+    <ModalContext.Provider value={{ modalState, openModal, closeModal, toggleFullscreen }}>
       {children}
       {modalState.modalId && modalState.overlayStyle && (
         <LayoutModal
           modalId={modalState.modalId}
           isExpanded={modalState.isExpanded}
+          isFullscreen={modalState.isFullscreen}
           overlayStyle={modalState.overlayStyle}
           onDismiss={closeModal}
         >
