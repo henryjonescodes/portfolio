@@ -1,14 +1,16 @@
 import cn from "classnames";
-import { motion } from "framer-motion";
+import { motion, LayoutGroup } from "framer-motion";
 import React, { useRef } from "react";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 import { widthMobile } from "@styles/layout.constants.ts";
 import TypewriterText from "@components/TypewriterText";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import AnimatedLine from "@components/AnimatedLine";
+import NavBarButton from "@components/NavBar/NavBarButton";
+import Expand from "@assets/svg/icons/expand.svg?react";
+import Compress from "@assets/svg/icons/handheld.svg?react";
 import styles from "./experience-entry.module.scss";
 import { useModal } from "@context/ModalContext";
-import ExperienceModalContent from "@components/Modal/ExperienceModalContent";
 
 import { usePage } from "@components/Page";
 
@@ -54,6 +56,8 @@ type ExperienceEntryProps = {
   description: string[];
   borderWidth?: number;
   children?: React.ReactNode;
+  isExpanded?: boolean; // New prop for modal mode
+  onClose?: () => void; // For closing modal
 } & (
   | {
       url?: string;
@@ -109,35 +113,44 @@ const ExperienceEntry = ({
   dateString,
   url,
   onClick,
+  isExpanded = false,
+  onClose,
 }: ExperienceEntryProps) => {
   const dateRange = dateString
     ? dateString
     : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
-  const { openModal, closeModal, modalState } = useModal();
+  const { openModal, closeModal, modalState, toggleFullscreen } = useModal();
   const entryRef = useRef<HTMLDivElement>(null);
 
   const modalId = `experience-${title.replace(/\s+/g, '-')}`;
+
+  // Shared transition config for all layout animations
+  const layoutTransition = {
+    duration: 0.35,
+    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
+  };
 
   const handleBoxClick = (e: React.MouseEvent) => {
     // Only open modal if onClick is provided and we're not clicking a link
     if (onClick && !url) {
       onClick();
-    } else if (!url && !onClick) {
-      // Open modal for viewing details - use entire entry as source
+    } else if (!url && !onClick && !isExpanded) {
+      // Open modal for viewing details - render same component in expanded mode
       openModal(
         modalId,
-        <ExperienceModalContent
+        <ExperienceEntry
           title={title}
           subtitle={subtitle}
-          dateRange={dateRange}
           description={description}
           children={children}
-          isExpanded={modalState.isExpanded}
-          modalId={modalId}
-          borderWidth={borderWidth}
+          isExpanded={true}
           onClose={closeModal}
+          borderWidth={borderWidth}
+          startDate={startDate}
+          endDate={endDate}
+          dateString={dateString}
         />,
         entryRef.current!
       );
@@ -145,32 +158,77 @@ const ExperienceEntry = ({
   };
 
   return (
-    <motion.div
-      ref={entryRef}
-      className={cn(styles.entry, {
-        [styles.fullScreen]: !embedded,
-      })}
-    >
+    <LayoutGroup id={modalId}>
+      <motion.div
+        ref={entryRef}
+        layout
+        layoutId={modalId}
+        className={cn(styles.entry, {
+          [styles.fullScreen]: !embedded,
+          [styles.modal]: isExpanded,
+        })}
+        transition={layoutTransition}
+        style={{
+          originX: 0,
+          originY: 1,
+        }}
+      >
+        {/* Navbar for expanded mode */}
+        {isExpanded && (
+          <motion.div className={styles.modalNavbar}>
+            <motion.div className={styles.navContents}>
+              <motion.div className={styles.navLeft} />
+              <motion.div className={styles.navCenter}>
+                <motion.h2
+                  layoutId={`${modalId}-title`}
+                  className={styles.navTitle}
+                  transition={layoutTransition}
+                >
+                  {title}
+                </motion.h2>
+              </motion.div>
+              <motion.div className={styles.navRight}>
+                <NavBarButton
+                  onClick={toggleFullscreen}
+                  active={modalState.isFullscreen}
+                  Icon={Expand}
+                  ActiveIcon={Compress}
+                />
+                <motion.button
+                  className={styles.closeButton}
+                  onClick={onClose}
+                  aria-label="Close modal"
+                >
+                  ×
+                </motion.button>
+              </motion.div>
+            </motion.div>
+          </motion.div>
+        )}
+
       <motion.span className={styles.header}>
         <motion.div className={styles.title}>
-          {url ? (
-            <motion.h2>
-              <a href={url} target="_blank" className={styles.linkText}>
+          {/* Only show title in header when not expanded (it moves to navbar when expanded) */}
+          {!isExpanded && (
+            url ? (
+              <motion.h2>
+                <a href={url} target="_blank" className={styles.linkText}>
+                  <TypewriterText text={title} />
+                </a>
+              </motion.h2>
+            ) : onClick ? (
+              <motion.h2 onClick={onClick} className={styles.linkText}>
                 <TypewriterText text={title} />
-              </a>
-            </motion.h2>
-          ) : onClick ? (
-            <motion.h2 onClick={onClick} className={styles.linkText}>
-              <TypewriterText text={title} />
-            </motion.h2>
-          ) : (
-            <motion.h2 layoutId={`${modalId}-title`}>
-              <TypewriterText text={title} />
-            </motion.h2>
+              </motion.h2>
+            ) : (
+              <motion.h2 layoutId={`${modalId}-title`} transition={layoutTransition}>
+                <TypewriterText text={title} />
+              </motion.h2>
+            )
           )}
           {!!dateRange && (
-            <motion.p layoutId={!url ? `${modalId}-date` : undefined}>
-              {dateRange}
+            <motion.p layoutId={!url ? `${modalId}-date` : undefined} transition={layoutTransition}>
+              {isExpanded ? dateRange : <TypewriterText text={dateRange} />}
             </motion.p>
           )}
         </motion.div>
@@ -179,12 +237,12 @@ const ExperienceEntry = ({
             className={styles.subtitle}
             animate={{
               transition: {
-                delay: 0.5,
+                delay: isExpanded ? 0 : 0.5,
               },
             }}
           >
-            <motion.h3 layoutId={`${modalId}-subtitle`}>
-              <TypewriterText text={subtitle} />
+            <motion.h3 layoutId={`${modalId}-subtitle`} transition={layoutTransition}>
+              {isExpanded ? subtitle : <TypewriterText text={subtitle} />}
             </motion.h3>
           </motion.div>
         )}
@@ -203,8 +261,12 @@ const ExperienceEntry = ({
           variants={entryTextVariants}
         >
           {description.map((desc, index) => (
-            <motion.p key={index} layoutId={!url ? `${modalId}-desc-${index}` : undefined}>
-              <TypewriterText text={desc} />
+            <motion.p
+              key={index}
+              layoutId={!url ? `${modalId}-desc-${index}` : undefined}
+              transition={layoutTransition}
+            >
+              {isExpanded ? desc : <TypewriterText text={desc} />}
             </motion.p>
           ))}
         </motion.div>
@@ -233,14 +295,19 @@ const ExperienceEntry = ({
                 {children}
               </motion.div>
             ) : (
-              <motion.div className={styles.children} layoutId={`${modalId}-children`}>
+              <motion.div
+                className={styles.children}
+                layoutId={`${modalId}-children`}
+                transition={layoutTransition}
+              >
                 {children}
               </motion.div>
             )}
           </motion.div>
         )}
       </AnimatedBorderBox>
-    </motion.div>
+      </motion.div>
+    </LayoutGroup>
   );
 };
 

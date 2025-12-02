@@ -53,40 +53,15 @@ const LayoutModal = ({
   };
 
   return (
-    <LayoutGroup id={modalId}>
-      <motion.div
-        className={cn(styles.modalOverlay, {
-          [styles.modalOverlayExpanded]: isExpanded,
-        })}
-        style={!isExpanded ? overlayStyle : undefined}
-        onClick={isExpanded ? handleBackdropClick : undefined}
-      >
-        <motion.div
-          layout
-          layoutId={modalId}
-          className={cn(styles.modal, {
-            [styles.modalCollapsed]: !isExpanded,
-            [styles.modalExpanded]: isExpanded && !isFullscreen,
-            [styles.modalFullscreen]: isExpanded && isFullscreen,
-          })}
-          style={{
-            originX: 0,
-            originY: 1,
-          }}
-          initial={{ opacity: 1 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 0.35,
-            ease: [0.4, 0, 0.2, 1],
-          }}
-          role="dialog"
-          aria-modal={isExpanded}
-          onClick={(e) => e.stopPropagation()}
-        >
-          {children}
-        </motion.div>
-      </motion.div>
-    </LayoutGroup>
+    <motion.div
+      className={cn(styles.modalOverlay, {
+        [styles.modalOverlayExpanded]: isExpanded,
+      })}
+      style={!isExpanded ? overlayStyle : undefined}
+      onClick={isExpanded ? handleBackdropClick : undefined}
+    >
+      {children}
+    </motion.div>
   );
 };
 
