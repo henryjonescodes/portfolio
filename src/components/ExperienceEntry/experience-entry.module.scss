@@ -25,13 +25,23 @@
       align-items: center;
       width: 100%;
 
+      h2 {
+        color: styles.$foreground-primary;
+        color: var(--foreground-primary);
+      }
+
       p {
         color: styles.$accent-secondary;
         color: var(--accent-secondary);
       }
     }
 
-    .subtitle {}
+    .subtitle {
+      h3 {
+        color: styles.$accent-secondary;
+        color: var(--accent-secondary);
+      }
+    }
   }
 
   .box {
@@ -53,6 +63,11 @@
     flex-direction: column;
     gap: 8px;
     padding: 16px;
+
+    p {
+      color: styles.$foreground-tertiary;
+      color: var(--foreground-tertiary);
+    }
   }
 
   .childrenWrapper {
@@ -107,10 +122,9 @@
   width: 600px;
   max-width: 90%;
   max-height: 80%;
-  overflow: hidden;
-  // background-color: var(--background-primary);
-  // border-radius: 16px;
-  // box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  // color: var(--foreground-primary);
+  // overflow: hidden;
+
 
   // Animated background
   &::before {

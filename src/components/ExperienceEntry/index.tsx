@@ -60,26 +60,16 @@ type ExperienceEntryProps = {
   onClose?: () => void; // For closing modal
 } & (
   | {
-      url?: string;
-      onClick?: never;
+      dateString?: string;
+      startDate?: never;
+      endDate?: never;
     }
   | {
-      onClick?: () => void;
-      url?: never;
+      startDate?: Date;
+      endDate?: Date;
+      dateString?: never;
     }
-) &
-  (
-    | {
-        dateString?: string;
-        startDate?: never;
-        endDate?: never;
-      }
-    | {
-        startDate?: Date;
-        endDate?: Date;
-        dateString?: never;
-      }
-  );
+);
 
 // Animation variants
 const entryTextVariants = {
@@ -111,8 +101,6 @@ const ExperienceEntry = ({
   borderWidth = 2.5,
   children,
   dateString,
-  url,
-  onClick,
   isExpanded = false,
   onClose,
 }: ExperienceEntryProps) => {
@@ -134,10 +122,7 @@ const ExperienceEntry = ({
   };
 
   const handleBoxClick = (e: React.MouseEvent) => {
-    // Only open modal if onClick is provided and we're not clicking a link
-    if (onClick && !url) {
-      onClick();
-    } else if (!url && !onClick && !isExpanded) {
+    if (!isExpanded) {
       // Open modal for viewing details - render same component in expanded mode
       openModal(
         modalId,
@@ -209,32 +194,18 @@ const ExperienceEntry = ({
 
         <motion.span className={styles.header}>
           <motion.div className={styles.title}>
-            {/* Only show title in header when not expanded (it moves to navbar when expanded) */}
-            {!isExpanded &&
-              (url ? (
-                <motion.h2>
-                  <a href={url} target="_blank" className={styles.linkText}>
-                    <TypewriterText text={title} />
-                  </a>
-                </motion.h2>
-              ) : onClick ? (
-                <motion.h2 onClick={onClick} className={styles.linkText}>
-                  <TypewriterText text={title} />
-                </motion.h2>
-              ) : (
-                <motion.h2
-                  layoutId={`${modalId}-title`}
-                  transition={layoutTransition}
-                >
-                  <TypewriterText text={title} />
-                </motion.h2>
-              ))}
+            <motion.h2
+              layoutId={`${modalId}-title`}
+              transition={layoutTransition}
+            >
+              <TypewriterText text={title} />
+            </motion.h2>
             {!!dateRange && (
               <motion.p
-                layoutId={!url ? `${modalId}-date` : undefined}
+                layoutId={`${modalId}-date`}
                 transition={layoutTransition}
               >
-                {isExpanded ? dateRange : <TypewriterText text={dateRange} />}
+                <TypewriterText text={dateRange} />
               </motion.p>
             )}
           </motion.div>
@@ -243,7 +214,7 @@ const ExperienceEntry = ({
               className={styles.subtitle}
               animate={{
                 transition: {
-                  delay: isExpanded ? 0 : 0.5,
+                  delay: 0.5,
                 },
               }}
             >
@@ -251,7 +222,7 @@ const ExperienceEntry = ({
                 layoutId={`${modalId}-subtitle`}
                 transition={layoutTransition}
               >
-                {isExpanded ? subtitle : <TypewriterText text={subtitle} />}
+                <TypewriterText text={subtitle} />
               </motion.h3>
             </motion.div>
           )}
@@ -261,9 +232,9 @@ const ExperienceEntry = ({
           className={styles.box}
           contentClassName={styles.boxContent}
           borderWidth={borderWidth}
-          onClick={!url ? handleBoxClick : undefined}
-          style={!url ? { cursor: "pointer" } : undefined}
-          layoutId={!url ? `${modalId}-border` : undefined}
+          onClick={handleBoxClick}
+          style={{ cursor: "pointer" }}
+          layoutId={`${modalId}-border`}
         >
           <motion.div
             className={styles.descriptionWrapper}
@@ -272,10 +243,10 @@ const ExperienceEntry = ({
             {description.map((desc, index) => (
               <motion.p
                 key={index}
-                layoutId={!url ? `${modalId}-desc-${index}` : undefined}
+                layoutId={`${modalId}-desc-${index}`}
                 transition={layoutTransition}
               >
-                {isExpanded ? desc : <TypewriterText text={desc} />}
+                <TypewriterText text={desc} />
               </motion.p>
             ))}
           </motion.div>
@@ -286,32 +257,13 @@ const ExperienceEntry = ({
                 horizontal={width < widthMobile}
                 className={styles.line}
               />
-              {url ? (
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(styles.children, styles.linkArea)}
-                >
-                  {children}
-                </a>
-              ) : onClick ? (
-                <motion.div
-                  onClick={onClick}
-                  className={cn(styles.children, styles.linkArea)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {children}
-                </motion.div>
-              ) : (
-                <motion.div
-                  className={styles.children}
-                  layoutId={`${modalId}-children`}
-                  transition={layoutTransition}
-                >
-                  {children}
-                </motion.div>
-              )}
+              <motion.div
+                className={styles.children}
+                layoutId={`${modalId}-children`}
+                transition={layoutTransition}
+              >
+                {children}
+              </motion.div>
             </motion.div>
           )}
         </AnimatedBorderBox>
