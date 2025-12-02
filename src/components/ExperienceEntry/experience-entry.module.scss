@@ -107,7 +107,7 @@
   width: 600px;
   max-width: 90%;
   max-height: 80%;
-  overflow-y: auto;
+  overflow: hidden;
   background: var(--background-primary);
   border-radius: 16px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
@@ -115,16 +115,23 @@
   // Animated background
   &::before {
     content: "";
-    @include styles.glowing-background;
+    // @include styles.glowing-background;
     z-index: 0;
   }
 
   // Scanlines effect
   &::after {
     content: "";
-    @include styles.scanlines-effect;
+    // @include styles.scanlines-effect;
     z-index: 0;
     position: absolute;
+  }
+
+  // Ensure all content is above background
+  .header,
+  .box {
+    position: relative;
+    z-index: 1;
   }
 }
 
@@ -175,12 +182,12 @@
   display: flex;
 
   // Apply left border to all direct children
-  > * {
+  >* {
     border-left: 4px solid var(--foreground-primary);
   }
 
   // Apply right border only to last child
-  > *:last-child {
+  >*:last-child {
     border-right: 4px solid var(--foreground-primary);
   }
 }
