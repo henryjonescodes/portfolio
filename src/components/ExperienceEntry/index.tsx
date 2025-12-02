@@ -124,11 +124,12 @@ const ExperienceEntry = ({
   const { openModal, closeModal, modalState, toggleFullscreen } = useModal();
   const entryRef = useRef<HTMLDivElement>(null);
 
-  const modalId = `experience-${title.replace(/\s+/g, '-')}`;
+  const modalId = `experience-${title.replace(/\s+/g, "-")}`;
 
   // Shared transition config for all layout animations
   const layoutTransition = {
-    duration: 0.35,
+    duration: 2.35,
+    staggerChildren: 0,
     ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
   };
 
@@ -174,7 +175,7 @@ const ExperienceEntry = ({
         }}
       >
         {/* Navbar for expanded mode */}
-        {isExpanded && (
+        {/* {isExpanded && (
           <motion.div className={styles.modalNavbar}>
             <motion.div className={styles.navContents}>
               <motion.div className={styles.navLeft} />
@@ -204,108 +205,116 @@ const ExperienceEntry = ({
               </motion.div>
             </motion.div>
           </motion.div>
-        )}
+        )} */}
 
-      <motion.span className={styles.header}>
-        <motion.div className={styles.title}>
-          {/* Only show title in header when not expanded (it moves to navbar when expanded) */}
-          {!isExpanded && (
-            url ? (
-              <motion.h2>
-                <a href={url} target="_blank" className={styles.linkText}>
+        <motion.span className={styles.header}>
+          <motion.div className={styles.title}>
+            {/* Only show title in header when not expanded (it moves to navbar when expanded) */}
+            {!isExpanded &&
+              (url ? (
+                <motion.h2>
+                  <a href={url} target="_blank" className={styles.linkText}>
+                    <TypewriterText text={title} />
+                  </a>
+                </motion.h2>
+              ) : onClick ? (
+                <motion.h2 onClick={onClick} className={styles.linkText}>
                   <TypewriterText text={title} />
-                </a>
-              </motion.h2>
-            ) : onClick ? (
-              <motion.h2 onClick={onClick} className={styles.linkText}>
-                <TypewriterText text={title} />
-              </motion.h2>
-            ) : (
-              <motion.h2 layoutId={`${modalId}-title`} transition={layoutTransition}>
-                <TypewriterText text={title} />
-              </motion.h2>
-            )
-          )}
-          {!!dateRange && (
-            <motion.p layoutId={!url ? `${modalId}-date` : undefined} transition={layoutTransition}>
-              {isExpanded ? dateRange : <TypewriterText text={dateRange} />}
-            </motion.p>
-          )}
-        </motion.div>
-        {!!subtitle && (
-          <motion.div
-            className={styles.subtitle}
-            animate={{
-              transition: {
-                delay: isExpanded ? 0 : 0.5,
-              },
-            }}
-          >
-            <motion.h3 layoutId={`${modalId}-subtitle`} transition={layoutTransition}>
-              {isExpanded ? subtitle : <TypewriterText text={subtitle} />}
-            </motion.h3>
-          </motion.div>
-        )}
-      </motion.span>
-
-      <AnimatedBorderBox
-        className={styles.box}
-        contentClassName={styles.boxContent}
-        borderWidth={borderWidth}
-        onClick={!url ? handleBoxClick : undefined}
-        style={!url ? { cursor: "pointer" } : undefined}
-        layoutId={!url ? `${modalId}-border` : undefined}
-      >
-        <motion.div
-          className={styles.descriptionWrapper}
-          variants={entryTextVariants}
-        >
-          {description.map((desc, index) => (
-            <motion.p
-              key={index}
-              layoutId={!url ? `${modalId}-desc-${index}` : undefined}
-              transition={layoutTransition}
-            >
-              {isExpanded ? desc : <TypewriterText text={desc} />}
-            </motion.p>
-          ))}
-        </motion.div>
-        {children && (
-          <motion.div className={styles.childrenWrapper}>
-            <AnimatedLine
-              borderWidth={borderWidth}
-              horizontal={width < widthMobile}
-              className={styles.line}
-            />
-            {url ? (
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(styles.children, styles.linkArea)}
-              >
-                {children}
-              </a>
-            ) : onClick ? (
-              <motion.div
-                onClick={onClick}
-                className={cn(styles.children, styles.linkArea)}
-                style={{ cursor: "pointer" }}
-              >
-                {children}
-              </motion.div>
-            ) : (
-              <motion.div
-                className={styles.children}
-                layoutId={`${modalId}-children`}
+                </motion.h2>
+              ) : (
+                <motion.h2
+                  layoutId={`${modalId}-title`}
+                  transition={layoutTransition}
+                >
+                  <TypewriterText text={title} />
+                </motion.h2>
+              ))}
+            {!!dateRange && (
+              <motion.p
+                layoutId={!url ? `${modalId}-date` : undefined}
                 transition={layoutTransition}
               >
-                {children}
-              </motion.div>
+                {isExpanded ? dateRange : <TypewriterText text={dateRange} />}
+              </motion.p>
             )}
           </motion.div>
-        )}
-      </AnimatedBorderBox>
+          {!!subtitle && (
+            <motion.div
+              className={styles.subtitle}
+              animate={{
+                transition: {
+                  delay: isExpanded ? 0 : 0.5,
+                },
+              }}
+            >
+              <motion.h3
+                layoutId={`${modalId}-subtitle`}
+                transition={layoutTransition}
+              >
+                {isExpanded ? subtitle : <TypewriterText text={subtitle} />}
+              </motion.h3>
+            </motion.div>
+          )}
+        </motion.span>
+
+        <AnimatedBorderBox
+          className={styles.box}
+          contentClassName={styles.boxContent}
+          borderWidth={borderWidth}
+          onClick={!url ? handleBoxClick : undefined}
+          style={!url ? { cursor: "pointer" } : undefined}
+          layoutId={!url ? `${modalId}-border` : undefined}
+        >
+          <motion.div
+            className={styles.descriptionWrapper}
+            variants={entryTextVariants}
+          >
+            {description.map((desc, index) => (
+              <motion.p
+                key={index}
+                layoutId={!url ? `${modalId}-desc-${index}` : undefined}
+                transition={layoutTransition}
+              >
+                {isExpanded ? desc : <TypewriterText text={desc} />}
+              </motion.p>
+            ))}
+          </motion.div>
+          {children && (
+            <motion.div className={styles.childrenWrapper}>
+              <AnimatedLine
+                borderWidth={borderWidth}
+                horizontal={width < widthMobile}
+                className={styles.line}
+              />
+              {url ? (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(styles.children, styles.linkArea)}
+                >
+                  {children}
+                </a>
+              ) : onClick ? (
+                <motion.div
+                  onClick={onClick}
+                  className={cn(styles.children, styles.linkArea)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {children}
+                </motion.div>
+              ) : (
+                <motion.div
+                  className={styles.children}
+                  layoutId={`${modalId}-children`}
+                  transition={layoutTransition}
+                >
+                  {children}
+                </motion.div>
+              )}
+            </motion.div>
+          )}
+        </AnimatedBorderBox>
       </motion.div>
     </LayoutGroup>
   );

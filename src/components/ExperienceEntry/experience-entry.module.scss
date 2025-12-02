@@ -108,14 +108,14 @@
   max-width: 90%;
   max-height: 80%;
   overflow: hidden;
-  background: var(--background-primary);
-  border-radius: 16px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  // background-color: var(--background-primary);
+  // border-radius: 16px;
+  // box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
 
   // Animated background
   &::before {
     content: "";
-    // @include styles.glowing-background;
+    @include styles.glowing-background;
     z-index: 0;
   }
 
