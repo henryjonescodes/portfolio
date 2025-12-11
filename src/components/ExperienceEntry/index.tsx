@@ -314,6 +314,15 @@ const ExperienceEntry = ({
           initial="animate"
           animate="modalAnimate"
           exit="modalExit"
+          drag
+          dragMomentum={false}
+          dragElastic={0.1}
+          dragConstraints={{
+            top: -1000,
+            left: -1000,
+            right: 1000,
+            bottom: 1000,
+          }}
         >
           {containerContent}
         </motion.div>

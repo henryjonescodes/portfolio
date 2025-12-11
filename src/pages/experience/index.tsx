@@ -115,14 +115,16 @@ const Experience = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <ExperienceEntry
-              key={selectedId}
-              data={experienceData[selectedId]}
-              pageOpen={pageOpen}
-              inList={false}
-              overlayStyle={overlayStyle}
-              onClose={handleClose}
-            />
+            <div onClick={(e) => e.stopPropagation()}>
+              <ExperienceEntry
+                key={selectedId}
+                data={experienceData[selectedId]}
+                pageOpen={pageOpen}
+                inList={false}
+                overlayStyle={overlayStyle}
+                onClose={handleClose}
+              />
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

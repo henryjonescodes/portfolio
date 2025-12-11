@@ -43,8 +43,8 @@ const ModalNavBar = ({ title, onClose }: ModalNavBarProps) => {
       exit="exit"
     >
       <motion.div className={styles.contents}>
-        <motion.div className={styles.left} />
-        <motion.div className={styles.center}>
+        <motion.div className={`${styles.left} ${styles.dragHandle}`} />
+        <motion.div className={`${styles.center} ${styles.dragHandle}`}>
           <motion.h2 className={styles.title}>{title}</motion.h2>
         </motion.div>
         <motion.div className={styles.right}>
