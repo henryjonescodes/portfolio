@@ -17,7 +17,7 @@ const experienceVariants = {
 const Experience = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({});
-  const [shouldLayout, setShouldLayout] = useState(false);
+  const [pageOpen, setPageOpen] = useState(false);
 
   // Create refs for each entry
   const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
@@ -27,16 +27,16 @@ const Experience = () => {
     }, {} as Record<string, React.RefObject<HTMLDivElement>>)
   );
 
-  // Delay layout animation by 1s when modal opens
+  // Delay pageOpen to trigger layout animations
   useEffect(() => {
     if (selectedId) {
-      setShouldLayout(false);
+      setPageOpen(false);
       const timer = setTimeout(() => {
-        setShouldLayout(true);
-      }, 1000);
+        setPageOpen(true);
+      }, 10); // 10ms like main branch
       return () => clearTimeout(timer);
     } else {
-      setShouldLayout(false);
+      setPageOpen(false);
     }
   }, [selectedId]);
 
@@ -68,7 +68,8 @@ const Experience = () => {
           const entry = experienceData[id];
           return (
             <ExperienceEntry
-              key={id}
+              key={`${id}-inList`}
+              id={`${id}-inList`}
               title={entry.title}
               subtitle={entry.subtitle}
               description={entry.description}
@@ -76,7 +77,8 @@ const Experience = () => {
               endDate={entry.endDate}
               entryRef={entryRefs.current[id]}
               onClick={() => handleEntryClick(id)}
-              layoutId={id}
+              pageOpen={pageOpen}
+              inList={true}
             />
           );
         })}
@@ -100,13 +102,15 @@ const Experience = () => {
             }}
           >
             <ExperienceEntry
+              key={selectedId}
+              id={selectedId}
               title={experienceData[selectedId].title}
               subtitle={experienceData[selectedId].subtitle}
               description={experienceData[selectedId].description}
               startDate={experienceData[selectedId].startDate}
               endDate={experienceData[selectedId].endDate}
-              isExpanded={shouldLayout}
-              layoutId={selectedId}
+              pageOpen={pageOpen}
+              inList={false}
             />
           </motion.div>
         </div>

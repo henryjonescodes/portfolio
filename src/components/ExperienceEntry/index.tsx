@@ -1,5 +1,5 @@
 import cn from "classnames";
-import { motion } from "framer-motion";
+import { motion, LayoutGroup } from "framer-motion";
 import React from "react";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 import { widthMobile } from "@styles/layout.constants.ts";
@@ -47,14 +47,15 @@ const formatDateRange = (startDate?: Date, endDate?: Date): string | null => {
 };
 
 type ExperienceEntryProps = {
+  id: string;
   title: string;
   subtitle?: string;
   description: string[];
   borderWidth?: number;
   children?: React.ReactNode;
   entryRef?: React.RefObject<HTMLDivElement>;
-  isExpanded?: boolean;
-  layoutId?: string;
+  pageOpen?: boolean;
+  inList?: boolean;
 } & (
   | {
       url?: string;
@@ -98,8 +99,11 @@ const entryTextVariants = {
   },
 };
 
+const ANIMATION_DURATION = 0.35;
+
 // TODO: discriminated union type for the props, see dates
 const ExperienceEntry = ({
+  id,
   title,
   subtitle,
   description,
@@ -111,27 +115,34 @@ const ExperienceEntry = ({
   url,
   onClick,
   entryRef,
-  isExpanded = false,
-  layoutId: baseLayoutId,
+  pageOpen = false,
+  inList = false,
 }: ExperienceEntryProps) => {
   const dateRange = dateString
     ? dateString
     : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
+  const isOpen = pageOpen && !inList;
 
   return (
-    <motion.div
-      ref={entryRef}
-      className={cn(styles.entry, {
-        [styles.fullScreen]: !embedded,
-      })}
-      onClick={onClick}
-      style={onClick ? { cursor: "pointer" } : undefined}
-    >
-      {/* Show header elements outside box when NOT expanded */}
-      {!isExpanded && (
-        <motion.span className={styles.header}>
+    <LayoutGroup id={id}>
+      <motion.div
+        ref={entryRef}
+        layout
+        layoutId={id}
+        className={cn(styles.entry, {
+          [styles.fullScreen]: !embedded,
+        })}
+        onClick={onClick}
+        style={onClick ? { cursor: "pointer" } : undefined}
+        transition={{ duration: ANIMATION_DURATION }}
+      >
+        <motion.span
+          layoutId="header"
+          className={styles.header}
+          transition={{ duration: 0 }}
+        >
           <motion.div className={styles.title}>
             {url ? (
               <motion.h2>
@@ -140,12 +151,19 @@ const ExperienceEntry = ({
                 </a>
               </motion.h2>
             ) : (
-              <motion.h2 layoutId={baseLayoutId ? `${baseLayoutId}-title` : undefined}>
+              <motion.h2 layoutId="title">
                 <TypewriterText text={title} />
               </motion.h2>
             )}
             {!!dateRange && (
-              <motion.p layoutId={baseLayoutId ? `${baseLayoutId}-date` : undefined}>
+              <motion.p
+                layoutId="date"
+                transition={{
+                  duration: pageOpen
+                    ? ANIMATION_DURATION * 1.1
+                    : ANIMATION_DURATION,
+                }}
+              >
                 <TypewriterText text={dateRange} />
               </motion.p>
             )}
@@ -159,79 +177,79 @@ const ExperienceEntry = ({
                 },
               }}
             >
-              <motion.h3 layoutId={baseLayoutId ? `${baseLayoutId}-subtitle` : undefined}>
+              <motion.h3 layoutId="subtitle">
                 <TypewriterText text={subtitle} />
               </motion.h3>
             </motion.div>
           )}
         </motion.span>
-      )}
 
       <AnimatedBorderBox
         className={styles.box}
         contentClassName={styles.boxContent}
         borderWidth={borderWidth}
       >
-        {/* Show header elements inside box when expanded */}
-        {isExpanded && (
-          <motion.div>
-            <motion.h2 layoutId={baseLayoutId ? `${baseLayoutId}-title` : undefined}>
-              {title}
-            </motion.h2>
-            {!!subtitle && (
-              <motion.h3 layoutId={baseLayoutId ? `${baseLayoutId}-subtitle` : undefined}>
-                {subtitle}
-              </motion.h3>
-            )}
-            {!!dateRange && (
-              <motion.p layoutId={baseLayoutId ? `${baseLayoutId}-date` : undefined}>
-                {dateRange}
-              </motion.p>
-            )}
-          </motion.div>
-        )}
-
         <motion.div
-          className={styles.descriptionWrapper}
-          variants={entryTextVariants}
+          layoutId="body"
+          className={styles.body}
+          transition={{ duration: 0 }}
         >
-          {description.map((desc, index) => (
-            <motion.p key={index}>
-              <TypewriterText text={desc} />
-            </motion.p>
-          ))}
-        </motion.div>
-        {children && (
-          <motion.div className={styles.childrenWrapper}>
-            <AnimatedLine
-              borderWidth={borderWidth}
-              horizontal={width < widthMobile}
-              className={styles.line}
-            />
-            {url ? (
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(styles.children, styles.linkArea)}
-              >
-                {children}
-              </a>
-            ) : onClick ? (
-              <motion.div
-                onClick={onClick}
-                className={cn(styles.children, styles.linkArea)}
-                style={{ cursor: "pointer" }}
-              >
-                {children}
+          <motion.div
+            layoutId="bodyContent"
+            className={styles.descriptionWrapper}
+            transition={{ duration: ANIMATION_DURATION * 0.9 }}
+            variants={entryTextVariants}
+          >
+            {isOpen && (
+              <motion.div layoutId="bodyTitle">
+                <motion.h2 layoutId="title">{title}</motion.h2>
+                {!!subtitle && (
+                  <motion.h3 layoutId="subtitle">{subtitle}</motion.h3>
+                )}
+                {!!dateRange && (
+                  <motion.p layoutId="date">{dateRange}</motion.p>
+                )}
               </motion.div>
-            ) : (
-              <motion.div className={styles.children}>{children}</motion.div>
             )}
+            {description.map((desc, index) => (
+              <motion.p key={index}>
+                <TypewriterText text={desc} />
+              </motion.p>
+            ))}
           </motion.div>
-        )}
+          {children && (
+            <motion.div className={styles.childrenWrapper}>
+              <AnimatedLine
+                borderWidth={borderWidth}
+                horizontal={width < widthMobile}
+                className={styles.line}
+              />
+              {url ? (
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(styles.children, styles.linkArea)}
+                >
+                  {children}
+                </a>
+              ) : onClick ? (
+                <motion.div
+                  onClick={onClick}
+                  className={cn(styles.children, styles.linkArea)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {children}
+                </motion.div>
+              ) : (
+                <motion.div className={styles.children}>{children}</motion.div>
+              )}
+            </motion.div>
+          )}
+        </motion.div>
       </AnimatedBorderBox>
     </motion.div>
+    </LayoutGroup>
   );
 };
 
