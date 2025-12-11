@@ -114,12 +114,8 @@ const ExperienceEntry = ({
 
   const modalId = `experience-${title.replace(/\s+/g, "-")}`;
 
-  // Shared transition config for all layout animations
-  const layoutTransition = {
-    duration: 2.35,
-    staggerChildren: 0,
-    ease: [0.4, 0, 0.2, 1] as [number, number, number, number],
-  };
+  // Base animation duration
+  const ANIMATION_DURATION = 3.35;
 
   const handleBoxClick = (e: React.MouseEvent) => {
     if (!isExpanded) {
@@ -153,10 +149,14 @@ const ExperienceEntry = ({
           [styles.fullScreen]: !embedded,
           [styles.modal]: isExpanded,
         })}
-        transition={layoutTransition}
+        transition={{ duration: ANIMATION_DURATION }}
         style={{
+          // background: "red",
           originX: 0,
           originY: 1,
+          ...(isExpanded && {
+            width: "600px",
+          }),
         }}
       >
         {/* Navbar for expanded mode */}
@@ -192,18 +192,28 @@ const ExperienceEntry = ({
           </motion.div>
         )} */}
 
-        <motion.span className={styles.header}>
-          <motion.div className={styles.title}>
+        <motion.span
+          className={styles.header}
+          layoutId={`${modalId}-header`}
+          style={{ background: "pink" }}
+          // transition={{ duration: ANIMATION_DURATION * 1.5 }}
+
+          // transition={{ duration: 0 }}
+        >
+          <motion.div
+            className={styles.title}
+            // layoutId={`${modalId}-titleWrapper`}
+          >
             <motion.h2
               layoutId={`${modalId}-title`}
-              transition={layoutTransition}
+              // transition={{ duration: 0 }}
             >
               <TypewriterText text={title} />
             </motion.h2>
             {!!dateRange && (
               <motion.p
                 layoutId={`${modalId}-date`}
-                transition={layoutTransition}
+                // transition={{ duration: 0 }}
               >
                 <TypewriterText text={dateRange} />
               </motion.p>
@@ -212,15 +222,15 @@ const ExperienceEntry = ({
           {!!subtitle && (
             <motion.div
               className={styles.subtitle}
-              animate={{
-                transition: {
-                  delay: 0.5,
-                },
-              }}
+              // animate={{
+              //   transition: {
+              //     delay: 0.5,
+              //   },
+              // }}
             >
               <motion.h3
                 layoutId={`${modalId}-subtitle`}
-                transition={layoutTransition}
+                // transition={{ duration: 0 }}
               >
                 <TypewriterText text={subtitle} />
               </motion.h3>
@@ -233,18 +243,21 @@ const ExperienceEntry = ({
           contentClassName={styles.boxContent}
           borderWidth={borderWidth}
           onClick={handleBoxClick}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: "pointer", background: "green" }}
           layoutId={`${modalId}-border`}
         >
           <motion.div
             className={styles.descriptionWrapper}
+            style={{ background: "blue" }}
+            layoutId={`${modalId}-body`}
+            // transition={{ duration: 0 }}
             variants={entryTextVariants}
           >
             {description.map((desc, index) => (
               <motion.p
                 key={index}
                 layoutId={`${modalId}-desc-${index}`}
-                transition={layoutTransition}
+                // transition={{ duration: 0 }}
               >
                 <TypewriterText text={desc} />
               </motion.p>
@@ -260,7 +273,7 @@ const ExperienceEntry = ({
               <motion.div
                 className={styles.children}
                 layoutId={`${modalId}-children`}
-                transition={layoutTransition}
+                // transition={{ duration: 0 }}
               >
                 {children}
               </motion.div>

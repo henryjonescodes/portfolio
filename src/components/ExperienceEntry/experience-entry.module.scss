@@ -9,6 +9,8 @@
 }
 
 .entry {
+  background-color: purple;
+
   margin-bottom: 32px;
   display: flex;
   flex-direction: column;
@@ -18,12 +20,16 @@
   .header {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 100%;
 
     .title {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
+      // display: flex;
+      // justify-content: space-between;
+      // align-items: center;
+      max-width: 100%;
+      background-color: yellow;
+
 
       h2 {
         color: styles.$foreground-primary;
@@ -31,12 +37,15 @@
       }
 
       p {
+        background-color: black;
         color: styles.$accent-secondary;
         color: var(--accent-secondary);
       }
     }
 
     .subtitle {
+      // background-color: green;
+
       h3 {
         color: styles.$accent-secondary;
         color: var(--accent-secondary);
@@ -46,6 +55,8 @@
 
   .box {
     position: relative;
+    width: 100%;
+    max-width: 100%;
 
     &Content {
       position: relative;
@@ -53,13 +64,17 @@
       flex-direction: row;
       justify-content: space-between;
       overflow: hidden;
+      width: 100%;
+      max-width: 100%;
     }
   }
 
 
   .descriptionWrapper {
-    flex: 1 1 auto;
+    flex: 1 1 0;
     display: flex;
+    width: 100%;
+    max-width: 100%;
     flex-direction: column;
     gap: 8px;
     padding: 16px;
@@ -119,34 +134,33 @@
 // Modal mode styles
 .modal {
   position: relative;
-  width: 600px;
-  max-width: 90%;
-  max-height: 80%;
+  // max-width: 90%;
+  // max-height: 80%;
   // color: var(--foreground-primary);
-  // overflow: hidden;
+  overflow: hidden;
 
 
   // Animated background
-  &::before {
-    content: "";
-    @include styles.glowing-background;
-    z-index: 0;
-  }
+  // &::before {
+  // content: "";
+  // @include styles.glowing-background;
+  // z-index: 0;
+  // }
 
   // Scanlines effect
-  &::after {
-    content: "";
-    // @include styles.scanlines-effect;
-    z-index: 0;
-    position: absolute;
-  }
+  // &::after {
+  // content: "";
+  // @include styles.scanlines-effect;
+  // z-index: 0;
+  // position: absolute;
+  // }
 
   // Ensure all content is above background
-  .header,
-  .box {
-    position: relative;
-    z-index: 1;
-  }
+  // .header,
+  // .box {
+  //   position: relative;
+  //   z-index: 1;
+  // }
 }
 
 // Modal navbar styles
