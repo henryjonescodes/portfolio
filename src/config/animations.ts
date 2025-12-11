@@ -27,11 +27,14 @@ export const ANIMATION_DURATIONS = {
   TYPEWRITER_CHAR_DURATION: 0.2,
   TYPEWRITER_CHAR_STAGGER: 0.03,
 
-  // Modal animations
+  // Modal animations (all in seconds)
   MODAL_CONTAINER: 0.35,
   MODAL_CONTENT: 0.315, // 0.9x multiplier
   MODAL_DATE_OPEN: 0.385, // 1.1x multiplier
-  MODAL_LAYOUT_DELAY_MS: 350,
+  MODAL_LAYOUT_DELAY: 1.0,
+  MODAL_BLURB_DELAY: 0.5,
+  MODAL_TEXT_PAINT_DURATION: 0.3,
+  MODAL_TEXT_STAGGER: 0.6,
 } as const;
 
 /**

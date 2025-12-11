@@ -35,7 +35,7 @@ const Experience = () => {
       setPageOpen(false);
       const timer = setTimeout(() => {
         setPageOpen(true);
-      }, ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY_MS);
+      }, ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY * 1000);
       return () => clearTimeout(timer);
     } else {
       setPageOpen(false);
@@ -66,8 +66,8 @@ const Experience = () => {
 
     // Wait for layout animation to reverse + exit animation
     const totalDuration =
-      ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY_MS +
-      ANIMATION_DURATIONS.MODAL_CONTAINER * 1000;
+      (ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY +
+      ANIMATION_DURATIONS.MODAL_CONTAINER) * 1000;
     setTimeout(() => {
       setSelectedId(null);
       setIsClosing(false);
@@ -82,17 +82,11 @@ const Experience = () => {
         </motion.h1>
 
         {experienceOrder.map((id) => {
-          const entry = experienceData[id];
           const isSelected = selectedId === id;
           return (
             <ExperienceEntry
               key={`${id}-inList`}
-              id={`${id}-inList`}
-              title={entry.title}
-              subtitle={entry.subtitle}
-              description={entry.description}
-              startDate={entry.startDate}
-              endDate={entry.endDate}
+              data={experienceData[id]}
               entryRef={entryRefs.current[id]}
               onClick={() => handleEntryClick(id)}
               pageOpen={pageOpen}
@@ -115,12 +109,7 @@ const Experience = () => {
           >
             <ExperienceEntry
               key={selectedId}
-              id={selectedId}
-              title={experienceData[selectedId].title}
-              subtitle={experienceData[selectedId].subtitle}
-              description={experienceData[selectedId].description}
-              startDate={experienceData[selectedId].startDate}
-              endDate={experienceData[selectedId].endDate}
+              data={experienceData[selectedId]}
               pageOpen={pageOpen}
               inList={false}
               overlayStyle={overlayStyle}

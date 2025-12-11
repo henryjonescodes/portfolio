@@ -47,11 +47,10 @@ const formatDateRange = (startDate?: Date, endDate?: Date): string | null => {
   return `${start} - ${end}`;
 };
 
+import type { ExperienceData } from "@data/experience";
+
 type ExperienceEntryProps = {
-  id: string;
-  title: string;
-  subtitle?: string;
-  description: string[];
+  data: ExperienceData;
   borderWidth?: number;
   children?: React.ReactNode;
   entryRef?: React.RefObject<HTMLDivElement>;
@@ -59,6 +58,7 @@ type ExperienceEntryProps = {
   inList?: boolean;
   isSelected?: boolean;
   overlayStyle?: React.CSSProperties;
+  dateString?: string;
 } & (
   | {
       url?: string;
@@ -68,19 +68,7 @@ type ExperienceEntryProps = {
       onClick?: () => void;
       url?: never;
     }
-) &
-  (
-    | {
-        dateString?: string;
-        startDate?: never;
-        endDate?: never;
-      }
-    | {
-        startDate?: Date;
-        endDate?: Date;
-        dateString?: never;
-      }
-  );
+);
 
 // Animation variants for initial page paint-in
 const entryTextVariants = {
@@ -90,27 +78,27 @@ const entryTextVariants = {
   animate: {
     opacity: 1,
     transition: {
-      duration: 0.3,
-      staggerChildren: 0.6,
+      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
+      staggerChildren: ANIMATION_DURATIONS.MODAL_TEXT_STAGGER,
     },
   },
   exit: {
     opacity: 0,
     transition: {
-      duration: 0.3,
+      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
     },
   },
   // Modal states - start at animate state, no paint-in effect
   modalAnimate: {
     opacity: 1,
     transition: {
-      duration: 0.3,
+      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
     },
   },
   modalExit: {
     opacity: 1,
     transition: {
-      duration: 0.3,
+      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
     },
   },
 };
@@ -131,14 +119,8 @@ const modalContainerVariants = {
   }),
 };
 
-// TODO: discriminated union type for the props, see dates
 const ExperienceEntry = ({
-  id,
-  title,
-  subtitle,
-  description,
-  startDate,
-  endDate,
+  data,
   borderWidth = 2.5,
   children,
   dateString,
@@ -150,6 +132,7 @@ const ExperienceEntry = ({
   isSelected = false,
   overlayStyle,
 }: ExperienceEntryProps) => {
+  const { id, title, subtitle, description, blurb, startDate, endDate } = data;
   const dateRange = dateString
     ? dateString
     : formatDateRange(startDate, endDate);
@@ -259,16 +242,16 @@ const ExperienceEntry = ({
                   <TypewriterText text={desc} />
                 </motion.p>
               ))}
-              {isOpen && (
+              {isOpen && blurb && (
                 <motion.div
                   variants={entryTextVariants}
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY }}
                 >
                   <motion.p>
-                    <TypewriterText text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+                    <TypewriterText text={blurb} />
                   </motion.p>
                 </motion.div>
               )}
