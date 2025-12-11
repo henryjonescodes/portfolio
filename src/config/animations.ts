@@ -31,7 +31,7 @@ export const ANIMATION_DURATIONS = {
   MODAL_CONTAINER: 0.35,
   MODAL_CONTENT: 0.315, // 0.9x multiplier
   MODAL_DATE_OPEN: 0.385, // 1.1x multiplier
-  MODAL_LAYOUT_DELAY_MS: 1000,
+  MODAL_LAYOUT_DELAY_MS: 350,
 } as const;
 
 /**

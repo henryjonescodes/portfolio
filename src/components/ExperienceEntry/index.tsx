@@ -259,6 +259,19 @@ const ExperienceEntry = ({
                   <TypewriterText text={desc} />
                 </motion.p>
               ))}
+              {isOpen && (
+                <motion.div
+                  variants={entryTextVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={{ delay: 0.5 }}
+                >
+                  <motion.p>
+                    <TypewriterText text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." />
+                  </motion.p>
+                </motion.div>
+              )}
             </motion.div>
             {children && (
               <motion.div className={styles.childrenWrapper}>
