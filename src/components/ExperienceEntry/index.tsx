@@ -57,6 +57,7 @@ type ExperienceEntryProps = {
   entryRef?: React.RefObject<HTMLDivElement>;
   pageOpen?: boolean;
   inList?: boolean;
+  isSelected?: boolean;
 } & (
   | {
       url?: string;
@@ -116,6 +117,7 @@ const ExperienceEntry = ({
   entryRef,
   pageOpen = false,
   inList = false,
+  isSelected = false,
 }: ExperienceEntryProps) => {
   const dateRange = dateString
     ? dateString
@@ -136,6 +138,10 @@ const ExperienceEntry = ({
         onClick={onClick}
         style={onClick ? { cursor: "pointer" } : undefined}
         transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
+        initial={false}
+        animate={{
+          opacity: inList && isSelected ? 0 : !inList ? 1 : 1,
+        }}
       >
         <motion.span
           layoutId="header"
@@ -180,6 +186,16 @@ const ExperienceEntry = ({
           contentClassName={styles.boxContent}
           borderWidth={borderWidth}
         >
+          {!inList && (
+            <motion.div
+              className={styles.background}
+              initial={false}
+              animate={{
+                opacity: isOpen ? 0.8 : 0,
+              }}
+              transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
+            />
+          )}
           <motion.div
             layoutId="body"
             className={styles.body}

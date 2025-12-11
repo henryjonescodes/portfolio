@@ -67,6 +67,7 @@ const Experience = () => {
 
         {experienceOrder.map((id) => {
           const entry = experienceData[id];
+          const isSelected = selectedId === id;
           return (
             <ExperienceEntry
               key={`${id}-inList`}
@@ -80,6 +81,7 @@ const Experience = () => {
               onClick={() => handleEntryClick(id)}
               pageOpen={pageOpen}
               inList={true}
+              isSelected={isSelected}
             />
           );
         })}
@@ -87,9 +89,12 @@ const Experience = () => {
 
       {/* Modal overlay */}
       {selectedId && (
-        <div
+        <motion.div
           className={styles.overlay}
           onClick={() => setSelectedId(null)}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         >
           <motion.div
             style={overlayStyle}
@@ -114,7 +119,7 @@ const Experience = () => {
               inList={false}
             />
           </motion.div>
-        </div>
+        </motion.div>
       )}
     </PageContents>
   );
