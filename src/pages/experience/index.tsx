@@ -73,7 +73,17 @@ const Experience = () => {
           className={styles.overlay}
           onClick={() => setSelectedId(null)}
         >
-          <div style={overlayStyle}>
+          <motion.div
+            style={overlayStyle}
+            initial={{
+              width: overlayStyle.width,
+              left: overlayStyle.left
+            }}
+            animate={{
+              width: '70%',
+              left: '15%' // Centers at 50%: 15% left + 70% width + 15% right
+            }}
+          >
             <ExperienceEntry
               title={experienceData[selectedId].title}
               subtitle={experienceData[selectedId].subtitle}
@@ -81,7 +91,7 @@ const Experience = () => {
               startDate={experienceData[selectedId].startDate}
               endDate={experienceData[selectedId].endDate}
             />
-          </div>
+          </motion.div>
         </div>
       )}
     </PageContents>
