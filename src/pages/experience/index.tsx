@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
+import { useState, useRef, createRef } from "react";
 import ExperienceEntry from "@components/ExperienceEntry";
 import PageContents from "@components/Page/PageContents";
 import TypewriterText from "@components/TypewriterText";
+import { experienceData, experienceOrder } from "@data/experience";
 import styles from "./experience.module.scss";
+
 const experienceVariants = {
   animate: {
     transition: {
@@ -12,65 +15,75 @@ const experienceVariants = {
 };
 
 const Experience = () => {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({});
+
+  // Create refs for each entry
+  const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
+    experienceOrder.reduce((acc, id) => {
+      acc[id] = createRef<HTMLDivElement>();
+      return acc;
+    }, {} as Record<string, React.RefObject<HTMLDivElement>>)
+  );
+
+  const handleEntryClick = (id: string) => {
+    const entryElement = entryRefs.current[id].current;
+    if (!entryElement) return;
+
+    const rect = entryElement.getBoundingClientRect();
+
+    setOverlayStyle({
+      position: 'fixed',
+      top: rect.top,
+      left: rect.left,
+      width: rect.width,
+      height: rect.height,
+    });
+
+    setSelectedId(id);
+  };
+
   return (
     <PageContents key={"experience"} className={styles.experience}>
       <motion.div variants={experienceVariants} className={styles.content}>
         <motion.h1>
           <TypewriterText text={"Experience"} staggerChildren={0.05} />
         </motion.h1>
-        <ExperienceEntry
-          title="Arbor"
-          subtitle="Full Stack Engineer"
-          description={[
-            "— Designed and delivered custom email notification system to provide real-time insights to users about their savings with Arbor ",
-          ]}
-          startDate={new Date(2025, 0)}
-        />
-        <ExperienceEntry
-          title="ChannelAI"
-          subtitle="iOS Engineer, Design System Lead"
-          description={[
-            "— Delivered interactive UI features and maintained design assets across departments for Channel's AI-powered chat platform.",
-            "— Worked extensively with Objective-C, Swift, and SwiftUI to implement core iOS features such as user profiles, media galleries, and app settings.",
-            "— Led design system management, ensuring consistency in components, color, and typography across the app.",
-          ]}
-          startDate={new Date(2024, 0)}
-          endDate={new Date(2024, 4)}
-        />
 
-        <ExperienceEntry
-          title="Mushroom.gg"
-          subtitle="Full Stack Engineer, Design System Lead"
-          description={[
-            "— Contributed to the implementation of chat and feed features for a gaming-focused social media platform.",
-            "— Managed cross-platform development for web and mobile using React, React Native, and GraphQL.",
-            "— Led the development and maintenance of design libraries, including UI components and iconography.",
-          ]}
-          startDate={new Date(2022, 2)}
-          endDate={new Date(2024, 0)}
-        />
-
-        <ExperienceEntry
-          title="Union College"
-          subtitle="UI/UX Researcher"
-          description={[
-            "— Conducted a research study on user trust in software agents, using a custom Java game environment.",
-            "— Designed and analyzed experiments to measure user interactions with varying levels of agent reliability.",
-          ]}
-          startDate={new Date(2020, 8)}
-          endDate={new Date(2021, 5)}
-        />
-
-        <ExperienceEntry
-          title="Tumblr"
-          subtitle="Systems Intern"
-          description={[
-            "— Supported the systems department in various tasks during a high-school internship.",
-            "— Gained exposure to the fast-paced environment of a tech startup, learning foundational industry skills.",
-          ]}
-          endDate={new Date(2014, 1)}
-        />
+        {experienceOrder.map((id) => {
+          const entry = experienceData[id];
+          return (
+            <ExperienceEntry
+              key={id}
+              title={entry.title}
+              subtitle={entry.subtitle}
+              description={entry.description}
+              startDate={entry.startDate}
+              endDate={entry.endDate}
+              entryRef={entryRefs.current[id]}
+              onClick={() => handleEntryClick(id)}
+            />
+          );
+        })}
       </motion.div>
+
+      {/* Modal overlay */}
+      {selectedId && (
+        <div
+          className={styles.overlay}
+          onClick={() => setSelectedId(null)}
+        >
+          <div style={overlayStyle}>
+            <ExperienceEntry
+              title={experienceData[selectedId].title}
+              subtitle={experienceData[selectedId].subtitle}
+              description={experienceData[selectedId].description}
+              startDate={experienceData[selectedId].startDate}
+              endDate={experienceData[selectedId].endDate}
+            />
+          </div>
+        </div>
+      )}
     </PageContents>
   );
 };

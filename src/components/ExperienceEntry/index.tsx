@@ -52,6 +52,7 @@ type ExperienceEntryProps = {
   description: string[];
   borderWidth?: number;
   children?: React.ReactNode;
+  entryRef?: React.RefObject<HTMLDivElement>;
 } & (
   | {
       url?: string;
@@ -107,6 +108,7 @@ const ExperienceEntry = ({
   dateString,
   url,
   onClick,
+  entryRef,
 }: ExperienceEntryProps) => {
   const dateRange = dateString
     ? dateString
@@ -116,9 +118,12 @@ const ExperienceEntry = ({
 
   return (
     <motion.div
+      ref={entryRef}
       className={cn(styles.entry, {
         [styles.fullScreen]: !embedded,
       })}
+      onClick={onClick}
+      style={onClick ? { cursor: "pointer" } : undefined}
     >
       <motion.span className={styles.header}>
         <motion.div className={styles.title}>
@@ -127,10 +132,6 @@ const ExperienceEntry = ({
               <a href={url} target="_blank" className={styles.linkText}>
                 <TypewriterText text={title} />
               </a>
-            </motion.h2>
-          ) : onClick ? (
-            <motion.h2 onClick={onClick} className={styles.linkText}>
-              <TypewriterText text={title} />
             </motion.h2>
           ) : (
             <motion.h2>
