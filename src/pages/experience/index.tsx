@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState, useRef, createRef } from "react";
+import { useState, useRef, createRef, useEffect } from "react";
 import ExperienceEntry from "@components/ExperienceEntry";
 import PageContents from "@components/Page/PageContents";
 import TypewriterText from "@components/TypewriterText";
@@ -17,6 +17,7 @@ const experienceVariants = {
 const Experience = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({});
+  const [shouldLayout, setShouldLayout] = useState(false);
 
   // Create refs for each entry
   const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
@@ -25,6 +26,19 @@ const Experience = () => {
       return acc;
     }, {} as Record<string, React.RefObject<HTMLDivElement>>)
   );
+
+  // Delay layout animation by 1s when modal opens
+  useEffect(() => {
+    if (selectedId) {
+      setShouldLayout(false);
+      const timer = setTimeout(() => {
+        setShouldLayout(true);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else {
+      setShouldLayout(false);
+    }
+  }, [selectedId]);
 
   const handleEntryClick = (id: string) => {
     const entryElement = entryRefs.current[id].current;
@@ -62,6 +76,7 @@ const Experience = () => {
               endDate={entry.endDate}
               entryRef={entryRefs.current[id]}
               onClick={() => handleEntryClick(id)}
+              layoutId={id}
             />
           );
         })}
@@ -90,6 +105,8 @@ const Experience = () => {
               description={experienceData[selectedId].description}
               startDate={experienceData[selectedId].startDate}
               endDate={experienceData[selectedId].endDate}
+              isExpanded={shouldLayout}
+              layoutId={selectedId}
             />
           </motion.div>
         </div>

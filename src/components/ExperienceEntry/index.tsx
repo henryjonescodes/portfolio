@@ -53,6 +53,8 @@ type ExperienceEntryProps = {
   borderWidth?: number;
   children?: React.ReactNode;
   entryRef?: React.RefObject<HTMLDivElement>;
+  isExpanded?: boolean;
+  layoutId?: string;
 } & (
   | {
       url?: string;
@@ -109,6 +111,8 @@ const ExperienceEntry = ({
   url,
   onClick,
   entryRef,
+  isExpanded = false,
+  layoutId: baseLayoutId,
 }: ExperienceEntryProps) => {
   const dateRange = dateString
     ? dateString
@@ -125,46 +129,68 @@ const ExperienceEntry = ({
       onClick={onClick}
       style={onClick ? { cursor: "pointer" } : undefined}
     >
-      <motion.span className={styles.header}>
-        <motion.div className={styles.title}>
-          {url ? (
-            <motion.h2>
-              <a href={url} target="_blank" className={styles.linkText}>
+      {/* Show header elements outside box when NOT expanded */}
+      {!isExpanded && (
+        <motion.span className={styles.header}>
+          <motion.div className={styles.title}>
+            {url ? (
+              <motion.h2>
+                <a href={url} target="_blank" className={styles.linkText}>
+                  <TypewriterText text={title} />
+                </a>
+              </motion.h2>
+            ) : (
+              <motion.h2 layoutId={baseLayoutId ? `${baseLayoutId}-title` : undefined}>
                 <TypewriterText text={title} />
-              </a>
-            </motion.h2>
-          ) : (
-            <motion.h2>
-              <TypewriterText text={title} />
-            </motion.h2>
-          )}
-          {!!dateRange && (
-            <motion.p>
-              <TypewriterText text={dateRange} />
-            </motion.p>
-          )}
-        </motion.div>
-        {!!subtitle && (
-          <motion.div
-            className={styles.subtitle}
-            animate={{
-              transition: {
-                delay: 0.5,
-              },
-            }}
-          >
-            <motion.h3>
-              <TypewriterText text={subtitle} />
-            </motion.h3>
+              </motion.h2>
+            )}
+            {!!dateRange && (
+              <motion.p layoutId={baseLayoutId ? `${baseLayoutId}-date` : undefined}>
+                <TypewriterText text={dateRange} />
+              </motion.p>
+            )}
           </motion.div>
-        )}
-      </motion.span>
+          {!!subtitle && (
+            <motion.div
+              className={styles.subtitle}
+              animate={{
+                transition: {
+                  delay: 0.5,
+                },
+              }}
+            >
+              <motion.h3 layoutId={baseLayoutId ? `${baseLayoutId}-subtitle` : undefined}>
+                <TypewriterText text={subtitle} />
+              </motion.h3>
+            </motion.div>
+          )}
+        </motion.span>
+      )}
 
       <AnimatedBorderBox
         className={styles.box}
         contentClassName={styles.boxContent}
         borderWidth={borderWidth}
       >
+        {/* Show header elements inside box when expanded */}
+        {isExpanded && (
+          <motion.div>
+            <motion.h2 layoutId={baseLayoutId ? `${baseLayoutId}-title` : undefined}>
+              {title}
+            </motion.h2>
+            {!!subtitle && (
+              <motion.h3 layoutId={baseLayoutId ? `${baseLayoutId}-subtitle` : undefined}>
+                {subtitle}
+              </motion.h3>
+            )}
+            {!!dateRange && (
+              <motion.p layoutId={baseLayoutId ? `${baseLayoutId}-date` : undefined}>
+                {dateRange}
+              </motion.p>
+            )}
+          </motion.div>
+        )}
+
         <motion.div
           className={styles.descriptionWrapper}
           variants={entryTextVariants}
