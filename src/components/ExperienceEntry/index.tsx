@@ -6,6 +6,7 @@ import { widthMobile } from "@styles/layout.constants.ts";
 import TypewriterText from "@components/TypewriterText";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import AnimatedLine from "@components/AnimatedLine";
+import { ANIMATION_DURATIONS } from "@config/animations";
 import styles from "./experience-entry.module.scss";
 
 import { usePage } from "@components/Page";
@@ -99,8 +100,6 @@ const entryTextVariants = {
   },
 };
 
-const ANIMATION_DURATION = 0.35;
-
 // TODO: discriminated union type for the props, see dates
 const ExperienceEntry = ({
   id,
@@ -136,7 +135,7 @@ const ExperienceEntry = ({
         })}
         onClick={onClick}
         style={onClick ? { cursor: "pointer" } : undefined}
-        transition={{ duration: ANIMATION_DURATION }}
+        transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
       >
         <motion.span
           layoutId="header"
@@ -144,24 +143,16 @@ const ExperienceEntry = ({
           transition={{ duration: 0 }}
         >
           <motion.div className={styles.title}>
-            {url ? (
-              <motion.h2>
-                <a href={url} target="_blank" className={styles.linkText}>
-                  <TypewriterText text={title} />
-                </a>
-              </motion.h2>
-            ) : (
-              <motion.h2 layoutId="title">
-                <TypewriterText text={title} />
-              </motion.h2>
-            )}
+            <motion.h2 layoutId="title">
+              <TypewriterText text={title} />
+            </motion.h2>
             {!!dateRange && (
               <motion.p
                 layoutId="date"
                 transition={{
                   duration: pageOpen
-                    ? ANIMATION_DURATION * 1.1
-                    : ANIMATION_DURATION,
+                    ? ANIMATION_DURATIONS.MODAL_DATE_OPEN
+                    : ANIMATION_DURATIONS.MODAL_CONTAINER,
                 }}
               >
                 <TypewriterText text={dateRange} />
@@ -184,71 +175,75 @@ const ExperienceEntry = ({
           )}
         </motion.span>
 
-      <AnimatedBorderBox
-        className={styles.box}
-        contentClassName={styles.boxContent}
-        borderWidth={borderWidth}
-      >
-        <motion.div
-          layoutId="body"
-          className={styles.body}
-          transition={{ duration: 0 }}
+        <AnimatedBorderBox
+          className={styles.box}
+          contentClassName={styles.boxContent}
+          borderWidth={borderWidth}
         >
           <motion.div
-            layoutId="bodyContent"
-            className={styles.descriptionWrapper}
-            transition={{ duration: ANIMATION_DURATION * 0.9 }}
-            variants={entryTextVariants}
+            layoutId="body"
+            className={styles.body}
+            transition={{ duration: 0 }}
           >
-            {isOpen && (
-              <motion.div layoutId="bodyTitle">
-                <motion.h2 layoutId="title">{title}</motion.h2>
-                {!!subtitle && (
-                  <motion.h3 layoutId="subtitle">{subtitle}</motion.h3>
-                )}
-                {!!dateRange && (
-                  <motion.p layoutId="date">{dateRange}</motion.p>
+            <motion.div
+              layoutId="bodyContent"
+              className={styles.descriptionWrapper}
+              transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
+              variants={entryTextVariants}
+            >
+              {isOpen && (
+                <motion.div layoutId="bodyTitle">
+                  <motion.h2 layoutId="title">
+                    <TypewriterText text={title} />
+                  </motion.h2>
+                  {!!subtitle && (
+                    <motion.h3 layoutId="subtitle">{subtitle}</motion.h3>
+                  )}
+                  {!!dateRange && (
+                    <motion.p layoutId="date">{dateRange}</motion.p>
+                  )}
+                </motion.div>
+              )}
+              {description.map((desc, index) => (
+                <motion.p key={index}>
+                  <TypewriterText text={desc} />
+                </motion.p>
+              ))}
+            </motion.div>
+            {children && (
+              <motion.div className={styles.childrenWrapper}>
+                <AnimatedLine
+                  borderWidth={borderWidth}
+                  horizontal={width < widthMobile}
+                  className={styles.line}
+                />
+                {url ? (
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(styles.children, styles.linkArea)}
+                  >
+                    {children}
+                  </a>
+                ) : onClick ? (
+                  <motion.div
+                    onClick={onClick}
+                    className={cn(styles.children, styles.linkArea)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    {children}
+                  </motion.div>
+                ) : (
+                  <motion.div className={styles.children}>
+                    {children}
+                  </motion.div>
                 )}
               </motion.div>
             )}
-            {description.map((desc, index) => (
-              <motion.p key={index}>
-                <TypewriterText text={desc} />
-              </motion.p>
-            ))}
           </motion.div>
-          {children && (
-            <motion.div className={styles.childrenWrapper}>
-              <AnimatedLine
-                borderWidth={borderWidth}
-                horizontal={width < widthMobile}
-                className={styles.line}
-              />
-              {url ? (
-                <a
-                  href={url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(styles.children, styles.linkArea)}
-                >
-                  {children}
-                </a>
-              ) : onClick ? (
-                <motion.div
-                  onClick={onClick}
-                  className={cn(styles.children, styles.linkArea)}
-                  style={{ cursor: "pointer" }}
-                >
-                  {children}
-                </motion.div>
-              ) : (
-                <motion.div className={styles.children}>{children}</motion.div>
-              )}
-            </motion.div>
-          )}
-        </motion.div>
-      </AnimatedBorderBox>
-    </motion.div>
+        </AnimatedBorderBox>
+      </motion.div>
     </LayoutGroup>
   );
 };

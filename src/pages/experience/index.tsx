@@ -4,6 +4,7 @@ import ExperienceEntry from "@components/ExperienceEntry";
 import PageContents from "@components/Page/PageContents";
 import TypewriterText from "@components/TypewriterText";
 import { experienceData, experienceOrder } from "@data/experience";
+import { ANIMATION_DURATIONS } from "@config/animations";
 import styles from "./experience.module.scss";
 
 const experienceVariants = {
@@ -33,7 +34,7 @@ const Experience = () => {
       setPageOpen(false);
       const timer = setTimeout(() => {
         setPageOpen(true);
-      }, 10); // 10ms like main branch
+      }, ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY_MS);
       return () => clearTimeout(timer);
     } else {
       setPageOpen(false);
