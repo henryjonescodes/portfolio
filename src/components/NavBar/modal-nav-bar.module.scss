@@ -1,0 +1,45 @@
+@use '@styles'as styles;
+@use './nav-bar.module.scss'as navBar;
+
+.modalNavbar {
+  @include navBar.navBarContainer;
+  // z-index: 2;
+  // overflow: hidden;
+}
+
+.navbarBorder {
+  // width: 100%;
+  // height: 5px;
+}
+
+.contents {
+  @include navBar.navBarContents;
+  // padding: 16px;
+}
+
+.left {
+  @include navBar.navBarSection;
+  // grid-column: 1 / 2;
+  // justify-content: flex-start;
+}
+
+.center {
+  @include navBar.navBarSection;
+  // grid-column: 2 / 3;
+  // justify-self: center;
+}
+
+.title {
+  // margin: 0;
+  // color: var(--accent-primary);
+  // font-size: 1rem;
+  // font-weight: 400;
+  // white-space: nowrap;
+}
+
+.right {
+  @include navBar.navBarSection;
+  // grid-column: 3 / 4;
+  // justify-content: flex-end;
+  // gap: 8px;
+}

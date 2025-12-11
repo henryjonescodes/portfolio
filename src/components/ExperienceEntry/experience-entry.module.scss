@@ -62,14 +62,16 @@
     z-index: 1;
   }
 
-
-  .descriptionWrapper {
+  .descriptionContents {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 16px;
   }
+
+  .descriptionWrapper {}
+
 
   .childrenWrapper {
     aspect-ratio: 1.5;

@@ -113,6 +113,7 @@ const Experience = () => {
               pageOpen={pageOpen}
               inList={false}
               overlayStyle={overlayStyle}
+              onClose={handleClose}
             />
           </motion.div>
         )}

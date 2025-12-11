@@ -6,6 +6,7 @@ import { widthMobile } from "@styles/layout.constants.ts";
 import TypewriterText from "@components/TypewriterText";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import AnimatedLine from "@components/AnimatedLine";
+import ModalNavBar from "@components/NavBar/ModalNavBar";
 import { ANIMATION_DURATIONS } from "@config/animations";
 import styles from "./experience-entry.module.scss";
 
@@ -59,6 +60,7 @@ type ExperienceEntryProps = {
   isSelected?: boolean;
   overlayStyle?: React.CSSProperties;
   dateString?: string;
+  onClose?: () => void;
 } & (
   | {
       url?: string;
@@ -131,6 +133,7 @@ const ExperienceEntry = ({
   inList = false,
   isSelected = false,
   overlayStyle,
+  onClose,
 }: ExperienceEntryProps) => {
   const { id, title, subtitle, description, blurb, startDate, endDate } = data;
   const dateRange = dateString
@@ -224,37 +227,42 @@ const ExperienceEntry = ({
               animate={inList ? "animate" : "modalAnimate"}
               exit={inList ? "exit" : "modalExit"}
             >
-              {isOpen && (
-                <motion.div layoutId="bodyTitle">
-                  <motion.h2 layoutId="title">
-                    <TypewriterText text={title} />
-                  </motion.h2>
-                  {!!subtitle && (
-                    <motion.h3 layoutId="subtitle">{subtitle}</motion.h3>
-                  )}
-                  {!!dateRange && (
-                    <motion.p layoutId="date">{dateRange}</motion.p>
-                  )}
-                </motion.div>
-              )}
-              {description.map((desc, index) => (
-                <motion.p key={index}>
-                  <TypewriterText text={desc} />
-                </motion.p>
-              ))}
-              {isOpen && blurb && (
-                <motion.div
-                  variants={entryTextVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={{ delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY }}
-                >
-                  <motion.p>
-                    <TypewriterText text={blurb} />
+              {isOpen && <ModalNavBar title={title} onClose={onClose} />}
+              <motion.div className={styles.descriptionContents}>
+                {isOpen && (
+                  <motion.div layoutId="bodyTitle">
+                    <motion.h2 layoutId="title">
+                      <TypewriterText text={title} />
+                    </motion.h2>
+                    {!!subtitle && (
+                      <motion.h3 layoutId="subtitle">{subtitle}</motion.h3>
+                    )}
+                    {!!dateRange && (
+                      <motion.p layoutId="date">{dateRange}</motion.p>
+                    )}
+                  </motion.div>
+                )}
+                {description.map((desc, index) => (
+                  <motion.p key={index}>
+                    <TypewriterText text={desc} />
                   </motion.p>
-                </motion.div>
-              )}
+                ))}
+                {isOpen && blurb && (
+                  <motion.div
+                    variants={entryTextVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{
+                      delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY,
+                    }}
+                  >
+                    <motion.p>
+                      <TypewriterText text={blurb} />
+                    </motion.p>
+                  </motion.div>
+                )}
+              </motion.div>
             </motion.div>
             {children && (
               <motion.div className={styles.childrenWrapper}>
