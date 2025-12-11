@@ -107,17 +107,20 @@ const entryTextVariants = {
 
 // Modal container width/position animation
 const modalContainerVariants = {
-  animate: (overlayStyle: React.CSSProperties) => ({
+  animate: (overlayStyle: React.CSSProperties & { centeredTop?: number; centeredLeft?: number }) => ({
     width: overlayStyle.width,
     left: overlayStyle.left,
+    top: overlayStyle.top,
   }),
-  modalAnimate: {
+  modalAnimate: (overlayStyle: React.CSSProperties & { centeredTop?: number; centeredLeft?: number }) => ({
     width: "70%",
     left: "15%", // Centers at 50%: 15% left + 70% width + 15% right
-  },
-  modalExit: (overlayStyle: React.CSSProperties) => ({
+    top: overlayStyle.centeredTop,
+  }),
+  modalExit: (overlayStyle: React.CSSProperties & { centeredTop?: number; centeredLeft?: number }) => ({
     width: overlayStyle.width,
     left: overlayStyle.left,
+    top: overlayStyle.top,
   }),
 };
 

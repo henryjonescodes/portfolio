@@ -47,6 +47,12 @@ const Experience = () => {
     if (!entryElement) return;
 
     const rect = entryElement.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const viewportWidth = window.innerWidth;
+
+    // Calculate centered position
+    const centeredTop = (viewportHeight - rect.height) / 2;
+    const centeredLeft = (viewportWidth - rect.width) / 2;
 
     setOverlayStyle({
       position: "fixed",
@@ -54,6 +60,8 @@ const Experience = () => {
       left: rect.left,
       width: rect.width,
       height: rect.height,
+      centeredTop,
+      centeredLeft,
     });
 
     setIsClosing(false);
