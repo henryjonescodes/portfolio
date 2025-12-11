@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, createRef, useEffect } from "react";
 import ExperienceEntry from "@components/ExperienceEntry";
 import PageContents from "@components/Page/PageContents";
@@ -104,28 +104,30 @@ const Experience = () => {
       </motion.div>
 
       {/* Modal overlay */}
-      {selectedId && (
-        <motion.div
-          className={styles.overlay}
-          onClick={handleClose}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <ExperienceEntry
-            key={selectedId}
-            id={selectedId}
-            title={experienceData[selectedId].title}
-            subtitle={experienceData[selectedId].subtitle}
-            description={experienceData[selectedId].description}
-            startDate={experienceData[selectedId].startDate}
-            endDate={experienceData[selectedId].endDate}
-            pageOpen={pageOpen}
-            inList={false}
-            overlayStyle={overlayStyle}
-          />
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {selectedId && (
+          <motion.div
+            className={styles.overlay}
+            onClick={handleClose}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <ExperienceEntry
+              key={selectedId}
+              id={selectedId}
+              title={experienceData[selectedId].title}
+              subtitle={experienceData[selectedId].subtitle}
+              description={experienceData[selectedId].description}
+              startDate={experienceData[selectedId].startDate}
+              endDate={experienceData[selectedId].endDate}
+              pageOpen={pageOpen}
+              inList={false}
+              overlayStyle={overlayStyle}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </PageContents>
   );
 };
