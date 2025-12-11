@@ -19,6 +19,7 @@ const Experience = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({});
   const [pageOpen, setPageOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   // Create refs for each entry
   const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
@@ -30,7 +31,7 @@ const Experience = () => {
 
   // Delay pageOpen to trigger layout animations
   useEffect(() => {
-    if (selectedId) {
+    if (selectedId && !isClosing) {
       setPageOpen(false);
       const timer = setTimeout(() => {
         setPageOpen(true);
@@ -39,7 +40,7 @@ const Experience = () => {
     } else {
       setPageOpen(false);
     }
-  }, [selectedId]);
+  }, [selectedId, isClosing]);
 
   const handleEntryClick = (id: string) => {
     const entryElement = entryRefs.current[id].current;
@@ -48,14 +49,29 @@ const Experience = () => {
     const rect = entryElement.getBoundingClientRect();
 
     setOverlayStyle({
-      position: 'fixed',
+      position: "fixed",
       top: rect.top,
       left: rect.left,
       width: rect.width,
       height: rect.height,
     });
 
+    setIsClosing(false);
     setSelectedId(id);
+  };
+
+  const handleClose = () => {
+    setIsClosing(true);
+    setPageOpen(false);
+
+    // Wait for layout animation to reverse + exit animation
+    const totalDuration =
+      ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY_MS +
+      ANIMATION_DURATIONS.MODAL_CONTAINER * 1000;
+    setTimeout(() => {
+      setSelectedId(null);
+      setIsClosing(false);
+    }, totalDuration);
   };
 
   return (
@@ -91,34 +107,23 @@ const Experience = () => {
       {selectedId && (
         <motion.div
           className={styles.overlay}
-          onClick={() => setSelectedId(null)}
+          onClick={handleClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <motion.div
-            style={overlayStyle}
-            initial={{
-              width: overlayStyle.width,
-              left: overlayStyle.left
-            }}
-            animate={{
-              width: '70%',
-              left: '15%' // Centers at 50%: 15% left + 70% width + 15% right
-            }}
-          >
-            <ExperienceEntry
-              key={selectedId}
-              id={selectedId}
-              title={experienceData[selectedId].title}
-              subtitle={experienceData[selectedId].subtitle}
-              description={experienceData[selectedId].description}
-              startDate={experienceData[selectedId].startDate}
-              endDate={experienceData[selectedId].endDate}
-              pageOpen={pageOpen}
-              inList={false}
-            />
-          </motion.div>
+          <ExperienceEntry
+            key={selectedId}
+            id={selectedId}
+            title={experienceData[selectedId].title}
+            subtitle={experienceData[selectedId].subtitle}
+            description={experienceData[selectedId].description}
+            startDate={experienceData[selectedId].startDate}
+            endDate={experienceData[selectedId].endDate}
+            pageOpen={pageOpen}
+            inList={false}
+            overlayStyle={overlayStyle}
+          />
         </motion.div>
       )}
     </PageContents>

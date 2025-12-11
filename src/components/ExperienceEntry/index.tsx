@@ -58,6 +58,7 @@ type ExperienceEntryProps = {
   pageOpen?: boolean;
   inList?: boolean;
   isSelected?: boolean;
+  overlayStyle?: React.CSSProperties;
 } & (
   | {
       url?: string;
@@ -81,7 +82,7 @@ type ExperienceEntryProps = {
       }
   );
 
-// Animation variants
+// Animation variants for initial page paint-in
 const entryTextVariants = {
   initial: {
     opacity: 0,
@@ -99,6 +100,35 @@ const entryTextVariants = {
       duration: 0.3,
     },
   },
+  // Modal states - start at animate state, no paint-in effect
+  modalAnimate: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+  modalExit: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+    },
+  },
+};
+
+// Modal container width/position animation
+const modalContainerVariants = {
+  animate: (overlayStyle: React.CSSProperties) => ({
+    width: overlayStyle.width,
+    left: overlayStyle.left,
+  }),
+  modalAnimate: {
+    width: "70%",
+    left: "15%", // Centers at 50%: 15% left + 70% width + 15% right
+  },
+  modalExit: (overlayStyle: React.CSSProperties) => ({
+    width: overlayStyle.width,
+    left: overlayStyle.left,
+  }),
 };
 
 // TODO: discriminated union type for the props, see dates
@@ -118,6 +148,7 @@ const ExperienceEntry = ({
   pageOpen = false,
   inList = false,
   isSelected = false,
+  overlayStyle,
 }: ExperienceEntryProps) => {
   const dateRange = dateString
     ? dateString
@@ -126,8 +157,8 @@ const ExperienceEntry = ({
   const { embedded } = usePage();
   const isOpen = pageOpen && !inList;
 
-  return (
-    <LayoutGroup id={id}>
+  const containerContent = (
+    <>
       <motion.div
         ref={entryRef}
         layout
@@ -206,6 +237,9 @@ const ExperienceEntry = ({
               className={styles.descriptionWrapper}
               transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
               variants={entryTextVariants}
+              initial={inList ? "initial" : "animate"}
+              animate={inList ? "animate" : "modalAnimate"}
+              exit={inList ? "exit" : "modalExit"}
             >
               {isOpen && (
                 <motion.div layoutId="bodyTitle">
@@ -260,6 +294,25 @@ const ExperienceEntry = ({
           </motion.div>
         </AnimatedBorderBox>
       </motion.div>
+    </>
+  );
+
+  return (
+    <LayoutGroup id={id}>
+      {!inList && overlayStyle ? (
+        <motion.div
+          style={overlayStyle}
+          custom={overlayStyle}
+          variants={modalContainerVariants}
+          initial="animate"
+          animate="modalAnimate"
+          exit="modalExit"
+        >
+          {containerContent}
+        </motion.div>
+      ) : (
+        containerContent
+      )}
     </LayoutGroup>
   );
 };
