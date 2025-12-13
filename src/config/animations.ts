@@ -28,7 +28,7 @@ export const ANIMATION_DURATIONS = {
   TYPEWRITER_CHAR_STAGGER: 0.03,
 
   // Modal animations - DEBUG: Increase MODAL_BASE_DURATION to slow down all modal animations
-  MODAL_BASE_DURATION: 2.3,
+  MODAL_BASE_DURATION: 0.3,
   get MODAL_CONTAINER() { return this.MODAL_BASE_DURATION; },
   get MODAL_CONTENT() { return this.MODAL_BASE_DURATION * 0.9; },
   get MODAL_DATE_OPEN() { return this.MODAL_BASE_DURATION * 1.1; },

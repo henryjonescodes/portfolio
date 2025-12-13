@@ -57,12 +57,9 @@ const modalContainerVariants = {
   }),
   modalAnimate: () => ({
     width: "700px",
-    maxWidth: "500px",
+    maxWidth: "700px",
   }),
-  modalExit: (overlayStyle: React.CSSProperties) => ({
-    maxWidth: overlayStyle.width,
-    width: overlayStyle.width,
-  }),
+  modalExit: (overlayStyle: React.CSSProperties) => ({}),
 };
 
 const ExperienceEntry = ({
@@ -175,20 +172,30 @@ const ExperienceEntry = ({
               variants={entryTextVariants}
               initial={inList ? "initial" : "animate"}
               animate={inList ? "animate" : "modalAnimate"}
-              exit={inList ? "exit" : "modalExit"}
+              exit={inList ? "exit" : "animate"}
             >
               {isOpen && <ModalNavBar title={title} onClose={onClose} />}
               <motion.div className={styles.descriptionContents}>
                 {isOpen && (
-                  <motion.div layoutId="bodyTitle" transition={layoutTransition}>
+                  <motion.div
+                    layoutId="bodyTitle"
+                    transition={layoutTransition}
+                  >
                     <motion.h2 layoutId="title" transition={layoutTransition}>
                       <TypewriterText text={title} />
                     </motion.h2>
                     {!!subtitle && (
-                      <motion.h3 layoutId="subtitle" transition={layoutTransition}>{subtitle}</motion.h3>
+                      <motion.h3
+                        layoutId="subtitle"
+                        transition={layoutTransition}
+                      >
+                        {subtitle}
+                      </motion.h3>
                     )}
                     {!!dateRange && (
-                      <motion.p layoutId="date" transition={layoutTransition}>{dateRange}</motion.p>
+                      <motion.p layoutId="date" transition={layoutTransition}>
+                        {dateRange}
+                      </motion.p>
                     )}
                   </motion.div>
                 )}
