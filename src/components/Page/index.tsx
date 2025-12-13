@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 import { useLoading } from "@context/LoadingContext";
 import { useZoom } from "@context/ZoomContext";
 import { useAnimations } from "@context/AnimationContext";
+import { PageProviders } from "./PageProviders";
 
 import styles from "./page.module.scss";
 
@@ -70,45 +71,47 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
 
   return (
     <PageProvider embedded={embedded}>
-      <AnimatePresence>
-        <motion.div
-          key={"page"}
-          className={cn(styles.page, {
-            [styles.pageHandheld]: embedded,
-            [styles.pageDisabled]: zoomLevel === "info",
-          })}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          variants={pageVariants}
-          onAnimationComplete={(definition) => {
-            if (definition === "animate" && firstPageLoad) {
-              setFirstPageLoad(false);
-            }
-          }}
-        >
-          <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
-          <Suspense fallback={null}>
-            <LazyNavBar page={page} />
-          </Suspense>
+      <PageProviders>
+        <AnimatePresence>
           <motion.div
-            className={cn(styles.content, {
-              [styles.contentFullScreen]: !embedded,
+            key={"page"}
+            className={cn(styles.page, {
+              [styles.pageHandheld]: embedded,
+              [styles.pageDisabled]: zoomLevel === "info",
             })}
-            key="pageContent"
+            initial="initial"
+            animate="animate"
+            exit="exit"
             variants={pageVariants}
-            ref={contentRef}
+            onAnimationComplete={(definition) => {
+              if (definition === "animate" && firstPageLoad) {
+                setFirstPageLoad(false);
+              }
+            }}
           >
-            <motion.div className={styles.contentInner}>
-              <AnimatePresence mode="wait">
-                <Suspense fallback={null}>
-                  <LazyAnimatedOutlet key={page} />
-                </Suspense>
-              </AnimatePresence>
+            <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
+            <Suspense fallback={null}>
+              <LazyNavBar page={page} />
+            </Suspense>
+            <motion.div
+              className={cn(styles.content, {
+                [styles.contentFullScreen]: !embedded,
+              })}
+              key="pageContent"
+              variants={pageVariants}
+              ref={contentRef}
+            >
+              <motion.div className={styles.contentInner}>
+                <AnimatePresence mode="wait">
+                  <Suspense fallback={null}>
+                    <LazyAnimatedOutlet key={page} />
+                  </Suspense>
+                </AnimatePresence>
+              </motion.div>
             </motion.div>
           </motion.div>
-        </motion.div>
-      </AnimatePresence>
+        </AnimatePresence>
+      </PageProviders>
     </PageProvider>
   );
 };
