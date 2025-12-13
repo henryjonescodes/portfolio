@@ -9,7 +9,7 @@ import AnimatedLine from "@components/AnimatedLine";
 import ModalNavBar from "@components/NavBar/ModalNavBar";
 import { ANIMATION_DURATIONS } from "@config/animations";
 import styles from "./experience-entry.module.scss";
-import { usePage } from "@components/Page";
+import { usePage } from "@context/PageContext";
 import { formatDateRange } from "@utils/text";
 import type { ExperienceEntryProps } from "./types";
 

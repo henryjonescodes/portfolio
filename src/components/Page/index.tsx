@@ -1,14 +1,6 @@
 import cn from "classnames";
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  createContext,
-  lazy,
-  ReactNode,
-  Suspense,
-  useContext,
-  useEffect,
-  useRef,
-} from "react";
+import { lazy, Suspense, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 import { useLoading } from "@context/LoadingContext";
@@ -70,76 +62,48 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   }, [page]);
 
   return (
-    <PageProvider embedded={embedded}>
-      <PageProviders>
-        <AnimatePresence>
+    <PageProviders embedded={embedded}>
+      <AnimatePresence>
+        <motion.div
+          key={"page"}
+          className={cn(styles.page, {
+            [styles.pageHandheld]: embedded,
+            [styles.pageDisabled]: zoomLevel === "info",
+          })}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          variants={pageVariants}
+          onAnimationComplete={(definition) => {
+            if (definition === "animate" && firstPageLoad) {
+              setFirstPageLoad(false);
+            }
+          }}
+        >
+          <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
+          <Suspense fallback={null}>
+            <LazyNavBar page={page} />
+          </Suspense>
           <motion.div
-            key={"page"}
-            className={cn(styles.page, {
-              [styles.pageHandheld]: embedded,
-              [styles.pageDisabled]: zoomLevel === "info",
+            className={cn(styles.content, {
+              [styles.contentFullScreen]: !embedded,
             })}
-            initial="initial"
-            animate="animate"
-            exit="exit"
+            key="pageContent"
             variants={pageVariants}
-            onAnimationComplete={(definition) => {
-              if (definition === "animate" && firstPageLoad) {
-                setFirstPageLoad(false);
-              }
-            }}
+            ref={contentRef}
           >
-            <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
-            <Suspense fallback={null}>
-              <LazyNavBar page={page} />
-            </Suspense>
-            <motion.div
-              className={cn(styles.content, {
-                [styles.contentFullScreen]: !embedded,
-              })}
-              key="pageContent"
-              variants={pageVariants}
-              ref={contentRef}
-            >
-              <motion.div className={styles.contentInner}>
-                <AnimatePresence mode="wait">
-                  <Suspense fallback={null}>
-                    <LazyAnimatedOutlet key={page} />
-                  </Suspense>
-                </AnimatePresence>
-              </motion.div>
+            <motion.div className={styles.contentInner}>
+              <AnimatePresence mode="wait">
+                <Suspense fallback={null}>
+                  <LazyAnimatedOutlet key={page} />
+                </Suspense>
+              </AnimatePresence>
             </motion.div>
           </motion.div>
-        </AnimatePresence>
-      </PageProviders>
-    </PageProvider>
+        </motion.div>
+      </AnimatePresence>
+    </PageProviders>
   );
-};
-
-interface PageContextType {
-  embedded?: boolean;
-}
-
-const PageContext = createContext<PageContextType | undefined>(undefined);
-
-export const PageProvider = ({
-  children,
-  embedded,
-}: {
-  children: ReactNode;
-  embedded?: boolean;
-}) => {
-  return (
-    <PageContext.Provider value={{ embedded }}>{children}</PageContext.Provider>
-  );
-};
-
-export const usePage = () => {
-  const context = useContext(PageContext);
-  if (context === undefined) {
-    throw new Error("usePage must be used within an PageProvider");
-  }
-  return context;
 };
 
 export default Page;

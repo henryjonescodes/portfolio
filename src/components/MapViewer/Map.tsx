@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import AnimatedLine from "@components/AnimatedLine";
-import { usePage } from "@components/Page";
+import { usePage } from "@context/PageContext";
 import { MapContext } from "./MapContext";
 import styles from "./map-components.module.scss";
 import MapSlider from "./MapSlider";

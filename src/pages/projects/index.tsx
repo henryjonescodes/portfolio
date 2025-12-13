@@ -7,8 +7,8 @@ import { projectsData, projectsOrder } from "@data/projects";
 import { useModal } from "@context/ModalContext";
 import styles from "./projects.module.scss";
 import GlitchMedia from "@components/GlitchMedia";
-import { usePage } from "@components/Page";
 import cn from "classnames";
+import { usePage } from "@context/PageContext";
 
 const projectsVariants = {
   animate: {
@@ -105,7 +105,15 @@ const Projects = () => {
               key={`${id}-inList`}
               data={project}
               entryRef={entryRefs.current[id]}
-              onClick={() => openModal(project, entryRefs.current[id], getProjectMedia(id), project.url, project.dateString)}
+              onClick={() =>
+                openModal(
+                  project,
+                  entryRefs.current[id],
+                  getProjectMedia(id),
+                  project.url,
+                  project.dateString
+                )
+              }
               url={project.url}
               dateString={project.dateString}
               inList={true}

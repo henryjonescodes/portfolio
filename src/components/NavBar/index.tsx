@@ -16,7 +16,7 @@ import Pause from "@assets/svg/icons/pause.svg?react";
 import Play from "@assets/svg/icons/play.svg?react";
 import User from "@assets/svg/icons/user.svg?react";
 
-import { usePage } from "@components/Page";
+import { usePage } from "@context/PageContext";
 import { useZoom } from "@context/ZoomContext";
 import { useLoading } from "@context/LoadingContext";
 

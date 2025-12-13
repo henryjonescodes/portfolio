@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import { useSettings } from "@context/SettingsContext";
 import styles from "./page.module.scss";
 import { folder, useControls } from "leva";
-import { usePage } from ".";
+import { usePage } from "@context/PageContext";
 
 // Define the props interface
 export type PageContentsProps = {
@@ -31,51 +31,57 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
     fullscreenDelay,
     notFullscreenDelay,
   } = useControls("Page Contents", {
-    "Fade Transitions": folder({
-      transitionDuration: {
-        value: 0.1,
-        min: 0,
-        max: 0.5,
-        step: 0.05,
-        label: "Fade In",
-        hint: "How long page contents take to fade in",
+    "Fade Transitions": folder(
+      {
+        transitionDuration: {
+          value: 0.1,
+          min: 0,
+          max: 0.5,
+          step: 0.05,
+          label: "Fade In",
+          hint: "How long page contents take to fade in",
+        },
+        exitDuration: {
+          value: 0.1,
+          min: 0,
+          max: 0.5,
+          step: 0.05,
+          label: "Fade Out",
+          hint: "How long page contents take to fade out",
+        },
       },
-      exitDuration: {
-        value: 0.1,
-        min: 0,
-        max: 0.5,
-        step: 0.05,
-        label: "Fade Out",
-        hint: "How long page contents take to fade out",
-      },
-    }, { collapsed: false }),
+      { collapsed: false }
+    ),
 
-    "Timing Delays": folder({
-      staggerChildren: {
-        value: 0.5,
-        min: 0,
-        max: 1,
-        step: 0.05,
-        label: "Stagger Children",
-        hint: "Delay between animating each child element",
+    "Timing Delays": folder(
+      {
+        staggerChildren: {
+          value: 0.5,
+          min: 0,
+          max: 1,
+          step: 0.05,
+          label: "Stagger Children",
+          hint: "Delay between animating each child element",
+        },
+        fullscreenDelay: {
+          value: 0.3,
+          min: 0,
+          max: 2,
+          step: 0.1,
+          label: "Fullscreen Delay",
+          hint: "Delay before animating when in fullscreen (2D) mode",
+        },
+        notFullscreenDelay: {
+          value: 0.3,
+          min: 0,
+          max: 2,
+          step: 0.1,
+          label: "3D Embedded Delay",
+          hint: "Delay before animating when embedded in 3D scene",
+        },
       },
-      fullscreenDelay: {
-        value: 0.3,
-        min: 0,
-        max: 2,
-        step: 0.1,
-        label: "Fullscreen Delay",
-        hint: "Delay before animating when in fullscreen (2D) mode",
-      },
-      notFullscreenDelay: {
-        value: 0.3,
-        min: 0,
-        max: 2,
-        step: 0.1,
-        label: "3D Embedded Delay",
-        hint: "Delay before animating when embedded in 3D scene",
-      },
-    }, { collapsed: false }),
+      { collapsed: false }
+    ),
   });
 
   useEffect(() => {

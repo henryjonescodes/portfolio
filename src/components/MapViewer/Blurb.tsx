@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
 import { commonInitial } from "@styles/variants";
 import TypewriterText from "@components/TypewriterText";
-import { usePage } from "@components/Page";
+import { usePage } from "@context/PageContext";
 import { MapContext } from "./MapContext";
 import styles from "./map-components.module.scss";
 
