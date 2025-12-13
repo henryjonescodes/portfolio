@@ -13,6 +13,9 @@ import { usePage } from "@context/PageContext";
 import { formatDateRange } from "@utils/text";
 import type { ExperienceEntryProps } from "./types";
 
+// Shared layout transition for all layoutId elements
+const layoutTransition = { duration: ANIMATION_DURATIONS.MODAL_CONTAINER };
+
 // Animation variants for initial page paint-in
 const entryTextVariants = {
   initial: {
@@ -110,10 +113,10 @@ const ExperienceEntry = ({
         <motion.span
           layoutId="header"
           className={styles.header}
-          transition={{ duration: 0 }}
+          transition={layoutTransition}
         >
           <motion.div className={styles.title}>
-            <motion.h2 layoutId="title">
+            <motion.h2 layoutId="title" transition={layoutTransition}>
               <TypewriterText text={title} />
             </motion.h2>
             {!!dateRange && (
@@ -134,11 +137,11 @@ const ExperienceEntry = ({
               className={styles.subtitle}
               animate={{
                 transition: {
-                  delay: 0.5,
+                  delay: ANIMATION_DURATIONS.MODAL_BASE_DURATION * 1.43,
                 },
               }}
             >
-              <motion.h3 layoutId="subtitle">
+              <motion.h3 layoutId="subtitle" transition={layoutTransition}>
                 <TypewriterText text={subtitle} />
               </motion.h3>
             </motion.div>
@@ -163,7 +166,7 @@ const ExperienceEntry = ({
           <motion.div
             layoutId="body"
             className={styles.body}
-            transition={{ duration: 0 }}
+            transition={layoutTransition}
           >
             <motion.div
               layoutId="bodyContent"
@@ -177,15 +180,15 @@ const ExperienceEntry = ({
               {isOpen && <ModalNavBar title={title} onClose={onClose} />}
               <motion.div className={styles.descriptionContents}>
                 {isOpen && (
-                  <motion.div layoutId="bodyTitle">
-                    <motion.h2 layoutId="title">
+                  <motion.div layoutId="bodyTitle" transition={layoutTransition}>
+                    <motion.h2 layoutId="title" transition={layoutTransition}>
                       <TypewriterText text={title} />
                     </motion.h2>
                     {!!subtitle && (
-                      <motion.h3 layoutId="subtitle">{subtitle}</motion.h3>
+                      <motion.h3 layoutId="subtitle" transition={layoutTransition}>{subtitle}</motion.h3>
                     )}
                     {!!dateRange && (
-                      <motion.p layoutId="date">{dateRange}</motion.p>
+                      <motion.p layoutId="date" transition={layoutTransition}>{dateRange}</motion.p>
                     )}
                   </motion.div>
                 )}
@@ -258,6 +261,7 @@ const ExperienceEntry = ({
           initial="animate"
           animate="modalAnimate"
           exit="modalExit"
+          transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
           drag
           dragMomentum={false}
           dragElastic={0.1}
