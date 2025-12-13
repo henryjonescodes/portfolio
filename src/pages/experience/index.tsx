@@ -18,7 +18,12 @@ const experienceVariants = {
 
 const Experience = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({});
+  const [overlayStyle, setOverlayStyle] = useState<
+    React.CSSProperties & {
+      centeredTop?: number;
+      centeredLeft?: number;
+    }
+  >({});
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 

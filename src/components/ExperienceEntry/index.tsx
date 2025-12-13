@@ -89,8 +89,7 @@ const modalContainerVariants = {
   ) => ({
     width: "70%",
     maxWidth: "700px",
-    left: "15%", // Centers at 50%: 15% left + 70% width + 15% right
-    top: overlayStyle.centeredTop,
+    top: `calc(${overlayStyle.centeredTop}px - 100px)`,
   }),
   modalExit: (
     overlayStyle: React.CSSProperties & {
