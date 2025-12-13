@@ -7,11 +7,11 @@ import styles from "./modal-nav-bar.module.scss";
 
 const modalNavBarVariants = {
   initial: {
-    height: 0,
+    // height: 0,
     opacity: 0,
   },
   animate: {
-    height: "auto",
+    // height: "auto",
     opacity: 1,
     transition: {
       duration: ANIMATION_DURATIONS.MODAL_CONTAINER,

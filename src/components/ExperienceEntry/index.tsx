@@ -9,46 +9,9 @@ import AnimatedLine from "@components/AnimatedLine";
 import ModalNavBar from "@components/NavBar/ModalNavBar";
 import { ANIMATION_DURATIONS } from "@config/animations";
 import styles from "./experience-entry.module.scss";
-
 import { usePage } from "@components/Page";
-
-const formatDateRange = (startDate?: Date, endDate?: Date): string | null => {
-  const formatOptions: Intl.DateTimeFormatOptions = {
-    month: "short",
-    year: "numeric",
-  };
-
-  if (!startDate && endDate) {
-    return endDate.toLocaleDateString("en-US", formatOptions);
-  }
-  if (startDate && !endDate) {
-    return `${startDate.toLocaleDateString("en-US", formatOptions)} - Present`;
-  }
-  if (!startDate || !endDate) {
-    return null;
-  }
-
-  const sameYear = startDate.getFullYear() === endDate.getFullYear();
-  const sameMonth = sameYear && startDate.getMonth() === endDate.getMonth();
-
-  if (sameMonth) {
-    return startDate.toLocaleDateString("en-US", formatOptions);
-  }
-  if (sameYear) {
-    const startMonth = startDate.toLocaleDateString("en-US", {
-      month: "short",
-    });
-    const endMonth = endDate.toLocaleDateString("en-US", { month: "short" });
-    return `${startMonth} - ${endMonth} ${startDate.getFullYear()}`;
-  }
-
-  // Different years
-  const start = startDate.toLocaleDateString("en-US", formatOptions);
-  const end = endDate.toLocaleDateString("en-US", formatOptions);
-  return `${start} - ${end}`;
-};
-
-import type { ExperienceData } from "@data/experience";
+import { ExperienceData } from "@data/experience";
+import { formatDateRange } from "@utils/text";
 
 type ExperienceEntryProps = {
   data: ExperienceData;
@@ -113,8 +76,9 @@ const modalContainerVariants = {
       centeredLeft?: number;
     }
   ) => ({
-    width: overlayStyle.width,
+    maxWidth: overlayStyle.width,
     left: overlayStyle.left,
+    width: overlayStyle.width,
     top: overlayStyle.top,
   }),
   modalAnimate: (
@@ -124,6 +88,7 @@ const modalContainerVariants = {
     }
   ) => ({
     width: "70%",
+    maxWidth: "700px",
     left: "15%", // Centers at 50%: 15% left + 70% width + 15% right
     top: overlayStyle.centeredTop,
   }),

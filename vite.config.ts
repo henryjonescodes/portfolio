@@ -58,6 +58,7 @@ export default defineConfig({
       '@hooks': path.resolve(__dirname, './src/hooks'),
       '@config': path.resolve(__dirname, './src/config'),
       '@data': path.resolve(__dirname, './src/data'),
+      '@utils': path.resolve(__dirname, './src/utils'),
       '$three': path.resolve(__dirname, './src/three-exports.ts'),
     },
   },
