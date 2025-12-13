@@ -121,6 +121,10 @@ const ExperienceEntry = ({
         initial={false}
         animate={{
           opacity: inList && isSelected ? 0 : !inList ? 1 : 1,
+          transition: {
+            duration:
+              inList && isSelected ? 0 : ANIMATION_DURATIONS.MODAL_CONTAINER,
+          },
         }}
       >
         <motion.span

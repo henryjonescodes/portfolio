@@ -50,7 +50,9 @@ const Experience = () => {
     const rect = entryElement.getBoundingClientRect();
 
     // Get the page container
-    const pageContainer = document.querySelector('[class*="page"]:not([class*="pageContents"])') as HTMLElement;
+    const pageContainer = document.querySelector(
+      '[class*="page"]:not([class*="pageContents"])'
+    ) as HTMLElement;
     const pageRect = pageContainer?.getBoundingClientRect();
 
     if (!pageRect) return;
@@ -71,7 +73,8 @@ const Experience = () => {
     // Wait for layout animation to reverse + exit animation
     const totalDuration =
       (ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY +
-      ANIMATION_DURATIONS.MODAL_CONTAINER) * 1000;
+        ANIMATION_DURATIONS.MODAL_CONTAINER) *
+      1000;
     setTimeout(() => {
       setSelectedId(null);
       setIsClosing(false);
@@ -105,26 +108,32 @@ const Experience = () => {
       {selectedId &&
         createPortal(
           <AnimatePresence>
-            <motion.div
-              className={styles.overlay}
-              onClick={handleClose}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              <div onClick={(e) => e.stopPropagation()}>
-                <ExperienceEntry
-                  key={selectedId}
-                  data={experienceData[selectedId]}
-                  pageOpen={pageOpen}
-                  inList={false}
-                  overlayStyle={overlayStyle}
-                  onClose={handleClose}
-                />
-              </div>
-            </motion.div>
+            {selectedId && (
+              <motion.div
+                key="modal-overlay"
+                className={styles.overlay}
+                onClick={handleClose}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
+              >
+                <div onClick={(e) => e.stopPropagation()}>
+                  <ExperienceEntry
+                    key={selectedId}
+                    data={experienceData[selectedId]}
+                    pageOpen={pageOpen}
+                    inList={false}
+                    overlayStyle={overlayStyle}
+                    onClose={handleClose}
+                  />
+                </div>
+              </motion.div>
+            )}
           </AnimatePresence>,
-          document.querySelector('[class*="page"]:not([class*="pageContents"])') as HTMLElement
+          document.querySelector(
+            '[class*="page"]:not([class*="pageContents"])'
+          ) as HTMLElement
         )}
     </PageContents>
   );
