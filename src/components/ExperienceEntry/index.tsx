@@ -55,51 +55,32 @@ const entryTextVariants = {
   },
   // Modal states - start at animate state, no paint-in effect
   modalAnimate: {
-    opacity: 1,
+    // opacity: 1,
     transition: {
       duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
     },
   },
   modalExit: {
-    opacity: 1,
+    // opacity: 1,
     transition: {
       duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
     },
   },
 };
 
-// Modal container width/position animation
+// Modal container width animation
 const modalContainerVariants = {
-  animate: (
-    overlayStyle: React.CSSProperties & {
-      centeredTop?: number;
-      centeredLeft?: number;
-    }
-  ) => ({
+  animate: (overlayStyle: React.CSSProperties) => ({
     maxWidth: overlayStyle.width,
-    left: overlayStyle.left,
     width: overlayStyle.width,
-    top: overlayStyle.top,
   }),
-  modalAnimate: (
-    overlayStyle: React.CSSProperties & {
-      centeredTop?: number;
-      centeredLeft?: number;
-    }
-  ) => ({
-    width: "70%",
-    maxWidth: "700px",
-    top: `calc(${overlayStyle.centeredTop}px - 100px)`,
+  modalAnimate: () => ({
+    // width: "70%",
+    // maxWidth: "500px",
+    // Flexbox parent centers the modal
   }),
-  modalExit: (
-    overlayStyle: React.CSSProperties & {
-      centeredTop?: number;
-      centeredLeft?: number;
-    }
-  ) => ({
+  modalExit: (overlayStyle: React.CSSProperties) => ({
     width: overlayStyle.width,
-    left: overlayStyle.left,
-    top: overlayStyle.top,
   }),
 };
 

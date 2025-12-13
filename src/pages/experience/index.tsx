@@ -18,12 +18,7 @@ const experienceVariants = {
 
 const Experience = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [overlayStyle, setOverlayStyle] = useState<
-    React.CSSProperties & {
-      centeredTop?: number;
-      centeredLeft?: number;
-    }
-  >({});
+  const [overlayStyle, setOverlayStyle] = useState<React.CSSProperties>({});
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -60,22 +55,9 @@ const Experience = () => {
 
     if (!pageRect) return;
 
-    // Calculate position relative to page container
-    const relativeTop = rect.top - pageRect.top;
-    const relativeLeft = rect.left - pageRect.left;
-
-    // Calculate centered position within page container
-    const centeredTop = (pageRect.height - rect.height) / 2;
-    const centeredLeft = (pageRect.width - rect.width) / 2;
-
     setOverlayStyle({
-      position: "absolute",
-      top: relativeTop,
-      left: relativeLeft,
       width: rect.width,
       height: rect.height,
-      centeredTop,
-      centeredLeft,
     });
 
     setIsClosing(false);

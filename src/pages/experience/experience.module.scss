@@ -17,4 +17,9 @@
   z-index: 1000;
   background: rgba(0, 0, 0, 0.5);
   pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 3px solid yellow;
 }
