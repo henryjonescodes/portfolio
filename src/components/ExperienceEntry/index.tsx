@@ -107,43 +107,45 @@ const ExperienceEntry = ({
           },
         }}
       >
-        <motion.span
-          layoutId="header"
-          className={styles.header}
-          transition={layoutTransition}
-        >
-          <motion.div className={styles.title}>
-            <motion.h2 layoutId="title" transition={layoutTransition}>
-              <TypewriterText text={title} />
-            </motion.h2>
-            {!!dateRange && (
-              <motion.p
-                layoutId="date"
-                transition={{
-                  duration: pageOpen
-                    ? ANIMATION_DURATIONS.MODAL_DATE_OPEN
-                    : ANIMATION_DURATIONS.MODAL_CONTAINER,
+        {!isOpen && (
+          <motion.span
+            layoutId="header"
+            className={styles.header}
+            transition={layoutTransition}
+          >
+            <motion.div className={styles.title}>
+              <motion.h2 layoutId="title" transition={layoutTransition}>
+                <TypewriterText text={title} />
+              </motion.h2>
+              {!!dateRange && (
+                <motion.p
+                  layoutId="date"
+                  transition={{
+                    duration: pageOpen
+                      ? ANIMATION_DURATIONS.MODAL_DATE_OPEN
+                      : ANIMATION_DURATIONS.MODAL_CONTAINER,
+                  }}
+                >
+                  <TypewriterText text={dateRange} />
+                </motion.p>
+              )}
+            </motion.div>
+            {!!subtitle && (
+              <motion.div
+                className={styles.subtitle}
+                animate={{
+                  transition: {
+                    delay: ANIMATION_DURATIONS.MODAL_BASE_DURATION * 1.43,
+                  },
                 }}
               >
-                <TypewriterText text={dateRange} />
-              </motion.p>
+                <motion.h3 layoutId="subtitle" transition={layoutTransition}>
+                  <TypewriterText text={subtitle} />
+                </motion.h3>
+              </motion.div>
             )}
-          </motion.div>
-          {!!subtitle && (
-            <motion.div
-              className={styles.subtitle}
-              animate={{
-                transition: {
-                  delay: ANIMATION_DURATIONS.MODAL_BASE_DURATION * 1.43,
-                },
-              }}
-            >
-              <motion.h3 layoutId="subtitle" transition={layoutTransition}>
-                <TypewriterText text={subtitle} />
-              </motion.h3>
-            </motion.div>
-          )}
-        </motion.span>
+          </motion.span>
+        )}
 
         <AnimatedBorderBox
           className={styles.box}

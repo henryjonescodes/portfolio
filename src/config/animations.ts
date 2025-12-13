@@ -30,11 +30,11 @@ export const ANIMATION_DURATIONS = {
   // Modal animations - DEBUG: Increase MODAL_BASE_DURATION to slow down all modal animations
   MODAL_BASE_DURATION: 0.3,
   get MODAL_CONTAINER() { return this.MODAL_BASE_DURATION; },
-  get MODAL_CONTENT() { return this.MODAL_BASE_DURATION * 0.9; },
-  get MODAL_DATE_OPEN() { return this.MODAL_BASE_DURATION * 1.1; },
-  get MODAL_LAYOUT_DELAY() { return this.MODAL_BASE_DURATION * 1.23; },
-  get MODAL_BLURB_DELAY() { return this.MODAL_BASE_DURATION * 1.29; },
-  get MODAL_TEXT_PAINT_DURATION() { return this.MODAL_BASE_DURATION * 0.86; },
+  get MODAL_CONTENT() { return this.MODAL_BASE_DURATION * 0.1; },
+  get MODAL_DATE_OPEN_DURATION() { return this.MODAL_BASE_DURATION * 0.7; },
+  get MODAL_LAYOUT_DELAY() { return this.MODAL_BASE_DURATION * 0.1; },
+  get MODAL_BLURB_DELAY() { return this.MODAL_BASE_DURATION * 0.5; },
+  get MODAL_TEXT_PAINT_DURATION() { return this.MODAL_BASE_DURATION * 0.5; },
   get MODAL_TEXT_STAGGER() { return this.MODAL_BASE_DURATION * 1.71; },
 } as const;
 
