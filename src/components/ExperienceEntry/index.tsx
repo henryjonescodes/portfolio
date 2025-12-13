@@ -75,8 +75,8 @@ const modalContainerVariants = {
     width: overlayStyle.width,
   }),
   modalAnimate: () => ({
-    // width: "70%",
-    // maxWidth: "500px",
+    width: "700px",
+    maxWidth: "500px",
     // Flexbox parent centers the modal
   }),
   modalExit: (overlayStyle: React.CSSProperties) => ({
