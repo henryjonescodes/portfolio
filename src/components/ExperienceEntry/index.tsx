@@ -10,30 +10,8 @@ import ModalNavBar from "@components/NavBar/ModalNavBar";
 import { ANIMATION_DURATIONS } from "@config/animations";
 import styles from "./experience-entry.module.scss";
 import { usePage } from "@components/Page";
-import { ExperienceData } from "@data/experience";
 import { formatDateRange } from "@utils/text";
-
-type ExperienceEntryProps = {
-  data: ExperienceData;
-  borderWidth?: number;
-  children?: React.ReactNode;
-  entryRef?: React.RefObject<HTMLDivElement>;
-  pageOpen?: boolean;
-  inList?: boolean;
-  isSelected?: boolean;
-  overlayStyle?: React.CSSProperties;
-  dateString?: string;
-  onClose?: () => void;
-} & (
-  | {
-      url?: string;
-      onClick?: never;
-    }
-  | {
-      onClick?: () => void;
-      url?: never;
-    }
-);
+import type { ExperienceEntryProps } from "./types";
 
 // Animation variants for initial page paint-in
 const entryTextVariants = {

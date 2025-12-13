@@ -1,14 +1,6 @@
-export type ExperienceData = {
-  id: string;
-  title: string;
-  subtitle?: string;
-  description: string[];
-  blurb?: string;
-  startDate?: Date;
-  endDate?: Date;
-};
+import type { EntryData } from "@components/ExperienceEntry/types";
 
-export const experienceData: Record<string, ExperienceData> = {
+export const experienceData: Record<string, EntryData> = {
   arbor: {
     id: "arbor",
     title: "Arbor",
