@@ -87,11 +87,8 @@ export const ExperienceEntryModalProvider = ({
     setIsClosing(true);
     setPageOpen(false);
 
-    // Wait for layout animation to reverse + exit animation
-    const totalDuration =
-      (ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY +
-        ANIMATION_DURATIONS.MODAL_CONTAINER) *
-      1000;
+    // Wait for exit animation to complete
+    const totalDuration = ANIMATION_DURATIONS.MODAL_CONTAINER * 1000;
     setTimeout(() => {
       setSelectedEntry(null);
       setEntryRect(null);

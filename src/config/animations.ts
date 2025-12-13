@@ -27,14 +27,15 @@ export const ANIMATION_DURATIONS = {
   TYPEWRITER_CHAR_DURATION: 0.2,
   TYPEWRITER_CHAR_STAGGER: 0.03,
 
-  // Modal animations (all in seconds)
-  MODAL_CONTAINER: 0.35,
-  MODAL_CONTENT: 0.315, // 0.9x multiplier
-  MODAL_DATE_OPEN: 0.385, // 1.1x multiplier
-  MODAL_LAYOUT_DELAY: 0.43,
-  MODAL_BLURB_DELAY: 0.45,
-  MODAL_TEXT_PAINT_DURATION: 0.3,
-  MODAL_TEXT_STAGGER: 0.6,
+  // Modal animations - DEBUG: Increase MODAL_BASE_DURATION to slow down all modal animations
+  MODAL_BASE_DURATION: 1.3,
+  get MODAL_CONTAINER() { return this.MODAL_BASE_DURATION; },
+  get MODAL_CONTENT() { return this.MODAL_BASE_DURATION * 0.9; },
+  get MODAL_DATE_OPEN() { return this.MODAL_BASE_DURATION * 1.1; },
+  get MODAL_LAYOUT_DELAY() { return this.MODAL_BASE_DURATION * 1.23; },
+  get MODAL_BLURB_DELAY() { return this.MODAL_BASE_DURATION * 1.29; },
+  get MODAL_TEXT_PAINT_DURATION() { return this.MODAL_BASE_DURATION * 0.86; },
+  get MODAL_TEXT_STAGGER() { return this.MODAL_BASE_DURATION * 1.71; },
 } as const;
 
 /**

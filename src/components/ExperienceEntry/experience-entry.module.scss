@@ -97,6 +97,14 @@
   }
 }
 
+.inList {
+  background-color: rgb(143, 11, 59) !important;
+}
+
+.notInList {
+  background-color: rgb(36, 79, 198) !important;
+}
+
 @media (max-width: styles.$width-mobile) {
   .fullScreen {
     .box {

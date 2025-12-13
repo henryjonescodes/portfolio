@@ -92,6 +92,8 @@ const ExperienceEntry = ({
         layoutId={id}
         className={cn(styles.entry, {
           [styles.fullScreen]: !embedded,
+          [styles.inList]: inList,
+          [styles.notInList]: !inList,
         })}
         onClick={onClick}
         style={onClick ? { cursor: "pointer" } : undefined}
