@@ -114,8 +114,6 @@ const Projects = () => {
                   project.dateString
                 )
               }
-              url={project.url}
-              dateString={project.dateString}
               inList={true}
               isSelected={isSelected}
             >
