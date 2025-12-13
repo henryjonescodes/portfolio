@@ -47,12 +47,20 @@ const Experience = () => {
     if (!entryElement) return;
 
     const rect = entryElement.getBoundingClientRect();
-    const viewportHeight = window.innerHeight;
-    const viewportWidth = window.innerWidth;
 
-    // Calculate centered position
-    const centeredTop = (viewportHeight - rect.height) / 2;
-    const centeredLeft = (viewportWidth - rect.width) / 2;
+    // Get the page content wrapper (scrollable area)
+    const pageWrapper = document.querySelector('[class*="content"][class*="Inner"]') as HTMLElement;
+    const wrapperRect = pageWrapper?.getBoundingClientRect();
+
+    if (!wrapperRect) return;
+
+    // Calculate position relative to entry's current position in viewport
+    const relativeTop = rect.top - wrapperRect.top;
+    const relativeLeft = rect.left - wrapperRect.left;
+
+    // Calculate centered position within the wrapper viewport
+    const centeredTop = (wrapperRect.height - rect.height) / 2;
+    const centeredLeft = (wrapperRect.width - rect.width) / 2;
 
     setOverlayStyle({
       position: "fixed",
@@ -60,8 +68,8 @@ const Experience = () => {
       left: rect.left,
       width: rect.width,
       height: rect.height,
-      centeredTop,
-      centeredLeft,
+      centeredTop: wrapperRect.top + centeredTop,
+      centeredLeft: wrapperRect.left + centeredLeft,
     });
 
     setIsClosing(false);
