@@ -2,8 +2,6 @@
 
 .experience {
   @include styles.page-padding-vertical;
-  position: relative;
-  min-height: 100vh;
 
   >.content {
     @include styles.list-flex;

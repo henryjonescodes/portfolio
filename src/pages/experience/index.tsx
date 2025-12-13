@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, createRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import ExperienceEntry from "@components/ExperienceEntry";
 import PageContents from "@components/Page/PageContents";
 import TypewriterText from "@components/TypewriterText";
@@ -48,28 +49,28 @@ const Experience = () => {
 
     const rect = entryElement.getBoundingClientRect();
 
-    // Get the page content wrapper (scrollable area)
-    const pageWrapper = document.querySelector('[class*="content"][class*="Inner"]') as HTMLElement;
-    const wrapperRect = pageWrapper?.getBoundingClientRect();
+    // Get the page container
+    const pageContainer = document.querySelector('[class*="page"]:not([class*="pageContents"])') as HTMLElement;
+    const pageRect = pageContainer?.getBoundingClientRect();
 
-    if (!wrapperRect) return;
+    if (!pageRect) return;
 
-    // Calculate position relative to entry's current position in viewport
-    const relativeTop = rect.top - wrapperRect.top;
-    const relativeLeft = rect.left - wrapperRect.left;
+    // Calculate position relative to page container
+    const relativeTop = rect.top - pageRect.top;
+    const relativeLeft = rect.left - pageRect.left;
 
-    // Calculate centered position within the wrapper viewport
-    const centeredTop = (wrapperRect.height - rect.height) / 2;
-    const centeredLeft = (wrapperRect.width - rect.width) / 2;
+    // Calculate centered position within page container
+    const centeredTop = (pageRect.height - rect.height) / 2;
+    const centeredLeft = (pageRect.width - rect.width) / 2;
 
     setOverlayStyle({
-      position: "fixed",
-      top: rect.top,
-      left: rect.left,
+      position: "absolute",
+      top: relativeTop,
+      left: relativeLeft,
       width: rect.width,
       height: rect.height,
-      centeredTop: wrapperRect.top + centeredTop,
-      centeredLeft: wrapperRect.left + centeredLeft,
+      centeredTop,
+      centeredLeft,
     });
 
     setIsClosing(false);
@@ -113,29 +114,31 @@ const Experience = () => {
         })}
       </motion.div>
 
-      {/* Modal overlay */}
-      <AnimatePresence>
-        {selectedId && (
-          <motion.div
-            className={styles.overlay}
-            onClick={handleClose}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <div onClick={(e) => e.stopPropagation()}>
-              <ExperienceEntry
-                key={selectedId}
-                data={experienceData[selectedId]}
-                pageOpen={pageOpen}
-                inList={false}
-                overlayStyle={overlayStyle}
-                onClose={handleClose}
-              />
-            </div>
-          </motion.div>
+      {/* Modal overlay - portaled to page container */}
+      {selectedId &&
+        createPortal(
+          <AnimatePresence>
+            <motion.div
+              className={styles.overlay}
+              onClick={handleClose}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <div onClick={(e) => e.stopPropagation()}>
+                <ExperienceEntry
+                  key={selectedId}
+                  data={experienceData[selectedId]}
+                  pageOpen={pageOpen}
+                  inList={false}
+                  overlayStyle={overlayStyle}
+                  onClose={handleClose}
+                />
+              </div>
+            </motion.div>
+          </AnimatePresence>,
+          document.querySelector('[class*="page"]:not([class*="pageContents"])') as HTMLElement
         )}
-      </AnimatePresence>
     </PageContents>
   );
 };
