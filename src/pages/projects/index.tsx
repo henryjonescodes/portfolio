@@ -4,7 +4,7 @@ import ExperienceEntry from "@components/ExperienceEntry";
 import PageContents from "@components/Page/PageContents";
 import TypewriterText from "@components/TypewriterText";
 import { projectsData, projectsOrder } from "@data/projects";
-import { useModal } from "@context/ModalContext";
+import { useExperienceEntryModal } from "@components/ExperienceEntry/ExperienceEntryModalContext";
 import styles from "./projects.module.scss";
 import GlitchMedia from "@components/GlitchMedia";
 import cn from "classnames";
@@ -77,7 +77,7 @@ const getProjectMedia = (id: string) => {
 
 const Projects = () => {
   const { embedded } = usePage();
-  const { openModal, selectedEntry } = useModal();
+  const { openModal, selectedEntry } = useExperienceEntryModal();
 
   // Create refs for each entry
   const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(

@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { ModalProvider } from "@context/ModalContext";
+import { ExperienceEntryModalProvider } from "@components/ExperienceEntry/ExperienceEntryModalContext";
 import { PageProvider } from "@context/PageContext";
 
 /**
@@ -15,9 +15,7 @@ export function PageProviders({
 }) {
   return (
     <PageProvider embedded={embedded}>
-      <ModalProvider>
-        {children}
-      </ModalProvider>
+      <ExperienceEntryModalProvider>{children}</ExperienceEntryModalProvider>
     </PageProvider>
   );
 }

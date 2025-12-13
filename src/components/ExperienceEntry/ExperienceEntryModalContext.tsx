@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import ExperienceEntry from "@components/ExperienceEntry";
 import { ANIMATION_DURATIONS } from "@config/animations";
 import type { EntryData } from "@components/ExperienceEntry/types";
-import styles from "./modal.module.scss";
+import styles from "./experience-entry-modal.module.scss";
 
 type ModalContextType = {
   selectedEntry: EntryData | null;
@@ -22,28 +22,34 @@ type ModalContextType = {
   closeModal: () => void;
 };
 
-const ModalContext = createContext<ModalContextType | undefined>(undefined);
+const ExperienceEntryModalContext = createContext<ModalContextType | undefined>(
+  undefined
+);
 
-export const useModal = () => {
-  const context = useContext(ModalContext);
+export const useExperienceEntryModal = () => {
+  const context = useContext(ExperienceEntryModalContext);
   if (!context) {
     throw new Error("useModal must be used within ModalProvider");
   }
   return context;
 };
 
-type ModalProviderProps = {
+type ExperienceEntryModalProviderProps = {
   children: React.ReactNode;
 };
 
-export const ModalProvider = ({ children }: ModalProviderProps) => {
+export const ExperienceEntryModalProvider = ({
+  children,
+}: ExperienceEntryModalProviderProps) => {
   const [selectedEntry, setSelectedEntry] = useState<EntryData | null>(null);
   const [entryRect, setEntryRect] = useState<DOMRect | null>(null);
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
   const [modalUrl, setModalUrl] = useState<string | undefined>(undefined);
-  const [modalDateString, setModalDateString] = useState<string | undefined>(undefined);
+  const [modalDateString, setModalDateString] = useState<string | undefined>(
+    undefined
+  );
 
   // Delay pageOpen to trigger layout animations
   useEffect(() => {
@@ -83,7 +89,9 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
 
     // Wait for layout animation to reverse + exit animation
     const totalDuration =
-      (ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY + ANIMATION_DURATIONS.MODAL_CONTAINER) * 1000;
+      (ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY +
+        ANIMATION_DURATIONS.MODAL_CONTAINER) *
+      1000;
     setTimeout(() => {
       setSelectedEntry(null);
       setEntryRect(null);
@@ -102,7 +110,18 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     : {};
 
   return (
-    <ModalContext.Provider value={{ selectedEntry, openModal, closeModal, pageOpen, overlayStyle, modalChildren, modalUrl, modalDateString }}>
+    <ExperienceEntryModalContext.Provider
+      value={{
+        selectedEntry,
+        openModal,
+        closeModal,
+        pageOpen,
+        overlayStyle,
+        modalChildren,
+        modalUrl,
+        modalDateString,
+      }}
+    >
       {children}
 
       {/* Modal overlay rendered as sibling to page content */}
@@ -134,6 +153,6 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
           </motion.div>
         )}
       </AnimatePresence>
-    </ModalContext.Provider>
+    </ExperienceEntryModalContext.Provider>
   );
 };

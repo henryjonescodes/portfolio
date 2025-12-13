@@ -4,7 +4,7 @@ import ExperienceEntry from "@components/ExperienceEntry";
 import PageContents from "@components/Page/PageContents";
 import TypewriterText from "@components/TypewriterText";
 import { experienceData, experienceOrder } from "@data/experience";
-import { useModal } from "@context/ModalContext";
+import { useExperienceEntryModal } from "@components/ExperienceEntry/ExperienceEntryModalContext";
 import styles from "./experience.module.scss";
 
 const experienceVariants = {
@@ -16,7 +16,7 @@ const experienceVariants = {
 };
 
 const Experience = () => {
-  const { openModal, selectedEntry } = useModal();
+  const { openModal, selectedEntry } = useExperienceEntryModal();
 
   // Create refs for each entry
   const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
@@ -40,7 +40,9 @@ const Experience = () => {
               key={`${id}-inList`}
               data={experienceData[id]}
               entryRef={entryRefs.current[id]}
-              onClick={() => openModal(experienceData[id], entryRefs.current[id])}
+              onClick={() =>
+                openModal(experienceData[id], entryRefs.current[id])
+              }
               inList={true}
               isSelected={isSelected}
             />
