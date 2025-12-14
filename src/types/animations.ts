@@ -41,3 +41,6 @@ export type CategoryBaseScalars = typeof DEFAULT_CATEGORY_SCALARS;
 
 /** Transition scalars - Auto-derived from config via typeof */
 export type TransitionScalars = typeof DEFAULT_TRANSITION_SCALARS;
+
+/** Base type - Derived from AnimationBases keys */
+export type BaseType = keyof AnimationBases;

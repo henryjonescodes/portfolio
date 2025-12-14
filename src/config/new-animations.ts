@@ -15,6 +15,7 @@ import type {
   TransitionConfig,
   AnimationBases,
   SpringConfig,
+  BaseType,
 } from "../types";
 import type { InputWithSettings, NumberSettings } from "leva/plugin";
 
@@ -24,7 +25,7 @@ import type { InputWithSettings, NumberSettings } from "leva/plugin";
 
 type ScalarControl = InputWithSettings<
   number,
-  NumberSettings & { label: string; hint?: string }
+  NumberSettings & { label?: string; hint?: string; base: BaseType }
 >;
 
 type SectionMeta = {
@@ -45,6 +46,26 @@ const LEVA_DEFAULTS = {
   // Master control
   master: { min: 0.1, max: 3.0, step: 0.05 },
 } as const;
+
+// ============================================================================
+// LABEL AUTO-GENERATION
+// ============================================================================
+
+/** Convert FADE_IN_SCALAR → "Fade In" */
+function toTitleCase(str: string): string {
+  return str
+    .replace(/_SCALAR$/, '') // Remove _SCALAR suffix
+    .replace(/_/g, ' ')
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+}
+
+/** Generate label with base reference: "Fade In (×PAGE_BASE)" */
+export function generateLabel(key: string, base: BaseType): string {
+  const humanName = toTitleCase(key);
+  return `${humanName} (×${base})`;
+}
 
 // ============================================================================
 // ANIMATION SCALAR CONFIG - Single Source of Truth
@@ -95,58 +116,69 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "📄 Page Transitions", collapsed: true } as SectionMeta,
     PAGE_FADE_IN_SCALAR: {
       value: 1.0,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Fade In (×PAGE_BASE)",
       hint: "Page container fade in duration",
     } satisfies ScalarControl,
     PAGE_FADE_OUT_SCALAR: {
       value: 0.4,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Fade Out (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_ENTER_DELAY_SCALAR: {
       value: 0.2,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Enter Delay (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_FIRST_LOAD_DELAY_SCALAR: {
       value: 1.0,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "First Load Delay (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_CHILDREN_DELAY_SCALAR: {
       value: 0.4,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Children Delay (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR: {
       value: 0.4,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "First Load Children (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_CONTENTS_FADE_IN_SCALAR: {
       value: 0.2,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Contents Fade In (×PAGE_BASE)",
       hint: "Inner page contents fade in duration",
     } satisfies ScalarControl,
     PAGE_CONTENTS_FADE_OUT_SCALAR: {
       value: 0.2,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Contents Fade Out (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_CONTENTS_STAGGER_SCALAR: {
       value: 1.0,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Contents Stagger (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR: {
       value: 0.6,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Contents Fullscreen Delay (×PAGE_BASE)",
     } satisfies ScalarControl,
     PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR: {
       value: 0.6,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Contents 3D Delay (×PAGE_BASE)",
     } satisfies ScalarControl,
@@ -156,72 +188,86 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "🎭 Modal Animations", collapsed: true } as SectionMeta,
     MODAL_CONTAINER_DURATION_SCALAR: {
       value: 1.0,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Container (×MODAL_BASE)",
       hint: "Modal container layout transition",
     } satisfies ScalarControl,
     MODAL_NAVBAR_DURATION_SCALAR: {
       value: 0.67,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Navbar Duration (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_NAVBAR_DELAY_SCALAR: {
       value: 0.33,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Navbar Delay (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_NAVBAR_LINE_DURATION_SCALAR: {
       value: 1.5,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Navbar Line (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_NAVBAR_CHILDREN_DELAY_SCALAR: {
       value: 3.33,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Navbar Children Delay (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_CONTENT_DURATION_SCALAR: {
       value: 1.0,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Content (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_LAYOUT_DELAY_SCALAR: {
       value: 0.67,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Layout Delay (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_BLURB_DELAY_SCALAR: {
       value: 1.67,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Blurb Delay (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_TEXT_PAINT_DURATION_SCALAR: {
       value: 1.67,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Text Paint (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_TEXT_STAGGER_SCALAR: {
       value: 5.7,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Text Stagger (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_HEADER_TEXT_DURATION_SCALAR: {
       value: 6.67,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Header Text Duration (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_HEADER_TEXT_DELAY_SCALAR: {
       value: 6.67,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Header Text Delay (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_DATE_DURATION_SCALAR: {
       value: 1.1,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Date Duration (×MODAL_BASE)",
     } satisfies ScalarControl,
     MODAL_OVERLAY_DURATION_SCALAR: {
       value: 1.0,
+      base: 'MODAL_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Overlay (×MODAL_BASE)",
     } satisfies ScalarControl,
@@ -231,66 +277,79 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "🧭 Navigation", collapsed: true } as SectionMeta,
     NAV_ITEM_FADE_SCALAR: {
       value: 1.0,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Item Fade (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_ITEM_DELAY_SCALAR: {
       value: 1.0,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Item Delay (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Stagger (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_EXIT_SCALAR: {
       value: 0.5,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Exit (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_MINIMAL_DELAY_SCALAR: {
       value: 1.17,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Minimal Delay (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_MINIMAL_DURATION_SCALAR: {
       value: 0.83,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Minimal Duration (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_MINIMAL_EXIT_SCALAR: {
       value: 0.5,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Minimal Exit (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_HOME_FIRST_LOAD_DELAY_SCALAR: {
       value: 4.33,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Home First Load Delay (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_ITEM_BORDER_DURATION_SCALAR: {
       value: 0.83,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Item Border Duration (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_ITEM_BORDER_DELAY_SCALAR: {
       value: 2.5,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Item Border Delay (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_ITEM_BORDER_EXIT_SCALAR: {
       value: 0.5,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Item Border Exit (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_BUTTON_ACTIVE_SCALAR: {
       value: 0.33,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Button Active (×NAV_BASE)",
     } satisfies ScalarControl,
     NAV_BUTTON_INACTIVE_SCALAR: {
       value: 0.5,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Button Inactive (×NAV_BASE)",
     } satisfies ScalarControl,
@@ -300,26 +359,31 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "✍️ Text Effects", collapsed: true } as SectionMeta,
     TYPEWRITER_CHAR_SCALAR: {
       value: 1.0,
+      base: 'TEXT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Typewriter Char (×TEXT_BASE)",
     } satisfies ScalarControl,
     TYPEWRITER_STAGGER_SCALAR: {
       value: 0.15,
+      base: 'TEXT_BASE' as BaseType,
       ...LEVA_DEFAULTS.fine,
       label: "Typewriter Stagger (×TEXT_BASE)",
     } satisfies ScalarControl,
     TYPEWRITER_EXIT_SCALAR: {
       value: 1.5,
+      base: 'TEXT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Typewriter Exit (×TEXT_BASE)",
     } satisfies ScalarControl,
     NAV_ITEM_TEXT_STAGGER_SCALAR: {
       value: 0.15,
+      base: 'TEXT_BASE' as BaseType,
       ...LEVA_DEFAULTS.fine,
       label: "Nav Item Text Stagger (×TEXT_BASE)",
     } satisfies ScalarControl,
     STAT_TRACKER_TEXT_STAGGER_SCALAR: {
       value: 0.15,
+      base: 'TEXT_BASE' as BaseType,
       ...LEVA_DEFAULTS.fine,
       label: "Stat Tracker Text Stagger (×TEXT_BASE)",
     } satisfies ScalarControl,
@@ -329,86 +393,103 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "ℹ️ About Page", collapsed: true } as SectionMeta,
     ABOUT_HERO_DURATION_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Hero Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_HERO_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Hero Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_MAP_DURATION_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Map Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_MAP_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Map Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_SOCIALS_DELAY_SCALAR: {
       value: 5.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Socials Delay (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_SOCIALS_DELAY_CHILDREN_SCALAR: {
       value: 5.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Socials Delay Children (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_SOCIALS_DURATION_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Socials Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_SOCIALS_STAGGER_SCALAR: {
       value: 1.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Socials Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_STATS_DURATION_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Stats Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_STATS_STAGGER_SCALAR: {
       value: 1.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Stats Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_TAGS_DELAY_SCALAR: {
       value: 3.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Tags Delay (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_TAGS_DELAY_CHILDREN_SCALAR: {
       value: 3.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Tags Delay Children (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_TAGS_DURATION_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Tags Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_TAGS_STAGGER_SCALAR: {
       value: 1.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Tags Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_AVATAR_DELAY_SCALAR: {
       value: 5.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Avatar Delay (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_AVATAR_DURATION_SCALAR: {
       value: 8.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Avatar Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ABOUT_AVATAR_EXIT_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Avatar Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
@@ -418,21 +499,25 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "Stat Tracker", collapsed: true } as SectionMeta,
     STAT_TRACKER_ANIMATE_STAGGER_SCALAR: {
       value: 1.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Animate Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     STAT_TRACKER_EXIT_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Exit Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     STAT_TRACKER_BLOCK_DURATION_SCALAR: {
       value: 0.23,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Block Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     STAT_TRACKER_BLOCK_DELAY_SCALAR: {
       value: 0.23,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Block Delay (×COMPONENT_BASE)",
     } satisfies ScalarControl,
@@ -442,31 +527,37 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "General Components", collapsed: true } as SectionMeta,
     BORDER_BOX_ANIMATE_SCALAR: {
       value: 5.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Border Box Animate (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     BORDER_BOX_EXIT_SCALAR: {
       value: 3.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Border Box Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ANIMATED_LINE_SCALAR: {
       value: 3.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Animated Line (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ICON_ANIMATE_SCALAR: {
       value: 1.67,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Icon Animate (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     ICON_EXIT_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Icon Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     COMMON_EXIT_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Common Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
@@ -476,21 +567,25 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "Loading", collapsed: true } as SectionMeta,
     LOADING_PAGE_DURATION_SCALAR: {
       value: 1.67,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Page Duration (×PAGE_BASE)",
     } satisfies ScalarControl,
     LOADING_PAGE_DELAY_SCALAR: {
       value: 0,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Page Delay (×PAGE_BASE)",
     } satisfies ScalarControl,
     LOADING_EXIT_DURATION_SCALAR: {
       value: 1.0,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Exit Duration (×PAGE_BASE)",
     } satisfies ScalarControl,
     LOADING_EXIT_DELAY_SCALAR: {
       value: 6.5,
+      base: 'PAGE_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Exit Delay (×PAGE_BASE)",
     } satisfies ScalarControl,
@@ -500,46 +595,55 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "Map Viewer", collapsed: true } as SectionMeta,
     MAP_CONTENT_SCALAR: {
       value: 7.67,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Content (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_EXIT_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_BLURB_DURATION_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Blurb Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_BLURB_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Blurb Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_BLURB_EXIT_SCALAR: {
       value: 0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Blurb Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_SLIDER_DURATION_SCALAR: {
       value: 0.67,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Slider Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_SLIDER_STAGGER_SCALAR: {
       value: 0.17,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.fine,
       label: "Slider Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_SLIDER_EXIT_DURATION_SCALAR: {
       value: 0.67,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Slider Exit Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     MAP_SLIDER_EXIT_STAGGER_SCALAR: {
       value: 0.07,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.fine,
       label: "Slider Exit Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
@@ -549,21 +653,25 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "Projects", collapsed: true } as SectionMeta,
     PROJECTS_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     PROJECTS_ENTRY_SCALAR: {
       value: 7.67,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Entry (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     PROJECTS_EXIT_SCALAR: {
       value: 1.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     PROJECTS_TITLE_STAGGER_SCALAR: {
       value: 0.25,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.fine,
       label: "Title Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
@@ -573,11 +681,13 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "Experience", collapsed: true } as SectionMeta,
     EXPERIENCE_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     EXPERIENCE_TITLE_STAGGER_SCALAR: {
       value: 0.25,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.fine,
       label: "Title Stagger (×COMPONENT_BASE)",
     } satisfies ScalarControl,
@@ -587,6 +697,7 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "Home", collapsed: true } as SectionMeta,
     HOME_MENU_STAGGER_SCALAR: {
       value: 0.33,
+      base: 'NAV_BASE' as BaseType,
       ...LEVA_DEFAULTS.standard,
       label: "Menu Stagger (×NAV_BASE)",
     } satisfies ScalarControl,
@@ -596,16 +707,19 @@ export const ANIMATION_SCALAR_CONFIG = {
     _meta: { title: "Scene/Canvas", collapsed: true } as SectionMeta,
     SCENE_CLOSE_BUTTON_DELAY_SCALAR: {
       value: 5.0,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Close Button Delay (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     SCENE_CLOSE_BUTTON_DURATION_SCALAR: {
       value: 6.67,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Close Button Duration (×COMPONENT_BASE)",
     } satisfies ScalarControl,
     SCENE_CLOSE_BUTTON_EXIT_SCALAR: {
       value: 3.33,
+      base: 'COMPONENT_BASE' as BaseType,
       ...LEVA_DEFAULTS.extended,
       label: "Close Button Exit (×COMPONENT_BASE)",
     } satisfies ScalarControl,
