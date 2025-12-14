@@ -11,11 +11,10 @@ const modalNavBarVariants = {
     opacity: 0,
   },
   animate: {
-    // height: "auto",
     opacity: 1,
     transition: {
-      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
-      delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY,
+      duration: ANIMATION_DURATIONS.MODAL_NAVBAR_DURATION,
+      delay: ANIMATION_DURATIONS.MODAL_NAVBAR_DELAY,
       delayChildren: 1,
     },
   },
@@ -54,6 +53,7 @@ const ModalNavBar = ({ title, onClose }: ModalNavBarProps) => {
           className={styles.navbarBorder}
           borderWidth={5}
           horizontal
+          animationDuration={ANIMATION_DURATIONS.MODAL_NAVBAR_LINE_DURATION}
         />
       </motion.div>
     </motion.div>
