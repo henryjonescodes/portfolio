@@ -59,6 +59,7 @@ export default defineConfig({
       '@config': path.resolve(__dirname, './src/config'),
       '@data': path.resolve(__dirname, './src/data'),
       '@utils': path.resolve(__dirname, './src/utils'),
+      '@types': path.resolve(__dirname, './src/types'),
       '$three': path.resolve(__dirname, './src/three-exports.ts'),
     },
   },
