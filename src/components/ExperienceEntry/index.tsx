@@ -66,6 +66,34 @@ const entryTextVariants = {
     },
   },
 };
+const bodyVariants = {
+  initial: {
+    transition: {
+      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
+    },
+  },
+  animate: {
+    transition: {
+      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
+    },
+  },
+  exit: {
+    transition: {
+      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
+    },
+  },
+  // Modal states - start at animate state, no paint-in effect
+  modalAnimate: {
+    transition: {
+      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
+    },
+  },
+  modalExit: {
+    transition: {
+      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
+    },
+  },
+};
 
 // Modal container width animation
 const modalContainerVariants = {
@@ -79,7 +107,7 @@ const modalContainerVariants = {
     maxWidth: "700px",
     transition: { duration: ANIMATION_DURATIONS.MODAL_CONTAINER },
   }),
-  modalExit: (overlayStyle: React.CSSProperties) => ({
+  modalExit: () => ({
     transition: { duration: ANIMATION_DURATIONS.MODAL_CONTAINER },
   }),
 };
@@ -88,7 +116,6 @@ const ExperienceEntry = ({
   data,
   borderWidth = 2.5,
   children,
-  dateString,
   url,
   onClick,
   entryRef,
@@ -98,7 +125,16 @@ const ExperienceEntry = ({
   overlayStyle,
   onClose,
 }: ExperienceEntryProps) => {
-  const { id, title, subtitle, description, blurb, startDate, endDate } = data;
+  const {
+    id,
+    title,
+    subtitle,
+    description,
+    blurb,
+    startDate,
+    endDate,
+    dateString,
+  } = data;
   const dateRange = dateString
     ? dateString
     : formatDateRange(startDate, endDate);
@@ -136,24 +172,11 @@ const ExperienceEntry = ({
             transition={layoutTransition}
           >
             <motion.div className={styles.title}>
-              <motion.h2
-                layoutId="title"
-                // transition={headerTextTransition}
-                variants={headerTextVariants}
-              >
+              <motion.h2 layoutId="title" variants={headerTextVariants}>
                 <TypewriterText text={title} />
               </motion.h2>
               {!!dateRange && (
-                <motion.p
-                  layoutId="date"
-                  // transition={headerTextTransition}
-                  variants={headerTextVariants}
-                  // transition={{
-                  //   duration: pageOpen
-                  //     ? ANIMATION_DURATIONS.MODAL_DATE_OPEN
-                  //     : ANIMATION_DURATIONS.MODAL_CONTAINER,
-                  // }}
-                >
+                <motion.p layoutId="date" variants={headerTextVariants}>
                   <TypewriterText text={dateRange} />
                 </motion.p>
               )}
@@ -161,15 +184,7 @@ const ExperienceEntry = ({
             {!!subtitle && (
               <motion.div
                 className={styles.subtitle}
-                // transition={headerTextTransition}
                 variants={headerTextVariants}
-                animate={
-                  {
-                    // transition: {
-                    //   delay: ANIMATION_DURATIONS.MODAL_BASE_DURATION * 1.43,
-                    // },
-                  }
-                }
               >
                 <motion.h3 layoutId="subtitle" transition={layoutTransition}>
                   <TypewriterText text={subtitle} />
@@ -197,69 +212,113 @@ const ExperienceEntry = ({
           <motion.div
             layoutId="body"
             className={styles.body}
-            transition={layoutTransition}
+            variants={bodyVariants}
+            // transition={layoutTransition}
+            initial={inList ? "initial" : "animate"}
+            animate={inList ? "animate" : "modalAnimate"}
+            exit={inList ? "exit" : "animate"}
           >
             <motion.div
               layoutId="bodyContent"
               className={styles.descriptionWrapper}
               transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
               variants={entryTextVariants}
-              initial={inList ? "initial" : "animate"}
-              animate={inList ? "animate" : "modalAnimate"}
-              exit={inList ? "exit" : "animate"}
             >
               {isOpen && <ModalNavBar title={title} onClose={onClose} />}
               <motion.div className={styles.descriptionContents}>
-                {isOpen && (
-                  <motion.div
-                    layoutId="bodyTitle"
-                    transition={layoutTransition}
-                  >
-                    <motion.h2 layoutId="title" transition={layoutTransition}>
-                      <TypewriterText text={title} />
-                    </motion.h2>
-                    {!!subtitle && (
-                      <motion.h3
-                        layoutId="subtitle"
-                        transition={layoutTransition}
-                      >
-                        {subtitle}
-                      </motion.h3>
-                    )}
-                    {!!dateRange && (
-                      <motion.p layoutId="date" transition={layoutTransition}>
-                        {dateRange}
-                      </motion.p>
-                    )}
-                  </motion.div>
-                )}
-                {description.map((desc, index) => (
-                  <motion.p key={index}>
-                    <TypewriterText text={desc} />
-                  </motion.p>
-                ))}
-                {isOpen && blurb && (
-                  <motion.div
-                    variants={entryTextVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    transition={{
-                      delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY,
-                    }}
-                  >
-                    <motion.p>
-                      <TypewriterText text={blurb} />
+                <motion.div className={styles.descriptionText}>
+                  {isOpen && (
+                    <motion.div
+                      layoutId="bodyTitle"
+                      transition={layoutTransition}
+                    >
+                      <motion.h2 layoutId="title" transition={layoutTransition}>
+                        <TypewriterText text={title} />
+                      </motion.h2>
+                      {!!subtitle && (
+                        <motion.h3
+                          layoutId="subtitle"
+                          transition={layoutTransition}
+                        >
+                          {subtitle}
+                        </motion.h3>
+                      )}
+                      {!!dateRange && (
+                        <motion.p layoutId="date" transition={layoutTransition}>
+                          {dateRange}
+                        </motion.p>
+                      )}
+                    </motion.div>
+                  )}
+                  {description.map((desc, index) => (
+                    <motion.p key={index}>
+                      <TypewriterText text={desc} />
                     </motion.p>
+                  ))}
+                  {isOpen && blurb && (
+                    <motion.div
+                      variants={entryTextVariants}
+                      initial="initial"
+                      animate="animate"
+                      exit="exit"
+                      transition={{
+                        delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY,
+                      }}
+                    >
+                      <motion.p>
+                        <TypewriterText text={blurb} />
+                      </motion.p>
+                    </motion.div>
+                  )}
+                </motion.div>
+                {children && inList && (
+                  <motion.div
+                    className={styles.childrenWrapper}
+                    layoutId="childrenWrapper"
+                    transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
+                  >
+                    <AnimatedLine
+                      borderWidth={borderWidth}
+                      horizontal={width < widthMobile}
+                      className={styles.line}
+                    />
+                    {url ? (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(styles.children, styles.linkArea)}
+                      >
+                        {children}
+                      </a>
+                    ) : onClick ? (
+                      <motion.div
+                        onClick={onClick}
+                        className={cn(styles.children, styles.linkArea)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {children}
+                      </motion.div>
+                    ) : (
+                      <motion.div className={styles.children}>
+                        {children}
+                      </motion.div>
+                    )}
                   </motion.div>
                 )}
               </motion.div>
             </motion.div>
-            {children && (
-              <motion.div className={styles.childrenWrapper}>
+            {children && !inList && (
+              <motion.div
+                className={cn(styles.childrenWrapper, {
+                  [styles.childrenWrapperModal]: !inList,
+                })}
+                layoutId="childrenWrapper"
+                transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
+              >
                 <AnimatedLine
                   borderWidth={borderWidth}
-                  horizontal={width < widthMobile}
+                  horizontal={true}
                   className={styles.line}
                 />
                 {url ? (
@@ -296,13 +355,11 @@ const ExperienceEntry = ({
     <LayoutGroup id={id}>
       {!inList && overlayStyle ? (
         <motion.div
-          style={overlayStyle}
           custom={overlayStyle}
           variants={modalContainerVariants}
           initial="animate"
           animate="modalAnimate"
           exit="modalExit"
-          // transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
           drag
           dragMomentum={false}
           dragElastic={0.1}
