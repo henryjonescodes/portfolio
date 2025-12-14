@@ -12,6 +12,8 @@ import styles from "./experience-entry.module.scss";
 import { usePage } from "@context/PageContext";
 import { formatDateRange } from "@utils/text";
 import type { ExperienceEntryProps } from "./types";
+import GlitchIconItem from "@components/GlitchIconItem";
+import GitHub from "@assets/svg/socials/github.svg?react";
 
 // Shared layout transition for all layoutId elements
 const layoutTransition = { duration: ANIMATION_DURATIONS.MODAL_CONTAINER };
@@ -134,6 +136,7 @@ const ExperienceEntry = ({
     startDate,
     endDate,
     dateString,
+    tools,
   } = data;
   const dateRange = dateString
     ? dateString
@@ -220,54 +223,76 @@ const ExperienceEntry = ({
           >
             <motion.div
               layoutId="bodyContent"
-              className={styles.descriptionWrapper}
+              className={styles.description}
               transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
               variants={entryTextVariants}
             >
               {isOpen && <ModalNavBar title={title} onClose={onClose} />}
               <motion.div className={styles.descriptionContents}>
-                <motion.div className={styles.descriptionText}>
-                  {isOpen && (
-                    <motion.div
-                      layoutId="bodyTitle"
-                      transition={layoutTransition}
-                    >
-                      <motion.h2 layoutId="title" transition={layoutTransition}>
-                        <TypewriterText text={title} />
-                      </motion.h2>
-                      {!!subtitle && (
-                        <motion.h3
-                          layoutId="subtitle"
+                <motion.div className={styles.descriptionContentsFlex}>
+                  <motion.div className={styles.text}>
+                    {isOpen && (
+                      <motion.div
+                        layoutId="bodyTitle"
+                        transition={layoutTransition}
+                      >
+                        <motion.h2
+                          layoutId="title"
                           transition={layoutTransition}
                         >
-                          {subtitle}
-                        </motion.h3>
-                      )}
-                      {!!dateRange && (
-                        <motion.p layoutId="date" transition={layoutTransition}>
-                          {dateRange}
-                        </motion.p>
-                      )}
-                    </motion.div>
-                  )}
-                  {description.map((desc, index) => (
-                    <motion.p key={index}>
-                      <TypewriterText text={desc} />
-                    </motion.p>
-                  ))}
-                  {isOpen && blurb && (
-                    <motion.div
-                      variants={entryTextVariants}
-                      initial="initial"
-                      animate="animate"
-                      exit="exit"
-                      transition={{
-                        delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY,
-                      }}
-                    >
-                      <motion.p>
-                        <TypewriterText text={blurb} />
+                          <TypewriterText text={title} />
+                        </motion.h2>
+                        {!!subtitle && (
+                          <motion.h3
+                            layoutId="subtitle"
+                            transition={layoutTransition}
+                          >
+                            {subtitle}
+                          </motion.h3>
+                        )}
+                        {!!dateRange && (
+                          <motion.p
+                            layoutId="date"
+                            transition={layoutTransition}
+                          >
+                            {dateRange}
+                          </motion.p>
+                        )}
+                      </motion.div>
+                    )}
+                    {description.map((desc, index) => (
+                      <motion.p key={index}>
+                        <TypewriterText text={desc} />
                       </motion.p>
+                    ))}
+                    {isOpen && blurb && (
+                      <motion.div
+                        variants={entryTextVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                        transition={{
+                          delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY,
+                        }}
+                      >
+                        <motion.p>
+                          <TypewriterText text={blurb} />
+                        </motion.p>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                  {!!tools && (
+                    <motion.div className={styles.tools}>
+                      <AnimatedLine
+                        borderWidth={borderWidth}
+                        horizontal={true}
+                        className={styles.line}
+                      />
+                      {tools.map((t, index) => (
+                        <GlitchIconItem key={index} Icon={t.Icon}>
+                          {t.label}
+                        </GlitchIconItem>
+                      ))}
                     </motion.div>
                   )}
                 </motion.div>
