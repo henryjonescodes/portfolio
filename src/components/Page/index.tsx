@@ -22,7 +22,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   const { firstPageLoad, setFirstPageLoad } = useLoading();
 
   const { zoomLevel } = useZoom();
-  const { durations } = useAnimations();
+  const { TRANSITIONS } = useAnimations();
 
   const pageVariants = {
     initial: {
@@ -30,23 +30,11 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
     },
     animate: {
       opacity: 1,
-      transition: {
-        duration: firstPageLoad ? 0 : durations.PAGE_FADE_IN,
-        delay: firstPageLoad
-          ? durations.PAGE_FIRST_LOAD_DELAY
-          : durations.PAGE_ENTER_DELAY,
-        delayChildren: firstPageLoad
-          ? durations.PAGE_FIRST_LOAD_DELAY_CHILDREN
-          : durations.PAGE_DELAY_CHILDREN,
-        when: "beforeChildren",
-      },
+      transition: firstPageLoad ? TRANSITIONS.PAGE_ANIMATE_FIRST_LOAD : TRANSITIONS.PAGE_ANIMATE_NORMAL,
     },
     exit: {
       opacity: 0,
-      transition: {
-        duration: durations.PAGE_FADE_OUT,
-        when: "beforeChildren",
-      },
+      transition: TRANSITIONS.PAGE_EXIT,
     },
   };
 

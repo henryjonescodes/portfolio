@@ -15,7 +15,7 @@ import type {
   TransitionConfig,
   AnimationBases,
   SpringConfig,
-} from "@types/animations";
+} from "../types";
 
 // ============================================================================
 // MASTER BASE
@@ -72,6 +72,13 @@ export const DEFAULT_TRANSITION_SCALARS = {
   PAGE_FIRST_LOAD_DELAY_SCALAR: 1.0,
   PAGE_CHILDREN_DELAY_SCALAR: 0.4,
   PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR: 0.4,
+
+  // Page contents (inner content fade)
+  PAGE_CONTENTS_FADE_IN_SCALAR: 0.2,
+  PAGE_CONTENTS_FADE_OUT_SCALAR: 0.2,
+  PAGE_CONTENTS_STAGGER_SCALAR: 1.0,
+  PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR: 0.6,
+  PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR: 0.6,
 
   // Modal animations
   MODAL_CONTAINER_DURATION_SCALAR: 1.0,
@@ -219,6 +226,26 @@ export function buildTransitions(
 
     PAGE_FIRST_LOAD_CHILDREN: {  // First load child elements
       delayChildren: bases.PAGE_BASE * scalars.PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR,
+    },
+
+    // Complete swappable page transition objects
+    PAGE_ANIMATE_FIRST_LOAD: {  // Complete transition for first page load
+      duration: 0,
+      delay: bases.PAGE_BASE * scalars.PAGE_FIRST_LOAD_DELAY_SCALAR,
+      delayChildren: bases.PAGE_BASE * scalars.PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR,
+      when: "beforeChildren" as const,
+    },
+
+    PAGE_ANIMATE_NORMAL: {  // Complete transition for normal page navigation
+      duration: bases.PAGE_BASE * scalars.PAGE_FADE_IN_SCALAR,
+      delay: bases.PAGE_BASE * scalars.PAGE_ENTER_DELAY_SCALAR,
+      delayChildren: bases.PAGE_BASE * scalars.PAGE_CHILDREN_DELAY_SCALAR,
+      when: "beforeChildren" as const,
+    },
+
+    PAGE_EXIT: {  // Complete transition for page exit
+      duration: bases.PAGE_BASE * scalars.PAGE_FADE_OUT_SCALAR,
+      when: "beforeChildren" as const,
     },
 
     // ========================================

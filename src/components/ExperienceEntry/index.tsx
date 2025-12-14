@@ -79,7 +79,7 @@ const modalContainerVariants = {
     maxWidth: "700px",
     transition: { duration: ANIMATION_DURATIONS.MODAL_CONTAINER },
   }),
-  modalExit: (overlayStyle: React.CSSProperties) => ({
+  modalExit: () => ({
     transition: { duration: ANIMATION_DURATIONS.MODAL_CONTAINER },
   }),
 };
