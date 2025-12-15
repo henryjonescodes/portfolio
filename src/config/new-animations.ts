@@ -12,7 +12,6 @@
  */
 
 import type {
-  TransitionConfig,
   AnimationBases,
   SpringConfig,
   BaseType,
@@ -1430,7 +1429,7 @@ export function buildTransitions(
               scaledValues.STAT_TRACKER_ANIMATE_STAGGER_SCALAR,
       },
 
-      BLOCK: {
+      BLOCK_ANIMATE: {
             // Individual stat block
             duration: scaledValues.STAT_TRACKER_BLOCK_DURATION_SCALAR,
             delay: scaledValues.STAT_TRACKER_BLOCK_DELAY_SCALAR,

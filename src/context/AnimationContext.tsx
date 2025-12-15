@@ -10,7 +10,7 @@ import {
   MAP_SLIDER_CASCADE_DURATION_MS,
   generateLabel,
 } from "@config/new-animations";
-import type { AnimationBases, TransitionConfig } from "../types";
+import type { AnimationBases } from "../types";
 
 type AnimationContextType = {
   TRANSITIONS: ReturnType<typeof buildTransitions>; // Nested structure auto-derived
