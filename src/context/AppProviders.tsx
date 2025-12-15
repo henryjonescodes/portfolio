@@ -13,18 +13,18 @@ import { AnimationProvider } from "./AnimationContext";
  * Provider Hierarchy & Dependencies:
  *
  * WindowDimensionProvider (no deps)
- * └── LoadingProvider (no deps)
- *     └── SettingsProvider (uses: useLocation, useNavigate from React Router)
- *         └── AnimationProvider (uses: Leva - only active in debug mode)
+ * └── SettingsProvider (uses: useLocation, useNavigate from React Router)
+ *     └── AnimationProvider (uses: Leva - only active in debug mode, uses: useSettings)
+ *         └── LoadingProvider (uses: useAnimations for Loading component animations)
  *             └── ZoomProvider (uses: useLoading, useSettings, useWindowDimensions)
  *                 └── ColorsProvider (uses: useSettings)
  *                     └── InteractionProvider (no deps)
  *
  * Context Dependencies Explained:
  * - WindowDimensionProvider: Provides screen size and responsive zoom positions
- * - LoadingProvider: Manages 3D asset loading state and lite mode fallback
  * - SettingsProvider: Handles debug mode and animation toggles
  * - AnimationProvider: Provides animation timing constants (with Leva controls in debug mode)
+ * - LoadingProvider: Manages 3D asset loading state and lite mode fallback (Loading component uses useAnimations)
  * - ZoomProvider: Controls camera zoom levels (depends on loading, settings, dimensions)
  * - ColorsProvider: Manages dynamic color theming (depends on settings for debug logging)
  * - InteractionProvider: Tracks active 3D objects (no dependencies)
@@ -32,16 +32,16 @@ import { AnimationProvider } from "./AnimationContext";
  * Important Notes:
  * - Providers must be in this exact order due to hook dependencies
  * - Each provider that uses a context hook from above must be nested below it
- * - AnimationProvider should be available to all components using animation timings
+ * - AnimationProvider must be above LoadingProvider since Loading component uses useAnimations
  * - Debug mode controls (Leva) only render when SettingsProvider enables debug mode
  */
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <WindowDimensionProvider>
-      <LoadingProvider>
-        <SettingsProvider>
-          <AnimationProvider>
+      <SettingsProvider>
+        <AnimationProvider>
+          <LoadingProvider>
             <ZoomProvider>
               <ColorsProvider>
                 <InteractionProvider>
@@ -49,9 +49,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
                 </InteractionProvider>
               </ColorsProvider>
             </ZoomProvider>
-          </AnimationProvider>
-        </SettingsProvider>
-      </LoadingProvider>
+          </LoadingProvider>
+        </AnimationProvider>
+      </SettingsProvider>
     </WindowDimensionProvider>
   );
 }
