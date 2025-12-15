@@ -53,23 +53,26 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
     [embedded, TRANSITIONS]
   );
 
-  const minimalPageVariants = {
-    animate: {
-      opacity: 0,
-    },
-    shown: {
-      opacity: 1,
-      transition: {
-        duration: 0.5,
+  const minimalPageVariants = useMemo(
+    () => ({
+      animate: {
+        opacity: 0,
       },
-    },
-    removed: {
-      opacity: 0,
-      transition: {
-        when: "beforeChildren",
+      shown: {
+        opacity: 1,
+        transition: {
+          duration: TRANSITIONS.PAGE_CONTENTS.FULLSCREEN_ANIMATE.duration || 0.5,
+        },
       },
-    },
-  };
+      removed: {
+        opacity: 0,
+        transition: {
+          when: "beforeChildren" as const,
+        },
+      },
+    }),
+    [TRANSITIONS]
+  );
 
   const { initial, animate, exit, variants } = useMemo(() => {
     if (animationDisabled) {

@@ -1,6 +1,7 @@
 import { motion, useIsPresent } from "framer-motion";
 import { useEffect, useRef, useState, ReactNode } from "react";
 import cn from "classnames";
+import { useAnimations } from "@context/AnimationContext";
 import styles from "./local.module.scss";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 
@@ -12,24 +13,6 @@ interface AnimatedBorderProps {
   onAnimationComplete?: () => void;
 }
 
-const pathVariants = {
-  initial: { pathLength: 0 },
-  animate: {
-    pathLength: 1,
-    transition: {
-      duration: 1.5,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    pathLength: 0,
-    transition: {
-      duration: 1,
-      ease: "easeInOut",
-    },
-  },
-};
-
 const AnimatedBorder = ({
   width,
   height,
@@ -37,6 +20,26 @@ const AnimatedBorder = ({
   borderRadius = 20,
   onAnimationComplete,
 }: AnimatedBorderProps) => {
+  const { TRANSITIONS } = useAnimations();
+
+  const pathVariants = {
+    initial: { pathLength: 0 },
+    animate: {
+      pathLength: 1,
+      transition: {
+        ...TRANSITIONS.BORDER_BOX.ANIMATE,
+        ease: "easeInOut",
+      },
+    },
+    exit: {
+      pathLength: 0,
+      transition: {
+        ...TRANSITIONS.BORDER_BOX.EXIT,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
     <motion.svg
       className={styles.animatedBorder}

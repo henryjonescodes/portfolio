@@ -1,4 +1,5 @@
 import { useLoading } from "@context/LoadingContext";
+import { useAnimations } from "@context/AnimationContext";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import styles from "./loading.module.scss";
@@ -14,16 +15,16 @@ export const Spinner: React.FC = () => {
 };
 
 export const PageLoading: React.FC = () => {
+  const { TRANSITIONS } = useAnimations();
+
   const wrapperVariants = {
     visible: { opacity: 1 },
     hidden: {
       opacity: 0,
-      transition: {
-        duration: 0.5,
-        delay: 0,
-      },
+      transition: TRANSITIONS.LOADING_PAGE.ANIMATE,
     },
   };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -41,15 +42,13 @@ export const PageLoading: React.FC = () => {
 
 const Loading = () => {
   const { loadingState, finishLoading } = useLoading();
+  const { TRANSITIONS } = useAnimations();
 
   const wrapperVariants = {
     visible: { opacity: 1 },
     hidden: {
       opacity: 0,
-      transition: {
-        duration: 0.3,
-        delay: 1.95,
-      },
+      transition: TRANSITIONS.LOADING_PAGE.ANIMATE,
     },
   };
 
