@@ -41,8 +41,8 @@ interface LoadingProviderProps {
   children: ReactNode;
 }
 
-const LOADING_TIMEOUT_MS: number = LOADING_TIMEOUTS.AUTO_TIMEOUT_MS;
-const LOADING_TIMEOUT_USER_INITIATED_MS: number = LOADING_TIMEOUTS.USER_INITIATED_TIMEOUT_MS;
+const LOADING_TIMEOUT_MS: number = LOADING_TIMEOUTS.LITE_MODE_FALLBACK;
+const LOADING_TIMEOUT_USER_INITIATED_MS: number = LOADING_TIMEOUTS.USER_INITIATED_FALLBACK;
 export const LoadingProvider: React.FC<LoadingProviderProps> = ({
   children,
 }) => {

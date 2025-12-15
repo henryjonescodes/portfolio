@@ -48,7 +48,9 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     })
   );
 
-  const controls = useControls("Animation System", levaSchema);
+  const controls = useControls("Animation System", levaSchema, {
+    collapsed: false,
+  });
 
   // Extract category base scalars from controls
   const {
