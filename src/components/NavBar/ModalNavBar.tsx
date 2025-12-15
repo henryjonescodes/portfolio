@@ -1,31 +1,9 @@
 import { motion } from "framer-motion";
-import { ANIMATION_DURATIONS } from "@config/animations";
+import { useAnimations } from "@context/AnimationContext";
 import NavBarButton from "./NavBarButton";
 import AnimatedLine from "@components/AnimatedLine";
 import Close from "@assets/svg/icons/close.svg?react";
 import styles from "./modal-nav-bar.module.scss";
-
-const modalNavBarVariants = {
-  initial: {
-    // height: 0,
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_NAVBAR_DURATION,
-      delay: ANIMATION_DURATIONS.MODAL_NAVBAR_DELAY,
-      delayChildren: 1,
-    },
-  },
-  exit: {
-    height: 0,
-    opacity: 0,
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
-    },
-  },
-};
 
 type ModalNavBarProps = {
   title: string;
@@ -33,6 +11,25 @@ type ModalNavBarProps = {
 };
 
 const ModalNavBar = ({ title, onClose }: ModalNavBarProps) => {
+  const { TRANSITIONS } = useAnimations();
+
+  const modalNavBarVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        ...TRANSITIONS.MODAL_NAVBAR.ANIMATE,
+        delayChildren: 1,
+      },
+    },
+    exit: {
+      height: 0,
+      opacity: 0,
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    },
+  };
   return (
     <motion.div
       className={styles.modalNavbar}
@@ -53,7 +50,7 @@ const ModalNavBar = ({ title, onClose }: ModalNavBarProps) => {
           className={styles.navbarBorder}
           borderWidth={5}
           horizontal
-          animationDuration={ANIMATION_DURATIONS.MODAL_NAVBAR_LINE_DURATION}
+          animationDuration={TRANSITIONS.MODAL_NAVBAR.LINE_ANIMATE.duration}
         />
       </motion.div>
     </motion.div>

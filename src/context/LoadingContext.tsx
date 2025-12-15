@@ -9,7 +9,7 @@ import React, {
 } from "react";
 import { isMobile } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
-import { LOADING_TIMEOUTS } from "@config/animations";
+import { LOADING_TIMEOUTS } from "@config/new-animations";
 
 export type LoadingStates = undefined | "loading" | "loaded" | "complete";
 
