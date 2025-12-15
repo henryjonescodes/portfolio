@@ -36,11 +36,14 @@ export type SpringConfig = {
   mass: number;
 };
 
+/** Base type - Derived from AnimationBases keys */
+export type BaseType = keyof AnimationBases;
+
 /** Category base scalars - Auto-derived from config via typeof */
 export type CategoryBaseScalars = typeof DEFAULT_CATEGORY_SCALARS;
 
 /** Transition scalars - Auto-derived from config via typeof */
 export type TransitionScalars = typeof DEFAULT_TRANSITION_SCALARS;
 
-/** Base type - Derived from AnimationBases keys */
-export type BaseType = keyof AnimationBases;
+/** Pre-scaled values - Same keys as TransitionScalars but already multiplied by base */
+export type ScaledTransitionValues = Record<keyof TransitionScalars, number>;

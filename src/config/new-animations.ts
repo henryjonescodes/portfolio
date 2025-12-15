@@ -16,6 +16,7 @@ import type {
   AnimationBases,
   SpringConfig,
   BaseType,
+  ScaledTransitionValues,
 } from "../types";
 import type { InputWithSettings, NumberSettings } from "leva/plugin";
 
@@ -23,6 +24,19 @@ import type { InputWithSettings, NumberSettings } from "leva/plugin";
 // LEVA TYPES & DEFAULTS
 // ============================================================================
 
+// Master control doesn't reference a base (it IS the base)
+type MasterControl = InputWithSettings<
+  number,
+  NumberSettings & { label?: string; hint?: string }
+>;
+
+// Category base scalars don't reference a base (they define the bases)
+type CategoryBaseControl = InputWithSettings<
+  number,
+  NumberSettings & { label?: string; hint?: string }
+>;
+
+// Transition scalars reference which base they multiply
 type ScalarControl = InputWithSettings<
   number,
   NumberSettings & { label?: string; hint?: string; base: BaseType }
@@ -79,7 +93,7 @@ export const ANIMATION_SCALAR_CONFIG = {
       ...LEVA_DEFAULTS.master,
       label: "Master Base Duration",
       hint: "Single value to speed/slow ALL animations",
-    } satisfies ScalarControl,
+    } satisfies MasterControl,
   },
 
   categoryBases: {
@@ -89,27 +103,27 @@ export const ANIMATION_SCALAR_CONFIG = {
       ...LEVA_DEFAULTS.base,
       label: "Page Base Scalar",
       hint: "Multiplies master base",
-    } satisfies ScalarControl,
+    } satisfies CategoryBaseControl,
     MODAL_BASE_SCALAR: {
       value: 1.0,
       ...LEVA_DEFAULTS.base,
       label: "Modal Base Scalar",
-    } satisfies ScalarControl,
+    } satisfies CategoryBaseControl,
     NAV_BASE_SCALAR: {
       value: 2.0,
       ...LEVA_DEFAULTS.base,
       label: "Nav Base Scalar",
-    } satisfies ScalarControl,
+    } satisfies CategoryBaseControl,
     TEXT_BASE_SCALAR: {
       value: 0.67,
       ...LEVA_DEFAULTS.base,
       label: "Text Base Scalar",
-    } satisfies ScalarControl,
+    } satisfies CategoryBaseControl,
     COMPONENT_BASE_SCALAR: {
       value: 1.0,
       ...LEVA_DEFAULTS.base,
       label: "Component Base Scalar",
-    } satisfies ScalarControl,
+    } satisfies CategoryBaseControl,
   },
 
   page: {
@@ -818,482 +832,647 @@ export const DEFAULT_ANIMATION_BASES = computeAnimationBases(
 // ============================================================================
 
 /**
- * Build all transition objects from bases and scalars.
+ * Build all transition objects from pre-scaled values with nested hierarchy.
  * This function is called by AnimationContext with Leva-controlled values.
+ * Values are already multiplied (base × scalar) before being passed in.
+ *
+ * Returns nested structure: TRANSITIONS.PAGE.FADE_IN instead of TRANSITIONS.PAGE_FADE_IN
  */
 export function buildTransitions(
-  bases: AnimationBases,
-  scalars: typeof DEFAULT_TRANSITION_SCALARS
-): Record<string, TransitionConfig> {
+  scaledValues: ScaledTransitionValues // Pre-scaled values (base × scalar already computed)
+) {
   return {
     // ========================================
-    // PAGE TRANSITIONS
+    // ABOUT_AVATAR
     // ========================================
 
-    PAGE_FADE_IN: {
-      // Main page container fade in
-      duration: bases.PAGE_BASE * scalars.PAGE_FADE_IN_SCALAR,
-    },
+    ABOUT_AVATAR: {
+      ANIMATE: {
+            // About page avatar image
+            delay: scaledValues.ABOUT_AVATAR_DELAY_SCALAR,
+            duration: scaledValues.ABOUT_AVATAR_DURATION_SCALAR,
+      },
 
-    PAGE_FADE_OUT: {
-      // Main page container fade out
-      duration: bases.PAGE_BASE * scalars.PAGE_FADE_OUT_SCALAR,
-    },
+      EXIT: {
+            // About page avatar exit
+            duration: scaledValues.ABOUT_AVATAR_EXIT_SCALAR,
+      },
 
-    PAGE_ENTER: {
-      // Delay before page enters
-      delay: bases.PAGE_BASE * scalars.PAGE_ENTER_DELAY_SCALAR,
-    },
-
-    PAGE_FIRST_LOAD: {
-      // First page load animation
-      delay: bases.PAGE_BASE * scalars.PAGE_FIRST_LOAD_DELAY_SCALAR,
-    },
-
-    PAGE_CHILDREN: {
-      // Page child elements stagger
-      delayChildren: bases.PAGE_BASE * scalars.PAGE_CHILDREN_DELAY_SCALAR,
-    },
-
-    PAGE_FIRST_LOAD_CHILDREN: {
-      // First load child elements
-      delayChildren:
-        bases.PAGE_BASE * scalars.PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR,
-    },
-
-    // Complete swappable page transition objects
-    PAGE_ANIMATE_FIRST_LOAD: {
-      // Complete transition for first page load
-      duration: 0,
-      delay: bases.PAGE_BASE * scalars.PAGE_FIRST_LOAD_DELAY_SCALAR,
-      delayChildren:
-        bases.PAGE_BASE * scalars.PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR,
-      when: "beforeChildren" as const,
-    },
-
-    PAGE_ANIMATE_NORMAL: {
-      // Complete transition for normal page navigation
-      duration: bases.PAGE_BASE * scalars.PAGE_FADE_IN_SCALAR,
-      delay: bases.PAGE_BASE * scalars.PAGE_ENTER_DELAY_SCALAR,
-      delayChildren: bases.PAGE_BASE * scalars.PAGE_CHILDREN_DELAY_SCALAR,
-      when: "beforeChildren" as const,
-    },
-
-    PAGE_EXIT: {
-      // Complete transition for page exit
-      duration: bases.PAGE_BASE * scalars.PAGE_FADE_OUT_SCALAR,
-      when: "beforeChildren" as const,
-    },
-
-    // Page contents transitions
-    PAGE_CONTENTS_ANIMATE_FULLSCREEN: {
-      // Page contents in fullscreen (2D) mode
-      duration: bases.PAGE_BASE * scalars.PAGE_CONTENTS_FADE_IN_SCALAR,
-      delay: bases.PAGE_BASE * scalars.PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR,
-      delayChildren:
-        bases.PAGE_BASE * scalars.PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR,
-      staggerChildren: bases.PAGE_BASE * scalars.PAGE_CONTENTS_STAGGER_SCALAR,
-    },
-
-    PAGE_CONTENTS_ANIMATE_EMBEDDED: {
-      // Page contents in 3D embedded mode
-      duration: bases.PAGE_BASE * scalars.PAGE_CONTENTS_FADE_IN_SCALAR,
-      delay: bases.PAGE_BASE * scalars.PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR,
-      delayChildren:
-        bases.PAGE_BASE * scalars.PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR,
-      staggerChildren: bases.PAGE_BASE * scalars.PAGE_CONTENTS_STAGGER_SCALAR,
-    },
-
-    PAGE_CONTENTS_EXIT: {
-      // Page contents exit
-      duration: bases.PAGE_BASE * scalars.PAGE_CONTENTS_FADE_OUT_SCALAR,
-      when: "afterChildren" as const,
     },
 
     // ========================================
-    // MODAL ANIMATIONS
-    // ========================================
-
-    MODAL_CONTAINER: {
-      // Modal container layout transition
-      duration: bases.MODAL_BASE * scalars.MODAL_CONTAINER_DURATION_SCALAR,
-      ease: "easeInOut",
-    },
-
-    MODAL_NAVBAR: {
-      // Modal navbar animation
-      duration: bases.MODAL_BASE * scalars.MODAL_NAVBAR_DURATION_SCALAR,
-      delay: bases.MODAL_BASE * scalars.MODAL_NAVBAR_DELAY_SCALAR,
-    },
-
-    MODAL_NAVBAR_LINE: {
-      // Modal navbar line duration
-      duration: bases.MODAL_BASE * scalars.MODAL_NAVBAR_LINE_DURATION_SCALAR,
-    },
-
-    MODAL_NAVBAR_CHILDREN: {
-      // Modal navbar children stagger
-      delayChildren:
-        bases.MODAL_BASE * scalars.MODAL_NAVBAR_CHILDREN_DELAY_SCALAR,
-    },
-
-    MODAL_CONTENT: {
-      // Modal content duration
-      duration: bases.MODAL_BASE * scalars.MODAL_CONTENT_DURATION_SCALAR,
-    },
-
-    MODAL_LAYOUT: {
-      // Modal layout delay
-      delay: bases.MODAL_BASE * scalars.MODAL_LAYOUT_DELAY_SCALAR,
-    },
-
-    MODAL_BLURB: {
-      // Modal blurb delay
-      delay: bases.MODAL_BASE * scalars.MODAL_BLURB_DELAY_SCALAR,
-    },
-
-    MODAL_TEXT_PAINT: {
-      // Modal text paint duration
-      duration: bases.MODAL_BASE * scalars.MODAL_TEXT_PAINT_DURATION_SCALAR,
-    },
-
-    MODAL_TEXT_STAGGER: {
-      // Modal text stagger
-      staggerChildren: bases.MODAL_BASE * scalars.MODAL_TEXT_STAGGER_SCALAR,
-    },
-
-    MODAL_HEADER_TEXT: {
-      // Modal header text animation
-      duration: bases.MODAL_BASE * scalars.MODAL_HEADER_TEXT_DURATION_SCALAR,
-      delay: bases.MODAL_BASE * scalars.MODAL_HEADER_TEXT_DELAY_SCALAR,
-    },
-
-    MODAL_DATE: {
-      // Modal date duration
-      duration: bases.MODAL_BASE * scalars.MODAL_DATE_DURATION_SCALAR,
-    },
-
-    MODAL_OVERLAY: {
-      // Modal overlay duration
-      duration: bases.MODAL_BASE * scalars.MODAL_OVERLAY_DURATION_SCALAR,
-    },
-
-    // ========================================
-    // NAVIGATION
-    // ========================================
-
-    NAV_ITEM_FADE: {
-      // Nav item fade duration
-      duration: bases.NAV_BASE * scalars.NAV_ITEM_FADE_SCALAR,
-      delay: bases.NAV_BASE * scalars.NAV_ITEM_DELAY_SCALAR,
-    },
-
-    NAV_STAGGER: {
-      // Nav items stagger
-      staggerChildren: bases.NAV_BASE * scalars.NAV_STAGGER_SCALAR,
-    },
-
-    NAV_EXIT: {
-      // Nav exit duration
-      duration: bases.NAV_BASE * scalars.NAV_EXIT_SCALAR,
-    },
-
-    NAV_MINIMAL: {
-      // Minimal nav animation
-      delay: bases.NAV_BASE * scalars.NAV_MINIMAL_DELAY_SCALAR,
-      duration: bases.NAV_BASE * scalars.NAV_MINIMAL_DURATION_SCALAR,
-    },
-
-    NAV_MINIMAL_EXIT: {
-      // Minimal nav exit
-      duration: bases.NAV_BASE * scalars.NAV_MINIMAL_EXIT_SCALAR,
-    },
-
-    NAV_HOME_FIRST_LOAD: {
-      // Home page nav first load delay
-      delay: bases.NAV_BASE * scalars.NAV_HOME_FIRST_LOAD_DELAY_SCALAR,
-    },
-
-    NAV_ITEM_BORDER: {
-      // Nav item border animation
-      duration: bases.NAV_BASE * scalars.NAV_ITEM_BORDER_DURATION_SCALAR,
-      delay: bases.NAV_BASE * scalars.NAV_ITEM_BORDER_DELAY_SCALAR,
-    },
-
-    NAV_ITEM_BORDER_EXIT: {
-      // Nav item border exit
-      duration: bases.NAV_BASE * scalars.NAV_ITEM_BORDER_EXIT_SCALAR,
-    },
-
-    NAV_BUTTON_ACTIVE: {
-      // Active nav button
-      duration: bases.NAV_BASE * scalars.NAV_BUTTON_ACTIVE_SCALAR,
-    },
-
-    NAV_BUTTON_INACTIVE: {
-      // Inactive nav button
-      duration: bases.NAV_BASE * scalars.NAV_BUTTON_INACTIVE_SCALAR,
-    },
-
-    // ========================================
-    // TEXT EFFECTS
-    // ========================================
-
-    TYPEWRITER_CHAR: {
-      // Typewriter character duration
-      duration: bases.TEXT_BASE * scalars.TYPEWRITER_CHAR_SCALAR,
-    },
-
-    TYPEWRITER_STAGGER: {
-      // Typewriter character stagger
-      staggerChildren: bases.TEXT_BASE * scalars.TYPEWRITER_STAGGER_SCALAR,
-    },
-
-    TYPEWRITER_EXIT: {
-      // Typewriter exit
-      duration: bases.TEXT_BASE * scalars.TYPEWRITER_EXIT_SCALAR,
-    },
-
-    NAV_ITEM_TEXT_STAGGER: {
-      // Nav item text stagger
-      staggerChildren: bases.TEXT_BASE * scalars.NAV_ITEM_TEXT_STAGGER_SCALAR,
-    },
-
-    STAT_TRACKER_TEXT_STAGGER: {
-      // Stat tracker text stagger
-      staggerChildren:
-        bases.TEXT_BASE * scalars.STAT_TRACKER_TEXT_STAGGER_SCALAR,
-    },
-
-    // ========================================
-    // ABOUT PAGE
+    // ABOUT_HERO
     // ========================================
 
     ABOUT_HERO: {
-      // About hero section
-      duration: bases.COMPONENT_BASE * scalars.ABOUT_HERO_DURATION_SCALAR,
-      staggerChildren: bases.COMPONENT_BASE * scalars.ABOUT_HERO_STAGGER_SCALAR,
+      ANIMATE: {
+            // About hero section
+            duration: scaledValues.ABOUT_HERO_DURATION_SCALAR,
+            staggerChildren: scaledValues.ABOUT_HERO_STAGGER_SCALAR,
+      },
+
     },
+
+    // ========================================
+    // ABOUT_MAP
+    // ========================================
 
     ABOUT_MAP: {
-      // About map section
-      duration: bases.COMPONENT_BASE * scalars.ABOUT_MAP_DURATION_SCALAR,
-      staggerChildren: bases.COMPONENT_BASE * scalars.ABOUT_MAP_STAGGER_SCALAR,
+      ANIMATE: {
+            // About map section
+            duration: scaledValues.ABOUT_MAP_DURATION_SCALAR,
+            staggerChildren: scaledValues.ABOUT_MAP_STAGGER_SCALAR,
+      },
+
     },
+
+    // ========================================
+    // ABOUT_SOCIALS
+    // ========================================
 
     ABOUT_SOCIALS: {
-      // About socials section
-      delay: bases.COMPONENT_BASE * scalars.ABOUT_SOCIALS_DELAY_SCALAR,
-      delayChildren:
-        bases.COMPONENT_BASE * scalars.ABOUT_SOCIALS_DELAY_CHILDREN_SCALAR,
-      duration: bases.COMPONENT_BASE * scalars.ABOUT_SOCIALS_DURATION_SCALAR,
-      staggerChildren:
-        bases.COMPONENT_BASE * scalars.ABOUT_SOCIALS_STAGGER_SCALAR,
+      ANIMATE: {
+            // About socials section
+            delay: scaledValues.ABOUT_SOCIALS_DELAY_SCALAR,
+            delayChildren:
+              scaledValues.ABOUT_SOCIALS_DELAY_CHILDREN_SCALAR,
+            duration: scaledValues.ABOUT_SOCIALS_DURATION_SCALAR,
+            staggerChildren:
+              scaledValues.ABOUT_SOCIALS_STAGGER_SCALAR,
+      },
+
     },
+
+    // ========================================
+    // ABOUT_STATS
+    // ========================================
 
     ABOUT_STATS: {
-      // About stats section
-      duration: bases.COMPONENT_BASE * scalars.ABOUT_STATS_DURATION_SCALAR,
-      staggerChildren:
-        bases.COMPONENT_BASE * scalars.ABOUT_STATS_STAGGER_SCALAR,
+      ANIMATE: {
+            // About stats section
+            duration: scaledValues.ABOUT_STATS_DURATION_SCALAR,
+            staggerChildren:
+              scaledValues.ABOUT_STATS_STAGGER_SCALAR,
+      },
+
     },
+
+    // ========================================
+    // ABOUT_TAGS
+    // ========================================
 
     ABOUT_TAGS: {
-      // About tags section
-      delay: bases.COMPONENT_BASE * scalars.ABOUT_TAGS_DELAY_SCALAR,
-      delayChildren:
-        bases.COMPONENT_BASE * scalars.ABOUT_TAGS_DELAY_CHILDREN_SCALAR,
-      duration: bases.COMPONENT_BASE * scalars.ABOUT_TAGS_DURATION_SCALAR,
-      staggerChildren: bases.COMPONENT_BASE * scalars.ABOUT_TAGS_STAGGER_SCALAR,
-    },
+      ANIMATE: {
+            // About tags section
+            delay: scaledValues.ABOUT_TAGS_DELAY_SCALAR,
+            delayChildren:
+              scaledValues.ABOUT_TAGS_DELAY_CHILDREN_SCALAR,
+            duration: scaledValues.ABOUT_TAGS_DURATION_SCALAR,
+            staggerChildren: scaledValues.ABOUT_TAGS_STAGGER_SCALAR,
+      },
 
-    ABOUT_AVATAR: {
-      // About page avatar image
-      delay: bases.COMPONENT_BASE * scalars.ABOUT_AVATAR_DELAY_SCALAR,
-      duration: bases.COMPONENT_BASE * scalars.ABOUT_AVATAR_DURATION_SCALAR,
-    },
-
-    ABOUT_AVATAR_EXIT: {
-      // About page avatar exit
-      duration: bases.COMPONENT_BASE * scalars.ABOUT_AVATAR_EXIT_SCALAR,
     },
 
     // ========================================
-    // STAT TRACKER
+    // ANIMATED_LINE
     // ========================================
-
-    STAT_TRACKER_ANIMATE: {
-      // Stat tracker appear animation
-      staggerChildren:
-        bases.COMPONENT_BASE * scalars.STAT_TRACKER_ANIMATE_STAGGER_SCALAR,
-    },
-
-    STAT_TRACKER_EXIT: {
-      // Stat tracker exit animation
-      staggerChildren:
-        bases.COMPONENT_BASE * scalars.STAT_TRACKER_EXIT_STAGGER_SCALAR,
-    },
-
-    STAT_TRACKER_BLOCK: {
-      // Individual stat block
-      duration: bases.COMPONENT_BASE * scalars.STAT_TRACKER_BLOCK_DURATION_SCALAR,
-      delay: bases.COMPONENT_BASE * scalars.STAT_TRACKER_BLOCK_DELAY_SCALAR,
-    },
-
-    // ========================================
-    // COMPONENTS
-    // ========================================
-
-    BORDER_BOX_ANIMATE: {
-      // AnimatedBorderBox appear
-      duration: bases.COMPONENT_BASE * scalars.BORDER_BOX_ANIMATE_SCALAR,
-    },
-
-    BORDER_BOX_EXIT: {
-      // AnimatedBorderBox exit
-      duration: bases.COMPONENT_BASE * scalars.BORDER_BOX_EXIT_SCALAR,
-    },
 
     ANIMATED_LINE: {
-      // AnimatedLine component
-      duration: bases.COMPONENT_BASE * scalars.ANIMATED_LINE_SCALAR,
+      ANIMATE: {
+            // AnimatedLine component
+            duration: scaledValues.ANIMATED_LINE_SCALAR,
+      },
+
     },
 
-    ICON_ANIMATE: {
-      // Icon fade in
-      duration: bases.COMPONENT_BASE * scalars.ICON_ANIMATE_SCALAR,
+    // ========================================
+    // BORDER_BOX
+    // ========================================
+
+    BORDER_BOX: {
+      ANIMATE: {
+            // AnimatedBorderBox appear
+            duration: scaledValues.BORDER_BOX_ANIMATE_SCALAR,
+      },
+
+      EXIT: {
+            // AnimatedBorderBox exit
+            duration: scaledValues.BORDER_BOX_EXIT_SCALAR,
+      },
+
     },
 
-    ICON_EXIT: {
-      // Icon fade out
-      duration: bases.COMPONENT_BASE * scalars.ICON_EXIT_SCALAR,
+    // ========================================
+    // COMMON
+    // ========================================
+
+    COMMON: {
+      EXIT: {
+            // Common/default exit duration
+            duration: scaledValues.COMMON_EXIT_SCALAR,
+      },
+
     },
 
-    COMMON_EXIT: {
-      // Common/default exit duration
-      duration: bases.COMPONENT_BASE * scalars.COMMON_EXIT_SCALAR,
+    // ========================================
+    // EXPERIENCE
+    // ========================================
+
+    EXPERIENCE: {
+      ANIMATE_STAGGER: {
+            // Experience list stagger
+            staggerChildren: scaledValues.EXPERIENCE_STAGGER_SCALAR,
+      },
+
+      TITLE_ANIMATE_STAGGER: {
+            // Experience title text stagger
+            staggerChildren:
+              scaledValues.EXPERIENCE_TITLE_STAGGER_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // HOME
+    // ========================================
+
+    HOME: {
+      MENU_ANIMATE_STAGGER: {
+            // Home page menu stagger
+            staggerChildren: scaledValues.HOME_MENU_STAGGER_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // ICON
+    // ========================================
+
+    ICON: {
+      ANIMATE: {
+            // Icon fade in
+            duration: scaledValues.ICON_ANIMATE_SCALAR,
+      },
+
+      EXIT: {
+            // Icon fade out
+            duration: scaledValues.ICON_EXIT_SCALAR,
+      },
+
     },
 
     // ========================================
     // LOADING
     // ========================================
 
+    LOADING: {
+      EXIT: {
+            // Loading page exit
+            duration: scaledValues.LOADING_EXIT_DURATION_SCALAR,
+            delay: scaledValues.LOADING_EXIT_DELAY_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // LOADING_PAGE
+    // ========================================
+
     LOADING_PAGE: {
-      // Loading page animation
-      duration: bases.PAGE_BASE * scalars.LOADING_PAGE_DURATION_SCALAR,
-      delay: bases.PAGE_BASE * scalars.LOADING_PAGE_DELAY_SCALAR,
-    },
+      ANIMATE: {
+            // Loading page animation
+            duration: scaledValues.LOADING_PAGE_DURATION_SCALAR,
+            delay: scaledValues.LOADING_PAGE_DELAY_SCALAR,
+      },
 
-    LOADING_EXIT: {
-      // Loading page exit
-      duration: bases.PAGE_BASE * scalars.LOADING_EXIT_DURATION_SCALAR,
-      delay: bases.PAGE_BASE * scalars.LOADING_EXIT_DELAY_SCALAR,
     },
 
     // ========================================
-    // MAP VIEWER
+    // MAP
     // ========================================
 
-    MAP_CONTENT: {
-      // Map viewer content animation
-      duration: bases.COMPONENT_BASE * scalars.MAP_CONTENT_SCALAR,
+    MAP: {
+      CONTENT_ANIMATE: {
+            // Map viewer content animation
+            duration: scaledValues.MAP_CONTENT_SCALAR,
+      },
+
+      EXIT: {
+            // Map viewer exit
+            duration: scaledValues.MAP_EXIT_SCALAR,
+      },
+
     },
 
-    MAP_EXIT: {
-      // Map viewer exit
-      duration: bases.COMPONENT_BASE * scalars.MAP_EXIT_SCALAR,
+    // ========================================
+    // MAP_DESCRIPTION
+    // ========================================
+
+    MAP_DESCRIPTION: {
+      ANIMATE: {
+            // Map blurb animation
+            duration: scaledValues.MAP_BLURB_DURATION_SCALAR,
+            staggerChildren: scaledValues.MAP_BLURB_STAGGER_SCALAR,
+      },
+
+      EXIT: {
+            // Map blurb exit
+            duration: scaledValues.MAP_BLURB_EXIT_SCALAR,
+      },
+
     },
 
-    MAP_BLURB: {
-      // Map blurb animation
-      duration: bases.COMPONENT_BASE * scalars.MAP_BLURB_DURATION_SCALAR,
-      staggerChildren: bases.COMPONENT_BASE * scalars.MAP_BLURB_STAGGER_SCALAR,
-    },
-
-    MAP_BLURB_EXIT: {
-      // Map blurb exit
-      duration: bases.COMPONENT_BASE * scalars.MAP_BLURB_EXIT_SCALAR,
-    },
+    // ========================================
+    // MAP_SLIDER
+    // ========================================
 
     MAP_SLIDER: {
-      // Map slider animation
-      duration: bases.COMPONENT_BASE * scalars.MAP_SLIDER_DURATION_SCALAR,
-      staggerChildren: bases.COMPONENT_BASE * scalars.MAP_SLIDER_STAGGER_SCALAR,
-    },
+      ANIMATE: {
+            // Map slider animation
+            duration: scaledValues.MAP_SLIDER_DURATION_SCALAR,
+            staggerChildren: scaledValues.MAP_SLIDER_STAGGER_SCALAR,
+      },
 
-    MAP_SLIDER_EXIT: {
-      // Map slider exit
-      duration:
-        bases.COMPONENT_BASE * scalars.MAP_SLIDER_EXIT_DURATION_SCALAR,
-      staggerChildren:
-        bases.COMPONENT_BASE * scalars.MAP_SLIDER_EXIT_STAGGER_SCALAR,
-    },
+      EXIT: {
+            // Map slider exit
+            duration:
+              scaledValues.MAP_SLIDER_EXIT_DURATION_SCALAR,
+            staggerChildren:
+              scaledValues.MAP_SLIDER_EXIT_STAGGER_SCALAR,
+      },
 
-    // ========================================
-    // PROJECTS PAGE
-    // ========================================
-
-    PROJECTS_STAGGER: {
-      // Projects list stagger
-      staggerChildren: bases.COMPONENT_BASE * scalars.PROJECTS_STAGGER_SCALAR,
-    },
-
-    PROJECTS_ENTRY: {
-      // Projects entry animation
-      duration: bases.COMPONENT_BASE * scalars.PROJECTS_ENTRY_SCALAR,
-    },
-
-    PROJECTS_EXIT: {
-      // Projects exit
-      duration: bases.COMPONENT_BASE * scalars.PROJECTS_EXIT_SCALAR,
-    },
-
-    PROJECTS_TITLE_STAGGER: {
-      // Projects title text stagger
-      staggerChildren:
-        bases.COMPONENT_BASE * scalars.PROJECTS_TITLE_STAGGER_SCALAR,
     },
 
     // ========================================
-    // EXPERIENCE PAGE
+    // MODAL
     // ========================================
 
-    EXPERIENCE_STAGGER: {
-      // Experience list stagger
-      staggerChildren: bases.COMPONENT_BASE * scalars.EXPERIENCE_STAGGER_SCALAR,
+    MODAL: {
+      CONTAINER_ANIMATE: {
+            // Modal container layout transition
+            duration: scaledValues.MODAL_CONTAINER_DURATION_SCALAR,
+            ease: "easeInOut",
+      },
+
+      CONTENT_ANIMATE: {
+            // Modal content duration
+            duration: scaledValues.MODAL_CONTENT_DURATION_SCALAR,
+      },
+
+      DATE_ANIMATE: {
+            // Modal date duration
+            duration: scaledValues.MODAL_DATE_DURATION_SCALAR,
+      },
+
+      DESCRIPTION_ANIMATE: {
+            // Modal blurb delay
+            delay: scaledValues.MODAL_BLURB_DELAY_SCALAR,
+      },
+
+      LAYOUT_ANIMATE: {
+            // Modal layout delay
+            delay: scaledValues.MODAL_LAYOUT_DELAY_SCALAR,
+      },
+
+      OVERLAY_ANIMATE: {
+            // Modal overlay duration
+            duration: scaledValues.MODAL_OVERLAY_DURATION_SCALAR,
+      },
+
     },
 
-    EXPERIENCE_TITLE_STAGGER: {
-      // Experience title text stagger
-      staggerChildren:
-        bases.COMPONENT_BASE * scalars.EXPERIENCE_TITLE_STAGGER_SCALAR,
+    // ========================================
+    // MODAL_HEADER
+    // ========================================
+
+    MODAL_HEADER: {
+      TEXT_ANIMATE: {
+            // Modal header text animation
+            duration: scaledValues.MODAL_HEADER_TEXT_DURATION_SCALAR,
+            delay: scaledValues.MODAL_HEADER_TEXT_DELAY_SCALAR,
+      },
+
     },
 
     // ========================================
-    // HOME PAGE
+    // MODAL_NAVBAR
     // ========================================
 
-    HOME_MENU_STAGGER: {
-      // Home page menu stagger
-      staggerChildren: bases.NAV_BASE * scalars.HOME_MENU_STAGGER_SCALAR,
+    MODAL_NAVBAR: {
+      ANIMATE: {
+            // Modal navbar animation
+            duration: scaledValues.MODAL_NAVBAR_DURATION_SCALAR,
+            delay: scaledValues.MODAL_NAVBAR_DELAY_SCALAR,
+      },
+
+      CHILDREN_ANIMATE: {
+            // Modal navbar children stagger
+            delayChildren:
+              scaledValues.MODAL_NAVBAR_CHILDREN_DELAY_SCALAR,
+      },
+
+      LINE_ANIMATE: {
+            // Modal navbar line duration
+            duration: scaledValues.MODAL_NAVBAR_LINE_DURATION_SCALAR,
+      },
+
     },
 
     // ========================================
-    // SCENE/CANVAS
+    // MODAL_TEXT
+    // ========================================
+
+    MODAL_TEXT: {
+      ANIMATE_STAGGER: {
+            // Modal text stagger
+            staggerChildren: scaledValues.MODAL_TEXT_STAGGER_SCALAR,
+      },
+
+      PAINT_ANIMATE: {
+            // Modal text paint duration
+            duration: scaledValues.MODAL_TEXT_PAINT_DURATION_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // NAV
+    // ========================================
+
+    NAV: {
+      ANIMATE_STAGGER: {
+            // Nav items stagger
+            staggerChildren: scaledValues.NAV_STAGGER_SCALAR,
+      },
+
+      EXIT: {
+            // Nav exit duration
+            duration: scaledValues.NAV_EXIT_SCALAR,
+      },
+
+      HOME_FIRST_LOAD_ANIMATE: {
+            // Home page nav first load delay
+            delay: scaledValues.NAV_HOME_FIRST_LOAD_DELAY_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // NAV_BUTTON
+    // ========================================
+
+    NAV_BUTTON: {
+      ACTIVE_ANIMATE: {
+            // Active nav button
+            duration: scaledValues.NAV_BUTTON_ACTIVE_SCALAR,
+      },
+
+      INACTIVE_ANIMATE: {
+            // Inactive nav button
+            duration: scaledValues.NAV_BUTTON_INACTIVE_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // NAV_ITEM
+    // ========================================
+
+    NAV_ITEM: {
+      BORDER_ANIMATE: {
+            // Nav item border animation
+            duration: scaledValues.NAV_ITEM_BORDER_DURATION_SCALAR,
+            delay: scaledValues.NAV_ITEM_BORDER_DELAY_SCALAR,
+      },
+
+      BORDER_EXIT: {
+            // Nav item border exit
+            duration: scaledValues.NAV_ITEM_BORDER_EXIT_SCALAR,
+      },
+
+      FADE_ANIMATE: {
+            // Nav item fade duration
+            duration: scaledValues.NAV_ITEM_FADE_SCALAR,
+            delay: scaledValues.NAV_ITEM_DELAY_SCALAR,
+      },
+
+      TEXT_ANIMATE_STAGGER: {
+            // Nav item text stagger
+            staggerChildren: scaledValues.NAV_ITEM_TEXT_STAGGER_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // NAV_MINIMAL
+    // ========================================
+
+    NAV_MINIMAL: {
+      ANIMATE: {
+            // Minimal nav animation
+            delay: scaledValues.NAV_MINIMAL_DELAY_SCALAR,
+            duration: scaledValues.NAV_MINIMAL_DURATION_SCALAR,
+      },
+
+      EXIT: {
+            // Minimal nav exit
+            duration: scaledValues.NAV_MINIMAL_EXIT_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // PAGE
+    // ========================================
+
+    PAGE: {
+      CHILDREN_ANIMATE: {
+            // Page child elements stagger
+            delayChildren: scaledValues.PAGE_CHILDREN_DELAY_SCALAR,
+      },
+
+      ENTER_ANIMATE: {
+            // Delay before page enters
+            delay: scaledValues.PAGE_ENTER_DELAY_SCALAR,
+      },
+
+      EXIT: {
+            // Complete transition for page exit
+            duration: scaledValues.PAGE_FADE_OUT_SCALAR,
+            when: "beforeChildren" as const,
+      },
+
+      FADE_IN_ANIMATE: {
+            // Main page container fade in
+            duration: scaledValues.PAGE_FADE_IN_SCALAR,
+      },
+
+      FADE_OUT_EXIT: {
+            // Main page container fade out
+            duration: scaledValues.PAGE_FADE_OUT_SCALAR,
+      },
+
+      FIRST_LOAD_ANIMATE: {
+            // First page load animation
+            delay: scaledValues.PAGE_FIRST_LOAD_DELAY_SCALAR,
+      },
+
+      FIRST_LOAD_CHILDREN_ANIMATE: {
+            // First load child elements
+            delayChildren:
+              scaledValues.PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR,
+      },
+
+      NORMAL_ANIMATE: {
+            // Complete transition for normal page navigation
+            duration: scaledValues.PAGE_FADE_IN_SCALAR,
+            delay: scaledValues.PAGE_ENTER_DELAY_SCALAR,
+            delayChildren: scaledValues.PAGE_CHILDREN_DELAY_SCALAR,
+            when: "beforeChildren" as const,
+      },
+
+    },
+
+    // ========================================
+    // PAGE_CONTENTS
+    // ========================================
+
+    PAGE_CONTENTS: {
+      EMBEDDED_ANIMATE: {
+            // Page contents in 3D embedded mode
+            duration: scaledValues.PAGE_CONTENTS_FADE_IN_SCALAR,
+            delay: scaledValues.PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR,
+            delayChildren:
+              scaledValues.PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR,
+            staggerChildren: scaledValues.PAGE_CONTENTS_STAGGER_SCALAR,
+      },
+
+      EXIT: {
+            // Page contents exit
+            duration: scaledValues.PAGE_CONTENTS_FADE_OUT_SCALAR,
+            when: "afterChildren" as const,
+      },
+
+      FULLSCREEN_ANIMATE: {
+            // Page contents in fullscreen (2D) mode
+            duration: scaledValues.PAGE_CONTENTS_FADE_IN_SCALAR,
+            delay: scaledValues.PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR,
+            delayChildren:
+              scaledValues.PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR,
+            staggerChildren: scaledValues.PAGE_CONTENTS_STAGGER_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // PROJECTS
+    // ========================================
+
+    PROJECTS: {
+      ANIMATE_STAGGER: {
+            // Projects list stagger
+            staggerChildren: scaledValues.PROJECTS_STAGGER_SCALAR,
+      },
+
+      ENTRY_ANIMATE: {
+            // Projects entry animation
+            duration: scaledValues.PROJECTS_ENTRY_SCALAR,
+      },
+
+      EXIT: {
+            // Projects exit
+            duration: scaledValues.PROJECTS_EXIT_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // PROJECTS_TITLE
+    // ========================================
+
+    PROJECTS_TITLE: {
+      ANIMATE_STAGGER: {
+            // Projects title text stagger
+            staggerChildren:
+              scaledValues.PROJECTS_TITLE_STAGGER_SCALAR,
+      },
+
+    },
+
+    // ========================================
+    // SCENE_CLOSE_BUTTON
     // ========================================
 
     SCENE_CLOSE_BUTTON: {
-      // Scene close button animation
-      delay: bases.COMPONENT_BASE * scalars.SCENE_CLOSE_BUTTON_DELAY_SCALAR,
-      duration:
-        bases.COMPONENT_BASE * scalars.SCENE_CLOSE_BUTTON_DURATION_SCALAR,
+      ANIMATE: {
+            // Scene close button animation
+            delay: scaledValues.SCENE_CLOSE_BUTTON_DELAY_SCALAR,
+            duration:
+              scaledValues.SCENE_CLOSE_BUTTON_DURATION_SCALAR,
+      },
+
+      EXIT: {
+            // Scene close button exit
+            duration:
+              scaledValues.SCENE_CLOSE_BUTTON_EXIT_SCALAR,
+      },
+
     },
 
-    SCENE_CLOSE_BUTTON_EXIT: {
-      // Scene close button exit
-      duration:
-        bases.COMPONENT_BASE * scalars.SCENE_CLOSE_BUTTON_EXIT_SCALAR,
+    // ========================================
+    // STAT_TRACKER
+    // ========================================
+
+    STAT_TRACKER: {
+      ANIMATE: {
+            // Stat tracker appear animation
+            staggerChildren:
+              scaledValues.STAT_TRACKER_ANIMATE_STAGGER_SCALAR,
+      },
+
+      BLOCK: {
+            // Individual stat block
+            duration: scaledValues.STAT_TRACKER_BLOCK_DURATION_SCALAR,
+            delay: scaledValues.STAT_TRACKER_BLOCK_DELAY_SCALAR,
+      },
+
+      EXIT: {
+            // Stat tracker exit animation
+            staggerChildren:
+              scaledValues.STAT_TRACKER_EXIT_STAGGER_SCALAR,
+      },
+
+      TEXT_ANIMATE_STAGGER: {
+            // Stat tracker text stagger
+            staggerChildren:
+              scaledValues.STAT_TRACKER_TEXT_STAGGER_SCALAR,
+      },
+
     },
+
+    // ========================================
+    // TYPEWRITER
+    // ========================================
+
+    TYPEWRITER: {
+      ANIMATE_STAGGER: {
+            // Typewriter character stagger
+            staggerChildren: scaledValues.TYPEWRITER_STAGGER_SCALAR,
+      },
+
+      CHAR_ANIMATE: {
+            // Typewriter character duration
+            duration: scaledValues.TYPEWRITER_CHAR_SCALAR,
+      },
+
+      EXIT: {
+            // Typewriter exit
+            duration: scaledValues.TYPEWRITER_EXIT_SCALAR,
+      },
+
+    },
+
+
   };
 }
 

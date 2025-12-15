@@ -8,11 +8,12 @@ import {
   DEBOUNCE_DELAYS,
   LOADING_TIMEOUTS,
   MAP_SLIDER_CASCADE_DURATION_MS,
+  generateLabel,
 } from "@config/new-animations";
 import type { AnimationBases, TransitionConfig } from "../types";
 
 type AnimationContextType = {
-  TRANSITIONS: Record<string, TransitionConfig>;
+  TRANSITIONS: ReturnType<typeof buildTransitions>; // Nested structure auto-derived
   BASES: AnimationBases;
   SPRINGS: typeof ANIMATION_SPRINGS;
   DEBOUNCE: typeof DEBOUNCE_DELAYS;
@@ -25,14 +26,24 @@ const AnimationContext = createContext<AnimationContextType | undefined>(
 );
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
-  // Build Leva schema from config - FULLY GENERIC!
+  // Build Leva schema from config with auto-generated labels
   const levaSchema = Object.fromEntries(
     Object.entries(ANIMATION_SCALAR_CONFIG).map(([_, section]) => {
       const { _meta, ...scalars } = section;
 
+      // Apply auto-generated labels if not manually specified
+      const scalarsWithLabels = Object.fromEntries(
+        Object.entries(scalars).map(([key, scalar]) => {
+          // Only generate label with base reference if scalar has a base property
+          const label = scalar.label ?? ('base' in scalar ? generateLabel(key, scalar.base) : key);
+          const { base, ...levaProps } = scalar as any; // Remove 'base' from Leva props if present
+          return [key, { ...levaProps, label }];
+        })
+      );
+
       return [
         _meta.title,
-        folder(scalars, { collapsed: _meta.collapsed ?? true }),
+        folder(scalarsWithLabels, { collapsed: _meta.collapsed ?? true }),
       ];
     })
   );
@@ -50,7 +61,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     ...transitionScalars
   } = controls;
 
-  // Compute bases from master + category scalars
+  // Compute bases from master + category scalars (memoized separately)
   const bases = useMemo(
     () =>
       computeAnimationBases(ANIMATION_MASTER_BASE as unknown as number, {
@@ -70,10 +81,30 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     ]
   );
 
-  // Build all transition objects
+  // Pre-scale all transition scalars (base × scalar) - memoized separately
+  const scaledValues = useMemo(() => {
+    const scaled: Record<string, number> = {};
+
+    // Iterate through all sections to find scalars with base property
+    Object.values(ANIMATION_SCALAR_CONFIG).forEach((section) => {
+      const { _meta, ...scalars } = section;
+      Object.entries(scalars).forEach(([key, scalar]) => {
+        if ('base' in scalar) {
+          // Pre-multiply: base × scalar
+          const scalarValue = transitionScalars[key] as unknown as number;
+          const baseValue = bases[scalar.base as keyof AnimationBases];
+          scaled[key] = baseValue * scalarValue;
+        }
+      });
+    });
+
+    return scaled;
+  }, [bases, transitionScalars]);
+
+  // Build all transition objects using pre-scaled values
   const transitions = useMemo(
-    () => buildTransitions(bases, transitionScalars as any),
-    [bases, transitionScalars]
+    () => buildTransitions(scaledValues as any),
+    [scaledValues]
   );
 
   return (

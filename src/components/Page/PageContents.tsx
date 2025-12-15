@@ -42,12 +42,12 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
       animate: {
         opacity: 1,
         transition: !embedded
-          ? TRANSITIONS.PAGE_CONTENTS_ANIMATE_FULLSCREEN
-          : TRANSITIONS.PAGE_CONTENTS_ANIMATE_EMBEDDED,
+          ? TRANSITIONS.PAGE.CONTENTS_FULLSCREEN_ANIMATE
+          : TRANSITIONS.PAGE.CONTENTS_EMBEDDED_ANIMATE,
       },
       exit: {
         opacity: 0,
-        transition: TRANSITIONS.PAGE_CONTENTS_EXIT,
+        transition: TRANSITIONS.PAGE.CONTENTS_EXIT,
       },
     }),
     [embedded, TRANSITIONS]

@@ -30,11 +30,11 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
     },
     animate: {
       opacity: 1,
-      transition: firstPageLoad ? TRANSITIONS.PAGE_ANIMATE_FIRST_LOAD : TRANSITIONS.PAGE_ANIMATE_NORMAL,
+      transition: firstPageLoad ? TRANSITIONS.PAGE.FIRST_LOAD_ANIMATE : TRANSITIONS.PAGE.NORMAL_ANIMATE,
     },
     exit: {
       opacity: 0,
-      transition: TRANSITIONS.PAGE_EXIT,
+      transition: TRANSITIONS.PAGE.EXIT,
     },
   };
 
