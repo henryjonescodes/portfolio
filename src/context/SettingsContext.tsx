@@ -112,7 +112,16 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
 
   return (
     <SettingsContext.Provider value={contextValue}>
-      <Leva collapsed hidden={!isDebugMode} oneLineLabels={true} />
+      <Leva
+        collapsed
+        hidden={!isDebugMode}
+        oneLineLabels={false}
+        theme={{
+          sizes: {
+            rootWidth: '500px',
+          }
+        }}
+      />
       {children}
     </SettingsContext.Provider>
   );
