@@ -1,4 +1,14 @@
 import type { EntryData } from "@components/ExperienceEntry/types";
+import GitHub from "@assets/svg/socials/github.svg?react";
+import ThreeJs from "@assets/svg/tools/ThreeJs.svg?react";
+import Blender from "@assets/svg/tools/Blender.svg?react";
+import Java from "@assets/svg/tools/Java.svg?react";
+import React from "@assets/svg/tools/React.svg?react";
+import Sass from "@assets/svg/tools/Sass.svg?react";
+import Typescript from "@assets/svg/tools/Typescript.svg?react";
+import Framer from "@assets/svg/tools/Framer.svg?react";
+import Swift from "@assets/svg/tools/Swift.svg?react";
+
 
 export const experienceData: Record<string, EntryData> = {
   arbor: {
@@ -10,6 +20,16 @@ export const experienceData: Record<string, EntryData> = {
     ],
     blurb: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
     startDate: new Date(2025, 0),
+    tools: [
+      {
+        Icon: React,
+        label: 'React'
+      },
+      {
+        Icon: Typescript,
+        label: 'Typescript'
+      },
+    ],
   },
   channelai: {
     id: "channelai",
@@ -23,6 +43,12 @@ export const experienceData: Record<string, EntryData> = {
     blurb: "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
     startDate: new Date(2024, 0),
     endDate: new Date(2024, 4),
+    tools: [
+      {
+        Icon: Swift,
+        label: 'Swift'
+      },
+    ],
   },
   mushroom: {
     id: "mushroom",
@@ -36,6 +62,24 @@ export const experienceData: Record<string, EntryData> = {
     blurb: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
     startDate: new Date(2022, 2),
     endDate: new Date(2024, 0),
+    tools: [
+      {
+        Icon: React,
+        label: 'React'
+      },
+      {
+        Icon: React,
+        label: 'React-Native'
+      },
+      {
+        Icon: Typescript,
+        label: 'Typescript'
+      },
+      {
+        Icon: Sass,
+        label: 'Sass'
+      },
+    ],
   },
   union: {
     id: "union",
@@ -48,6 +92,12 @@ export const experienceData: Record<string, EntryData> = {
     blurb: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.",
     startDate: new Date(2020, 8),
     endDate: new Date(2021, 5),
+    tools: [
+      {
+        Icon: Java,
+        label: 'Java'
+      },
+    ],
   },
   tumblr: {
     id: "tumblr",

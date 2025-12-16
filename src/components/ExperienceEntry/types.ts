@@ -1,5 +1,14 @@
 import React from "react";
 
+export type ToolEntry = {
+  Icon: React.FunctionComponent<
+    React.SVGProps<SVGSVGElement> & {
+      title?: string;
+    }
+  >,
+  label: string
+}
+
 // Base entry data type
 export type EntryData = {
   id: string;
@@ -11,6 +20,7 @@ export type EntryData = {
   endDate?: Date;
   url?: string;
   dateString?: string;
+  tools?: ToolEntry[]
 };
 
 // Component props type
