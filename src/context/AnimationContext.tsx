@@ -4,10 +4,6 @@ import {
   ANIMATION_SCALAR_CONFIG,
   computeAnimationBases,
   buildTransitions,
-  ANIMATION_SPRINGS,
-  DEBOUNCE_DELAYS,
-  LOADING_TIMEOUTS,
-  MAP_SLIDER_CASCADE_DURATION_MS,
   generateLabel,
 } from "@config/new-animations";
 import type { AnimationBases } from "../types";
@@ -15,9 +11,20 @@ import type { AnimationBases } from "../types";
 type AnimationContextType = {
   TRANSITIONS: ReturnType<typeof buildTransitions>; // Nested structure auto-derived
   BASES: AnimationBases;
-  SPRINGS: typeof ANIMATION_SPRINGS;
-  DEBOUNCE: typeof DEBOUNCE_DELAYS;
-  TIMEOUTS: typeof LOADING_TIMEOUTS;
+  SPRINGS: {
+    smooth: { tension: number; friction: number; mass: number };
+    bouncy: { tension: number; friction: number; mass: number };
+    slow: { tension: number; friction: number; mass: number };
+  };
+  DEBOUNCE: {
+    COLOR_UPDATE: number;
+    WINDOW_RESIZE: number;
+    SCROLL: number;
+  };
+  TIMEOUTS: {
+    LITE_MODE_FALLBACK: number;
+    USER_INITIATED_FALLBACK: number;
+  };
   MAP_SLIDER_CASCADE_MS: number;
 };
 
@@ -26,18 +33,22 @@ const AnimationContext = createContext<AnimationContextType | undefined>(
 );
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
-  // Build Leva schema from config with auto-generated labels
+  // Build Leva schema from config with auto-generated labels and hints
   const levaSchema = Object.fromEntries(
     Object.entries(ANIMATION_SCALAR_CONFIG).map(([_, section]) => {
       const { _meta, ...scalars } = section;
 
-      // Apply auto-generated labels if not manually specified
+      // Apply auto-generated labels and append field names to hints
       const scalarsWithLabels = Object.fromEntries(
         Object.entries(scalars).map(([key, scalar]) => {
           // Only generate label with base reference if scalar has a base property
           const label = scalar.label ?? ('base' in scalar ? generateLabel(key, scalar.base) : key);
+
+          // Append field name to existing hint (or use field name if no hint)
+          const hint = scalar.hint ? `${scalar.hint} | ${key}` : key;
+
           const { base, ...levaProps } = scalar as any; // Remove 'base' from Leva props if present
-          return [key, { ...levaProps, label }];
+          return [key, { ...levaProps, label, hint }];
         })
       );
 
@@ -52,7 +63,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     collapsed: false,
   });
 
-  // Extract category base scalars and spring values from controls
+  // Extract category base scalars, spring values, and system constants from controls
   const {
     ANIMATION_MASTER_BASE,
     PAGE_BASE_SCALAR,
@@ -69,6 +80,12 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     SPRING_SLOW_TENSION,
     SPRING_SLOW_FRICTION,
     SPRING_SLOW_MASS,
+    MAP_SLIDER_CASCADE_DURATION_MS,
+    DEBOUNCE_COLOR_UPDATE,
+    DEBOUNCE_WINDOW_RESIZE,
+    DEBOUNCE_SCROLL,
+    TIMEOUT_LITE_MODE_FALLBACK,
+    TIMEOUT_USER_INITIATED_FALLBACK,
     ...transitionScalars
   } = controls;
 
@@ -150,15 +167,34 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     ]
   );
 
+  // Build debounce delays from Leva controls
+  const debounceDelays = useMemo(
+    () => ({
+      COLOR_UPDATE: DEBOUNCE_COLOR_UPDATE as unknown as number,
+      WINDOW_RESIZE: DEBOUNCE_WINDOW_RESIZE as unknown as number,
+      SCROLL: DEBOUNCE_SCROLL as unknown as number,
+    }),
+    [DEBOUNCE_COLOR_UPDATE, DEBOUNCE_WINDOW_RESIZE, DEBOUNCE_SCROLL]
+  );
+
+  // Build loading timeouts from Leva controls
+  const loadingTimeouts = useMemo(
+    () => ({
+      LITE_MODE_FALLBACK: TIMEOUT_LITE_MODE_FALLBACK as unknown as number,
+      USER_INITIATED_FALLBACK: TIMEOUT_USER_INITIATED_FALLBACK as unknown as number,
+    }),
+    [TIMEOUT_LITE_MODE_FALLBACK, TIMEOUT_USER_INITIATED_FALLBACK]
+  );
+
   return (
     <AnimationContext.Provider
       value={{
         TRANSITIONS: transitions,
         BASES: bases,
         SPRINGS: springs,
-        DEBOUNCE: DEBOUNCE_DELAYS,
-        TIMEOUTS: LOADING_TIMEOUTS,
-        MAP_SLIDER_CASCADE_MS: MAP_SLIDER_CASCADE_DURATION_MS,
+        DEBOUNCE: debounceDelays,
+        TIMEOUTS: loadingTimeouts,
+        MAP_SLIDER_CASCADE_MS: MAP_SLIDER_CASCADE_DURATION_MS as unknown as number,
       }}
     >
       {children}

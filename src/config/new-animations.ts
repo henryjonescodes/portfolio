@@ -907,6 +907,58 @@ export const ANIMATION_SCALAR_CONFIG = {
       hint: "How long close button takes to fade out",
     } satisfies ScalarControl,
   },
+
+  constants: {
+    _meta: { title: "⚙️ System Constants", collapsed: true } as SectionMeta,
+    MAP_SLIDER_CASCADE_DURATION_MS: {
+      value: 1000,
+      min: 0,
+      max: 5000,
+      step: 50,
+      label: "Map Slider > Cascade Duration (ms)",
+      hint: "Time between map slider items cascading",
+    } satisfies MasterControl,
+    DEBOUNCE_COLOR_UPDATE: {
+      value: 50,
+      min: 0,
+      max: 500,
+      step: 10,
+      label: "Debounce > Color Update (ms)",
+      hint: "Debounce delay for color theme updates",
+    } satisfies MasterControl,
+    DEBOUNCE_WINDOW_RESIZE: {
+      value: 100,
+      min: 0,
+      max: 500,
+      step: 10,
+      label: "Debounce > Window Resize (ms)",
+      hint: "Debounce delay for window resize events",
+    } satisfies MasterControl,
+    DEBOUNCE_SCROLL: {
+      value: 50,
+      min: 0,
+      max: 500,
+      step: 10,
+      label: "Debounce > Scroll (ms)",
+      hint: "Debounce delay for scroll events",
+    } satisfies MasterControl,
+    TIMEOUT_LITE_MODE_FALLBACK: {
+      value: 8000,
+      min: 1000,
+      max: 30000,
+      step: 1000,
+      label: "Timeout > Lite Mode Fallback (ms)",
+      hint: "Timeout before falling back to lite mode",
+    } satisfies MasterControl,
+    TIMEOUT_USER_INITIATED_FALLBACK: {
+      value: 30000,
+      min: 5000,
+      max: 60000,
+      step: 1000,
+      label: "Timeout > User Initiated Fallback (ms)",
+      hint: "Timeout for user-initiated loading",
+    } satisfies MasterControl,
+  },
 } as const;
 
 // ============================================================================
@@ -1717,21 +1769,21 @@ export const ANIMATION_SPRINGS: Record<string, SpringConfig> = {
 };
 
 // ============================================================================
-// OTHER CONSTANTS
+// OTHER CONSTANTS (now configurable via Leva)
 // ============================================================================
 
-/** Debounce delays (in milliseconds) */
+/** Debounce delays (in milliseconds) - extracted from config */
 export const DEBOUNCE_DELAYS = {
-  COLOR_UPDATE: 50,
-  WINDOW_RESIZE: 100,
-  SCROLL: 50,
+  COLOR_UPDATE: ALL_SCALARS.DEBOUNCE_COLOR_UPDATE,
+  WINDOW_RESIZE: ALL_SCALARS.DEBOUNCE_WINDOW_RESIZE,
+  SCROLL: ALL_SCALARS.DEBOUNCE_SCROLL,
 };
 
-/** Loading timeouts (in milliseconds) */
+/** Loading timeouts (in milliseconds) - extracted from config */
 export const LOADING_TIMEOUTS = {
-  LITE_MODE_FALLBACK: 8000,
-  USER_INITIATED_FALLBACK: 30000,
+  LITE_MODE_FALLBACK: ALL_SCALARS.TIMEOUT_LITE_MODE_FALLBACK,
+  USER_INITIATED_FALLBACK: ALL_SCALARS.TIMEOUT_USER_INITIATED_FALLBACK,
 };
 
-/** Map slider cascade duration (in milliseconds) */
-export const MAP_SLIDER_CASCADE_DURATION_MS = 1000;
+/** Map slider cascade duration (in milliseconds) - extracted from config */
+export const MAP_SLIDER_CASCADE_DURATION_MS = ALL_SCALARS.MAP_SLIDER_CASCADE_DURATION_MS;
