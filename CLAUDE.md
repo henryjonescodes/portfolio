@@ -29,6 +29,14 @@ npm run generate-qr-code
 
 **Important**: The build process automatically exports SASS variables before building. If you modify `src/styles/_colors.scss`, run `npm run export-sass-variables` to update `sass-variables.ts`.
 
+## Development Guidelines
+
+**DO NOT obsessively run TypeScript checks or builds:**
+- Don't run `npm run build` or `tsc` after every small change
+- Type errors can be fixed later as needed
+- Focus on implementing features, not validating constantly
+- Only build when explicitly requested or when there's a specific reason to verify compilation
+
 ## Architecture Overview
 
 ### 2D/3D Integration Strategy

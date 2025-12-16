@@ -18,6 +18,7 @@ import { MapProvider } from "@components/MapViewer/MapContext";
 import { usePage } from "@context/PageContext";
 import { useColors } from "@context/ColorsContext";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
+import { useAnimations } from "@context/AnimationContext";
 
 import { screenWidths } from "@styles/layout.constants.ts";
 import { iconVariants } from "@styles/variants";
@@ -25,100 +26,85 @@ import { iconVariants } from "@styles/variants";
 import styles from "./about.module.scss";
 import StatTracker from "./StatTracker";
 
-const commonExit = {
-  opacity: 0,
-  transition: {
-    duration: 0,
-    when: "afterChildren",
-  },
-};
-
-const commonInitial = {
-  opacity: 0,
-};
-
-const heroVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-    },
-  },
-  exit: commonExit,
-};
-
-const mapViewerVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-    },
-  },
-  exit: commonExit,
-};
-
-const socialsVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 1.5,
-      delayChildren: 1.5,
-      duration: 0.3,
-      staggerChildren: 0.4,
-    },
-  },
-  exit: commonExit,
-};
-
-const statsVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.4,
-    },
-  },
-  exit: commonExit,
-};
-
-const tagsVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 1,
-      delayChildren: 1,
-      duration: 0.3,
-      staggerChildren: 0.4,
-    },
-  },
-  exit: commonExit,
-};
-const avatarVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 1.5,
-      duration: 2.5,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
 const About = () => {
   const { width } = useWindowDimensions();
+  const { TRANSITIONS } = useAnimations();
+
+  const commonInitial = {
+    opacity: 0,
+  };
+
+  const heroVariants = {
+    initial: commonInitial,
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.ABOUT_HERO.ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_HERO.EXIT,
+    },
+  };
+
+  const mapViewerVariants = {
+    initial: commonInitial,
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.ABOUT_MAP.ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_MAP.EXIT,
+    },
+  };
+
+  const socialsVariants = {
+    initial: commonInitial,
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.ABOUT_SOCIALS.ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_SOCIALS.EXIT,
+    },
+  };
+
+  const statsVariants = {
+    initial: commonInitial,
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.ABOUT_STATS.ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_STATS.EXIT,
+    },
+  };
+
+  const tagsVariants = {
+    initial: commonInitial,
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.ABOUT_TAGS.ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_TAGS.EXIT,
+    },
+  };
+
+  const avatarVariants = {
+    initial: commonInitial,
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.ABOUT_AVATAR.ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_AVATAR.EXIT,
+    },
+  };
 
   const { primaryHues } = useColors();
   const { embedded } = usePage();

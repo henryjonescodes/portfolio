@@ -1,55 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
-import { ANIMATION_DURATIONS } from "@config/animations";
-
-// Animation variants for individual characters
-const characterVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: ANIMATION_DURATIONS.TYPEWRITER_CHAR_DURATION,
-    },
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-  },
-  exit: {
-    opacity: 0,
-    y: -20, // Characters move upwards on exit
-    transition: {
-      duration: ANIMATION_DURATIONS.TYPEWRITER_CHAR_DURATION,
-    },
-  },
-};
-
-// Animation variants for the parent container
-const textVariants = (staggerChildren: number, staggerDirection: 1 | -1) => ({
-  initial: {
-    opacity: 1,
-  },
-  animate: {
-    transition: {
-      staggerChildren: staggerChildren, // Time between each character's appearance
-      staggerDirection: staggerDirection,
-    },
-  },
-  exit: {
-    transition: {
-      staggerChildren: staggerChildren / 4, // Stagger the children on exit
-      staggerDirection: staggerDirection * -1, // Reverse the order for exit
-    },
-  },
-  hide: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-      when: "beforeChildren",
-    },
-  },
-});
+import { useAnimations } from "@context/AnimationContext";
 
 // TypeScript interface for component props
 interface TypewriterTextProps {
@@ -63,6 +14,52 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
   staggerChildren = 0.009,
   staggerDirection = 1,
 }) => {
+  const { TRANSITIONS } = useAnimations();
+
+  // Animation variants for individual characters
+  const characterVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: TRANSITIONS.TYPEWRITER.CHAR_ANIMATE,
+    },
+    show: {
+      opacity: 1,
+      y: 0,
+    },
+    exit: {
+      opacity: 0,
+      y: -20, // Characters move upwards on exit
+      transition: TRANSITIONS.TYPEWRITER.CHAR_ANIMATE,
+    },
+  };
+
+  // Animation variants for the parent container
+  const textVariants = (staggerChildren: number, staggerDirection: 1 | -1) => ({
+    initial: {
+      opacity: 1,
+    },
+    animate: {
+      transition: {
+        staggerChildren: staggerChildren, // Time between each character's appearance
+        staggerDirection: staggerDirection,
+      },
+    },
+    exit: {
+      transition: {
+        staggerChildren: staggerChildren / 4, // Stagger the children on exit
+        staggerDirection: staggerDirection * -1, // Reverse the order for exit
+      },
+    },
+    hide: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        when: "beforeChildren",
+      },
+    },
+  });
   return (
     <motion.span variants={textVariants(staggerChildren, staggerDirection)}>
       {text.split("").map((char, index) => (

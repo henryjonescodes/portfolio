@@ -2,22 +2,21 @@ import { motion } from "framer-motion";
 import TypewriterText from "@components/TypewriterText";
 import PageContents from "@components/Page/PageContents";
 import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
-import { ANIMATION_DURATIONS } from "@config/animations";
+import { useAnimations } from "@context/AnimationContext";
 import styles from "./home.module.scss";
-
-// Define animation variants for the menu with staggered children
-const menuVariants = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
 
 const Home = () => {
   const navigate = useNavigatePreserveQuery(); // Initialize the navigate function
+  const { TRANSITIONS } = useAnimations();
 
-  const textStaggerSeconds = ANIMATION_DURATIONS.TYPEWRITER_CHAR_STAGGER;
+  // Define animation variants for the menu with staggered children
+  const menuVariants = {
+    animate: {
+      transition: TRANSITIONS.HOME.MENU_ANIMATE_STAGGER,
+    },
+  };
+
+  const textStaggerSeconds = TRANSITIONS.TYPEWRITER.ANIMATE_STAGGER.staggerChildren;
 
   return (
     <PageContents key={"menu"} className={styles.menu}>

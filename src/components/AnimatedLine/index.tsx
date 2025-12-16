@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useAnimations } from "@context/AnimationContext";
 import styles from "./animated-line.module.scss";
 
 type AnimatedLineProps = {
@@ -13,9 +14,13 @@ const AnimatedLine = ({
   className,
   borderWidth = 2.5,
   horizontal = false,
-  animationDuration = 1,
+  animationDuration,
 }: AnimatedLineProps) => {
+  const { TRANSITIONS } = useAnimations();
   const [animateOnLoad, setAnimateOnLoad] = useState(true);
+
+  // Use provided duration or fall back to TRANSITIONS
+  const duration = animationDuration ?? TRANSITIONS.ANIMATED_LINE.ANIMATE.duration;
 
   // When horizontal changes, stop animation on load
   useEffect(() => {
@@ -30,8 +35,8 @@ const AnimatedLine = ({
           width: "100%",
           transition: animateOnLoad
             ? {
-                duration: animationDuration,
-                ease: "easeInOut",
+                duration,
+                ease: TRANSITIONS.ANIMATED_LINE.ANIMATE.ease,
               }
             : { duration: 0 }, // Disable animation when horizontal updates
         }
@@ -39,8 +44,8 @@ const AnimatedLine = ({
           height: "100%",
           transition: animateOnLoad
             ? {
-                duration: animationDuration,
-                ease: "easeInOut",
+                duration,
+                ease: TRANSITIONS.ANIMATED_LINE.ANIMATE.ease,
               }
             : { duration: 0 },
         },

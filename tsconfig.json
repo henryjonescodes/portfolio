@@ -16,6 +16,7 @@
       "@context/*": ["./src/context/*"],
       "@config/*": ["./src/config/*"],
       "@utils/*": ["./src/utils/*"],
+      "@types/*": ["./src/types/*"],
       "@data/*": ["./src/data/*"],
       "$three": ["src/three-exports.ts"]
     },

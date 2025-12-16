@@ -2,6 +2,7 @@ import cn from "classnames";
 import { motion } from "framer-motion";
 import React from "react";
 import TypewriterText from "@components/TypewriterText";
+import { useAnimations } from "@context/AnimationContext";
 import styles from "./nav-bar.module.scss";
 
 // NavBarItem Component
@@ -16,28 +17,6 @@ type NavBarItemProps = {
     }
   >;
 };
-const borderVariants = {
-  initial: {
-    width: "0%",
-  },
-  animate: {
-    width: "100%",
-    transition: {
-      duration: 0.5,
-      delay: 1.5, // Delay the border animation by 0.5 seconds
-      ease: "easeInOut",
-    },
-  },
-  show: {
-    width: "100%",
-  },
-  exit: {
-    width: "0%",
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
 
 const NavBarItem = ({
   label,
@@ -46,6 +25,25 @@ const NavBarItem = ({
   mini,
   Icon,
 }: NavBarItemProps) => {
+  const { TRANSITIONS } = useAnimations();
+
+  const borderVariants = {
+    initial: {
+      width: "0%",
+    },
+    animate: {
+      width: "100%",
+      transition: TRANSITIONS.NAV_ITEM.BORDER_ANIMATE,
+    },
+    show: {
+      width: "100%",
+    },
+    exit: {
+      width: "0%",
+      transition: TRANSITIONS.NAV_ITEM.BORDER_EXIT,
+    },
+  };
+
   return (
     <motion.span
       className={cn(styles.navItem, { [styles.mini]: mini })}
@@ -61,7 +59,10 @@ const NavBarItem = ({
         </motion.span>
       )}
       <motion.span className={styles.label}>
-        <TypewriterText text={label} staggerChildren={0.03} />
+        <TypewriterText
+          text={label}
+          staggerChildren={TRANSITIONS.NAV_ITEM.TEXT_ANIMATE_STAGGER.staggerChildren}
+        />
       </motion.span>
     </motion.span>
   );

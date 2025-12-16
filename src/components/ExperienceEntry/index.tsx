@@ -7,110 +7,11 @@ import TypewriterText from "@components/TypewriterText";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import AnimatedLine from "@components/AnimatedLine";
 import ModalNavBar from "@components/NavBar/ModalNavBar";
-import { ANIMATION_DURATIONS } from "@config/animations";
+import { useAnimations } from "@context/AnimationContext";
 import styles from "./experience-entry.module.scss";
 import { usePage } from "@context/PageContext";
 import { formatDateRange } from "@utils/text";
 import type { ExperienceEntryProps } from "./types";
-
-// Shared layout transition for all layoutId elements
-const layoutTransition = { duration: ANIMATION_DURATIONS.MODAL_CONTAINER };
-
-const headerTextVariants = {
-  initial: {},
-  animate: {
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_HEADER_TEXT_DURATION,
-      delay: ANIMATION_DURATIONS.MODAL_HEADER_TEXT_DELAY,
-    },
-  },
-  exit: {
-    transition: {},
-  },
-  modalAnimate: {
-    transition: {},
-  },
-  modalExit: {
-    transition: {},
-  },
-};
-// Animation variants for initial page paint-in
-const entryTextVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
-      staggerChildren: ANIMATION_DURATIONS.MODAL_TEXT_STAGGER,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
-    },
-  },
-  // Modal states - start at animate state, no paint-in effect
-  modalAnimate: {
-    // opacity: 1,
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
-    },
-  },
-  modalExit: {
-    // opacity: 1,
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_TEXT_PAINT_DURATION,
-    },
-  },
-};
-const bodyVariants = {
-  initial: {
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
-    },
-  },
-  animate: {
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
-    },
-  },
-  exit: {
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
-    },
-  },
-  // Modal states - start at animate state, no paint-in effect
-  modalAnimate: {
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
-    },
-  },
-  modalExit: {
-    transition: {
-      duration: ANIMATION_DURATIONS.MODAL_CONTAINER,
-    },
-  },
-};
-
-// Modal container width animation
-const modalContainerVariants = {
-  animate: (overlayStyle: React.CSSProperties) => ({
-    maxWidth: overlayStyle.width,
-    width: overlayStyle.width,
-    transition: { duration: ANIMATION_DURATIONS.MODAL_CONTAINER },
-  }),
-  modalAnimate: () => ({
-    width: "700px",
-    maxWidth: "700px",
-    transition: { duration: ANIMATION_DURATIONS.MODAL_CONTAINER },
-  }),
-  modalExit: () => ({
-    transition: { duration: ANIMATION_DURATIONS.MODAL_CONTAINER },
-  }),
-};
 
 const ExperienceEntry = ({
   data,
@@ -140,7 +41,90 @@ const ExperienceEntry = ({
     : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
+  const { TRANSITIONS } = useAnimations();
   const isOpen = pageOpen && !inList;
+
+  // Shared layout transition for all layoutId elements
+  const layoutTransition = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
+
+  const headerTextVariants = {
+    initial: {},
+    animate: {
+      transition: TRANSITIONS.MODAL_HEADER.TEXT_ANIMATE,
+    },
+    exit: {
+      transition: {},
+    },
+    modalAnimate: {
+      transition: {},
+    },
+    modalExit: {
+      transition: {},
+    },
+  };
+
+  // Animation variants for initial page paint-in
+  const entryTextVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        ...TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
+        staggerChildren: TRANSITIONS.MODAL_TEXT.ANIMATE_STAGGER.staggerChildren,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
+    },
+    // Modal states - start at animate state, no paint-in effect
+    modalAnimate: {
+      // opacity: 1,
+      transition: TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
+    },
+    modalExit: {
+      // opacity: 1,
+      transition: TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
+    },
+  };
+
+  const bodyVariants = {
+    initial: {
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    },
+    animate: {
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    },
+    exit: {
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    },
+    // Modal states - start at animate state, no paint-in effect
+    modalAnimate: {
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    },
+    modalExit: {
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    },
+  };
+
+  // Modal container width animation
+  const modalContainerVariants = {
+    animate: (overlayStyle: React.CSSProperties) => ({
+      maxWidth: overlayStyle.width,
+      width: overlayStyle.width,
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    }),
+    modalAnimate: () => ({
+      width: "700px",
+      maxWidth: "700px",
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    }),
+    modalExit: () => ({
+      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+    }),
+  };
 
   const containerContent = (
     <>
@@ -155,13 +139,13 @@ const ExperienceEntry = ({
         })}
         onClick={onClick}
         style={onClick ? { cursor: "pointer" } : undefined}
-        transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
+        transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
         initial={false}
         animate={{
           opacity: inList && isSelected ? 0 : !inList ? 1 : 1,
           transition: {
             duration:
-              inList && isSelected ? 0 : ANIMATION_DURATIONS.MODAL_CONTAINER,
+              inList && isSelected ? 0 : TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration,
           },
         }}
       >
@@ -206,7 +190,7 @@ const ExperienceEntry = ({
               animate={{
                 opacity: isOpen ? 0.8 : 0,
               }}
-              transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
+              transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
             />
           )}
           <motion.div
@@ -221,7 +205,7 @@ const ExperienceEntry = ({
             <motion.div
               layoutId="bodyContent"
               className={styles.descriptionWrapper}
-              transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
+              transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
               variants={entryTextVariants}
             >
               {isOpen && <ModalNavBar title={title} onClose={onClose} />}
@@ -261,9 +245,7 @@ const ExperienceEntry = ({
                       initial="initial"
                       animate="animate"
                       exit="exit"
-                      transition={{
-                        delay: ANIMATION_DURATIONS.MODAL_BLURB_DELAY,
-                      }}
+                      transition={TRANSITIONS.MODAL.DESCRIPTION_ANIMATE}
                     >
                       <motion.p>
                         <TypewriterText text={blurb} />
@@ -275,7 +257,7 @@ const ExperienceEntry = ({
                   <motion.div
                     className={styles.childrenWrapper}
                     layoutId="childrenWrapper"
-                    transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
+                    transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
                   >
                     <AnimatedLine
                       borderWidth={borderWidth}
@@ -314,7 +296,7 @@ const ExperienceEntry = ({
                   [styles.childrenWrapperModal]: !inList,
                 })}
                 layoutId="childrenWrapper"
-                transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTENT }}
+                transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
               >
                 <AnimatedLine
                   borderWidth={borderWidth}

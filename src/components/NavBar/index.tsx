@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSettings } from "@context/SettingsContext";
 import { useWindowDimensions } from "@context/WindowDimensionContext";
 import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
-import { ANIMATION_DURATIONS } from "@config/animations";
+import { useAnimations } from "@context/AnimationContext";
 import { widthSmall } from "@styles/layout.constants.ts";
 import TypewriterText from "@components/TypewriterText";
 import AnimatedLine from "@components/AnimatedLine";
@@ -24,48 +24,6 @@ import styles from "./nav-bar.module.scss";
 import NavBarButton from "./NavBarButton";
 import NavBarItem from "./NavbarItem";
 
-const navBarVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: ANIMATION_DURATIONS.NAV_ITEM_FADE,
-      delay: ANIMATION_DURATIONS.NAV_ITEM_DELAY,
-      staggerChildren: 0.2,
-      delayChildren: ANIMATION_DURATIONS.NAV_ITEM_DELAY,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
-const minimalNavBarVariants = {
-  animate: {
-    opacity: 0,
-  },
-  show: {
-    opacity: 1,
-    transition: {
-      delay: 0.7,
-      duration: 0.5,
-      when: "afterChildren",
-    },
-  },
-  hide: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-      when: "beforeChildren",
-    },
-  },
-};
-
 type NavBarProps = {
   page: string | undefined;
 };
@@ -77,6 +35,47 @@ const NavBar = ({ page }: NavBarProps) => {
   const { animationDisabled, setAnimationDisabled } = useSettings();
   const { firstPageLoad } = useLoading();
   const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
+  const { TRANSITIONS } = useAnimations();
+
+  const navBarVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: {
+        ...TRANSITIONS.NAV_ITEM.FADE_ANIMATE,
+        staggerChildren: 0.2,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  const minimalNavBarVariants = {
+    animate: {
+      opacity: 0,
+    },
+    show: {
+      opacity: 1,
+      transition: {
+        delay: 0.7,
+        duration: 0.5,
+        when: "afterChildren",
+      },
+    },
+    hide: {
+      opacity: 0,
+      transition: {
+        duration: 0.3,
+        when: "beforeChildren",
+      },
+    },
+  };
 
   const handleNavClick = (path: string) => {
     navigate(path);

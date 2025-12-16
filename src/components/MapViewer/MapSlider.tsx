@@ -1,38 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
 import cn from "classnames";
 import { motion } from "framer-motion";
+import { useAnimations } from "@context/AnimationContext";
 import styles from "./map-components.module.scss";
 import { MapContext } from "./MapContext";
 import { LocationPinKeys } from "./map-viewer.contents";
 
-const staggerVariants = {
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.2,
-      staggerChildren: 0.05, // Stagger each child by 0.05s when enterin
-      staggerDirection: -1, // Reverse the stagger order on exitg
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.2,
-      staggerChildren: 0.02, // Stagger each child by 0.05s when exiting
-      // staggerDirection: -1, // Reverse the stagger order on exit
-      when: "afterChildren", // Ensure parent waits for children to exit
-    },
-  },
-};
-
-const lineVariants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 }, // Fade out each child when exiting
-};
-
 const MapSlider = () => {
+  const { TRANSITIONS, MAP_SLIDER_CASCADE_MS } = useAnimations();
+
+  const staggerVariants = {
+    initial: { opacity: 0 },
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.MAP_SLIDER.ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.MAP_SLIDER.EXIT,
+    },
+  };
+
+  const lineVariants = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
   const { currentKey, setCurrentKey, locationData } = useContext(MapContext);
   const [selectedStop, setSelectedStop] = useState<number | null>(null);
   const [requestedStop, setRequestedStop] = useState<number | null>(null);
@@ -71,7 +64,7 @@ const MapSlider = () => {
     const steps = Math.abs(endIndex - startIndex);
     const direction = endIndex > startIndex ? 1 : -1;
 
-    const totalDuration = 600;
+    const totalDuration = MAP_SLIDER_CASCADE_MS;
     const interval = totalDuration / steps;
 
     for (let i = 0; i <= steps; i++) {

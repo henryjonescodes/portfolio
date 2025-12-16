@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ExperienceEntry from "@components/ExperienceEntry";
-import { ANIMATION_DURATIONS } from "@config/animations";
+import { useAnimations } from "@context/AnimationContext";
 import type { EntryData } from "@components/ExperienceEntry/types";
 import styles from "./experience-entry-modal.module.scss";
 
@@ -41,6 +41,7 @@ type ExperienceEntryModalProviderProps = {
 export const ExperienceEntryModalProvider = ({
   children,
 }: ExperienceEntryModalProviderProps) => {
+  const { TRANSITIONS } = useAnimations();
   const [selectedEntry, setSelectedEntry] = useState<EntryData | null>(null);
   const [entryRect, setEntryRect] = useState<DOMRect | null>(null);
   const [pageOpen, setPageOpen] = useState(false);
@@ -57,12 +58,12 @@ export const ExperienceEntryModalProvider = ({
       setPageOpen(false);
       const timer = setTimeout(() => {
         setPageOpen(true);
-      }, ANIMATION_DURATIONS.MODAL_LAYOUT_DELAY * 1000);
+      }, (TRANSITIONS.MODAL.LAYOUT_ANIMATE.delay || 0) * 1000);
       return () => clearTimeout(timer);
     } else {
       setPageOpen(false);
     }
-  }, [selectedEntry, isClosing]);
+  }, [selectedEntry, isClosing, TRANSITIONS]);
 
   const openModal = (
     entry: EntryData,
@@ -88,7 +89,7 @@ export const ExperienceEntryModalProvider = ({
     setPageOpen(false);
 
     // Wait for exit animation to complete
-    const totalDuration = ANIMATION_DURATIONS.MODAL_CONTAINER * 1000;
+    const totalDuration = (TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration || 0) * 1000;
     setTimeout(() => {
       setSelectedEntry(null);
       setEntryRect(null);
@@ -131,7 +132,7 @@ export const ExperienceEntryModalProvider = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: ANIMATION_DURATIONS.MODAL_CONTAINER }}
+            transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
           >
             <div onClick={(e) => e.stopPropagation()}>
               <ExperienceEntry

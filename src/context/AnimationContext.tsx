@@ -1,307 +1,211 @@
-import { createContext, useContext, ReactNode } from "react";
-import { folder, useControls } from "leva";
+import { createContext, useContext, ReactNode, useMemo } from "react";
+import { useControls, folder } from "leva";
 import {
-  ANIMATION_DURATIONS,
-  ANIMATION_SPRINGS,
-  DEBOUNCE_DELAYS,
-  LOADING_TIMEOUTS,
-} from "@config/animations";
+  ANIMATION_SCALAR_CONFIG,
+  computeAnimationBases,
+  buildTransitions,
+  generateLabel,
+} from "@config/new-animations";
+import type { AnimationBases } from "../types";
 
-/**
- * Animation context providing access to all timing constants with optional Leva control overrides.
- *
- * In debug mode (?debug=true), all animation timings can be adjusted in real-time via Leva panel.
- * Includes a global speed multiplier that scales all duration values proportionally.
- */
-
-type AnimationDurations = {
-  [K in keyof typeof ANIMATION_DURATIONS]: number;
-};
-
-type AnimationSprings = {
-  [K in keyof typeof ANIMATION_SPRINGS]: {
-    tension: number;
-    friction: number;
-    mass: number;
+type AnimationContextType = {
+  TRANSITIONS: ReturnType<typeof buildTransitions>; // Nested structure auto-derived
+  BASES: AnimationBases;
+  SPRINGS: {
+    smooth: { tension: number; friction: number; mass: number };
+    bouncy: { tension: number; friction: number; mass: number };
+    slow: { tension: number; friction: number; mass: number };
   };
+  DEBOUNCE: {
+    COLOR_UPDATE: number;
+    WINDOW_RESIZE: number;
+    SCROLL: number;
+  };
+  TIMEOUTS: {
+    LITE_MODE_FALLBACK: number;
+    USER_INITIATED_FALLBACK: number;
+  };
+  MAP_SLIDER_CASCADE_MS: number;
 };
 
-type DebounceDurations = {
-  [K in keyof typeof DEBOUNCE_DELAYS]: number;
-};
+const AnimationContext = createContext<AnimationContextType | undefined>(
+  undefined
+);
 
-type LoadingTimeouts = {
-  [K in keyof typeof LOADING_TIMEOUTS]: number;
-};
+export const AnimationProvider = ({ children }: { children: ReactNode }) => {
+  // Build Leva schema from config with auto-generated labels and hints
+  const levaSchema = Object.fromEntries(
+    Object.entries(ANIMATION_SCALAR_CONFIG).map(([_, section]) => {
+      const { _meta, ...scalars } = section;
 
-type AnimationConfig = {
-  durations: AnimationDurations;
-  springs: AnimationSprings;
-  debounce: DebounceDurations;
-  loading: LoadingTimeouts;
-  speedMultiplier: number;
-};
+      // Apply auto-generated labels and append field names to hints
+      const scalarsWithLabels = Object.fromEntries(
+        Object.entries(scalars).map(([key, scalar]) => {
+          // Only generate label with base reference if scalar has a base property
+          const label = scalar.label ?? ('base' in scalar ? generateLabel(key, scalar.base) : key);
 
-const AnimationContext = createContext<AnimationConfig | undefined>(undefined);
+          // Append field name to existing hint (or use field name if no hint)
+          const hint = scalar.hint ? `${scalar.hint} | ${key}` : key;
 
-export function AnimationProvider({ children }: { children: ReactNode }) {
-  // Create Leva controls for all animation constants
-  const controls = useControls("Animation System", {
-    speedMultiplier: {
-      value: 1.0,
-      min: 0.1,
-      max: 3.0,
-      step: 0.1,
-      label: "Global Speed Multiplier",
-      hint: "Multiply all animation speeds (2 = twice as fast)",
-    },
+          const { base, ...levaProps } = scalar as any; // Remove 'base' from Leva props if present
+          return [key, { ...levaProps, label, hint }];
+        })
+      );
 
-    "Page Transitions": folder({
-      PAGE_FADE_IN: {
-        value: ANIMATION_DURATIONS.PAGE_FADE_IN,
-        min: 0,
-        max: 2,
-        step: 0.05,
-        label: "Fade In",
-        hint: "Duration for page to fade in after route change",
-      },
-      PAGE_FADE_OUT: {
-        value: ANIMATION_DURATIONS.PAGE_FADE_OUT,
-        min: 0,
-        max: 1,
-        step: 0.05,
-        label: "Fade Out",
-        hint: "Duration for page to fade out before route change",
-      },
-      PAGE_ENTER_DELAY: {
-        value: ANIMATION_DURATIONS.PAGE_ENTER_DELAY,
-        min: 0,
-        max: 1,
-        step: 0.05,
-        label: "Enter Delay",
-        hint: "Wait before starting fade in (allows exit to complete)",
-      },
-      PAGE_FIRST_LOAD_DELAY: {
-        value: ANIMATION_DURATIONS.PAGE_FIRST_LOAD_DELAY,
-        min: 0,
-        max: 2,
-        step: 0.1,
-        label: "First Load Delay",
-        hint: "Delay before animating page on first load",
-      },
-      PAGE_DELAY_CHILDREN: {
-        value: ANIMATION_DURATIONS.PAGE_DELAY_CHILDREN,
-        min: 0,
-        max: 1,
-        step: 0.05,
-        label: "Children Delay",
-        hint: "Delay before animating child elements",
-      },
-      PAGE_FIRST_LOAD_DELAY_CHILDREN: {
-        value: ANIMATION_DURATIONS.PAGE_FIRST_LOAD_DELAY_CHILDREN,
-        min: 0,
-        max: 1,
-        step: 0.05,
-        label: "First Load Children Delay",
-        hint: "Delay before animating children on first load",
-      },
-    }, { collapsed: false }),
+      return [
+        _meta.title,
+        folder(scalarsWithLabels, { collapsed: _meta.collapsed ?? true }),
+      ];
+    })
+  );
 
-    "Navigation": folder({
-      NAV_ITEM_FADE: {
-        value: ANIMATION_DURATIONS.NAV_ITEM_FADE,
-        min: 0,
-        max: 2,
-        step: 0.05,
-        label: "Item Fade",
-        hint: "Duration for navigation items to fade in",
-      },
-      NAV_ITEM_DELAY: {
-        value: ANIMATION_DURATIONS.NAV_ITEM_DELAY,
-        min: 0,
-        max: 2,
-        step: 0.05,
-        label: "Item Delay",
-        hint: "Delay before navigation items appear",
-      },
-    }, { collapsed: true }),
-
-    "Text Effects": folder({
-      TYPEWRITER_CHAR_DURATION: {
-        value: ANIMATION_DURATIONS.TYPEWRITER_CHAR_DURATION,
-        min: 0,
-        max: 1,
-        step: 0.01,
-        label: "Char Duration",
-        hint: "How long each character takes to appear",
-      },
-      TYPEWRITER_CHAR_STAGGER: {
-        value: ANIMATION_DURATIONS.TYPEWRITER_CHAR_STAGGER,
-        min: 0,
-        max: 0.2,
-        step: 0.005,
-        label: "Char Stagger",
-        hint: "Delay between each character appearing",
-      },
-    }, { collapsed: true }),
-
-    "Spring Physics": folder({
-      "Button": folder({
-        BUTTON_TENSION: {
-          value: ANIMATION_SPRINGS.BUTTON_PRESS.tension,
-          min: 50,
-          max: 500,
-          step: 10,
-          label: "Tension",
-          hint: "Higher = snappier button press",
-        },
-        BUTTON_FRICTION: {
-          value: ANIMATION_SPRINGS.BUTTON_PRESS.friction,
-          min: 10,
-          max: 100,
-          step: 1,
-          label: "Friction",
-          hint: "Higher = less bouncy",
-        },
-      }, { collapsed: true }),
-      "Knob": folder({
-        KNOB_TENSION: {
-          value: ANIMATION_SPRINGS.KNOB_ROTATION.tension,
-          min: 50,
-          max: 500,
-          step: 10,
-          label: "Tension",
-          hint: "Higher = snappier knob rotation",
-        },
-        KNOB_FRICTION: {
-          value: ANIMATION_SPRINGS.KNOB_ROTATION.friction,
-          min: 10,
-          max: 100,
-          step: 1,
-          label: "Friction",
-          hint: "Higher = less bouncy",
-        },
-      }, { collapsed: true }),
-    }, { collapsed: true }),
-
-    "Performance": folder({
-      "Debouncing": folder({
-        COLOR_UPDATE_DEBOUNCE_MS: {
-          value: DEBOUNCE_DELAYS.COLOR_UPDATE_MS,
-          min: 0,
-          max: 500,
-          step: 50,
-          label: "Color Update",
-          hint: "Delay before updating CSS after knob rotation",
-        },
-        RESIZE_DEBOUNCE_MS: {
-          value: DEBOUNCE_DELAYS.RESIZE_MS,
-          min: 0,
-          max: 500,
-          step: 50,
-          label: "Resize",
-          hint: "Delay before recalculating layout after resize",
-        },
-      }, { collapsed: true }),
-      "Loading Timeouts": folder({
-        AUTO_TIMEOUT_MS: {
-          value: LOADING_TIMEOUTS.AUTO_TIMEOUT_MS,
-          min: 1000,
-          max: 30000,
-          step: 1000,
-          label: "Auto Timeout",
-          hint: "Time before falling back to lite mode (automatic)",
-        },
-        USER_INITIATED_TIMEOUT_MS: {
-          value: LOADING_TIMEOUTS.USER_INITIATED_TIMEOUT_MS,
-          min: 5000,
-          max: 60000,
-          step: 5000,
-          label: "User Initiated",
-          hint: "Time before fallback when user clicks load 3D",
-        },
-      }, { collapsed: true }),
-    }, { collapsed: true }),
+  const controls = useControls("Animation System", levaSchema, {
+    collapsed: false,
   });
 
-  // Apply speed multiplier to all duration values
-  const scaledDurations = Object.fromEntries(
-    Object.entries(controls).map(([key, value]) => {
-      // Only scale duration values (seconds), not spring physics or delays
-      if (
-        key.startsWith("PAGE_") ||
-        key.startsWith("NAV_") ||
-        key.startsWith("TYPEWRITER_")
-      ) {
-        return [key, value / controls.speedMultiplier];
-      }
-      return [key, value];
-    })
-  ) as Record<string, number>;
+  // Extract category base scalars, spring values, and system constants from controls
+  const {
+    ANIMATION_MASTER_BASE,
+    PAGE_BASE_SCALAR,
+    MODAL_BASE_SCALAR,
+    NAV_BASE_SCALAR,
+    TEXT_BASE_SCALAR,
+    COMPONENT_BASE_SCALAR,
+    SPRING_SMOOTH_TENSION,
+    SPRING_SMOOTH_FRICTION,
+    SPRING_SMOOTH_MASS,
+    SPRING_BOUNCY_TENSION,
+    SPRING_BOUNCY_FRICTION,
+    SPRING_BOUNCY_MASS,
+    SPRING_SLOW_TENSION,
+    SPRING_SLOW_FRICTION,
+    SPRING_SLOW_MASS,
+    MAP_SLIDER_CASCADE_DURATION_MS,
+    DEBOUNCE_COLOR_UPDATE,
+    DEBOUNCE_WINDOW_RESIZE,
+    DEBOUNCE_SCROLL,
+    TIMEOUT_LITE_MODE_FALLBACK,
+    TIMEOUT_USER_INITIATED_FALLBACK,
+    ...transitionScalars
+  } = controls;
 
-  // Build configuration object matching original structure
-  const config: AnimationConfig = {
-    durations: {
-      PAGE_FADE_IN: scaledDurations.PAGE_FADE_IN,
-      PAGE_FADE_OUT: scaledDurations.PAGE_FADE_OUT,
-      PAGE_ENTER_DELAY: scaledDurations.PAGE_ENTER_DELAY,
-      PAGE_FIRST_LOAD_DELAY: scaledDurations.PAGE_FIRST_LOAD_DELAY,
-      PAGE_DELAY_CHILDREN: scaledDurations.PAGE_DELAY_CHILDREN,
-      PAGE_FIRST_LOAD_DELAY_CHILDREN:
-        scaledDurations.PAGE_FIRST_LOAD_DELAY_CHILDREN,
-      NAV_ITEM_FADE: scaledDurations.NAV_ITEM_FADE,
-      NAV_ITEM_DELAY: scaledDurations.NAV_ITEM_DELAY,
-      TYPEWRITER_CHAR_DURATION: scaledDurations.TYPEWRITER_CHAR_DURATION,
-      TYPEWRITER_CHAR_STAGGER: scaledDurations.TYPEWRITER_CHAR_STAGGER,
-    },
-    springs: {
-      BUTTON_PRESS: {
-        tension: controls.BUTTON_TENSION,
-        friction: controls.BUTTON_FRICTION,
-        mass: 1,
+  // Compute bases from master + category scalars (memoized separately)
+  const bases = useMemo(
+    () =>
+      computeAnimationBases(ANIMATION_MASTER_BASE as unknown as number, {
+        PAGE_BASE_SCALAR: PAGE_BASE_SCALAR as unknown as number,
+        MODAL_BASE_SCALAR: MODAL_BASE_SCALAR as unknown as number,
+        NAV_BASE_SCALAR: NAV_BASE_SCALAR as unknown as number,
+        TEXT_BASE_SCALAR: TEXT_BASE_SCALAR as unknown as number,
+        COMPONENT_BASE_SCALAR: COMPONENT_BASE_SCALAR as unknown as number,
+      }),
+    [
+      ANIMATION_MASTER_BASE,
+      PAGE_BASE_SCALAR,
+      MODAL_BASE_SCALAR,
+      NAV_BASE_SCALAR,
+      TEXT_BASE_SCALAR,
+      COMPONENT_BASE_SCALAR,
+    ]
+  );
+
+  // Pre-scale all transition scalars (base × scalar) - memoized separately
+  const scaledValues = useMemo(() => {
+    const scaled: Record<string, number> = {};
+
+    // Iterate through all sections to find scalars with base property
+    Object.values(ANIMATION_SCALAR_CONFIG).forEach((section) => {
+      const { _meta, ...scalars } = section;
+      Object.entries(scalars).forEach(([key, scalar]) => {
+        if ('base' in scalar) {
+          // Pre-multiply: base × scalar
+          const scalarValue = transitionScalars[key] as unknown as number;
+          const baseValue = bases[scalar.base as keyof AnimationBases];
+          scaled[key] = baseValue * scalarValue;
+        }
+      });
+    });
+
+    return scaled;
+  }, [bases, transitionScalars]);
+
+  // Build all transition objects using pre-scaled values
+  const transitions = useMemo(
+    () => buildTransitions(scaledValues as any),
+    [scaledValues]
+  );
+
+  // Build springs from Leva controls
+  const springs = useMemo(
+    () => ({
+      smooth: {
+        tension: SPRING_SMOOTH_TENSION as unknown as number,
+        friction: SPRING_SMOOTH_FRICTION as unknown as number,
+        mass: SPRING_SMOOTH_MASS as unknown as number,
       },
-      KNOB_ROTATION: {
-        tension: controls.KNOB_TENSION,
-        friction: controls.KNOB_FRICTION,
-        mass: 1,
+      bouncy: {
+        tension: SPRING_BOUNCY_TENSION as unknown as number,
+        friction: SPRING_BOUNCY_FRICTION as unknown as number,
+        mass: SPRING_BOUNCY_MASS as unknown as number,
       },
-      CAMERA_ZOOM: ANIMATION_SPRINGS.CAMERA_ZOOM, // Not exposed in Leva yet
-    },
-    debounce: {
-      COLOR_UPDATE_MS: controls.COLOR_UPDATE_DEBOUNCE_MS,
-      RESIZE_MS: controls.RESIZE_DEBOUNCE_MS,
-    },
-    loading: {
-      AUTO_TIMEOUT_MS: controls.AUTO_TIMEOUT_MS,
-      USER_INITIATED_TIMEOUT_MS: controls.USER_INITIATED_TIMEOUT_MS,
-    },
-    speedMultiplier: controls.speedMultiplier,
-  };
+      slow: {
+        tension: SPRING_SLOW_TENSION as unknown as number,
+        friction: SPRING_SLOW_FRICTION as unknown as number,
+        mass: SPRING_SLOW_MASS as unknown as number,
+      },
+    }),
+    [
+      SPRING_SMOOTH_TENSION,
+      SPRING_SMOOTH_FRICTION,
+      SPRING_SMOOTH_MASS,
+      SPRING_BOUNCY_TENSION,
+      SPRING_BOUNCY_FRICTION,
+      SPRING_BOUNCY_MASS,
+      SPRING_SLOW_TENSION,
+      SPRING_SLOW_FRICTION,
+      SPRING_SLOW_MASS,
+    ]
+  );
+
+  // Build debounce delays from Leva controls
+  const debounceDelays = useMemo(
+    () => ({
+      COLOR_UPDATE: DEBOUNCE_COLOR_UPDATE as unknown as number,
+      WINDOW_RESIZE: DEBOUNCE_WINDOW_RESIZE as unknown as number,
+      SCROLL: DEBOUNCE_SCROLL as unknown as number,
+    }),
+    [DEBOUNCE_COLOR_UPDATE, DEBOUNCE_WINDOW_RESIZE, DEBOUNCE_SCROLL]
+  );
+
+  // Build loading timeouts from Leva controls
+  const loadingTimeouts = useMemo(
+    () => ({
+      LITE_MODE_FALLBACK: TIMEOUT_LITE_MODE_FALLBACK as unknown as number,
+      USER_INITIATED_FALLBACK: TIMEOUT_USER_INITIATED_FALLBACK as unknown as number,
+    }),
+    [TIMEOUT_LITE_MODE_FALLBACK, TIMEOUT_USER_INITIATED_FALLBACK]
+  );
 
   return (
-    <AnimationContext.Provider value={config}>
+    <AnimationContext.Provider
+      value={{
+        TRANSITIONS: transitions,
+        BASES: bases,
+        SPRINGS: springs,
+        DEBOUNCE: debounceDelays,
+        TIMEOUTS: loadingTimeouts,
+        MAP_SLIDER_CASCADE_MS: MAP_SLIDER_CASCADE_DURATION_MS as unknown as number,
+      }}
+    >
       {children}
     </AnimationContext.Provider>
   );
-}
+};
 
-/**
- * Hook to access animation timing constants.
- * Falls back to defaults if used outside provider.
- */
-export function useAnimations(): AnimationConfig {
+export const useAnimations = () => {
   const context = useContext(AnimationContext);
-
-  if (!context) {
-    // Fallback to defaults if used outside provider
-    return {
-      durations: ANIMATION_DURATIONS,
-      springs: ANIMATION_SPRINGS,
-      debounce: DEBOUNCE_DELAYS,
-      loading: LOADING_TIMEOUTS,
-      speedMultiplier: 1,
-    };
+  if (context === undefined) {
+    throw new Error("useAnimations must be used within AnimationProvider");
   }
-
   return context;
-}
+};

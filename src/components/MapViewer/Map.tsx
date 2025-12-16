@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useContext } from "react";
 import AnimatedBorderBox from "@components/AnimatedBorderBox";
 import AnimatedLine from "@components/AnimatedLine";
+import { useAnimations } from "@context/AnimationContext";
 import { usePage } from "@context/PageContext";
 import { MapContext } from "./MapContext";
 import styles from "./map-components.module.scss";
@@ -12,33 +13,30 @@ import MapSlider from "./MapSlider";
 import Pin from "./Pin";
 import { LocationPinKeys } from "./map-viewer.contents";
 
-const mapContainerVariants = {
-  initial: {},
-  animate: {
-    transition: {},
-  },
-  exit: {},
-};
-
-const mapContentVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 2.3,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
-
 const Map = () => {
+  const { TRANSITIONS } = useAnimations();
+
+  const mapContainerVariants = {
+    initial: {},
+    animate: {
+      transition: {},
+    },
+    exit: {},
+  };
+
+  const mapContentVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.MAP.CONTENT_ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.MAP.EXIT,
+    },
+  };
   const { currentKey, setCurrentKey, locationData } = useContext(MapContext);
   const { mapTitle: title, mapHighlights: highlights } =
     locationData[currentKey ?? "nyc"] ?? {};
