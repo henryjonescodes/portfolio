@@ -30,14 +30,6 @@ const About = () => {
   const { width } = useWindowDimensions();
   const { TRANSITIONS } = useAnimations();
 
-  const commonExit = {
-    opacity: 0,
-    transition: {
-      duration: 0,
-      when: "afterChildren" as const,
-    },
-  };
-
   const commonInitial = {
     opacity: 0,
   };
@@ -48,7 +40,10 @@ const About = () => {
       opacity: 1,
       transition: TRANSITIONS.ABOUT_HERO.ANIMATE,
     },
-    exit: commonExit,
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_HERO.EXIT,
+    },
   };
 
   const mapViewerVariants = {
@@ -57,7 +52,10 @@ const About = () => {
       opacity: 1,
       transition: TRANSITIONS.ABOUT_MAP.ANIMATE,
     },
-    exit: commonExit,
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_MAP.EXIT,
+    },
   };
 
   const socialsVariants = {
@@ -66,7 +64,10 @@ const About = () => {
       opacity: 1,
       transition: TRANSITIONS.ABOUT_SOCIALS.ANIMATE,
     },
-    exit: commonExit,
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_SOCIALS.EXIT,
+    },
   };
 
   const statsVariants = {
@@ -75,7 +76,10 @@ const About = () => {
       opacity: 1,
       transition: TRANSITIONS.ABOUT_STATS.ANIMATE,
     },
-    exit: commonExit,
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_STATS.EXIT,
+    },
   };
 
   const tagsVariants = {
@@ -84,7 +88,10 @@ const About = () => {
       opacity: 1,
       transition: TRANSITIONS.ABOUT_TAGS.ANIMATE,
     },
-    exit: commonExit,
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.ABOUT_TAGS.EXIT,
+    },
   };
 
   const avatarVariants = {

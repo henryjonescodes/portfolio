@@ -964,6 +964,12 @@ export function buildTransitions(
             staggerChildren: scaledValues.ABOUT_HERO_STAGGER_SCALAR,
       },
 
+      EXIT: {
+            // Common about section exit
+            duration: 0,
+            when: "afterChildren" as const,
+      },
+
     },
 
     // ========================================
@@ -975,6 +981,12 @@ export function buildTransitions(
             // About map section
             duration: scaledValues.ABOUT_MAP_DURATION_SCALAR,
             staggerChildren: scaledValues.ABOUT_MAP_STAGGER_SCALAR,
+      },
+
+      EXIT: {
+            // Common about section exit
+            duration: 0,
+            when: "afterChildren" as const,
       },
 
     },
@@ -994,6 +1006,12 @@ export function buildTransitions(
               scaledValues.ABOUT_SOCIALS_STAGGER_SCALAR,
       },
 
+      EXIT: {
+            // Common about section exit
+            duration: 0,
+            when: "afterChildren" as const,
+      },
+
     },
 
     // ========================================
@@ -1006,6 +1024,12 @@ export function buildTransitions(
             duration: scaledValues.ABOUT_STATS_DURATION_SCALAR,
             staggerChildren:
               scaledValues.ABOUT_STATS_STAGGER_SCALAR,
+      },
+
+      EXIT: {
+            // Common about section exit
+            duration: 0,
+            when: "afterChildren" as const,
       },
 
     },
@@ -1024,6 +1048,12 @@ export function buildTransitions(
             staggerChildren: scaledValues.ABOUT_TAGS_STAGGER_SCALAR,
       },
 
+      EXIT: {
+            // Common about section exit
+            duration: 0,
+            when: "afterChildren" as const,
+      },
+
     },
 
     // ========================================
@@ -1034,6 +1064,7 @@ export function buildTransitions(
       ANIMATE: {
             // AnimatedLine component
             duration: scaledValues.ANIMATED_LINE_SCALAR,
+            ease: "easeInOut",
       },
 
     },
@@ -1046,11 +1077,13 @@ export function buildTransitions(
       ANIMATE: {
             // AnimatedBorderBox appear
             duration: scaledValues.BORDER_BOX_ANIMATE_SCALAR,
+            ease: "easeInOut",
       },
 
       EXIT: {
             // AnimatedBorderBox exit
             duration: scaledValues.BORDER_BOX_EXIT_SCALAR,
+            ease: "easeInOut",
       },
 
     },
@@ -1171,6 +1204,7 @@ export function buildTransitions(
       EXIT: {
             // Map blurb exit
             duration: scaledValues.MAP_BLURB_EXIT_SCALAR,
+            when: "afterChildren" as const,
       },
 
     },
@@ -1184,6 +1218,7 @@ export function buildTransitions(
             // Map slider animation
             duration: scaledValues.MAP_SLIDER_DURATION_SCALAR,
             staggerChildren: scaledValues.MAP_SLIDER_STAGGER_SCALAR,
+            staggerDirection: -1,
       },
 
       EXIT: {
@@ -1192,6 +1227,7 @@ export function buildTransitions(
               scaledValues.MAP_SLIDER_EXIT_DURATION_SCALAR,
             staggerChildren:
               scaledValues.MAP_SLIDER_EXIT_STAGGER_SCALAR,
+            when: "afterChildren" as const,
       },
 
     },
@@ -1336,6 +1372,7 @@ export function buildTransitions(
             // Nav item border animation
             duration: scaledValues.NAV_ITEM_BORDER_DURATION_SCALAR,
             delay: scaledValues.NAV_ITEM_BORDER_DELAY_SCALAR,
+            ease: "easeInOut",
       },
 
       BORDER_EXIT: {
@@ -1455,6 +1492,16 @@ export function buildTransitions(
             staggerChildren: scaledValues.PAGE_CONTENTS_STAGGER_SCALAR,
       },
 
+      MINIMAL_SHOWN: {
+            // Minimal animation when animations disabled
+            duration: scaledValues.PAGE_CONTENTS_FADE_IN_SCALAR,
+      },
+
+      MINIMAL_REMOVED: {
+            // Minimal exit when animations disabled
+            when: "beforeChildren" as const,
+      },
+
     },
 
     // ========================================
@@ -1521,6 +1568,7 @@ export function buildTransitions(
             // Stat tracker appear animation
             staggerChildren:
               scaledValues.STAT_TRACKER_ANIMATE_STAGGER_SCALAR,
+            staggerDirection: -1,
       },
 
       BLOCK_ANIMATE: {
@@ -1533,6 +1581,7 @@ export function buildTransitions(
             // Stat tracker exit animation
             staggerChildren:
               scaledValues.STAT_TRACKER_EXIT_STAGGER_SCALAR,
+            staggerDirection: 1,
       },
 
       TEXT_ANIMATE_STAGGER: {

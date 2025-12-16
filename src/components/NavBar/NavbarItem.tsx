@@ -33,10 +33,7 @@ const NavBarItem = ({
     },
     animate: {
       width: "100%",
-      transition: {
-        ...TRANSITIONS.NAV_ITEM.BORDER_ANIMATE,
-        ease: "easeInOut",
-      },
+      transition: TRANSITIONS.NAV_ITEM.BORDER_ANIMATE,
     },
     show: {
       width: "100%",

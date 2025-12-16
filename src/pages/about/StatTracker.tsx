@@ -20,17 +20,11 @@ const StatTracker = ({ label, rating }: StatTrackerProps) => {
     },
     animate: {
       opacity: 1,
-      transition: {
-        ...TRANSITIONS.STAT_TRACKER.ANIMATE,
-        staggerDirection: -1,
-      },
+      transition: TRANSITIONS.STAT_TRACKER.ANIMATE,
     },
     exit: {
       opacity: 0,
-      transition: {
-        ...TRANSITIONS.STAT_TRACKER.EXIT,
-        staggerDirection: 1,
-      },
+      transition: TRANSITIONS.STAT_TRACKER.EXIT,
     },
   };
 

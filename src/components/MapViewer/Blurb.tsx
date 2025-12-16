@@ -19,10 +19,7 @@ const Blurb = () => {
     },
     exit: {
       opacity: 0,
-      transition: {
-        ...TRANSITIONS.MAP_DESCRIPTION.EXIT,
-        when: "afterChildren" as const,
-      },
+      transition: TRANSITIONS.MAP_DESCRIPTION.EXIT,
     },
   };
   const { currentKey, previousKey, setCurrentKey, locationData } =

@@ -26,17 +26,11 @@ const AnimatedBorder = ({
     initial: { pathLength: 0 },
     animate: {
       pathLength: 1,
-      transition: {
-        ...TRANSITIONS.BORDER_BOX.ANIMATE,
-        ease: "easeInOut",
-      },
+      transition: TRANSITIONS.BORDER_BOX.ANIMATE,
     },
     exit: {
       pathLength: 0,
-      transition: {
-        ...TRANSITIONS.BORDER_BOX.EXIT,
-        ease: "easeInOut",
-      },
+      transition: TRANSITIONS.BORDER_BOX.EXIT,
     },
   };
 

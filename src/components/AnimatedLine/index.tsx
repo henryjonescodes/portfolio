@@ -36,7 +36,7 @@ const AnimatedLine = ({
           transition: animateOnLoad
             ? {
                 duration,
-                ease: "easeInOut",
+                ease: TRANSITIONS.ANIMATED_LINE.ANIMATE.ease,
               }
             : { duration: 0 }, // Disable animation when horizontal updates
         }
@@ -45,7 +45,7 @@ const AnimatedLine = ({
           transition: animateOnLoad
             ? {
                 duration,
-                ease: "easeInOut",
+                ease: TRANSITIONS.ANIMATED_LINE.ANIMATE.ease,
               }
             : { duration: 0 },
         },

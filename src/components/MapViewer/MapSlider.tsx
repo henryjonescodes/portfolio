@@ -13,17 +13,11 @@ const MapSlider = () => {
     initial: { opacity: 0 },
     animate: {
       opacity: 1,
-      transition: {
-        ...TRANSITIONS.MAP_SLIDER.ANIMATE,
-        staggerDirection: -1,
-      },
+      transition: TRANSITIONS.MAP_SLIDER.ANIMATE,
     },
     exit: {
       opacity: 0,
-      transition: {
-        ...TRANSITIONS.MAP_SLIDER.EXIT,
-        when: "afterChildren" as const,
-      },
+      transition: TRANSITIONS.MAP_SLIDER.EXIT,
     },
   };
 
