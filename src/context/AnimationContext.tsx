@@ -52,7 +52,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     collapsed: false,
   });
 
-  // Extract category base scalars from controls
+  // Extract category base scalars and spring values from controls
   const {
     ANIMATION_MASTER_BASE,
     PAGE_BASE_SCALAR,
@@ -60,6 +60,15 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     NAV_BASE_SCALAR,
     TEXT_BASE_SCALAR,
     COMPONENT_BASE_SCALAR,
+    SPRING_SMOOTH_TENSION,
+    SPRING_SMOOTH_FRICTION,
+    SPRING_SMOOTH_MASS,
+    SPRING_BOUNCY_TENSION,
+    SPRING_BOUNCY_FRICTION,
+    SPRING_BOUNCY_MASS,
+    SPRING_SLOW_TENSION,
+    SPRING_SLOW_FRICTION,
+    SPRING_SLOW_MASS,
     ...transitionScalars
   } = controls;
 
@@ -109,12 +118,44 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     [scaledValues]
   );
 
+  // Build springs from Leva controls
+  const springs = useMemo(
+    () => ({
+      smooth: {
+        tension: SPRING_SMOOTH_TENSION as unknown as number,
+        friction: SPRING_SMOOTH_FRICTION as unknown as number,
+        mass: SPRING_SMOOTH_MASS as unknown as number,
+      },
+      bouncy: {
+        tension: SPRING_BOUNCY_TENSION as unknown as number,
+        friction: SPRING_BOUNCY_FRICTION as unknown as number,
+        mass: SPRING_BOUNCY_MASS as unknown as number,
+      },
+      slow: {
+        tension: SPRING_SLOW_TENSION as unknown as number,
+        friction: SPRING_SLOW_FRICTION as unknown as number,
+        mass: SPRING_SLOW_MASS as unknown as number,
+      },
+    }),
+    [
+      SPRING_SMOOTH_TENSION,
+      SPRING_SMOOTH_FRICTION,
+      SPRING_SMOOTH_MASS,
+      SPRING_BOUNCY_TENSION,
+      SPRING_BOUNCY_FRICTION,
+      SPRING_BOUNCY_MASS,
+      SPRING_SLOW_TENSION,
+      SPRING_SLOW_FRICTION,
+      SPRING_SLOW_MASS,
+    ]
+  );
+
   return (
     <AnimationContext.Provider
       value={{
         TRANSITIONS: transitions,
         BASES: bases,
-        SPRINGS: ANIMATION_SPRINGS,
+        SPRINGS: springs,
         DEBOUNCE: DEBOUNCE_DELAYS,
         TIMEOUTS: LOADING_TIMEOUTS,
         MAP_SLIDER_CASCADE_MS: MAP_SLIDER_CASCADE_DURATION_MS,
