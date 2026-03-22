@@ -128,6 +128,7 @@ export const ExperienceEntryModalProvider = ({
           <motion.div
             key="modal-overlay"
             className={styles.overlay}
+            style={{ pointerEvents: isClosing ? 'none' : 'auto' }}
             onClick={closeModal}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
