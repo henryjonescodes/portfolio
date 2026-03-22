@@ -1,19 +1,19 @@
-import cn from "classnames";
-import { motion, LayoutGroup } from "framer-motion";
-import React from "react";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
-import { widthMobile } from "@styles/layout.constants.ts";
-import TypewriterText from "@components/TypewriterText";
-import AnimatedBorderBox from "@components/AnimatedBorderBox";
-import AnimatedLine from "@components/AnimatedLine";
-import ModalNavBar from "@components/NavBar/ModalNavBar";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./experience-entry.module.scss";
-import { usePage } from "@context/PageContext";
-import { formatDateRange } from "@utils/text";
-import type { ExperienceEntryProps } from "./types";
-import GlitchIconItem from "@components/GlitchIconItem";
-import GitHub from "@assets/svg/socials/github.svg?react";
+import cn from 'classnames';
+import { motion, LayoutGroup } from 'framer-motion';
+import React from 'react';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { widthMobile } from '@styles/layout.constants.ts';
+import TypewriterText from '@components/TypewriterText';
+import AnimatedBorderBox from '@components/AnimatedBorderBox';
+import AnimatedLine from '@components/AnimatedLine';
+import ModalNavBar from '@components/NavBar/ModalNavBar';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './experience-entry.module.scss';
+import { usePage } from '@context/PageContext';
+import { formatDateRange } from '@utils/text';
+import type { ExperienceEntryProps } from './types';
+import GlitchIconItem from '@components/GlitchIconItem';
+import GitHub from '@assets/svg/socials/github.svg?react';
 
 const ExperienceEntry = ({
   data,
@@ -28,20 +28,8 @@ const ExperienceEntry = ({
   overlayStyle,
   onClose,
 }: ExperienceEntryProps) => {
-  const {
-    id,
-    title,
-    subtitle,
-    description,
-    blurb,
-    startDate,
-    endDate,
-    dateString,
-    tools,
-  } = data;
-  const dateRange = dateString
-    ? dateString
-    : formatDateRange(startDate, endDate);
+  const { id, title, subtitle, description, blurb, startDate, endDate, dateString, tools } = data;
+  const dateRange = dateString ? dateString : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
@@ -115,13 +103,16 @@ const ExperienceEntry = ({
   // Modal container width animation
   const modalContainerVariants = {
     animate: (overlayStyle: React.CSSProperties) => ({
-      maxWidth: overlayStyle.width,
-      width: overlayStyle.width,
+      // maxWidth: overlayStyle.width,
+      // width: overlayStyle.width,
+      // width: '100%',
+      // maxWidth: '80%',
+      margin: '0 32px',
       transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
     }),
     modalAnimate: () => ({
-      width: "700px",
-      maxWidth: "700px",
+      // width: '700px',
+      // maxWidth: '700px',
       transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
     }),
     modalExit: () => ({
@@ -141,25 +132,18 @@ const ExperienceEntry = ({
           [styles.notInList]: !inList,
         })}
         onClick={onClick}
-        style={onClick ? { cursor: "pointer" } : undefined}
+        style={onClick ? { cursor: 'pointer' } : undefined}
         transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
         initial={false}
         animate={{
           opacity: inList && isSelected ? 0 : !inList ? 1 : 1,
           transition: {
-            duration:
-              inList && isSelected
-                ? 0
-                : TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration,
+            duration: inList && isSelected ? 0 : TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration,
           },
         }}
       >
         {!isOpen && (
-          <motion.span
-            layoutId="header"
-            className={styles.header}
-            transition={layoutTransition}
-          >
+          <motion.span layoutId="header" className={styles.header} transition={layoutTransition}>
             <motion.div className={styles.title}>
               <motion.h2 layoutId="title" variants={headerTextVariants}>
                 <TypewriterText text={title} />
@@ -171,10 +155,7 @@ const ExperienceEntry = ({
               )}
             </motion.div>
             {!!subtitle && (
-              <motion.div
-                className={styles.subtitle}
-                variants={headerTextVariants}
-              >
+              <motion.div className={styles.subtitle} variants={headerTextVariants}>
                 <motion.h3 layoutId="subtitle" transition={layoutTransition}>
                   <TypewriterText text={subtitle} />
                 </motion.h3>
@@ -203,9 +184,9 @@ const ExperienceEntry = ({
             className={styles.body}
             variants={bodyVariants}
             // transition={layoutTransition}
-            initial={inList ? "initial" : "animate"}
-            animate={inList ? "animate" : "modalAnimate"}
-            exit={inList ? "exit" : "animate"}
+            initial={inList ? 'initial' : 'animate'}
+            animate={inList ? 'animate' : 'modalAnimate'}
+            exit={inList ? 'exit' : 'animate'}
           >
             <motion.div
               layoutId="bodyContent"
@@ -218,29 +199,17 @@ const ExperienceEntry = ({
                 <motion.div className={styles.descriptionContentsFlex}>
                   <motion.div className={styles.text}>
                     {isOpen && (
-                      <motion.div
-                        layoutId="bodyTitle"
-                        transition={layoutTransition}
-                      >
-                        <motion.h2
-                          layoutId="title"
-                          transition={layoutTransition}
-                        >
+                      <motion.div layoutId="bodyTitle" transition={layoutTransition}>
+                        <motion.h2 layoutId="title" transition={layoutTransition}>
                           <TypewriterText text={title} />
                         </motion.h2>
                         {!!subtitle && (
-                          <motion.h3
-                            layoutId="subtitle"
-                            transition={layoutTransition}
-                          >
+                          <motion.h3 layoutId="subtitle" transition={layoutTransition}>
                             {subtitle}
                           </motion.h3>
                         )}
                         {!!dateRange && (
-                          <motion.p
-                            layoutId="date"
-                            transition={layoutTransition}
-                          >
+                          <motion.p layoutId="date" transition={layoutTransition}>
                             {dateRange}
                           </motion.p>
                         )}
@@ -268,7 +237,10 @@ const ExperienceEntry = ({
                   {!!tools && (
                     <motion.div
                       className={styles.tools}
-                      variants={{ animate: { transition: TRANSITIONS.EXPERIENCE.TOOLS_ANIMATE }, initial: {} }}
+                      variants={{
+                        animate: { transition: TRANSITIONS.EXPERIENCE.TOOLS_ANIMATE },
+                        initial: {},
+                      }}
                     >
                       <AnimatedLine
                         borderWidth={borderWidth}
@@ -308,14 +280,12 @@ const ExperienceEntry = ({
                       <motion.div
                         onClick={onClick}
                         className={cn(styles.children, styles.linkArea)}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
                       >
                         {children}
                       </motion.div>
                     ) : (
-                      <motion.div className={styles.children}>
-                        {children}
-                      </motion.div>
+                      <motion.div className={styles.children}>{children}</motion.div>
                     )}
                   </motion.div>
                 )}
