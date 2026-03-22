@@ -53,13 +53,14 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   // ? Parse query parameters
   const isDebugMode = useMemo(() => {
     const searchParams = new URLSearchParams(location.search);
+    console.log("hello", searchParams.get("debug"));
     return searchParams.get("debug") === "true";
   }, [location.search]);
 
   // ? Setup States
   const [lockAnimationReEnable, setLockAnimationReEnable] = useState(false);
   const [animationDisabled, setAnimationDisabledInternal] = useState(
-    defaultSettings.animationDisabled
+    defaultSettings.animationDisabled,
   );
 
   // ? Leva Controls
@@ -68,7 +69,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       {
         useOrbitControls: false,
       },
-      { collapsed: true }
+      { collapsed: true },
     ),
   });
 
@@ -107,7 +108,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
       animationDisabled,
       setAnimationDisabled,
     }),
-    [useOrbitControls, toggleDebugMode, isDebugMode, animationDisabled]
+    [useOrbitControls, toggleDebugMode, isDebugMode, animationDisabled],
   );
 
   return (
@@ -118,8 +119,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
         oneLineLabels={false}
         theme={{
           sizes: {
-            rootWidth: '500px',
-          }
+            rootWidth: "500px",
+          },
         }}
       />
       {children}

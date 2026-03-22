@@ -16,8 +16,12 @@ import type {
   SpringConfig,
   BaseType,
   ScaledTransitionValues,
+  ScalarField,
+  ConstantField,
+  TransitionsConfig,
 } from "../types";
 import type { InputWithSettings, NumberSettings } from "leva/plugin";
+import { folder } from "leva";
 
 // ============================================================================
 // LEVA TYPES & DEFAULTS
@@ -1744,6 +1748,107 @@ export function buildTransitions(
 
 
   };
+}
+
+// ============================================================================
+// TRANSITIONS_CONFIG — New nested architecture (Phase 1 PoC: BORDER_BOX, ICON)
+// ============================================================================
+
+export const TRANSITIONS_CONFIG: TransitionsConfig = {
+  BORDER_BOX: {
+    ANIMATE: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 5.0, ...LEVA_DEFAULTS.extended, label: "Border Box > Draw Duration", hint: "How long animated border takes to draw" } satisfies ScalarField,
+      ease: "easeInOut",
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 3.33, ...LEVA_DEFAULTS.extended, label: "Border Box > Fade Out Duration", hint: "How long border takes to fade out" } satisfies ScalarField,
+      ease: "easeInOut",
+    },
+  },
+  ICON: {
+    ANIMATE: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.67, ...LEVA_DEFAULTS.standard, label: "Icon > Fade In Duration", hint: "How long icons take to fade in" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0, ...LEVA_DEFAULTS.standard, label: "Icon > Fade Out Duration", hint: "How long icons take to fade out" } satisfies ScalarField,
+    },
+  },
+};
+
+/**
+ * Extract a nested Leva schema from TRANSITIONS_CONFIG.
+ * Scalar fields become Leva number controls; string/number/constant fields are skipped.
+ * Structure: component → action → field (nested folders).
+ *
+ * Control keys are path-prefixed (COMPONENT_ACTION_field) to avoid collisions
+ * from duplicate field names (e.g., multiple "duration" entries across actions).
+ */
+export function extractLevaSchema(config: TransitionsConfig) {
+  return Object.fromEntries(
+    Object.entries(config).map(([componentKey, component]) => {
+      const actionFolders = Object.fromEntries(
+        Object.entries(component).map(([actionKey, action]) => {
+          const fields = Object.fromEntries(
+            Object.entries(action)
+              .filter(([, field]) => typeof field === 'object' && field !== null && (field as ScalarField)._type === 'scalar')
+              .map(([fieldKey, field]) => {
+                const scalar = field as ScalarField;
+                const path = `${componentKey}.${actionKey}.${fieldKey}`;
+                // Prefix key with path to avoid collisions across components/actions
+                const controlKey = `${componentKey}_${actionKey}_${fieldKey}`;
+                const label = scalar.label ?? fieldKey;
+                const hint = scalar.hint ? `${scalar.hint} | ${path}` : path;
+                const { _type, base, label: _l, hint: _h, ...levaProps } = scalar;
+                return [controlKey, { ...levaProps, label, hint }];
+              })
+          );
+          return [actionKey, folder(fields, { collapsed: true })];
+        })
+      );
+      return [componentKey, folder(actionFolders, { collapsed: true })];
+    })
+  );
+}
+
+/**
+ * Build resolved transitions from TRANSITIONS_CONFIG.
+ * Scalar fields are multiplied by their base; constants and primitives pass through.
+ * Expects controls keyed by path-prefixed names (COMPONENT_ACTION_field).
+ */
+export function buildTransitionsFromConfig(
+  config: TransitionsConfig,
+  controls: Record<string, unknown>,
+  bases: AnimationBases
+) {
+  return Object.fromEntries(
+    Object.entries(config).map(([componentKey, component]) => {
+      const resolvedComponent = Object.fromEntries(
+        Object.entries(component).map(([actionKey, action]) => {
+          const resolvedAction = Object.fromEntries(
+            Object.entries(action).map(([fieldKey, field]) => {
+              if (typeof field === 'object' && field !== null) {
+                const typed = field as ScalarField | ConstantField;
+                if (typed._type === 'scalar') {
+                  const scalar = typed as ScalarField;
+                  const controlKey = `${componentKey}_${actionKey}_${fieldKey}`;
+                  const controlValue = controls[controlKey] as number ?? scalar.value;
+                  const baseValue = scalar.base ? bases[scalar.base] : 1;
+                  return [fieldKey, baseValue * controlValue];
+                }
+                if (typed._type === 'constant') {
+                  return [fieldKey, typed.value];
+                }
+              }
+              // string or number — pass through
+              return [fieldKey, field];
+            })
+          );
+          return [actionKey, resolvedAction];
+        })
+      );
+      return [componentKey, resolvedComponent];
+    })
+  );
 }
 
 // ============================================================================

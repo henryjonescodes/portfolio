@@ -6,4 +6,10 @@ export type {
   CategoryBaseScalars,
   TransitionScalars,
   ScaledTransitionValues,
+  ScalarField,
+  ConstantField,
+  TransitionField,
+  TransitionAction,
+  TransitionComponent,
+  TransitionsConfig,
 } from './animations'

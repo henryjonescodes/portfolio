@@ -47,3 +47,31 @@ export type TransitionScalars = typeof DEFAULT_TRANSITION_SCALARS;
 
 /** Pre-scaled values - Same keys as TransitionScalars but already multiplied by base */
 export type ScaledTransitionValues = Record<keyof TransitionScalars, number>;
+
+// ============================================================================
+// TRANSITIONS_CONFIG types (new nested architecture)
+// ============================================================================
+
+export type ScalarField = {
+  _type: 'scalar';
+  base?: BaseType;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  label?: string;
+  hint?: string;
+};
+
+export type ConstantField = {
+  _type: 'constant';
+  value: number;
+};
+
+export type TransitionField = ScalarField | ConstantField | string | number;
+
+export type TransitionAction = { [key: string]: TransitionField };
+
+export type TransitionComponent = { [action: string]: TransitionAction };
+
+export type TransitionsConfig = { [component: string]: TransitionComponent };

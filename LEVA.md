@@ -30,6 +30,7 @@ about: {
 // Later in buildTransitions():
 ABOUT_HERO: {
   ANIMATE: {
+    
     duration: scaledValues.ABOUT_HERO_DURATION_SCALAR,
     staggerChildren: scaledValues.ABOUT_HERO_STAGGER_SCALAR,
   },

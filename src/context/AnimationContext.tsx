@@ -5,6 +5,9 @@ import {
   computeAnimationBases,
   buildTransitions,
   generateLabel,
+  TRANSITIONS_CONFIG,
+  extractLevaSchema,
+  buildTransitionsFromConfig,
 } from "@config/new-animations";
 import type { AnimationBases } from "../types";
 
@@ -135,6 +138,22 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     [scaledValues]
   );
 
+  // New nested architecture — Leva controls for TRANSITIONS_CONFIG entries
+  const newControls = useControls(
+    "✨ Transitions (New)",
+    extractLevaSchema(TRANSITIONS_CONFIG),
+    { collapsed: true }
+  );
+
+  // Build new-format transitions and merge over old ones (PoC: BORDER_BOX, ICON)
+  const mergedTransitions = useMemo(
+    () => ({
+      ...transitions,
+      ...buildTransitionsFromConfig(TRANSITIONS_CONFIG, newControls, bases),
+    }),
+    [transitions, newControls, bases]
+  );
+
   // Build springs from Leva controls
   const springs = useMemo(
     () => ({
@@ -189,7 +208,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AnimationContext.Provider
       value={{
-        TRANSITIONS: transitions,
+        TRANSITIONS: mergedTransitions,
         BASES: bases,
         SPRINGS: springs,
         DEBOUNCE: debounceDelays,

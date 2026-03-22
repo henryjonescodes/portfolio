@@ -148,7 +148,9 @@ const ExperienceEntry = ({
           opacity: inList && isSelected ? 0 : !inList ? 1 : 1,
           transition: {
             duration:
-              inList && isSelected ? 0 : TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration,
+              inList && isSelected
+                ? 0
+                : TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration,
           },
         }}
       >
@@ -278,7 +280,8 @@ const ExperienceEntry = ({
                     </motion.div>
                   )}
                 </motion.div>
-                {children && inList && (
+                {children && (
+                  // {children && inList && (
                   <motion.div
                     className={styles.childrenWrapper}
                     layoutId="childrenWrapper"
@@ -315,7 +318,7 @@ const ExperienceEntry = ({
                 )}
               </motion.div>
             </motion.div>
-            {children && !inList && (
+            {/* {children && !inList && (
               <motion.div
                 className={cn(styles.childrenWrapper, {
                   [styles.childrenWrapperModal]: !inList,
@@ -351,7 +354,7 @@ const ExperienceEntry = ({
                   </motion.div>
                 )}
               </motion.div>
-            )}
+            )} */}
           </motion.div>
         </AnimatedBorderBox>
       </motion.div>
