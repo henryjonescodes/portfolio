@@ -1,13 +1,8 @@
 /**
  * Type definitions for the animation system.
- *
- * Types are auto-derived from the actual configuration to maintain DRY principles.
  */
 
-import type {
-  DEFAULT_CATEGORY_SCALARS,
-  DEFAULT_TRANSITION_SCALARS,
-} from "@config/new-animations";
+import type { DEFAULT_CATEGORY_SCALARS } from "@config/new-animations";
 
 /** Framer Motion transition configuration */
 export type TransitionConfig = {
@@ -22,11 +17,11 @@ export type TransitionConfig = {
 
 /** Category base durations derived from master */
 export type AnimationBases = {
-  PAGE_BASE: number; // Page-level transitions (slower, emphasized)
-  MODAL_BASE: number; // Modal/dialog animations
-  NAV_BASE: number; // Navigation items and menus
-  TEXT_BASE: number; // Text effects (typewriter, reveals)
-  COMPONENT_BASE: number; // Generic components (borders, boxes, etc)
+  PAGE_BASE: number;
+  MODAL_BASE: number;
+  NAV_BASE: number;
+  TEXT_BASE: number;
+  COMPONENT_BASE: number;
 };
 
 /** Spring physics configuration for react-spring */
@@ -42,14 +37,8 @@ export type BaseType = keyof AnimationBases;
 /** Category base scalars - Auto-derived from config via typeof */
 export type CategoryBaseScalars = typeof DEFAULT_CATEGORY_SCALARS;
 
-/** Transition scalars - Auto-derived from config via typeof */
-export type TransitionScalars = typeof DEFAULT_TRANSITION_SCALARS;
-
-/** Pre-scaled values - Same keys as TransitionScalars but already multiplied by base */
-export type ScaledTransitionValues = Record<keyof TransitionScalars, number>;
-
 // ============================================================================
-// TRANSITIONS_CONFIG types (new nested architecture)
+// TRANSITIONS_CONFIG types (nested architecture)
 // ============================================================================
 
 export type ScalarField = {

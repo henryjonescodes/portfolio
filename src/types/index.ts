@@ -4,8 +4,6 @@ export type {
   SpringConfig,
   BaseType,
   CategoryBaseScalars,
-  TransitionScalars,
-  ScaledTransitionValues,
   ScalarField,
   ConstantField,
   TransitionField,

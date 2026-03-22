@@ -266,7 +266,10 @@ const ExperienceEntry = ({
                     )}
                   </motion.div>
                   {!!tools && (
-                    <motion.div className={styles.tools}>
+                    <motion.div
+                      className={styles.tools}
+                      variants={{ animate: { transition: TRANSITIONS.EXPERIENCE.TOOLS_ANIMATE }, initial: {} }}
+                    >
                       <AnimatedLine
                         borderWidth={borderWidth}
                         horizontal={true}

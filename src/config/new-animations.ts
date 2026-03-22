@@ -14,8 +14,6 @@
 import type {
   AnimationBases,
   SpringConfig,
-  BaseType,
-  ScaledTransitionValues,
   ScalarField,
   ConstantField,
   TransitionsConfig,
@@ -39,11 +37,6 @@ type CategoryBaseControl = InputWithSettings<
   NumberSettings & { label?: string; hint?: string }
 >;
 
-// Transition scalars reference which base they multiply
-type ScalarControl = InputWithSettings<
-  number,
-  NumberSettings & { label?: string; hint?: string; base: BaseType }
->;
 
 type SectionMeta = {
   title: string;
@@ -64,25 +57,6 @@ const LEVA_DEFAULTS = {
   master: { min: 0.1, max: 3.0, step: 0.05 },
 } as const;
 
-// ============================================================================
-// LABEL AUTO-GENERATION
-// ============================================================================
-
-/** Convert FADE_IN_SCALAR → "Fade In" */
-function toTitleCase(str: string): string {
-  return str
-    .replace(/_SCALAR$/, '') // Remove _SCALAR suffix
-    .replace(/_/g, ' ')
-    .split(' ')
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
-}
-
-/** Generate label with base reference: "Fade In (×PAGE_BASE)" */
-export function generateLabel(key: string, base: BaseType): string {
-  const humanName = toTitleCase(key);
-  return `${humanName} (×${base})`;
-}
 
 // ============================================================================
 // ANIMATION SCALAR CONFIG - Single Source of Truth
@@ -205,713 +179,6 @@ export const ANIMATION_SCALAR_CONFIG = {
     } satisfies MasterControl,
   },
 
-  page: {
-    _meta: { title: "📄 Page Transitions", collapsed: true } as SectionMeta,
-    PAGE_FADE_IN_SCALAR: {
-      value: 1.0,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page > Fade In Duration",
-      hint: "How long page container takes to fade in",
-    } satisfies ScalarControl,
-    PAGE_FADE_OUT_SCALAR: {
-      value: 0.4,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page > Fade Out Duration",
-      hint: "How long page container takes to fade out",
-    } satisfies ScalarControl,
-    PAGE_ENTER_DELAY_SCALAR: {
-      value: 0.2,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page > Enter Delay",
-      hint: "Wait time before page starts fading in",
-    } satisfies ScalarControl,
-    PAGE_FIRST_LOAD_DELAY_SCALAR: {
-      value: 1.0,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page > First Load Delay",
-      hint: "Extra delay on initial page load",
-    } satisfies ScalarControl,
-    PAGE_CHILDREN_DELAY_SCALAR: {
-      value: 0.4,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page > Children Delay",
-      hint: "Delay before child elements animate",
-    } satisfies ScalarControl,
-    PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR: {
-      value: 0.4,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page > First Load Children Delay",
-      hint: "Child element delay on first load",
-    } satisfies ScalarControl,
-    PAGE_CONTENTS_FADE_IN_SCALAR: {
-      value: 0.2,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page Contents > Fade In",
-      hint: "Inner page content fade in duration",
-    } satisfies ScalarControl,
-    PAGE_CONTENTS_FADE_OUT_SCALAR: {
-      value: 0.2,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page Contents > Fade Out",
-      hint: "Inner page content fade out duration",
-    } satisfies ScalarControl,
-    PAGE_CONTENTS_STAGGER_SCALAR: {
-      value: 1.0,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page Contents > Stagger",
-      hint: "Delay between child elements appearing",
-    } satisfies ScalarControl,
-    PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR: {
-      value: 0.6,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page Contents > Fullscreen Mode Delay",
-      hint: "Delay when page is in fullscreen mode",
-    } satisfies ScalarControl,
-    PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR: {
-      value: 0.6,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Page Contents > 3D Embedded Delay",
-      hint: "Delay when page is in 3D mixer view",
-    } satisfies ScalarControl,
-  },
-
-  modal: {
-    _meta: { title: "🎭 Modal Animations", collapsed: true } as SectionMeta,
-    MODAL_CONTAINER_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Container Expand/Collapse",
-      hint: "Duration for modal container layout animation",
-    } satisfies ScalarControl,
-    MODAL_NAVBAR_DURATION_SCALAR: {
-      value: 0.67,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Navbar Fade In",
-      hint: "How long modal navbar takes to appear",
-    } satisfies ScalarControl,
-    MODAL_NAVBAR_DELAY_SCALAR: {
-      value: 0.33,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Navbar Appear Delay",
-      hint: "Wait before navbar starts fading in",
-    } satisfies ScalarControl,
-    MODAL_NAVBAR_LINE_DURATION_SCALAR: {
-      value: 1.5,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Navbar Border Line",
-      hint: "Animated line draw duration in navbar",
-    } satisfies ScalarControl,
-    MODAL_NAVBAR_CHILDREN_DELAY_SCALAR: {
-      value: 3.33,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Modal > Navbar Children Delay",
-      hint: "Delay before navbar buttons animate",
-    } satisfies ScalarControl,
-    MODAL_CONTENT_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Content Transition",
-      hint: "Duration for content area animation",
-    } satisfies ScalarControl,
-    MODAL_LAYOUT_DELAY_SCALAR: {
-      value: 0.67,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Layout Change Delay",
-      hint: "Wait before layout expands to full size",
-    } satisfies ScalarControl,
-    MODAL_BLURB_DELAY_SCALAR: {
-      value: 1.67,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Description Text Delay",
-      hint: "Delay before blurb/description appears",
-    } satisfies ScalarControl,
-    MODAL_TEXT_PAINT_DURATION_SCALAR: {
-      value: 1.67,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Text Paint Duration",
-      hint: "How long text takes to fade in",
-    } satisfies ScalarControl,
-    MODAL_TEXT_STAGGER_SCALAR: {
-      value: 5.7,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Modal > Text Paragraphs Stagger",
-      hint: "Delay between paragraphs appearing",
-    } satisfies ScalarControl,
-    MODAL_HEADER_TEXT_DURATION_SCALAR: {
-      value: 6.67,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Modal > Header Text Duration",
-      hint: "Title/subtitle animation duration",
-    } satisfies ScalarControl,
-    MODAL_HEADER_TEXT_DELAY_SCALAR: {
-      value: 6.67,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Modal > Header Text Delay",
-      hint: "Wait before header text animates",
-    } satisfies ScalarControl,
-    MODAL_DATE_DURATION_SCALAR: {
-      value: 1.1,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Date Field Duration",
-      hint: "Date range animation duration",
-    } satisfies ScalarControl,
-    MODAL_OVERLAY_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'MODAL_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Modal > Background Overlay",
-      hint: "Dark overlay fade duration",
-    } satisfies ScalarControl,
-  },
-
-  navigation: {
-    _meta: { title: "🧭 Navigation", collapsed: true } as SectionMeta,
-    NAV_ITEM_FADE_SCALAR: {
-      value: 1.0,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Item > Fade In Duration",
-      hint: "How long nav items take to fade in",
-    } satisfies ScalarControl,
-    NAV_ITEM_DELAY_SCALAR: {
-      value: 1.0,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Item > Appear Delay",
-      hint: "Wait before nav items start fading in",
-    } satisfies ScalarControl,
-    NAV_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Bar > Item Stagger",
-      hint: "Delay between each nav item appearing",
-    } satisfies ScalarControl,
-    NAV_EXIT_SCALAR: {
-      value: 0.5,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Bar > Exit Duration",
-      hint: "How long nav bar takes to fade out",
-    } satisfies ScalarControl,
-    NAV_MINIMAL_DELAY_SCALAR: {
-      value: 1.17,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Bar > Minimal Mode Delay",
-      hint: "Delay when animations are disabled",
-    } satisfies ScalarControl,
-    NAV_MINIMAL_DURATION_SCALAR: {
-      value: 0.83,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Bar > Minimal Mode Duration",
-      hint: "Duration when animations are disabled",
-    } satisfies ScalarControl,
-    NAV_MINIMAL_EXIT_SCALAR: {
-      value: 0.5,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Bar > Minimal Mode Exit",
-      hint: "Exit duration in minimal mode",
-    } satisfies ScalarControl,
-    NAV_HOME_FIRST_LOAD_DELAY_SCALAR: {
-      value: 4.33,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Nav Bar > Home First Load Delay",
-      hint: "Extra delay on initial home page load",
-    } satisfies ScalarControl,
-    NAV_ITEM_BORDER_DURATION_SCALAR: {
-      value: 0.83,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Item > Border Draw Duration",
-      hint: "How long animated border takes to draw",
-    } satisfies ScalarControl,
-    NAV_ITEM_BORDER_DELAY_SCALAR: {
-      value: 2.5,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Item > Border Appear Delay",
-      hint: "Wait before border starts animating",
-    } satisfies ScalarControl,
-    NAV_ITEM_BORDER_EXIT_SCALAR: {
-      value: 0.5,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Item > Border Fade Out",
-      hint: "Border fade out duration on exit",
-    } satisfies ScalarControl,
-    NAV_BUTTON_ACTIVE_SCALAR: {
-      value: 0.33,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Button > Activate Duration",
-      hint: "Button transition when becoming active",
-    } satisfies ScalarControl,
-    NAV_BUTTON_INACTIVE_SCALAR: {
-      value: 0.5,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Nav Button > Deactivate Duration",
-      hint: "Button transition when becoming inactive",
-    } satisfies ScalarControl,
-  },
-
-  text: {
-    _meta: { title: "✍️ Text Effects", collapsed: true } as SectionMeta,
-    TYPEWRITER_CHAR_SCALAR: {
-      value: 1.0,
-      base: 'TEXT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Typewriter > Character Duration",
-      hint: "How long each character takes to appear",
-    } satisfies ScalarControl,
-    TYPEWRITER_STAGGER_SCALAR: {
-      value: 0.15,
-      base: 'TEXT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.fine,
-      label: "Typewriter > Character Stagger",
-      hint: "Delay between each character typing",
-    } satisfies ScalarControl,
-    TYPEWRITER_EXIT_SCALAR: {
-      value: 1.5,
-      base: 'TEXT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Typewriter > Exit Duration",
-      hint: "How long text takes to fade out",
-    } satisfies ScalarControl,
-    NAV_ITEM_TEXT_STAGGER_SCALAR: {
-      value: 0.15,
-      base: 'TEXT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.fine,
-      label: "Nav Item > Text Character Stagger",
-      hint: "Delay between characters in nav items",
-    } satisfies ScalarControl,
-    STAT_TRACKER_TEXT_STAGGER_SCALAR: {
-      value: 0.15,
-      base: 'TEXT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.fine,
-      label: "Stat Tracker > Text Character Stagger",
-      hint: "Delay between characters in stats",
-    } satisfies ScalarControl,
-  },
-
-  about: {
-    _meta: { title: "ℹ️ About Page", collapsed: true } as SectionMeta,
-    ABOUT_HERO_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Hero Section > Fade In",
-      hint: "Duration for hero section to appear",
-    } satisfies ScalarControl,
-    ABOUT_HERO_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Hero Section > Element Stagger",
-      hint: "Delay between hero elements (name, title)",
-    } satisfies ScalarControl,
-    ABOUT_MAP_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map Section > Fade In",
-      hint: "Duration for map to appear",
-    } satisfies ScalarControl,
-    ABOUT_MAP_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map Section > Marker Stagger",
-      hint: "Delay between map markers appearing",
-    } satisfies ScalarControl,
-    ABOUT_SOCIALS_DELAY_SCALAR: {
-      value: 5.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Social Links > Section Delay",
-      hint: "Wait before social links section appears",
-    } satisfies ScalarControl,
-    ABOUT_SOCIALS_DELAY_CHILDREN_SCALAR: {
-      value: 5.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Social Links > Icons Delay",
-      hint: "Wait before social icons start appearing",
-    } satisfies ScalarControl,
-    ABOUT_SOCIALS_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Social Links > Fade Duration",
-      hint: "How long each social icon takes to appear",
-    } satisfies ScalarControl,
-    ABOUT_SOCIALS_STAGGER_SCALAR: {
-      value: 1.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Social Links > Icon Stagger",
-      hint: "Delay between each social icon",
-    } satisfies ScalarControl,
-    ABOUT_STATS_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Stats Section > Fade Duration",
-      hint: "How long stat trackers take to appear",
-    } satisfies ScalarControl,
-    ABOUT_STATS_STAGGER_SCALAR: {
-      value: 1.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Stats Section > Stat Stagger",
-      hint: "Delay between each stat appearing",
-    } satisfies ScalarControl,
-    ABOUT_TAGS_DELAY_SCALAR: {
-      value: 3.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Skills Tags > Section Delay",
-      hint: "Wait before skills section appears",
-    } satisfies ScalarControl,
-    ABOUT_TAGS_DELAY_CHILDREN_SCALAR: {
-      value: 3.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Skills Tags > Tags Delay",
-      hint: "Wait before skill tags start appearing",
-    } satisfies ScalarControl,
-    ABOUT_TAGS_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Skills Tags > Fade Duration",
-      hint: "How long each skill tag takes to appear",
-    } satisfies ScalarControl,
-    ABOUT_TAGS_STAGGER_SCALAR: {
-      value: 1.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Skills Tags > Tag Stagger",
-      hint: "Delay between each skill tag",
-    } satisfies ScalarControl,
-    ABOUT_AVATAR_DELAY_SCALAR: {
-      value: 5.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Avatar > Appear Delay",
-      hint: "Wait before avatar starts appearing",
-    } satisfies ScalarControl,
-    ABOUT_AVATAR_DURATION_SCALAR: {
-      value: 8.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Avatar > Fade In Duration",
-      hint: "How long avatar takes to fully appear",
-    } satisfies ScalarControl,
-    ABOUT_AVATAR_EXIT_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Avatar > Fade Out Duration",
-      hint: "How long avatar takes to fade out",
-    } satisfies ScalarControl,
-  },
-
-  statTracker: {
-    _meta: { title: "📊 Stat Tracker", collapsed: true } as SectionMeta,
-    STAT_TRACKER_ANIMATE_STAGGER_SCALAR: {
-      value: 1.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Stat Blocks > Appear Stagger",
-      hint: "Delay between each stat block appearing",
-    } satisfies ScalarControl,
-    STAT_TRACKER_EXIT_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Stat Blocks > Exit Stagger",
-      hint: "Delay between each stat block fading out",
-    } satisfies ScalarControl,
-    STAT_TRACKER_BLOCK_DURATION_SCALAR: {
-      value: 0.23,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Stat Block > Fade In Duration",
-      hint: "How long each stat block takes to appear",
-    } satisfies ScalarControl,
-    STAT_TRACKER_BLOCK_DELAY_SCALAR: {
-      value: 0.23,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Stat Block > Appear Delay",
-      hint: "Initial delay before stat blocks animate",
-    } satisfies ScalarControl,
-  },
-
-  bordersAndLines: {
-    _meta: { title: "🔲 Borders & Lines", collapsed: true } as SectionMeta,
-    BORDER_BOX_ANIMATE_SCALAR: {
-      value: 5.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Border Box > Draw Duration",
-      hint: "How long animated border takes to draw",
-    } satisfies ScalarControl,
-    BORDER_BOX_EXIT_SCALAR: {
-      value: 3.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Border Box > Fade Out Duration",
-      hint: "How long border takes to fade out",
-    } satisfies ScalarControl,
-    ANIMATED_LINE_SCALAR: {
-      value: 3.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Animated Line > Draw Duration",
-      hint: "How long animated line takes to draw",
-    } satisfies ScalarControl,
-  },
-
-  icons: {
-    _meta: { title: "🎨 Icons", collapsed: true } as SectionMeta,
-    ICON_ANIMATE_SCALAR: {
-      value: 1.67,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Icon > Fade In Duration",
-      hint: "How long icons take to fade in",
-    } satisfies ScalarControl,
-    ICON_EXIT_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Icon > Fade Out Duration",
-      hint: "How long icons take to fade out",
-    } satisfies ScalarControl,
-    COMMON_EXIT_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Common > Exit Duration",
-      hint: "Default exit duration for generic components",
-    } satisfies ScalarControl,
-  },
-
-  loading: {
-    _meta: { title: "⏳ Loading Screen", collapsed: true } as SectionMeta,
-    LOADING_PAGE_DURATION_SCALAR: {
-      value: 1.67,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Loading Page > Fade In Duration",
-      hint: "How long loading screen takes to appear",
-    } satisfies ScalarControl,
-    LOADING_PAGE_DELAY_SCALAR: {
-      value: 0,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Loading Page > Appear Delay",
-      hint: "Wait before loading screen appears",
-    } satisfies ScalarControl,
-    LOADING_EXIT_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Loading Screen > Exit Duration",
-      hint: "How long loading screen takes to fade out",
-    } satisfies ScalarControl,
-    LOADING_EXIT_DELAY_SCALAR: {
-      value: 6.5,
-      base: 'PAGE_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Loading Screen > Exit Delay",
-      hint: "Wait before loading screen starts fading out",
-    } satisfies ScalarControl,
-  },
-
-  mapViewer: {
-    _meta: { title: "🗺️ Map Viewer", collapsed: true } as SectionMeta,
-    MAP_CONTENT_SCALAR: {
-      value: 7.67,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Map > Content Fade Duration",
-      hint: "How long map content takes to appear",
-    } satisfies ScalarControl,
-    MAP_EXIT_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map > Exit Duration",
-      hint: "How long map takes to fade out",
-    } satisfies ScalarControl,
-    MAP_BLURB_DURATION_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map > Description Fade Duration",
-      hint: "How long map description takes to appear",
-    } satisfies ScalarControl,
-    MAP_BLURB_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map > Description Stagger Delay",
-      hint: "Delay between description paragraphs",
-    } satisfies ScalarControl,
-    MAP_BLURB_EXIT_SCALAR: {
-      value: 0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map > Description Exit Duration",
-      hint: "How long description takes to fade out",
-    } satisfies ScalarControl,
-    MAP_SLIDER_DURATION_SCALAR: {
-      value: 0.67,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map > Slider Item Fade Duration",
-      hint: "How long each slider item takes to appear",
-    } satisfies ScalarControl,
-    MAP_SLIDER_STAGGER_SCALAR: {
-      value: 0.17,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.fine,
-      label: "Map > Slider Item Stagger Delay",
-      hint: "Delay between slider items appearing",
-    } satisfies ScalarControl,
-    MAP_SLIDER_EXIT_DURATION_SCALAR: {
-      value: 0.67,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Map > Slider Exit Duration",
-      hint: "How long slider takes to fade out",
-    } satisfies ScalarControl,
-    MAP_SLIDER_EXIT_STAGGER_SCALAR: {
-      value: 0.07,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.fine,
-      label: "Map > Slider Exit Stagger Delay",
-      hint: "Delay between items fading out",
-    } satisfies ScalarControl,
-  },
-
-  projects: {
-    _meta: { title: "💼 Projects Page", collapsed: true } as SectionMeta,
-    PROJECTS_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Projects > Item Stagger Delay",
-      hint: "Delay between project cards appearing",
-    } satisfies ScalarControl,
-    PROJECTS_ENTRY_SCALAR: {
-      value: 7.67,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Projects > Entry Fade Duration",
-      hint: "How long project card takes to appear",
-    } satisfies ScalarControl,
-    PROJECTS_EXIT_SCALAR: {
-      value: 1.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Projects > Exit Duration",
-      hint: "How long projects page takes to exit",
-    } satisfies ScalarControl,
-    PROJECTS_TITLE_STAGGER_SCALAR: {
-      value: 0.25,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.fine,
-      label: "Projects > Title Character Stagger",
-      hint: "Delay between title characters appearing",
-    } satisfies ScalarControl,
-  },
-
-  experience: {
-    _meta: { title: "💼 Experience Page", collapsed: true } as SectionMeta,
-    EXPERIENCE_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Experience > Item Stagger Delay",
-      hint: "Delay between experience entries appearing",
-    } satisfies ScalarControl,
-    EXPERIENCE_TITLE_STAGGER_SCALAR: {
-      value: 0.25,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.fine,
-      label: "Experience > Title Character Stagger",
-      hint: "Delay between title characters appearing",
-    } satisfies ScalarControl,
-  },
-
-  home: {
-    _meta: { title: "🏠 Home Page", collapsed: true } as SectionMeta,
-    HOME_MENU_STAGGER_SCALAR: {
-      value: 0.33,
-      base: 'NAV_BASE' as BaseType,
-      ...LEVA_DEFAULTS.standard,
-      label: "Home Menu > Item Stagger Delay",
-      hint: "Delay between menu items appearing",
-    } satisfies ScalarControl,
-  },
-
-  scene: {
-    _meta: { title: "🎬 3D Scene/Canvas", collapsed: true } as SectionMeta,
-    SCENE_CLOSE_BUTTON_DELAY_SCALAR: {
-      value: 5.0,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Close Button > Appear Delay",
-      hint: "Wait before close button appears",
-    } satisfies ScalarControl,
-    SCENE_CLOSE_BUTTON_DURATION_SCALAR: {
-      value: 6.67,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Close Button > Fade In Duration",
-      hint: "How long close button takes to appear",
-    } satisfies ScalarControl,
-    SCENE_CLOSE_BUTTON_EXIT_SCALAR: {
-      value: 3.33,
-      base: 'COMPONENT_BASE' as BaseType,
-      ...LEVA_DEFAULTS.extended,
-      label: "Close Button > Exit Duration",
-      hint: "How long close button takes to fade out",
-    } satisfies ScalarControl,
-  },
-
   constants: {
     _meta: { title: "⚙️ System Constants", collapsed: true } as SectionMeta,
     MAP_SLIDER_CASCADE_DURATION_MS: {
@@ -1012,18 +279,6 @@ export const DEFAULT_CATEGORY_SCALARS = {
   COMPONENT_BASE_SCALAR: ALL_SCALARS.COMPONENT_BASE_SCALAR,
 } as const;
 
-/** All transition scalars (everything except category bases) */
-export const DEFAULT_TRANSITION_SCALARS = (() => {
-  const {
-    PAGE_BASE_SCALAR,
-    MODAL_BASE_SCALAR,
-    NAV_BASE_SCALAR,
-    TEXT_BASE_SCALAR,
-    COMPONENT_BASE_SCALAR,
-    ...rest
-  } = ALL_SCALARS;
-  return rest;
-})();
 
 // ============================================================================
 // CATEGORY BASES (computed from master + scalars)
@@ -1056,723 +311,397 @@ export const DEFAULT_ANIMATION_BASES = computeAnimationBases(
 // TRANSITIONS BUILDER
 // ============================================================================
 
-/**
- * Build all transition objects from pre-scaled values with nested hierarchy.
- * This function is called by AnimationContext with Leva-controlled values.
- * Values are already multiplied (base × scalar) before being passed in.
- *
- * Returns nested structure: TRANSITIONS.PAGE.FADE_IN instead of TRANSITIONS.PAGE_FADE_IN
- */
-export function buildTransitions(
-  scaledValues: ScaledTransitionValues // Pre-scaled values (base × scalar already computed)
-) {
-  return {
-    // ========================================
-    // ABOUT_AVATAR
-    // ========================================
-
-    ABOUT_AVATAR: {
-      ANIMATE: {
-            // About page avatar image
-            delay: scaledValues.ABOUT_AVATAR_DELAY_SCALAR,
-            duration: scaledValues.ABOUT_AVATAR_DURATION_SCALAR,
-      },
-
-      EXIT: {
-            // About page avatar exit
-            duration: scaledValues.ABOUT_AVATAR_EXIT_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // ABOUT_HERO
-    // ========================================
-
-    ABOUT_HERO: {
-      ANIMATE: {
-            // About hero section
-            duration: scaledValues.ABOUT_HERO_DURATION_SCALAR,
-            staggerChildren: scaledValues.ABOUT_HERO_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Common about section exit
-            duration: 0,
-            when: "afterChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // ABOUT_MAP
-    // ========================================
-
-    ABOUT_MAP: {
-      ANIMATE: {
-            // About map section
-            duration: scaledValues.ABOUT_MAP_DURATION_SCALAR,
-            staggerChildren: scaledValues.ABOUT_MAP_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Common about section exit
-            duration: 0,
-            when: "afterChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // ABOUT_SOCIALS
-    // ========================================
-
-    ABOUT_SOCIALS: {
-      ANIMATE: {
-            // About socials section
-            delay: scaledValues.ABOUT_SOCIALS_DELAY_SCALAR,
-            delayChildren:
-              scaledValues.ABOUT_SOCIALS_DELAY_CHILDREN_SCALAR,
-            duration: scaledValues.ABOUT_SOCIALS_DURATION_SCALAR,
-            staggerChildren:
-              scaledValues.ABOUT_SOCIALS_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Common about section exit
-            duration: 0,
-            when: "afterChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // ABOUT_STATS
-    // ========================================
-
-    ABOUT_STATS: {
-      ANIMATE: {
-            // About stats section
-            duration: scaledValues.ABOUT_STATS_DURATION_SCALAR,
-            staggerChildren:
-              scaledValues.ABOUT_STATS_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Common about section exit
-            duration: 0,
-            when: "afterChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // ABOUT_TAGS
-    // ========================================
-
-    ABOUT_TAGS: {
-      ANIMATE: {
-            // About tags section
-            delay: scaledValues.ABOUT_TAGS_DELAY_SCALAR,
-            delayChildren:
-              scaledValues.ABOUT_TAGS_DELAY_CHILDREN_SCALAR,
-            duration: scaledValues.ABOUT_TAGS_DURATION_SCALAR,
-            staggerChildren: scaledValues.ABOUT_TAGS_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Common about section exit
-            duration: 0,
-            when: "afterChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // ANIMATED_LINE
-    // ========================================
-
-    ANIMATED_LINE: {
-      ANIMATE: {
-            // AnimatedLine component
-            duration: scaledValues.ANIMATED_LINE_SCALAR,
-            ease: "easeInOut",
-      },
-
-    },
-
-    // ========================================
-    // BORDER_BOX
-    // ========================================
-
-    BORDER_BOX: {
-      ANIMATE: {
-            // AnimatedBorderBox appear
-            duration: scaledValues.BORDER_BOX_ANIMATE_SCALAR,
-            ease: "easeInOut",
-      },
-
-      EXIT: {
-            // AnimatedBorderBox exit
-            duration: scaledValues.BORDER_BOX_EXIT_SCALAR,
-            ease: "easeInOut",
-      },
-
-    },
-
-    // ========================================
-    // COMMON
-    // ========================================
-
-    COMMON: {
-      EXIT: {
-            // Common/default exit duration
-            duration: scaledValues.COMMON_EXIT_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // EXPERIENCE
-    // ========================================
-
-    EXPERIENCE: {
-      ANIMATE_STAGGER: {
-            // Experience list stagger
-            staggerChildren: scaledValues.EXPERIENCE_STAGGER_SCALAR,
-      },
-
-      TITLE_ANIMATE_STAGGER: {
-            // Experience title text stagger
-            staggerChildren:
-              scaledValues.EXPERIENCE_TITLE_STAGGER_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // HOME
-    // ========================================
-
-    HOME: {
-      MENU_ANIMATE_STAGGER: {
-            // Home page menu stagger
-            staggerChildren: scaledValues.HOME_MENU_STAGGER_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // ICON
-    // ========================================
-
-    ICON: {
-      ANIMATE: {
-            // Icon fade in
-            duration: scaledValues.ICON_ANIMATE_SCALAR,
-      },
-
-      EXIT: {
-            // Icon fade out
-            duration: scaledValues.ICON_EXIT_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // LOADING
-    // ========================================
-
-    LOADING: {
-      EXIT: {
-            // Loading page exit
-            duration: scaledValues.LOADING_EXIT_DURATION_SCALAR,
-            delay: scaledValues.LOADING_EXIT_DELAY_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // LOADING_PAGE
-    // ========================================
-
-    LOADING_PAGE: {
-      ANIMATE: {
-            // Loading page animation
-            duration: scaledValues.LOADING_PAGE_DURATION_SCALAR,
-            delay: scaledValues.LOADING_PAGE_DELAY_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // MAP
-    // ========================================
-
-    MAP: {
-      CONTENT_ANIMATE: {
-            // Map viewer content animation
-            duration: scaledValues.MAP_CONTENT_SCALAR,
-      },
-
-      EXIT: {
-            // Map viewer exit
-            duration: scaledValues.MAP_EXIT_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // MAP_DESCRIPTION
-    // ========================================
-
-    MAP_DESCRIPTION: {
-      ANIMATE: {
-            // Map blurb animation
-            duration: scaledValues.MAP_BLURB_DURATION_SCALAR,
-            staggerChildren: scaledValues.MAP_BLURB_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Map blurb exit
-            duration: scaledValues.MAP_BLURB_EXIT_SCALAR,
-            when: "afterChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // MAP_SLIDER
-    // ========================================
-
-    MAP_SLIDER: {
-      ANIMATE: {
-            // Map slider animation
-            duration: scaledValues.MAP_SLIDER_DURATION_SCALAR,
-            staggerChildren: scaledValues.MAP_SLIDER_STAGGER_SCALAR,
-            staggerDirection: -1,
-      },
-
-      EXIT: {
-            // Map slider exit
-            duration:
-              scaledValues.MAP_SLIDER_EXIT_DURATION_SCALAR,
-            staggerChildren:
-              scaledValues.MAP_SLIDER_EXIT_STAGGER_SCALAR,
-            when: "afterChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // MODAL
-    // ========================================
-
-    MODAL: {
-      CONTAINER_ANIMATE: {
-            // Modal container layout transition
-            duration: scaledValues.MODAL_CONTAINER_DURATION_SCALAR,
-            ease: "easeInOut",
-      },
-
-      CONTENT_ANIMATE: {
-            // Modal content duration
-            duration: scaledValues.MODAL_CONTENT_DURATION_SCALAR,
-      },
-
-      DATE_ANIMATE: {
-            // Modal date duration
-            duration: scaledValues.MODAL_DATE_DURATION_SCALAR,
-      },
-
-      DESCRIPTION_ANIMATE: {
-            // Modal blurb delay
-            delay: scaledValues.MODAL_BLURB_DELAY_SCALAR,
-      },
-
-      LAYOUT_ANIMATE: {
-            // Modal layout delay
-            delay: scaledValues.MODAL_LAYOUT_DELAY_SCALAR,
-      },
-
-      OVERLAY_ANIMATE: {
-            // Modal overlay duration
-            duration: scaledValues.MODAL_OVERLAY_DURATION_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // MODAL_HEADER
-    // ========================================
-
-    MODAL_HEADER: {
-      TEXT_ANIMATE: {
-            // Modal header text animation
-            duration: scaledValues.MODAL_HEADER_TEXT_DURATION_SCALAR,
-            delay: scaledValues.MODAL_HEADER_TEXT_DELAY_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // MODAL_NAVBAR
-    // ========================================
-
-    MODAL_NAVBAR: {
-      ANIMATE: {
-            // Modal navbar animation
-            duration: scaledValues.MODAL_NAVBAR_DURATION_SCALAR,
-            delay: scaledValues.MODAL_NAVBAR_DELAY_SCALAR,
-      },
-
-      CHILDREN_ANIMATE: {
-            // Modal navbar children stagger
-            delayChildren:
-              scaledValues.MODAL_NAVBAR_CHILDREN_DELAY_SCALAR,
-      },
-
-      LINE_ANIMATE: {
-            // Modal navbar line duration
-            duration: scaledValues.MODAL_NAVBAR_LINE_DURATION_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // MODAL_TEXT
-    // ========================================
-
-    MODAL_TEXT: {
-      ANIMATE_STAGGER: {
-            // Modal text stagger
-            staggerChildren: scaledValues.MODAL_TEXT_STAGGER_SCALAR,
-      },
-
-      PAINT_ANIMATE: {
-            // Modal text paint duration
-            duration: scaledValues.MODAL_TEXT_PAINT_DURATION_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // NAV
-    // ========================================
-
-    NAV: {
-      ANIMATE_STAGGER: {
-            // Nav items stagger
-            staggerChildren: scaledValues.NAV_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Nav exit duration
-            duration: scaledValues.NAV_EXIT_SCALAR,
-      },
-
-      HOME_FIRST_LOAD_ANIMATE: {
-            // Home page nav first load delay
-            delay: scaledValues.NAV_HOME_FIRST_LOAD_DELAY_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // NAV_BUTTON
-    // ========================================
-
-    NAV_BUTTON: {
-      ACTIVE_ANIMATE: {
-            // Active nav button
-            duration: scaledValues.NAV_BUTTON_ACTIVE_SCALAR,
-      },
-
-      INACTIVE_ANIMATE: {
-            // Inactive nav button
-            duration: scaledValues.NAV_BUTTON_INACTIVE_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // NAV_ITEM
-    // ========================================
-
-    NAV_ITEM: {
-      BORDER_ANIMATE: {
-            // Nav item border animation
-            duration: scaledValues.NAV_ITEM_BORDER_DURATION_SCALAR,
-            delay: scaledValues.NAV_ITEM_BORDER_DELAY_SCALAR,
-            ease: "easeInOut",
-      },
-
-      BORDER_EXIT: {
-            // Nav item border exit
-            duration: scaledValues.NAV_ITEM_BORDER_EXIT_SCALAR,
-      },
-
-      FADE_ANIMATE: {
-            // Nav item fade duration
-            duration: scaledValues.NAV_ITEM_FADE_SCALAR,
-            delay: scaledValues.NAV_ITEM_DELAY_SCALAR,
-      },
-
-      TEXT_ANIMATE_STAGGER: {
-            // Nav item text stagger
-            staggerChildren: scaledValues.NAV_ITEM_TEXT_STAGGER_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // NAV_MINIMAL
-    // ========================================
-
-    NAV_MINIMAL: {
-      ANIMATE: {
-            // Minimal nav animation
-            delay: scaledValues.NAV_MINIMAL_DELAY_SCALAR,
-            duration: scaledValues.NAV_MINIMAL_DURATION_SCALAR,
-      },
-
-      EXIT: {
-            // Minimal nav exit
-            duration: scaledValues.NAV_MINIMAL_EXIT_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // PAGE
-    // ========================================
-
-    PAGE: {
-      CHILDREN_ANIMATE: {
-            // Page child elements stagger
-            delayChildren: scaledValues.PAGE_CHILDREN_DELAY_SCALAR,
-      },
-
-      ENTER_ANIMATE: {
-            // Delay before page enters
-            delay: scaledValues.PAGE_ENTER_DELAY_SCALAR,
-      },
-
-      EXIT: {
-            // Complete transition for page exit
-            duration: scaledValues.PAGE_FADE_OUT_SCALAR,
-            when: "beforeChildren" as const,
-      },
-
-      FADE_IN_ANIMATE: {
-            // Main page container fade in
-            duration: scaledValues.PAGE_FADE_IN_SCALAR,
-      },
-
-      FADE_OUT_EXIT: {
-            // Main page container fade out
-            duration: scaledValues.PAGE_FADE_OUT_SCALAR,
-      },
-
-      FIRST_LOAD_ANIMATE: {
-            // First page load animation
-            delay: scaledValues.PAGE_FIRST_LOAD_DELAY_SCALAR,
-      },
-
-      FIRST_LOAD_CHILDREN_ANIMATE: {
-            // First load child elements
-            delayChildren:
-              scaledValues.PAGE_FIRST_LOAD_CHILDREN_DELAY_SCALAR,
-      },
-
-      NORMAL_ANIMATE: {
-            // Complete transition for normal page navigation
-            duration: scaledValues.PAGE_FADE_IN_SCALAR,
-            delay: scaledValues.PAGE_ENTER_DELAY_SCALAR,
-            delayChildren: scaledValues.PAGE_CHILDREN_DELAY_SCALAR,
-            when: "beforeChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // PAGE_CONTENTS
-    // ========================================
-
-    PAGE_CONTENTS: {
-      EMBEDDED_ANIMATE: {
-            // Page contents in 3D embedded mode
-            duration: scaledValues.PAGE_CONTENTS_FADE_IN_SCALAR,
-            delay: scaledValues.PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR,
-            delayChildren:
-              scaledValues.PAGE_CONTENTS_EMBEDDED_DELAY_SCALAR,
-            staggerChildren: scaledValues.PAGE_CONTENTS_STAGGER_SCALAR,
-      },
-
-      EXIT: {
-            // Page contents exit
-            duration: scaledValues.PAGE_CONTENTS_FADE_OUT_SCALAR,
-            when: "afterChildren" as const,
-      },
-
-      FULLSCREEN_ANIMATE: {
-            // Page contents in fullscreen (2D) mode
-            duration: scaledValues.PAGE_CONTENTS_FADE_IN_SCALAR,
-            delay: scaledValues.PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR,
-            delayChildren:
-              scaledValues.PAGE_CONTENTS_FULLSCREEN_DELAY_SCALAR,
-            staggerChildren: scaledValues.PAGE_CONTENTS_STAGGER_SCALAR,
-      },
-
-      MINIMAL_SHOWN: {
-            // Minimal animation when animations disabled
-            duration: scaledValues.PAGE_CONTENTS_FADE_IN_SCALAR,
-      },
-
-      MINIMAL_REMOVED: {
-            // Minimal exit when animations disabled
-            when: "beforeChildren" as const,
-      },
-
-    },
-
-    // ========================================
-    // PROJECTS
-    // ========================================
-
-    PROJECTS: {
-      ANIMATE_STAGGER: {
-            // Projects list stagger
-            staggerChildren: scaledValues.PROJECTS_STAGGER_SCALAR,
-      },
-
-      ENTRY_ANIMATE: {
-            // Projects entry animation
-            duration: scaledValues.PROJECTS_ENTRY_SCALAR,
-      },
-
-      EXIT: {
-            // Projects exit
-            duration: scaledValues.PROJECTS_EXIT_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // PROJECTS_TITLE
-    // ========================================
-
-    PROJECTS_TITLE: {
-      ANIMATE_STAGGER: {
-            // Projects title text stagger
-            staggerChildren:
-              scaledValues.PROJECTS_TITLE_STAGGER_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // SCENE_CLOSE_BUTTON
-    // ========================================
-
-    SCENE_CLOSE_BUTTON: {
-      ANIMATE: {
-            // Scene close button animation
-            delay: scaledValues.SCENE_CLOSE_BUTTON_DELAY_SCALAR,
-            duration:
-              scaledValues.SCENE_CLOSE_BUTTON_DURATION_SCALAR,
-      },
-
-      EXIT: {
-            // Scene close button exit
-            duration:
-              scaledValues.SCENE_CLOSE_BUTTON_EXIT_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // STAT_TRACKER
-    // ========================================
-
-    STAT_TRACKER: {
-      ANIMATE: {
-            // Stat tracker appear animation
-            staggerChildren:
-              scaledValues.STAT_TRACKER_ANIMATE_STAGGER_SCALAR,
-            staggerDirection: -1,
-      },
-
-      BLOCK_ANIMATE: {
-            // Individual stat block
-            duration: scaledValues.STAT_TRACKER_BLOCK_DURATION_SCALAR,
-            delay: scaledValues.STAT_TRACKER_BLOCK_DELAY_SCALAR,
-      },
-
-      EXIT: {
-            // Stat tracker exit animation
-            staggerChildren:
-              scaledValues.STAT_TRACKER_EXIT_STAGGER_SCALAR,
-            staggerDirection: 1,
-      },
-
-      TEXT_ANIMATE_STAGGER: {
-            // Stat tracker text stagger
-            staggerChildren:
-              scaledValues.STAT_TRACKER_TEXT_STAGGER_SCALAR,
-      },
-
-    },
-
-    // ========================================
-    // TYPEWRITER
-    // ========================================
-
-    TYPEWRITER: {
-      ANIMATE_STAGGER: {
-            // Typewriter character stagger
-            staggerChildren: scaledValues.TYPEWRITER_STAGGER_SCALAR,
-      },
-
-      CHAR_ANIMATE: {
-            // Typewriter character duration
-            duration: scaledValues.TYPEWRITER_CHAR_SCALAR,
-      },
-
-      EXIT: {
-            // Typewriter exit
-            duration: scaledValues.TYPEWRITER_EXIT_SCALAR,
-      },
-
-    },
-
-
-  };
-}
-
 // ============================================================================
-// TRANSITIONS_CONFIG — New nested architecture (Phase 1 PoC: BORDER_BOX, ICON)
+// TRANSITIONS_CONFIG — Nested architecture (all 33 transition objects)
 // ============================================================================
+
+const S = LEVA_DEFAULTS.standard;
+const E = LEVA_DEFAULTS.extended;
+const F = LEVA_DEFAULTS.fine;
 
 export const TRANSITIONS_CONFIG: TransitionsConfig = {
+
+  ABOUT_AVATAR: {
+    ANIMATE: {
+      delay:    { _type: 'scalar', base: 'COMPONENT_BASE', value: 5.0,  ...E, label: "Avatar > Appear Delay",       hint: "Wait before avatar starts appearing" } satisfies ScalarField,
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 8.33, ...E, label: "Avatar > Fade In Duration",   hint: "How long avatar takes to fully appear" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Avatar > Fade Out Duration",  hint: "How long avatar takes to fade out" } satisfies ScalarField,
+    },
+  },
+
+  ABOUT_HERO: {
+    ANIMATE: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Hero Section > Fade In",        hint: "Duration for hero section to appear" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.33, ...S, label: "Hero Section > Element Stagger", hint: "Delay between hero elements (name, title)" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'constant', value: 0 },
+      when: "afterChildren",
+    },
+  },
+
+  ABOUT_MAP: {
+    ANIMATE: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Map Section > Fade In",         hint: "Duration for map to appear" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.33, ...S, label: "Map Section > Marker Stagger",  hint: "Delay between map markers appearing" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'constant', value: 0 },
+      when: "afterChildren",
+    },
+  },
+
+  ABOUT_SOCIALS: {
+    ANIMATE: {
+      delay:           { _type: 'scalar', base: 'COMPONENT_BASE', value: 5.0,  ...E, label: "Social Links > Section Delay", hint: "Wait before social links section appears" } satisfies ScalarField,
+      delayChildren:   { _type: 'scalar', base: 'COMPONENT_BASE', value: 5.0,  ...E, label: "Social Links > Icons Delay",   hint: "Wait before social icons start appearing" } satisfies ScalarField,
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Social Links > Fade Duration", hint: "How long each social icon takes to appear" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.33, ...S, label: "Social Links > Icon Stagger",  hint: "Delay between each social icon" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'constant', value: 0 },
+      when: "afterChildren",
+    },
+  },
+
+  ABOUT_STATS: {
+    ANIMATE: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Stats Section > Fade Duration", hint: "How long stat trackers take to appear" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.33, ...S, label: "Stats Section > Stat Stagger",  hint: "Delay between each stat appearing" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'constant', value: 0 },
+      when: "afterChildren",
+    },
+  },
+
+  ABOUT_TAGS: {
+    ANIMATE: {
+      delay:           { _type: 'scalar', base: 'COMPONENT_BASE', value: 3.33, ...E, label: "Skills Tags > Section Delay", hint: "Wait before skills section appears" } satisfies ScalarField,
+      delayChildren:   { _type: 'scalar', base: 'COMPONENT_BASE', value: 3.33, ...E, label: "Skills Tags > Tags Delay",    hint: "Wait before skill tags start appearing" } satisfies ScalarField,
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Skills Tags > Fade Duration", hint: "How long each skill tag takes to appear" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.33, ...S, label: "Skills Tags > Tag Stagger",   hint: "Delay between each skill tag" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'constant', value: 0 },
+      when: "afterChildren",
+    },
+  },
+
+  ANIMATED_LINE: {
+    ANIMATE: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 3.33, ...E, label: "Animated Line > Draw Duration", hint: "How long animated line takes to draw" } satisfies ScalarField,
+      ease: "easeInOut",
+    },
+  },
+
   BORDER_BOX: {
     ANIMATE: {
-      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 5.0, ...LEVA_DEFAULTS.extended, label: "Border Box > Draw Duration", hint: "How long animated border takes to draw" } satisfies ScalarField,
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 5.0,  ...E, label: "Border Box > Draw Duration",      hint: "How long animated border takes to draw" } satisfies ScalarField,
       ease: "easeInOut",
     },
     EXIT: {
-      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 3.33, ...LEVA_DEFAULTS.extended, label: "Border Box > Fade Out Duration", hint: "How long border takes to fade out" } satisfies ScalarField,
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 3.33, ...E, label: "Border Box > Fade Out Duration",  hint: "How long border takes to fade out" } satisfies ScalarField,
       ease: "easeInOut",
     },
   },
+
+  COMMON: {
+    EXIT: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0, ...S, label: "Common > Exit Duration", hint: "Default exit duration for generic components" } satisfies ScalarField,
+    },
+  },
+
+  EXPERIENCE: {
+    ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.33, ...S, label: "Experience > Item Stagger Delay",       hint: "Delay between experience entries appearing" } satisfies ScalarField,
+    },
+    TITLE_ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.25, ...F, label: "Experience > Title Character Stagger",  hint: "Delay between title characters appearing" } satisfies ScalarField,
+    },
+    TOOLS_ANIMATE: {
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.75, ...F, label: "Experience > Tools Icon Stagger", hint: "Delay between each tool icon appearing in the entry" } satisfies ScalarField,
+    },
+  },
+
+  HOME: {
+    MENU_ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'NAV_BASE', value: 0.33, ...S, label: "Home Menu > Item Stagger Delay", hint: "Delay between menu items appearing" } satisfies ScalarField,
+    },
+  },
+
   ICON: {
     ANIMATE: {
-      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.67, ...LEVA_DEFAULTS.standard, label: "Icon > Fade In Duration", hint: "How long icons take to fade in" } satisfies ScalarField,
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.67, ...S, label: "Icon > Fade In Duration",  hint: "How long icons take to fade in" } satisfies ScalarField,
     },
     EXIT: {
-      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0, ...LEVA_DEFAULTS.standard, label: "Icon > Fade Out Duration", hint: "How long icons take to fade out" } satisfies ScalarField,
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Icon > Fade Out Duration", hint: "How long icons take to fade out" } satisfies ScalarField,
     },
   },
+
+  LOADING: {
+    EXIT: {
+      duration: { _type: 'scalar', base: 'PAGE_BASE', value: 1.0, ...S, label: "Loading Screen > Exit Duration", hint: "How long loading screen takes to fade out" } satisfies ScalarField,
+      delay:    { _type: 'scalar', base: 'PAGE_BASE', value: 6.5, ...E, label: "Loading Screen > Exit Delay",     hint: "Wait before loading screen starts fading out" } satisfies ScalarField,
+    },
+  },
+
+  LOADING_PAGE: {
+    ANIMATE: {
+      duration: { _type: 'scalar', base: 'PAGE_BASE', value: 1.67, ...S, label: "Loading Page > Fade In Duration", hint: "How long loading screen takes to appear" } satisfies ScalarField,
+      delay:    { _type: 'scalar', base: 'PAGE_BASE', value: 0,    ...S, label: "Loading Page > Appear Delay",     hint: "Wait before loading screen appears" } satisfies ScalarField,
+    },
+  },
+
+  MAP: {
+    CONTENT_ANIMATE: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 7.67, ...E, label: "Map > Content Fade Duration", hint: "How long map content takes to appear" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Map > Exit Duration",         hint: "How long map takes to fade out" } satisfies ScalarField,
+    },
+  },
+
+  MAP_DESCRIPTION: {
+    ANIMATE: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Map > Description Fade Duration",   hint: "How long map description takes to appear" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.33, ...S, label: "Map > Description Stagger Delay",   hint: "Delay between description paragraphs" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0, ...S, label: "Map > Description Exit Duration", hint: "How long description takes to fade out" } satisfies ScalarField,
+      when: "afterChildren",
+    },
+  },
+
+  MAP_SLIDER: {
+    ANIMATE: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.67, ...S, label: "Map > Slider Item Fade Duration",  hint: "How long each slider item takes to appear" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.17, ...F, label: "Map > Slider Item Stagger Delay", hint: "Delay between slider items appearing" } satisfies ScalarField,
+      staggerDirection: -1,
+    },
+    EXIT: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.67, ...S, label: "Map > Slider Exit Duration",       hint: "How long slider takes to fade out" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.07, ...F, label: "Map > Slider Exit Stagger Delay",  hint: "Delay between items fading out" } satisfies ScalarField,
+      when: "afterChildren",
+    },
+  },
+
+  MODAL: {
+    CONTAINER_ANIMATE: {
+      duration: { _type: 'scalar', base: 'MODAL_BASE', value: 1.0,  ...S, label: "Modal > Container Expand/Collapse", hint: "Duration for modal container layout animation" } satisfies ScalarField,
+      ease: "easeInOut",
+    },
+    CONTENT_ANIMATE: {
+      duration: { _type: 'scalar', base: 'MODAL_BASE', value: 1.0,  ...S, label: "Modal > Content Transition",        hint: "Duration for content area animation" } satisfies ScalarField,
+    },
+    DATE_ANIMATE: {
+      duration: { _type: 'scalar', base: 'MODAL_BASE', value: 1.1,  ...S, label: "Modal > Date Field Duration",       hint: "Date range animation duration" } satisfies ScalarField,
+    },
+    DESCRIPTION_ANIMATE: {
+      delay:    { _type: 'scalar', base: 'MODAL_BASE', value: 1.67, ...S, label: "Modal > Description Text Delay",    hint: "Delay before blurb/description appears" } satisfies ScalarField,
+    },
+    LAYOUT_ANIMATE: {
+      delay:    { _type: 'scalar', base: 'MODAL_BASE', value: 0.67, ...S, label: "Modal > Layout Change Delay",       hint: "Wait before layout expands to full size" } satisfies ScalarField,
+    },
+    OVERLAY_ANIMATE: {
+      duration: { _type: 'scalar', base: 'MODAL_BASE', value: 1.0,  ...S, label: "Modal > Background Overlay",       hint: "Dark overlay fade duration" } satisfies ScalarField,
+    },
+  },
+
+  MODAL_HEADER: {
+    TEXT_ANIMATE: {
+      duration: { _type: 'scalar', base: 'MODAL_BASE', value: 6.67, ...E, label: "Modal > Header Text Duration", hint: "Title/subtitle animation duration" } satisfies ScalarField,
+      delay:    { _type: 'scalar', base: 'MODAL_BASE', value: 6.67, ...E, label: "Modal > Header Text Delay",    hint: "Wait before header text animates" } satisfies ScalarField,
+    },
+  },
+
+  MODAL_NAVBAR: {
+    ANIMATE: {
+      duration: { _type: 'scalar', base: 'MODAL_BASE', value: 0.67, ...S, label: "Modal > Navbar Fade In",          hint: "How long modal navbar takes to appear" } satisfies ScalarField,
+      delay:    { _type: 'scalar', base: 'MODAL_BASE', value: 0.33, ...S, label: "Modal > Navbar Appear Delay",     hint: "Wait before navbar starts fading in" } satisfies ScalarField,
+    },
+    CHILDREN_ANIMATE: {
+      delayChildren: { _type: 'scalar', base: 'MODAL_BASE', value: 3.33, ...E, label: "Modal > Navbar Children Delay", hint: "Delay before navbar buttons animate" } satisfies ScalarField,
+    },
+    LINE_ANIMATE: {
+      duration: { _type: 'scalar', base: 'MODAL_BASE', value: 1.5,  ...S, label: "Modal > Navbar Border Line",     hint: "Animated line draw duration in navbar" } satisfies ScalarField,
+    },
+  },
+
+  MODAL_TEXT: {
+    ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'MODAL_BASE', value: 5.7,  ...E, label: "Modal > Text Paragraphs Stagger", hint: "Delay between paragraphs appearing" } satisfies ScalarField,
+    },
+    PAINT_ANIMATE: {
+      duration:        { _type: 'scalar', base: 'MODAL_BASE', value: 1.67, ...S, label: "Modal > Text Paint Duration",     hint: "How long text takes to fade in" } satisfies ScalarField,
+    },
+  },
+
+  NAV: {
+    ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'NAV_BASE', value: 0.33, ...S, label: "Nav Bar > Item Stagger",          hint: "Delay between each nav item appearing" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration:        { _type: 'scalar', base: 'NAV_BASE', value: 0.5,  ...S, label: "Nav Bar > Exit Duration",          hint: "How long nav bar takes to fade out" } satisfies ScalarField,
+    },
+    HOME_FIRST_LOAD_ANIMATE: {
+      delay:           { _type: 'scalar', base: 'NAV_BASE', value: 4.33, ...E, label: "Nav Bar > Home First Load Delay",  hint: "Extra delay on initial home page load" } satisfies ScalarField,
+    },
+  },
+
+  NAV_BUTTON: {
+    ACTIVE_ANIMATE: {
+      duration: { _type: 'scalar', base: 'NAV_BASE', value: 0.33, ...S, label: "Nav Button > Activate Duration",   hint: "Button transition when becoming active" } satisfies ScalarField,
+    },
+    INACTIVE_ANIMATE: {
+      duration: { _type: 'scalar', base: 'NAV_BASE', value: 0.5,  ...S, label: "Nav Button > Deactivate Duration", hint: "Button transition when becoming inactive" } satisfies ScalarField,
+    },
+  },
+
+  NAV_ITEM: {
+    BORDER_ANIMATE: {
+      duration: { _type: 'scalar', base: 'NAV_BASE',  value: 0.83, ...S, label: "Nav Item > Border Draw Duration", hint: "How long animated border takes to draw" } satisfies ScalarField,
+      delay:    { _type: 'scalar', base: 'NAV_BASE',  value: 2.5,  ...S, label: "Nav Item > Border Appear Delay",  hint: "Wait before border starts animating" } satisfies ScalarField,
+      ease: "easeInOut",
+    },
+    BORDER_EXIT: {
+      duration: { _type: 'scalar', base: 'NAV_BASE',  value: 0.5,  ...S, label: "Nav Item > Border Fade Out",      hint: "Border fade out duration on exit" } satisfies ScalarField,
+    },
+    FADE_ANIMATE: {
+      duration: { _type: 'scalar', base: 'NAV_BASE',  value: 1.0,  ...S, label: "Nav Item > Fade In Duration",     hint: "How long nav items take to fade in" } satisfies ScalarField,
+      delay:    { _type: 'scalar', base: 'NAV_BASE',  value: 1.0,  ...S, label: "Nav Item > Appear Delay",         hint: "Wait before nav items start fading in" } satisfies ScalarField,
+    },
+    TEXT_ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'TEXT_BASE', value: 0.15, ...F, label: "Nav Item > Text Character Stagger", hint: "Delay between characters in nav items" } satisfies ScalarField,
+    },
+  },
+
+  NAV_MINIMAL: {
+    ANIMATE: {
+      delay:    { _type: 'scalar', base: 'NAV_BASE', value: 1.17, ...S, label: "Nav Bar > Minimal Mode Delay",    hint: "Delay when animations are disabled" } satisfies ScalarField,
+      duration: { _type: 'scalar', base: 'NAV_BASE', value: 0.83, ...S, label: "Nav Bar > Minimal Mode Duration", hint: "Duration when animations are disabled" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'NAV_BASE', value: 0.5,  ...S, label: "Nav Bar > Minimal Mode Exit",     hint: "Exit duration in minimal mode" } satisfies ScalarField,
+    },
+  },
+
+  PAGE: {
+    CHILDREN_ANIMATE: {
+      delayChildren: { _type: 'scalar', base: 'PAGE_BASE', value: 0.4, ...S, label: "Page > Children Delay",              hint: "Delay before child elements animate" } satisfies ScalarField,
+    },
+    ENTER_ANIMATE: {
+      delay:         { _type: 'scalar', base: 'PAGE_BASE', value: 0.2, ...S, label: "Page > Enter Delay",                  hint: "Wait time before page starts fading in" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration:      { _type: 'scalar', base: 'PAGE_BASE', value: 0.4, ...S, label: "Page > Fade Out Duration",            hint: "How long page container takes to fade out" } satisfies ScalarField,
+      when: "beforeChildren",
+    },
+    FADE_IN_ANIMATE: {
+      duration:      { _type: 'scalar', base: 'PAGE_BASE', value: 1.0, ...S, label: "Page > Fade In Duration",             hint: "How long page container takes to fade in" } satisfies ScalarField,
+    },
+    FADE_OUT_EXIT: {
+      duration:      { _type: 'scalar', base: 'PAGE_BASE', value: 0.4, ...S, label: "Page > Fade Out Duration (exit)",     hint: "How long page container takes to fade out" } satisfies ScalarField,
+    },
+    FIRST_LOAD_ANIMATE: {
+      delay:         { _type: 'scalar', base: 'PAGE_BASE', value: 1.0, ...S, label: "Page > First Load Delay",             hint: "Extra delay on initial page load" } satisfies ScalarField,
+    },
+    FIRST_LOAD_CHILDREN_ANIMATE: {
+      delayChildren: { _type: 'scalar', base: 'PAGE_BASE', value: 0.4, ...S, label: "Page > First Load Children Delay",   hint: "Child element delay on first load" } satisfies ScalarField,
+    },
+    NORMAL_ANIMATE: {
+      duration:      { _type: 'scalar', base: 'PAGE_BASE', value: 1.0, ...S, label: "Page > Normal Fade In Duration",      hint: "How long page container takes to fade in" } satisfies ScalarField,
+      delay:         { _type: 'scalar', base: 'PAGE_BASE', value: 0.2, ...S, label: "Page > Normal Enter Delay",           hint: "Wait time before page starts fading in" } satisfies ScalarField,
+      delayChildren: { _type: 'scalar', base: 'PAGE_BASE', value: 0.4, ...S, label: "Page > Normal Children Delay",        hint: "Delay before child elements animate" } satisfies ScalarField,
+      when: "beforeChildren",
+    },
+  },
+
+  PAGE_CONTENTS: {
+    EMBEDDED_ANIMATE: {
+      duration:        { _type: 'scalar', base: 'PAGE_BASE', value: 0.2, ...S, label: "Page Contents > Fade In",             hint: "Inner page content fade in duration" } satisfies ScalarField,
+      delay:           { _type: 'scalar', base: 'PAGE_BASE', value: 0.6, ...S, label: "Page Contents > 3D Embedded Delay",   hint: "Delay when page is in 3D mixer view" } satisfies ScalarField,
+      delayChildren:   { _type: 'scalar', base: 'PAGE_BASE', value: 0.6, ...S, label: "Page Contents > 3D Children Delay",   hint: "Delay when page is in 3D mixer view" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'PAGE_BASE', value: 1.0, ...S, label: "Page Contents > Stagger",             hint: "Delay between child elements appearing" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'PAGE_BASE', value: 0.2, ...S, label: "Page Contents > Fade Out", hint: "Inner page content fade out duration" } satisfies ScalarField,
+      when: "afterChildren",
+    },
+    FULLSCREEN_ANIMATE: {
+      duration:        { _type: 'scalar', base: 'PAGE_BASE', value: 0.2, ...S, label: "Page Contents > Fullscreen Fade In",  hint: "Inner page content fade in duration" } satisfies ScalarField,
+      delay:           { _type: 'scalar', base: 'PAGE_BASE', value: 0.6, ...S, label: "Page Contents > Fullscreen Delay",    hint: "Delay when page is in fullscreen mode" } satisfies ScalarField,
+      delayChildren:   { _type: 'scalar', base: 'PAGE_BASE', value: 0.6, ...S, label: "Page Contents > Fullscreen Children", hint: "Delay when page is in fullscreen mode" } satisfies ScalarField,
+      staggerChildren: { _type: 'scalar', base: 'PAGE_BASE', value: 1.0, ...S, label: "Page Contents > Fullscreen Stagger",  hint: "Delay between child elements appearing" } satisfies ScalarField,
+    },
+    MINIMAL_SHOWN: {
+      duration: { _type: 'scalar', base: 'PAGE_BASE', value: 0.2, ...S, label: "Page Contents > Minimal Fade In", hint: "Inner page content fade in duration" } satisfies ScalarField,
+    },
+    MINIMAL_REMOVED: {
+      when: "beforeChildren",
+    },
+  },
+
+  PROJECTS: {
+    ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.33, ...S, label: "Projects > Item Stagger Delay",      hint: "Delay between project cards appearing" } satisfies ScalarField,
+    },
+    ENTRY_ANIMATE: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 7.67, ...E, label: "Projects > Entry Fade Duration",     hint: "How long project card takes to appear" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration:        { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.0,  ...S, label: "Projects > Exit Duration",           hint: "How long projects page takes to exit" } satisfies ScalarField,
+    },
+  },
+
+  PROJECTS_TITLE: {
+    ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.25, ...F, label: "Projects > Title Character Stagger", hint: "Delay between title characters appearing" } satisfies ScalarField,
+    },
+  },
+
+  SCENE_CLOSE_BUTTON: {
+    ANIMATE: {
+      delay:    { _type: 'scalar', base: 'COMPONENT_BASE', value: 5.0,  ...E, label: "Close Button > Appear Delay",      hint: "Wait before close button appears" } satisfies ScalarField,
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 6.67, ...E, label: "Close Button > Fade In Duration",  hint: "How long close button takes to appear" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 3.33, ...E, label: "Close Button > Exit Duration",     hint: "How long close button takes to fade out" } satisfies ScalarField,
+    },
+  },
+
+  STAT_TRACKER: {
+    ANIMATE: {
+      staggerChildren:  { _type: 'scalar', base: 'COMPONENT_BASE', value: 1.33, ...S, label: "Stat Blocks > Appear Stagger",      hint: "Delay between each stat block appearing" } satisfies ScalarField,
+      staggerDirection: -1,
+    },
+    BLOCK_ANIMATE: {
+      duration: { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.23, ...S, label: "Stat Block > Fade In Duration",          hint: "How long each stat block takes to appear" } satisfies ScalarField,
+      delay:    { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.23, ...S, label: "Stat Block > Appear Delay",              hint: "Initial delay before stat blocks animate" } satisfies ScalarField,
+    },
+    EXIT: {
+      staggerChildren:  { _type: 'scalar', base: 'COMPONENT_BASE', value: 0.33, ...S, label: "Stat Blocks > Exit Stagger",       hint: "Delay between each stat block fading out" } satisfies ScalarField,
+      staggerDirection: 1,
+    },
+    TEXT_ANIMATE_STAGGER: {
+      staggerChildren:  { _type: 'scalar', base: 'TEXT_BASE',      value: 0.15, ...F, label: "Stat Tracker > Text Character Stagger", hint: "Delay between characters in stats" } satisfies ScalarField,
+    },
+  },
+
+  TYPEWRITER: {
+    ANIMATE_STAGGER: {
+      staggerChildren: { _type: 'scalar', base: 'TEXT_BASE', value: 0.15, ...F, label: "Typewriter > Character Stagger", hint: "Delay between each character typing" } satisfies ScalarField,
+    },
+    CHAR_ANIMATE: {
+      duration:        { _type: 'scalar', base: 'TEXT_BASE', value: 1.0,  ...S, label: "Typewriter > Character Duration", hint: "How long each character takes to appear" } satisfies ScalarField,
+    },
+    EXIT: {
+      duration:        { _type: 'scalar', base: 'TEXT_BASE', value: 1.5,  ...S, label: "Typewriter > Exit Duration",      hint: "How long text takes to fade out" } satisfies ScalarField,
+    },
+  },
+
 };
 
 /**

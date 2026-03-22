@@ -3,17 +3,14 @@ import { useControls, folder } from "leva";
 import {
   ANIMATION_SCALAR_CONFIG,
   computeAnimationBases,
-  buildTransitions,
-  generateLabel,
   TRANSITIONS_CONFIG,
   extractLevaSchema,
   buildTransitionsFromConfig,
 } from "@config/new-animations";
-import type { AnimationBases } from "../types";
 
 type AnimationContextType = {
-  TRANSITIONS: ReturnType<typeof buildTransitions>; // Nested structure auto-derived
-  BASES: AnimationBases;
+  TRANSITIONS: ReturnType<typeof buildTransitionsFromConfig>;
+  BASES: ReturnType<typeof computeAnimationBases>;
   SPRINGS: {
     smooth: { tension: number; friction: number; mass: number };
     bouncy: { tension: number; friction: number; mass: number };
@@ -36,25 +33,17 @@ const AnimationContext = createContext<AnimationContextType | undefined>(
 );
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
-  // Build Leva schema from config with auto-generated labels and hints
-  const levaSchema = Object.fromEntries(
+  // Build Leva schema for master, category bases, springs, and system constants
+  const systemSchema = Object.fromEntries(
     Object.entries(ANIMATION_SCALAR_CONFIG).map(([_, section]) => {
       const { _meta, ...scalars } = section;
-
-      // Apply auto-generated labels and append field names to hints
       const scalarsWithLabels = Object.fromEntries(
         Object.entries(scalars).map(([key, scalar]) => {
-          // Only generate label with base reference if scalar has a base property
-          const label = scalar.label ?? ('base' in scalar ? generateLabel(key, scalar.base) : key);
-
-          // Append field name to existing hint (or use field name if no hint)
-          const hint = scalar.hint ? `${scalar.hint} | ${key}` : key;
-
-          const { base, ...levaProps } = scalar as any; // Remove 'base' from Leva props if present
-          return [key, { ...levaProps, label, hint }];
+          const label = (scalar as any).label ?? key;
+          const hint = (scalar as any).hint ? `${(scalar as any).hint} | ${key}` : key;
+          return [key, { ...(scalar as any), label, hint }];
         })
       );
-
       return [
         _meta.title,
         folder(scalarsWithLabels, { collapsed: _meta.collapsed ?? true }),
@@ -62,11 +51,13 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     })
   );
 
-  const controls = useControls("Animation System", levaSchema, {
+  const systemControls = useControls("Animation System", {
+    ...systemSchema,
+    "✨ Transitions": folder(extractLevaSchema(TRANSITIONS_CONFIG), { collapsed: true }),
+  }, {
     collapsed: false,
   });
 
-  // Extract category base scalars, spring values, and system constants from controls
   const {
     ANIMATION_MASTER_BASE,
     PAGE_BASE_SCALAR,
@@ -89,10 +80,8 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     DEBOUNCE_SCROLL,
     TIMEOUT_LITE_MODE_FALLBACK,
     TIMEOUT_USER_INITIATED_FALLBACK,
-    ...transitionScalars
-  } = controls;
+  } = systemControls;
 
-  // Compute bases from master + category scalars (memoized separately)
   const bases = useMemo(
     () =>
       computeAnimationBases(ANIMATION_MASTER_BASE as unknown as number, {
@@ -112,49 +101,11 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     ]
   );
 
-  // Pre-scale all transition scalars (base × scalar) - memoized separately
-  const scaledValues = useMemo(() => {
-    const scaled: Record<string, number> = {};
-
-    // Iterate through all sections to find scalars with base property
-    Object.values(ANIMATION_SCALAR_CONFIG).forEach((section) => {
-      const { _meta, ...scalars } = section;
-      Object.entries(scalars).forEach(([key, scalar]) => {
-        if ('base' in scalar) {
-          // Pre-multiply: base × scalar
-          const scalarValue = transitionScalars[key] as unknown as number;
-          const baseValue = bases[scalar.base as keyof AnimationBases];
-          scaled[key] = baseValue * scalarValue;
-        }
-      });
-    });
-
-    return scaled;
-  }, [bases, transitionScalars]);
-
-  // Build all transition objects using pre-scaled values
   const transitions = useMemo(
-    () => buildTransitions(scaledValues as any),
-    [scaledValues]
+    () => buildTransitionsFromConfig(TRANSITIONS_CONFIG, systemControls, bases),
+    [systemControls, bases]
   );
 
-  // New nested architecture — Leva controls for TRANSITIONS_CONFIG entries
-  const newControls = useControls(
-    "✨ Transitions (New)",
-    extractLevaSchema(TRANSITIONS_CONFIG),
-    { collapsed: true }
-  );
-
-  // Build new-format transitions and merge over old ones (PoC: BORDER_BOX, ICON)
-  const mergedTransitions = useMemo(
-    () => ({
-      ...transitions,
-      ...buildTransitionsFromConfig(TRANSITIONS_CONFIG, newControls, bases),
-    }),
-    [transitions, newControls, bases]
-  );
-
-  // Build springs from Leva controls
   const springs = useMemo(
     () => ({
       smooth: {
@@ -174,19 +125,12 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
       },
     }),
     [
-      SPRING_SMOOTH_TENSION,
-      SPRING_SMOOTH_FRICTION,
-      SPRING_SMOOTH_MASS,
-      SPRING_BOUNCY_TENSION,
-      SPRING_BOUNCY_FRICTION,
-      SPRING_BOUNCY_MASS,
-      SPRING_SLOW_TENSION,
-      SPRING_SLOW_FRICTION,
-      SPRING_SLOW_MASS,
+      SPRING_SMOOTH_TENSION, SPRING_SMOOTH_FRICTION, SPRING_SMOOTH_MASS,
+      SPRING_BOUNCY_TENSION, SPRING_BOUNCY_FRICTION, SPRING_BOUNCY_MASS,
+      SPRING_SLOW_TENSION,   SPRING_SLOW_FRICTION,   SPRING_SLOW_MASS,
     ]
   );
 
-  // Build debounce delays from Leva controls
   const debounceDelays = useMemo(
     () => ({
       COLOR_UPDATE: DEBOUNCE_COLOR_UPDATE as unknown as number,
@@ -196,7 +140,6 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     [DEBOUNCE_COLOR_UPDATE, DEBOUNCE_WINDOW_RESIZE, DEBOUNCE_SCROLL]
   );
 
-  // Build loading timeouts from Leva controls
   const loadingTimeouts = useMemo(
     () => ({
       LITE_MODE_FALLBACK: TIMEOUT_LITE_MODE_FALLBACK as unknown as number,
@@ -208,7 +151,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AnimationContext.Provider
       value={{
-        TRANSITIONS: mergedTransitions,
+        TRANSITIONS: transitions,
         BASES: bases,
         SPRINGS: springs,
         DEBOUNCE: debounceDelays,

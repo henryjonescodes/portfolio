@@ -1,4 +1,4 @@
-import { folder, Leva, useControls } from "leva";
+import { Leva, useControls } from "leva";
 import React, {
   createContext,
   ReactNode,
@@ -64,13 +64,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   );
 
   // ? Leva Controls
-  const { useOrbitControls } = useControls({
-    Controls: folder(
-      {
-        useOrbitControls: false,
-      },
-      { collapsed: true },
-    ),
+  const { useOrbitControls } = useControls("3D Scene", {
+    useOrbitControls: false,
   });
 
   // ?? Manages animation disabled setting/state changes

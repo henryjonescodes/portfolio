@@ -32,10 +32,6 @@ export const projectsData: Record<string, EntryData> = {
         Icon: Sass,
         label: 'Sass'
       },
-      {
-        Icon: Blender,
-        label: 'Blender'
-      },
     ],
   },
   virtualportfolio: {
