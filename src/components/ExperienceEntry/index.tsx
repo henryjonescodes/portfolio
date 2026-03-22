@@ -145,18 +145,18 @@ const ExperienceEntry = ({
         {!isOpen && (
           <motion.span layoutId="header" className={styles.header} transition={layoutTransition}>
             <motion.div className={styles.title}>
-              <motion.h2 layoutId="title" variants={headerTextVariants}>
+              <motion.h2 layoutId="title" layout="position" variants={headerTextVariants}>
                 <TypewriterText text={title} />
               </motion.h2>
               {!!dateRange && (
-                <motion.p layoutId="date" variants={headerTextVariants}>
+                <motion.p layoutId="date" layout="position" variants={headerTextVariants}>
                   <TypewriterText text={dateRange} />
                 </motion.p>
               )}
             </motion.div>
             {!!subtitle && (
               <motion.div className={styles.subtitle} variants={headerTextVariants}>
-                <motion.h3 layoutId="subtitle" transition={layoutTransition}>
+                <motion.h3 layoutId="subtitle" layout="position" transition={layoutTransition}>
                   <TypewriterText text={subtitle} />
                 </motion.h3>
               </motion.div>
@@ -200,16 +200,16 @@ const ExperienceEntry = ({
                   <motion.div className={styles.text}>
                     {isOpen && (
                       <motion.div layoutId="bodyTitle" transition={layoutTransition}>
-                        <motion.h2 layoutId="title" transition={layoutTransition}>
+                        <motion.h2 layoutId="title" layout="position" transition={layoutTransition}>
                           <TypewriterText text={title} />
                         </motion.h2>
                         {!!subtitle && (
-                          <motion.h3 layoutId="subtitle" transition={layoutTransition}>
+                          <motion.h3 layoutId="subtitle" layout="position" transition={layoutTransition}>
                             {subtitle}
                           </motion.h3>
                         )}
                         {!!dateRange && (
-                          <motion.p layoutId="date" transition={layoutTransition}>
+                          <motion.p layoutId="date" layout="position" transition={layoutTransition}>
                             {dateRange}
                           </motion.p>
                         )}

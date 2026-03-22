@@ -52,18 +52,9 @@ export const ExperienceEntryModalProvider = ({
     undefined
   );
 
-  // Delay pageOpen to trigger layout animations
   useEffect(() => {
-    if (selectedEntry && !isClosing) {
-      setPageOpen(false);
-      const timer = setTimeout(() => {
-        setPageOpen(true);
-      }, (TRANSITIONS.MODAL.LAYOUT_ANIMATE.delay || 0) * 1000);
-      return () => clearTimeout(timer);
-    } else {
-      setPageOpen(false);
-    }
-  }, [selectedEntry, isClosing, TRANSITIONS]);
+    setPageOpen(selectedEntry != null && !isClosing);
+  }, [selectedEntry, isClosing]);
 
   const openModal = (
     entry: EntryData,
