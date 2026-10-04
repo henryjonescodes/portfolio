@@ -18,6 +18,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - [x] Card-to-page morph with tunable base duration and multipliers
 - [x] e2e test for the morph and close
 - [?] Design review of the carousel in 3D and lite mode
+- [ ] Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)
 
 ## Log
 
