@@ -1,6 +1,6 @@
 ---
 branch: feat/entry-tabs
-parent: feat/entry-dock
+parent: staging
 status: planned
 title: Entry subpages as nav tabs, and a masonry gallery
 pr: null
