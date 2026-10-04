@@ -36,11 +36,13 @@ export const CrosshairMark = () => {
   );
   const { x, y, inside } = usePointer(onMove);
 
+  // The system cursor hides only while the crosshair is tracking the pointer, so a page loaded
+  // under a still mouse keeps a visible cursor until it moves.
   useEffect(() => {
-    if (!fine) return;
+    if (!fine || !inside) return;
     document.documentElement.classList.add(styles.noCursor);
     return () => document.documentElement.classList.remove(styles.noCursor);
-  }, [fine]);
+  }, [fine, inside]);
 
   if (!fine) return null;
   return (
