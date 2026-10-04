@@ -8,14 +8,16 @@ import { usePage } from '@context/PageContext';
 
 // Define the props interface
 type PageContentsProps = {
-  className?: string; // Add an optional className prop
+  className?: string;
+  /** Stretch to the height of the scroll area, for pages that centre content in it. */
+  fill?: boolean;
 };
 
 type Props = {
   children: ReactNode;
 } & PageContentsProps;
 
-const PageContents: React.FC<Props> = ({ children, className }) => {
+const PageContents: React.FC<Props> = ({ children, className, fill = false }) => {
   const { animationDisabled } = useSettings();
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
@@ -72,7 +74,7 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
   return (
     <motion.div
       ref={ref}
-      className={classNames(styles.pageContents, className)}
+      className={classNames(styles.pageContents, { [styles.pageContentsFill]: fill }, className)}
       variants={variants}
       initial={initial}
       animate={animate}

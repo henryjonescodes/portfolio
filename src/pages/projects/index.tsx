@@ -12,18 +12,15 @@ import styles from './projects.module.scss';
 import EntryMediaView from '@components/EntryMedia';
 import cn from 'classnames';
 import { usePage } from '@context/PageContext';
-import { useWindowDimensions } from '@context/WindowDimensionContext';
-import ProjectCarousel from '@components/ProjectCarousel';
-import { screenWidths } from '@styles/layout.constants';
+import EntryCarousel from '@components/EntryCarousel';
+import { useAsCarousel } from '@components/EntryCarousel/useAsCarousel';
 
 const projectList = projectsOrder.map((id) => projectsData[id]);
 
 const Projects = () => {
   const { TRANSITIONS } = useAnimations();
   const { embedded } = usePage();
-  const { width } = useWindowDimensions();
-  // Phones get the carousel; the 3D screen and wider lite views keep the list.
-  const asCarousel = !embedded && width < screenWidths.mobileLarge;
+  const asCarousel = useAsCarousel();
   const { openModal, selectedEntry } = useExperienceEntryModal();
 
   const projectsVariants = {
@@ -53,7 +50,7 @@ const Projects = () => {
   );
 
   return (
-    <PageContents key={'projects'} className={styles.projects}>
+    <PageContents key={'projects'} className={styles.projects} fill={asCarousel}>
       <motion.div
         variants={projectsVariants}
         className={cn(styles.content, { [styles.fullscreen]: !embedded })}
@@ -66,7 +63,7 @@ const Projects = () => {
         </motion.h1>
 
         {asCarousel ? (
-          <ProjectCarousel projects={projectList} />
+          <EntryCarousel entries={projectList} />
         ) : (
           projectsOrder.map((id) => {
             const isSelected = selectedEntry?.id === id;

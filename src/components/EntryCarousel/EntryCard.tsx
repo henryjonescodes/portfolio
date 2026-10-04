@@ -2,19 +2,22 @@ import cn from 'classnames';
 import { LayoutGroup, motion } from 'framer-motion';
 import { forwardRef } from 'react';
 import Close from '@assets/svg/icons/close.svg?react';
+import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import AnimatedLine from '@components/AnimatedLine';
 import EntryMediaView from '@components/EntryMedia';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import GlitchIconItem from '@components/GlitchIconItem';
 import NavBarButton from '@components/NavBar/NavBarButton';
 import PanelGrid from '@components/Panels';
+import TypewriterText from '@components/TypewriterText';
 import { useAnimations } from '@context/AnimationContext';
 import { radius } from '@styles/sass-variables';
 import { trapFocus } from '@utils/focus';
-import styles from './project-carousel.module.scss';
+import { formatDateRange } from '@utils/text';
+import styles from './entry-carousel.module.scss';
 
-type ProjectCardProps = {
-  project: EntryData;
+type EntryCardProps = {
+  entry: EntryData;
   /** Namespaces the inner layoutIds; list and overlay copies use different keys on purpose. */
   layoutKey: string;
   isOpen: boolean;
@@ -24,17 +27,23 @@ type ProjectCardProps = {
   onLayoutAnimationComplete?: () => void;
 };
 
+const BORDER = 2.5;
+
 /**
- * One project as a tile: title bar, media, then text, never text over media. The open
- * overlay copy is the same component; flipping `isOpen` morphs it to fill the view.
+ * One entry as a tile: title bar, media, then text, never text over media. The open
+ * overlay copy is the same component; flipping `isOpen` morphs it to fill the view. Tiles
+ * paint in (border drawn, text typed, parts staggered); the overlay copy starts painted.
  */
-const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCard(
-  { project, layoutKey, isOpen, hidden, onSelect, onClose, onLayoutAnimationComplete },
+const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
+  { entry, layoutKey, isOpen, hidden, onSelect, onClose, onLayoutAnimationComplete },
   ref,
 ) {
   const { TRANSITIONS } = useAnimations();
   const T = TRANSITIONS.CAROUSEL;
   const snap = { duration: 0 };
+  const isTile = !!onSelect;
+  const date = entry.dateString ?? formatDateRange(entry.startDate, entry.endDate);
+  const stagger = { animate: { transition: T.TILE_STAGGER } };
 
   return (
     <LayoutGroup id={layoutKey}>
@@ -42,11 +51,12 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
         ref={ref}
         layout
         layoutId={layoutKey}
-        data-testid={onSelect ? 'project-card' : 'project-card-open'}
-        data-project-id={project.id}
-        className={cn(styles.card, { [styles.open]: isOpen })}
+        data-testid={isTile ? 'carousel-card' : 'carousel-card-open'}
+        data-entry-id={entry.id}
+        className={cn(styles.card, { [styles.open]: isOpen, [styles.tile]: isTile })}
         // Real values, not CSS variables, so the morph does not distort.
         style={{ borderRadius: isOpen ? 0 : radius.md, visibility: hidden ? 'hidden' : 'visible' }}
+        variants={stagger}
         transition={T.CARD}
         onLayoutAnimationComplete={onLayoutAnimationComplete}
         onClick={(e) => (onSelect ? onSelect() : e.stopPropagation())}
@@ -57,18 +67,19 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
             onSelect();
           }
         }}
-        role={onSelect ? 'button' : 'dialog'}
-        aria-modal={onSelect ? undefined : true}
-        tabIndex={onSelect ? 0 : -1}
-        aria-label={onSelect ? `Open ${project.title}` : project.title}
+        role={isTile ? 'button' : 'dialog'}
+        aria-modal={isTile ? undefined : true}
+        tabIndex={isTile ? 0 : -1}
+        aria-label={isTile ? `Open ${entry.title}` : entry.title}
       >
+        {isTile && <AnimatedBorderBox className={styles.paintedBorder} borderWidth={BORDER} />}
         <motion.header layoutId="header" className={styles.titleBar} transition={snap}>
           <motion.h2 layoutId="title" layout="position" transition={T.CARD}>
-            {project.title}
+            <TypewriterText text={entry.title} />
           </motion.h2>
-          {project.dateString && (
+          {date && (
             <motion.p layoutId="date" layout="position" transition={isOpen ? T.DATE_OPEN : T.CARD}>
-              {project.dateString}
+              <TypewriterText text={date} />
             </motion.p>
           )}
           {isOpen && onClose && (
@@ -76,27 +87,38 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
               <NavBarButton onClick={onClose} Icon={Close} label="Close" />
             </span>
           )}
+          {isTile && <AnimatedLine horizontal borderWidth={BORDER} className={styles.barLine} />}
         </motion.header>
-        <div className={styles.scroll}>
-          {project.media && (
+        <motion.div className={styles.scroll} variants={stagger}>
+          {entry.media && (
             <motion.div
               layoutId="media"
               className={styles.media}
               transition={isOpen ? T.MEDIA_OPEN : T.CARD}
             >
-              <EntryMediaView media={project.media} />
+              <EntryMediaView media={entry.media} />
             </motion.div>
           )}
-          {/* The tile draws its divider in; the open copy skips the paint-in, so its rule is static. */}
-          {onSelect ? (
-            <AnimatedLine horizontal borderWidth={2.5} className={styles.line} />
-          ) : (
-            <div className={styles.rule} />
-          )}
-          <motion.div layoutId="body" className={styles.body} transition={T.CONTENT}>
-            {project.description.map((line) => (
+          {entry.media &&
+            (isTile ? (
+              <AnimatedLine horizontal borderWidth={BORDER} className={styles.line} />
+            ) : (
+              <div className={styles.rule} />
+            ))}
+          <motion.div
+            layoutId="body"
+            className={styles.body}
+            transition={T.CONTENT}
+            variants={stagger}
+          >
+            {entry.subtitle && (
+              <motion.h3 layout="position" transition={T.CONTENT}>
+                <TypewriterText text={entry.subtitle} />
+              </motion.h3>
+            )}
+            {entry.description.map((line) => (
               <motion.p key={line} layout="position" transition={T.CONTENT}>
-                {line}
+                <TypewriterText text={line} staggerChildren={0.004} />
               </motion.p>
             ))}
             {isOpen && (
@@ -105,24 +127,24 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: T.DETAILS_ANIMATE }}
               >
-                {project.blurb && <p>{project.blurb}</p>}
-                {!!project.tools?.length && (
+                {entry.blurb && <p>{entry.blurb}</p>}
+                {!!entry.tools?.length && (
                   <div className={styles.tools}>
-                    {project.tools.map((t) => (
+                    {entry.tools.map((t) => (
                       <GlitchIconItem key={t.label} Icon={t.Icon}>
                         {t.label}
                       </GlitchIconItem>
                     ))}
                   </div>
                 )}
-                {!!project.panels?.length && <PanelGrid panels={project.panels} />}
+                {!!entry.panels?.length && <PanelGrid panels={entry.panels} />}
               </motion.div>
             )}
           </motion.div>
-        </div>
+        </motion.div>
       </motion.article>
     </LayoutGroup>
   );
 });
 
-export default ProjectCard;
+export default EntryCard;

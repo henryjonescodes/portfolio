@@ -2,8 +2,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
-import ProjectCard from './ProjectCard';
-import styles from './project-carousel.module.scss';
+import EntryCard from './EntryCard';
+import styles from './entry-carousel.module.scss';
 
 type Selection = { id: string; from: CSSProperties; to: CSSProperties };
 
@@ -25,11 +25,11 @@ function boxWithin(
 }
 
 /**
- * Projects as a horizontal row of tiles for phones. Selecting one mounts an overlay copy
+ * Entries as a horizontal row of tiles for phones. Selecting one mounts an overlay copy
  * exactly over it, then opens it to fill the visible scroll area, so `layout` morphs tile to
  * page; closing morphs back and unmounts when the layout animation completes.
  */
-const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
+const EntryCarousel = ({ entries }: { entries: EntryData[] }) => {
   const { TRANSITIONS } = useAnimations();
   const rootRef = useRef<HTMLDivElement>(null);
   const rowRef = useRef<HTMLDivElement>(null);
@@ -65,7 +65,7 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
     if (selection) setOpen(true);
   }, [selection]);
 
-  // While a project is open the tiles behind it leave the tab order, focus moves into the
+  // While an entry is open the tiles behind it leave the tab order, focus moves into the
   // dialog, and closing hands focus back to the tile it came from.
   useEffect(() => {
     const row = rowRef.current;
@@ -79,7 +79,7 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
     };
   }, [selection]);
 
-  // Hold the page still while a project is open.
+  // Hold the page still while an entry is open.
   useEffect(() => {
     const scroller = rootRef.current?.closest<HTMLElement>('[data-scroll-root]');
     if (!selection || !scroller) return;
@@ -102,20 +102,20 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
     return () => window.removeEventListener('keydown', onKey);
   }, [open, close]);
 
-  const selected = selection && projects.find((p) => p.id === selection.id);
+  const selected = selection && entries.find((e) => e.id === selection.id);
 
   return (
     <div ref={rootRef} className={styles.carousel}>
       <motion.div ref={rowRef} layoutScroll className={styles.row} variants={variants.row}>
-        {projects.map((project) => (
-          <motion.div key={project.id} className={styles.slot} variants={variants.slot}>
-            <ProjectCard
-              ref={(el) => (cardRefs.current[project.id] = el)}
-              project={project}
-              layoutKey={`${project.id}-tile`}
+        {entries.map((entry) => (
+          <motion.div key={entry.id} className={styles.slot} variants={variants.slot}>
+            <EntryCard
+              ref={(el) => (cardRefs.current[entry.id] = el)}
+              entry={entry}
+              layoutKey={`${entry.id}-tile`}
               isOpen={false}
-              hidden={selection?.id === project.id}
-              onSelect={() => select(project.id)}
+              hidden={selection?.id === entry.id}
+              onSelect={() => select(entry.id)}
             />
           </motion.div>
         ))}
@@ -136,10 +136,10 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
             initial={false}
             animate="open"
           >
-            <ProjectCard
+            <EntryCard
               ref={openRef}
               key={selection.id}
-              project={selected}
+              entry={selected}
               layoutKey={selection.id}
               isOpen={open}
               onClose={close}
@@ -154,4 +154,4 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
   );
 };
 
-export default ProjectCarousel;
+export default EntryCarousel;

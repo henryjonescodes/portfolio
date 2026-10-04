@@ -5,7 +5,11 @@ import PageContents from '@components/Page/PageContents';
 import TypewriterText from '@components/TypewriterText';
 import { experienceData, experienceOrder } from '@data/experience';
 import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
+import EntryCarousel from '@components/EntryCarousel';
+import { useAsCarousel } from '@components/EntryCarousel/useAsCarousel';
 import styles from './experience.module.scss';
+
+const experienceList = experienceOrder.map((id) => experienceData[id]);
 
 const experienceVariants = {
   animate: {
@@ -17,6 +21,7 @@ const experienceVariants = {
 
 const Experience = () => {
   const { openModal, selectedEntry } = useExperienceEntryModal();
+  const asCarousel = useAsCarousel();
 
   // Create refs for each entry
   const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
@@ -30,25 +35,26 @@ const Experience = () => {
   );
 
   return (
-    <PageContents key={'experience'} className={styles.experience}>
+    <PageContents key={'experience'} className={styles.experience} fill={asCarousel}>
       <motion.div variants={experienceVariants} className={styles.content}>
         <motion.h1>
           <TypewriterText text={'Experience'} staggerChildren={0.05} />
         </motion.h1>
 
-        {experienceOrder.map((id) => {
-          const isSelected = selectedEntry?.id === id;
-          return (
+        {asCarousel ? (
+          <EntryCarousel entries={experienceList} />
+        ) : (
+          experienceOrder.map((id) => (
             <ExperienceEntry
               key={`${id}-inList`}
               data={experienceData[id]}
               entryRef={entryRefs.current[id]}
               onClick={() => openModal(experienceData[id], entryRefs.current[id])}
               inList={true}
-              isSelected={isSelected}
+              isSelected={selectedEntry?.id === id}
             />
-          );
-        })}
+          ))
+        )}
       </motion.div>
     </PageContents>
   );

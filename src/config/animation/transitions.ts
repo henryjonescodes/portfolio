@@ -311,6 +311,15 @@ export const TRANSITIONS_CONFIG = {
         'Delay between cards appearing',
       ),
     },
+    TILE_STAGGER: {
+      staggerChildren: tune(
+        'COMPONENT',
+        0.15,
+        F,
+        'Carousel > Tile Content Stagger',
+        'Delay between the parts of a tile painting in',
+      ),
+    },
     CARD: {
       duration: tune(
         'MODAL',
