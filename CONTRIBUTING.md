@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:52 UTC · 10 live branches · 0 PRs open · 19 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:54 UTC · 10 live branches · 0 PRs open · 19 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:52 UTC by `bw board` on `feat/control-panel` |
+| Generated | 2026-10-04 20:54 UTC by `bw board` on `entry/window` |
 | Trunk | `staging` |
 | Live branches | 10 |
 | Open PRs | none |
@@ -18,7 +18,7 @@
 flowchart LR
   n_staging([staging])
   n_feat_entry_tabs([feat/entry-tabs])
-  n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/6<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
+  n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 2/6<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
   n_entry_cleanup["<b>Tidy after the entry merge</b><br/>entry/cleanup<br/>planned · 0/2<br/><i>next: Merge carousel.spec into modal.spec; …</i>"]
@@ -31,13 +31,13 @@ flowchart LR
   class n_entry_open planned
   n_entry_list --> n_entry_open
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
-  class n_entry_window planned
+  class n_entry_window planned,current
   n_staging --> n_entry_window
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
   n_feat_control_panel["<b>A control panel for colour, type and effects</b><br/>feat/control-panel<br/>planned · 0/8 · 🙋 3<br/><i>next: 2D knob, mini slider and key controls…</i>"]
-  class n_feat_control_panel planned,current
+  class n_feat_control_panel planned
   n_staging --> n_feat_control_panel
   n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 3/3"]
   class n_fix_about_card planned
@@ -69,19 +69,15 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Let visitors play with the device, and give the model's knobs and buttons a reason to exist outside 3D.
+**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
 
-**What.** A gear in the main nav opens a three-page panel (colour, type, FX) built from a 2D knob, a mini slider and a key. The model's three buttons switch pages and its knobs drive the open page. Settings persist in the URL and local storage.
+**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
 
-**How, next.**
-
-- 2D knob, mini slider and key controls, keyboard and mouse
-- Panel shell from the gear in the nav; pages switch from tabs and the model's buttons
-- Colour page with presets
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/control-panel` |  | planned, local only | 0/8 | 2D knob, mini slider and key controls, keyboard and mouse | 2026-10-control-panel, 0 of 1 |
+| `entry/window` |  | planned, pushed | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
 
 ## 🕘 Just happened
 
@@ -197,7 +193,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Plan | Progress |
 |---|---|
-| [2026-10-control-panel.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-control-panel.md) | 0 of 1 branches done |
+| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
+| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 0 of 4 branches done |
 | [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -207,18 +204,18 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
+| `bw/inbox` | One inbox for the owner's answers | planned |  | 2/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/5 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` | One window for every open entry | planned |  | 6/6 | 8 | pushed |  |
+| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 8 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/control-panel` ◀ | A control panel for colour, type and effects | planned |  | 0/8 | 0 | local only | 2D knob, mini slider and key controls, keyboard and mouse |
+| `feat/control-panel` | A control panel for colour, type and effects | planned |  | 0/8 | 0 | local only | 2D knob, mini slider and key controls, keyboard and mouse |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 7 | pushed |  |
 | `fix/fullscreen-url` | Full screen survives a refresh | planned |  | 1/1 | 11 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
-<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
+<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (2/6)</summary>
 
 Every open question and claim across branches is gathered into INBOX.md on the board branch, answerable from GitHub's editor. bw pulls answers back into the right branch's seed as a todo to act on, so the session on that workstream picks it up.
 
@@ -226,8 +223,8 @@ Every open question and claim across branches is gathered into INBOX.md on the b
 - [ ] bw ingests answers (from origin/board) into seeds and logs them
 - [ ] branchwork-loop applies the inbox at the start of a session
 - [ ] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
-- [ ] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
-- [ ] Ambient branchwork-quiz skill: offer a quiz at natural pauses without blocking, ask the juiciest few open questions (max 4) with AskUserQuestion, record answers with bw answer
+- [x] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
+- [x] Ambient branchwork-quiz skill: offer a quiz at natural pauses without blocking, ask the juiciest few open questions (max 4) with AskUserQuestion, record answers with bw answer
 
 </details>
 
