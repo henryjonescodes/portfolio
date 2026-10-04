@@ -27,3 +27,4 @@ Finish the animation cleanup the refactor started, behind the e2e net and the la
 - 2026-10-04: done "Replace setTimeout sequencing in PageContents, Page, MapSlider, ZoomContext with when/delayChildren or cleaned-up effects" at b6bb82a5
 - 2026-10-04: done "Memoize ExperienceEntry variants; drop no-op variants and dead commented code" at 553bce2e
 - 2026-10-04: done "Walk the regression checklist in 3D and lite mode" at 0c960ede
+- 2026-10-04: Checklist walked via e2e plus lite-mode visual check; reduced-motion and network throttle not exercised
