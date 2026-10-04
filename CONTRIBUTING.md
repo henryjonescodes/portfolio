@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:50 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:51 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:50 UTC by `bw board` on `fix/fullscreen-url` |
+| Generated | 2026-10-04 20:51 UTC by `bw board` on `fix/fullscreen-url` |
 | Trunk | `staging` |
 | Live branches | 9 |
 | Open PRs | none |
@@ -39,7 +39,7 @@ flowchart LR
   n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 3/3"]
   class n_fix_about_card planned
   n_staging --> n_fix_about_card
-  n_fix_fullscreen_url["<b>Full screen survives a refresh</b><br/>fix/fullscreen-url<br/>planned · 0/1<br/><i>next: view=full read on load and kept in sy…</i>"]
+  n_fix_fullscreen_url["<b>Full screen survives a refresh</b><br/>fix/fullscreen-url<br/>planned · 1/1"]
   class n_fix_fullscreen_url planned,current
   n_staging --> n_fix_fullscreen_url
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
@@ -68,29 +68,28 @@ flowchart LR
 
 **What.** The full-screen view is in the URL (?view=full), so a refresh or a shared link keeps it instead of relaunching into the 3D device.
 
-**How, next.**
-
-- view=full read on load and kept in sync with the toggle
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `fix/fullscreen-url` |  | planned, local only | 0/1 | view=full read on load and kept in sync with the toggle |  |
+| `fix/fullscreen-url` |  | planned, local only | 1/1 | nothing open |  |
 
 ## 🕘 Just happened
 
-**fix(about): readable skill bars; email opens mail, not a blank tab** · 2026-10-04 20:49 · `fix/about-card` · `267bbf6a`
+**fix(view): full screen lives in the URL, so a refresh keeps it** · 2026-10-04 20:51 · `fix/fullscreen-url` · `85092fc6`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **fix(about): readable skill bars; email opens mail, not a blank tab** · 20:49 · `fix/about-card` · `267bbf6a`
 - **feat(entries): phone tiles open the shared window, full screen, image first** · 20:47 · `entry/window` · `c69e8718`
 - **fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 20:31 · `fix/fullscreen-url` · `ed401577`
-- **fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 20:28 · `fix/about-card` · `250dbac3`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:28 | fix(about): NYC, tags on one row, fixed-width sliders, two rows of links | `fix/about-card` · `250dbac3` |
 | 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | `fix/fullscreen-url` · `d6f7dca5` |
-| 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | `fix/fullscreen-url` · `21cece7c` |
+| 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | [#83](https://github.com/henryjonescodes/portfolio/pull/83) · `21cece7c` |
 | 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | `fix/about-card` · `e0c96483` |
 | 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6` |
 | 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a` |
@@ -194,7 +193,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/window` | One window for every open entry | planned |  | 6/6 | 8 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 7 | pushed |  |
-| `fix/fullscreen-url` ◀ | Full screen survives a refresh | planned |  | 0/1 | 10 | local only | view=full read on load and kept in sync with the toggle |
+| `fix/fullscreen-url` ◀ | Full screen survives a refresh | planned |  | 1/1 | 11 | local only |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
@@ -282,11 +281,11 @@ The About card says NYC, keeps its two info lines on one row, gives the skill sl
 
 </details>
 
-<details><summary><code>fix/fullscreen-url</code>: Full screen survives a refresh (0/1)</summary>
+<details><summary><code>fix/fullscreen-url</code>: Full screen survives a refresh (1/1)</summary>
 
 The full-screen view is in the URL (?view=full), so a refresh or a shared link keeps it instead of relaunching into the 3D device.
 
-- [ ] view=full read on load and kept in sync with the toggle
+- [x] view=full read on load and kept in sync with the toggle
 
 </details>
 
