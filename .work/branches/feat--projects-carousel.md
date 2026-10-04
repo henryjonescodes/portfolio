@@ -13,7 +13,6 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 
 ## Todo
 
-- [x] Card-to-page morph with tunable base duration and multipliers
 - [x] e2e test for the morph and close
 - [?] Design review of the carousel in 3D and lite mode
 - [x] Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)
@@ -38,3 +37,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: Design feedback: overlaid text unreadable on noisy media, unused width, open view should be opaque
 - 2026-10-04: dropped "Extend EntryData with color, backgroundImage, logo"
 - 2026-10-04: dropped "Carousel row with layoutScroll and mobile scroll-snap"
+- 2026-10-04: dropped "Card-to-page morph with tunable base duration and multipliers"
