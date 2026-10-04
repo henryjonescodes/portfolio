@@ -13,7 +13,6 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 
 ## Todo
 
-- [x] Extend EntryData with color, backgroundImage, logo
 - [x] Carousel row with layoutScroll and mobile scroll-snap
 - [x] Card-to-page morph with tunable base duration and multipliers
 - [x] e2e test for the morph and close
@@ -38,3 +37,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: done "Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)" at f0c814ca
 - 2026-10-04: done "Remove the now unused projects path from ExperienceEntry (url and media children)" at 04abdffc
 - 2026-10-04: Design feedback: overlaid text unreadable on noisy media, unused width, open view should be opaque
+- 2026-10-04: dropped "Extend EntryData with color, backgroundImage, logo"
