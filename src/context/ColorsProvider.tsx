@@ -1,76 +1,15 @@
-// ColorsContext.tsx
-import { colord, extend } from 'colord';
-import mixPlugin from 'colord/plugins/mix';
-import React, { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import useDebounceEffect from '@hooks/useDebouncedEffect';
-import { colors as defaultColors } from '@styles/sass-variables';
-
-// Extend colord with plugins
-extend([mixPlugin]);
-
-// Define types for color values and control options
-type ColorHex = `#${string}`;
-
-// Primary hues interface
-interface PrimaryHues {
-  foregroundPrimary: number;
-  accentPrimary: number;
-  backgroundPrimary: number;
-}
-
-// Derived color keys for extrapolated colors
-interface DerivedColors {
-  'foreground-secondary': ColorHex;
-  'foreground-tertiary': ColorHex;
-  'foreground-quaternary': ColorHex;
-  'accent-secondary': ColorHex;
-  'accent-tertiary': ColorHex;
-  'background-secondary': ColorHex;
-  'background-tertiary': ColorHex;
-}
-
-// Functions to adjust saturation and lightness
-const adjustSaturation = (color: string, amount: number): ColorHex => {
-  return colord(color)
-    .saturate(amount / 100)
-    .toHex() as ColorHex;
-};
-
-const adjustLightness = (color: string, amount: number): ColorHex => {
-  return colord(color)
-    .lighten(amount / 100)
-    .toHex() as ColorHex;
-};
-
-// Extract default HSL values from default colors
-const defaultForegroundColor = defaultColors['foreground-primary'];
-const defaultAccentColor = defaultColors['accent-primary'];
-const defaultBackgroundColor = defaultColors['background-primary'];
-
-const defaultForegroundHSL = colord(defaultForegroundColor).toHsl();
-const defaultAccentHSL = colord(defaultAccentColor).toHsl();
-const defaultBackgroundHSL = colord(defaultBackgroundColor).toHsl();
-
-// Define the shape of your context
-type ColorsContextType = {
-  primaryHues: PrimaryHues;
-  setPrimaryHues: React.Dispatch<React.SetStateAction<PrimaryHues>>;
-  resetColors: () => void;
-};
-
-// Provide default values for the context
-const defaultContextValue: ColorsContextType = {
-  primaryHues: {
-    foregroundPrimary: defaultForegroundHSL.h,
-    accentPrimary: defaultAccentHSL.h,
-    backgroundPrimary: defaultBackgroundHSL.h,
-  },
-  setPrimaryHues: () => {},
-  resetColors: () => {},
-};
-
-// Create the context
-const ColorsContext = createContext<ColorsContextType>(defaultContextValue);
+import { adjustLightness, adjustSaturation, type ColorHex } from '@utils/color';
+import { colord } from 'colord';
+import React, { ReactNode, useCallback, useMemo, useState } from 'react';
+import {
+  ColorsContext,
+  defaultAccentHSL,
+  defaultBackgroundHSL,
+  defaultForegroundHSL,
+  DerivedColors,
+  PrimaryHues,
+} from './ColorsContext';
 
 // Create the Provider component
 export const ColorsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -149,13 +88,4 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       {children}
     </ColorsContext.Provider>
   );
-};
-
-// Custom hook to consume the ColorsContext
-export const useColors = () => {
-  const context = useContext(ColorsContext);
-  if (!context) {
-    throw new Error('useColors must be used within a ColorsProvider');
-  }
-  return context;
 };

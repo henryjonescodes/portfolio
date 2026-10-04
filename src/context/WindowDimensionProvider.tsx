@@ -1,25 +1,11 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode, useMemo } from 'react';
 import {
-  screenSize,
-  screenWidths,
   ScreenWidthKey,
   ScreenWidthZoomPositions,
-  ZoomLevel,
+  screenWidths,
 } from '@styles/layout.constants.ts';
 import { debugLog } from '@utils/debug';
-
-// Define the context type
-type ScreenSizeType = {
-  width: number;
-  height: number;
-};
-type WindowDimensionContextProps = {
-  screenWidthKey: ScreenWidthKey;
-  zoomPositions: ZoomLevel;
-} & ScreenSizeType;
-
-// Create the context with default values
-const WindowDimensionContext = createContext<WindowDimensionContextProps | undefined>(undefined);
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
+import { ScreenSizeType, WindowDimensionContext } from './WindowDimensionContext';
 
 // Define a provider component
 export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -100,19 +86,4 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({ chi
       {children}
     </WindowDimensionContext.Provider>
   );
-};
-
-// Custom hook to use the screen size context
-export const useWindowDimensions = (): WindowDimensionContextProps => {
-  const context = useContext(WindowDimensionContext);
-  // TODO: kill the defaults
-  if (!context) {
-    return {
-      width: screenSize.width,
-      height: screenSize.height,
-      screenWidthKey: 'default',
-      zoomPositions: ScreenWidthZoomPositions.default,
-    };
-  }
-  return context;
 };

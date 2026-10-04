@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
-import { WindowDimensionProvider } from './WindowDimensionContext';
-import { LoadingProvider } from './LoadingContext';
-import { SettingsProvider } from './SettingsContext';
-import { ZoomProvider } from './ZoomContext';
-import { ColorsProvider } from './ColorsContext';
-import { InteractionProvider } from './InteractionContext';
-import { AnimationProvider } from './AnimationContext';
+import { WindowDimensionProvider } from './WindowDimensionProvider';
+import { LoadingProvider } from './LoadingProvider';
+import { SettingsProvider } from './SettingsProvider';
+import { ZoomProvider } from './ZoomProvider';
+import { ColorsProvider } from './ColorsProvider';
+import { InteractionProvider } from './InteractionProvider';
+import { AnimationProvider } from './AnimationProvider';
 import { DebugTools } from '../debug';
 
 /**

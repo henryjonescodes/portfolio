@@ -1,4 +1,3 @@
-// Scene.tsx
 import CustomControls from '@components/3D/CustomControls';
 import LoadingHelper from '@components/Loading/LoadingHelper';
 import { useSettings } from '@context/SettingsContext';

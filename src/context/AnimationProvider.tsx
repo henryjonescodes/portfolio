@@ -1,14 +1,11 @@
-import { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import {
   DEFAULT_ANIMATIONS,
   DEFAULT_TUNABLE_VALUES,
   resolveAnimations,
-  type ResolvedAnimations,
   type TunableValues,
 } from '@config/animation';
-
-const AnimationContext = createContext<ResolvedAnimations>(DEFAULT_ANIMATIONS);
-const AnimationTuningContext = createContext<(values: TunableValues) => void>(() => {});
+import { ReactNode, useCallback, useMemo, useState } from 'react';
+import { AnimationContext, AnimationTuningContext } from './AnimationContext';
 
 const sameValues = (a: TunableValues, b: TunableValues) =>
   Object.keys(b).every((key) => a[key] === b[key]);
@@ -35,7 +32,3 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     </AnimationTuningContext.Provider>
   );
 };
-
-export const useAnimations = () => useContext(AnimationContext);
-
-export const useAnimationTuning = () => useContext(AnimationTuningContext);

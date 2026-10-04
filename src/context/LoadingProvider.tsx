@@ -1,35 +1,10 @@
 import Loading from '@components/Loading';
-import React, { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
-import { isMobile } from 'react-device-detect';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { useAnimations } from '@context/AnimationContext';
 import { debugLog } from '@utils/debug';
-
-type LoadingStates = undefined | 'loading' | 'loaded' | 'complete';
-
-interface LoadingContextType {
-  liteMode: boolean;
-  progress: number;
-  startLoading: () => void;
-  finishLoading: () => void;
-  loadingState: LoadingStates;
-  setProgress: (value: number) => void;
-  firstPageLoad: boolean;
-  setFirstPageLoad: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const defaultLoading: LoadingContextType = {
-  liteMode: false,
-  progress: 0,
-  startLoading: () => {},
-  finishLoading: () => {},
-  loadingState: undefined,
-  setProgress: () => {},
-  firstPageLoad: true,
-  setFirstPageLoad: () => {},
-};
-
-const LoadingContext = createContext<LoadingContextType>(defaultLoading);
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { LoadingContext, LoadingStates } from './LoadingContext';
 
 interface LoadingProviderProps {
   children: ReactNode;
@@ -160,12 +135,4 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
       {children}
     </LoadingContext.Provider>
   );
-};
-
-export const useLoading = (): LoadingContextType => {
-  const context = useContext(LoadingContext);
-  if (!context) {
-    throw new Error('useLoading must be used within a LoadingProvider');
-  }
-  return context;
 };

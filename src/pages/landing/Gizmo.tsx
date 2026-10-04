@@ -1,4 +1,3 @@
-// Scene.tsx
 import { SiteMixer } from '@components/3D/SiteMixer';
 import { useZoom } from '@context/ZoomContext';
 import { PresentationControls } from '@react-three/drei';

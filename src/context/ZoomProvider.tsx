@@ -1,23 +1,10 @@
-// ZoomContext.tsx
-import React, { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
+import { useAnimations } from '@context/AnimationContext';
+import { debugLog } from '@utils/debug';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLoading } from './LoadingContext';
-import { useAnimations } from '@context/AnimationContext';
 import { useSettings } from './SettingsContext';
-import { debugLog } from '@utils/debug';
-
-type handheldZoomType = 'handheld' | 'info' | 'wide';
-type zoomLevelType = 'fullscreen' | handheldZoomType;
-
-interface ZoomContextType {
-  zoomLevel: zoomLevelType;
-  setZoomLevel: React.Dispatch<React.SetStateAction<zoomLevelType>>;
-  handHeldZoomLevel: React.MutableRefObject<handheldZoomType>;
-  toggleFullscreenZoomPosition: () => void;
-  toggleInfoModeZoomPosition: () => void;
-}
-
-const ZoomContext = createContext<ZoomContextType | undefined>(undefined);
+import { handheldZoomType, ZoomContext, zoomLevelType } from './ZoomContext';
 
 interface ZoomProviderProps {
   children: ReactNode;
@@ -98,12 +85,4 @@ export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
       {children}
     </ZoomContext.Provider>
   );
-};
-
-export const useZoom = (): ZoomContextType => {
-  const context = useContext(ZoomContext);
-  if (!context) {
-    throw new Error('useZoom must be used within a ZoomProvider');
-  }
-  return context;
 };

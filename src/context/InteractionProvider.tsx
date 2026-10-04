@@ -1,17 +1,7 @@
-// InteractionContext.tsx
-import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
 import { debugLog } from '@utils/debug';
-
-type InteractionContextType = {
-  activeObject: string | null;
-  setActiveObject: (objectName: string | null) => void;
-};
-
-export const InteractionContext = createContext<InteractionContextType>({
-  activeObject: null,
-  setActiveObject: () => {},
-});
+import React, { useContext, useEffect, useState } from 'react';
+import { InteractionContext } from './InteractionContext';
 
 export const InteractionProvider = ({ children }: { children: React.ReactNode }) => {
   const [activeObject, setActiveObject] = useState<string | null>(null);

@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
-import { ExperienceEntryModalProvider } from '@components/ExperienceEntry/ExperienceEntryModalContext';
-import { PageProvider } from '@context/PageContext';
+import { ExperienceEntryModalProvider } from '@components/ExperienceEntry/ExperienceEntryModalProvider';
+import { PageProvider } from '@context/PageProvider';
 
 /**
  * Page-level context providers.

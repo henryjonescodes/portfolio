@@ -1,5 +1,3 @@
-// designConstants.ts
-
 import { Vector3 } from '$three';
 
 export const screenSize = {

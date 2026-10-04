@@ -2,7 +2,7 @@ import { animated, useSpring } from '@react-spring/three';
 import { useAnimations } from '@context/AnimationContext';
 import { useEffect, useState } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
-import { InteractiveElement, InteractiveElementProps } from '@context/InteractionContext';
+import { InteractiveElement, InteractiveElementProps } from '@context/InteractionProvider';
 
 type ButtonProps = {
   position?: [number, number, number];

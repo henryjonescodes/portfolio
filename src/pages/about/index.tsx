@@ -14,7 +14,7 @@ import PageContents from '@components/Page/PageContents';
 import AnimatedLine from '@components/AnimatedLine';
 import GlitchIcon from '@components/GlitchIcon';
 import Blurb from '@components/MapViewer/Blurb';
-import { MapProvider } from '@components/MapViewer/MapContext';
+import { MapProvider } from '@components/MapViewer/MapProvider';
 import { usePage } from '@context/PageContext';
 import { useColors } from '@context/ColorsContext';
 import { useWindowDimensions } from '@context/WindowDimensionContext';

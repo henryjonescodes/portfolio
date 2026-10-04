@@ -1,4 +1,3 @@
-// CustomControls.tsx
 import { useFrame, useThree } from '@react-three/fiber';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useSpring } from '@react-spring/three';

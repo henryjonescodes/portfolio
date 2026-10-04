@@ -1,10 +1,7 @@
 import React, { useContext, useEffect, useRef, useState, useCallback } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
-import {
-  InteractionContext,
-  InteractiveElement,
-  InteractiveElementProps,
-} from '@context/InteractionContext';
+import { InteractionContext } from '@context/InteractionContext';
+import { InteractiveElement, InteractiveElementProps } from '@context/InteractionProvider';
 
 type KnobProps = {
   position?: [number, number, number];

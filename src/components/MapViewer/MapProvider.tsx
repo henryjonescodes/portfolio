@@ -1,21 +1,6 @@
-import React, { createContext, useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { locationData, LocationPinKeys } from './map-viewer.contents';
-
-interface MapContextProps {
-  currentKey: LocationPinKeys | null;
-  setCurrentKey: (key: LocationPinKeys | null, isUserAction?: boolean) => void;
-  previousKey: LocationPinKeys | null;
-  locationData: typeof locationData;
-}
-
-const defaultMapContext: MapContextProps = {
-  currentKey: null,
-  setCurrentKey: () => {},
-  previousKey: null,
-  locationData: locationData,
-};
-
-export const MapContext = createContext<MapContextProps>(defaultMapContext);
+import { MapContext } from './MapContext';
 
 export const MapProvider = ({ children }: { children: React.ReactElement }) => {
   const [currentKey, setCurrentKeyState] = useState<LocationPinKeys | null>('nyc');
