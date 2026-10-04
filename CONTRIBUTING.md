@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:43 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:43 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/cleanup` |
 | Trunk | `staging` |
-| Live branches | 9 |
+| Live branches | 10 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Merged, not yet landed | `feat/entry-tabs` (run `bw land <branch> --into <next>`) |
@@ -21,6 +21,9 @@ flowchart LR
   n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/6<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
+  n_entry_cleanup["<b>Tidy after the entry merge</b><br/>entry/cleanup<br/>planned · 0/2<br/><i>next: Merge carousel.spec into modal.spec; …</i>"]
+  class n_entry_cleanup planned,current
+  n_entry_open --> n_entry_cleanup
   n_entry_list["<b>One list that is a carousel on phones</b><br/>entry/list<br/>planned · 0/3<br/><i>next: EntryList with the list and tile pres…</i>"]
   class n_entry_list planned
   n_entry_window --> n_entry_list
@@ -66,7 +69,16 @@ flowchart LR
 
 ## 🟢 Happening now
 
-Nothing checked out or active.
+**What.** Specs, skills and docs describe one entry component.
+
+**How, next.**
+
+- Merge carousel.spec into modal.spec; drop dead styles and tunables
+- Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `entry/cleanup` |  | planned, local only | 0/2 | Merge carousel.spec into modal.spec; drop dead styles and tunables |  |
 
 ## 🕘 Just happened
 
@@ -181,6 +193,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
+| `entry/cleanup` ◀ | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `entry/window` | One window for every open entry | planned |  | 6/6 | 7 | local only |  |
@@ -200,6 +213,15 @@ Every open question and claim across branches is gathered into INBOX.md on the b
 - [ ] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
 - [ ] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
 - [ ] Ambient branchwork-quiz skill: offer a quiz at natural pauses without blocking, ask the juiciest few open questions (max 4) with AskUserQuestion, record answers with bw answer
+
+</details>
+
+<details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
+
+Specs, skills and docs describe one entry component.
+
+- [ ] Merge carousel.spec into modal.spec; drop dead styles and tunables
+- [ ] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
 
 </details>
 
