@@ -3,7 +3,7 @@ branch: anim/motion-idioms
 parent: modalize-leva-work
 status: active
 title: Framer Motion idioms pass
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/58
 updated: 2026-10-04
 ---
 
