@@ -14,7 +14,7 @@ Opening the entry modal runs every layout change on one timing, so the inner con
 ## Todo
 
 - [x] Capture open and close frames as a baseline
-- [ ] One MotionConfig timing for every layout animation in the entry; drop per-element layout transitions
+- [x] One MotionConfig timing for every layout animation in the entry; drop per-element layout transitions
 - [ ] e2e: inner content tracks the container during the open morph
 - [?] Feel check of the new open in lite and 3D
 
@@ -22,3 +22,4 @@ Opening the entry modal runs every layout change on one timing, so the inner con
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Capture open and close frames as a baseline" at 53a1442a
+- 2026-10-04: done "One MotionConfig timing for every layout animation in the entry; drop per-element layout transitions" at 73dfeb80
