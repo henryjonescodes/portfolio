@@ -3,7 +3,7 @@ branch: a11y/pass
 parent: feat/mobile-carousel
 status: review
 title: Accessibility pass
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/68
 updated: 2026-10-04
 ---
 
