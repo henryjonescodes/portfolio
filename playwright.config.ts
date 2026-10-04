@@ -10,7 +10,7 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   // Animation timing assertions are sensitive to CPU contention.
-  workers: 2,
+  workers: process.env.CI ? 1 : 2,
   reporter: [['list']],
   use: {
     baseURL: `http://localhost:${PORT}`,
