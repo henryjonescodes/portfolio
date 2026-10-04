@@ -64,3 +64,15 @@ test('about links to the links page and keeps the query', async ({ page }) => {
   await expect(page).toHaveURL(/\/links\?lite=true$/);
   await expect(page.getByRole('navigation', { name: 'Links' })).toBeVisible();
 });
+
+test('links on the map open their entry over the about page', async ({ page }) => {
+  await page.goto('/about?lite=true');
+  const link = page.locator('[class*="entryLink"]').first();
+  await expect(link).toBeVisible({ timeout: 10_000 });
+  await link.click();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(page).toHaveURL(/entry=/);
+  await dialog.getByRole('button', { name: 'Close' }).click();
+  await expect(dialog).toHaveCount(0);
+});

@@ -344,7 +344,8 @@ $line-selected-width: 5px;
           top: 50%;
           opacity: 0;
 
-          > span {
+          > span,
+          > .entryLink {
             width: 100%;
             display: flex;
             gap: 4px;
@@ -366,6 +367,13 @@ $line-selected-width: 5px;
               color: var(--foreground-tertiary);
             }
 
+            // A highlight that opens its entry reads as a link.
+            &.entryLink h5 {
+              color: var(--accent-primary);
+              text-decoration: underline dotted;
+              text-underline-offset: 3px;
+            }
+
             svg {
               svg,
               path {
@@ -383,6 +391,8 @@ $line-selected-width: 5px;
             position: absolute;
             height: 100%;
             width: 100%;
+            // The corner brackets frame the details without covering their links.
+            pointer-events: none;
 
             > svg {
               position: absolute;

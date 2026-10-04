@@ -52,15 +52,18 @@ export type ExperienceEntryProps = {
   pageOpen?: boolean;
   inList?: boolean;
   isSelected?: boolean;
-  overlayStyle?: React.CSSProperties;
-  dateString?: string;
+  /** Renders as the modal's window (drag, expand) instead of in place. */
+  modal?: boolean;
+  /** Positions the modal's window; the provider sets it over the source while opening and closing. */
+  windowStyle?: React.CSSProperties;
+  onLayoutAnimationComplete?: () => void;
   onClose?: () => void;
   /** Open entry fills the overlay instead of its cozy size. */
   expanded?: boolean;
   onToggleExpand?: () => void;
   effortId?: string | null;
   onSelectEffort?: (effortId: string | null) => void;
-  onMention?: (entryId: string, effortId: string) => void;
+  onMention?: (entryId: string, effortId: string | null, source?: HTMLElement) => void;
 } & (
   | {
       url?: string;

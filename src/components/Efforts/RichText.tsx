@@ -1,16 +1,17 @@
+import SourceButton from '@components/EntryLink/SourceButton';
 import TypewriterText from '@components/TypewriterText';
 import styles from './efforts.module.scss';
 
-const MENTION = /\{\{([\w-]+)\/([\w-]+)\|([^}]+)\}\}/g;
+const MENTION = /\{\{([\w-]+)(?:\/([\w-]+))?\|([^}]+)\}\}/g;
 
-type Segment = { text: string; mention?: { entryId: string; effortId: string } };
+type Segment = { text: string; mention?: { entryId: string; effortId: string | null } };
 
 function parseMentions(text: string): Segment[] {
   const out: Segment[] = [];
   let last = 0;
   for (const m of text.matchAll(MENTION)) {
     if (m.index > last) out.push({ text: text.slice(last, m.index) });
-    out.push({ text: m[3], mention: { entryId: m[1], effortId: m[2] } });
+    out.push({ text: m[3], mention: { entryId: m[1], effortId: m[2] ?? null } });
     last = m.index + m[0].length;
   }
   if (last < text.length) out.push({ text: text.slice(last) });
@@ -20,11 +21,11 @@ function parseMentions(text: string): Segment[] {
 type RichTextProps = {
   text: string;
   /** Mentions become buttons; without it they read as highlighted text (inside a tile, say). */
-  onMention?: (entryId: string, effortId: string) => void;
+  onMention?: (entryId: string, effortId: string | null, source?: HTMLElement) => void;
   staggerChildren?: number;
 };
 
-/** Typed-in prose whose `{{entry/effort|text}}` mentions open that effort. */
+/** Typed-in prose whose `{{entry|text}}` and `{{entry/effort|text}}` mentions open what they name. */
 const RichText = ({ text, onMention, staggerChildren }: RichTextProps) => (
   <>
     {parseMentions(text).map(({ text: part, mention }, i) => {
@@ -37,17 +38,13 @@ const RichText = ({ text, onMention, staggerChildren }: RichTextProps) => (
           </span>
         );
       return (
-        <button
+        <SourceButton
           key={i}
-          type="button"
           className={styles.mention}
-          onClick={(e) => {
-            e.stopPropagation();
-            onMention(mention.entryId, mention.effortId);
-          }}
+          onActivate={(el) => onMention(mention.entryId, mention.effortId, el)}
         >
           {typed}
-        </button>
+        </SourceButton>
       );
     })}
   </>

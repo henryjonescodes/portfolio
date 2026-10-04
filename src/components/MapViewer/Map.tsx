@@ -7,6 +7,7 @@ import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import AnimatedLine from '@components/AnimatedLine';
 import { useAnimations } from '@context/AnimationContext';
 import { usePage } from '@context/PageContext';
+import EntryLink from '@components/EntryLink';
 import { MapContext } from './MapContext';
 import styles from './map-components.module.scss';
 import MapSlider from './MapSlider';
@@ -77,12 +78,25 @@ const Map = () => {
                   <motion.span>
                     <motion.h4 role="none">{title ?? ''}</motion.h4>
                   </motion.span>
-                  {highlights?.map((highlight, index) => (
-                    <motion.span key={index}>
-                      <highlight.icon />
-                      <motion.h5 role="none">{highlight.text}</motion.h5>
-                    </motion.span>
-                  ))}
+                  {highlights?.map((highlight, index) => {
+                    const content = (
+                      <>
+                        <highlight.icon />
+                        <motion.h5 role="none">{highlight.text}</motion.h5>
+                      </>
+                    );
+                    return highlight.entryId ? (
+                      <EntryLink
+                        key={index}
+                        entryId={highlight.entryId}
+                        className={styles.entryLink}
+                      >
+                        {content}
+                      </EntryLink>
+                    ) : (
+                      <motion.span key={index}>{content}</motion.span>
+                    );
+                  })}
                   <motion.div>
                     <Corner />
                     <Corner />
@@ -104,7 +118,7 @@ const Map = () => {
               />
             ))}
           </motion.div>
-          <USA className={styles.usa} />;
+          <USA className={styles.usa} />
           <motion.img src={'images/grid.png'} className={styles.grid} alt="" />
         </motion.div>
       </motion.div>

@@ -191,9 +191,17 @@
 }
 
 .modalWrapper {
-  // Full width, so switching tabs changes only the height.
+  // Full width, so switching tabs changes only the height. While it sits over its source it
+  // is absolutely placed, and the window fills it.
+  display: flex;
+  flex-direction: column;
   width: 100%;
   margin: auto;
+
+  > .entry {
+    flex: 1;
+    margin-bottom: 0;
+  }
 
   &Expanded {
     flex: 1;

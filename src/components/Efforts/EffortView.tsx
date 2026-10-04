@@ -6,7 +6,7 @@ import styles from './efforts.module.scss';
 
 type EffortViewProps = {
   effort: Effort;
-  onMention?: (entryId: string, effortId: string) => void;
+  onMention?: (entryId: string, effortId: string | null, source?: HTMLElement) => void;
 };
 
 /** One effort: its title and summary typed in, then its panels. */

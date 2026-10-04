@@ -48,13 +48,13 @@ const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
   const isTile = !!onSelect;
   const date = entry.dateString ?? formatDateRange(entry.startDate, entry.endDate);
   const stagger = { animate: { transition: T.TILE_STAGGER } };
-  const { openEffort } = useExperienceEntryModal();
+  const { openEntry } = useExperienceEntryModal();
   const [effortId, setEffortId] = useState<string | null>(null);
   const effort = isOpen ? entry.efforts?.find((e) => e.id === effortId) : undefined;
   // A mention of this entry's own effort switches tabs; any other opens that entry's modal.
   const onMention = isOpen
-    ? (entryId: string, id: string) =>
-        entryId === entry.id ? setEffortId(id) : openEffort(entryId, id)
+    ? (entryId: string, id: string | null, source?: HTMLElement) =>
+        entryId === entry.id ? setEffortId(id) : openEntry(entryId, id, source)
     : undefined;
 
   return (
