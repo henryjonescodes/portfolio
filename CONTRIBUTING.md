@@ -5,7 +5,7 @@ _Updated 2026-10-04 19:09 UTC on `feat/entry-dock` by `bw board`. Generated; edi
 ```mermaid
 flowchart LR
   n_staging([staging])
-  n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 1/3<br/><i>next: Placeholder media component, labelled…</i>"]
+  n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 2/3<br/><i>next: Placeholders on experience entries an…</i>"]
   class n_feat_entry_dock planned,current
   n_feat_global_modal --> n_feat_entry_dock
   n_feat_global_modal["<b>Inline links that open any modal</b><br/>feat/global-modal<br/>planned · 2/10 · 🙋 8"]
@@ -59,8 +59,8 @@ flowchart LR
 
 ## 🟢 Happening now
 
-- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 1/3  
-  next: Placeholder media component, labelled with what image belongs there
+- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 2/3  
+  next: Placeholders on experience entries and efforts
 
 ## 🕘 Just happened
 
@@ -91,19 +91,19 @@ flowchart LR
 
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
-| `feat/entry-dock` ◀ | planned | 1/3 | 1 | local only | Placeholder media component, labelled with what image belongs there |  |
+| `feat/entry-dock` ◀ | planned | 2/3 | 1 | local only | Placeholders on experience entries and efforts |  |
 | `feat/global-modal` | planned | 2/10 | 6 | pushed | — |  |
 | `feat/shareable-urls` | planned | 2/3 | 3 | pushed | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
 
-<details><summary><b>feat/entry-dock</b>: Effort dock and placeholder media (1/3)</summary>
+<details><summary><b>feat/entry-dock</b>: Effort dock and placeholder media (2/3)</summary>
 
 Open entries switch efforts from a compact retro dock with a sliding indicator instead of big buttons, and every listing shows labelled placeholder media where a specific image belongs, so the owner can see what to supply.
 
 - [x] Dock replaces the effort tab buttons (modal, expanded, phone open view)
-- [ ] Placeholder media component, labelled with what image belongs there
+- [x] Placeholder media component, labelled with what image belongs there
 - [ ] Placeholders on experience entries and efforts
 
 Commits:
