@@ -2,6 +2,7 @@
 import React, { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useLoading } from './LoadingContext';
+import { useAnimations } from '@context/AnimationContext';
 import { useSettings } from './SettingsContext';
 
 export type handheldZoomType = 'handheld' | 'info' | 'wide';
@@ -24,6 +25,9 @@ interface ZoomProviderProps {
 export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
   const { liteMode, startLoading } = useLoading();
   const { setAnimationDisabled, isDebugMode } = useSettings();
+  const { TIMEOUTS } = useAnimations();
+  const reEnableTimer = useRef<ReturnType<typeof setTimeout>>();
+  useEffect(() => () => clearTimeout(reEnableTimer.current), []);
   const location = useLocation();
 
   const [zoomLevel, setZoomLevel] = useState<zoomLevelType>(liteMode ? 'fullscreen' : 'wide');
@@ -77,9 +81,11 @@ export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
       setZoomLevel(handHeldZoomLevel.current);
     }
 
-    setTimeout(() => {
-      setAnimationDisabled(false, false);
-    }, 500);
+    clearTimeout(reEnableTimer.current);
+    reEnableTimer.current = setTimeout(
+      () => setAnimationDisabled(false, false),
+      TIMEOUTS.ZOOM_ANIMATION_LOCK,
+    );
   };
 
   useEffect(() => {

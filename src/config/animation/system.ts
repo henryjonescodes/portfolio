@@ -103,6 +103,13 @@ export const SYSTEM_TUNABLES = {
         'Lite Mode Fallback (ms)',
         'Loading time before falling back to lite mode',
       ),
+      TIMEOUT_ZOOM_ANIMATION_LOCK: tune(
+        undefined,
+        500,
+        { min: 0, max: 3000, step: 50 },
+        'Zoom Animation Lock (ms)',
+        'Page animations stay simplified this long after a fullscreen zoom toggle',
+      ),
       TIMEOUT_USER_INITIATED_FALLBACK: tune(
         undefined,
         30000,

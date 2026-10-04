@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
-import { motion } from 'framer-motion';
+import { animate, motion, type AnimationPlaybackControls } from 'framer-motion';
 import { useAnimations } from '@context/AnimationContext';
 import styles from './map-components.module.scss';
 import { MapContext } from './MapContext';
@@ -30,6 +30,8 @@ const MapSlider = () => {
   const [selectedStop, setSelectedStop] = useState<number | null>(null);
   const [requestedStop, setRequestedStop] = useState<number | null>(null);
   const [bulgingIndex, setBulgingIndex] = useState<number | null>(null);
+  const cascade = useRef<AnimationPlaybackControls>();
+  useEffect(() => () => cascade.current?.stop(), []);
 
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
   // const numStops = stopKeys.length;
@@ -61,23 +63,18 @@ const MapSlider = () => {
     const startIndex = start * 10;
     const endIndex = end * 10;
 
-    const steps = Math.abs(endIndex - startIndex);
-    const direction = endIndex > startIndex ? 1 : -1;
-
-    const totalDuration = MAP_SLIDER_CASCADE_MS;
-    const interval = totalDuration / steps;
-
-    for (let i = 0; i <= steps; i++) {
-      setTimeout(() => {
-        setBulgingIndex(startIndex + i * direction);
-      }, i * interval);
-    }
-
-    setTimeout(() => {
-      setSelectedStop(newIndex);
-      setBulgingIndex(null);
-      setRequestedStop(null);
-    }, totalDuration);
+    // The bulge walks line by line from the current stop to the requested one.
+    cascade.current?.stop();
+    cascade.current = animate(startIndex, endIndex, {
+      duration: MAP_SLIDER_CASCADE_MS / 1000,
+      ease: 'linear',
+      onUpdate: (index) => setBulgingIndex(Math.round(index)),
+      onComplete: () => {
+        setSelectedStop(newIndex);
+        setBulgingIndex(null);
+        setRequestedStop(null);
+      },
+    });
   };
 
   const renderLines = () => {
