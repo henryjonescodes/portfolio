@@ -23,6 +23,7 @@ Also carries `chore/ci`: Run lint, type check, knip and the lite-mode e2e suite 
 - [x] Write ROADMAP.md and update LEVA.md and CLAUDE.md
 - [x] Fix the 21 lint errors
 - [x] Open the PR into staging
+- [ ] Confirm the first CI run is green on every stacked PR
 
 ## Log
 
