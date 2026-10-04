@@ -5,7 +5,7 @@ _Updated 2026-10-04 19:09 UTC on `feat/entry-dock` by `bw board`. Generated; edi
 ```mermaid
 flowchart LR
   n_staging([staging])
-  n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/3"]
+  n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/4 · 🙋 1"]
   class n_feat_entry_dock planned,current
   n_feat_global_modal --> n_feat_entry_dock
   n_feat_global_modal["<b>Inline links that open any modal</b><br/>feat/global-modal<br/>planned · 2/10 · 🙋 8"]
@@ -54,12 +54,13 @@ flowchart LR
 
 **Media to find**
 
+- [ ] Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there · `feat/entry-dock`
 - [ ] Screens or recordings of Almanac, Kiki UI and the notifier (from feat/efforts) · `feat/global-modal`
 - [ ] An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro) (from feat/efforts) · `feat/global-modal`
 
 ## 🟢 Happening now
 
-- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 3/3  
+- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 3/4  
   next: nothing open
 
 ## 🕘 Just happened
@@ -91,20 +92,21 @@ flowchart LR
 
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
-| `feat/entry-dock` ◀ | planned | 3/3 | 1 | local only | — |  |
+| `feat/entry-dock` ◀ | planned | 3/4 | 1 | local only | — |  |
 | `feat/global-modal` | planned | 2/10 | 6 | pushed | — |  |
 | `feat/shareable-urls` | planned | 2/3 | 3 | pushed | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
 
-<details><summary><b>feat/entry-dock</b>: Effort dock and placeholder media (3/3)</summary>
+<details><summary><b>feat/entry-dock</b>: Effort dock and placeholder media (3/4)</summary>
 
 Open entries switch efforts from a compact retro dock with a sliding indicator instead of big buttons, and every listing shows labelled placeholder media where a specific image belongs, so the owner can see what to supply.
 
 - [x] Dock replaces the effort tab buttons (modal, expanded, phone open view)
 - [x] Placeholder media component, labelled with what image belongs there
 - [x] Placeholders on experience entries and efforts
+- [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there
 
 Commits:
 
