@@ -5,7 +5,7 @@ status: review
 title: Entry subpages as nav tabs, and a masonry gallery
 pr: https://github.com/henryjonescodes/portfolio/pull/82
 updated: 2026-10-04
-motivation: null
+motivation: Make every open entry feel like a real window on a small operating system, so the site reads as one designed object rather than a page with popups.
 ---
 
 ## Goal
