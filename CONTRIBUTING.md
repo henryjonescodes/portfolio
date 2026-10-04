@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/cleanup` |
+| Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/window` |
 | Trunk | `staging` |
 | Live branches | 10 |
 | Open PRs | none |
@@ -22,7 +22,7 @@ flowchart LR
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
   n_entry_cleanup["<b>Tidy after the entry merge</b><br/>entry/cleanup<br/>planned · 0/2<br/><i>next: Merge carousel.spec into modal.spec; …</i>"]
-  class n_entry_cleanup planned,current
+  class n_entry_cleanup planned
   n_entry_open --> n_entry_cleanup
   n_entry_list["<b>One list that is a carousel on phones</b><br/>entry/list<br/>planned · 0/3<br/><i>next: EntryList with the list and tile pres…</i>"]
   class n_entry_list planned
@@ -31,7 +31,7 @@ flowchart LR
   class n_entry_open planned
   n_entry_list --> n_entry_open
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
-  class n_entry_window planned
+  class n_entry_window planned,current
   n_staging --> n_entry_window
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
@@ -69,16 +69,15 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Specs, skills and docs describe one entry component.
+**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
 
-**How, next.**
+**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
 
-- Merge carousel.spec into modal.spec; drop dead styles and tunables
-- Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/cleanup` |  | planned, local only | 0/2 | Merge carousel.spec into modal.spec; drop dead styles and tunables |  |
+| `entry/window` |  | planned, local only | 6/6 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -183,6 +182,8 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 
 | Plan | Progress |
 |---|---|
+| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
+| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 4 of 4 branches done (complete) |
 | [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -193,10 +194,10 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
-| `entry/cleanup` ◀ | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
+| `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` | One window for every open entry | planned |  | 6/6 | 7 | local only |  |
+| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 7 | local only |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
