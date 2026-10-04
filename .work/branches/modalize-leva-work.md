@@ -1,7 +1,7 @@
 ---
 branch: modalize-leva-work
 parent: staging
-status: active
+status: review
 title: Animation system refactor and test net
 pr: https://github.com/henryjonescodes/portfolio/pull/57
 updated: 2026-10-04
