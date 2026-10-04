@@ -14,10 +14,11 @@ An open entry's subpages use the main nav's tabs (Overview is the home icon, no 
 ## Todo
 
 - [x] Subpage tabs styled and built like the main nav items
-- [ ] Gallery subpage: masonry with square, wide and tall cards, animated reflow
+- [x] Gallery subpage: masonry with square, wide and tall cards, animated reflow
 - [ ] check:mentions in npm run check, and a repertoire rule for it
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Subpage tabs styled and built like the main nav items" at e4dc73fc
+- 2026-10-04: done "Gallery subpage: masonry with square, wide and tall cards, animated reflow" at 9ca8a20e
