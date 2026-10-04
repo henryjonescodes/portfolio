@@ -124,6 +124,8 @@ const ExperienceEntry = ({
     <>
       <motion.div
         ref={entryRef}
+        data-testid={inList ? 'entry' : 'modal-entry'}
+        data-entry-id={id}
         layout
         layoutId={id}
         className={cn(styles.entry, {

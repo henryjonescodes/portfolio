@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ExperienceEntry from "@components/ExperienceEntry";
 import { useAnimations } from "@context/AnimationContext";
@@ -29,7 +29,7 @@ const ExperienceEntryModalContext = createContext<ModalContextType | undefined>(
 export const useExperienceEntryModal = () => {
   const context = useContext(ExperienceEntryModalContext);
   if (!context) {
-    throw new Error("useModal must be used within ModalProvider");
+    throw new Error("useExperienceEntryModal must be used within ExperienceEntryModalProvider");
   }
   return context;
 };
@@ -51,6 +51,9 @@ export const ExperienceEntryModalProvider = ({
   const [modalDateString, setModalDateString] = useState<string | undefined>(
     undefined
   );
+  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  useEffect(() => () => clearTimeout(closeTimer.current), []);
 
   useEffect(() => {
     setPageOpen(selectedEntry != null && !isClosing);
@@ -65,6 +68,7 @@ export const ExperienceEntryModalProvider = ({
   ) => {
     const entryElement = entryRef.current;
     if (!entryElement) return;
+    clearTimeout(closeTimer.current);
 
     const rect = entryElement.getBoundingClientRect();
     setEntryRect(rect);
@@ -79,15 +83,16 @@ export const ExperienceEntryModalProvider = ({
     setIsClosing(true);
     setPageOpen(false);
 
-    // Wait for exit animation to complete
+    // Unmount once the layout morph back to the list has finished. isClosing stays
+    // true so the fading overlay never blocks clicks while its children finish exiting.
     const totalDuration = (TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration || 0) * 1000;
-    setTimeout(() => {
+    clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => {
       setSelectedEntry(null);
       setEntryRect(null);
       setModalChildren(null);
       setModalUrl(undefined);
       setModalDateString(undefined);
-      setIsClosing(false);
     }, totalDuration);
   };
 
@@ -118,6 +123,7 @@ export const ExperienceEntryModalProvider = ({
         {selectedEntry && (
           <motion.div
             key="modal-overlay"
+            data-testid="modal-overlay"
             className={styles.overlay}
             style={{ pointerEvents: isClosing ? 'none' : 'auto' }}
             onClick={closeModal}

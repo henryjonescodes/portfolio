@@ -8,6 +8,7 @@ import GlitchIcon from "@components/GlitchIcon";
 // Define mutually exclusive types
 type NavBarButtonIconOnlyProps = {
   onClick: () => void;
+  label?: string;
   Icon: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
@@ -19,6 +20,7 @@ type NavBarButtonIconOnlyProps = {
 
 type NavBarButtonWithActiveProps = {
   onClick: () => void;
+  label?: string;
   Icon: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
@@ -39,6 +41,7 @@ type NavBarButtonProps =
 
 export const NavBarButton = ({
   onClick,
+  label,
   Icon,
   ActiveIcon,
   active,
@@ -46,7 +49,19 @@ export const NavBarButton = ({
   const { TRANSITIONS } = useAnimations();
 
   return (
-    <motion.span className={styles.navButton} onClick={onClick}>
+    <motion.span
+      className={styles.navButton}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
       <AnimatePresence mode="wait">
         {active && ActiveIcon ? (
           <motion.span

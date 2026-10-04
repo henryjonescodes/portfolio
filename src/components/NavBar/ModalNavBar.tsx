@@ -44,7 +44,7 @@ const ModalNavBar = ({ title, onClose }: ModalNavBarProps) => {
           <motion.h2 className={styles.title}>{title}</motion.h2>
         </motion.div>
         <motion.div className={styles.right}>
-          {onClose && <NavBarButton onClick={onClose} Icon={Close} />}
+          {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" />}
         </motion.div>
         <AnimatedLine
           className={styles.navbarBorder}
