@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:32 UTC by `bw board` on `` |
+| Generated | 2026-10-04 20:32 UTC by `bw board` on `refactor/entry-window` |
 | Trunk | `staging` |
 | Live branches | 10 |
 | Open PRs | none |
@@ -43,7 +43,7 @@ flowchart LR
   class n_refactor_entry_open planned
   n_refactor_entry_list --> n_refactor_entry_open
   n_refactor_entry_window["<b>One window for every open entry</b><br/>refactor/entry-window<br/>planned · 0/6<br/><i>next: EntryWindow: bar, media, body and sec…</i>"]
-  class n_refactor_entry_window planned
+  class n_refactor_entry_window planned,current
   n_staging --> n_refactor_entry_window
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -69,7 +69,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-Nothing checked out or active.
+**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
+
+**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
+
+**How, next.**
+
+- EntryWindow: bar, media, body and sections, used by the modal and the phone open view
+- Phone open view covers the full height, nav included; Close reads clearly
+- Media sits under the bar on phones, beside the text on wide screens, by CSS
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `refactor/entry-window` |  | planned, local only | 0/6 | EntryWindow: bar, media, body and sections, used by the modal and the phone open view | 2026-10-entry-reconcile, 0 of 4 |
 
 ## 🕘 Just happened
 
@@ -192,7 +204,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `refactor/entry-cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `refactor/entry-list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `refactor/entry-open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `refactor/entry-window` | One window for every open entry | planned |  | 0/6 | 0 | local only | EntryWindow: bar, media, body and sections, used by the modal and the phone open view |
+| `refactor/entry-window` ◀ | One window for every open entry | planned |  | 0/6 | 6 | local only | EntryWindow: bar, media, body and sections, used by the modal and the phone open view |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
