@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { motion, LayoutGroup } from 'framer-motion';
+import { useMemo } from 'react';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { widthMobile } from '@styles/layout.constants.ts';
 import TypewriterText from '@components/TypewriterText';
@@ -7,6 +8,7 @@ import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import AnimatedLine from '@components/AnimatedLine';
 import ModalNavBar from '@components/NavBar/ModalNavBar';
 import { useAnimations } from '@context/AnimationContext';
+import { buildEntryVariants } from './variants';
 import styles from './experience-entry.module.scss';
 import { usePage } from '@context/PageContext';
 import { formatDateRange } from '@utils/text';
@@ -36,83 +38,7 @@ const ExperienceEntry = ({
   // Shared layout transition for all layoutId elements
   const layoutTransition = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
 
-  const headerTextVariants = {
-    initial: {},
-    animate: {
-      transition: TRANSITIONS.MODAL_HEADER.TEXT_ANIMATE,
-    },
-    exit: {
-      transition: {},
-    },
-    modalAnimate: {
-      transition: {},
-    },
-    modalExit: {
-      transition: {},
-    },
-  };
-
-  // Animation variants for initial page paint-in
-  const entryTextVariants = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-      transition: {
-        ...TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
-        staggerChildren: TRANSITIONS.MODAL_TEXT.ANIMATE_STAGGER.staggerChildren,
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
-    },
-    // Modal states - start at animate state, no paint-in effect
-    modalAnimate: {
-      // opacity: 1,
-      transition: TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
-    },
-    modalExit: {
-      // opacity: 1,
-      transition: TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE,
-    },
-  };
-
-  const bodyVariants = {
-    initial: {
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    },
-    animate: {
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    },
-    exit: {
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    },
-    // Modal states - start at animate state, no paint-in effect
-    modalAnimate: {
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    },
-    modalExit: {
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    },
-  };
-
-  // Modal container width animation
-  const modalContainerVariants = {
-    animate: () => ({
-      margin: '0 32px',
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    }),
-    modalAnimate: () => ({
-      // width: '700px',
-      // maxWidth: '700px',
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    }),
-    modalExit: () => ({
-      transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
-    }),
-  };
+  const variants = useMemo(() => buildEntryVariants(TRANSITIONS), [TRANSITIONS]);
 
   const containerContent = (
     <>
@@ -141,17 +67,17 @@ const ExperienceEntry = ({
         {!isOpen && (
           <motion.span layoutId="header" className={styles.header} transition={layoutTransition}>
             <motion.div className={styles.title}>
-              <motion.h2 layoutId="title" layout="position" variants={headerTextVariants}>
+              <motion.h2 layoutId="title" layout="position" variants={variants.headerText}>
                 <TypewriterText text={title} />
               </motion.h2>
               {!!dateRange && (
-                <motion.p layoutId="date" layout="position" variants={headerTextVariants}>
+                <motion.p layoutId="date" layout="position" variants={variants.headerText}>
                   <TypewriterText text={dateRange} />
                 </motion.p>
               )}
             </motion.div>
             {!!subtitle && (
-              <motion.div className={styles.subtitle} variants={headerTextVariants}>
+              <motion.div className={styles.subtitle} variants={variants.headerText}>
                 <motion.h3 layoutId="subtitle" layout="position" transition={layoutTransition}>
                   <TypewriterText text={subtitle} />
                 </motion.h3>
@@ -178,8 +104,6 @@ const ExperienceEntry = ({
           <motion.div
             layoutId="body"
             className={styles.body}
-            variants={bodyVariants}
-            // transition={layoutTransition}
             initial={inList ? 'initial' : 'animate'}
             animate={inList ? 'animate' : 'modalAnimate'}
             exit={inList ? 'exit' : 'animate'}
@@ -188,7 +112,7 @@ const ExperienceEntry = ({
               layoutId="bodyContent"
               className={styles.description}
               transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
-              variants={entryTextVariants}
+              variants={variants.entryText}
             >
               {isOpen && <ModalNavBar title={title} onClose={onClose} />}
               <motion.div className={styles.descriptionContents}>
@@ -222,7 +146,7 @@ const ExperienceEntry = ({
                     ))}
                     {isOpen && blurb && (
                       <motion.div
-                        variants={entryTextVariants}
+                        variants={variants.entryText}
                         initial="initial"
                         animate="animate"
                         exit="exit"
@@ -235,13 +159,7 @@ const ExperienceEntry = ({
                     )}
                   </motion.div>
                   {!!tools && (
-                    <motion.div
-                      className={styles.tools}
-                      variants={{
-                        animate: { transition: TRANSITIONS.EXPERIENCE.TOOLS_ANIMATE },
-                        initial: {},
-                      }}
-                    >
+                    <motion.div className={styles.tools} variants={variants.tools}>
                       <AnimatedLine
                         borderWidth={borderWidth}
                         horizontal={true}
@@ -256,7 +174,6 @@ const ExperienceEntry = ({
                   )}
                 </motion.div>
                 {children && (
-                  // {children && inList && (
                   <motion.div
                     className={styles.childrenWrapper}
                     layoutId="childrenWrapper"
@@ -291,43 +208,6 @@ const ExperienceEntry = ({
                 )}
               </motion.div>
             </motion.div>
-            {/* {children && !inList && (
-              <motion.div
-                className={cn(styles.childrenWrapper, {
-                  [styles.childrenWrapperModal]: !inList,
-                })}
-                layoutId="childrenWrapper"
-                transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
-              >
-                <AnimatedLine
-                  borderWidth={borderWidth}
-                  horizontal={true}
-                  className={styles.line}
-                />
-                {url ? (
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={cn(styles.children, styles.linkArea)}
-                  >
-                    {children}
-                  </a>
-                ) : onClick ? (
-                  <motion.div
-                    onClick={onClick}
-                    className={cn(styles.children, styles.linkArea)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    {children}
-                  </motion.div>
-                ) : (
-                  <motion.div className={styles.children}>
-                    {children}
-                  </motion.div>
-                )}
-              </motion.div>
-            )} */}
           </motion.div>
         </AnimatedBorderBox>
       </motion.div>
@@ -338,8 +218,7 @@ const ExperienceEntry = ({
     <LayoutGroup id={id}>
       {!inList && overlayStyle ? (
         <motion.div
-          custom={overlayStyle}
-          variants={modalContainerVariants}
+          variants={variants.modalContainer}
           initial="animate"
           animate="modalAnimate"
           exit="modalExit"
