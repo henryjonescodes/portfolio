@@ -22,7 +22,7 @@ flowchart LR
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
-  n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 1/3<br/><i>next: Small crosshair on top with a differe…</i>"]
+  n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 3/3"]
   class n_feat_crosshair_cursor planned,current
   n_staging --> n_feat_crosshair_cursor
   n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs · #82<br/>review · 3/3"]
@@ -56,14 +56,11 @@ flowchart LR
 
 **What.** The pointer becomes a small crosshair, with dashed guide lines running to every edge of the screen. The lines sit behind the page content and in front of the background; the small mark rides on top with a blend mode so it reads against anything.
 
-**How, next.**
-
-- Small crosshair on top with a difference blend; grows over anything clickable
-- Fine pointers only; touch and reduced motion keep the plain cursor where it matters
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/crosshair-cursor` |  | planned, local only | 1/3 | Small crosshair on top with a difference blend; grows over anything clickable |  |
+| `feat/crosshair-cursor` |  | planned, local only | 3/3 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -185,7 +182,7 @@ On mouse and trackpad the system cursor becomes a small crosshair that inverts a
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 1/3 | 1 | local only | Small crosshair on top with a difference blend; grows over anything clickable |
+| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 3/3 | 1 | local only |  |
 | `feat/entry-tabs` | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
@@ -219,13 +216,13 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 
 </details>
 
-<details><summary><code>feat/crosshair-cursor</code>: A crosshair cursor (1/3)</summary>
+<details><summary><code>feat/crosshair-cursor</code>: A crosshair cursor (3/3)</summary>
 
 The pointer becomes a small crosshair, with dashed guide lines running to every edge of the screen. The lines sit behind the page content and in front of the background; the small mark rides on top with a blend mode so it reads against anything.
 
 - [x] Guide lines follow the pointer behind the content, in front of the background
-- [ ] Small crosshair on top with a difference blend; grows over anything clickable
-- [ ] Fine pointers only; touch and reduced motion keep the plain cursor where it matters
+- [x] Small crosshair on top with a difference blend; grows over anything clickable
+- [x] Fine pointers only; touch and reduced motion keep the plain cursor where it matters
 
 </details>
 
