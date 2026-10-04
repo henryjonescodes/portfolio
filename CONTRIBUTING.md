@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:20 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:24 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:20 UTC by `bw board` on `fix/modal-nav-mini` |
+| Generated | 2026-10-04 20:24 UTC by `bw board` on `fix/modal-nav-mini` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
@@ -27,7 +27,7 @@ flowchart LR
   n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 3/3"]
   class n_feat_crosshair_cursor planned
   n_staging --> n_feat_crosshair_cursor
-  n_fix_modal_nav_mini["<b>The window's bar is the main nav</b><br/>fix/modal-nav-mini<br/>planned · 0/1<br/><i>next: Mini nav items in the window bar; nam…</i>"]
+  n_fix_modal_nav_mini["<b>The window's bar is the main nav</b><br/>fix/modal-nav-mini<br/>planned · 1/1"]
   class n_fix_modal_nav_mini planned,current
   n_staging --> n_fix_modal_nav_mini
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
@@ -56,27 +56,26 @@ flowchart LR
 
 **What.** An open entry's title bar uses exactly the main nav's mini items (icons that open to show their label), with the entry's name floated right before the buttons.
 
-**How, next.**
-
-- Mini nav items in the window bar; name floated right
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `fix/modal-nav-mini` |  | planned, local only | 0/1 | Mini nav items in the window bar; name floated right |  |
+| `fix/modal-nav-mini` |  | planned, local only | 1/1 | nothing open |  |
 
 ## 🕘 Just happened
 
-**feat(cursor): a crosshair pointer with dashed guides behind the content** · 2026-10-04 20:18 · `feat/crosshair-cursor` · `21cece7c`
-On mouse and trackpad the system cursor becomes a small crosshair that inverts against what is under it and opens up over anything clickable. Dashed guides run from the pointer to every edge, layered over the background and under the content and nav. Touch screens keep their own behaviour.
+**fix(modal): the window bar is the main nav: mini items, the name on the right** · 2026-10-04 20:24 · `fix/modal-nav-mini` · `d6f7dca5`
+The bar uses the main nav's own mini items (icons that open to show their label), grown to fit longer section names, with the entry's name floated right before the buttons. The bar sits under the window's drawn border so the frame shows around it.
 
+- **feat(cursor): a crosshair pointer with dashed guides behind the content** · 20:18 · `feat/crosshair-cursor` · `21cece7c`
 - **fix(modal): the close button sits inside the title bar, with the frame as its edge** · 20:13 · `fix/modal-nav-mini` · `e0c96483`
 - **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · `fix/modal-nav-mini` · `be7fc0f6`
-- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 20:06 · `fix/modal-nav-mini` · `d6eb511a`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | `fix/modal-nav-mini` · `d6eb511a` |
 | 2026-10-04 20:06 | feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `1881a411` |
 | 2026-10-04 19:35 | feat(entries): an effort dock and labelled placeholder media | [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865` |
 | 2026-10-04 19:18 | test: modal close asserts the outcome, not a mid-close style the faster close skips | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `db04bcdf` |
@@ -176,7 +175,7 @@ On mouse and trackpad the system cursor becomes a small crosshair that inverts a
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 1 | pushed |  |
-| `fix/modal-nav-mini` ◀ | The window's bar is the main nav | planned |  | 0/1 | 5 | local only | Mini nav items in the window bar; name floated right |
+| `fix/modal-nav-mini` ◀ | The window's bar is the main nav | planned |  | 1/1 | 6 | local only |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
@@ -219,11 +218,11 @@ The pointer becomes a small crosshair, with dashed guide lines running to every 
 
 </details>
 
-<details><summary><code>fix/modal-nav-mini</code>: The window's bar is the main nav (0/1)</summary>
+<details><summary><code>fix/modal-nav-mini</code>: The window's bar is the main nav (1/1)</summary>
 
 An open entry's title bar uses exactly the main nav's mini items (icons that open to show their label), with the entry's name floated right before the buttons.
 
-- [ ] Mini nav items in the window bar; name floated right
+- [x] Mini nav items in the window bar; name floated right
 
 </details>
 
