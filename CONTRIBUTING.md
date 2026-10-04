@@ -1,6 +1,6 @@
 # Work board
 
-_Updated 2026-10-04 19:12 UTC on `feat/global-modal` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:15 UTC on `feat/global-modal` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
@@ -65,14 +65,14 @@ flowchart LR
 
 ## 🕘 Just happened
 
-- 0m ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
-- 1m ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
-- 1m ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
-- 2m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/global-modal`
-- 3m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
+- 0m ago · fix(modal): a window with nothing to land on shrinks and fades about the middle · `feat/global-modal`
+- 3m ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
+- 3m ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
+- 4m ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
+- 4m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/global-modal`
+- 6m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
 - 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/entry-dock`
 - 5h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/entry-dock`
-- 5h ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/entry-dock`
 
 **Landed and folded**
 
@@ -94,7 +94,7 @@ flowchart LR
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
 | `feat/entry-dock` | planned | 3/4 | 4 | pushed | — |  |
-| `feat/global-modal` ◀ | planned | 2/10 | 7 | 9 to push, 8 to pull | — |  |
+| `feat/global-modal` ◀ | planned | 2/10 | 8 | 10 to push, 8 to pull | — |  |
 | `feat/shareable-urls` | planned | 2/3 | 4 | 1 to push | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
@@ -135,6 +135,7 @@ Later, once the rest has landed. Any text can link to an experience, project or 
 
 Commits:
 
+- `05b63c49` fix(modal): a window with nothing to land on shrinks and fades about the middle
 - `63c1f59e` feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word
 - `f2d37efd` docs: roadmap reflects efforts, sharing and entry links
 - `21bfc4b4` feat(modal): any link can open an entry, zooming out of where it was clicked
