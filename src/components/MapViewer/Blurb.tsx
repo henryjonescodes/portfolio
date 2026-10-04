@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useContext } from 'react';
+import RichText from '@components/Efforts/RichText';
+import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
 import TypewriterText from '@components/TypewriterText';
 import { useAnimations } from '@context/AnimationContext';
 import { fade } from '@config/animation';
@@ -17,6 +19,7 @@ const Blurb = () => {
   const { title, prefix, description } = locationData[keyToShow ?? 'portland'] ?? {};
 
   const { embedded } = usePage();
+  const { openEntry } = useExperienceEntryModal();
 
   return (
     <AnimatePresence mode="wait">
@@ -44,7 +47,7 @@ const Blurb = () => {
           </motion.h3>
         </motion.span>
         <motion.p className={styles.description}>
-          <TypewriterText text={description} />
+          <RichText text={description} onMention={openEntry} />
         </motion.p>
       </motion.div>
     </AnimatePresence>

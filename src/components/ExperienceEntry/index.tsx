@@ -30,6 +30,7 @@ const ExperienceEntry = ({
   inList = false,
   isSelected = false,
   modal = false,
+  standalone = false,
   onClose,
   expanded = false,
   onToggleExpand,
@@ -294,7 +295,7 @@ const ExperienceEntry = ({
     // One timing for every layout animation inside the entry, so the content moves with
     // the window instead of on its own clock.
     <MotionConfig transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}>
-      <LayoutGroup id={id}>
+      <LayoutGroup id={standalone ? `${id}-standalone` : id}>
         {!inList && modal ? (
           <motion.div
             className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}

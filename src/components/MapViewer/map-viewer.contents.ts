@@ -16,6 +16,8 @@ type PointOfInterest = {
       }
     >;
     text: string;
+    /** Opens this experience entry's modal. */
+    entryId?: string;
   }[];
   className: string;
   pinClassName: string;
@@ -28,9 +30,9 @@ export const locationData: Record<LocationPinKeys, PointOfInterest> = {
     prefix: 'I’m based in',
     title: 'New York City',
     description:
-      'I live in New York City and work remotely as a full stack engineer at Arbor, building the features that show people how much they save, with React, TypeScript and a real-time notification system behind them.',
+      'I live in New York City and work remotely as a full stack engineer at {{arbor|Arbor}}, building the features that show people how much they save, with React, TypeScript and a real-time notification system behind them.',
     mapTitle: 'NEW YORK, NY',
-    mapHighlights: [{ icon: Building, text: 'Arbor (remote)' }],
+    mapHighlights: [{ icon: Building, text: 'Arbor (remote)', entryId: 'arbor' }],
     className: styles.nyc,
     pinClassName: styles.nycPin,
   },
@@ -38,11 +40,11 @@ export const locationData: Record<LocationPinKeys, PointOfInterest> = {
     prefix: 'I made apps in',
     title: 'Palo Alto, California',
     description:
-      'I’ve spent the past few years Immersed in the consumer-tech startup scene building elegant and performant chat and social media UIs for web and mobile.',
+      'I’ve spent the past few years Immersed in the consumer-tech startup scene building elegant and performant chat and social media UIs for web and mobile at {{mushroom|Mushroom.gg}} and {{channelai|ChannelAI}}.',
     mapTitle: 'PALO ALTO, CA',
     mapHighlights: [
-      { icon: Mushroom, text: 'Mushroom.gg' },
-      { icon: Channel, text: 'ChannelAI' },
+      { icon: Mushroom, text: 'Mushroom.gg', entryId: 'mushroom' },
+      { icon: Channel, text: 'ChannelAI', entryId: 'channelai' },
     ],
     className: styles.paloAlto,
     pinClassName: styles.paloAltoPin,
@@ -53,7 +55,7 @@ export const locationData: Record<LocationPinKeys, PointOfInterest> = {
     description:
       'Focusing on UI research and creative development I earned a B.A. in Computer Science with a minor in Spanish, collecting various 3D design and film studies credits along the way.',
     mapTitle: 'SCHENECTADY, NY',
-    mapHighlights: [{ icon: Book, text: 'Union College' }],
+    mapHighlights: [{ icon: Book, text: 'Union College', entryId: 'union' }],
     className: styles.schenectady,
     pinClassName: styles.schenectadyPin,
   },

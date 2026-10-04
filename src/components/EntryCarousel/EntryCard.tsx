@@ -8,7 +8,10 @@ import EffortNav from '@components/Efforts/EffortNav';
 import EffortView from '@components/Efforts/EffortView';
 import RichText from '@components/Efforts/RichText';
 import EntryMediaView from '@components/EntryMedia';
-import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
+import {
+  useExperienceEntryModal,
+  type Point,
+} from '@components/ExperienceEntry/ExperienceEntryModalContext';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import GlitchIconItem from '@components/GlitchIconItem';
 import NavBarButton from '@components/NavBar/NavBarButton';
@@ -48,13 +51,13 @@ const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
   const isTile = !!onSelect;
   const date = entry.dateString ?? formatDateRange(entry.startDate, entry.endDate);
   const stagger = { animate: { transition: T.TILE_STAGGER } };
-  const { openEffort } = useExperienceEntryModal();
+  const { openEntry } = useExperienceEntryModal();
   const [effortId, setEffortId] = useState<string | null>(null);
   const effort = isOpen ? entry.efforts?.find((e) => e.id === effortId) : undefined;
   // A mention of this entry's own effort switches tabs; any other opens that entry's modal.
   const onMention = isOpen
-    ? (entryId: string, id: string) =>
-        entryId === entry.id ? setEffortId(id) : openEffort(entryId, id)
+    ? (entryId: string, id: string | null, origin?: Point) =>
+        entryId === entry.id ? setEffortId(id) : openEntry(entryId, id, origin)
     : undefined;
 
   return (

@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import EntryMediaView from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
@@ -9,7 +9,7 @@ import { useAnimations } from '@context/AnimationContext';
 import { findEntry } from '@data/entries';
 import { entryTitle, pageTitle } from '@data/pages';
 import styles from './experience-entry-modal.module.scss';
-import { ExperienceEntryModalContext } from './ExperienceEntryModalContext';
+import { ExperienceEntryModalContext, type Point } from './ExperienceEntryModalContext';
 
 /** Query keys that describe the open modal, so a link can reopen it. */
 const PARAMS = { entry: 'entry', effort: 'effort', size: 'size' } as const;
@@ -39,6 +39,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   const [isClosing, setIsClosing] = useState(false);
   const [expanded, setExpanded] = useState(linked.expanded);
   const [effortId, setEffortId] = useState<string | null>(linked.effort);
+  // Set when a link opened the entry: the window zooms from here instead of morphing.
+  const [origin, setOrigin] = useState<Point | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => () => clearTimeout(closeTimer.current), []);
@@ -54,8 +57,12 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     setPageOpen(selectedEntry != null && !isClosing);
   }, [selectedEntry, isClosing]);
 
-  const open = (entry: EntryData, options: { effort?: string | null; expanded?: boolean } = {}) => {
+  const open = (
+    entry: EntryData,
+    options: { effort?: string | null; expanded?: boolean; origin?: Point } = {},
+  ) => {
     clearTimeout(closeTimer.current);
+    setOrigin(options.origin ?? null);
     setSelectedEntry(entry);
     setIsClosing(false);
     setExpanded(options.expanded ?? false);
@@ -67,11 +74,10 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     open(entry);
   };
 
-  const openEffort = (entryId: string, nextEffortId: string) => {
+  const openEntry = (entryId: string, nextEffortId: string | null = null, from?: Point) => {
     if (selectedEntry?.id === entryId && !isClosing) return setEffortId(nextEffortId);
     const entry = findEntry(entryId);
-    // No list item to grow from here, so the entry opens in place over the page.
-    if (entry) open(entry, { effort: nextEffortId });
+    if (entry) open(entry, { effort: nextEffortId, origin: from });
   };
 
   const closeModal = () => {
@@ -80,10 +86,21 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
 
     // Unmount once the layout morph back to the list has finished. isClosing stays
     // true so the fading overlay never blocks clicks while its children finish exiting.
-    const totalDuration = (TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration || 0) * 1000;
+    // A zoomed-in window zooms straight back out; a list morph waits for the morph.
+    const totalDuration = origin ? 0 : (TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration || 0) * 1000;
     clearTimeout(closeTimer.current);
     closeTimer.current = setTimeout(() => setSelectedEntry(null), totalDuration);
   };
+
+  // Zoom about the link's point. The dialog fills the overlay and is already scaled, so the
+  // overlay gives its unscaled box.
+  useLayoutEffect(() => {
+    const dialog = dialogRef.current;
+    const box = dialog?.parentElement;
+    if (!dialog || !box || !origin) return;
+    const rect = box.getBoundingClientRect();
+    dialog.style.transformOrigin = `${origin.x - rect.left}px ${origin.y - rect.top}px`;
+  }, [origin, selectedEntry]);
 
   // The address bar and tab title follow the open modal, so copying the URL shares it. The
   // URL is replaced in place rather than through the router, whose re-render mid-morph would
@@ -113,7 +130,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
         pageOpen,
         effortId,
         setEffortId,
-        openEffort,
+        openEntry,
       }}
     >
       {children}
@@ -132,8 +149,13 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
             exit={{ opacity: 0 }}
             transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
           >
-            <div
+            <motion.div
+              ref={dialogRef}
               className={cn(styles.dialog, { [styles.expanded]: expanded })}
+              initial={origin ? { scale: 0.1, opacity: 0 } : false}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={origin ? { scale: 0.1, opacity: 0 } : undefined}
+              transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
               role="dialog"
               aria-modal="true"
               aria-label={selectedEntry.title}
@@ -145,15 +167,18 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
               <ExperienceEntry
                 key={selectedEntry.id}
                 data={selectedEntry}
-                pageOpen={pageOpen}
+                // A window opened from a link has no list form to morph to or from, so it
+                // stays in its open layout while it zooms in and out.
+                pageOpen={pageOpen || !!origin}
                 inList={false}
                 modal
+                standalone={!!origin}
                 onClose={closeModal}
                 expanded={expanded}
                 onToggleExpand={() => setExpanded((e) => !e)}
                 effortId={effortId}
                 onSelectEffort={setEffortId}
-                onMention={openEffort}
+                onMention={openEntry}
                 url={selectedEntry.url}
               >
                 {selectedEntry.media && (
@@ -162,7 +187,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
                   </div>
                 )}
               </ExperienceEntry>
-            </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
