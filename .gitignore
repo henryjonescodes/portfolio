@@ -46,3 +46,7 @@ dist-ssr/
 .claude/rules/
 .claude/agents/
 .claude/.repertoire-sync.json
+
+# Playwright
+test-results/
+playwright-report/
