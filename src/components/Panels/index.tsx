@@ -8,7 +8,7 @@ import styles from './panels.module.scss';
 
 export type { Panel } from './types';
 
-/** Lays panels out on a 6-column grid of small windows, fading in one after another. */
+/** Lays panels out as sections of the open entry on a 6-column grid, fading in in turn. */
 const PanelGrid = ({ panels }: { panels: Panel[] }) => {
   const { TRANSITIONS } = useAnimations();
   const variants = useMemo(
@@ -33,10 +33,8 @@ const PanelGrid = ({ panels }: { panels: Panel[] }) => {
             variants={variants.panel}
             aria-label={panel.title}
           >
-            {panel.title && <header className={styles.titleBar}>{panel.title}</header>}
-            <div className={styles.body}>
-              <View {...panel} />
-            </div>
+            {panel.title && <h4 className={styles.label}>{panel.title}</h4>}
+            <View {...panel} />
           </motion.section>
         );
       })}

@@ -235,6 +235,7 @@ const ExperienceEntry = ({
               </motion.div>
               {isOpen && !!panels?.length && (
                 <div className={styles.panels}>
+                  <AnimatedLine borderWidth={borderWidth} horizontal className={styles.line} />
                   <PanelGrid panels={panels} />
                 </div>
               )}

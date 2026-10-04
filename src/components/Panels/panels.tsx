@@ -42,22 +42,23 @@ export const GalleryPanelView = ({ images, columns = 3 }: GalleryPanel) => (
 );
 
 export const LinksPanelView = ({ links }: LinksPanel) => (
-  <div className={styles.links}>
+  <ul className={styles.links}>
     {links.map((link) => {
       const external = link.href.startsWith('http');
       return (
-        <a
-          key={link.href}
-          className={styles.linkButton}
-          href={link.href}
-          target={external ? '_blank' : undefined}
-          rel={external ? 'noopener noreferrer' : undefined}
-        >
-          {link.label}
-        </a>
+        <li key={link.href}>
+          <a
+            className={styles.link}
+            href={link.href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
       );
     })}
-  </div>
+  </ul>
 );
 
 export const StatsPanelView = ({ items }: StatsPanel) => (

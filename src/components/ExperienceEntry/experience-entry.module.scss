@@ -127,10 +127,34 @@
 }
 
 .notInList {
-  // -webkit-box-shadow: 0px 0px 40px 2px var(--foreground-quaternary);
-  // -moz-box-shadow: 0px 0px 40px 2px var(--foreground-quaternary);
-  // box-shadow: 0px 0px 40px 2px var(--foreground-quaternary);
-  // border-radius: 32px;
+  // Open: the media column grows and shows the whole frame instead of a cropped third.
+  .descriptionContentsFlex {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .childrenWrapper {
+    aspect-ratio: auto;
+    flex: 1 1 50%;
+    max-width: 50%;
+  }
+
+  .children video,
+  .children img {
+    object-fit: contain;
+    background: black;
+  }
+
+  &.expanded {
+    .descriptionContentsFlex {
+      flex-basis: 40%;
+    }
+
+    .childrenWrapper {
+      flex-basis: 60%;
+      max-width: 60%;
+    }
+  }
 }
 
 @media (max-width: styles.$width-mobile) {
@@ -191,6 +215,13 @@
 }
 
 .panels {
-  padding: 16px;
+  position: relative;
+  padding: 24px 16px 16px;
   width: 100%;
+
+  .line {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
