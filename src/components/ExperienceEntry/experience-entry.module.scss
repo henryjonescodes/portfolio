@@ -281,8 +281,9 @@
 }
 
 .windowHeader {
+  // Under the window's drawn border (z-index 2), so the frame stays visible around the bar.
   position: relative;
-  z-index: 3;
+  z-index: 1;
   flex-shrink: 0;
   background: var(--background-secondary);
 }

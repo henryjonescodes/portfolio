@@ -15,8 +15,6 @@ type EffortNavProps = {
   onSelect: (subpageId: string | null) => void;
   /** Sits inside a title bar rather than as its own strip. */
   inline?: boolean;
-  /** Shown after the home key when inline, standing in for the bar's own title. */
-  title?: string;
 };
 
 /**
@@ -30,7 +28,6 @@ const EffortNav = ({
   selected,
   onSelect,
   inline = false,
-  title,
 }: EffortNavProps) => {
   const tabs: { id: string; title: string; Icon?: Effort['Icon']; paint?: Effort['paint'] }[] = [
     { id: '', title: 'Overview', Icon: Home },
@@ -64,26 +61,17 @@ const EffortNav = ({
 
   return (
     <div className={inline ? styles.inline : styles.subnav} role="tablist" aria-label="Sections">
-      {tabs.map((tab, i) => [
-        i === 1 && inline && title && (
-          <NavBarItem
-            key="title"
-            hero
-            label={title}
-            mini={false}
-            selected={false}
-            onClick={() => select(0)}
-          />
-        ),
+      {tabs.map((tab, i) => (
         <NavBarItem
           key={tab.id || 'overview'}
           itemRef={(el) => (refs.current[i] = el)}
           label={tab.title}
           Icon={tab.Icon}
-          iconOnly={!tab.id}
-          withIcon={!!tab.id && !!tab.Icon}
+          // Inline in a window bar, the tabs are the main nav's own mini items.
+          mini={inline}
+          iconOnly={!inline && !tab.id}
+          withIcon={!inline && !!tab.id && !!tab.Icon}
           strokeIcon={tab.paint === 'stroke'}
-          mini={false}
           selected={i === selectedIndex}
           onClick={() => select(i)}
           tab={{
@@ -92,8 +80,8 @@ const EffortNav = ({
             controls: i === selectedIndex && tab.id ? `${idPrefix}-panel` : undefined,
             onKeyDown: (e) => onKeyDown(e, i),
           }}
-        />,
-      ])}
+        />
+      ))}
     </div>
   );
 };

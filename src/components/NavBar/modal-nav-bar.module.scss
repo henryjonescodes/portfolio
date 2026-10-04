@@ -17,7 +17,7 @@
   scrollbar-width: none;
 }
 
-// With tabs, the left side carries the title too: home, title, tabs, then the buttons.
+// With tabs on the left, the name floats right, just before the buttons.
 .hasLeft {
   display: flex;
 
@@ -30,7 +30,12 @@
   }
 
   .center {
-    display: none;
+    margin-left: auto;
+    padding: 0 16px;
+
+    @media (max-width: styles.$width-mobile) {
+      display: none;
+    }
   }
 }
 
