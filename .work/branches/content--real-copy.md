@@ -25,3 +25,4 @@ Replace lorem ipsum and bring over content only the old site has.
 - 2026-10-04: seeded
 - 2026-10-04: done "Port real experience blurbs and responsibilities from origin/main" at 5e471d7b
 - 2026-10-04: done "Write real project blurbs" at d335f705
+- 2026-10-04: Assumed tumblr 2014 dates are right; old site's open end date was a data error
