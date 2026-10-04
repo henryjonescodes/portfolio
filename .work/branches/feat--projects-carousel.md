@@ -21,6 +21,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - [x] Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)
 - [x] Remove the now unused projects path from ExperienceEntry (url and media children)
 - [ ] Responsive layout: vertical list in 3D and wide lite, horizontal carousel only on mobile, one component set
+- [ ] List row: window title bar with title and date, text in the left two thirds, media in the right third, tools footer; no text over media
 
 ## Log
 
