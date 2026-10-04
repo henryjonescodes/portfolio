@@ -1,7 +1,6 @@
 import cn from 'classnames';
 import { motion, type Variants } from 'framer-motion';
 import { useMemo } from 'react';
-import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import TypewriterText from '@components/TypewriterText';
 import { useAnimations } from '@context/AnimationContext';
 import type { LinkData } from '@data/links';
@@ -17,7 +16,7 @@ const LinkEntry = ({ label, href, Icon, paint }: LinkEntryProps) => {
       ({
         // The root joins the variant tree so the list's stagger reaches it.
         entry: { initial: { opacity: 0 }, animate: { opacity: 1 } },
-        background: {
+        well: {
           initial: { opacity: 0 },
           animate: { opacity: 1, transition: TRANSITIONS.LINKS.BACKGROUND_ANIMATE },
         },
@@ -30,27 +29,22 @@ const LinkEntry = ({ label, href, Icon, paint }: LinkEntryProps) => {
   );
 
   return (
-    <motion.a {...linkProps(href)} className={styles.entryWrapper} variants={variants.entry}>
-      <AnimatedBorderBox
-        className={styles.entry}
-        contentClassName={styles.entryContent}
-        borderWidth={4}
+    <motion.a {...linkProps(href)} className={styles.key} variants={variants.entry}>
+      <motion.span
+        className={cn(styles.well, {
+          [styles.iconFill]: paint === 'fill',
+          [styles.iconStroke]: paint === 'stroke',
+        })}
+        variants={variants.well}
+        aria-hidden
       >
-        <motion.div className={styles.background} variants={variants.background} />
-        <motion.div
-          className={cn(styles.icon, {
-            [styles.iconFill]: paint === 'fill',
-            [styles.iconStroke]: paint === 'stroke',
-          })}
-          variants={variants.icon}
-          aria-hidden
-        >
+        <motion.span className={styles.icon} variants={variants.icon}>
           <Icon />
-        </motion.div>
-        <motion.h3 className={styles.label}>
-          <TypewriterText text={label} staggerChildren={0.08} />
-        </motion.h3>
-      </AnimatedBorderBox>
+        </motion.span>
+      </motion.span>
+      <span className={styles.label}>
+        <TypewriterText text={label} staggerChildren={0.05} />
+      </span>
     </motion.a>
   );
 };

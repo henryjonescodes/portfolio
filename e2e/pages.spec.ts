@@ -57,3 +57,10 @@ test('links page lists working links, including the resume', async ({ page, requ
   await page.waitForTimeout(1500);
   expect(errors).toEqual([]);
 });
+
+test('about links to the links page and keeps the query', async ({ page }) => {
+  await page.goto('/about?lite=true');
+  await page.getByRole('link', { name: 'All links' }).click();
+  await expect(page).toHaveURL(/\/links\?lite=true$/);
+  await expect(page.getByRole('navigation', { name: 'Links' })).toBeVisible();
+});

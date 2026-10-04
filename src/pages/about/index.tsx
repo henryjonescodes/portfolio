@@ -6,6 +6,7 @@ import Instagram from '@assets/svg/socials/Instagram.svg?react';
 import LinkedIn from '@assets/svg/socials/linkedIn.svg?react';
 import Book from '@assets/svg/icons/book-01.svg?react';
 import Home from '@assets/svg/icons/home.svg?react';
+import LinkIcon from '@assets/svg/icons/link.svg?react';
 
 import TypewriterText from '@components/TypewriterText';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
@@ -80,7 +81,7 @@ const About = () => {
             {/* Blurb */}
             <motion.div className={styles.blurb}>
               <motion.p>
-                <TypewriterText text="An early fascination with robotics led him to study computer science with a focus on UI and human interaction. In Silicon Valley, he built fast, high-impact social media UIs, refining his approach to accessible design. Now in NYC, he continues his journey, seeking fresh challenges that unite design with technology to create intuitive digital experiences." />
+                <TypewriterText text="An early fascination with robotics led him to study computer science with a focus on UI and human interaction. In Silicon Valley, he built fast, high-impact social media UIs, refining his approach to accessible design. Now in NYC, he works remotely as a full stack engineer at Arbor, uniting design with technology to create intuitive digital experiences." />
               </motion.p>
             </motion.div>
 
@@ -109,6 +110,15 @@ const About = () => {
                   className={styles.icon}
                   url="https://www.instagram.com/theycallmezonez/"
                   label="Instagram"
+                />
+              </motion.div>
+              <motion.div variants={iconVariants} className={styles.iconWrapper}>
+                <GlitchIcon
+                  Icon={LinkIcon}
+                  paint="stroke"
+                  className={styles.icon}
+                  url="/links"
+                  label="All links"
                 />
               </motion.div>
             </motion.div>
