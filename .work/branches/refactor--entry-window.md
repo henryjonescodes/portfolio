@@ -14,7 +14,7 @@ The open entry, modal or phone, renders one EntryWindow: the main nav bar with t
 
 ## Todo
 
-- [ ] EntryWindow: bar, media, body and sections, used by the modal and the phone open view
+- [x] EntryWindow: bar, media, body and sections, used by the modal and the phone open view
 - [ ] Phone open view covers the full height, nav included; Close reads clearly
 - [ ] Media sits under the bar on phones, beside the text on wide screens, by CSS
 - [ ] e2e: the same window on both widths
@@ -24,3 +24,4 @@ The open entry, modal or phone, renders one EntryWindow: the main nav bar with t
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "EntryWindow: bar, media, body and sections, used by the modal and the phone open view" at b89de966
