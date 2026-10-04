@@ -50,3 +50,6 @@ dist-ssr/
 # Playwright
 test-results/
 playwright-report/
+
+# branchwork board, generated
+.work/BOARD.md
