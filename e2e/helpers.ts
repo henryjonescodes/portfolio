@@ -16,7 +16,7 @@ export function trackErrors(page: Page) {
  * Samples an element's bounding box every animation frame for `ms`, starting
  * immediately. Used to prove a transition actually interpolates instead of snapping.
  */
-async function sampleBoxes(
+export async function sampleBoxes(
   page: Page,
   selector: string,
   ms: number,

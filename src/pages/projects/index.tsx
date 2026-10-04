@@ -12,10 +12,18 @@ import styles from './projects.module.scss';
 import EntryMediaView from '@components/EntryMedia';
 import cn from 'classnames';
 import { usePage } from '@context/PageContext';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import ProjectCarousel from '@components/ProjectCarousel';
+import { screenWidths } from '@styles/layout.constants';
+
+const projectList = projectsOrder.map((id) => projectsData[id]);
 
 const Projects = () => {
   const { TRANSITIONS } = useAnimations();
   const { embedded } = usePage();
+  const { width } = useWindowDimensions();
+  // Phones get the carousel; the 3D screen and wider lite views keep the list.
+  const asCarousel = !embedded && width < screenWidths.mobileLarge;
   const { openModal, selectedEntry } = useExperienceEntryModal();
 
   const projectsVariants = {
@@ -57,30 +65,34 @@ const Projects = () => {
           />
         </motion.h1>
 
-        {projectsOrder.map((id) => {
-          const isSelected = selectedEntry?.id === id;
-          const project = projectsData[id];
-          return (
-            <ExperienceEntry
-              key={`${id}-inList`}
-              data={project}
-              entryRef={entryRefs.current[id]}
-              onClick={() =>
-                openModal(
-                  project,
-                  entryRefs.current[id],
-                  renderMedia(project.media),
-                  project.url,
-                  project.dateString,
-                )
-              }
-              inList={true}
-              isSelected={isSelected}
-            >
-              {renderMedia(project.media)}
-            </ExperienceEntry>
-          );
-        })}
+        {asCarousel ? (
+          <ProjectCarousel projects={projectList} />
+        ) : (
+          projectsOrder.map((id) => {
+            const isSelected = selectedEntry?.id === id;
+            const project = projectsData[id];
+            return (
+              <ExperienceEntry
+                key={`${id}-inList`}
+                data={project}
+                entryRef={entryRefs.current[id]}
+                onClick={() =>
+                  openModal(
+                    project,
+                    entryRefs.current[id],
+                    renderMedia(project.media),
+                    project.url,
+                    project.dateString,
+                  )
+                }
+                inList={true}
+                isSelected={isSelected}
+              >
+                {renderMedia(project.media)}
+              </ExperienceEntry>
+            );
+          })
+        )}
       </motion.div>
     </PageContents>
   );

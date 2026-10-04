@@ -1,6 +1,7 @@
 import { expect, test } from '@playwright/test';
 import {
   distinctBoxes,
+  sampleBoxes,
   openFirstEntry,
   openFirstEntrySampled,
   trackErrors,
@@ -159,4 +160,59 @@ test('map slider walks the bulge to a clicked stop and selects it', async ({ pag
   await expect(page.locator('[class*="bulging"]')).toHaveCount(1);
   await expect(page.locator('[class*="bulging"]')).toHaveCount(0, { timeout: 5_000 });
   await expect(stops.nth(3)).toHaveClass(/selected/);
+});
+
+test.describe('projects carousel on phones', () => {
+  test.use({ viewport: { width: 390, height: 844 } });
+
+  test('a tile morphs into the page, shows its panels, and closes back', async ({ page }) => {
+    const errors = trackErrors(page);
+    await page.goto('/projects?lite=true');
+    const tile = page.getByTestId('project-card').first();
+    await expect(tile).toBeVisible();
+    await page.waitForTimeout(1500);
+    const source = (await tile.boundingBox())!;
+
+    const boxes = await sampleBoxes(
+      page,
+      '[data-testid="project-card-open"]',
+      1500,
+      '[data-testid="project-card"]',
+    );
+    const first = boxes[0];
+    const last = boxes[boxes.length - 1];
+    expect(Math.abs(first.x - source.x)).toBeLessThan(source.width / 2);
+    expect(last.width).toBeGreaterThan(source.width);
+    expect(distinctBoxes(boxes)).toBeGreaterThan(2);
+
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByRole('region', { name: 'Links' })).toBeVisible();
+    await dialog.getByRole('button', { name: 'Close' }).click();
+    await expect(page.getByTestId('project-card-open')).toHaveCount(0, { timeout: 5_000 });
+    await expect(tile).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+
+  test('keyboard opens a tile, Escape closes it, and reduced motion still closes', async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: 'reduce' });
+    await page.goto('/projects?lite=true');
+    await page.waitForTimeout(1500);
+    await page
+      .getByRole('button', { name: /^Open / })
+      .first()
+      .focus();
+    await page.keyboard.press('Enter');
+    await expect(page.getByRole('dialog')).toBeVisible();
+    await page.waitForTimeout(500);
+    await page.keyboard.press('Escape');
+    await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 3_000 });
+  });
+});
+
+test('wide lite view keeps the projects list', async ({ page }) => {
+  await page.goto('/projects?lite=true');
+  await expect(page.getByTestId('entry').first()).toBeVisible();
+  await expect(page.getByTestId('project-card')).toHaveCount(0);
 });

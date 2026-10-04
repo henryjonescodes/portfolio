@@ -1,0 +1,148 @@
+@use '@styles' as styles;
+
+.carousel {
+  // The overlay and backdrop position against this box.
+  position: relative;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 4vw;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 4px 2px 16px;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.slot {
+  flex: 0 0 82%;
+  scroll-snap-align: start;
+}
+
+.card {
+  @include styles.text-colors;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2.5px solid var(--foreground-secondary);
+  background: var(--background-secondary);
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  &.open {
+    cursor: default;
+    border-width: 0;
+  }
+}
+
+.titleBar {
+  @include styles.title-bar;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+  padding: 0 16px;
+  border-bottom: 2.5px solid var(--foreground-secondary);
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  p {
+    margin-left: auto;
+    color: var(--accent-secondary);
+  }
+}
+
+.close {
+  margin-left: 4px;
+}
+
+.scroll {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  .open & {
+    overflow-y: auto;
+  }
+}
+
+.media {
+  aspect-ratio: 16 / 10;
+  background: black;
+
+  video,
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .open & {
+    video,
+    img {
+      object-fit: contain;
+    }
+  }
+}
+
+.line {
+  position: relative;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 8px;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.backdrop {
+  position: absolute;
+  z-index: 9;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.overlay {
+  position: absolute;
+  z-index: 10;
+  display: flex;
+
+  > * {
+    flex: 1;
+  }
+}
