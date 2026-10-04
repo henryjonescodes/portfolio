@@ -251,9 +251,11 @@ Add a tunable there and read it through `useAnimations()`; never hardcode a dura
 
 ## Testing
 
-`npm run test:e2e` runs the Playwright smoke suite in `e2e/` (pages, the modal morph and close,
-the debug panel, the 3D canvas). Run it before pushing anything that touches animation, the
-modal or the 3D bridge. `npm run lint` and `npm run format` cover source style.
+`npm run test:e2e` runs the Playwright suite in `e2e/`, one spec per feature (`pages`, `modal`,
+`carousel`, `scene`, `a11y`) with shared helpers in `helpers.ts`; add tests to the matching spec.
+Run it before pushing anything that touches animation, the modal or the 3D bridge.
+`npm run check` (lint, types, knip, asset check) must pass; `npm run format` applies Prettier.
+`npm run modal-frames` captures modal open and close frames for a visual check.
 
 ## Work Tracking
 

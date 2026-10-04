@@ -1,37 +1,31 @@
 # Roadmap
 
 Work is tracked as branches. Each branch carries its own ticket in `.work/branches/`, and
-`.work/BOARD.md` (generated, not committed) shows every branch, its todos and what waits on
-a person. The plan behind the current branches is
-[`.work/plans/2026-10-roadmap.md`](.work/plans/2026-10-roadmap.md); landed work is in
+`.work/BOARD.md` (generated, not committed) shows what needs a person, what is happening and
+what just happened. Plans live in `.work/plans/`; landed work is in
 [`.work/CHANGELOG.md`](.work/CHANGELOG.md).
 
 ## Where the site stands
 
-- `main` deploys the old webpack site (last merged 2024-09). `staging` deploys the Vite and
-  React Three Fiber rewrite. Both change only through PRs.
-- `modalize-leva-work` adds the experience and project modals, the Leva-tunable animation
-  system, a Playwright smoke suite, and a fix for the closed modal swallowing clicks. It
-  goes into `staging` as one PR.
+- `staging` carries the Vite and React Three Fiber rewrite and deploys on every merge.
+  `main` still serves the old webpack site.
+- On `staging` now: experience and project modals with panels and an expandable size, a
+  phone-only projects carousel, the `/links` page and resume, one tunable animation config
+  with Leva only in debug, reduced-motion support, retro chrome (one radius scale and bevel),
+  an accessibility pass, sharing metadata, and lighter loads (no three.js in lite mode, WebP
+  textures, a Draco model).
+- Every PR runs lint, types, knip, an asset check and the Playwright suite in CI.
 
-## Phases
+## Next
 
-1. **Animation system** (`modalize-leva-work`, then `anim/motion-idioms`): one config for
-   every timing, Leva only in debug, reduced-motion support, Framer Motion orchestration in
-   place of timers.
-2. **Content** (`content/real-copy`): real blurbs instead of lorem ipsum, the resume, and the
-   Links page from the old site.
-3. **Projects carousel** (`feat/projects-carousel`): the old site's card-to-page morph, in
-   the new styles.
-4. **Release** (`release/promote-main`): staging into main, retiring the old site.
+1. **Release.** Promote `staging` to `main` once the design passes below are signed off.
+2. **Design passes.** The list and modal, the retro chrome, the phone carousel, and one
+   background shade (static CSS `#043030` against the knobs' `#003838`).
+3. **Content.** Real panel content per project (screenshots, galleries, stats).
 
-## Later, not yet branched
+## Later
 
-- Fix the remaining lint errors and make `npm run lint` part of a CI check.
-- Visual baselines (screenshot comparison) for the animation states the smoke suite only
-  checks structurally.
-- Unify `react-spring` and `@react-spring/three`, and revisit the camera's spring plus lerp
-  smoothing once it can be judged side by side.
-- Salvage what is still useful from the `noodling` branch's first modal prototype.
-- Branchwork tooling: batch seed edits into one commit, a CI check that seeds parse, and
-  automatic `land` on merge.
+- Visual baselines (screenshot comparison) for the animation states the suite checks
+  structurally.
+- A lossy colour bake (about 0.8 MB smaller) after a visual check.
+- Branchwork: batch seed edits into one commit and a CI check that seeds parse.
