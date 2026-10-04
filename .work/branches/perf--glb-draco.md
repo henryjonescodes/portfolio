@@ -15,10 +15,11 @@ Shrink the 1.66 MB scene model with Draco, which decodes to full-precision posit
 
 - [x] Draco-compress the GLB and compare sizes
 - [x] Serve the Draco decoder from public and point useGLTF at it
-- [ ] Check the scene by eye in 3D; e2e stays green
+- [x] Check the scene by eye in 3D; e2e stays green
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Draco-compress the GLB and compare sizes" at e09dbfa5
 - 2026-10-04: done "Serve the Draco decoder from public and point useGLTF at it" at d245c6c5
+- 2026-10-04: done "Check the scene by eye in 3D; e2e stays green" at a4fad3b9
