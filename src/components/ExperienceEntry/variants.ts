@@ -23,14 +23,9 @@ export function buildEntryVariants(TRANSITIONS: ResolvedAnimations['TRANSITIONS'
     exit: { opacity: 0, transition: TRANSITIONS.MODAL_TEXT.PAINT_ANIMATE },
   };
 
-  const modalContainer: Variants = {
-    animate: { margin: '0 32px', transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE },
-    expanded: { margin: '0px', transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE },
-  };
-
   const tools: Variants = {
     animate: { transition: TRANSITIONS.EXPERIENCE.TOOLS_ANIMATE },
   };
 
-  return { headerText, entryText, modalContainer, tools };
+  return { headerText, entryText, tools };
 }

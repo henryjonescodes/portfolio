@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
@@ -110,11 +111,14 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
             transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
           >
             <div
-              className={expanded ? styles.dialogExpanded : styles.dialog}
+              className={cn(styles.dialog, { [styles.expanded]: expanded })}
               role="dialog"
               aria-modal="true"
               aria-label={selectedEntry.title}
-              onClick={(e) => e.stopPropagation()}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (e.target === e.currentTarget) closeModal();
+              }}
             >
               <ExperienceEntry
                 key={selectedEntry.id}

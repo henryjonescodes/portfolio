@@ -192,11 +192,13 @@
 
 .modalWrapper {
   max-width: 100%;
+  margin: auto;
 
   &Expanded {
     flex: 1;
     display: flex;
     min-height: 100%;
+    margin: 0;
   }
 }
 

@@ -101,6 +101,36 @@ test('open project shows its panels, and the modal expands and restores', async 
     .toBeLessThan(4);
 });
 
+test('restoring from expanded never clips the window', async ({ page }) => {
+  await page.goto('/experience?lite=true');
+  await page.waitForTimeout(1500);
+  await openFirstEntry(page);
+  const dialog = page.getByRole('dialog');
+  await page.waitForTimeout(1200);
+  await dialog.getByRole('button', { name: 'Expand' }).click();
+  await page.waitForTimeout(1200);
+
+  // Every frame of the restore, the visible dialog area must still contain the window.
+  const overhang = await page.evaluate(
+    () =>
+      new Promise<number>((resolve) => {
+        const dlg = document.querySelector('[role="dialog"]') as HTMLElement;
+        (dlg.querySelector('[aria-label="Restore"]') as HTMLElement).click();
+        let worst = 0;
+        const t0 = performance.now();
+        const tick = () => {
+          const d = dlg.getBoundingClientRect();
+          const e = dlg.querySelector('[data-testid="modal-entry"]')!.getBoundingClientRect();
+          worst = Math.max(worst, d.top - e.top, e.bottom - d.bottom);
+          if (performance.now() - t0 < 900) requestAnimationFrame(tick);
+          else resolve(worst);
+        };
+        requestAnimationFrame(tick);
+      }),
+  );
+  expect(overhang).toBeLessThan(2);
+});
+
 test('opening the modal moves its content with the window, never ahead of it', async ({ page }) => {
   await page.goto('/projects?lite=true');
   await page.waitForTimeout(2000);
