@@ -13,10 +13,11 @@ The links page reworked to match the old site's links page in the retro, skeuomo
 
 ## Todo
 
-- [ ] Restyle /links as raised retro keys, in theme with the old links page
+- [x] Restyle /links as raised retro keys, in theme with the old links page
 - [ ] Link to /links from About, with the old site's link icon
 - [ ] Axe and e2e stay green
 
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Restyle /links as raised retro keys, in theme with the old links page" at ee9510a8
