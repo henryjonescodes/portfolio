@@ -1,7 +1,7 @@
 ---
 branch: feat/modal-panels
 parent: feat/projects-carousel
-status: active
+status: review
 title: Modal panels and an expanded size
 pr: https://github.com/henryjonescodes/portfolio/pull/62
 updated: 2026-10-04
