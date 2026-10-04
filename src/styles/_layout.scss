@@ -22,7 +22,8 @@ $page-padding-mobile: 1.5rem;
 $paragraph-spacing-large: 2rem;
 $paragraph-spacing-small: 1.4rem;
 
-$height-nav-bar: 45px;
+// Taller on phones; set on :root in index.scss.
+$height-nav-bar: var(--nav-bar-height);
 
 $padding-page: 32px;
 $padding-page-mobile: 16px;
