@@ -1,5 +1,5 @@
 ---
-branch: refactor/entry-window
+branch: entry/window
 parent: staging
 status: planned
 title: One window for every open entry
