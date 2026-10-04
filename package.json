@@ -14,6 +14,7 @@
     "test:e2e": "playwright test",
     "check": "npm run lint && tsc -b && knip && npm run check:assets",
     "check:assets": "node scripts/check-assets.mjs",
+    "modal-frames": "node scripts/capture-modal-frames.mjs",
     "og-image": "node scripts/capture-og-image.mjs"
   },
   "dependencies": {

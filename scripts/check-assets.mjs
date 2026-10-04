@@ -5,7 +5,9 @@ import { readFileSync } from 'node:fs';
 import { basename } from 'node:path';
 
 const tracked = (args) =>
-  execFileSync('git', ['ls-files', ...args], { encoding: 'utf8' }).split('\n').filter(Boolean);
+  execFileSync('git', ['ls-files', ...args], { encoding: 'utf8' })
+    .split('\n')
+    .filter(Boolean);
 
 // Read by Netlify, not by the app.
 const KEEP = new Set(['public/_redirects']);

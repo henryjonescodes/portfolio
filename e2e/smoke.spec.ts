@@ -266,3 +266,53 @@ test.describe('accessibility', () => {
     expect(results.violations.map((v) => `${v.id}: ${v.nodes.length}`)).toEqual([]);
   });
 });
+
+test('opening the modal moves its content with the window, never ahead of it', async ({ page }) => {
+  await page.goto('/projects?lite=true');
+  await page.waitForTimeout(2000);
+  type Frame = { t: number; box: number[]; inner: number[][] };
+  const frames = await page.evaluate(
+    () =>
+      new Promise<Frame[]>((resolve) => {
+        (document.querySelector('[data-testid="entry"]') as HTMLElement).click();
+        const out: Frame[] = [];
+        const t0 = performance.now();
+        const tick = () => {
+          const box = document.querySelector('[data-testid="modal-entry"]');
+          const title =
+            box &&
+            [...box.querySelectorAll('h2')].find((h) => !h.closest('[class*="modalNavbar"]'));
+          const firstLine = box?.querySelector('[class*="description"] p');
+          if (box && title && firstLine) {
+            const b = box.getBoundingClientRect();
+            const rel = (el: Element) => {
+              const r = el.getBoundingClientRect();
+              return [r.top - b.top, b.bottom - r.bottom];
+            };
+            out.push({
+              t: performance.now() - t0,
+              box: [b.width, b.height],
+              inner: [rel(title), rel(firstLine)],
+            });
+          }
+          if (performance.now() - t0 < 1500) requestAnimationFrame(tick);
+          else resolve(out);
+        };
+        tick();
+      }),
+  );
+  expect(frames.length).toBeGreaterThanOrEqual(3);
+  // Never outside the window, which is what clips.
+  for (const f of frames) {
+    for (const [top, bottom] of f.inner) expect(Math.min(top, bottom)).toBeGreaterThan(-2);
+  }
+  // The content settles when the window settles, not before it with a jump or after it.
+  const round = (xs: number[]) => xs.map(Math.round).join();
+  const settledAt = (pick: (f: Frame) => string) => {
+    const last = pick(frames[frames.length - 1]);
+    return frames.find((_, i) => frames.slice(i).every((g) => pick(g) === last))!.t;
+  };
+  const boxDone = settledAt((f) => round(f.box));
+  const innerDone = settledAt((f) => round(f.inner.flat()));
+  expect(Math.abs(innerDone - boxDone)).toBeLessThan(120);
+});
