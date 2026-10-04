@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:13 UTC · 4 live branches · 1 PRs open · 17 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:14 UTC · 5 live branches · 1 PRs open · 17 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:13 UTC by `bw board` on `feat/entry-tabs` |
+| Generated | 2026-10-04 20:14 UTC by `bw board` on `feat/crosshair-cursor` |
 | Trunk | `staging` |
-| Live branches | 4 |
+| Live branches | 5 |
 | Open PRs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) |
 | Waiting on you | 17 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -22,8 +22,11 @@ flowchart LR
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
+  n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 0/3<br/><i>next: Guide lines follow the pointer behind…</i>"]
+  class n_feat_crosshair_cursor planned,current
+  n_staging --> n_feat_crosshair_cursor
   n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs · #82<br/>review · 3/3"]
-  class n_feat_entry_tabs review,current
+  class n_feat_entry_tabs review
   n_staging --> n_feat_entry_tabs
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -49,15 +52,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Make every open entry feel like a real window on a small operating system, so the site reads as one designed object rather than a page with popups.
+**Motivation.** Make the pointer part of the instrument-panel look, so moving around the site feels like operating the device.
 
-**What.** An open entry's subpages use the main nav's tabs (Overview is the home icon, no text), a Gallery tab appears when an entry has one, and the gallery is a two-column masonry of square, wide (2:1) and tall (1:2) cards. A check fails the build when an effort subpage has no mention in the prose.
+**What.** The pointer becomes a small crosshair, with dashed guide lines running to every edge of the screen. The lines sit behind the page content and in front of the background; the small mark rides on top with a blend mode so it reads against anything.
 
-**How, next.** Every todo is done; it waits on review and merge.
+**How, next.**
+
+- Guide lines follow the pointer behind the content, in front of the background
+- Small crosshair on top with a difference blend; grows over anything clickable
+- Fine pointers only; touch and reduced motion keep the plain cursor where it matters
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/entry-tabs` | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | review, 5 to push | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
+| `feat/crosshair-cursor` |  | planned, local only | 0/3 | Guide lines follow the pointer behind the content, in front of the background |  |
 
 ## 🕘 Just happened
 
@@ -167,7 +174,6 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Plan | Progress |
 |---|---|
-| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 0 of 3 branches done |
 | [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -179,7 +185,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | 5 to push |  |
+| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 0/3 | 0 | local only | Guide lines follow the pointer behind the content, in front of the background |
+| `feat/entry-tabs` | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
@@ -209,6 +216,16 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 - [ ] 🙋 claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock)
+
+</details>
+
+<details><summary><code>feat/crosshair-cursor</code>: A crosshair cursor (0/3)</summary>
+
+The pointer becomes a small crosshair, with dashed guide lines running to every edge of the screen. The lines sit behind the page content and in front of the background; the small mark rides on top with a blend mode so it reads against anything.
+
+- [ ] Guide lines follow the pointer behind the content, in front of the background
+- [ ] Small crosshair on top with a difference blend; grows over anything clickable
+- [ ] Fine pointers only; touch and reduced motion keep the plain cursor where it matters
 
 </details>
 
