@@ -359,6 +359,29 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
+  LINKS: {
+    ANIMATE_STAGGER: {
+      staggerChildren: tune(
+        'COMPONENT',
+        0.33,
+        F,
+        'Links > Entry Stagger',
+        'Delay between link entries appearing',
+      ),
+    },
+    BACKGROUND_ANIMATE: {
+      duration: tune('COMPONENT', 9.33, E, 'Links > Background Fade In'),
+    },
+    ICON_ANIMATE: {
+      duration: tune('COMPONENT', 1.67, S, 'Links > Icon Fade In'),
+    },
+    HOVER: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 20,
+    },
+  },
+
   LOADING: {
     EXIT: {
       duration: tune(

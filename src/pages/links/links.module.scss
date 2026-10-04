@@ -1,0 +1,76 @@
+// links.module.scss
+@use '@styles' as styles;
+
+.links {
+  @include styles.page-padding-vertical;
+  height: 100%;
+  display: flex;
+  // justify-content: center;
+  gap: 0px;
+
+  > .content {
+    @include styles.list-flex;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: min-content;
+    width: 100%;
+  }
+}
+
+.entryWrapper {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.entry {
+  width: 100%;
+  overflow: hidden;
+  transform: rotate(180deg);
+
+  &Content {
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    position: relative;
+    gap: 0.6rem;
+  }
+}
+
+.background {
+  background-color: styles.$foreground-primary;
+  z-index: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+
+  &Fill {
+    svg,
+    path {
+      fill: styles.$background-primary !important;
+    }
+  }
+
+  &Stroke {
+    svg,
+    path {
+      stroke: styles.$background-primary !important;
+    }
+  }
+}
+
+.label {
+  z-index: 1;
+  color: styles.$background-primary !important;
+}
