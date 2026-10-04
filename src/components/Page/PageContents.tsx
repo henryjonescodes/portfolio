@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { ReactNode, useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { ReactNode, useMemo, useState } from 'react';
 import { useSettings } from '@context/SettingsContext';
 import { useAnimations } from '@context/AnimationContext';
 import styles from './page.module.scss';
@@ -17,22 +16,12 @@ type Props = {
 } & PageContentsProps;
 
 const PageContents: React.FC<Props> = ({ children, className }) => {
-  const location = useLocation();
-  const pathSegments = location.pathname.split('/').filter(Boolean);
-  const page = pathSegments[0];
-  const [delayedPage, setDelayedPage] = useState(page);
   const { animationDisabled } = useSettings();
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
-
-  useEffect(() => {
-    let timerDur = 400;
-    if (animationDisabled) {
-      timerDur = 400;
-    }
-    const timer = setTimeout(() => setDelayedPage(`${page}`), timerDur);
-    return () => clearTimeout(timer); // Clean up on unmount or page change
-  }, [page, animationDisabled]);
+  // Each page mounts fresh per route, and keeps the mode it mounted with through its exit,
+  // so a zoom toggle mid-visit does not swap its variants.
+  const [minimal] = useState(animationDisabled);
 
   const pageVariants = useMemo(
     () => ({
@@ -70,22 +59,9 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
     [TRANSITIONS],
   );
 
-  const { initial, animate, exit, variants } = useMemo(() => {
-    if (animationDisabled) {
-      return {
-        initial: 'animate',
-        animate: 'shown',
-        exit: 'removed',
-        variants: minimalPageVariants,
-      };
-    }
-    return {
-      initial: 'initial',
-      animate: 'animate',
-      exit: 'exit',
-      variants: pageVariants,
-    };
-  }, [delayedPage]);
+  const { initial, animate, exit, variants } = minimal
+    ? { initial: 'animate', animate: 'shown', exit: 'removed', variants: minimalPageVariants }
+    : { initial: 'initial', animate: 'animate', exit: 'exit', variants: pageVariants };
 
   return (
     <motion.div
