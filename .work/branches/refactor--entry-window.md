@@ -16,7 +16,7 @@ The open entry, modal or phone, renders one EntryWindow: the main nav bar with t
 
 - [x] EntryWindow: bar, media, body and sections, used by the modal and the phone open view
 - [x] Phone open view covers the full height, nav included; Close reads clearly
-- [ ] Media sits under the bar on phones, beside the text on wide screens, by CSS
+- [x] Media sits under the bar on phones, beside the text on wide screens, by CSS
 - [ ] e2e: the same window on both widths
 - [ ] The entry's main image shows only on Overview, never on an effort or the gallery
 - [ ] Sections (efforts, gallery) drop the entry heading the nav already shows; an effort shows dates only when it has its own
@@ -26,3 +26,4 @@ The open entry, modal or phone, renders one EntryWindow: the main nav bar with t
 - 2026-10-04: seeded
 - 2026-10-04: done "EntryWindow: bar, media, body and sections, used by the modal and the phone open view" at b89de966
 - 2026-10-04: done "Phone open view covers the full height, nav included; Close reads clearly" at a874d9d8
+- 2026-10-04: done "Media sits under the bar on phones, beside the text on wide screens, by CSS" at ef26577a
