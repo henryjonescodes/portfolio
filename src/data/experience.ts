@@ -108,7 +108,7 @@ export const experienceData: Record<string, EntryData> = {
     ],
     blurb:
       'Interned with the systems department at Tumblr, studying system architecture, dev-ops best practices, and deployment strategies.',
-    endDate: new Date(2014, 1),
+    dateString: '2015',
   },
 };
 
