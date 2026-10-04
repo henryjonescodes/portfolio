@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test';
 import {
   distinctBoxes,
-  sampleBoxes,
   openFirstEntry,
   openFirstEntrySampled,
   trackErrors,
@@ -26,7 +25,7 @@ test.describe('lite mode pages', () => {
   }
 });
 
-for (const path of ['/experience']) {
+for (const path of ['/experience', '/projects']) {
   test.describe(`modal on ${path}`, () => {
     test('morphs open from the clicked entry and closes back', async ({ page }) => {
       const errors = trackErrors(page);
@@ -112,47 +111,4 @@ test('a new page starts scrolled to the top', async ({ page }) => {
   });
   await expect(page.locator('h1').first()).toHaveText(/projects/i, { timeout: 10_000 });
   await expect.poll(() => scroller.evaluate((el) => el.scrollTop)).toBe(0);
-});
-
-test.describe('projects carousel', () => {
-  test('a card morphs into the page and back', async ({ page }) => {
-    const errors = trackErrors(page);
-    await page.goto('/projects?lite=true');
-    const card = page.getByTestId('project-card').first();
-    await expect(card).toBeVisible();
-    await page.waitForTimeout(1500);
-    const source = (await card.boundingBox())!;
-
-    const boxes = await sampleBoxes(
-      page,
-      '[data-testid="project-card-open"]',
-      1500,
-      '[data-testid="project-card"]',
-    );
-    const first = boxes[0];
-    const last = boxes[boxes.length - 1];
-    // Starts on the card, ends larger, and interpolates in between.
-    expect(Math.abs(first.x - source.x)).toBeLessThan(source.width / 2);
-    expect(last.width * last.height).toBeGreaterThan(source.width * source.height * 1.5);
-    expect(distinctBoxes(boxes)).toBeGreaterThan(2);
-
-    await page.getByRole('dialog').getByRole('button', { name: 'Close' }).click();
-    await expect(page.getByTestId('project-card-open')).toHaveCount(0, { timeout: 5_000 });
-    await expect(card).toBeVisible();
-    expect(errors).toEqual([]);
-  });
-
-  test('keyboard opens a card and Escape closes it', async ({ page }) => {
-    await page.goto('/projects?lite=true');
-    await page.waitForTimeout(1500);
-    await page
-      .getByRole('button', { name: /^Open / })
-      .first()
-      .focus();
-    await page.keyboard.press('Enter');
-    await expect(page.getByRole('dialog')).toBeVisible();
-    await page.waitForTimeout(800);
-    await page.keyboard.press('Escape');
-    await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 5_000 });
-  });
 });

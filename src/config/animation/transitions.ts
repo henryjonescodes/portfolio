@@ -285,28 +285,6 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
-  CAROUSEL: {
-    ROW_STAGGER: {
-      staggerChildren: tune('COMPONENT', 0.33, F, 'Carousel > Card Stagger', 'Delay between cards appearing'),
-    },
-    CARD: {
-      duration: tune('MODAL', 1.17, S, 'Carousel > Card Morph', 'Card to page morph, open and close'),
-    },
-    DATE_OPEN: {
-      duration: tune('MODAL', 1.28, S, 'Carousel > Date Open', 'Date travels slightly slower than the card on open'),
-    },
-    CONTENT: {
-      duration: tune('MODAL', 1.05, S, 'Carousel > Body Content', 'Body content reflow inside the morph'),
-    },
-    MEDIA_OPEN: {
-      duration: tune('MODAL', 1.75, S, 'Carousel > Media Open', 'Media drifts out slower than the card on open'),
-    },
-    DETAILS_ANIMATE: {
-      delay: tune('MODAL', 1.17, S, 'Carousel > Details Delay', 'Open-only details wait for the morph'),
-      duration: tune('MODAL', 1.0, S, 'Carousel > Details Fade In'),
-    },
-  },
-
   LOADING: {
     EXIT: {
       duration: tune(
