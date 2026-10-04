@@ -1,6 +1,6 @@
 # Work board
 
-_Updated 2026-10-04 19:37 UTC on `feat/entry-tabs` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:41 UTC on `feat/entry-tabs` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
@@ -57,8 +57,8 @@ flowchart LR
 
 ## 🕘 Just happened
 
-- 1m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
-- 2m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
+- 5m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
+- 6m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
 
 **Merged, not yet landed** (run `bw land <branch> --into <next branch>`)
 
