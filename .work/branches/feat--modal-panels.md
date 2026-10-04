@@ -21,7 +21,7 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 - [x] e2e: panels render; expand fills the overlay and restores
 - [x] Self-maintain portfolio skills for panels and modal sizes
 - [?] Curate real panel content (screenshots, galleries, stats) per project
-- [?] Expanded layout: the right-third media clips at full width; decide whether it grows or moves into a panel
+- [x] Expanded layout: the right-third media clips at full width; decide whether it grows or moves into a panel
 
 ## Log
 
@@ -33,3 +33,4 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 - 2026-10-04: done "Seed project panels from existing content only" at 368c1989
 - 2026-10-04: done "e2e: panels render; expand fills the overlay and restores" at 65b63dfd
 - 2026-10-04: done "Self-maintain portfolio skills for panels and modal sizes" at 82a86157
+- 2026-10-04: done "Expanded layout: the right-third media clips at full width; decide whether it grows or moves into a panel" at b42a0d89
