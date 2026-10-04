@@ -69,7 +69,7 @@ flowchart LR
 - 3m ago · fix(modal): a window with nothing to land on shrinks and fades about the middle · `feat/global-modal`
 - 6m ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
 - 6m ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
-- 6m ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
+- 7m ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
 - 7m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/global-modal`
 - 9m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
 - 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/entry-dock`
