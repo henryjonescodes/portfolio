@@ -14,10 +14,11 @@ The About card says NYC, keeps its two info lines on one row, gives the skill sl
 
 ## Todo
 
-- [ ] NYC as the location; info lines share a row
+- [x] NYC as the location; info lines share a row
 - [ ] Fixed-width skill sliders
 - [ ] Two rows of links under the bio
 
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "NYC as the location; info lines share a row" at 250dbac3
