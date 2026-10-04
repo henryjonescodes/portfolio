@@ -14,7 +14,6 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 ## Todo
 
 - [?] Design review of the carousel in 3D and lite mode
-- [ ] Open view: opaque window filling the whole visible content area, page darkened behind it during the morph
 - [ ] Retro tablet chrome: bevelled title bars, smaller corner radius, skeuomorphic controls
 - [ ] Re-sample the morph tests for both layouts
 
@@ -38,3 +37,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: dropped "Responsive layout: vertical list in 3D and wide lite, horizontal carousel only on mobile, one component set"
 - 2026-10-04: dropped "List row: window title bar with title and date, text in the left two thirds, media in the right third, tools footer; no text over media"
 - 2026-10-04: dropped "Paint-in like the old entries: border draws, divider line draws, typewriter title, media glitches in"
+- 2026-10-04: dropped "Open view: opaque window filling the whole visible content area, page darkened behind it during the morph"
