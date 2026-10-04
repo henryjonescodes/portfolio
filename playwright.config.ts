@@ -7,6 +7,8 @@ export default defineConfig({
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 1 : 0,
   // Animation timing assertions are sensitive to CPU contention.
   workers: 2,
   reporter: [['list']],
@@ -24,7 +26,7 @@ export default defineConfig({
   webServer: {
     command: `npx vite --port ${PORT} --strictPort`,
     port: PORT,
-    reuseExistingServer: true,
+    reuseExistingServer: !process.env.CI,
     timeout: 60_000,
   },
 });
