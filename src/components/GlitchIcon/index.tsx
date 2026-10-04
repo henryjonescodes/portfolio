@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import cn from 'classnames';
+import { Link, useLocation } from 'react-router-dom';
 import styles from './glitch-icon.module.scss';
 import { useSettings } from '@context/SettingsContext';
 
@@ -17,10 +18,21 @@ type GlitchIconProps = {
 } & ({ url: string; onClick?: never } | { onClick?: () => void; url?: never }) & {
     /** Accessible name; required in practice when the link shows only an icon. */
     label?: string;
+    /** Icons drawn with strokes are themed on the stroke instead of the fill. */
+    paint?: 'fill' | 'stroke';
   };
 
-const GlitchIcon: React.FC<GlitchIconProps> = ({ Icon, className, url, onClick, label }) => {
+const GlitchIcon: React.FC<GlitchIconProps> = ({
+  Icon,
+  className,
+  url,
+  onClick,
+  label,
+  paint = 'fill',
+}) => {
   const { animationDisabled } = useSettings();
+  const paintClass = paint === 'stroke' && styles.stroke;
+  const { search } = useLocation();
   // Function to handle the content within the wrapper
   const renderContent = () =>
     animationDisabled ? (
@@ -38,7 +50,19 @@ const GlitchIcon: React.FC<GlitchIconProps> = ({ Icon, className, url, onClick, 
       </motion.div>
     );
 
-  // Determine wrapper and apply appropriate props
+  // A path stays in the app and keeps the query (lite, debug); anything else opens a tab.
+  if (url?.startsWith('/')) {
+    return (
+      <Link
+        to={{ pathname: url, search }}
+        aria-label={label}
+        className={cn(styles.glitch, paintClass, className)}
+      >
+        {renderContent()}
+      </Link>
+    );
+  }
+
   if (url) {
     return (
       <a
@@ -46,18 +70,27 @@ const GlitchIcon: React.FC<GlitchIconProps> = ({ Icon, className, url, onClick, 
         aria-label={label}
         target="_blank"
         rel="noopener noreferrer"
-        className={cn(styles.glitch, className)}
+        className={cn(styles.glitch, paintClass, className)}
       >
         {renderContent()}
       </a>
     );
   }
 
-  return (
-    <div onClick={onClick} className={cn(styles.glitch, className)}>
-      {renderContent()}
-    </div>
-  );
+  if (onClick) {
+    return (
+      <button
+        type="button"
+        onClick={onClick}
+        aria-label={label}
+        className={cn(styles.glitch, styles.button, paintClass, className)}
+      >
+        {renderContent()}
+      </button>
+    );
+  }
+
+  return <div className={cn(styles.glitch, paintClass, className)}>{renderContent()}</div>;
 };
 
 export default GlitchIcon;

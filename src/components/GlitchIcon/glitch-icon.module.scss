@@ -68,6 +68,22 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   transition: opacity 0.2s ease-in-out;
 }
 
+.stroke .icon {
+  path,
+  svg {
+    fill: none;
+    stroke: var(--accent-primary);
+  }
+}
+
+.button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+}
+
 .glitch__layers {
   position: absolute;
   z-index: 2;
