@@ -2,18 +2,11 @@
 // into link previews. Loads the site's data through Vite so aliases and SVG imports resolve.
 // Runs before every build (`npm run share-data`).
 import { writeFileSync } from 'node:fs';
-import { createServer } from 'vite';
+import { loadSiteData } from './lib/load-site-data.mjs';
 
-const server = await createServer({
-  appType: 'custom',
-  logLevel: 'error',
-  server: { middlewareMode: true, hmr: false },
-});
-
-try {
-  const { experienceData } = await server.ssrLoadModule('/src/data/experience.ts');
-  const { projectsData } = await server.ssrLoadModule('/src/data/projects.ts');
-  const { pageMeta, entryTitle, SITE_TITLE } = await server.ssrLoadModule('/src/data/pages.ts');
+{
+  const [{ experienceData }, { projectsData }, { pageMeta, entryTitle, SITE_TITLE }] =
+    await loadSiteData(['/src/data/experience.ts', '/src/data/projects.ts', '/src/data/pages.ts']);
 
   // Mentions read as their text, and list bullets lose their leading dash.
   const plain = (text = '') =>
@@ -46,6 +39,4 @@ try {
 
   writeFileSync('netlify/share-data.json', `${JSON.stringify(shareData, null, 2)}\n`);
   console.log(`share data: ${Object.keys(shareData.entries).length} entries`);
-} finally {
-  await server.close();
 }

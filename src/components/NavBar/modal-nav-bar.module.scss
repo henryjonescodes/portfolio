@@ -12,6 +12,26 @@
 
 .left {
   @include navBar.navBarSection;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+// With tabs, the left side carries the title too: home, title, tabs, then the buttons.
+.hasLeft {
+  display: flex;
+
+  // Stretched to the bar's full height, so tab underlines sit on its bottom edge.
+  .left {
+    flex: 1;
+    height: auto;
+    align-self: stretch;
+    align-items: stretch;
+  }
+
+  .center {
+    display: none;
+  }
 }
 
 .center {
@@ -28,4 +48,9 @@
   &:active {
     cursor: grabbing;
   }
+}
+
+// The window's frame is the bar's right edge, so the last button needs no border of its own.
+.right > :last-child {
+  border-right: none;
 }

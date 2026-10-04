@@ -1,81 +1,19 @@
 @use '@styles' as styles;
 
-.dock {
+.inline {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  align-items: stretch;
+  height: 100%;
 }
 
-// A small bevelled tray of icon keys, like an app dock.
-.tray {
+// The same tabs as the site's nav bar, in a strip of their own (the phone card's).
+.subnav {
   @include styles.title-bar;
   display: flex;
-  gap: 6px;
-  padding: 5px 6px 9px;
-  border: 1px solid var(--foreground-tertiary);
-  border-radius: styles.$radius-md;
-}
-
-.key {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 1px solid transparent;
-  border-radius: styles.$radius-sm;
-  background: none;
-  color: var(--foreground-secondary);
-  font: inherit;
-  cursor: pointer;
-  transition:
-    transform 0.15s ease-out,
-    background-color 0.15s ease-out;
-
-  svg {
-    width: 18px;
-    height: 18px;
-
-    path {
-      fill: currentColor;
-    }
-  }
-
-  &.stroke svg path {
-    fill: none;
-    stroke: currentColor;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    color: var(--accent-primary);
-  }
-
-  &.active {
-    @include styles.bevel-pressed;
-    color: var(--accent-primary);
-    background: var(--background-primary);
-    border-color: var(--foreground-tertiary);
-  }
-}
-
-// The lit dot under the current key; it slides between keys.
-.indicator {
-  position: absolute;
-  bottom: -7px;
-  left: 50%;
-  width: 4px;
-  height: 4px;
-  margin-left: -2px;
-  border-radius: 50%;
-  background: var(--accent-primary);
-  box-shadow: 0 0 6px var(--accent-primary);
-}
-
-.current {
-  font-size: 0.85rem;
-  color: var(--accent-secondary);
+  height: 40px;
+  border-bottom: 2px solid var(--foreground-primary);
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
 .effort {

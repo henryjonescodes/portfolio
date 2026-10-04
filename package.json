@@ -13,8 +13,9 @@
     "lint": "eslint src",
     "format": "prettier --write src e2e",
     "test:e2e": "playwright test",
-    "check": "npm run lint && tsc -b && knip && npm run check:assets",
+    "check": "npm run lint && tsc -b && knip && npm run check:assets && npm run check:mentions",
     "check:assets": "node scripts/check-assets.mjs",
+    "check:mentions": "node scripts/check-mentions.mjs",
     "modal-frames": "node scripts/capture-modal-frames.mjs",
     "og-image": "node scripts/capture-og-image.mjs"
   },

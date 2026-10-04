@@ -16,6 +16,8 @@ import { formatDateRange } from '@utils/text';
 import type { ExperienceEntryProps } from './types';
 import GlitchIconItem from '@components/GlitchIconItem';
 import EffortNav from '@components/Efforts/EffortNav';
+import { GALLERY } from '@components/Efforts/subpages';
+import MasonryGallery from '@components/MasonryGallery';
 import EffortView from '@components/Efforts/EffortView';
 import RichText from '@components/Efforts/RichText';
 
@@ -51,6 +53,7 @@ const ExperienceEntry = ({
     tools,
     panels,
     efforts,
+    gallery,
   } = data;
   const dateRange = dateString ? dateString : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
@@ -58,6 +61,8 @@ const ExperienceEntry = ({
   const { TRANSITIONS } = useAnimations();
   const isOpen = pageOpen && !inList;
   const effort = isOpen ? efforts?.find((e) => e.id === effortId) : undefined;
+  const showGallery = isOpen && effortId === GALLERY && !!gallery?.length;
+  const subpageId = effort?.id ?? (showGallery ? GALLERY : null);
   // Mentions are buttons only in the open entry; a list item is already one big button.
   const mentionHandler = isOpen ? onMention : undefined;
 
@@ -170,8 +175,35 @@ const ExperienceEntry = ({
               transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
             />
           )}
+          {isOpen && (
+            // The frame's fixed top: the title bar, with the section tabs on its left. Only the body below scrolls,
+            // and `layout` keeps this pinned to the top edge while the window resizes.
+            <motion.div layout className={styles.windowHeader}>
+              <ModalNavBar
+                title={title}
+                onClose={onClose}
+                expanded={expanded}
+                onToggleExpand={onToggleExpand}
+                left={
+                  (!!efforts?.length || !!gallery?.length) &&
+                  onSelectEffort && (
+                    <EffortNav
+                      inline
+                      title={title}
+                      idPrefix={id}
+                      efforts={efforts ?? []}
+                      hasGallery={!!gallery?.length}
+                      selected={subpageId}
+                      onSelect={onSelectEffort}
+                    />
+                  )
+                }
+              />
+            </motion.div>
+          )}
           <motion.div
             layoutId="body"
+            layoutScroll={isOpen}
             className={styles.body}
             initial={inList ? 'initial' : 'animate'}
             animate={inList ? 'animate' : 'modalAnimate'}
@@ -182,35 +214,21 @@ const ExperienceEntry = ({
               className={styles.description}
               variants={variants.entryText}
             >
-              {isOpen && (
-                <ModalNavBar
-                  title={title}
-                  onClose={onClose}
-                  expanded={expanded}
-                  onToggleExpand={onToggleExpand}
-                />
-              )}
-              {isOpen && !!efforts?.length && onSelectEffort && (
-                <motion.div layout className={styles.effortNav}>
-                  <EffortNav
-                    idPrefix={id}
-                    efforts={efforts}
-                    selected={effort?.id ?? null}
-                    onSelect={onSelectEffort}
-                  />
-                </motion.div>
-              )}
-              {effort ? (
+              {subpageId ? (
                 <motion.div
                   layout
-                  key={effort.id}
+                  key={subpageId}
                   className={styles.effortContents}
                   role="tabpanel"
                   id={`${id}-panel`}
-                  aria-labelledby={`${id}-tab-${effort.id}`}
+                  aria-labelledby={`${id}-tab-${subpageId}`}
                 >
                   {bodyTitle}
-                  <EffortView effort={effort} onMention={mentionHandler} />
+                  {effort ? (
+                    <EffortView effort={effort} onMention={mentionHandler} />
+                  ) : (
+                    <MasonryGallery items={gallery ?? []} />
+                  )}
                 </motion.div>
               ) : (
                 <>
