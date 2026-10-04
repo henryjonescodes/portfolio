@@ -14,7 +14,7 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 ## Todo
 
 - [x] Effort data model and a mini nav inside the open entry
-- [ ] Efforts: Almanac skill manager (Arbor), Kiki UI design system (ChannelAI), User notifier (Arbor)
+- [x] Efforts: Almanac skill manager (Arbor), Kiki UI design system (ChannelAI), User notifier (Arbor)
 - [ ] Hero numbers kit: big numbers plus simple theme charts for efforts without flashy visuals
 - [ ] Deep links from prose open the entry modal on one effort
 - [ ] Mark unverified data claims in the data and show it only in debug
@@ -26,3 +26,4 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Effort data model and a mini nav inside the open entry" at 882a9eda
+- 2026-10-04: done "Efforts: Almanac skill manager (Arbor), Kiki UI design system (ChannelAI), User notifier (Arbor)" at dd4dcb4f
