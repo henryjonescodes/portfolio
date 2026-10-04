@@ -14,7 +14,7 @@ Run axe in the e2e suite on every page and the open modal, fix what it finds, an
 ## Todo
 
 - [x] Add @axe-core/playwright checks for each page in lite mode and for the open modal
-- [ ] Fix the violations it reports (contrast, names, roles, landmarks)
+- [x] Fix the violations it reports (contrast, names, roles, landmarks)
 - [ ] Allow pinch zoom: drop maximum-scale and user-scalable=no from the viewport meta
 - [ ] Visible focus styles on every interactive element
 
@@ -22,3 +22,4 @@ Run axe in the e2e suite on every page and the open modal, fix what it finds, an
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Add @axe-core/playwright checks for each page in lite mode and for the open modal" at d42f75f6
+- 2026-10-04: done "Fix the violations it reports (contrast, names, roles, landmarks)" at 722978ea
