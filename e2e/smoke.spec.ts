@@ -149,3 +149,14 @@ test('open project shows its panels, and the modal expands and restores', async 
     .poll(async () => Math.abs((await box()).width - cozy.width), { timeout: 5_000 })
     .toBeLessThan(4);
 });
+
+test('map slider walks the bulge to a clicked stop and selects it', async ({ page }) => {
+  await page.goto('/about?lite=true');
+  const stops = page.locator('[class*="stop"]:visible');
+  await expect(stops).toHaveCount(4);
+  await page.waitForTimeout(1500);
+  await stops.nth(3).click();
+  await expect(page.locator('[class*="bulging"]')).toHaveCount(1);
+  await expect(page.locator('[class*="bulging"]')).toHaveCount(0, { timeout: 5_000 });
+  await expect(stops.nth(3)).toHaveClass(/selected/);
+});

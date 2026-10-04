@@ -79,7 +79,7 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
         root.style.setProperty(`--${key}`, value);
       });
     },
-    [derivedColors],
+    [primaryColors, derivedColors],
     100,
   );
 

@@ -1,7 +1,8 @@
 import Loading from '@components/Loading';
 import { useAnimations } from '@context/AnimationContext';
 import { debugLog } from '@utils/debug';
-import React, { ReactNode, useEffect, useRef, useState } from 'react';
+import { useLatest } from '@hooks/useLatest';
+import React, { useCallback, ReactNode, useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoadingContext, LoadingStates } from './LoadingContext';
@@ -30,31 +31,31 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   const [loadingState, setLoadingState] = useState<LoadingStates>(liteMode ? undefined : 'loading');
   const [firstPageLoad, setFirstPageLoad] = useState<boolean>(true);
 
-  // ? Add lite mode query param if lite mode started due to mobile device
-  useEffect(() => {
-    if (isMobile) {
-      updateLiteModeFlag(true);
-    }
-  }, []);
+  // Keeps ?lite in the URL in step with lite mode.
+  const updateLiteModeFlag = useCallback(
+    (to: boolean) => {
+      const searchParams = new URLSearchParams(location.search);
+      const liteModeFlag = searchParams.get('lite');
 
-  // ? Lite Mode Updating
+      if (to && liteModeFlag !== 'true') {
+        searchParams.set('lite', 'true');
+        navigate({ search: searchParams.toString() });
+      } else if (!to && liteModeFlag === 'true') {
+        searchParams.delete('lite');
+        navigate({ search: searchParams.toString() });
+      }
+    },
+    [location.search, navigate],
+  );
+
+  // Phones always run in lite mode, so make the URL say so.
+  useEffect(() => {
+    if (isMobile) updateLiteModeFlag(true);
+  }, [updateLiteModeFlag]);
+
   const setLiteMode = (to: boolean) => {
     updateLiteModeFlag(to);
     setLiteModeState(to);
-  };
-
-  // ? Internal
-  const updateLiteModeFlag = (to: boolean) => {
-    const searchParams = new URLSearchParams(location.search);
-    const liteModeFlag = searchParams.get('lite');
-
-    if (to && liteModeFlag !== 'true') {
-      searchParams.set('lite', 'true');
-      navigate({ search: searchParams.toString() });
-    } else if (!to && liteModeFlag === 'true') {
-      searchParams.delete('lite');
-      navigate({ search: searchParams.toString() });
-    }
   };
 
   // ? Loading management functions
@@ -82,7 +83,9 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
     setLoadingState(undefined);
   };
 
-  // ? Handle loading timeout logic
+  const latestStopLoading = useLatest(stopLoading);
+
+  // Fall back to lite mode if loading outlasts its timeout.
   useEffect(() => {
     debugLog('LoadingContext', `loadingState: ${loadingState}`);
 
@@ -92,7 +95,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
     if (loadingState === 'loading' && !preventTimeout.current) {
       loadingTimer = setTimeout(() => {
         preventTimeout.current = true;
-        stopLoading();
+        latestStopLoading.current();
       }, loadingTimerMs.current); // 5 seconds
     } else {
       if (loadingTimer) {
@@ -106,16 +109,13 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
         clearTimeout(loadingTimer);
       }
     };
-  }, [loadingState]);
+  }, [loadingState, latestStopLoading]);
 
   // ? Update loading state on progress
   useEffect(() => {
-    if (progress >= 100) {
-      if (loadingState !== 'complete') {
-        debugLog('LoadingContext', 'Finished loading');
-        setLoadingState('loaded');
-      }
-    }
+    if (progress < 100) return;
+    debugLog('LoadingContext', 'Assets loaded');
+    setLoadingState((state) => (state === 'complete' ? state : 'loaded'));
   }, [progress]);
 
   return (

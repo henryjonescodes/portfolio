@@ -1,6 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useMemo, useEffect, useRef, useState } from 'react';
 import { locationData, LocationPinKeys } from './map-viewer.contents';
 import { MapContext } from './MapContext';
+import { useAnimations } from '@context/AnimationContext';
+import { useLatest } from '@hooks/useLatest';
 
 export const MapProvider = ({ children }: { children: React.ReactElement }) => {
   const [currentKey, setCurrentKeyState] = useState<LocationPinKeys | null>('nyc');
@@ -15,7 +17,8 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
   const preventAutoCycleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const indexRef = useRef<number>(0);
 
-  const stopKeys = Object.keys(locationData) as LocationPinKeys[];
+  const { MAP_AUTOCYCLE } = useAnimations();
+  const stopKeys = useMemo(() => Object.keys(locationData) as LocationPinKeys[], []);
 
   // Wrap setCurrentKey to handle user interactions
   const setCurrentKey = (key: LocationPinKeys | null, isUserAction: boolean = true) => {
@@ -37,7 +40,7 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
       }
       preventAutoCycleTimeoutRef.current = setTimeout(() => {
         setPreventAutoCycle(false);
-      }, 60000); // 1 minute
+      }, MAP_AUTOCYCLE.USER_PAUSE_MS);
     }
   };
 
@@ -67,7 +70,7 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
     // Set a timeout to start auto cycling after 30 seconds of inactivity
     autoCycleTimeoutRef.current = setTimeout(() => {
       setAutoCycleActive(true);
-    }, 30000); // 30 seconds
+    }, MAP_AUTOCYCLE.IDLE_MS);
 
     // Cleanup on effect cleanup
     return () => {
@@ -76,10 +79,12 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
         autoCycleTimeoutRef.current = null;
       }
     };
-  }, [lastInteractionTime, preventAutoCycle]);
+  }, [lastInteractionTime, preventAutoCycle, MAP_AUTOCYCLE.IDLE_MS]);
 
-  // Effect to handle auto cycling through keys every 10s
+  // Auto-cycling starts from the current stop; read it and the setter at start time only.
+  const latest = useLatest({ currentKey, setCurrentKey });
   useEffect(() => {
+    const { currentKey, setCurrentKey } = latest.current;
     if (autoCycleActive) {
       // Initialize indexRef.current
       let initialIndex: number;
@@ -104,7 +109,7 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
           indexRef.current = 0;
         }
         setCurrentKey(stopKeys[indexRef.current], false); // isUserAction defaults to false
-      }, 8000); // 8 seconds
+      }, MAP_AUTOCYCLE.INTERVAL_MS);
     }
 
     return () => {
@@ -114,7 +119,7 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
         autoCycleIntervalRef.current = null;
       }
     };
-  }, [autoCycleActive]);
+  }, [autoCycleActive, stopKeys, latest, MAP_AUTOCYCLE.INTERVAL_MS]);
 
   // Cleanup on unmount
   useEffect(() => {

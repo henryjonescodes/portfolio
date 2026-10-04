@@ -96,6 +96,27 @@ export const SYSTEM_TUNABLES = {
         'Map Slider > Cascade Duration (ms)',
         'Time between map slider items cascading',
       ),
+      MAP_AUTOCYCLE_IDLE_MS: tune(
+        undefined,
+        30000,
+        { min: 1000, max: 120000, step: 1000 },
+        'Map > Auto-cycle After Idle (ms)',
+        'Idle time before the map starts cycling stops on its own',
+      ),
+      MAP_AUTOCYCLE_INTERVAL_MS: tune(
+        undefined,
+        8000,
+        { min: 1000, max: 30000, step: 500 },
+        'Map > Auto-cycle Interval (ms)',
+        'Time on each stop while cycling',
+      ),
+      MAP_USER_PAUSE_MS: tune(
+        undefined,
+        60000,
+        { min: 0, max: 300000, step: 5000 },
+        'Map > Pause After Click (ms)',
+        'How long a click on the map holds off auto-cycling',
+      ),
       TIMEOUT_LITE_MODE_FALLBACK: tune(
         undefined,
         8000,

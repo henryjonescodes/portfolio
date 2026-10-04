@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { animate, motion, type AnimationPlaybackControls } from 'framer-motion';
 import { useAnimations } from '@context/AnimationContext';
+import { useLatest } from '@hooks/useLatest';
 import { fade } from '@config/animation';
 import styles from './map-components.module.scss';
 import { MapContext } from './MapContext';
@@ -26,7 +27,14 @@ const MapSlider = () => {
 
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
 
+  // React to the selected key changing (from a click or auto-cycling); read the rest live.
+  const latest = useLatest({
+    selectedStop,
+    stopKeys,
+    triggerCascadingAnimation: (i: number) => triggerCascadingAnimation(i),
+  });
   useEffect(() => {
+    const { selectedStop, stopKeys, triggerCascadingAnimation } = latest.current;
     const index = currentKey !== null ? stopKeys.indexOf(currentKey) : -1;
 
     if (index !== -1) {
@@ -37,7 +45,7 @@ const MapSlider = () => {
     } else {
       setSelectedStop(null);
     }
-  }, [currentKey]);
+  }, [currentKey, latest]);
 
   const handleClick = (index: number) => {
     setCurrentKey(stopKeys[index]);
