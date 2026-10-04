@@ -1,14 +1,15 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:19 UTC · 5 live branches · 1 PRs open · 17 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:20 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:19 UTC by `bw board` on `feat/content-requests` |
+| Generated | 2026-10-04 20:20 UTC by `bw board` on `fix/modal-nav-mini` |
 | Trunk | `staging` |
 | Live branches | 5 |
-| Open PRs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) |
-| Waiting on you | 17 |
+| Open PRs | none |
+| Waiting on you | 16 |
+| Merged, not yet landed | `feat/entry-tabs` (run `bw land <branch> --into <next>`) |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -16,18 +17,19 @@
 ```mermaid
 flowchart LR
   n_staging([staging])
+  n_feat_entry_tabs([feat/entry-tabs])
   n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/5<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
-  class n_feat_content_requests planned,current
+  class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
   n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 3/3"]
   class n_feat_crosshair_cursor planned
   n_staging --> n_feat_crosshair_cursor
-  n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs · #82<br/>review · 3/3"]
-  class n_feat_entry_tabs review
-  n_staging --> n_feat_entry_tabs
+  n_fix_modal_nav_mini["<b>The window's bar is the main nav</b><br/>fix/modal-nav-mini<br/>planned · 0/1<br/><i>next: Mini nav items in the window bar; nam…</i>"]
+  class n_fix_modal_nav_mini planned,current
+  n_staging --> n_fix_modal_nav_mini
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
   n_staging --> n_release_promote_main
@@ -52,40 +54,32 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Layouts are built against mock images and drafted prose, each tagged with a request id. A generated REQUESTS page lists everything the owner needs to source (images, links, prose, icons) with the draft beside it and where to drop the real thing; dropping a file or prose named by its id replaces the mock or draft with no code change.
+**What.** An open entry's title bar uses exactly the main nav's mini items (icons that open to show their label), with the entry's name floated right before the buttons.
 
 **How, next.**
 
-- Request ids on mock media and drafted prose
-- Sourced files and prose resolve by id at build time
-- npm run requests renders the list; bw publishes it next to the board
+- Mini nav items in the window bar; name floated right
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/content-requests` |  | planned, local only | 0/11 | Request ids on mock media and drafted prose |  |
+| `fix/modal-nav-mini` |  | planned, local only | 0/1 | Mini nav items in the window bar; name floated right |  |
 
 ## 🕘 Just happened
 
 **feat(cursor): a crosshair pointer with dashed guides behind the content** · 2026-10-04 20:18 · `feat/crosshair-cursor` · `21cece7c`
 On mouse and trackpad the system cursor becomes a small crosshair that inverts against what is under it and opens up over anything clickable. Dashed guides run from the pointer to every edge, layered over the background and under the content and nav. Touch screens keep their own behaviour.
 
-- **fix(modal): the close button sits inside the title bar, with the frame as its edge** · 20:13 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e0c96483`
-- **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6`
-- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a`
+- **fix(modal): the close button sits inside the title bar, with the frame as its edge** · 20:13 · `fix/modal-nav-mini` · `e0c96483`
+- **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · `fix/modal-nav-mini` · `be7fc0f6`
+- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 20:06 · `fix/modal-nav-mini` · `d6eb511a`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:06 | feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `1881a411` |
 | 2026-10-04 19:35 | feat(entries): an effort dock and labelled placeholder media | [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865` |
 | 2026-10-04 19:18 | test: modal close asserts the outcome, not a mid-close style the faster close skips | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `db04bcdf` |
-| 2026-10-04 19:15 | fix(modal): a window with nothing to land on shrinks and fades about the middle | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `05b63c49` |
-| 2026-10-04 19:12 | feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `63c1f59e` |
-| 2026-10-04 19:12 | docs: roadmap reflects efforts, sharing and entry links | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `f2d37efd` |
-| 2026-10-04 19:11 | feat(modal): any link can open an entry, zooming out of where it was clicked | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `21bfc4b4` |
-| 2026-10-04 19:11 | fix(share): restore a shared link from the address bar, not the router's stale query | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `e18c2be4` |
-| 2026-10-04 13:45 | fix(share): no closed-modal flash on arrival, page titles, no router render mid-morph | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `646fcd90` |
-| 2026-10-04 13:45 | fix(a11y): nav items are keyboard-reachable links | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `fa77adbf` |
 
 </details>
 
@@ -165,14 +159,12 @@ On mouse and trackpad the system cursor becomes a small crosshair that inverts a
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
-**17. Review and merge Entry subpages as nav tabs, and a masonry gallery**
-- *Why:* its PR is open and waiting on a merge
-- `review` · `feat/entry-tabs` · [#82](https://github.com/henryjonescodes/portfolio/pull/82)
-
 <details><summary><b>Plans</b></summary>
 
 | Plan | Progress |
 |---|---|
+| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
+| [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
 </details>
@@ -182,9 +174,9 @@ On mouse and trackpad the system cursor becomes a small crosshair that inverts a
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
-| `feat/content-requests` ◀ | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
+| `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 1 | pushed |  |
-| `feat/entry-tabs` | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | pushed |  |
+| `fix/modal-nav-mini` ◀ | The window's bar is the main nav | planned |  | 0/1 | 5 | local only | Mini nav items in the window bar; name floated right |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
@@ -227,13 +219,11 @@ The pointer becomes a small crosshair, with dashed guide lines running to every 
 
 </details>
 
-<details><summary><code>feat/entry-tabs</code>: Entry subpages as nav tabs, and a masonry gallery (3/3)</summary>
+<details><summary><code>fix/modal-nav-mini</code>: The window's bar is the main nav (0/1)</summary>
 
-An open entry's subpages use the main nav's tabs (Overview is the home icon, no text), a Gallery tab appears when an entry has one, and the gallery is a two-column masonry of square, wide (2:1) and tall (1:2) cards. A check fails the build when an effort subpage has no mention in the prose.
+An open entry's title bar uses exactly the main nav's mini items (icons that open to show their label), with the entry's name floated right before the buttons.
 
-- [x] Subpage tabs styled and built like the main nav items
-- [x] Gallery subpage: masonry with square, wide and tall cards, animated reflow
-- [x] check:mentions in npm run check, and a repertoire rule for it
+- [ ] Mini nav items in the window bar; name floated right
 
 </details>
 
