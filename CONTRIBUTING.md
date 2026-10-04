@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:48 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:49 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:48 UTC by `bw board` on `entry/window` |
+| Generated | 2026-10-04 20:49 UTC by `bw board` on `fix/about-card` |
 | Trunk | `staging` |
 | Live branches | 9 |
 | Open PRs | none |
@@ -31,7 +31,7 @@ flowchart LR
   class n_entry_open planned
   n_entry_list --> n_entry_open
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
-  class n_entry_window planned,current
+  class n_entry_window planned
   n_staging --> n_entry_window
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
@@ -40,7 +40,7 @@ flowchart LR
   class n_feat_crosshair_cursor planned
   n_staging --> n_feat_crosshair_cursor
   n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 3/3"]
-  class n_fix_about_card planned
+  class n_fix_about_card planned,current
   n_staging --> n_fix_about_card
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -66,15 +66,13 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
-
-**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
+**What.** The About card says NYC, keeps its two info lines on one row, gives the skill sliders a fixed width, and shows two rows of links.
 
 **How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/window` |  | planned, 15 to push, 14 to pull | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
+| `fix/about-card` |  | planned, pushed | 3/3 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -178,7 +176,6 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | Plan | Progress |
 |---|---|
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
-| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 0 of 4 branches done |
 | [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -192,10 +189,10 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/5 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 8 | 15 to push, 14 to pull |  |
+| `entry/window` | One window for every open entry | planned |  | 6/6 | 8 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
-| `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
+| `fix/about-card` ◀ | About card tidy | planned |  | 3/3 | 6 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
