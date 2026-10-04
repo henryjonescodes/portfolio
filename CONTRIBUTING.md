@@ -1,15 +1,15 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:49 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:50 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:49 UTC by `bw board` on `fix/about-card` |
+| Generated | 2026-10-04 20:50 UTC by `bw board` on `fix/fullscreen-url` |
 | Trunk | `staging` |
 | Live branches | 9 |
 | Open PRs | none |
 | Waiting on you | 16 |
-| Merged, not yet landed | `feat/entry-tabs`, `fix/modal-nav-mini` (run `bw land <branch> --into <next>`) |
+| Merged, not yet landed | `feat/crosshair-cursor`, `feat/entry-tabs`, `fix/modal-nav-mini` (run `bw land <branch> --into <next>`) |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -36,12 +36,12 @@ flowchart LR
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
-  n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 3/3"]
-  class n_feat_crosshair_cursor planned
-  n_staging --> n_feat_crosshair_cursor
   n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 3/3"]
-  class n_fix_about_card planned,current
+  class n_fix_about_card planned
   n_staging --> n_fix_about_card
+  n_fix_fullscreen_url["<b>Full screen survives a refresh</b><br/>fix/fullscreen-url<br/>planned · 0/1<br/><i>next: view=full read on load and kept in sy…</i>"]
+  class n_fix_fullscreen_url planned,current
+  n_staging --> n_fix_fullscreen_url
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
   n_staging --> n_release_promote_main
@@ -66,13 +66,15 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** The About card says NYC, keeps its two info lines on one row, gives the skill sliders a fixed width, and shows two rows of links.
+**What.** The full-screen view is in the URL (?view=full), so a refresh or a shared link keeps it instead of relaunching into the 3D device.
 
-**How, next.** Every todo is done; it waits on review and merge.
+**How, next.**
+
+- view=full read on load and kept in sync with the toggle
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `fix/about-card` |  | planned, pushed | 3/3 | nothing open |  |
+| `fix/fullscreen-url` |  | planned, local only | 0/1 | view=full read on load and kept in sync with the toggle |  |
 
 ## 🕘 Just happened
 
@@ -80,19 +82,18 @@ flowchart LR
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 - **feat(entries): phone tiles open the shared window, full screen, image first** · 20:47 · `entry/window` · `c69e8718`
-- **fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 20:31 · `feat/crosshair-cursor` · `ed401577`
+- **fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 20:31 · `fix/fullscreen-url` · `ed401577`
 - **fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 20:28 · `fix/about-card` · `250dbac3`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | [#84](https://github.com/henryjonescodes/portfolio/pull/84) · `d6f7dca5` |
-| 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | `feat/crosshair-cursor` · `21cece7c` |
+| 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | `fix/fullscreen-url` · `d6f7dca5` |
+| 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | `fix/fullscreen-url` · `21cece7c` |
 | 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | `fix/about-card` · `e0c96483` |
 | 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6` |
 | 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a` |
-| 2026-10-04 20:06 | feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `1881a411` |
 
 </details>
 
@@ -192,8 +193,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/5 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `entry/window` | One window for every open entry | planned |  | 6/6 | 8 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
-| `fix/about-card` ◀ | About card tidy | planned |  | 3/3 | 7 | pushed |  |
+| `fix/about-card` | About card tidy | planned |  | 3/3 | 7 | pushed |  |
+| `fix/fullscreen-url` ◀ | Full screen survives a refresh | planned |  | 0/1 | 10 | local only | view=full read on load and kept in sync with the toggle |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
@@ -271,16 +272,6 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 
 </details>
 
-<details><summary><code>feat/crosshair-cursor</code>: A crosshair cursor (3/3)</summary>
-
-The pointer becomes a small crosshair, with dashed guide lines running to every edge of the screen. The lines sit behind the page content and in front of the background; the small mark rides on top with a blend mode so it reads against anything.
-
-- [x] Guide lines follow the pointer behind the content, in front of the background
-- [x] Small crosshair on top with a difference blend; grows over anything clickable
-- [x] Fine pointers only; touch and reduced motion keep the plain cursor where it matters
-
-</details>
-
 <details><summary><code>fix/about-card</code>: About card tidy (3/3)</summary>
 
 The About card says NYC, keeps its two info lines on one row, gives the skill sliders a fixed width, and shows two rows of links.
@@ -288,6 +279,14 @@ The About card says NYC, keeps its two info lines on one row, gives the skill sl
 - [x] NYC as the location; info lines share a row
 - [x] Fixed-width skill sliders
 - [x] Two rows of links under the bio
+
+</details>
+
+<details><summary><code>fix/fullscreen-url</code>: Full screen survives a refresh (0/1)</summary>
+
+The full-screen view is in the URL (?view=full), so a refresh or a shared link keeps it instead of relaunching into the 3D device.
+
+- [ ] view=full read on load and kept in sync with the toggle
 
 </details>
 
