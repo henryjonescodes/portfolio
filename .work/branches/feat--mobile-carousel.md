@@ -3,7 +3,7 @@ branch: feat/mobile-carousel
 parent: design/retro-chrome
 status: review
 title: Mobile carousel (nice to have)
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/66
 updated: 2026-10-04
 ---
 
