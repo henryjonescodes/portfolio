@@ -17,7 +17,7 @@ Finish the animation cleanup the refactor started, behind the e2e net and the la
 - [x] Memoize ExperienceEntry variants; drop no-op variants and dead commented code
 - [x] Replace setTimeout sequencing in PageContents, Page, MapSlider, ZoomContext with when/delayChildren or cleaned-up effects
 - [x] Walk the regression checklist in 3D and lite mode
-- [ ] Write the portfolio-animation-system and portfolio-regression-checklist skills
+- [x] Write the portfolio-animation-system and portfolio-regression-checklist skills
 - [ ] Resolve the 27 lint warnings (hook deps, fast-refresh exports)
 
 ## Log
@@ -28,3 +28,4 @@ Finish the animation cleanup the refactor started, behind the e2e net and the la
 - 2026-10-04: done "Memoize ExperienceEntry variants; drop no-op variants and dead commented code" at 553bce2e
 - 2026-10-04: done "Walk the regression checklist in 3D and lite mode" at 0c960ede
 - 2026-10-04: Checklist walked via e2e plus lite-mode visual check; reduced-motion and network throttle not exercised
+- 2026-10-04: done "Write the portfolio-animation-system and portfolio-regression-checklist skills" at 095508bf
