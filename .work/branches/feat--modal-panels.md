@@ -21,6 +21,7 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 - [x] e2e: panels render; expand fills the overlay and restores
 - [ ] Self-maintain portfolio skills for panels and modal sizes
 - [?] Curate real panel content (screenshots, galleries, stats) per project
+- [?] Expanded layout: the right-third media clips at full width; decide whether it grows or moves into a panel
 
 ## Log
 
