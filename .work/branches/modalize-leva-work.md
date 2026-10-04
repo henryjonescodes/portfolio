@@ -18,7 +18,7 @@ Make the animations easy to tweak and idiomatic without regressing them; ship as
 - [x] Split animation config; wire dead Leva controls; lazy-load Leva
 - [x] Write ROADMAP.md and update LEVA.md and CLAUDE.md
 - [x] Fix the 21 lint errors
-- [ ] Open the PR into staging
+- [x] Open the PR into staging
 
 ## Log
 
