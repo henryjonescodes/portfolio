@@ -1,13 +1,13 @@
 # Work board
 
-_Updated 2026-10-04 19:35 UTC on `feat/entry-dock` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:35 UTC on `` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
   n_feat_global_modal([feat/global-modal])
   n_staging([staging])
   n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/4 · 🙋 1"]
-  class n_feat_entry_dock planned,current
+  class n_feat_entry_dock planned
   n_feat_global_modal --> n_feat_entry_dock
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/14 · 🙋 11<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -43,8 +43,7 @@ flowchart LR
 
 ## 🟢 Happening now
 
-- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 3/4  
-  next: nothing open
+- Nothing active.
 
 ## 🕘 Just happened
 
@@ -77,7 +76,7 @@ flowchart LR
 
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
-| `feat/entry-dock` ◀ | planned | 3/4 | 4 | pushed | — |  |
+| `feat/entry-dock` | planned | 3/4 | 4 | pushed | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
