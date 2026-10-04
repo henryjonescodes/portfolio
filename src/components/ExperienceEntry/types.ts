@@ -9,9 +9,6 @@ export type ToolEntry = {
   label: string;
 };
 
-/** A project's preview: a looping video or a still image, served from /public. */
-export type EntryMedia = { video: string; objectPosition?: string } | { img: string };
-
 // Base entry data type
 export type EntryData = {
   id: string;
@@ -24,7 +21,6 @@ export type EntryData = {
   url?: string;
   dateString?: string;
   tools?: ToolEntry[];
-  media?: EntryMedia;
 };
 
 // Component props type
