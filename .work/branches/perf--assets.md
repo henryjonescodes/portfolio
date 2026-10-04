@@ -18,6 +18,7 @@ Phones and lite mode never download three.js, and the 3D scene's 13 MB of textur
 - [ ] Measure before and after: chunk sizes, total transfer, time to scene ready
 - [x] e2e: lite mode loads no three.js chunk
 - [ ] Compress the GLB: meshopt quantization moves a correction into node transforms that SiteMixer's hand-written meshes ignore, so render the glTF's node transforms (or regenerate SiteMixer with gltfjsx --transform) first
+- [?] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check
 
 ## Log
 
