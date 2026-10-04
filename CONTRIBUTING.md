@@ -65,6 +65,7 @@ flowchart LR
 
 ## 🕘 Just happened
 
+- 0m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/shareable-urls`
 - 2m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
 - 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
 - 5h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
@@ -94,7 +95,7 @@ flowchart LR
 |---|---|---|---|---|---|---|
 | `feat/entry-dock` | planned | 3/4 | 1 | pushed | — |  |
 | `feat/global-modal` | planned | 2/10 | 6 | pushed | — |  |
-| `feat/shareable-urls` ◀ | planned | 2/3 | 3 | pushed | — |  |
+| `feat/shareable-urls` ◀ | planned | 2/3 | 4 | 1 to push | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
@@ -150,6 +151,7 @@ URL parameters capture as much state as possible (open entry, effort, size), and
 
 Commits:
 
+- `e18c2be4` fix(share): restore a shared link from the address bar, not the router's stale query
 - `646fcd90` fix(share): no closed-modal flash on arrival, page titles, no router render mid-morph
 - `fa77adbf` fix(a11y): nav items are keyboard-reachable links
 - `5b0412e4` feat(share): the open modal lives in the URL, and links preview what they share
