@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:14 UTC · 5 live branches · 1 PRs open · 17 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:18 UTC · 5 live branches · 1 PRs open · 17 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:14 UTC by `bw board` on `feat/crosshair-cursor` |
+| Generated | 2026-10-04 20:18 UTC by `bw board` on `feat/crosshair-cursor` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) |
@@ -22,7 +22,7 @@ flowchart LR
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
-  n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 0/3<br/><i>next: Guide lines follow the pointer behind…</i>"]
+  n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 1/3<br/><i>next: Small crosshair on top with a differe…</i>"]
   class n_feat_crosshair_cursor planned,current
   n_staging --> n_feat_crosshair_cursor
   n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs · #82<br/>review · 3/3"]
@@ -58,27 +58,27 @@ flowchart LR
 
 **How, next.**
 
-- Guide lines follow the pointer behind the content, in front of the background
 - Small crosshair on top with a difference blend; grows over anything clickable
 - Fine pointers only; touch and reduced motion keep the plain cursor where it matters
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/crosshair-cursor` |  | planned, local only | 0/3 | Guide lines follow the pointer behind the content, in front of the background |  |
+| `feat/crosshair-cursor` |  | planned, local only | 1/3 | Small crosshair on top with a difference blend; grows over anything clickable |  |
 
 ## 🕘 Just happened
 
-**fix(modal): the close button sits inside the title bar, with the frame as its edge** · 2026-10-04 20:13 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e0c96483`
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+**feat(cursor): a crosshair pointer with dashed guides behind the content** · 2026-10-04 20:18 · `feat/crosshair-cursor` · `21cece7c`
+On mouse and trackpad the system cursor becomes a small crosshair that inverts against what is under it and opens up over anything clickable. Dashed guides run from the pointer to every edge, layered over the background and under the content and nav. Touch screens keep their own behaviour.
 
+- **fix(modal): the close button sits inside the title bar, with the frame as its edge** · 20:13 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e0c96483`
 - **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6`
 - **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a`
-- **feat(entries): an effort dock and labelled placeholder media** · 19:35 · [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 19:35 | feat(entries): an effort dock and labelled placeholder media | [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865` |
 | 2026-10-04 19:18 | test: modal close asserts the outcome, not a mid-close style the faster close skips | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `db04bcdf` |
 | 2026-10-04 19:15 | fix(modal): a window with nothing to land on shrinks and fades about the middle | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `05b63c49` |
 | 2026-10-04 19:12 | feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `63c1f59e` |
@@ -185,7 +185,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 0/3 | 0 | local only | Guide lines follow the pointer behind the content, in front of the background |
+| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 1/3 | 1 | local only | Small crosshair on top with a difference blend; grows over anything clickable |
 | `feat/entry-tabs` | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
@@ -219,11 +219,11 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 
 </details>
 
-<details><summary><code>feat/crosshair-cursor</code>: A crosshair cursor (0/3)</summary>
+<details><summary><code>feat/crosshair-cursor</code>: A crosshair cursor (1/3)</summary>
 
 The pointer becomes a small crosshair, with dashed guide lines running to every edge of the screen. The lines sit behind the page content and in front of the background; the small mark rides on top with a blend mode so it reads against anything.
 
-- [ ] Guide lines follow the pointer behind the content, in front of the background
+- [x] Guide lines follow the pointer behind the content, in front of the background
 - [ ] Small crosshair on top with a difference blend; grows over anything clickable
 - [ ] Fine pointers only; touch and reduced motion keep the plain cursor where it matters
 
