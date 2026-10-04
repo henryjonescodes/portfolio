@@ -2,7 +2,7 @@
 branch: feat/modal-panels
 parent: anim/motion-idioms
 status: review
-title: Modal panels and an expanded size
+title: Projects list polish, modal panels and an expanded size
 pr: https://github.com/henryjonescodes/portfolio/pull/62
 updated: 2026-10-04
 ---
