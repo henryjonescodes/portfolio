@@ -1,7 +1,7 @@
 ---
 branch: perf/assets
 parent: feat/mobile-carousel
-status: planned
+status: active
 title: Faster loads: lazy 3D and lighter assets
 pr: null
 updated: 2026-10-04
