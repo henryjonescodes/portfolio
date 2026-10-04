@@ -15,6 +15,7 @@ Links to the site unfurl with a title, description and image, and the page has t
 
 - [x] Description, theme-color and canonical URL in index.html
 - [x] Open Graph and Twitter card tags with a share image
+- [?] Approve the share image and description, and confirm the canonical domain is henryjones.xyz
 
 ## Log
 
