@@ -13,7 +13,7 @@ Leave the codebase lean and consistent before more features land: no unused code
 
 ## Todo
 
-- [ ] Drop unused dependencies (react-spring, @use-gesture/react, concurrently) and list three-stdlib
+- [x] Drop unused dependencies (react-spring, @use-gesture/react, concurrently) and list three-stdlib
 - [ ] Delete unused exports, dead constants and leftover variants (knip report), and the stale SESSION_LOG.md
 - [ ] One debug logger hook in place of the eight console.log calls, silent unless ?debug=true
 - [ ] One EntryMedia view shared by the projects list and the media panel
@@ -26,3 +26,4 @@ Leave the codebase lean and consistent before more features land: no unused code
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Drop unused dependencies (react-spring, @use-gesture/react, concurrently) and list three-stdlib" at b125d1ef
