@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:30 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:31 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:30 UTC by `bw board` on `refactor/entry-window` |
+| Generated | 2026-10-04 20:31 UTC by `bw board` on `feat/crosshair-cursor` |
 | Trunk | `staging` |
 | Live branches | 10 |
 | Open PRs | none |
@@ -25,7 +25,7 @@ flowchart LR
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
   n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 3/3"]
-  class n_feat_crosshair_cursor planned
+  class n_feat_crosshair_cursor planned,current
   n_staging --> n_feat_crosshair_cursor
   n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 3/3"]
   class n_fix_about_card planned
@@ -43,7 +43,7 @@ flowchart LR
   class n_refactor_entry_open planned
   n_refactor_entry_list --> n_refactor_entry_open
   n_refactor_entry_window["<b>One window for every open entry</b><br/>refactor/entry-window<br/>planned · 0/6<br/><i>next: EntryWindow: bar, media, body and sec…</i>"]
-  class n_refactor_entry_window planned,current
+  class n_refactor_entry_window planned
   n_staging --> n_refactor_entry_window
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -69,19 +69,15 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
+**Motivation.** Make the pointer part of the instrument-panel look, so moving around the site feels like operating the device.
 
-**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
+**What.** The pointer becomes a small crosshair, with dashed guide lines running to every edge of the screen. The lines sit behind the page content and in front of the background; the small mark rides on top with a blend mode so it reads against anything.
 
-**How, next.**
-
-- EntryWindow: bar, media, body and sections, used by the modal and the phone open view
-- Phone open view covers the full height, nav included; Close reads clearly
-- Media sits under the bar on phones, beside the text on wide screens, by CSS
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `refactor/entry-window` |  | planned, local only | 0/6 | EntryWindow: bar, media, body and sections, used by the modal and the phone open view | 2026-10-entry-reconcile, 0 of 4 |
+| `feat/crosshair-cursor` |  | planned, pushed | 3/3 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -184,7 +180,6 @@ The card's location reads NYC and both tags share a row; the location tags rende
 
 | Plan | Progress |
 |---|---|
-| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 0 of 4 branches done |
 | [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -196,13 +191,13 @@ The card's location reads NYC and both tags share a row; the location tags rende
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 1 | pushed |  |
+| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 3/3 | 1 | pushed |  |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
 | `fix/modal-nav-mini` | The window's bar is the main nav | planned |  | 1/1 | 6 | pushed |  |
 | `refactor/entry-cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `refactor/entry-list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `refactor/entry-open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `refactor/entry-window` ◀ | One window for every open entry | planned |  | 0/6 | 0 | local only | EntryWindow: bar, media, body and sections, used by the modal and the phone open view |
+| `refactor/entry-window` | One window for every open entry | planned |  | 0/6 | 0 | local only | EntryWindow: bar, media, body and sections, used by the modal and the phone open view |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
