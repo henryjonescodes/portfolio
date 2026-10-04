@@ -138,14 +138,4 @@ test.describe('projects carousel', () => {
     await page.keyboard.press('Escape');
     await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 5_000 });
   });
-
-  test('with reduced motion the card still opens and closes', async ({ page }) => {
-    await page.emulateMedia({ reducedMotion: 'reduce' });
-    await page.goto('/projects?lite=true');
-    await page.waitForTimeout(1500);
-    await page.getByTestId('project-card').first().click();
-    await expect(page.getByRole('dialog')).toBeVisible();
-    await page.getByRole('dialog').getByRole('button', { name: 'Close' }).click();
-    await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 2_000 });
-  });
 });

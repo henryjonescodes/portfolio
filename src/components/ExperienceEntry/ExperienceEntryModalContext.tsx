@@ -9,7 +9,16 @@ type ModalContextType = {
   selectedEntry: EntryData | null;
   pageOpen: boolean;
   overlayStyle: React.CSSProperties;
-  openModal: (entry: EntryData, entryRef: React.RefObject<HTMLDivElement>) => void;
+  modalChildren: React.ReactNode;
+  modalUrl?: string;
+  modalDateString?: string;
+  openModal: (
+    entry: EntryData,
+    entryRef: React.RefObject<HTMLDivElement>,
+    children?: React.ReactNode,
+    url?: string,
+    dateString?: string,
+  ) => void;
   closeModal: () => void;
 };
 
@@ -33,6 +42,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   const [entryRect, setEntryRect] = useState<DOMRect | null>(null);
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
+  const [modalUrl, setModalUrl] = useState<string | undefined>(undefined);
+  const [modalDateString, setModalDateString] = useState<string | undefined>(undefined);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => () => clearTimeout(closeTimer.current), []);
@@ -41,7 +53,13 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     setPageOpen(selectedEntry != null && !isClosing);
   }, [selectedEntry, isClosing]);
 
-  const openModal = (entry: EntryData, entryRef: React.RefObject<HTMLDivElement>) => {
+  const openModal = (
+    entry: EntryData,
+    entryRef: React.RefObject<HTMLDivElement>,
+    children?: React.ReactNode,
+    url?: string,
+    dateString?: string,
+  ) => {
     const entryElement = entryRef.current;
     if (!entryElement) return;
     clearTimeout(closeTimer.current);
@@ -49,6 +67,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     const rect = entryElement.getBoundingClientRect();
     setEntryRect(rect);
     setSelectedEntry(entry);
+    setModalChildren(children);
+    setModalUrl(url);
+    setModalDateString(dateString);
     setIsClosing(false);
   };
 
@@ -63,6 +84,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     closeTimer.current = setTimeout(() => {
       setSelectedEntry(null);
       setEntryRect(null);
+      setModalChildren(null);
+      setModalUrl(undefined);
+      setModalDateString(undefined);
     }, totalDuration);
   };
 
@@ -81,6 +105,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
         closeModal,
         pageOpen,
         overlayStyle,
+        modalChildren,
+        modalUrl,
+        modalDateString,
       }}
     >
       {children}
@@ -107,7 +134,11 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
                 inList={false}
                 overlayStyle={overlayStyle}
                 onClose={closeModal}
-              />
+                url={modalUrl}
+                dateString={modalDateString}
+              >
+                {modalChildren}
+              </ExperienceEntry>
             </div>
           </motion.div>
         )}

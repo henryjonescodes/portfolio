@@ -1,4 +1,4 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   useCallback,
   useEffect,
@@ -36,8 +36,6 @@ const ProjectCarousel = ({
   const cardRefs = useRef<Record<string, HTMLElement | null>>({});
   const [selection, setSelection] = useState<Selection | null>(null);
   const [open, setOpen] = useState(false);
-  // With reduced motion the layout snaps and may not report completion, so close outright.
-  const reduceMotion = useReducedMotion();
 
   const rowVariants = useMemo(
     () => ({ animate: { transition: TRANSITIONS.CAROUSEL.ROW_STAGGER } }),
@@ -64,10 +62,7 @@ const ProjectCarousel = ({
     if (selection) setOpen(true);
   }, [selection]);
 
-  const close = useCallback(() => {
-    setOpen(false);
-    if (reduceMotion) setSelection(null);
-  }, [reduceMotion]);
+  const close = useCallback(() => setOpen(false), []);
 
   useEffect(() => {
     if (!open) return;
