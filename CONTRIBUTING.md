@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/open` |
+| Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/cleanup` |
 | Trunk | `staging` |
 | Live branches | 9 |
 | Open PRs | none |
@@ -25,7 +25,7 @@ flowchart LR
   class n_entry_list planned
   n_entry_window --> n_entry_list
   n_entry_open["<b>One open morph, the carousel's, at every width</b><br/>entry/open<br/>planned · 0/4<br/><i>next: Closed and open layouts keep the same…</i>"]
-  class n_entry_open planned,current
+  class n_entry_open planned
   n_entry_list --> n_entry_open
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
   class n_entry_window planned
@@ -66,19 +66,7 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** The phone morph is the reference; every open should feel like it.
-
-**What.** Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
-
-**How, next.**
-
-- Closed and open layouts keep the same elements in the same order, with shared layoutIds
-- Per-part timings from the carousel tunables, shared by every width
-- Remove EntryCarousel and EntryCard; one provider opens everything
-
-| Branch | PR | Status | Progress | Next | Plan |
-|---|---|---|---|---|---|
-| `entry/open` |  | planned, local only | 0/4 | Closed and open layouts keep the same elements in the same order, with shared layoutIds |  |
+Nothing checked out or active.
 
 ## 🕘 Just happened
 
@@ -194,7 +182,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `entry/window` | One window for every open entry | planned |  | 6/6 | 7 | local only |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
