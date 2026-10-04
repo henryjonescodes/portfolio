@@ -21,6 +21,7 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 - [?] claim: User notifier sends about 250,000 notifications a month
 - [?] claim: User notifier delivers at a 99.99% success rate
 - [?] media: Screens or recordings of Almanac, Kiki UI and the notifier
+- [?] claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo
 
 ## Log
 
