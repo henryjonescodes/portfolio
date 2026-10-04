@@ -76,17 +76,18 @@ flowchart LR
 
 ## 🕘 Just happened
 
-**feat(entries): phone tiles open the shared window, full screen, image first** · 2026-10-04 20:47 · `entry/window` · `c69e8718`
-Phone tiles open the same window as wide screens. On phones it takes the whole screen over the site nav, the image sits first under the bar on Overview, and Expand is hidden. Sections drop the entry heading the bar already shows; an effort shows dates only when it has its own. A closed window over a source with no image hides the pane, so it grows in as it opens. The window takes focus as it opens, traps Tab and returns focus to its source. The carousel keeps only its tiles.
+**fix(about): readable skill bars; email opens mail, not a blank tab** · 2026-10-04 20:49 · `fix/about-card` · `267bbf6a`
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **feat(entries): phone tiles open the shared window, full screen, image first** · 20:47 · `entry/window` · `c69e8718`
 - **fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 20:31 · `feat/crosshair-cursor` · `ed401577`
 - **fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 20:28 · `fix/about-card` · `250dbac3`
-- **fix(modal): the window bar is the main nav: mini items, the name on the right** · 20:24 · [#84](https://github.com/henryjonescodes/portfolio/pull/84) · `d6f7dca5`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | [#84](https://github.com/henryjonescodes/portfolio/pull/84) · `d6f7dca5` |
 | 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | `feat/crosshair-cursor` · `21cece7c` |
 | 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | `fix/about-card` · `e0c96483` |
 | 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6` |
@@ -192,7 +193,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | `entry/window` | One window for every open entry | planned |  | 6/6 | 8 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
-| `fix/about-card` ◀ | About card tidy | planned |  | 3/3 | 6 | pushed |  |
+| `fix/about-card` ◀ | About card tidy | planned |  | 3/3 | 7 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
