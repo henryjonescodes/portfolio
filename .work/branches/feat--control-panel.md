@@ -5,7 +5,7 @@ status: planned
 title: A control panel for colour, type and effects
 pr: null
 updated: 2026-10-04
-motivation: null
+motivation: Let visitors play with the device, and give the model's knobs and buttons a reason to exist outside 3D.
 ---
 
 ## Goal
