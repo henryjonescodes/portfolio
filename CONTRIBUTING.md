@@ -1,19 +1,14 @@
 # Work board
 
-_Updated 2026-10-04 19:18 UTC on `feat/global-modal` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:35 UTC on `feat/entry-dock` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
+  n_feat_global_modal([feat/global-modal])
   n_staging([staging])
   n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/4 · 🙋 1"]
-  class n_feat_entry_dock planned
+  class n_feat_entry_dock planned,current
   n_feat_global_modal --> n_feat_entry_dock
-  n_feat_global_modal["<b>Inline links that open any modal</b><br/>feat/global-modal<br/>planned · 2/10 · 🙋 8"]
-  class n_feat_global_modal planned,current
-  n_staging --> n_feat_global_modal
-  n_feat_shareable_urls["<b>Shareable state and per-link previews</b><br/>feat/shareable-urls<br/>planned · 2/3 · 🙋 1"]
-  class n_feat_shareable_urls planned
-  n_staging --> n_feat_shareable_urls
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/14 · 🙋 11<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
   n_staging --> n_release_promote_main
@@ -30,8 +25,6 @@ flowchart LR
 
 **Questions**
 
-- [ ] Which page titles should link to entries? Map lines and prose mentions do now; headings are plain · `feat/global-modal`
-- [ ] Approve per-entry preview images, or generate them · `feat/shareable-urls`
 - [ ] Feel check of the new open in lite and 3D (from anim/modal-open) · `release/promote-main`
 - [ ] Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy) · `release/promote-main`
 - [ ] Decide where /links appears (home menu, nav bar, or as home like the old branch) (from content/real-copy) · `release/promote-main`
@@ -44,35 +37,26 @@ flowchart LR
 - [ ] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check (from perf/assets) · `release/promote-main`
 - [ ] Approve the share image and description, and confirm the canonical domain is henryjones.xyz (from seo/meta) · `release/promote-main`
 
-**Claims to verify** (shown on the site, marked unverified until checked)
-
-- [ ] User notifier sends about 250,000 notifications a month (from feat/efforts) · `feat/global-modal`
-- [ ] User notifier delivers at a 99.99% success rate (from feat/efforts) · `feat/global-modal`
-- [ ] Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) · `feat/global-modal`
-- [ ] Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) · `feat/global-modal`
-- [ ] User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) · `feat/global-modal`
-
 **Media to find**
 
 - [ ] Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there · `feat/entry-dock`
-- [ ] Screens or recordings of Almanac, Kiki UI and the notifier (from feat/efforts) · `feat/global-modal`
-- [ ] An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro) (from feat/efforts) · `feat/global-modal`
 
 ## 🟢 Happening now
 
-- **Inline links that open any modal** · `feat/global-modal` (checked out) · 2/10  
+- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 3/4  
   next: nothing open
 
 ## 🕘 Just happened
 
-- 0m ago · test: modal close asserts the outcome, not a mid-close style the faster close skips · `feat/global-modal`
-- 3m ago · fix(modal): a window with nothing to land on shrinks and fades about the middle · `feat/global-modal`
-- 6m ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
-- 6m ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
-- 7m ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
-- 7m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/global-modal`
-- 9m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
+- 26m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
 - 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/entry-dock`
+- 6h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/entry-dock`
+- 6h ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/entry-dock`
+
+**Merged, not yet landed** (run `bw land <branch> --into <next branch>`)
+
+- `feat/global-modal` into `staging`: Inline links that open any modal
+- `feat/shareable-urls` into `staging`: Shareable state and per-link previews
 
 **Landed and folded**
 
@@ -84,7 +68,7 @@ flowchart LR
 
 <details><summary><b>Plans</b></summary>
 
-- `2026-10-mobile-efforts.md`: 5/7 branches done
+- `2026-10-mobile-efforts.md`: 7/7 branches done (complete; the next `bw land` removes it)
 - `2026-10-roadmap.md`: 3/4 branches done
 
 </details>
@@ -93,9 +77,7 @@ flowchart LR
 
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
-| `feat/entry-dock` | planned | 3/4 | 4 | pushed | — |  |
-| `feat/global-modal` ◀ | planned | 2/10 | 9 | 11 to push, 8 to pull | — |  |
-| `feat/shareable-urls` | planned | 2/3 | 4 | 1 to push | — |  |
+| `feat/entry-dock` ◀ | planned | 3/4 | 4 | pushed | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
@@ -115,51 +97,6 @@ Commits:
 - `a0dee110` feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word
 - `5c351640` docs: roadmap reflects efforts, sharing and entry links
 - `026e795a` feat(modal): any link can open an entry, zooming out of where it was clicked
-
-</details>
-
-<details><summary><b>feat/global-modal</b>: Inline links that open any modal (2/10)</summary>
-
-Later, once the rest has landed. Any text can link to an experience, project or effort and open its modal with an animation, from anywhere including the map's one-line entries.
-
-- [x] One global modal host and an inline link component
-- [x] The map's single-line experience entries become entry variants that open the modal
-- [ ] 🙋 Which page titles should link to entries? Map lines and prose mentions do now; headings are plain
-- [ ] 🙋 claim: User notifier sends about 250,000 notifications a month (from feat/efforts)
-- [ ] 🙋 claim: User notifier delivers at a 99.99% success rate (from feat/efforts)
-- [ ] 🙋 media: Screens or recordings of Almanac, Kiki UI and the notifier (from feat/efforts)
-- [ ] 🙋 claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts)
-- [ ] 🙋 claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts)
-- [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts)
-- [ ] 🙋 media: An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro) (from feat/efforts)
-
-Commits:
-
-- `db04bcdf` test: modal close asserts the outcome, not a mid-close style the faster close skips
-- `05b63c49` fix(modal): a window with nothing to land on shrinks and fades about the middle
-- `63c1f59e` feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word
-- `f2d37efd` docs: roadmap reflects efforts, sharing and entry links
-- `21bfc4b4` feat(modal): any link can open an entry, zooming out of where it was clicked
-- `e18c2be4` fix(share): restore a shared link from the address bar, not the router's stale query
-- `646fcd90` fix(share): no closed-modal flash on arrival, page titles, no router render mid-morph
-- `fa77adbf` fix(a11y): nav items are keyboard-reachable links
-
-</details>
-
-<details><summary><b>feat/shareable-urls</b>: Shareable state and per-link previews (2/3)</summary>
-
-URL parameters capture as much state as possible (open entry, effort, size), and link previews reflect the shared state.
-
-- [x] Modal, effort and expanded state in URL parameters, restored on load
-- [x] Per-URL Open Graph (title, description, image) via a Netlify edge function
-- [ ] 🙋 Approve per-entry preview images, or generate them
-
-Commits:
-
-- `e18c2be4` fix(share): restore a shared link from the address bar, not the router's stale query
-- `646fcd90` fix(share): no closed-modal flash on arrival, page titles, no router render mid-morph
-- `fa77adbf` fix(a11y): nav items are keyboard-reachable links
-- `5b0412e4` feat(share): the open modal lives in the URL, and links preview what they share
 
 </details>
 
