@@ -15,10 +15,11 @@ The pointer becomes a small crosshair, with dashed guide lines running to every 
 ## Todo
 
 - [x] Guide lines follow the pointer behind the content, in front of the background
-- [ ] Small crosshair on top with a difference blend; grows over anything clickable
+- [x] Small crosshair on top with a difference blend; grows over anything clickable
 - [ ] Fine pointers only; touch and reduced motion keep the plain cursor where it matters
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Guide lines follow the pointer behind the content, in front of the background" at 21cece7c
+- 2026-10-04: done "Small crosshair on top with a difference blend; grows over anything clickable" at f93f4ca0
