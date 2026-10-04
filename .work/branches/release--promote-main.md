@@ -16,6 +16,7 @@ Retire the old webpack site once staging carries everything above.
 - [?] Confirm Netlify deploy settings for main and staging
 - [ ] PR staging into main
 - [?] Feel check of the new open in lite and 3D (from anim/modal-open)
+- [?] Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 
 ## Log
 
