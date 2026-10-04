@@ -46,6 +46,7 @@
 
   &Inner {
     width: 100%;
+    min-height: 100%;
     max-width: 1000px;
     display: flex;
     flex-direction: column;
