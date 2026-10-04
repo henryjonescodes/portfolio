@@ -13,7 +13,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 
 ## Todo
 
-- [ ] Extend EntryData with color, backgroundImage, logo
+- [x] Extend EntryData with color, backgroundImage, logo
 - [ ] Carousel row with layoutScroll and mobile scroll-snap
 - [ ] Card-to-page morph with tunable base duration and multipliers
 - [ ] e2e test for the morph and close
@@ -22,3 +22,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Extend EntryData with color, backgroundImage, logo" at 3d8a96f6
