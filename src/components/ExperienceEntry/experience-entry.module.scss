@@ -66,30 +66,6 @@
     flex-direction: column;
   }
 
-  .childrenWrapper {
-    aspect-ratio: 1.5;
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    flex-shrink: 0;
-    flex-grow: 0;
-    max-width: 40%;
-    max-height: 100%;
-    z-index: 0;
-
-    &Modal {
-      aspect-ratio: unset;
-      max-width: 100%;
-    }
-  }
-
-  .children {
-    z-index: 1;
-    display: flex;
-    height: 100%;
-    position: relative;
-  }
-
   .line {
     z-index: 2;
   }
@@ -139,15 +115,6 @@
       &Content {
         flex-direction: column-reverse;
       }
-    }
-
-    .childrenWrapper {
-      aspect-ratio: unset;
-      max-width: unset;
-      max-height: unset;
-    }
-
-    .children {
     }
 
     .line {
