@@ -248,10 +248,6 @@ const ExperienceEntry = ({
         {!inList && overlayStyle ? (
           <motion.div
             className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
-            variants={variants.modalContainer}
-            initial="animate"
-            animate={expanded ? 'expanded' : 'modalAnimate'}
-            exit="modalExit"
             style={{ x: dragX, y: dragY }}
             drag={!expanded}
             dragMomentum={false}
