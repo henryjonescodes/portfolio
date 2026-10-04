@@ -3,7 +3,7 @@ branch: design/retro-chrome
 parent: chore/foundation
 status: review
 title: Retro tablet chrome pass
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/65
 updated: 2026-10-04
 ---
 
