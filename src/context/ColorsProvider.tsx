@@ -73,6 +73,9 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({ children }) 
       root.style.setProperty('--foreground-primary', primaryColors.foregroundPrimary);
       root.style.setProperty('--accent-primary', primaryColors.accentPrimary);
       root.style.setProperty('--background-primary', primaryColors.backgroundPrimary);
+      document
+        .querySelector('meta[name="theme-color"]')
+        ?.setAttribute('content', primaryColors.backgroundPrimary);
 
       // Set derived colors
       Object.entries(derivedColors).forEach(([key, value]) => {

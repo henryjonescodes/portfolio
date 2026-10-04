@@ -1,6 +1,15 @@
+@use '@styles/layout' as layout;
+
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
-/* index.css */
+:root {
+  --nav-bar-height: 45px;
+
+  @media (max-width: layout.$width-mobile) {
+    --nav-bar-height: 52px;
+  }
+}
+
 html,
 body,
 #root {
@@ -13,6 +22,12 @@ body,
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+}
+
+// iOS Safari paints this behind overscroll and the toolbars.
+html,
+body {
+  background-color: var(--background-primary);
 }
 
 #root {

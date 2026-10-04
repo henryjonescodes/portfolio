@@ -68,10 +68,6 @@
       }
     }
 
-    @media (max-width: styles.$width-mobile) {
-      width: 20px;
-      height: 20px;
-    }
   }
 
   .label {
@@ -216,7 +212,7 @@
     }
 
     @media (max-width: styles.$width-mobile) {
-      width: 40px;
+      width: 46px;
 
       .icon {
         margin-left: 10px;

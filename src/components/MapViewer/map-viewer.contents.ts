@@ -25,12 +25,12 @@ export type LocationPinKeys = 'portland' | 'paloAlto' | 'nyc' | 'schenectady';
 
 export const locationData: Record<LocationPinKeys, PointOfInterest> = {
   nyc: {
-    prefix: 'I’m on the job market in',
+    prefix: 'I’m based in',
     title: 'New York City',
     description:
-      'On the lookout for my next challenge in New York City, where I can apply my expertise in React, TypeScript, iOS, and frontend development to build innovative, seamless user experiences. Working on my next big idea in the meantime.',
+      'I live in New York City and work remotely as a full stack engineer at Arbor, building the features that show people how much they save, with React, TypeScript and a real-time notification system behind them.',
     mapTitle: 'NEW YORK, NY',
-    mapHighlights: [{ icon: Building, text: 'Your Company?' }],
+    mapHighlights: [{ icon: Building, text: 'Arbor (remote)' }],
     className: styles.nyc,
     pinClassName: styles.nycPin,
   },
