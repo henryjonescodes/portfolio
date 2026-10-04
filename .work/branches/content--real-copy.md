@@ -13,7 +13,7 @@ Replace lorem ipsum and bring over content only the old site has.
 
 ## Todo
 
-- [ ] Port real experience blurbs and responsibilities from origin/main
+- [x] Port real experience blurbs and responsibilities from origin/main
 - [ ] Write real project blurbs
 - [?] Confirm tumblr dates (old site says 2015 to present, new says 2014)
 - [ ] Add the resume PDF and a link to it
@@ -22,3 +22,4 @@ Replace lorem ipsum and bring over content only the old site has.
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Port real experience blurbs and responsibilities from origin/main" at 5e471d7b
