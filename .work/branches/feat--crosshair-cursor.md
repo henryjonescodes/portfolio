@@ -5,7 +5,7 @@ status: planned
 title: A crosshair cursor
 pr: null
 updated: 2026-10-04
-motivation: null
+motivation: Make the pointer part of the instrument-panel look, so moving around the site feels like operating the device.
 ---
 
 ## Goal
