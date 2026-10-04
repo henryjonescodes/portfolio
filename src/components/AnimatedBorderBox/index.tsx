@@ -2,6 +2,7 @@ import { motion, useIsPresent } from 'framer-motion';
 import { useEffect, useRef, useState, ReactNode } from 'react';
 import cn from 'classnames';
 import { useAnimations } from '@context/AnimationContext';
+import { radius } from '@styles/sass-variables';
 import styles from './local.module.scss';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 
@@ -17,7 +18,7 @@ const AnimatedBorder = ({
   width,
   height,
   borderWidth,
-  borderRadius = 20,
+  borderRadius = radius.md,
   onAnimationComplete,
 }: AnimatedBorderProps) => {
   const { TRANSITIONS } = useAnimations();
@@ -72,7 +73,7 @@ const AnimatedBorderBox = ({
   className,
   children,
   contentClassName,
-  borderRadius = 20,
+  borderRadius = radius.md,
 }: AnimatedBorderBoxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });

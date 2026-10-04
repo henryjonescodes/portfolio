@@ -85,6 +85,7 @@
 
 .navigationBar {
   @include navBarContainer;
+  @include styles.title-bar;
   height: styles.$height-nav-bar;
 }
 
@@ -228,7 +229,13 @@
 
 .navButton {
   @include navItemCommon;
+  @include styles.bevel;
   padding: 8px;
+
+  &:active {
+    @include styles.bevel-pressed;
+  }
+
   border-left: 4px solid styles.$foreground-primary;
   border-left: 4px solid var(--foreground-primary);
   justify-content: center;

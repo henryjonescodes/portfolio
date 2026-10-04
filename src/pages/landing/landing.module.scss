@@ -71,7 +71,7 @@
   overflow: hidden;
   height: 325px !important;
   width: 425px !important;
-  border-radius: 16px;
+  border-radius: styles.$radius-lg;
 
   &.button {
     cursor: pointer;

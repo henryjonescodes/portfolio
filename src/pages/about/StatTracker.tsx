@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import TypewriterText from '@components/TypewriterText';
 import { useAnimations } from '@context/AnimationContext';
+import { radius } from '@styles/sass-variables';
 import { fade } from '@config/animation';
 import styles from './about.module.scss';
 
@@ -42,7 +43,7 @@ const StatTracker = ({ label, rating }: StatTrackerProps) => {
       <AnimatedBorderBox
         className={styles.tracker}
         contentClassName={styles.trackerContent}
-        borderRadius={11}
+        borderRadius={radius.lg}
         borderWidth={3}
       >
         <motion.span className={styles.track} variants={trackerVariants}>

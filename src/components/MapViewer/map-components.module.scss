@@ -154,7 +154,7 @@ $line-selected-width: 5px;
       background-color 0.3s,
       height 0.2s,
       width 0.2s;
-    border-radius: 4px;
+    border-radius: styles.$radius-sm;
   }
 
   &:hover::before {
@@ -275,7 +275,7 @@ $line-selected-width: 5px;
   }
 
   > .contents {
-    border-radius: 32px 32px 0 0px;
+    border-radius: styles.$radius-lg styles.$radius-lg 0 0;
     overflow: hidden;
     aspect-ratio: 1.4 !important;
     position: relative;

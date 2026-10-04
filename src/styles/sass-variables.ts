@@ -10,3 +10,9 @@ export const colors = {
   "background-secondary": "#010a0a",
   "background-tertiary": "#062e2e"
 } as const;
+
+export const radius = {
+  "sm": 4,
+  "md": 8,
+  "lg": 12
+} as const;
