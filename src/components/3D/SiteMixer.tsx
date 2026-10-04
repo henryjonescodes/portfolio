@@ -41,7 +41,9 @@ const texturePaths = [
   '3D/images/roughness_bake_1.webp',
 ];
 texturePaths.forEach((path) => useLoader.preload(TextureLoader, path));
-useGLTF.preload('/3D/models/site-mixer-1.glb');
+// The model is Draco-compressed; the decoder is served from public/draco.
+const DRACO_DECODER = '/draco/';
+useGLTF.preload('/3D/models/site-mixer-1.glb', DRACO_DECODER);
 
 export function SiteMixer(props: JSX.IntrinsicElements['group']) {
   const location = useLocation();
@@ -49,7 +51,7 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
   const { primaryHues, setPrimaryHues } = useColors();
 
   // ?? Load Scene Components & Textures
-  const { nodes, materials } = useGLTF('3D/models/site-mixer-1.glb') as SiteMixerGLTF;
+  const { nodes, materials } = useGLTF('3D/models/site-mixer-1.glb', DRACO_DECODER) as SiteMixerGLTF;
   const [bakeImage, normalMap, roughnessMap] = useLoader(TextureLoader, texturePaths);
 
   bakeImage.flipY = false;

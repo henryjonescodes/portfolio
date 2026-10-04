@@ -9,8 +9,11 @@ const tracked = (args) =>
     .split('\n')
     .filter(Boolean);
 
-// Read by Netlify, not by the app.
+// Not referenced by name: Netlify reads _redirects, and DRACOLoader fetches its decoder files
+// from the folder useGLTF is given.
 const KEEP = new Set(['public/_redirects']);
+const KEEP_DIRS = ['public/draco/'];
+const kept = (f) => KEEP.has(f) || KEEP_DIRS.some((d) => f.startsWith(d));
 
 const sources = tracked(['src', 'index.html', 'scripts']).filter((f) =>
   /\.(tsx?|s?css|html|m?js|json)$/.test(f),
@@ -19,7 +22,7 @@ const corpus = sources.map((f) => readFileSync(f, 'utf8')).join('\n');
 
 const isJunk = (f) => f.endsWith('.DS_Store');
 const unused = [
-  ...tracked(['public']).filter((f) => !KEEP.has(f) && !isJunk(f) && !corpus.includes(basename(f))),
+  ...tracked(['public']).filter((f) => !kept(f) && !isJunk(f) && !corpus.includes(basename(f))),
   ...tracked(['src/assets']).filter((f) => !isJunk(f) && !corpus.includes(f.slice('src/'.length))),
 ];
 
