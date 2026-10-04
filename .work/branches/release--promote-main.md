@@ -27,6 +27,7 @@ Retire the old webpack site once staging carries everything above.
 - [ ] Confirm the first CI run is green on every stacked PR (from modalize-leva-work)
 - [ ] Compress the GLB: meshopt quantization moves a correction into node transforms that SiteMixer's hand-written meshes ignore, so render the glTF's node transforms (or regenerate SiteMixer with gltfjsx --transform) first (from perf/assets)
 - [?] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check (from perf/assets)
+- [?] Approve the share image and description, and confirm the canonical domain is henryjones.xyz (from seo/meta)
 
 ## Log
 
