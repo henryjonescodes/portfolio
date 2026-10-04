@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/list` |
+| Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/open` |
 | Trunk | `staging` |
 | Live branches | 8 |
 | Open PRs | none |
@@ -22,7 +22,7 @@ flowchart LR
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
   n_entry_list["<b>One list that is a carousel on phones</b><br/>entry/list<br/>planned · 0/3<br/><i>next: EntryList with the list and tile pres…</i>"]
-  class n_entry_list planned,current
+  class n_entry_list planned
   n_entry_window --> n_entry_list
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
   class n_entry_window planned
@@ -63,19 +63,7 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Resizing should re-lay out the same entries, not swap one component tree for another.
-
-**What.** Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go.
-
-**How, next.**
-
-- EntryList with the list and tile presentations from CSS container queries
-- One paint-in (border, typewriter, stagger) for list items and tiles
-- Resizing across the breakpoint keeps the same elements (e2e)
-
-| Branch | PR | Status | Progress | Next | Plan |
-|---|---|---|---|---|---|
-| `entry/list` |  | planned, local only | 0/3 | EntryList with the list and tile presentations from CSS container queries |  |
+Nothing checked out or active.
 
 ## 🕘 Just happened
 
@@ -190,7 +178,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
-| `entry/list` ◀ | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/window` | One window for every open entry | planned |  | 6/6 | 7 | local only |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
