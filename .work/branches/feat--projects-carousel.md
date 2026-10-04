@@ -14,7 +14,6 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 ## Todo
 
 - [?] Design review of the carousel in 3D and lite mode
-- [ ] Responsive layout: vertical list in 3D and wide lite, horizontal carousel only on mobile, one component set
 - [ ] List row: window title bar with title and date, text in the left two thirds, media in the right third, tools footer; no text over media
 - [ ] Paint-in like the old entries: border draws, divider line draws, typewriter title, media glitches in
 - [ ] Open view: opaque window filling the whole visible content area, page darkened behind it during the morph
@@ -38,3 +37,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: dropped "e2e test for the morph and close"
 - 2026-10-04: dropped "Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)"
 - 2026-10-04: dropped "Remove the now unused projects path from ExperienceEntry (url and media children)"
+- 2026-10-04: dropped "Responsive layout: vertical list in 3D and wide lite, horizontal carousel only on mobile, one component set"
