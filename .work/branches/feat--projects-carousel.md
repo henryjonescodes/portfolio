@@ -19,6 +19,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - [x] e2e test for the morph and close
 - [?] Design review of the carousel in 3D and lite mode
 - [ ] Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)
+- [ ] Remove the now unused projects path from ExperienceEntry (url and media children)
 
 ## Log
 
