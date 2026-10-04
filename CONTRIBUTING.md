@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:13 UTC by `bw board` on `` |
+| Generated | 2026-10-04 20:13 UTC by `bw board` on `feat/entry-tabs` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) |
@@ -23,7 +23,7 @@ flowchart LR
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
   n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs · #82<br/>review · 3/3"]
-  class n_feat_entry_tabs review
+  class n_feat_entry_tabs review,current
   n_staging --> n_feat_entry_tabs
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -49,15 +49,23 @@ flowchart LR
 
 ## 🟢 Happening now
 
-Nothing checked out or active.
+**Motivation.** Make every open entry feel like a real window on a small operating system, so the site reads as one designed object rather than a page with popups.
+
+**What.** An open entry's subpages use the main nav's tabs (Overview is the home icon, no text), a Gallery tab appears when an entry has one, and the gallery is a two-column masonry of square, wide (2:1) and tall (1:2) cards. A check fails the build when an effort subpage has no mention in the prose.
+
+**How, next.** Every todo is done; it waits on review and merge.
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `feat/entry-tabs` | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | review, 5 to push | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
 
 ## 🕘 Just happened
 
-**fix(modal): the close button sits inside the title bar, with the frame as its edge** · 2026-10-04 20:13 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `efa8ee45`
+**fix(modal): the close button sits inside the title bar, with the frame as its edge** · 2026-10-04 20:13 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e0c96483`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
-- **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `41e91db8`
-- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 19:56 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d14aab9a`
+- **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6`
+- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a`
 - **feat(entries): an effort dock and labelled placeholder media** · 19:35 · [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
@@ -171,7 +179,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/entry-tabs` | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | 13 to push, 9 to pull |  |
+| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | 5 to push |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
