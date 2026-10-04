@@ -1,15 +1,15 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:47 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:47 UTC · 9 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:47 UTC by `bw board` on `entry/window` |
+| Generated | 2026-10-04 20:47 UTC by `bw board` on `` |
 | Trunk | `staging` |
-| Live branches | 10 |
+| Live branches | 9 |
 | Open PRs | none |
 | Waiting on you | 16 |
-| Merged, not yet landed | `feat/entry-tabs` (run `bw land <branch> --into <next>`) |
+| Merged, not yet landed | `feat/entry-tabs`, `fix/modal-nav-mini` (run `bw land <branch> --into <next>`) |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -27,11 +27,11 @@ flowchart LR
   n_entry_list["<b>One list that is a carousel on phones</b><br/>entry/list<br/>planned · 0/3<br/><i>next: EntryList with the list and tile pres…</i>"]
   class n_entry_list planned
   n_entry_window --> n_entry_list
-  n_entry_open["<b>One open morph, the carousel's, at every width</b><br/>entry/open<br/>planned · 0/4<br/><i>next: Closed and open layouts keep the same…</i>"]
+  n_entry_open["<b>One open morph, the carousel's, at every width</b><br/>entry/open<br/>planned · 0/5<br/><i>next: Closed and open layouts keep the same…</i>"]
   class n_entry_open planned
   n_entry_list --> n_entry_open
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
-  class n_entry_window planned,current
+  class n_entry_window planned
   n_staging --> n_entry_window
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
@@ -42,9 +42,6 @@ flowchart LR
   n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 3/3"]
   class n_fix_about_card planned
   n_staging --> n_fix_about_card
-  n_fix_modal_nav_mini["<b>The window's bar is the main nav</b><br/>fix/modal-nav-mini<br/>planned · 1/1"]
-  class n_fix_modal_nav_mini planned
-  n_staging --> n_fix_modal_nav_mini
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
   n_staging --> n_release_promote_main
@@ -69,15 +66,7 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
-
-**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
-
-**How, next.** Every todo is done; it waits on review and merge.
-
-| Branch | PR | Status | Progress | Next | Plan |
-|---|---|---|---|---|---|
-| `entry/window` |  | planned, pushed | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
+Nothing checked out or active.
 
 ## 🕘 Just happened
 
@@ -86,7 +75,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 
 - **fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 20:31 · `feat/crosshair-cursor` · `ed401577`
 - **fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 20:28 · `fix/about-card` · `250dbac3`
-- **fix(modal): the window bar is the main nav: mini items, the name on the right** · 20:24 · `fix/modal-nav-mini` · `d6f7dca5`
+- **fix(modal): the window bar is the main nav: mini items, the name on the right** · 20:24 · [#84](https://github.com/henryjonescodes/portfolio/pull/84) · `d6f7dca5`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
@@ -94,11 +83,9 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 |---|---|---|
 | 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | `feat/crosshair-cursor` · `21cece7c` |
 | 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | `fix/about-card` · `e0c96483` |
-| 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | `fix/modal-nav-mini` · `be7fc0f6` |
-| 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | `fix/modal-nav-mini` · `d6eb511a` |
+| 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6` |
+| 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a` |
 | 2026-10-04 20:06 | feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `1881a411` |
-| 2026-10-04 19:35 | feat(entries): an effort dock and labelled placeholder media | [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865` |
-| 2026-10-04 19:18 | test: modal close asserts the outcome, not a mid-close style the faster close skips | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `db04bcdf` |
 
 </details>
 
@@ -183,7 +170,6 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | Plan | Progress |
 |---|---|
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
-| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 0 of 4 branches done |
 | [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -196,12 +182,11 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
-| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 7 | pushed |  |
+| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/5 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/window` | One window for every open entry | planned |  | 6/6 | 7 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
-| `fix/modal-nav-mini` | The window's bar is the main nav | planned |  | 1/1 | 6 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
@@ -236,7 +221,7 @@ Experience and projects render one EntryList. A container query turns it from a 
 
 </details>
 
-<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (0/4)</summary>
+<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (0/5)</summary>
 
 Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
@@ -244,6 +229,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 - [ ] Per-part timings from the carousel tunables, shared by every width
 - [ ] Remove EntryCarousel and EntryCard; one provider opens everything
 - [ ] e2e: open and close at both widths, and a resize while open
+- [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt
 
 </details>
 
@@ -295,14 +281,6 @@ The About card says NYC, keeps its two info lines on one row, gives the skill sl
 - [x] NYC as the location; info lines share a row
 - [x] Fixed-width skill sliders
 - [x] Two rows of links under the bio
-
-</details>
-
-<details><summary><code>fix/modal-nav-mini</code>: The window's bar is the main nav (1/1)</summary>
-
-An open entry's title bar uses exactly the main nav's mini items (icons that open to show their label), with the entry's name floated right before the buttons.
-
-- [x] Mini nav items in the window bar; name floated right
 
 </details>
 
