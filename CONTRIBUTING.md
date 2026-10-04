@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:11 UTC · 4 live branches · 1 PRs open · 17 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:13 UTC · 4 live branches · 1 PRs open · 17 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:11 UTC by `bw board` on `feat/entry-tabs` |
+| Generated | 2026-10-04 20:13 UTC by `bw board` on `feat/entry-tabs` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) |
@@ -57,15 +57,15 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/entry-tabs` | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | review, 12 to push, 9 to pull | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
+| `feat/entry-tabs` | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | review, 13 to push, 9 to pull | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
 
 ## 🕘 Just happened
 
-**fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 2026-10-04 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `41e91db8`
-The bar holds the home key, the entry's name in hero type and the sections as icon and label nav items, all one NavBarItem, with underlines on the bar's bottom edge. The phone card hides overview extras on the gallery, the tab title names the gallery, and focus only moves on a real tab change.
+**fix(modal): the close button sits inside the title bar, with the frame as its edge** · 2026-10-04 20:13 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `efa8ee45`
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `41e91db8`
 - **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 19:56 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d14aab9a`
-- **feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll** · 19:50 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e4dc73fc`
 - **feat(entries): an effort dock and labelled placeholder media** · 19:35 · [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
@@ -89,69 +89,69 @@ The bar holds the home key, the entry's name in hero type and the sections as ic
 
 **1. User notifier sends about 250,000 notifications a month**
 - *Why:* The User notifier effort leads with this figure, shown as unverified on the live site until you confirm it.
-- `claim` · `feat/content-requests` · from `feat/efforts`
+- `claim` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **2. User notifier delivers at a 99.99% success rate**
 - *Why:* The second headline figure on the User notifier effort, also marked unverified until confirmed.
-- `claim` · `feat/content-requests` · from `feat/efforts`
+- `claim` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 ### Writing
 
 **3. Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo**
 - *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
-- `prose` · `feat/content-requests` · from `feat/efforts`
+- `prose` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **4. Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography)**
 - *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
-- `prose` · `feat/content-requests` · from `feat/efforts`
+- `prose` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **5. User notifier summary: a real-time email notification system that shows Arbor users what they are saving**
 - *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
-- `prose` · `feat/content-requests` · from `feat/efforts`
+- `prose` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **6. Review the Arbor and project blurbs (written from existing descriptions)**
 - *Why:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
-- `prose` · `release/promote-main` · from `content/real-copy`
+- `prose` · `release/promote-main` · from `content/real-copy` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 ### Decisions
 
 **7. Approve per-entry preview images, or generate them**
 - *Why:* Shared links show a per-page title and description, but one site-wide image for every entry.
-- `decision` · `feat/content-requests` · from `feat/shareable-urls`
+- `decision` · `feat/content-requests` · from `feat/shareable-urls` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
 **8. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
 - *Why:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
-- `decision` · `feat/content-requests` · from `feat/global-modal`
+- `decision` · `feat/content-requests` · from `feat/global-modal` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/components/EntryLink/index.tsx)
 
 **9. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
 - *Why:* The page exists and About links to it, but nothing else on the site leads there.
-- `decision` · `release/promote-main` · from `content/real-copy`
+- `decision` · `release/promote-main` · from `content/real-copy` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/pages/links/index.tsx)
 
 **10. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
 - *Why:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
-- `decision` · `release/promote-main` · from `design/retro-chrome`
+- `decision` · `release/promote-main` · from `design/retro-chrome` · [_colors.scss](https://github.com/henryjonescodes/portfolio/blob/staging/src/styles/_colors.scss#L12)
 
 **11. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
 - *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
-- `decision` · `release/promote-main` · from `perf/assets`
+- `decision` · `release/promote-main` · from `perf/assets` · [images](https://github.com/henryjonescodes/portfolio/blob/staging/public/3D/images)
 
 **12. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
 - *Why:* Every shared link shows this card; it also settles which domain is canonical.
-- `decision` · `release/promote-main` · from `seo/meta`
+- `decision` · `release/promote-main` · from `seo/meta` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
 ### Files to send
 
 **13. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
 - *Why:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
-- `media` · `feat/content-requests` · from `feat/entry-dock`
+- `media` · `feat/content-requests` · from `feat/entry-dock` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **14. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
-- `media` · `release/promote-main` · from `content/real-copy`
+- `media` · `release/promote-main` · from `content/real-copy` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
 
 **15. Curate real panel content (screenshots, galleries, stats) per project**
 - *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
-- `media` · `release/promote-main` · from `feat/modal-panels`
+- `media` · `release/promote-main` · from `feat/modal-panels` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
 
 ### Reviews
 
@@ -179,8 +179,8 @@ The bar holds the home key, the entry's name in hero type and the sections as ic
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 3 | 12 to push, 9 to pull |  |
-| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 11 to push | PR staging into main |
+| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | 13 to push, 9 to pull |  |
+| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
 
