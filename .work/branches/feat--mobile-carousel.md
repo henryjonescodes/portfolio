@@ -1,7 +1,7 @@
 ---
 branch: feat/mobile-carousel
 parent: design/retro-chrome
-status: planned
+status: active
 title: Mobile carousel (nice to have)
 pr: null
 updated: 2026-10-04
