@@ -1,6 +1,6 @@
 ---
 branch: perf/assets
-parent: feat/mobile-carousel
+parent: staging
 status: review
 title: Faster loads: lazy 3D and lighter assets
 pr: https://github.com/henryjonescodes/portfolio/pull/67
