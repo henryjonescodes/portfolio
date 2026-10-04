@@ -24,6 +24,7 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 - [?] claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo
 - [?] claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography)
 - [?] claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving
+- [?] media: An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro)
 
 ## Log
 
@@ -34,3 +35,4 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 - 2026-10-04: done "Deep links from prose open the entry modal on one effort" at cf1f7dc2
 - 2026-10-04: done "Mark unverified data claims in the data and show it only in debug" at dc9362f4
 - 2026-10-04: Unverified figures show an 'unverified' chip publicly (not debug-only), since staging is public; set unverified: false once confirmed.
+- 2026-10-04: carried 1 open todo(s) from feat/links-retro
