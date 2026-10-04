@@ -21,10 +21,11 @@ const HeroNumber = ({ value, label, format, suffix, meter, unverified }: HeroNum
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true });
   const reduceMotion = useReducedMotion();
-  const [shown, setShown] = useState(reduceMotion ? value : 0);
+  const [shown, setShown] = useState(0);
 
   useEffect(() => {
-    if (!inView || reduceMotion) return;
+    if (reduceMotion) return setShown(value);
+    if (!inView) return;
     const { duration } = TRANSITIONS.HERO.COUNT;
     const controls = animate(0, value, { duration, ease: 'easeOut', onUpdate: setShown });
     return () => controls.stop();

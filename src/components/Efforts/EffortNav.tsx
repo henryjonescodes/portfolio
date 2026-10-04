@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import type { Effort } from '@components/ExperienceEntry/types';
 import styles from './efforts.module.scss';
 
@@ -15,6 +15,15 @@ type EffortNavProps = {
 const EffortNav = ({ idPrefix, efforts, selected, onSelect }: EffortNavProps) => {
   const tabs = [{ id: null, title: 'Overview' }, ...efforts];
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  // A mention that switches tabs unmounts itself; hand focus to the tab it selected.
+  const selectedIndex = tabs.findIndex((t) => t.id === selected);
+  const mounted = useRef(false);
+  useEffect(() => {
+    if (mounted.current && document.activeElement === document.body)
+      refs.current[selectedIndex]?.focus();
+    mounted.current = true;
+  }, [selectedIndex]);
 
   const onKeyDown = (e: React.KeyboardEvent, index: number) => {
     const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;

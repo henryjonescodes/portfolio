@@ -71,6 +71,26 @@ const ExperienceEntry = ({
     return () => controls.forEach((c) => c.stop());
   }, [expanded, dragX, dragY, TRANSITIONS]);
 
+  // The open entry's heading. Both the overview and an effort render it, so its shared
+  // layoutIds stay mounted when tabs switch instead of handing back to the list item.
+  const bodyTitle = (
+    <motion.div layoutId="bodyTitle">
+      <motion.h2 layoutId="title" layout="position">
+        <TypewriterText text={title} />
+      </motion.h2>
+      {!!subtitle && (
+        <motion.h3 layoutId="subtitle" layout="position">
+          {subtitle}
+        </motion.h3>
+      )}
+      {!!dateRange && (
+        <motion.p layoutId="date" layout="position">
+          {dateRange}
+        </motion.p>
+      )}
+    </motion.div>
+  );
+
   const containerContent = (
     <>
       <motion.div
@@ -182,6 +202,7 @@ const ExperienceEntry = ({
                   id={`${id}-panel`}
                   aria-labelledby={`${id}-tab-${effort.id}`}
                 >
+                  {bodyTitle}
                   <EffortView effort={effort} onMention={mentionHandler} />
                 </motion.div>
               ) : (
@@ -189,23 +210,7 @@ const ExperienceEntry = ({
                   <motion.div layout className={styles.descriptionContents}>
                     <motion.div className={styles.descriptionContentsFlex}>
                       <motion.div className={styles.text}>
-                        {isOpen && (
-                          <motion.div layoutId="bodyTitle">
-                            <motion.h2 layoutId="title" layout="position">
-                              <TypewriterText text={title} />
-                            </motion.h2>
-                            {!!subtitle && (
-                              <motion.h3 layoutId="subtitle" layout="position">
-                                {subtitle}
-                              </motion.h3>
-                            )}
-                            {!!dateRange && (
-                              <motion.p layoutId="date" layout="position">
-                                {dateRange}
-                              </motion.p>
-                            )}
-                          </motion.div>
-                        )}
+                        {isOpen && bodyTitle}
                         {description.map((desc, index) => (
                           <motion.p key={index}>
                             <RichText text={desc} onMention={mentionHandler} />

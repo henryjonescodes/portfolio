@@ -51,7 +51,10 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
   const { primaryHues, setPrimaryHues } = useColors();
 
   // ?? Load Scene Components & Textures
-  const { nodes, materials } = useGLTF('3D/models/site-mixer-1.glb', DRACO_DECODER) as SiteMixerGLTF;
+  const { nodes, materials } = useGLTF(
+    '3D/models/site-mixer-1.glb',
+    DRACO_DECODER,
+  ) as SiteMixerGLTF;
   const [bakeImage, normalMap, roughnessMap] = useLoader(TextureLoader, texturePaths);
 
   bakeImage.flipY = false;

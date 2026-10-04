@@ -193,7 +193,10 @@ test('efforts: tabs switch the open entry, and a mention opens its effort', asyn
   await openFirstEntry(page);
   const dialog = page.getByRole('dialog');
   const tabs = dialog.getByRole('tablist', { name: 'Highlights' });
-  await expect(tabs.getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
+  await expect(tabs.getByRole('tab', { name: 'Overview' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
 
   await tabs.getByRole('tab', { name: 'User notifier' }).click();
   await expect(dialog.getByRole('tabpanel')).toContainText('Notifications sent');
@@ -206,4 +209,24 @@ test('efforts: tabs switch the open entry, and a mention opens its effort', asyn
   // List items show mentions as text, never as nested buttons.
   await closeModal(page);
   await expect(page.getByTestId('entry').first().getByRole('button')).toHaveCount(0);
+});
+
+test('efforts: a mention hands focus to the tab it selects', async ({ page }) => {
+  await page.goto('/experience?lite=true');
+  await page.waitForTimeout(1500);
+  await openFirstEntry(page);
+  const dialog = page.getByRole('dialog');
+  await page.waitForTimeout(1500);
+  await dialog.getByRole('button', { name: 'Almanac', exact: true }).focus();
+  await page.keyboard.press('Enter');
+  await expect(dialog.getByRole('tab', { name: 'Almanac' })).toBeFocused();
+});
+
+test('hero figures show their value with reduced motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/experience?lite=true');
+  await openFirstEntry(page);
+  const dialog = page.getByRole('dialog');
+  await dialog.getByRole('tab', { name: 'User notifier' }).click();
+  await expect(dialog.getByText('99.99%').first()).toBeVisible();
 });
