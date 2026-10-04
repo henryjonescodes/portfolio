@@ -14,7 +14,6 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 ## Todo
 
 - [?] Design review of the carousel in 3D and lite mode
-- [ ] Retro tablet chrome: bevelled title bars, smaller corner radius, skeuomorphic controls
 - [ ] Opaque open view and a darker backdrop behind the modal
 - [ ] Escape closes the modal; the open entry is a labelled dialog
 - [ ] Smaller corner radius and bevelled, skeuomorphic title bars on entries and the modal
@@ -43,3 +42,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: dropped "Open view: opaque window filling the whole visible content area, page darkened behind it during the morph"
 - 2026-10-04: dropped "Re-sample the morph tests for both layouts"
 - 2026-10-04: Carousel retired after design review; list layout kept for its line draw-in. Carousel archived on local branch archive/projects-carousel
+- 2026-10-04: dropped "Retro tablet chrome: bevelled title bars, smaller corner radius, skeuomorphic controls"
