@@ -16,6 +16,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - [?] Design review of the carousel in 3D and lite mode
 - [ ] Retro tablet chrome: bevelled title bars, smaller corner radius, skeuomorphic controls
 - [ ] Opaque open view and a darker backdrop behind the modal
+- [ ] Escape closes the modal; the open entry is a labelled dialog
 
 ## Log
 
