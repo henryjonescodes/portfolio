@@ -1,6 +1,5 @@
 import cn from 'classnames';
 import { motion, LayoutGroup } from 'framer-motion';
-import React from 'react';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { widthMobile } from '@styles/layout.constants.ts';
 import TypewriterText from '@components/TypewriterText';
@@ -13,7 +12,6 @@ import { usePage } from '@context/PageContext';
 import { formatDateRange } from '@utils/text';
 import type { ExperienceEntryProps } from './types';
 import GlitchIconItem from '@components/GlitchIconItem';
-import GitHub from '@assets/svg/socials/github.svg?react';
 
 const ExperienceEntry = ({
   data,
@@ -102,11 +100,7 @@ const ExperienceEntry = ({
 
   // Modal container width animation
   const modalContainerVariants = {
-    animate: (overlayStyle: React.CSSProperties) => ({
-      // maxWidth: overlayStyle.width,
-      // width: overlayStyle.width,
-      // width: '100%',
-      // maxWidth: '80%',
+    animate: () => ({
       margin: '0 32px',
       transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE,
     }),

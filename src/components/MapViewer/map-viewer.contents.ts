@@ -21,13 +21,9 @@ export type PointOfInterest = {
   pinClassName: string;
 };
 
-const keys = ['portland', 'paloAlto', 'nyc', 'schenectady'] as const;
-export type LocationPinKeys = (typeof keys)[number];
+export type LocationPinKeys = 'portland' | 'paloAlto' | 'nyc' | 'schenectady';
 
-export const locationData: Record<
-  'portland' | 'paloAlto' | 'nyc' | 'schenectady',
-  PointOfInterest
-> = {
+export const locationData: Record<LocationPinKeys, PointOfInterest> = {
   nyc: {
     prefix: 'I’m on the job market in',
     title: 'New York City',

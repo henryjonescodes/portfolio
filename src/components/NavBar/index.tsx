@@ -81,7 +81,7 @@ const NavBar = ({ page }: NavBarProps) => {
     navigate(path);
   };
 
-  const pageName = !!page ? page : 'home';
+  const pageName = page ? page : 'home';
   const mini = embedded || width < widthSmall;
   const centerText = mini ? pageName : `$henry-jones/${pageName}`;
 

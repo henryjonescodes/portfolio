@@ -41,7 +41,7 @@ const GlitchIconItem: React.FC<GlitchIconProps> = ({
 }) => {
   return (
     <motion.span className={cn(className, styles.wrapper)} variants={glitchIconItemVariants}>
-      {!!onClick ? (
+      {onClick ? (
         <GlitchIcon Icon={Icon} onClick={onClick} className={cn(iconClassName, styles.icon)} />
       ) : (
         <GlitchIcon Icon={Icon} url={url} className={cn(iconClassName, styles.icon)} />

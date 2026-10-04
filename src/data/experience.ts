@@ -1,12 +1,8 @@
 import type { EntryData } from '@components/ExperienceEntry/types';
-import GitHub from '@assets/svg/socials/github.svg?react';
-import ThreeJs from '@assets/svg/tools/ThreeJs.svg?react';
-import Blender from '@assets/svg/tools/Blender.svg?react';
 import Java from '@assets/svg/tools/Java.svg?react';
 import React from '@assets/svg/tools/React.svg?react';
 import Sass from '@assets/svg/tools/Sass.svg?react';
 import Typescript from '@assets/svg/tools/Typescript.svg?react';
-import Framer from '@assets/svg/tools/Framer.svg?react';
 import Swift from '@assets/svg/tools/Swift.svg?react';
 
 export const experienceData: Record<string, EntryData> = {
