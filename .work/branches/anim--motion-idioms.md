@@ -1,7 +1,7 @@
 ---
 branch: anim/motion-idioms
 parent: modalize-leva-work
-status: planned
+status: active
 title: Framer Motion idioms pass
 pr: null
 updated: 2026-10-04
