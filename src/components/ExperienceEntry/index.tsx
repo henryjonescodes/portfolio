@@ -15,6 +15,9 @@ import { formatDateRange } from '@utils/text';
 import type { ExperienceEntryProps } from './types';
 import GlitchIconItem from '@components/GlitchIconItem';
 
+/** Small radius keeps entries reading as hardware panels rather than soft cards. */
+const ENTRY_RADIUS = 8;
+
 const ExperienceEntry = ({
   data,
   borderWidth = 2.5,
@@ -87,6 +90,7 @@ const ExperienceEntry = ({
         )}
 
         <AnimatedBorderBox
+          borderRadius={ENTRY_RADIUS}
           className={styles.box}
           contentClassName={styles.boxContent}
           borderWidth={borderWidth}
@@ -96,7 +100,7 @@ const ExperienceEntry = ({
               className={styles.background}
               initial={false}
               animate={{
-                opacity: isOpen ? 0.8 : 0,
+                opacity: isOpen ? 1 : 0,
               }}
               transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
             />

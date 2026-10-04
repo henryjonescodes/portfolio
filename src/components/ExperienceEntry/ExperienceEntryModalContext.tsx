@@ -50,6 +50,13 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   useEffect(() => () => clearTimeout(closeTimer.current), []);
 
   useEffect(() => {
+    if (!selectedEntry || isClosing) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && closeModal();
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+
+  useEffect(() => {
     setPageOpen(selectedEntry != null && !isClosing);
   }, [selectedEntry, isClosing]);
 
@@ -126,7 +133,12 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
             exit={{ opacity: 0 }}
             transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
           >
-            <div onClick={(e) => e.stopPropagation()}>
+            <div
+              role="dialog"
+              aria-modal="true"
+              aria-label={selectedEntry.title}
+              onClick={(e) => e.stopPropagation()}
+            >
               <ExperienceEntry
                 key={selectedEntry.id}
                 data={selectedEntry}
