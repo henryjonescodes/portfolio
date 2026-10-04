@@ -18,7 +18,7 @@ Replace lorem ipsum and bring over content only the old site has.
 - [?] Confirm tumblr dates (old site says 2015 to present, new says 2014)
 - [ ] Add the resume PDF and a link to it
 - [ ] Salvage the Links page from origin/Add-Links-Page
-- [?] ? Review the Arbor and project blurbs (written from existing descriptions)
+- [?] Review the Arbor and project blurbs (written from existing descriptions)
 
 ## Log
 
