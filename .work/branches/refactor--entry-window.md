@@ -19,6 +19,7 @@ The open entry, modal or phone, renders one EntryWindow: the main nav bar with t
 - [ ] Media sits under the bar on phones, beside the text on wide screens, by CSS
 - [ ] e2e: the same window on both widths
 - [ ] The entry's main image shows only on Overview, never on an effort or the gallery
+- [ ] Sections (efforts, gallery) drop the entry heading the nav already shows; an effort shows dates only when it has its own
 
 ## Log
 
