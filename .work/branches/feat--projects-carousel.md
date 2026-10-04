@@ -15,7 +15,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 
 - [x] Opaque open view and a darker backdrop behind the modal
 - [x] Escape closes the modal; the open entry is a labelled dialog
-- [ ] Smaller corner radius and bevelled, skeuomorphic title bars on entries and the modal
+- [x] Smaller corner radius and bevelled, skeuomorphic title bars on entries and the modal
 - [x] Move project media into the project data
 - [?] Design review of the list and modal in 3D and lite mode
 
@@ -48,3 +48,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: done "Escape closes the modal; the open entry is a labelled dialog" at 0792d78a
 - 2026-10-04: done "Move project media into the project data" at 49baae04
 - 2026-10-04: Bevel applied to the modal title bar only; entry headers unchanged pending design review
+- 2026-10-04: done "Smaller corner radius and bevelled, skeuomorphic title bars on entries and the modal" at e2992d43
