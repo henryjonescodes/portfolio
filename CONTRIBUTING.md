@@ -48,7 +48,7 @@ flowchart LR
 ## 🕘 Just happened
 
 - 27m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
-- 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/entry-dock`
+- 5h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/entry-dock`
 - 6h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/entry-dock`
 - 6h ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/entry-dock`
 
