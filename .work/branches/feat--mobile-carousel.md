@@ -1,6 +1,6 @@
 ---
 branch: feat/mobile-carousel
-parent: feat/projects-carousel
+parent: feat/modal-panels
 status: planned
 title: Mobile carousel (nice to have)
 pr: null
