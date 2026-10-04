@@ -24,7 +24,7 @@ export const projectsData: Record<string, EntryData> = {
       'Tools: Framer Motion, React, SASS, Webpack, SVG',
     ],
     blurb:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+      'The second version of this site: a 2D portfolio built around Framer Motion, with animated SVG work, work experience, and links to everywhere I am online.',
     url: 'https://v2.henryjones.xyz',
     dateString: '2023',
     tools: [
@@ -60,7 +60,7 @@ export const projectsData: Record<string, EntryData> = {
       'Tools: Three.js, React, Blender',
     ],
     blurb:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+      'An experiment in building a portfolio as a 3D space with Three.js and React. Every model in the scene was made by hand in Blender.',
     url: 'https://tower.henryjones.xyz',
     tools: [
       {
@@ -95,7 +95,7 @@ export const projectsData: Record<string, EntryData> = {
       'Tools: Framer Motion, React',
     ],
     blurb:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+      'The first portfolio: a playful site with interactive 2D animations that showcased my work before I moved into tech.',
     url: 'https://v1.henryjones.xyz',
     dateString: '2021',
     tools: [
@@ -129,7 +129,7 @@ export const projectsData: Record<string, EntryData> = {
       'Tools: Java, Swing',
     ],
     blurb:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+      'My undergraduate capstone in human computer interaction. Study participants worked with a software agent whose suggestions were deliberately unreliable, and the study measured how their trust in it responded.',
     url: '/pdf/TrustResponseToAnticipatorySoftwareAgents.pdf',
     startDate: new Date(2020, 8),
     endDate: new Date(2021, 5),
