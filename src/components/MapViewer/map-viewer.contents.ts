@@ -30,10 +30,7 @@ export const locationData: Record<LocationPinKeys, PointOfInterest> = {
     description:
       'On the lookout for my next challenge in New York City, where I can apply my expertise in React, TypeScript, iOS, and frontend development to build innovative, seamless user experiences. Working on my next big idea in the meantime.',
     mapTitle: 'NEW YORK, NY',
-    mapHighlights: [
-      // { icon: Tumblr, text: 'Tumblr' },
-      { icon: Building, text: 'Your Company?' },
-    ],
+    mapHighlights: [{ icon: Building, text: 'Your Company?' }],
     className: styles.nyc,
     pinClassName: styles.nycPin,
   },

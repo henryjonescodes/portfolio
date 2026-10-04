@@ -9,7 +9,7 @@ import { projectsData, projectsOrder } from '@data/projects';
 import type { EntryMedia } from '@components/ExperienceEntry/types';
 import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
 import styles from './projects.module.scss';
-import GlitchMedia from '@components/GlitchMedia';
+import EntryMediaView from '@components/EntryMedia';
 import cn from 'classnames';
 import { usePage } from '@context/PageContext';
 
@@ -29,22 +29,7 @@ const Projects = () => {
   const renderMedia = (media?: EntryMedia) =>
     media && (
       <motion.div className={styles.video} variants={entryContentVariants}>
-        {'video' in media ? (
-          <GlitchMedia
-            video={
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                src={media.video}
-                style={{ objectPosition: media.objectPosition }}
-              />
-            }
-          />
-        ) : (
-          <GlitchMedia img={<img src={media.img} alt="" />} />
-        )}
+        <EntryMediaView media={media} />
       </motion.div>
     );
 

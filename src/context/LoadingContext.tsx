@@ -3,6 +3,7 @@ import React, { createContext, ReactNode, useContext, useEffect, useRef, useStat
 import { isMobile } from 'react-device-detect';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAnimations } from '@context/AnimationContext';
+import { debugLog } from '@utils/debug';
 
 type LoadingStates = undefined | 'loading' | 'loaded' | 'complete';
 
@@ -84,7 +85,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   // ? Loading management functions
   const startLoading = () => {
     if (loadingState === 'complete') return;
-    console.log('[LoadingContext]: Started loading');
+    debugLog('LoadingContext', 'Started loading');
     loadingTimerMs.current = TIMEOUTS.USER_INITIATED_FALLBACK;
     preventTimeout.current = false;
     setLiteMode(false);
@@ -92,7 +93,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   };
 
   const finishLoading = () => {
-    console.log('[LoadingContext]: Completed loading');
+    debugLog('LoadingContext', 'Completed loading');
 
     setLiteMode(false);
     setLoadingState('complete');
@@ -101,14 +102,14 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   const stopLoading = () => {
     if (loadingState === undefined) return;
 
-    console.log('[LoadingContext]: Stopped loading');
+    debugLog('LoadingContext', 'Stopped loading');
     setLiteMode(true);
     setLoadingState(undefined);
   };
 
   // ? Handle loading timeout logic
   useEffect(() => {
-    console.log(`[LoadingContext]: loadingState updated: ${loadingState}`);
+    debugLog('LoadingContext', `loadingState: ${loadingState}`);
 
     let loadingTimer: NodeJS.Timeout | null = null;
 
@@ -136,7 +137,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   useEffect(() => {
     if (progress >= 100) {
       if (loadingState !== 'complete') {
-        console.log('[LoadingContext]: Finished loading');
+        debugLog('LoadingContext', 'Finished loading');
         setLoadingState('loaded');
       }
     }

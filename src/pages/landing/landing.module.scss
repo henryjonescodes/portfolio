@@ -176,35 +176,6 @@
       background: var(--accent-tertiary);
       cursor: pointer;
     }
-
-    &::-moz-range-thumb {
-      // width: 55px;
-      // height: 55px;
-      // background: gray;
-      // cursor: pointer;
-    }
-
-    &::-ms-thumb {
-      // width: 55px;
-      // height: 55px;
-      // background: gray;
-      // cursor: pointer;
-    }
-
-    &::-webkit-slider-runnable-track {
-      // height: 100%;
-      // background: #ddd;
-    }
-
-    &::-moz-range-track {
-      // height: 100%;
-      // background: #ddd;
-    }
-
-    &::-ms-track {
-      // height: 100%;
-      // background: #ddd;
-    }
   }
 
   .label {

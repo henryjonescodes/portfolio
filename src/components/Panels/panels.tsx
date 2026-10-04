@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import GlitchMedia from '@components/GlitchMedia';
+import EntryMediaView from '@components/EntryMedia';
 import { linkProps } from '@utils/links';
 import type { GalleryPanel, LinksPanel, MediaPanel, StatsPanel, TextPanel } from './types';
 import styles from './panels.module.scss';
@@ -14,22 +14,7 @@ export const TextPanelView = ({ paragraphs }: TextPanel) => (
 
 export const MediaPanelView = ({ media, caption, fit = 'cover' }: MediaPanel) => (
   <figure className={cn(styles.media, styles[fit])}>
-    {'video' in media ? (
-      <GlitchMedia
-        video={
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            src={media.video}
-            style={{ objectPosition: media.objectPosition }}
-          />
-        }
-      />
-    ) : (
-      <GlitchMedia img={<img src={media.img} alt={caption ?? ''} />} />
-    )}
+    <EntryMediaView media={media} alt={caption} />
     {caption && <figcaption>{caption}</figcaption>}
   </figure>
 );

@@ -32,14 +32,8 @@
     font-size: 1.6rem;
   }
 
-  &.fullscreen {
-  }
-
   .header {
     .prefix,
-    .title {
-    }
-
     .prefix {
       font-size: 2rem;
     }
@@ -232,12 +226,6 @@ $line-selected-width: 5px;
   }
 }
 
-// @media (max-width: $width-small) {
-//   .line {
-//     pointer-events: none;
-//   }
-// }
-
 /////////////////////////////////////////////////
 //                 MAP PIN                     //
 /////////////////////////////////////////////////
@@ -275,11 +263,6 @@ $line-selected-width: 5px;
   justify-content: center;
 
   // TODO: fullscreen styles
-  &.handHeld {
-  }
-
-  &.fullscreen {
-  }
 
   .border {
     height: 100%;
@@ -588,7 +571,6 @@ $line-selected-width: 5px;
 
     > .map {
       left: -105%;
-      // top: -10%;
       min-height: $scale;
       min-width: $scale;
     }
@@ -609,7 +591,6 @@ $line-selected-width: 5px;
 
     > .map {
       left: 43%;
-      // top: -10%;
       min-height: $scale;
       min-width: $scale;
     }
@@ -626,136 +607,3 @@ $line-selected-width: 5px;
     }
   }
 }
-
-//   .mapViewer {
-//     min-width: 375px;
-//     max-width: 375px;
-
-//     &Contents {
-//       >.map {
-
-//         >.grid {
-//           left: -35%;
-//           height: 167%;
-//           width: 167%;
-//         }
-
-//         >.pins {
-//           >.details {
-//             >span {
-//               h4 {
-//                 font-size: 1.3rem;
-//                 line-height: 1.35rem;
-//               }
-
-//               h5 {
-//                 font-size: 1.2rem;
-//                 line-height: 1.3rem;
-//               }
-
-//               svg {
-//                 height: 1.1rem;
-//                 width: 1.1rem;
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-
-//   .portland {
-//     >.map {
-//       left: -105%;
-//     }
-//   }
-
-//   .nyc {
-//     >.map {
-//       left: -124%;
-//     }
-//   }
-
-//   .paloAlto {
-//     >.map {
-//       left: 48%;
-//     }
-//   }
-
-//   .schenectady {
-//     >.map {
-//       top: -4%;
-//     }
-//   }
-// }
-
-// @media (max-width: $width-small) {
-//   .mapViewer {
-//     max-width: unset;
-
-//     &Contents {}
-//   }
-
-//   .portland {
-//     >.map {
-//       left: -110%;
-//     }
-//   }
-
-//   .paloAlto {
-//     $scale: 190%;
-
-//     >.map {
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .schenectady {
-//     >.map {
-//       top: -0%;
-//     }
-
-//     .details {
-//       left: 85% !important;
-//       top: 17.5% !important;
-//     }
-//   }
-// }
-
-// @media (max-width: $width-small) {
-//   .paloAlto {
-//     $scale: 180%;
-
-//     >.map {
-//       left: 53%;
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .nyc {
-//     $scale: 180%;
-
-//     >.map {
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .schenectady {
-//     .details {
-//       left: 87% !important;
-//       top: 16.5% !important;
-//     }
-//   }
-// }
-
-// @media (max-width: $width-small) {
-//   .mapViewer {
-//     min-width: 100%;
-//     max-width: 100%;
-
-//     &Contents {}
-//   }
-// }

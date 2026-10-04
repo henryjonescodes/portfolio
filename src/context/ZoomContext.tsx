@@ -4,6 +4,7 @@ import { useLocation } from 'react-router-dom';
 import { useLoading } from './LoadingContext';
 import { useAnimations } from '@context/AnimationContext';
 import { useSettings } from './SettingsContext';
+import { debugLog } from '@utils/debug';
 
 type handheldZoomType = 'handheld' | 'info' | 'wide';
 type zoomLevelType = 'fullscreen' | handheldZoomType;
@@ -24,7 +25,7 @@ interface ZoomProviderProps {
 
 export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
   const { liteMode, startLoading } = useLoading();
-  const { setAnimationDisabled, isDebugMode } = useSettings();
+  const { setAnimationDisabled } = useSettings();
   const { TIMEOUTS } = useAnimations();
   const reEnableTimer = useRef<ReturnType<typeof setTimeout>>();
   useEffect(() => () => clearTimeout(reEnableTimer.current), []);
@@ -81,11 +82,8 @@ export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    if (!isDebugMode) return;
-    console.log(
-      `[ZoomContext]: Zoom level updated: ${zoomLevel} ref: ${handHeldZoomLevel.current}`,
-    );
-  }, [zoomLevel, isDebugMode]);
+    debugLog('ZoomContext', `zoom level ${zoomLevel}, handheld ref ${handHeldZoomLevel.current}`);
+  }, [zoomLevel]);
 
   return (
     <ZoomContext.Provider

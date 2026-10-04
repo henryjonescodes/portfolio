@@ -40,7 +40,6 @@
 
       .right {
         flex-basis: 45%;
-        // min-width: 45%;
         flex-grow: 0;
         flex-shrink: 1;
       }
@@ -771,11 +770,6 @@
                 }
               }
             }
-
-            .values {
-              .sliders {
-              }
-            }
           }
         }
       }
@@ -786,9 +780,6 @@
 
       .tracker {
         min-width: 80px;
-
-        &Content {
-        }
 
         .track {
           gap: 0px;

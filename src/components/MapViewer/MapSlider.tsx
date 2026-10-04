@@ -25,7 +25,6 @@ const MapSlider = () => {
   useEffect(() => () => cascade.current?.stop(), []);
 
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
-  // const numStops = stopKeys.length;
 
   useEffect(() => {
     const index = currentKey !== null ? stopKeys.indexOf(currentKey) : -1;

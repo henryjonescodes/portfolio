@@ -54,8 +54,6 @@ const About = () => {
 
   const moveTags = width > screenWidths.mobileLarge || embedded;
 
-  // const moveSocials = width < screenWidths.tiny && zoomLevel === "fullscreen";
-
   return (
     <PageContents
       key={'about'}

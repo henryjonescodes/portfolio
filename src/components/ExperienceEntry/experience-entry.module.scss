@@ -30,9 +30,6 @@
         color: var(--accent-secondary);
       }
     }
-
-    .subtitle {
-    }
   }
 
   .box {
@@ -122,10 +119,6 @@
   }
 }
 
-.inList {
-  // background-color: rgb(143, 11, 59) !important;
-}
-
 .notInList {
   // Open: the media column grows and shows the whole frame instead of a cropped third.
   .descriptionContentsFlex {
@@ -174,9 +167,6 @@
       aspect-ratio: unset;
       max-width: unset;
       max-height: unset;
-    }
-
-    .children {
     }
 
     .line {
