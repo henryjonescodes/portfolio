@@ -1,3 +1,4 @@
+import { CrosshairGuides } from '@components/Crosshair';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { lazy, Suspense, useMemo, useRef } from 'react';
@@ -58,6 +59,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
           }}
         >
           <Suspense fallback={null}>{!embedded && <LazyBackground />}</Suspense>
+          {!embedded && <CrosshairGuides />}
           <Suspense fallback={null}>
             <LazyNavBar page={page} />
           </Suspense>
