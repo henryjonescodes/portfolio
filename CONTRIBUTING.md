@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:25 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:28 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:25 UTC by `bw board` on `fix/about-card` |
+| Generated | 2026-10-04 20:28 UTC by `bw board` on `fix/about-card` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
@@ -27,7 +27,7 @@ flowchart LR
   n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 3/3"]
   class n_feat_crosshair_cursor planned
   n_staging --> n_feat_crosshair_cursor
-  n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 0/3<br/><i>next: NYC as the location; info lines share…</i>"]
+  n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 1/3<br/><i>next: Fixed-width skill sliders</i>"]
   class n_fix_about_card planned,current
   n_staging --> n_fix_about_card
   n_fix_modal_nav_mini["<b>The window's bar is the main nav</b><br/>fix/modal-nav-mini<br/>planned · 1/1"]
@@ -61,27 +61,27 @@ flowchart LR
 
 **How, next.**
 
-- NYC as the location; info lines share a row
 - Fixed-width skill sliders
 - Two rows of links under the bio
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `fix/about-card` |  | planned, local only | 0/3 | NYC as the location; info lines share a row |  |
+| `fix/about-card` |  | planned, local only | 1/3 | Fixed-width skill sliders |  |
 
 ## 🕘 Just happened
 
-**fix(modal): the window bar is the main nav: mini items, the name on the right** · 2026-10-04 20:24 · `fix/modal-nav-mini` · `d6f7dca5`
-The bar uses the main nav's own mini items (icons that open to show their label), grown to fit longer section names, with the entry's name floated right before the buttons. The bar sits under the window's drawn border so the frame shows around it.
+**fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 2026-10-04 20:28 · `fix/about-card` · `250dbac3`
+The card's location reads NYC and both tags share a row; the location tags render once for both layouts. Skill bars have a fixed width so every row lines up. The links under the bio come from the shared links data, two rows of four ending with All links. GlitchIcon keeps page paths in the app but opens files (the resume PDF) as files.
 
+- **fix(modal): the window bar is the main nav: mini items, the name on the right** · 20:24 · `fix/modal-nav-mini` · `d6f7dca5`
 - **feat(cursor): a crosshair pointer with dashed guides behind the content** · 20:18 · `feat/crosshair-cursor` · `21cece7c`
 - **fix(modal): the close button sits inside the title bar, with the frame as its edge** · 20:13 · `fix/about-card` · `e0c96483`
-- **fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 20:06 · `fix/about-card` · `be7fc0f6`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | `fix/about-card` · `be7fc0f6` |
 | 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | `fix/about-card` · `d6eb511a` |
 | 2026-10-04 20:06 | feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `1881a411` |
 | 2026-10-04 19:35 | feat(entries): an effort dock and labelled placeholder media | [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865` |
@@ -182,7 +182,7 @@ The bar uses the main nav's own mini items (icons that open to show their label)
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 1 | pushed |  |
-| `fix/about-card` ◀ | About card tidy | planned |  | 0/3 | 5 | local only | NYC as the location; info lines share a row |
+| `fix/about-card` ◀ | About card tidy | planned |  | 1/3 | 6 | local only | Fixed-width skill sliders |
 | `fix/modal-nav-mini` | The window's bar is the main nav | planned |  | 1/1 | 6 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
@@ -226,11 +226,11 @@ The pointer becomes a small crosshair, with dashed guide lines running to every 
 
 </details>
 
-<details><summary><code>fix/about-card</code>: About card tidy (0/3)</summary>
+<details><summary><code>fix/about-card</code>: About card tidy (1/3)</summary>
 
 The About card says NYC, keeps its two info lines on one row, gives the skill sliders a fixed width, and shows two rows of links.
 
-- [ ] NYC as the location; info lines share a row
+- [x] NYC as the location; info lines share a row
 - [ ] Fixed-width skill sliders
 - [ ] Two rows of links under the bio
 
