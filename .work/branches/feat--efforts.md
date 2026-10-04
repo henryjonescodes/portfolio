@@ -16,7 +16,7 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 - [x] Effort data model and a mini nav inside the open entry
 - [x] Efforts: Almanac skill manager (Arbor), Kiki UI design system (ChannelAI), User notifier (Arbor)
 - [x] Hero numbers kit: big numbers plus simple theme charts for efforts without flashy visuals
-- [ ] Deep links from prose open the entry modal on one effort
+- [x] Deep links from prose open the entry modal on one effort
 - [ ] Mark unverified data claims in the data and show it only in debug
 - [?] claim: User notifier sends about 250,000 notifications a month
 - [?] claim: User notifier delivers at a 99.99% success rate
@@ -28,3 +28,4 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 - 2026-10-04: done "Effort data model and a mini nav inside the open entry" at 882a9eda
 - 2026-10-04: done "Efforts: Almanac skill manager (Arbor), Kiki UI design system (ChannelAI), User notifier (Arbor)" at dd4dcb4f
 - 2026-10-04: done "Hero numbers kit: big numbers plus simple theme charts for efforts without flashy visuals" at 5b983bca
+- 2026-10-04: done "Deep links from prose open the entry modal on one effort" at cf1f7dc2
