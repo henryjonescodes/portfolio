@@ -44,7 +44,7 @@ const CustomControls: React.FC = () => {
       focusLocal.z = focusLocal.z * landscapeZoomPositionOffset;
     }
     setFocus(focusLocal);
-  }, [zoomLevel, zoomPositions, isLandscape, isMobile]);
+  }, [zoomLevel, zoomPositions, isLandscape]);
 
   // Animate camera position
   const { position } = useSpring({

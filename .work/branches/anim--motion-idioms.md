@@ -1,0 +1,33 @@
+---
+branch: anim/motion-idioms
+parent: modalize-leva-work
+status: review
+title: Framer Motion idioms pass
+pr: https://github.com/henryjonescodes/portfolio/pull/58
+updated: 2026-10-04
+---
+
+## Goal
+
+Finish the animation cleanup the refactor started, behind the e2e net and the layout-modal rules.
+
+## Todo
+
+- [x] MotionConfig reducedMotion="user" at the app root
+- [x] Memoize ExperienceEntry variants; drop no-op variants and dead commented code
+- [x] Replace setTimeout sequencing in PageContents, Page, MapSlider, ZoomContext with when/delayChildren or cleaned-up effects
+- [x] Walk the regression checklist in 3D and lite mode
+- [x] Write the portfolio-animation-system and portfolio-regression-checklist skills
+- [x] Resolve the 27 lint warnings (hook deps, fast-refresh exports)
+
+## Log
+
+- 2026-10-04: seeded
+- 2026-10-04: done "MotionConfig reducedMotion="user" at the app root" at 42e8a016
+- 2026-10-04: done "Replace setTimeout sequencing in PageContents, Page, MapSlider, ZoomContext with when/delayChildren or cleaned-up effects" at b6bb82a5
+- 2026-10-04: done "Memoize ExperienceEntry variants; drop no-op variants and dead commented code" at 553bce2e
+- 2026-10-04: done "Walk the regression checklist in 3D and lite mode" at 0c960ede
+- 2026-10-04: Checklist walked via e2e plus lite-mode visual check; reduced-motion and network throttle not exercised
+- 2026-10-04: done "Write the portfolio-animation-system and portfolio-regression-checklist skills" at 095508bf
+- 2026-10-04: Safe hook-dep warnings fixed; Loading, Map, useDebouncedEffect deps and fast-refresh splits left: they change runtime behaviour or move files
+- 2026-10-04: done "Resolve the 27 lint warnings (hook deps, fast-refresh exports)" at 83360bb7

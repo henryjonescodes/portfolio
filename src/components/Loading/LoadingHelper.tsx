@@ -9,7 +9,7 @@ const LoadingHelper = () => {
   useEffect(() => {
     // ?? Update Loading Context Progress State
     setProgress(progress);
-  }, [progress]);
+  }, [progress, setProgress]);
 
   return null;
 };

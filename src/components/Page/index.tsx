@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
-import { lazy, Suspense, useEffect, useRef } from 'react';
+import { lazy, Suspense, useMemo, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useLoading } from '@context/LoadingContext';
@@ -24,32 +24,19 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
   const { zoomLevel } = useZoom();
   const { TRANSITIONS } = useAnimations();
 
-  const pageVariants = {
-    initial: {
-      opacity: firstPageLoad ? 1 : 0,
-    },
-    animate: {
-      opacity: 1,
-      transition: firstPageLoad
-        ? TRANSITIONS.PAGE.FIRST_LOAD_ANIMATE
-        : TRANSITIONS.PAGE.NORMAL_ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.PAGE.EXIT,
-    },
-  };
-
-  useEffect(() => {
-    const scrollToTop = () => {
-      if (contentRef.current) {
-        setTimeout(() => {
-          contentRef.current?.scrollTo(0, 0);
-        }, 1000);
-      }
-    };
-    scrollToTop();
-  }, [page]);
+  const pageVariants = useMemo(
+    () => ({
+      initial: { opacity: firstPageLoad ? 1 : 0 },
+      animate: {
+        opacity: 1,
+        transition: firstPageLoad
+          ? TRANSITIONS.PAGE.FIRST_LOAD_ANIMATE
+          : TRANSITIONS.PAGE.NORMAL_ANIMATE,
+      },
+      exit: { opacity: 0, transition: TRANSITIONS.PAGE.EXIT },
+    }),
+    [firstPageLoad, TRANSITIONS],
+  );
 
   return (
     <PageProviders embedded={embedded}>
@@ -83,7 +70,11 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
             ref={contentRef}
           >
             <motion.div className={styles.contentInner}>
-              <AnimatePresence mode="wait">
+              {/* Reset scroll once the old page has exited, before the new one paints in. */}
+              <AnimatePresence
+                mode="wait"
+                onExitComplete={() => contentRef.current?.scrollTo(0, 0)}
+              >
                 <Suspense fallback={null}>
                   <LazyAnimatedOutlet key={page} />
                 </Suspense>
