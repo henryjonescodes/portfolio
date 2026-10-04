@@ -14,10 +14,11 @@ On phone widths only, show projects as a horizontal carousel like the published 
 ## Todo
 
 - [x] Port ProjectCarousel from archive/projects-carousel behind a mobile-width switch
-- [ ] Header and side text only; never text over media
+- [x] Header and side text only; never text over media
 - [?] Design review on a phone
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Port ProjectCarousel from archive/projects-carousel behind a mobile-width switch" at d63c6600
+- 2026-10-04: done "Header and side text only; never text over media" at cedc7aa8
