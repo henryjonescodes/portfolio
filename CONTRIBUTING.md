@@ -1,14 +1,14 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:11 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:11 UTC · 4 live branches · 1 PRs open · 17 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-04 20:11 UTC by `bw board` on `feat/entry-tabs` |
 | Trunk | `staging` |
 | Live branches | 4 |
-| Open PRs | none |
-| Waiting on you | 16 |
+| Open PRs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) |
+| Waiting on you | 17 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -22,7 +22,7 @@ flowchart LR
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
-  n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs<br/>review · 3/3"]
+  n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs · #82<br/>review · 3/3"]
   class n_feat_entry_tabs review,current
   n_staging --> n_feat_entry_tabs
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
@@ -55,15 +55,15 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/entry-tabs` |  | review, 10 to push, 9 to pull | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
+| `feat/entry-tabs` | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | review, 11 to push, 9 to pull | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
 
 ## 🕘 Just happened
 
-**fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 2026-10-04 20:06 · `feat/entry-tabs` · `41e91db8`
+**fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 2026-10-04 20:06 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `41e91db8`
 The bar holds the home key, the entry's name in hero type and the sections as icon and label nav items, all one NavBarItem, with underlines on the bar's bottom edge. The phone card hides overview extras on the gallery, the tab title names the gallery, and focus only moves on a real tab change.
 
-- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 19:56 · `feat/entry-tabs` · `d14aab9a`
-- **feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll** · 19:50 · `feat/entry-tabs` · `e4dc73fc`
+- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 19:56 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d14aab9a`
+- **feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll** · 19:50 · [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e4dc73fc`
 - **feat(entries): an effort dock and labelled placeholder media** · 19:35 · [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
@@ -157,6 +157,10 @@ The bar holds the home key, the entry's name in hero type and the sections as ic
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
+**17. Review and merge Entry subpages as nav tabs, and a masonry gallery**
+- *Why:* its PR is open and waiting on a merge
+- `review` · `feat/entry-tabs` · [#82](https://github.com/henryjonescodes/portfolio/pull/82)
+
 <details><summary><b>Plans</b></summary>
 
 | Plan | Progress |
@@ -173,7 +177,7 @@ The bar holds the home key, the entry's name in hero type and the sections as ic
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review |  | 3/3 | 3 | 10 to push, 9 to pull |  |
+| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 3 | 11 to push, 9 to pull |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 11 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
