@@ -37,3 +37,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: EntryData gained media only; color and logo were not needed for the new style
 - 2026-10-04: done "Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)" at f0c814ca
 - 2026-10-04: done "Remove the now unused projects path from ExperienceEntry (url and media children)" at 04abdffc
+- 2026-10-04: Design feedback: overlaid text unreadable on noisy media, unused width, open view should be opaque
