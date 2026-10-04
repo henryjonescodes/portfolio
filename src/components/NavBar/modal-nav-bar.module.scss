@@ -17,14 +17,20 @@
   scrollbar-width: none;
 }
 
-// On phones the tabs need the room, so the title gives way to them.
-@media (max-width: styles.$width-mobile) {
-  .hasLeft {
-    grid-template-columns: 1fr auto;
+// With tabs, the left side carries the title too: home, title, tabs, then the buttons.
+.hasLeft {
+  display: flex;
 
-    .center {
-      display: none;
-    }
+  // Stretched to the bar's full height, so tab underlines sit on its bottom edge.
+  .left {
+    flex: 1;
+    height: auto;
+    align-self: stretch;
+    align-items: stretch;
+  }
+
+  .center {
+    display: none;
   }
 }
 

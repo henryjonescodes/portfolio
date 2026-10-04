@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import GalleryIcon from '@assets/svg/icons/gallery.svg?react';
 import Home from '@assets/svg/icons/home.svg?react';
 import type { Effort } from '@components/ExperienceEntry/types';
 import NavBarItem from '@components/NavBar/NavbarItem';
@@ -14,6 +15,8 @@ type EffortNavProps = {
   onSelect: (subpageId: string | null) => void;
   /** Sits inside a title bar rather than as its own strip. */
   inline?: boolean;
+  /** Shown after the home key when inline, standing in for the bar's own title. */
+  title?: string;
 };
 
 /**
@@ -27,11 +30,12 @@ const EffortNav = ({
   selected,
   onSelect,
   inline = false,
+  title,
 }: EffortNavProps) => {
-  const tabs = [
-    { id: '', title: 'Overview' },
-    ...efforts.map(({ id, title }) => ({ id, title })),
-    ...(hasGallery ? [{ id: GALLERY, title: 'Gallery' }] : []),
+  const tabs: { id: string; title: string; Icon?: Effort['Icon']; paint?: Effort['paint'] }[] = [
+    { id: '', title: 'Overview', Icon: Home },
+    ...efforts.map(({ id, title, Icon, paint }) => ({ id, title, Icon, paint })),
+    ...(hasGallery ? [{ id: GALLERY, title: 'Gallery', Icon: GalleryIcon }] : []),
   ];
   const refs = useRef<(HTMLElement | null)[]>([]);
   const selectedIndex = Math.max(
@@ -40,11 +44,11 @@ const EffortNav = ({
   );
 
   // A mention that switches tabs unmounts itself; hand focus to the tab it selected.
-  const mounted = useRef(false);
+  const shown = useRef(selectedIndex);
   useEffect(() => {
-    if (mounted.current && document.activeElement === document.body)
-      refs.current[selectedIndex]?.focus();
-    mounted.current = true;
+    if (shown.current === selectedIndex) return;
+    shown.current = selectedIndex;
+    if (document.activeElement === document.body) refs.current[selectedIndex]?.focus();
   }, [selectedIndex]);
 
   const select = (index: number) => onSelect(tabs[index].id || null);
@@ -60,13 +64,25 @@ const EffortNav = ({
 
   return (
     <div className={inline ? styles.inline : styles.subnav} role="tablist" aria-label="Sections">
-      {tabs.map((tab, i) => (
+      {tabs.map((tab, i) => [
+        i === 1 && inline && title && (
+          <NavBarItem
+            key="title"
+            hero
+            label={title}
+            mini={false}
+            selected={false}
+            onClick={() => select(0)}
+          />
+        ),
         <NavBarItem
           key={tab.id || 'overview'}
           itemRef={(el) => (refs.current[i] = el)}
           label={tab.title}
-          Icon={tab.id ? undefined : Home}
+          Icon={tab.Icon}
           iconOnly={!tab.id}
+          withIcon={!!tab.id && !!tab.Icon}
+          strokeIcon={tab.paint === 'stroke'}
           mini={false}
           selected={i === selectedIndex}
           onClick={() => select(i)}
@@ -76,8 +92,8 @@ const EffortNav = ({
             controls: i === selectedIndex && tab.id ? `${idPrefix}-panel` : undefined,
             onKeyDown: (e) => onKeyDown(e, i),
           }}
-        />
-      ))}
+        />,
+      ])}
     </div>
   );
 };

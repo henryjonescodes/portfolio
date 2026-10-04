@@ -136,7 +136,10 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     if (url.href !== window.location.href)
       window.history.replaceState(window.history.state, '', url);
 
-    const effortTitle = selectedEntry?.efforts?.find((e) => e.id === effortId)?.title;
+    const effortTitle =
+      effortId === GALLERY
+        ? 'Gallery'
+        : selectedEntry?.efforts?.find((e) => e.id === effortId)?.title;
     document.title =
       openId && selectedEntry ? entryTitle(selectedEntry.title, effortTitle) : pageTitle(pathname);
   }, [openId, effortId, expanded, selectedEntry, pathname]);

@@ -189,6 +189,7 @@ const ExperienceEntry = ({
                   onSelectEffort && (
                     <EffortNav
                       inline
+                      title={title}
                       idPrefix={id}
                       efforts={efforts ?? []}
                       hasGallery={!!gallery?.length}

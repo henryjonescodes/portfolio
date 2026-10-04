@@ -162,7 +162,7 @@ const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
                 </motion.p>
               ))
             )}
-            {isOpen && !effort && (
+            {isOpen && !subpageId && (
               <motion.div
                 className={styles.details}
                 initial={{ opacity: 0 }}

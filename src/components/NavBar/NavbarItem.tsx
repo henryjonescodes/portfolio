@@ -13,6 +13,10 @@ type NavBarItemProps = {
   mini: boolean;
   /** Shows only the icon, never the label (a home key, say); the label stays its name. */
   iconOnly?: boolean;
+  /** Icon and label together, as a mini item looks when it opens on hover. */
+  withIcon?: boolean;
+  /** The icon is drawn with strokes, so it is themed on the stroke. */
+  strokeIcon?: boolean;
   Icon?: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
@@ -21,6 +25,8 @@ type NavBarItemProps = {
   /** Role and state when the item is a tab rather than a page link. */
   tab?: { id: string; controls?: string; onKeyDown: (e: React.KeyboardEvent) => void };
   itemRef?: (el: HTMLElement | null) => void;
+  /** Shown as a name rather than a control: hero type, no role, out of the tab order. */
+  hero?: boolean;
 };
 
 const NavBarItem = ({
@@ -29,9 +35,12 @@ const NavBarItem = ({
   selected = false,
   mini,
   iconOnly = false,
+  withIcon = false,
+  strokeIcon = false,
   Icon,
   tab,
   itemRef,
+  hero = false,
 }: NavBarItemProps) => {
   const { TRANSITIONS } = useAnimations();
 
@@ -55,21 +64,29 @@ const NavBarItem = ({
   return (
     <motion.span
       ref={itemRef}
-      className={cn(styles.navItem, { [styles.mini]: mini, [styles.iconOnly]: iconOnly })}
+      className={cn(styles.navItem, {
+        [styles.mini]: mini,
+        [styles.iconOnly]: iconOnly,
+        [styles.withIcon]: withIcon,
+        [styles.strokeIcon]: strokeIcon,
+        [styles.hero]: hero,
+      })}
       onClick={(e) => {
         e.stopPropagation();
         onClick();
       }}
-      aria-label={label}
-      {...(tab
-        ? {
-            role: 'tab',
-            id: tab.id,
-            'aria-selected': selected,
-            'aria-controls': tab.controls,
-            tabIndex: selected ? 0 : -1,
-          }
-        : { role: 'link', tabIndex: 0, 'aria-current': selected ? 'page' : undefined })}
+      aria-label={hero ? undefined : label}
+      {...(hero
+        ? { 'aria-hidden': true }
+        : tab
+          ? {
+              role: 'tab',
+              id: tab.id,
+              'aria-selected': selected,
+              'aria-controls': tab.controls,
+              tabIndex: selected ? 0 : -1,
+            }
+          : { role: 'link', tabIndex: 0, 'aria-current': selected ? 'page' : undefined })}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -81,7 +98,7 @@ const NavBarItem = ({
         className={cn(styles.border, { [styles.selected]: selected })}
         variants={borderVariants}
       />
-      {(mini || iconOnly) && Icon && (
+      {(mini || iconOnly || withIcon) && Icon && (
         <motion.span className={styles.icon}>
           <Icon className={styles.image} />
         </motion.span>
