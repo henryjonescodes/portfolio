@@ -45,17 +45,9 @@ export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
 
   // ? Update zoomLevel based on page changes
   useEffect(() => {
-    if (page) {
-      if (zoomLevel !== 'fullscreen') {
-        setZoomLevel('handheld');
-      }
-      handHeldZoomLevel.current = 'handheld';
-    } else {
-      if (zoomLevel !== 'fullscreen') {
-        setZoomLevel('wide');
-      }
-      handHeldZoomLevel.current = 'wide';
-    }
+    const target = page ? 'handheld' : 'wide';
+    setZoomLevel((current) => (current === 'fullscreen' ? current : target));
+    handHeldZoomLevel.current = target;
   }, [page]);
 
   const toggleInfoModeZoomPosition = () => {
@@ -93,7 +85,7 @@ export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
     console.log(
       `[ZoomContext]: Zoom level updated: ${zoomLevel} ref: ${handHeldZoomLevel.current}`,
     );
-  }, [zoomLevel]);
+  }, [zoomLevel, isDebugMode]);
 
   return (
     <ZoomContext.Provider

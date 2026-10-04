@@ -80,7 +80,7 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({ chi
     };
 
     return getZoomPositions(screenWidthKey);
-  }, [screenWidthKey]);
+  }, [screenWidthKey, isDebugMode]);
 
   useEffect(() => {
     const handleResize = () => {
