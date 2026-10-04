@@ -23,6 +23,7 @@ Retire the old webpack site once staging carries everything above.
 - [?] Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line) (from design/retro-chrome)
 - [?] Design review on a phone (from feat/mobile-carousel)
 - [?] Design review of the list and modal in 3D and lite mode (from feat/modal-panels)
+- [?] Curate real panel content (screenshots, galleries, stats) per project (from feat/modal-panels)
 
 ## Log
 
