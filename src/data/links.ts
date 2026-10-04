@@ -14,7 +14,7 @@ export type LinkData = {
   paint: 'fill' | 'stroke';
 };
 
-export const RESUME_URL = '/pdf/Henry-Jones-Resume.pdf';
+const RESUME_URL = '/pdf/Henry-Jones-Resume.pdf';
 
 export const links: LinkData[] = [
   { label: 'Email', href: 'mailto:henryjonescodes@gmail.com', Icon: Email, paint: 'stroke' },
