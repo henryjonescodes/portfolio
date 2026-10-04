@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import React, { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLocation } from 'react-router-dom';
 import EntryMediaView from '@components/EntryMedia';
@@ -108,10 +108,13 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     setIsClosing(true);
     setPageOpen(false);
     const dialog = dialogRef.current;
-    // Morph back to wherever the source sits now; without one, the overlay just fades.
-    if (reduceMotion || !source?.isConnected || !dialog) return finishClose();
-    // A zoomed window zooms back through its own animation; a morph re-measures its source.
-    if (!zoom) setFrom(boxWithin(source, dialog));
+    if (!dialog) return finishClose();
+    // A zoomed window zooms back through its own animation; a morph lands on its source.
+    if (zoom) return;
+    if (!reduceMotion && source?.isConnected) return setFrom(boxWithin(source, dialog));
+    // Nothing to land on (a shared link, or a source that went away) or reduced motion:
+    // shrink and fade about the middle instead of snapping shut.
+    setZoom({ x: dialog.clientWidth / 2, y: dialog.clientHeight / 2 + dialog.scrollTop });
   };
 
   // The address bar and tab title follow the open modal, so copying the URL shares it. The
@@ -134,14 +137,11 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   }, [openId, effortId, expanded, selectedEntry, pathname]);
 
   const overlay = selectedEntry && (
-    <motion.div
-      key="modal-overlay"
+    <div
       data-testid="modal-overlay"
       className={styles.overlay}
       style={{ pointerEvents: isClosing ? 'none' : 'auto' }}
       onClick={closeModal}
-      exit={{ opacity: 0 }}
-      transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
     >
       <motion.div
         className={styles.backdrop}
@@ -200,7 +200,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
           )}
         </ExperienceEntry>
       </motion.div>
-    </motion.div>
+    </div>
   );
 
   return (
@@ -221,10 +221,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
       {/* Same box as the dialog, always mounted, so a source can be measured before opening. */}
       <div ref={stageRef} className={styles.stage} aria-hidden />
 
-      {/* Modal overlay rendered as sibling to page content. A window that came from a source
-          lands back on it and unmounts at once, like the phone carousel's; one opened without
-          a source (a shared link) fades out instead. */}
-      {source ? overlay : <AnimatePresence>{overlay}</AnimatePresence>}
+      {/* Modal overlay rendered as sibling to page content. Closing ends in the window's own
+          animation, so it unmounts at once, like the phone carousel's. */}
+      {overlay}
     </ExperienceEntryModalContext.Provider>
   );
 };

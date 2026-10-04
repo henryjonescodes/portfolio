@@ -277,3 +277,19 @@ test('after closing a shared entry, moving on does not reopen it', async ({ page
   await page.waitForTimeout(1200);
   await expect(dialog).toHaveCount(0);
 });
+
+test('with reduced motion, and without a source, the modal still closes', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/experience?lite=true');
+  await openFirstEntry(page);
+  await page.waitForTimeout(800);
+  await closeModal(page);
+  await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 5_000 });
+
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/experience?lite=true&entry=arbor');
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.waitForTimeout(800);
+  await closeModal(page);
+  await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 5_000 });
+});
