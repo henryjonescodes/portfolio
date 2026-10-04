@@ -14,7 +14,7 @@ export const experienceData: Record<string, EntryData> = {
       '— Designed and delivered custom email notification system to provide real-time insights to users about their savings with Arbor ',
     ],
     blurb:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+      'Full stack engineer building the features that show people how much they save with Arbor, starting with a real-time email notification system.',
     startDate: new Date(2025, 0),
     tools: [
       {
@@ -37,7 +37,7 @@ export const experienceData: Record<string, EntryData> = {
       '— Led design system management, ensuring consistency in components, color, and typography across the app.',
     ],
     blurb:
-      'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'iOS developer crafting the future of AI-enhanced communication. Design-Tech Bridge facilitating rapid iteration and design system consistency.',
     startDate: new Date(2024, 0),
     endDate: new Date(2024, 4),
     tools: [
@@ -57,7 +57,7 @@ export const experienceData: Record<string, EntryData> = {
       '— Led the development and maintenance of design libraries, including UI components and iconography.',
     ],
     blurb:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.',
+      'Frontend focused engineer and design/engineering liaison. Balanced technical precision with creative flair to create engaging gamified social media experiences across web, mobile, and Discord.',
     startDate: new Date(2022, 2),
     endDate: new Date(2024, 0),
     tools: [
@@ -88,7 +88,7 @@ export const experienceData: Record<string, EntryData> = {
       '— Designed and analyzed experiments to measure user interactions with varying levels of agent reliability.',
     ],
     blurb:
-      'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.',
+      'Bachelor of arts in Computer Science, minor in Spanish. Focused on user interface design principles, 3D/Multimedia art, and UX research.',
     startDate: new Date(2020, 8),
     endDate: new Date(2021, 5),
     tools: [
@@ -107,8 +107,8 @@ export const experienceData: Record<string, EntryData> = {
       '— Gained exposure to the fast-paced environment of a tech startup, learning foundational industry skills.',
     ],
     blurb:
-      'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident.',
-    endDate: new Date(2014, 1),
+      'Interned with the systems department at Tumblr, studying system architecture, dev-ops best practices, and deployment strategies.',
+    dateString: '2015',
   },
 };
 

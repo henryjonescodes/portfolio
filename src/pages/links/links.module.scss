@@ -1,0 +1,87 @@
+@use '@styles' as styles;
+
+.links {
+  @include styles.page-padding-vertical;
+  height: 100%;
+  display: flex;
+  gap: 0px;
+
+  > .content {
+    @include styles.list-flex;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.entryWrapper {
+  width: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease-out,
+    filter 0.2s ease-out;
+
+  &:hover,
+  &:focus-visible {
+    transform: scale(1.02);
+  }
+}
+
+// Hovering or focusing one link mutes the others; CSS keeps hover and focus in step.
+.content:hover .entryWrapper:not(:hover),
+.content:focus-within .entryWrapper:not(:focus-visible) {
+  filter: saturate(0.5);
+}
+
+.entry {
+  width: 100%;
+  overflow: hidden;
+  transform: rotate(180deg);
+
+  &Content {
+    transform: rotate(180deg);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    position: relative;
+    gap: 0.6rem;
+  }
+}
+
+.background {
+  background-color: var(--foreground-primary);
+  z-index: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.icon {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+
+  &Fill {
+    svg,
+    path {
+      fill: var(--background-primary) !important;
+    }
+  }
+
+  &Stroke {
+    svg,
+    path {
+      stroke: var(--background-primary) !important;
+    }
+  }
+}
+
+.label {
+  z-index: 1;
+  color: var(--background-primary) !important;
+}

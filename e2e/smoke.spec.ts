@@ -248,7 +248,7 @@ test('lite mode never downloads three.js or the 3D scene', async ({ page }) => {
 });
 
 test.describe('accessibility', () => {
-  for (const path of ['/', '/about', '/experience', '/projects']) {
+  for (const path of ['/', '/about', '/experience', '/projects', '/links']) {
     test(`${path} has no axe violations in lite mode`, async ({ page }) => {
       await page.goto(`${path}?lite=true`);
       await page.waitForTimeout(2500); // let paint-in finish so contrast is measured on final colours
@@ -315,4 +315,16 @@ test('opening the modal moves its content with the window, never ahead of it', a
   const boxDone = settledAt((f) => round(f.box));
   const innerDone = settledAt((f) => round(f.inner.flat()));
   expect(Math.abs(innerDone - boxDone)).toBeLessThan(120);
+});
+
+test('links page lists working links, including the resume', async ({ page, request }) => {
+  const errors = trackErrors(page);
+  await page.goto('/links?lite=true');
+  const nav = page.getByRole('navigation', { name: 'Links' });
+  await expect(nav.getByRole('link')).toHaveCount(6);
+  const resume = nav.getByRole('link', { name: /resume/i });
+  const href = (await resume.getAttribute('href'))!;
+  expect((await request.get(href)).headers()['content-type']).toContain('pdf');
+  await page.waitForTimeout(1500);
+  expect(errors).toEqual([]);
 });

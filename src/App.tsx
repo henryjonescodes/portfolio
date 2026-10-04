@@ -11,6 +11,7 @@ import Home from './pages/home';
 const About = lazy(() => import('./pages/about'));
 const Experience = lazy(() => import('./pages/experience'));
 const Projects = lazy(() => import('./pages/projects'));
+const Links = lazy(() => import('./pages/links'));
 
 export default function App() {
   return (
@@ -49,6 +50,14 @@ export default function App() {
                 element={
                   <Suspense fallback={<PageLoading />}>
                     <Projects key="projects" />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="links"
+                element={
+                  <Suspense fallback={<PageLoading />}>
+                    <Links key="links" />
                   </Suspense>
                 }
               />
