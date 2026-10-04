@@ -1,22 +1,22 @@
 import { expect, test } from '@playwright/test';
 import { distinctBoxes, sampleBoxes, trackErrors } from './helpers';
 
-test.describe('projects carousel on phones', () => {
+test.describe('entry carousels on phones', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
   test('a tile morphs into the page, shows its panels, and closes back', async ({ page }) => {
     const errors = trackErrors(page);
     await page.goto('/projects?lite=true');
-    const tile = page.getByTestId('project-card').first();
+    const tile = page.getByTestId('carousel-card').first();
     await expect(tile).toBeVisible();
     await page.waitForTimeout(1500);
     const source = (await tile.boundingBox())!;
 
     const boxes = await sampleBoxes(
       page,
-      '[data-testid="project-card-open"]',
+      '[data-testid="carousel-card-open"]',
       1500,
-      '[data-testid="project-card"]',
+      '[data-testid="carousel-card"]',
     );
     const first = boxes[0];
     const last = boxes[boxes.length - 1];
@@ -27,15 +27,30 @@ test.describe('projects carousel on phones', () => {
     const dialog = page.getByRole('dialog');
     await expect(dialog.getByRole('region', { name: 'Links' })).toBeVisible();
     await dialog.getByRole('button', { name: 'Close' }).click();
-    await expect(page.getByTestId('project-card-open')).toHaveCount(0, { timeout: 5_000 });
+    await expect(page.getByTestId('carousel-card-open')).toHaveCount(0, { timeout: 5_000 });
     await expect(tile).toBeVisible();
     expect(errors).toEqual([]);
   });
 
+  for (const path of ['/projects', '/experience']) {
+    test(`${path}: the first tile is centred and the row runs edge to edge`, async ({ page }) => {
+      await page.goto(`${path}?lite=true`);
+      const tile = page.getByTestId('carousel-card').first();
+      await expect(tile).toBeVisible();
+      await page.waitForTimeout(1500);
+      const vw = page.viewportSize()!.width;
+      const t = (await tile.boundingBox())!;
+      expect(Math.abs(t.x + t.width / 2 - vw / 2)).toBeLessThan(2);
+      const row = (await tile.locator('xpath=../..').boundingBox())!;
+      expect(row.x).toBeLessThanOrEqual(0.5);
+      expect(row.width).toBeGreaterThanOrEqual(vw - 1);
+    });
+  }
+
   test('an open tile takes focus and the tiles behind it leave the tab order', async ({ page }) => {
     await page.goto('/projects?lite=true');
     await page.waitForTimeout(1500);
-    await page.getByTestId('project-card').first().click();
+    await page.getByTestId('carousel-card').first().click();
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeFocused();
     await expect(dialog.getByRole('button', { name: 'Close' })).toBeVisible();
@@ -70,5 +85,5 @@ test.describe('projects carousel on phones', () => {
 test('wide lite view keeps the projects list', async ({ page }) => {
   await page.goto('/projects?lite=true');
   await expect(page.getByTestId('entry').first()).toBeVisible();
-  await expect(page.getByTestId('project-card')).toHaveCount(0);
+  await expect(page.getByTestId('carousel-card')).toHaveCount(0);
 });

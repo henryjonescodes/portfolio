@@ -1,18 +1,32 @@
 @use '@styles' as styles;
 
+$tile: 82cqw;
+$side: calc((100cqw - #{$tile}) / 2);
+
 .carousel {
-  // The overlay and backdrop position against this box.
+  // The overlay and backdrop position against this box. It bleeds through the page
+  // padding so the row scrolls edge to edge, and fills the height left under the title
+  // so the row sits in the middle of it.
   position: relative;
-  width: 100%;
+  container-type: inline-size;
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-inline: -(styles.$padding-page-mobile);
 }
 
 .row {
   display: flex;
-  gap: 4vw;
+  gap: 4cqw;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
-  padding: 4px 2px 16px;
+  // Side padding equal to the gap either side of a centred tile, so the first and last
+  // tiles centre too.
+  padding: 4px $side 16px;
+  scroll-padding-inline: $side;
   scrollbar-width: none;
 
   &::-webkit-scrollbar {
@@ -21,8 +35,8 @@
 }
 
 .slot {
-  flex: 0 0 82%;
-  scroll-snap-align: start;
+  flex: 0 0 $tile;
+  scroll-snap-align: center;
 }
 
 .card {
@@ -47,10 +61,32 @@
     cursor: default;
     border-width: 0;
   }
+
+  // Tiles trade the border for equal padding, inside the clip, and paint the border in.
+  &.tile {
+    border-width: 0;
+    padding: 2.5px;
+
+    .titleBar {
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+.paintedBorder {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+
+  svg {
+    stroke: var(--foreground-secondary);
+  }
 }
 
 .titleBar {
   @include styles.title-bar;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -63,7 +99,13 @@
     margin: 0;
   }
 
+  // The title shrinks before the date does.
+  h2 {
+    min-width: 0;
+  }
+
   p {
+    flex-shrink: 0;
     margin-left: auto;
     color: var(--accent-secondary);
   }
@@ -103,8 +145,15 @@
   }
 }
 
-.line {
+.card .line {
   position: relative;
+  background-color: var(--foreground-secondary);
+}
+
+.card .barLine {
+  top: auto;
+  bottom: -2.5px;
+  background-color: var(--foreground-secondary);
 }
 
 .rule {
@@ -118,8 +167,13 @@
   gap: 10px;
   padding: 16px;
 
+  h3,
   p {
     margin: 0;
+  }
+
+  h3 {
+    color: var(--accent-primary);
   }
 }
 

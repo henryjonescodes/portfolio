@@ -17,3 +17,5 @@ Landed branches, newest last. Appended by `bw land`.
 - 2026-10-04 **perf/glb-draco** → `staging`: Draco-compressed 3D model. Draco-compress the GLB and compare sizes; Serve the Draco decoder from public and point useGLTF at it; Check the scene by eye in 3D; e2e stays green
 - 2026-10-04 plan `2026-10-foundation.md` complete: chore/foundation, chore/ci, design/retro-chrome
 - 2026-10-04 plan `2026-10-quality.md` complete: perf/assets, a11y/pass, seo/meta
+- 2026-10-04 **fix/mobile-polish** → `staging`: Phone polish and an updated map. iOS Safari shows the page colour behind and around the page, not white (html background, theme-color); Mobile site header about 15% larger; Map: no longer on the job market; working at Arbor (remote), based in New York City; Prune the plans whose branches have all landed
+- 2026-10-04 **anim/restore-timing** → `staging`: Restore from expanded on the window's clock. Measure restore frame by frame and confirm the reflow runs ahead of the container; Copy the carousel's approach (one element owns the size change, content follows) to restore; e2e: restore keeps content inside the window and settles with it
