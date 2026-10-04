@@ -9,10 +9,12 @@ what just happened. Plans live in `.work/plans/`; landed work is in
 
 - `staging` carries the Vite and React Three Fiber rewrite and deploys on every merge.
   `main` still serves the old webpack site.
-- On `staging` now: experience and project modals with panels and an expandable size, a
-  phone carousels for projects and experience, the `/links` page and resume, one tunable animation config
-  with Leva only in debug, reduced-motion support, retro chrome (one radius scale and bevel),
-  an accessibility pass, sharing metadata, and lighter loads (no three.js in lite mode, WebP
+- On `staging` now: experience and project modals with panels, efforts (tabbed highlights
+  with hero figures) and an expandable size; phone carousels for projects and experience;
+  the retro `/links` page and resume; links from prose and the map that open any entry;
+  shareable URLs for the open modal with per-link previews; one tunable animation config
+  with Leva only in debug, reduced-motion support, retro chrome (one radius scale and
+  bevel), an accessibility pass, and lighter loads (no three.js in lite mode, WebP
   textures, a Draco model).
 - Every PR runs lint, types, knip, an asset check and the Playwright suite in CI.
 
@@ -21,7 +23,9 @@ what just happened. Plans live in `.work/plans/`; landed work is in
 1. **Release.** Promote `staging` to `main` once the design passes below are signed off.
 2. **Design passes.** The list and modal, the retro chrome, the phone carousel, and one
    background shade (static CSS `#043030` against the knobs' `#003838`).
-3. **Content.** Real panel content per project (screenshots, galleries, stats).
+3. **Content.** Real panel content per project (screenshots, galleries, stats), media for
+   experience entries and efforts, and confirmation of the figures marked unverified
+   (queued on the board under Claims to verify and Media to find).
 
 ## Later
 
