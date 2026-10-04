@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import EntryMediaView from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
@@ -20,11 +20,12 @@ type ExperienceEntryModalProviderProps = {
 
 export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalProviderProps) => {
   const { TRANSITIONS } = useAnimations();
-  const [searchParams] = useSearchParams();
   const { pathname } = useLocation();
   // A shared link names the entry to open, read on the first render so the URL never sees
-  // a closed modal in between.
+  // a closed modal in between. Read from the address bar, which the provider keeps current,
+  // not the router's copy, which goes stale once the URL is replaced in place.
   const [linked] = useState(() => {
+    const searchParams = new URLSearchParams(window.location.search);
     const entry = findEntry(searchParams.get(PARAMS.entry) ?? '');
     const effort = searchParams.get(PARAMS.effort);
     return {
