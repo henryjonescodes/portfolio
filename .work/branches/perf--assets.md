@@ -17,6 +17,7 @@ Phones and lite mode never download three.js, and the 3D scene's 13 MB of textur
 - [x] Convert the baked textures from PNG to WebP (or KTX2) with no visible loss
 - [ ] Measure before and after: chunk sizes, total transfer, time to scene ready
 - [x] e2e: lite mode loads no three.js chunk
+- [ ] Compress the GLB: meshopt quantization moves a correction into node transforms that SiteMixer's hand-written meshes ignore, so render the glTF's node transforms (or regenerate SiteMixer with gltfjsx --transform) first
 
 ## Log
 
