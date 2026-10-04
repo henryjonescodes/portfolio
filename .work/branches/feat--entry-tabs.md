@@ -3,7 +3,7 @@ branch: feat/entry-tabs
 parent: staging
 status: review
 title: Entry subpages as nav tabs, and a masonry gallery
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/82
 updated: 2026-10-04
 motivation: null
 ---
