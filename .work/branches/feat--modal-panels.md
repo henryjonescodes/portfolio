@@ -19,7 +19,7 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 - [x] Expanding resets any drag offset; Escape and Close still work
 - [x] Seed project panels from existing content only
 - [x] e2e: panels render; expand fills the overlay and restores
-- [ ] Self-maintain portfolio skills for panels and modal sizes
+- [x] Self-maintain portfolio skills for panels and modal sizes
 - [?] Curate real panel content (screenshots, galleries, stats) per project
 - [?] Expanded layout: the right-third media clips at full width; decide whether it grows or moves into a panel
 
@@ -32,3 +32,4 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 - 2026-10-04: done "Expanding resets any drag offset; Escape and Close still work" at 20ac598c
 - 2026-10-04: done "Seed project panels from existing content only" at 368c1989
 - 2026-10-04: done "e2e: panels render; expand fills the overlay and restores" at 65b63dfd
+- 2026-10-04: done "Self-maintain portfolio skills for panels and modal sizes" at 82a86157
