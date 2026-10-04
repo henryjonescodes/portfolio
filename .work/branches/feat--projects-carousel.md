@@ -1,7 +1,7 @@
 ---
 branch: feat/projects-carousel
 parent: anim/motion-idioms
-status: active
+status: review
 title: Projects list: carousel lessons on the list layout
 pr: https://github.com/henryjonescodes/portfolio/pull/61
 updated: 2026-10-04
