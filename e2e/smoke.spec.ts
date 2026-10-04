@@ -233,3 +233,15 @@ test('wide lite view keeps the projects list', async ({ page }) => {
   await expect(page.getByTestId('entry').first()).toBeVisible();
   await expect(page.getByTestId('project-card')).toHaveCount(0);
 });
+
+test('lite mode never downloads three.js or the 3D scene', async ({ page }) => {
+  const requested: string[] = [];
+  page.on('request', (req) => requested.push(req.url()));
+  await page.goto('/about?lite=true');
+  await expect(page.locator('h1').first()).toBeVisible();
+  await page.waitForTimeout(2000);
+  const threeish = requested.filter((u) =>
+    /react-three|\/three[._-]|three\.module|\/Scene[.-]/.test(u),
+  );
+  expect(threeish).toEqual([]);
+});

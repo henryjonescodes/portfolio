@@ -66,8 +66,7 @@ export default function Scene() {
         })}
         shadows
         camera={{
-          position:
-            zoomLevel === 'wide' ? zoomPositions.wide.toArray() : zoomPositions.handheld.toArray(),
+          position: zoomLevel === 'wide' ? zoomPositions.wide : zoomPositions.handheld,
         }}
       >
         <CanvasContent useOrbitControls={useOrbitControls} />

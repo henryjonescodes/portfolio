@@ -36,9 +36,9 @@ type SiteMixerGLTF = GLTF & {
 
 // ?? Preload Textures
 const texturePaths = [
-  '3D/images/delit_bake_1.png',
-  '3D/images/normal_bake_1.png',
-  '3D/images/roughness_bake_1.png',
+  '3D/images/delit_bake_1.webp',
+  '3D/images/normal_bake_1.webp',
+  '3D/images/roughness_bake_1.webp',
 ];
 texturePaths.forEach((path) => useLoader.preload(TextureLoader, path));
 useGLTF.preload('/3D/models/site-mixer-1.glb');
