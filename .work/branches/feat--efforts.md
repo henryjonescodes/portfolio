@@ -30,3 +30,4 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 - 2026-10-04: done "Hero numbers kit: big numbers plus simple theme charts for efforts without flashy visuals" at 5b983bca
 - 2026-10-04: done "Deep links from prose open the entry modal on one effort" at cf1f7dc2
 - 2026-10-04: done "Mark unverified data claims in the data and show it only in debug" at dc9362f4
+- 2026-10-04: Unverified figures show an 'unverified' chip publicly (not debug-only), since staging is public; set unverified: false once confirmed.
