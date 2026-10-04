@@ -146,6 +146,11 @@
   }
 
   &.expanded {
+    // Taller panels scroll inside the expanded window instead of being clipped.
+    .boxContent {
+      overflow-y: auto;
+    }
+
     .descriptionContentsFlex {
       flex-basis: 40%;
     }
@@ -223,5 +228,16 @@
     position: absolute;
     top: 0;
     left: 0;
+  }
+}
+
+// Phones stack media under the text, so the expanded split must not apply there.
+@media (max-width: styles.$width-mobile) {
+  .notInList.expanded {
+    .descriptionContentsFlex,
+    .childrenWrapper {
+      flex-basis: auto;
+      max-width: 100%;
+    }
   }
 }

@@ -25,6 +25,8 @@ export function buildEntryVariants(TRANSITIONS: ResolvedAnimations['TRANSITIONS'
 
   const modalContainer: Variants = {
     animate: { margin: '0 32px', transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE },
+    // Restore animates back to the cozy gutters; the label is modal-only so text keeps still.
+    modalAnimate: { margin: '0 32px', transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE },
     expanded: { margin: '0px', transition: TRANSITIONS.MODAL.CONTAINER_ANIMATE },
   };
 

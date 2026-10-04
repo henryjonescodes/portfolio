@@ -44,15 +44,9 @@ export const GalleryPanelView = ({ images, columns = 3 }: GalleryPanel) => (
 export const LinksPanelView = ({ links }: LinksPanel) => (
   <ul className={styles.links}>
     {links.map((link) => {
-      const external = link.href.startsWith('http');
       return (
         <li key={link.href}>
-          <a
-            className={styles.link}
-            href={link.href}
-            target={external ? '_blank' : undefined}
-            rel={external ? 'noopener noreferrer' : undefined}
-          >
+          <a className={styles.link} {...linkProps(link.href)}>
             {link.label}
           </a>
         </li>
