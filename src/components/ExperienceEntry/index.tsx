@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { animate, motion, LayoutGroup, useMotionValue } from 'framer-motion';
+import { animate, motion, LayoutGroup, MotionConfig, useMotionValue } from 'framer-motion';
 import { useEffect, useMemo } from 'react';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { widthMobile } from '@styles/layout.constants.ts';
@@ -38,9 +38,6 @@ const ExperienceEntry = ({
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
   const isOpen = pageOpen && !inList;
-
-  // Shared layout transition for all layoutId elements
-  const layoutTransition = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
 
   const variants = useMemo(() => buildEntryVariants(TRANSITIONS), [TRANSITIONS]);
 
@@ -81,7 +78,6 @@ const ExperienceEntry = ({
             }
           },
         })}
-        transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
         initial={false}
         animate={{
           opacity: inList && isSelected ? 0 : !inList ? 1 : 1,
@@ -91,7 +87,7 @@ const ExperienceEntry = ({
         }}
       >
         {!isOpen && (
-          <motion.span layoutId="header" className={styles.header} transition={layoutTransition}>
+          <motion.span layoutId="header" className={styles.header}>
             <motion.div className={styles.title}>
               <motion.h2 layoutId="title" layout="position" variants={variants.headerText}>
                 <TypewriterText text={title} />
@@ -104,7 +100,7 @@ const ExperienceEntry = ({
             </motion.div>
             {!!subtitle && (
               <motion.div className={styles.subtitle} variants={variants.headerText}>
-                <motion.h3 layoutId="subtitle" layout="position" transition={layoutTransition}>
+                <motion.h3 layoutId="subtitle" layout="position">
                   <TypewriterText text={subtitle} />
                 </motion.h3>
               </motion.div>
@@ -137,7 +133,6 @@ const ExperienceEntry = ({
             <motion.div
               layoutId="bodyContent"
               className={styles.description}
-              transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
               variants={variants.entryText}
             >
               {isOpen && (
@@ -148,25 +143,21 @@ const ExperienceEntry = ({
                   onToggleExpand={onToggleExpand}
                 />
               )}
-              <motion.div className={styles.descriptionContents}>
+              <motion.div layout className={styles.descriptionContents}>
                 <motion.div className={styles.descriptionContentsFlex}>
                   <motion.div className={styles.text}>
                     {isOpen && (
-                      <motion.div layoutId="bodyTitle" transition={layoutTransition}>
-                        <motion.h2 layoutId="title" layout="position" transition={layoutTransition}>
+                      <motion.div layoutId="bodyTitle">
+                        <motion.h2 layoutId="title" layout="position">
                           <TypewriterText text={title} />
                         </motion.h2>
                         {!!subtitle && (
-                          <motion.h3
-                            layoutId="subtitle"
-                            layout="position"
-                            transition={layoutTransition}
-                          >
+                          <motion.h3 layoutId="subtitle" layout="position">
                             {subtitle}
                           </motion.h3>
                         )}
                         {!!dateRange && (
-                          <motion.p layoutId="date" layout="position" transition={layoutTransition}>
+                          <motion.p layoutId="date" layout="position">
                             {dateRange}
                           </motion.p>
                         )}
@@ -207,11 +198,7 @@ const ExperienceEntry = ({
                   )}
                 </motion.div>
                 {children && (
-                  <motion.div
-                    className={styles.childrenWrapper}
-                    layoutId="childrenWrapper"
-                    transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
-                  >
+                  <motion.div className={styles.childrenWrapper} layoutId="childrenWrapper">
                     <AnimatedLine
                       borderWidth={borderWidth}
                       horizontal={width < widthMobile}
@@ -254,31 +241,35 @@ const ExperienceEntry = ({
   );
 
   return (
-    <LayoutGroup id={id}>
-      {!inList && overlayStyle ? (
-        <motion.div
-          className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
-          variants={variants.modalContainer}
-          initial="animate"
-          animate={expanded ? 'expanded' : 'modalAnimate'}
-          exit="modalExit"
-          style={{ x: dragX, y: dragY }}
-          drag={!expanded}
-          dragMomentum={false}
-          dragElastic={0.1}
-          dragConstraints={{
-            top: -1000,
-            left: -1000,
-            right: 1000,
-            bottom: 1000,
-          }}
-        >
-          {containerContent}
-        </motion.div>
-      ) : (
-        containerContent
-      )}
-    </LayoutGroup>
+    // One timing for every layout animation inside the entry, so the content moves with
+    // the window instead of on its own clock.
+    <MotionConfig transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}>
+      <LayoutGroup id={id}>
+        {!inList && overlayStyle ? (
+          <motion.div
+            className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
+            variants={variants.modalContainer}
+            initial="animate"
+            animate={expanded ? 'expanded' : 'modalAnimate'}
+            exit="modalExit"
+            style={{ x: dragX, y: dragY }}
+            drag={!expanded}
+            dragMomentum={false}
+            dragElastic={0.1}
+            dragConstraints={{
+              top: -1000,
+              left: -1000,
+              right: 1000,
+              bottom: 1000,
+            }}
+          >
+            {containerContent}
+          </motion.div>
+        ) : (
+          containerContent
+        )}
+      </LayoutGroup>
+    </MotionConfig>
   );
 };
 
