@@ -23,6 +23,8 @@ A gear in the main nav opens a three-page panel (colour, type, FX) built from a 
   - why: The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
   - kind: decision
 - [?] Sound: synthesised clicks (no files) or recorded samples you pick?
+  - why: Synthesised sounds need no files and stay tiny; samples sound richer but you would choose them.
+  - kind: decision
 - [?] Should the panel be on phones, or desktop only?
 
 ## Log
