@@ -13,7 +13,7 @@ Phones and lite mode never download three.js, and the 3D scene's 13 MB of textur
 
 ## Todo
 
-- [ ] Lazy-load the 3D Scene so lite mode and phones skip three.js and React Three Fiber
+- [x] Lazy-load the 3D Scene so lite mode and phones skip three.js and React Three Fiber
 - [ ] Convert the baked textures from PNG to WebP (or KTX2) with no visible loss
 - [ ] Compress the GLB (meshopt or Draco) and load it with the matching decoder
 - [ ] Measure before and after: chunk sizes, total transfer, time to scene ready
@@ -22,3 +22,4 @@ Phones and lite mode never download three.js, and the 3D scene's 13 MB of textur
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Lazy-load the 3D Scene so lite mode and phones skip three.js and React Three Fiber" at 3727e7e0
