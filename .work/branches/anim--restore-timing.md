@@ -15,10 +15,11 @@ Shrinking the experience modal from expanded back to cozy reflows the content wi
 
 - [x] Measure restore frame by frame and confirm the reflow runs ahead of the container
 - [x] Copy the carousel's approach (one element owns the size change, content follows) to restore
-- [ ] e2e: restore keeps content inside the window and settles with it
+- [x] e2e: restore keeps content inside the window and settles with it
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Measure restore frame by frame and confirm the reflow runs ahead of the container" at 242c17fc
 - 2026-10-04: done "Copy the carousel's approach (one element owns the size change, content follows) to restore" at 603f05bc
+- 2026-10-04: done "e2e: restore keeps content inside the window and settles with it" at 74cc917e
