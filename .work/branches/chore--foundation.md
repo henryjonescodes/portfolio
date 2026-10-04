@@ -1,7 +1,7 @@
 ---
 branch: chore/foundation
 parent: feat/modal-panels
-status: planned
+status: active
 title: Foundation: DRY, code splitting, cleanup
 pr: null
 updated: 2026-10-04
