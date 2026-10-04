@@ -29,3 +29,4 @@ Finish the animation cleanup the refactor started, behind the e2e net and the la
 - 2026-10-04: done "Walk the regression checklist in 3D and lite mode" at 0c960ede
 - 2026-10-04: Checklist walked via e2e plus lite-mode visual check; reduced-motion and network throttle not exercised
 - 2026-10-04: done "Write the portfolio-animation-system and portfolio-regression-checklist skills" at 095508bf
+- 2026-10-04: Safe hook-dep warnings fixed; Loading, Map, useDebouncedEffect deps and fast-refresh splits left: they change runtime behaviour or move files
