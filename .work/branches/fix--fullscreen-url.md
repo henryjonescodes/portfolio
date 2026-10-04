@@ -14,8 +14,9 @@ The full-screen view is in the URL (?view=full), so a refresh or a shared link k
 
 ## Todo
 
-- [ ] view=full read on load and kept in sync with the toggle
+- [x] view=full read on load and kept in sync with the toggle
 
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "view=full read on load and kept in sync with the toggle" at 85092fc6
