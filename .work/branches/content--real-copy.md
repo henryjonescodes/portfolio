@@ -15,7 +15,7 @@ Replace lorem ipsum and bring over content only the old site has.
 
 - [x] Port real experience blurbs and responsibilities from origin/main
 - [x] Write real project blurbs
-- [?] Confirm tumblr dates (old site says 2015 to present, new says 2014)
+- [x] Confirm tumblr dates (old site says 2015 to present, new says 2014)
 - [x] Add the resume PDF and a link to it
 - [x] Salvage the Links page from origin/Add-Links-Page
 - [?] Review the Arbor and project blurbs (written from existing descriptions)
@@ -30,3 +30,4 @@ Replace lorem ipsum and bring over content only the old site has.
 - 2026-10-04: Assumed tumblr 2014 dates are right; old site's open end date was a data error
 - 2026-10-04: done "Add the resume PDF and a link to it" at 392b66bb
 - 2026-10-04: done "Salvage the Links page from origin/Add-Links-Page" at 03413ddf
+- 2026-10-04: done "Confirm tumblr dates (old site says 2015 to present, new says 2014)" at 941a0088
