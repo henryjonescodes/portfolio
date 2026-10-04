@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import { WindowDimensionProvider } from "./WindowDimensionContext";
-import { LoadingProvider } from "./LoadingContext";
-import { SettingsProvider } from "./SettingsContext";
-import { ZoomProvider } from "./ZoomContext";
-import { ColorsProvider } from "./ColorsContext";
-import { InteractionProvider } from "./InteractionContext";
-import { AnimationProvider } from "./AnimationContext";
+import { ReactNode } from 'react';
+import { WindowDimensionProvider } from './WindowDimensionContext';
+import { LoadingProvider } from './LoadingContext';
+import { SettingsProvider } from './SettingsContext';
+import { ZoomProvider } from './ZoomContext';
+import { ColorsProvider } from './ColorsContext';
+import { InteractionProvider } from './InteractionContext';
+import { AnimationProvider } from './AnimationContext';
 
 /**
  * Application context providers in dependency order.
@@ -44,9 +44,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
           <LoadingProvider>
             <ZoomProvider>
               <ColorsProvider>
-                <InteractionProvider>
-                  {children}
-                </InteractionProvider>
+                <InteractionProvider>{children}</InteractionProvider>
               </ColorsProvider>
             </ZoomProvider>
           </LoadingProvider>

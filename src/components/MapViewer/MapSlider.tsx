@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import cn from "classnames";
-import { motion } from "framer-motion";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./map-components.module.scss";
-import { MapContext } from "./MapContext";
-import { LocationPinKeys } from "./map-viewer.contents";
+import React, { useContext, useEffect, useState } from 'react';
+import cn from 'classnames';
+import { motion } from 'framer-motion';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './map-components.module.scss';
+import { MapContext } from './MapContext';
+import { LocationPinKeys } from './map-viewer.contents';
 
 const MapSlider = () => {
   const { TRANSITIONS, MAP_SLIDER_CASCADE_MS } = useAnimations();
@@ -95,7 +95,7 @@ const MapSlider = () => {
           })}
           variants={lineVariants}
           onClick={() => handleClick(i)}
-        />
+        />,
       );
       lineIndex++;
 
@@ -108,7 +108,7 @@ const MapSlider = () => {
                 [styles.bulging]: bulgingIndex === lineIndex,
               })}
               variants={lineVariants}
-            />
+            />,
           );
           lineIndex++;
         }

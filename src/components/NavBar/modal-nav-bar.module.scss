@@ -1,5 +1,5 @@
-@use '@styles'as styles;
-@use './nav-bar.module.scss'as navBar;
+@use '@styles' as styles;
+@use './nav-bar.module.scss' as navBar;
 
 .modalNavbar {
   @include navBar.navBarContainer;

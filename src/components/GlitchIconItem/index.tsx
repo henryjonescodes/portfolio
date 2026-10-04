@@ -1,9 +1,9 @@
-import GlitchIcon from "@components/GlitchIcon";
-import { motion } from "framer-motion";
-import React from "react";
-import cn from "classnames";
-import styles from "./glitch-icon-item.module.scss";
-import TypewriterText from "@components/TypewriterText";
+import GlitchIcon from '@components/GlitchIcon';
+import { motion } from 'framer-motion';
+import React from 'react';
+import cn from 'classnames';
+import styles from './glitch-icon-item.module.scss';
+import TypewriterText from '@components/TypewriterText';
 
 const glitchIconItemVariants = {
   initial: {
@@ -40,22 +40,11 @@ const GlitchIconItem: React.FC<GlitchIconProps> = ({
   children,
 }) => {
   return (
-    <motion.span
-      className={cn(className, styles.wrapper)}
-      variants={glitchIconItemVariants}
-    >
+    <motion.span className={cn(className, styles.wrapper)} variants={glitchIconItemVariants}>
       {!!onClick ? (
-        <GlitchIcon
-          Icon={Icon}
-          onClick={onClick}
-          className={cn(iconClassName, styles.icon)}
-        />
+        <GlitchIcon Icon={Icon} onClick={onClick} className={cn(iconClassName, styles.icon)} />
       ) : (
-        <GlitchIcon
-          Icon={Icon}
-          url={url}
-          className={cn(iconClassName, styles.icon)}
-        />
+        <GlitchIcon Icon={Icon} url={url} className={cn(iconClassName, styles.icon)} />
       )}
       <motion.p>
         <TypewriterText text={children} staggerChildren={0.1} />

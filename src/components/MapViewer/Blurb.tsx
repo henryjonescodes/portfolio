@@ -1,12 +1,12 @@
-import cn from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
-import { commonInitial } from "@styles/variants";
-import TypewriterText from "@components/TypewriterText";
-import { useAnimations } from "@context/AnimationContext";
-import { usePage } from "@context/PageContext";
-import { MapContext } from "./MapContext";
-import styles from "./map-components.module.scss";
+import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useContext } from 'react';
+import { commonInitial } from '@styles/variants';
+import TypewriterText from '@components/TypewriterText';
+import { useAnimations } from '@context/AnimationContext';
+import { usePage } from '@context/PageContext';
+import { MapContext } from './MapContext';
+import styles from './map-components.module.scss';
 
 const Blurb = () => {
   const { TRANSITIONS } = useAnimations();
@@ -22,11 +22,9 @@ const Blurb = () => {
       transition: TRANSITIONS.MAP_DESCRIPTION.EXIT,
     },
   };
-  const { currentKey, previousKey, setCurrentKey, locationData } =
-    useContext(MapContext);
+  const { currentKey, previousKey, setCurrentKey, locationData } = useContext(MapContext);
   const keyToShow = currentKey !== null ? currentKey : previousKey;
-  const { title, prefix, description } =
-    locationData[keyToShow ?? "portland"] ?? {};
+  const { title, prefix, description } = locationData[keyToShow ?? 'portland'] ?? {};
 
   const { embedded } = usePage();
 

@@ -1,9 +1,9 @@
-import cn from "classnames";
-import { motion } from "framer-motion";
-import React from "react";
-import TypewriterText from "@components/TypewriterText";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./nav-bar.module.scss";
+import cn from 'classnames';
+import { motion } from 'framer-motion';
+import React from 'react';
+import TypewriterText from '@components/TypewriterText';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './nav-bar.module.scss';
 
 // NavBarItem Component
 type NavBarItemProps = {
@@ -18,37 +18,28 @@ type NavBarItemProps = {
   >;
 };
 
-const NavBarItem = ({
-  label,
-  onClick,
-  selected = false,
-  mini,
-  Icon,
-}: NavBarItemProps) => {
+const NavBarItem = ({ label, onClick, selected = false, mini, Icon }: NavBarItemProps) => {
   const { TRANSITIONS } = useAnimations();
 
   const borderVariants = {
     initial: {
-      width: "0%",
+      width: '0%',
     },
     animate: {
-      width: "100%",
+      width: '100%',
       transition: TRANSITIONS.NAV_ITEM.BORDER_ANIMATE,
     },
     show: {
-      width: "100%",
+      width: '100%',
     },
     exit: {
-      width: "0%",
+      width: '0%',
       transition: TRANSITIONS.NAV_ITEM.BORDER_EXIT,
     },
   };
 
   return (
-    <motion.span
-      className={cn(styles.navItem, { [styles.mini]: mini })}
-      onClick={onClick}
-    >
+    <motion.span className={cn(styles.navItem, { [styles.mini]: mini })} onClick={onClick}>
       <motion.span
         className={cn(styles.border, { [styles.selected]: selected })}
         variants={borderVariants}

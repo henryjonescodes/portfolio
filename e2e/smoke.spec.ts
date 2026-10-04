@@ -1,5 +1,11 @@
 import { expect, test } from '@playwright/test';
-import { distinctBoxes, openFirstEntry, openFirstEntrySampled, trackErrors, closeModal } from './helpers';
+import {
+  distinctBoxes,
+  openFirstEntry,
+  openFirstEntrySampled,
+  trackErrors,
+  closeModal,
+} from './helpers';
 
 const LITE = '?lite=true';
 

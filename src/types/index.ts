@@ -10,4 +10,4 @@ export type {
   TransitionAction,
   TransitionComponent,
   TransitionsConfig,
-} from './animations'
+} from './animations';

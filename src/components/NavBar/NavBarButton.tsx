@@ -1,8 +1,8 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./nav-bar.module.scss";
-import GlitchIcon from "@components/GlitchIcon";
+import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './nav-bar.module.scss';
+import GlitchIcon from '@components/GlitchIcon';
 
 // NavBarButton Component
 // Define mutually exclusive types
@@ -35,17 +35,9 @@ type NavBarButtonWithActiveProps = {
 };
 
 // Combine the mutually exclusive types using a union
-type NavBarButtonProps =
-  | NavBarButtonIconOnlyProps
-  | NavBarButtonWithActiveProps;
+type NavBarButtonProps = NavBarButtonIconOnlyProps | NavBarButtonWithActiveProps;
 
-export const NavBarButton = ({
-  onClick,
-  label,
-  Icon,
-  ActiveIcon,
-  active,
-}: NavBarButtonProps) => {
+export const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active }: NavBarButtonProps) => {
   const { TRANSITIONS } = useAnimations();
 
   return (
@@ -56,7 +48,7 @@ export const NavBarButton = ({
       tabIndex={0}
       aria-label={label}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           onClick();
         }

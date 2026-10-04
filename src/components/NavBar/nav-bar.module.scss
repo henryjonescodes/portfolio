@@ -1,6 +1,6 @@
-@use "sass:color";
+@use 'sass:color';
 
-@use '@styles'as styles;
+@use '@styles' as styles;
 
 // * * * * * * * Unreferenced Styles * * * * * * * //
 
@@ -79,10 +79,7 @@
     display: inline-block;
     transition: all 0.3s ease;
   }
-
-
 }
-
 
 // * * * * * * * Navigation Bar Styles * * * * * * * //
 
@@ -116,8 +113,6 @@
   justify-content: flex-end;
 }
 
-
-
 // * * * * * * * Mobile Styles * * * * * * * //
 
 @media (max-width: styles.$width-small) {
@@ -150,14 +145,11 @@
   }
 }
 
-
 @media (max-width: calc((styles.$width-tiny + styles.$width-mobile) /2)) {
   .center {
     display: none;
   }
 }
-
-
 
 // * * * * * * * NavBarItem Styles * * * * * * * //
 
@@ -184,7 +176,6 @@
     .border {
       border-bottom-width: 3px;
     }
-
   }
 
   .border {
@@ -206,8 +197,6 @@
     width: 50px;
     justify-content: flex-start;
 
-
-
     .label {
       display: none;
     }
@@ -224,7 +213,8 @@
         opacity: 0.8;
       }
 
-      .icon .image {}
+      .icon .image {
+      }
     }
 
     @media (max-width: styles.$width-mobile) {

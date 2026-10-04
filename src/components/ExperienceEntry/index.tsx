@@ -206,7 +206,11 @@ const ExperienceEntry = ({
                           <TypewriterText text={title} />
                         </motion.h2>
                         {!!subtitle && (
-                          <motion.h3 layoutId="subtitle" layout="position" transition={layoutTransition}>
+                          <motion.h3
+                            layoutId="subtitle"
+                            layout="position"
+                            transition={layoutTransition}
+                          >
                             {subtitle}
                           </motion.h3>
                         )}

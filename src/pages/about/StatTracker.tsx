@@ -1,10 +1,10 @@
-import { motion } from "framer-motion";
-import AnimatedBorderBox from "@components/AnimatedBorderBox";
-import TypewriterText from "@components/TypewriterText";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./about.module.scss";
+import { motion } from 'framer-motion';
+import AnimatedBorderBox from '@components/AnimatedBorderBox';
+import TypewriterText from '@components/TypewriterText';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './about.module.scss';
 
-import cn from "classnames";
+import cn from 'classnames';
 
 type StatTrackerProps = {
   label: string;

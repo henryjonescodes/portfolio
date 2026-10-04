@@ -1,20 +1,20 @@
 // Scene.tsx
-import CustomControls from "@components/3D/CustomControls";
-import LoadingHelper from "@components/Loading/LoadingHelper";
-import { useSettings } from "@context/SettingsContext";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
-import { useZoom } from "@context/ZoomContext";
-import { OrbitControls } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { useContextBridge } from "its-fine";
-import { lazy, Suspense } from "react";
-import styles from "./landing.module.scss";
-import cn from "classnames";
-import { isMobile } from "react-device-detect";
-import Close from "@assets/svg/icons/close-01.svg?react";
-import { AnimatePresence, motion } from "framer-motion";
+import CustomControls from '@components/3D/CustomControls';
+import LoadingHelper from '@components/Loading/LoadingHelper';
+import { useSettings } from '@context/SettingsContext';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { useZoom } from '@context/ZoomContext';
+import { OrbitControls } from '@react-three/drei';
+import { Canvas } from '@react-three/fiber';
+import { useContextBridge } from 'its-fine';
+import { lazy, Suspense } from 'react';
+import styles from './landing.module.scss';
+import cn from 'classnames';
+import { isMobile } from 'react-device-detect';
+import Close from '@assets/svg/icons/close-01.svg?react';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const Gizmo = lazy(() => import("./Gizmo"));
+const Gizmo = lazy(() => import('./Gizmo'));
 
 const closeButtonVariants = {
   hidden: { opacity: 0 },
@@ -45,7 +45,7 @@ export default function Scene() {
 
   return (
     <>
-      {zoomLevel !== "fullscreen" && isMobile && (
+      {zoomLevel !== 'fullscreen' && isMobile && (
         <AnimatePresence mode="wait">
           <motion.div
             className={styles.close}
@@ -68,9 +68,7 @@ export default function Scene() {
         shadows
         camera={{
           position:
-            zoomLevel === "wide"
-              ? zoomPositions.wide.toArray()
-              : zoomPositions.handheld.toArray(),
+            zoomLevel === 'wide' ? zoomPositions.wide.toArray() : zoomPositions.handheld.toArray(),
         }}
       >
         <CanvasContent useOrbitControls={useOrbitControls} />

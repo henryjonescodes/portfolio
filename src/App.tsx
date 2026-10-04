@@ -1,15 +1,15 @@
-import { lazy, Suspense } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import "./App.scss";
-import { AppProviders } from "./context/AppProviders";
-import { Landing } from "./pages/landing";
-import { PageLoading } from "./components/Loading";
-import { ErrorBoundary } from "./components/ErrorBoundary";
-import Home from "./pages/home";
+import { lazy, Suspense } from 'react';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import './App.scss';
+import { AppProviders } from './context/AppProviders';
+import { Landing } from './pages/landing';
+import { PageLoading } from './components/Loading';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import Home from './pages/home';
 
-const About = lazy(() => import("./pages/about"));
-const Experience = lazy(() => import("./pages/experience"));
-const Projects = lazy(() => import("./pages/projects"));
+const About = lazy(() => import('./pages/about'));
+const Experience = lazy(() => import('./pages/experience'));
+const Projects = lazy(() => import('./pages/projects'));
 
 export default function App() {
   return (

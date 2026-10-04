@@ -1,12 +1,6 @@
-import { Leva, useControls } from "leva";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Leva, useControls } from 'leva';
+import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 type SettingsContextType = {
   // ? Animation
@@ -43,9 +37,7 @@ type SettingsProviderProps = {
 };
 
 // Provider component
-export const SettingsProvider: React.FC<SettingsProviderProps> = ({
-  children,
-}) => {
+export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) => {
   // ? Get Page via React Router
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,8 +45,8 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   // ? Parse query parameters
   const isDebugMode = useMemo(() => {
     const searchParams = new URLSearchParams(location.search);
-    console.log("hello", searchParams.get("debug"));
-    return searchParams.get("debug") === "true";
+    console.log('hello', searchParams.get('debug'));
+    return searchParams.get('debug') === 'true';
   }, [location.search]);
 
   // ? Setup States
@@ -64,7 +56,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   );
 
   // ? Leva Controls
-  const { useOrbitControls } = useControls("3D Scene", {
+  const { useOrbitControls } = useControls('3D Scene', {
     useOrbitControls: false,
   });
 
@@ -88,9 +80,9 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
   const toggleDebugMode = () => {
     const searchParams = new URLSearchParams(location.search);
     if (isDebugMode) {
-      searchParams.delete("debug");
+      searchParams.delete('debug');
     } else {
-      searchParams.set("debug", "true");
+      searchParams.set('debug', 'true');
     }
     navigate({ search: searchParams.toString() });
   };
@@ -114,7 +106,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
         oneLineLabels={false}
         theme={{
           sizes: {
-            rootWidth: "500px",
+            rootWidth: '500px',
           },
         }}
       />
@@ -129,7 +121,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({
 export const useSettings = (): SettingsContextType => {
   const context = useContext(SettingsContext);
   if (!context) {
-    throw new Error("useSettings must be used within a SettingsProvider");
+    throw new Error('useSettings must be used within a SettingsProvider');
   }
   return context;
 };

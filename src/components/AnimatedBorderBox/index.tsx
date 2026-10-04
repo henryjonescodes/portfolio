@@ -1,9 +1,9 @@
-import { motion, useIsPresent } from "framer-motion";
-import { useEffect, useRef, useState, ReactNode } from "react";
-import cn from "classnames";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./local.module.scss";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
+import { motion, useIsPresent } from 'framer-motion';
+import { useEffect, useRef, useState, ReactNode } from 'react';
+import cn from 'classnames';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './local.module.scss';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
 
 interface AnimatedBorderProps {
   width: number;

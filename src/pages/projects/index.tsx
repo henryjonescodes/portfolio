@@ -1,15 +1,15 @@
-import { motion } from "framer-motion";
-import { useRef, createRef } from "react";
-import ExperienceEntry from "@components/ExperienceEntry";
-import PageContents from "@components/Page/PageContents";
-import TypewriterText from "@components/TypewriterText";
-import { useAnimations } from "@context/AnimationContext";
-import { projectsData, projectsOrder } from "@data/projects";
-import { useExperienceEntryModal } from "@components/ExperienceEntry/ExperienceEntryModalContext";
-import styles from "./projects.module.scss";
-import GlitchMedia from "@components/GlitchMedia";
-import cn from "classnames";
-import { usePage } from "@context/PageContext";
+import { motion } from 'framer-motion';
+import { useRef, createRef } from 'react';
+import ExperienceEntry from '@components/ExperienceEntry';
+import PageContents from '@components/Page/PageContents';
+import TypewriterText from '@components/TypewriterText';
+import { useAnimations } from '@context/AnimationContext';
+import { projectsData, projectsOrder } from '@data/projects';
+import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
+import styles from './projects.module.scss';
+import GlitchMedia from '@components/GlitchMedia';
+import cn from 'classnames';
+import { usePage } from '@context/PageContext';
 
 const Projects = () => {
   const { TRANSITIONS } = useAnimations();
@@ -43,22 +43,14 @@ const Projects = () => {
         <motion.div className={styles.video} variants={entryContentVariants}>
           <GlitchMedia
             video={
-              <video
-                autoPlay
-                loop
-                muted
-                src="video/v2-loop.mp4"
-                style={{ objectPosition: "0%" }}
-              />
+              <video autoPlay loop muted src="video/v2-loop.mp4" style={{ objectPosition: '0%' }} />
             }
           />
         </motion.div>
       ),
       virtualportfolio: (
         <motion.div className={styles.video} variants={entryContentVariants}>
-          <GlitchMedia
-            video={<video autoPlay loop muted src="video/tower-loop.mp4" />}
-          />
+          <GlitchMedia video={<video autoPlay loop muted src="video/tower-loop.mp4" />} />
         </motion.div>
       ),
       portfoliov1: (
@@ -77,21 +69,24 @@ const Projects = () => {
 
   // Create refs for each entry
   const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
-    projectsOrder.reduce((acc, id) => {
-      acc[id] = createRef<HTMLDivElement>();
-      return acc;
-    }, {} as Record<string, React.RefObject<HTMLDivElement>>)
+    projectsOrder.reduce(
+      (acc, id) => {
+        acc[id] = createRef<HTMLDivElement>();
+        return acc;
+      },
+      {} as Record<string, React.RefObject<HTMLDivElement>>,
+    ),
   );
 
   return (
-    <PageContents key={"projects"} className={styles.projects}>
+    <PageContents key={'projects'} className={styles.projects}>
       <motion.div
         variants={projectsVariants}
         className={cn(styles.content, { [styles.fullscreen]: !embedded })}
       >
         <motion.h1>
           <TypewriterText
-            text={"Projects"}
+            text={'Projects'}
             staggerChildren={TRANSITIONS.PROJECTS_TITLE.ANIMATE_STAGGER.staggerChildren}
           />
         </motion.h1>
@@ -110,7 +105,7 @@ const Projects = () => {
                   entryRefs.current[id],
                   getProjectMedia(id),
                   project.url,
-                  project.dateString
+                  project.dateString,
                 )
               }
               inList={true}

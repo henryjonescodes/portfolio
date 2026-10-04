@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext } from "react";
+import { createContext, ReactNode, useContext } from 'react';
 
 interface PageContextType {
   embedded?: boolean;
@@ -13,15 +13,13 @@ export const PageProvider = ({
   children: ReactNode;
   embedded?: boolean;
 }) => {
-  return (
-    <PageContext.Provider value={{ embedded }}>{children}</PageContext.Provider>
-  );
+  return <PageContext.Provider value={{ embedded }}>{children}</PageContext.Provider>;
 };
 
 export const usePage = () => {
   const context = useContext(PageContext);
   if (context === undefined) {
-    throw new Error("usePage must be used within an PageProvider");
+    throw new Error('usePage must be used within an PageProvider');
   }
   return context;
 };

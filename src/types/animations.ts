@@ -2,7 +2,7 @@
  * Type definitions for the animation system.
  */
 
-import type { DEFAULT_CATEGORY_SCALARS } from "@config/new-animations";
+import type { DEFAULT_CATEGORY_SCALARS } from '@config/new-animations';
 
 /** Framer Motion transition configuration */
 export type TransitionConfig = {
@@ -11,8 +11,8 @@ export type TransitionConfig = {
   delayChildren?: number;
   staggerChildren?: number;
   ease?: string | number[];
-  type?: "spring" | "tween" | "inertia";
-  when?: "beforeChildren" | "afterChildren";
+  type?: 'spring' | 'tween' | 'inertia';
+  when?: 'beforeChildren' | 'afterChildren';
 };
 
 /** Category base durations derived from master */

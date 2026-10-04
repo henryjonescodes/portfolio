@@ -1,19 +1,12 @@
-import React, {
-  createContext,
-  useState,
-  useEffect,
-  useContext,
-  ReactNode,
-  useMemo,
-} from "react";
+import React, { createContext, useState, useEffect, useContext, ReactNode, useMemo } from 'react';
 import {
   screenSize,
   screenWidths,
   ScreenWidthKey,
   ScreenWidthZoomPositions,
   ZoomLevel,
-} from "@styles/layout.constants.ts";
-import { useSettings } from "./SettingsContext";
+} from '@styles/layout.constants.ts';
+import { useSettings } from './SettingsContext';
 
 // Define the context type
 type ScreenSizeType = {
@@ -26,14 +19,10 @@ type WindowDimensionContextProps = {
 } & ScreenSizeType;
 
 // Create the context with default values
-const WindowDimensionContext = createContext<
-  WindowDimensionContextProps | undefined
->(undefined);
+const WindowDimensionContext = createContext<WindowDimensionContextProps | undefined>(undefined);
 
 // Define a provider component
-export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { isDebugMode } = useSettings();
   const [screenSize, setScreenSize] = useState<ScreenSizeType>({
     width: window.innerWidth,
@@ -42,50 +31,48 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({
 
   const screenWidthKey: ScreenWidthKey = useMemo(() => {
     if (screenSize.width > 3000) {
-      return "extraLarge";
+      return 'extraLarge';
     }
     if (screenSize.width > screenWidths.large) {
-      return "large";
+      return 'large';
     }
     if (screenSize.width > screenWidths.default) {
-      return "default";
+      return 'default';
     }
     if (screenSize.width > screenWidths.compact) {
-      return "compact";
+      return 'compact';
     }
     if (screenSize.width > screenWidths.medium) {
-      return "medium";
+      return 'medium';
     }
     if (screenSize.width > screenWidths.small) {
-      return "small";
+      return 'small';
     }
     if (screenSize.width > screenWidths.mobile) {
-      return "mobile";
+      return 'mobile';
     }
-    return "tiny";
+    return 'tiny';
   }, [screenSize.width]);
 
   const zoomPositions = useMemo(() => {
     const getZoomPositions = (key: ScreenWidthKey) => {
       if (isDebugMode) {
-        console.log(
-          `[WindowDimensionContext]: Zoom level updated on key change: ${key}`
-        );
+        console.log(`[WindowDimensionContext]: Zoom level updated on key change: ${key}`);
       }
       switch (key) {
-        case "extraLarge":
+        case 'extraLarge':
           return ScreenWidthZoomPositions.extraLarge;
-        case "large":
+        case 'large':
           return ScreenWidthZoomPositions.large;
-        case "default":
+        case 'default':
           return ScreenWidthZoomPositions.default;
-        case "compact":
+        case 'compact':
           return ScreenWidthZoomPositions.compact;
-        case "medium":
+        case 'medium':
           return ScreenWidthZoomPositions.medium;
-        case "small":
+        case 'small':
           return ScreenWidthZoomPositions.small;
-        case "mobile":
+        case 'mobile':
           return ScreenWidthZoomPositions.mobile;
         default:
           return ScreenWidthZoomPositions.tiny;
@@ -103,18 +90,16 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({
       });
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     // Cleanup the event listener on component unmount
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   return (
-    <WindowDimensionContext.Provider
-      value={{ ...screenSize, screenWidthKey, zoomPositions }}
-    >
+    <WindowDimensionContext.Provider value={{ ...screenSize, screenWidthKey, zoomPositions }}>
       {children}
     </WindowDimensionContext.Provider>
   );
@@ -128,7 +113,7 @@ export const useWindowDimensions = (): WindowDimensionContextProps => {
     return {
       width: screenSize.width,
       height: screenSize.height,
-      screenWidthKey: "default",
+      screenWidthKey: 'default',
       zoomPositions: ScreenWidthZoomPositions.default,
     };
   }

@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./animated-line.module.scss";
+import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './animated-line.module.scss';
 
 type AnimatedLineProps = {
   className?: string;
@@ -32,7 +32,7 @@ const AnimatedLine = ({
     initial: horizontal ? { width: 0 } : { height: 0 },
     animate: horizontal
       ? {
-          width: "100%",
+          width: '100%',
           transition: animateOnLoad
             ? {
                 duration,
@@ -41,7 +41,7 @@ const AnimatedLine = ({
             : { duration: 0 }, // Disable animation when horizontal updates
         }
       : {
-          height: "100%",
+          height: '100%',
           transition: animateOnLoad
             ? {
                 duration,
@@ -51,17 +51,17 @@ const AnimatedLine = ({
         },
     show: horizontal
       ? {
-          width: "100%",
+          width: '100%',
         }
       : {
-          height: "100%",
+          height: '100%',
         },
     exit: horizontal ? { width: 0 } : { height: 0 },
   };
 
   return (
     <motion.div
-      key={horizontal ? "horizontal" : "vertical"} // Ensures animation reset when prop changes
+      key={horizontal ? 'horizontal' : 'vertical'} // Ensures animation reset when prop changes
       className={`${styles.animatedLine} ${className}`}
       style={{
         width: horizontal ? 0 : `${borderWidth}px`,

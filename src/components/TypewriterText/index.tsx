@@ -1,6 +1,6 @@
-import { motion } from "framer-motion";
-import React from "react";
-import { useAnimations } from "@context/AnimationContext";
+import { motion } from 'framer-motion';
+import React from 'react';
+import { useAnimations } from '@context/AnimationContext';
 
 // TypeScript interface for component props
 interface TypewriterTextProps {
@@ -56,13 +56,13 @@ const TypewriterText: React.FC<TypewriterTextProps> = ({
       opacity: 0,
       transition: {
         duration: 0.3,
-        when: "beforeChildren",
+        when: 'beforeChildren',
       },
     },
   });
   return (
     <motion.span variants={textVariants(staggerChildren, staggerDirection)}>
-      {text.split("").map((char, index) => (
+      {text.split('').map((char, index) => (
         <motion.span key={index} variants={characterVariants}>
           {char}
         </motion.span>

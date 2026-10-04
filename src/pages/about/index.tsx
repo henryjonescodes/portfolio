@@ -1,30 +1,30 @@
-import { motion } from "framer-motion";
-import cn from "classnames";
+import { motion } from 'framer-motion';
+import cn from 'classnames';
 
-import GitHub from "@assets/svg/socials/github.svg?react";
-import Instagram from "@assets/svg/socials/Instagram.svg?react";
-import LinkedIn from "@assets/svg/socials/linkedIn.svg?react";
-import Book from "@assets/svg/icons/book-01.svg?react";
-import Home from "@assets/svg/icons/home.svg?react";
+import GitHub from '@assets/svg/socials/github.svg?react';
+import Instagram from '@assets/svg/socials/Instagram.svg?react';
+import LinkedIn from '@assets/svg/socials/linkedIn.svg?react';
+import Book from '@assets/svg/icons/book-01.svg?react';
+import Home from '@assets/svg/icons/home.svg?react';
 
-import TypewriterText from "@components/TypewriterText";
-import AnimatedBorderBox from "@components/AnimatedBorderBox";
-import Map from "@components/MapViewer/Map";
-import PageContents from "@components/Page/PageContents";
-import AnimatedLine from "@components/AnimatedLine";
-import GlitchIcon from "@components/GlitchIcon";
-import Blurb from "@components/MapViewer/Blurb";
-import { MapProvider } from "@components/MapViewer/MapContext";
-import { usePage } from "@context/PageContext";
-import { useColors } from "@context/ColorsContext";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
-import { useAnimations } from "@context/AnimationContext";
+import TypewriterText from '@components/TypewriterText';
+import AnimatedBorderBox from '@components/AnimatedBorderBox';
+import Map from '@components/MapViewer/Map';
+import PageContents from '@components/Page/PageContents';
+import AnimatedLine from '@components/AnimatedLine';
+import GlitchIcon from '@components/GlitchIcon';
+import Blurb from '@components/MapViewer/Blurb';
+import { MapProvider } from '@components/MapViewer/MapContext';
+import { usePage } from '@context/PageContext';
+import { useColors } from '@context/ColorsContext';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { useAnimations } from '@context/AnimationContext';
 
-import { screenWidths } from "@styles/layout.constants.ts";
-import { iconVariants } from "@styles/variants";
+import { screenWidths } from '@styles/layout.constants.ts';
+import { iconVariants } from '@styles/variants';
 
-import styles from "./about.module.scss";
-import StatTracker from "./StatTracker";
+import styles from './about.module.scss';
+import StatTracker from './StatTracker';
 
 const About = () => {
   const { width } = useWindowDimensions();
@@ -121,7 +121,7 @@ const About = () => {
 
   return (
     <PageContents
-      key={"about"}
+      key={'about'}
       className={cn(styles.about, {
         [styles.handheld]: embedded,
         [styles.fullscreen]: !embedded,
@@ -129,16 +129,13 @@ const About = () => {
     >
       <motion.div className={cn(styles.content, styles.aboutMe)}>
         {/* First Page */}
-        <motion.div
-          className={cn(styles.twoColumns, styles.flex)}
-          variants={heroVariants}
-        >
+        <motion.div className={cn(styles.twoColumns, styles.flex)} variants={heroVariants}>
           {/* Info Section (Left/Top) */}
           <motion.div className={styles.left}>
             {/* Title */}
             <motion.div className={styles.title}>
               <motion.h1>
-                <TypewriterText text={"Henry Jones"} staggerChildren={0.05} />
+                <TypewriterText text={'Henry Jones'} staggerChildren={0.05} />
               </motion.h1>
               <motion.h3>
                 <TypewriterText text="Creative Developer" />
@@ -155,30 +152,21 @@ const About = () => {
             {/* Socials */}
             {/* {!moveSocials && ( */}
             <motion.div className={styles.socials} variants={socialsVariants}>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
+              <motion.div variants={iconVariants} className={styles.iconWrapper}>
                 <GlitchIcon
                   Icon={GitHub}
                   className={styles.icon}
                   url="https://github.com/henryjonescodes"
                 />
               </motion.div>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
+              <motion.div variants={iconVariants} className={styles.iconWrapper}>
                 <GlitchIcon
                   Icon={LinkedIn}
                   className={styles.icon}
                   url="https://www.linkedin.com/in/henryjonescodes/"
                 />
               </motion.div>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
+              <motion.div variants={iconVariants} className={styles.iconWrapper}>
                 <GlitchIcon
                   Icon={Instagram}
                   className={styles.icon}
@@ -191,10 +179,7 @@ const About = () => {
 
           {/* Stats Section (Right/Bottom) */}
           <motion.div className={styles.right} variants={statsVariants}>
-            <AnimatedBorderBox
-              className={styles.border}
-              contentClassName={styles.borderContent}
-            >
+            <AnimatedBorderBox className={styles.border} contentClassName={styles.borderContent}>
               {/* Avatar */}
               <motion.div className={styles.viewer}>
                 <motion.img
@@ -209,46 +194,26 @@ const About = () => {
               {/* Tags */}
               {moveTags && (
                 <>
-                  <AnimatedLine
-                    className={styles.divider}
-                    horizontal={true}
-                    borderWidth={2}
-                  />
+                  <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                   <motion.div className={styles.tags} variants={tagsVariants}>
                     <motion.span className={styles.tag}>
-                      <motion.div
-                        variants={iconVariants}
-                        className={styles.iconWrapper}
-                      >
+                      <motion.div variants={iconVariants} className={styles.iconWrapper}>
                         <Home className={styles.icon} />
                       </motion.div>
                       <motion.h4 className={styles.text}>
-                        <TypewriterText
-                          text="Brooklyn, NY"
-                          staggerChildren={0.05}
-                        />
+                        <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
                       </motion.h4>
                     </motion.span>
                     <motion.span className={styles.tag}>
-                      <motion.div
-                        variants={iconVariants}
-                        className={styles.iconWrapper}
-                      >
+                      <motion.div variants={iconVariants} className={styles.iconWrapper}>
                         <Book className={styles.icon} />
                       </motion.div>
                       <motion.h4 className={styles.text}>
-                        <TypewriterText
-                          text="Union College"
-                          staggerChildren={0.05}
-                        />
+                        <TypewriterText text="Union College" staggerChildren={0.05} />
                       </motion.h4>
                     </motion.span>
                   </motion.div>
-                  <AnimatedLine
-                    className={styles.divider}
-                    horizontal={true}
-                    borderWidth={2}
-                  />
+                  <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                 </>
               )}
 
@@ -266,39 +231,23 @@ const About = () => {
                     />
                     <motion.div className={styles.tags} variants={tagsVariants}>
                       <motion.span className={styles.tag}>
-                        <motion.div
-                          variants={iconVariants}
-                          className={styles.iconWrapper}
-                        >
+                        <motion.div variants={iconVariants} className={styles.iconWrapper}>
                           <Home className={styles.icon} />
                         </motion.div>
                         <motion.h4 className={styles.text}>
-                          <TypewriterText
-                            text="Brooklyn, NY"
-                            staggerChildren={0.05}
-                          />
+                          <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
                         </motion.h4>
                       </motion.span>
                       <motion.span className={styles.tag}>
-                        <motion.div
-                          variants={iconVariants}
-                          className={styles.iconWrapper}
-                        >
+                        <motion.div variants={iconVariants} className={styles.iconWrapper}>
                           <Book className={styles.icon} />
                         </motion.div>
                         <motion.h4 className={styles.text}>
-                          <TypewriterText
-                            text="Union College"
-                            staggerChildren={0.05}
-                          />
+                          <TypewriterText text="Union College" staggerChildren={0.05} />
                         </motion.h4>
                       </motion.span>
                     </motion.div>
-                    <AnimatedLine
-                      className={styles.divider}
-                      horizontal={true}
-                      borderWidth={2}
-                    />
+                    <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                   </>
                 )}
                 <motion.div className={styles.sliders}>
@@ -316,10 +265,7 @@ const About = () => {
       <motion.div className={cn(styles.content, styles.mapViewer)}>
         {/* Second Page */}
         <MapProvider>
-          <motion.div
-            className={cn(styles.twoColumns, styles.flex)}
-            variants={mapViewerVariants}
-          >
+          <motion.div className={cn(styles.twoColumns, styles.flex)} variants={mapViewerVariants}>
             {/* Map Viewer */}
             <motion.div className={styles.left}>
               <Map />

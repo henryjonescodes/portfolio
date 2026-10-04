@@ -1,8 +1,8 @@
-import { useLoading } from "@context/LoadingContext";
-import { useAnimations } from "@context/AnimationContext";
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import styles from "./loading.module.scss";
+import { useLoading } from '@context/LoadingContext';
+import { useAnimations } from '@context/AnimationContext';
+import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
+import styles from './loading.module.scss';
 
 export const Spinner: React.FC = () => {
   return (
@@ -52,7 +52,7 @@ const Loading = () => {
     },
   };
 
-  if (!loadingState || loadingState === "complete") {
+  if (!loadingState || loadingState === 'complete') {
     return null;
   }
 
@@ -62,7 +62,7 @@ const Loading = () => {
         finishLoading();
       }}
     >
-      {loadingState === "loading" && (
+      {loadingState === 'loading' && (
         <motion.div
           className={styles.loadingWrapper}
           initial="visible"

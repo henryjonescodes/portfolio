@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
 function useDebounceEffect(effect: () => void, deps: React.DependencyList, delay: number) {
   const handler = useRef<ReturnType<typeof setTimeout> | null>(null);

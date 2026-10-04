@@ -1,11 +1,11 @@
-import classNames from "classnames";
-import { motion } from "framer-motion";
-import { ReactNode, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useSettings } from "@context/SettingsContext";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./page.module.scss";
-import { usePage } from "@context/PageContext";
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useSettings } from '@context/SettingsContext';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './page.module.scss';
+import { usePage } from '@context/PageContext';
 
 // Define the props interface
 export type PageContentsProps = {
@@ -18,7 +18,7 @@ type Props = {
 
 const PageContents: React.FC<Props> = ({ children, className }) => {
   const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean);
+  const pathSegments = location.pathname.split('/').filter(Boolean);
   const page = pathSegments[0];
   const [delayedPage, setDelayedPage] = useState(page);
   const { animationDisabled } = useSettings();
@@ -50,7 +50,7 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
         transition: TRANSITIONS.PAGE_CONTENTS.EXIT,
       },
     }),
-    [embedded, TRANSITIONS]
+    [embedded, TRANSITIONS],
   );
 
   const minimalPageVariants = useMemo(
@@ -67,22 +67,22 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
         transition: TRANSITIONS.PAGE_CONTENTS.MINIMAL_REMOVED,
       },
     }),
-    [TRANSITIONS]
+    [TRANSITIONS],
   );
 
   const { initial, animate, exit, variants } = useMemo(() => {
     if (animationDisabled) {
       return {
-        initial: "animate",
-        animate: "shown",
-        exit: "removed",
+        initial: 'animate',
+        animate: 'shown',
+        exit: 'removed',
         variants: minimalPageVariants,
       };
     }
     return {
-      initial: "initial",
-      animate: "animate",
-      exit: "exit",
+      initial: 'initial',
+      animate: 'animate',
+      exit: 'exit',
       variants: pageVariants,
     };
   }, [delayedPage]);

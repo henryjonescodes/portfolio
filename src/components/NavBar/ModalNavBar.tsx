@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import { useAnimations } from "@context/AnimationContext";
-import NavBarButton from "./NavBarButton";
-import AnimatedLine from "@components/AnimatedLine";
-import Close from "@assets/svg/icons/close.svg?react";
-import styles from "./modal-nav-bar.module.scss";
+import { motion } from 'framer-motion';
+import { useAnimations } from '@context/AnimationContext';
+import NavBarButton from './NavBarButton';
+import AnimatedLine from '@components/AnimatedLine';
+import Close from '@assets/svg/icons/close.svg?react';
+import styles from './modal-nav-bar.module.scss';
 
 type ModalNavBarProps = {
   title: string;

@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import TypewriterText from "@components/TypewriterText";
-import PageContents from "@components/Page/PageContents";
-import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
-import { useAnimations } from "@context/AnimationContext";
-import styles from "./home.module.scss";
+import { motion } from 'framer-motion';
+import TypewriterText from '@components/TypewriterText';
+import PageContents from '@components/Page/PageContents';
+import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './home.module.scss';
 
 const Home = () => {
   const navigate = useNavigatePreserveQuery(); // Initialize the navigate function
@@ -19,41 +19,29 @@ const Home = () => {
   const textStaggerSeconds = TRANSITIONS.TYPEWRITER.ANIMATE_STAGGER.staggerChildren;
 
   return (
-    <PageContents key={"menu"} className={styles.menu}>
+    <PageContents key={'menu'} className={styles.menu}>
       {/* Henry Jones */}
       <motion.h1 variants={menuVariants}>
-        <TypewriterText
-          text="Henry Jones"
-          staggerChildren={textStaggerSeconds}
-        />
+        <TypewriterText text="Henry Jones" staggerChildren={textStaggerSeconds} />
       </motion.h1>
 
       {/* Creative Developer */}
       <motion.h3 variants={menuVariants}>
-        <TypewriterText
-          text="Creative Developer"
-          staggerChildren={textStaggerSeconds}
-        />
+        <TypewriterText text="Creative Developer" staggerChildren={textStaggerSeconds} />
       </motion.h3>
 
       {/* About (Link) */}
-      <motion.h2 variants={menuVariants} onClick={() => navigate("/about")}>
+      <motion.h2 variants={menuVariants} onClick={() => navigate('/about')}>
         <TypewriterText text="About" staggerChildren={textStaggerSeconds} />
       </motion.h2>
 
       {/* Experience (Link) */}
-      <motion.h2
-        variants={menuVariants}
-        onClick={() => navigate("/experience")}
-      >
-        <TypewriterText
-          text="Experience"
-          staggerChildren={textStaggerSeconds}
-        />
+      <motion.h2 variants={menuVariants} onClick={() => navigate('/experience')}>
+        <TypewriterText text="Experience" staggerChildren={textStaggerSeconds} />
       </motion.h2>
 
       {/* Projects (Link) */}
-      <motion.h2 variants={menuVariants} onClick={() => navigate("/projects")}>
+      <motion.h2 variants={menuVariants} onClick={() => navigate('/projects')}>
         <TypewriterText text="Projects" staggerChildren={textStaggerSeconds} />
       </motion.h2>
     </PageContents>

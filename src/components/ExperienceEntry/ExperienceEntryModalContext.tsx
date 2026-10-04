@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import ExperienceEntry from "@components/ExperienceEntry";
-import { useAnimations } from "@context/AnimationContext";
-import type { EntryData } from "@components/ExperienceEntry/types";
-import styles from "./experience-entry-modal.module.scss";
+import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import ExperienceEntry from '@components/ExperienceEntry';
+import { useAnimations } from '@context/AnimationContext';
+import type { EntryData } from '@components/ExperienceEntry/types';
+import styles from './experience-entry-modal.module.scss';
 
 type ModalContextType = {
   selectedEntry: EntryData | null;
@@ -17,19 +17,17 @@ type ModalContextType = {
     entryRef: React.RefObject<HTMLDivElement>,
     children?: React.ReactNode,
     url?: string,
-    dateString?: string
+    dateString?: string,
   ) => void;
   closeModal: () => void;
 };
 
-const ExperienceEntryModalContext = createContext<ModalContextType | undefined>(
-  undefined
-);
+const ExperienceEntryModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const useExperienceEntryModal = () => {
   const context = useContext(ExperienceEntryModalContext);
   if (!context) {
-    throw new Error("useExperienceEntryModal must be used within ExperienceEntryModalProvider");
+    throw new Error('useExperienceEntryModal must be used within ExperienceEntryModalProvider');
   }
   return context;
 };
@@ -38,9 +36,7 @@ type ExperienceEntryModalProviderProps = {
   children: React.ReactNode;
 };
 
-export const ExperienceEntryModalProvider = ({
-  children,
-}: ExperienceEntryModalProviderProps) => {
+export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalProviderProps) => {
   const { TRANSITIONS } = useAnimations();
   const [selectedEntry, setSelectedEntry] = useState<EntryData | null>(null);
   const [entryRect, setEntryRect] = useState<DOMRect | null>(null);
@@ -48,9 +44,7 @@ export const ExperienceEntryModalProvider = ({
   const [isClosing, setIsClosing] = useState(false);
   const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
   const [modalUrl, setModalUrl] = useState<string | undefined>(undefined);
-  const [modalDateString, setModalDateString] = useState<string | undefined>(
-    undefined
-  );
+  const [modalDateString, setModalDateString] = useState<string | undefined>(undefined);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => () => clearTimeout(closeTimer.current), []);
@@ -64,7 +58,7 @@ export const ExperienceEntryModalProvider = ({
     entryRef: React.RefObject<HTMLDivElement>,
     children?: React.ReactNode,
     url?: string,
-    dateString?: string
+    dateString?: string,
   ) => {
     const entryElement = entryRef.current;
     if (!entryElement) return;

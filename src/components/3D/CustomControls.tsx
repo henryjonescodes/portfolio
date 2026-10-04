@@ -1,12 +1,12 @@
 // CustomControls.tsx
-import { useFrame, useThree } from "@react-three/fiber";
-import React, { useEffect, useState } from "react";
-import { useSpring } from "react-spring";
-import { Vector3 } from "$three";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
-import { useZoom } from "@context/ZoomContext";
-import { useMobileOrientation, isMobile } from "react-device-detect";
-import { landscapeZoomPositionOffset } from "@styles/layout.constants";
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useEffect, useState } from 'react';
+import { useSpring } from 'react-spring';
+import { Vector3 } from '$three';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { useZoom } from '@context/ZoomContext';
+import { useMobileOrientation, isMobile } from 'react-device-detect';
+import { landscapeZoomPositionOffset } from '@styles/layout.constants';
 
 const CustomControls: React.FC = () => {
   const { camera } = useThree();
@@ -20,16 +20,16 @@ const CustomControls: React.FC = () => {
   useEffect(() => {
     let focusLocal = undefined;
     switch (zoomLevel) {
-      case "wide":
+      case 'wide':
         focusLocal = zoomPositions.wide.clone();
         break;
-      case "handheld":
+      case 'handheld':
         focusLocal = zoomPositions.handheld.clone();
         break;
-      case "info":
+      case 'info':
         focusLocal = zoomPositions.info.clone();
         break;
-      case "fullscreen":
+      case 'fullscreen':
         focusLocal = zoomPositions.fullScreen.clone();
         break;
       default:

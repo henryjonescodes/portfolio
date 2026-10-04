@@ -1,12 +1,12 @@
-import { createContext, useContext, ReactNode, useMemo } from "react";
-import { useControls, folder } from "leva";
+import { createContext, useContext, ReactNode, useMemo } from 'react';
+import { useControls, folder } from 'leva';
 import {
   ANIMATION_SCALAR_CONFIG,
   computeAnimationBases,
   TRANSITIONS_CONFIG,
   extractLevaSchema,
   buildTransitionsFromConfig,
-} from "@config/new-animations";
+} from '@config/new-animations';
 
 type AnimationContextType = {
   TRANSITIONS: ReturnType<typeof buildTransitionsFromConfig>;
@@ -28,9 +28,7 @@ type AnimationContextType = {
   MAP_SLIDER_CASCADE_MS: number;
 };
 
-const AnimationContext = createContext<AnimationContextType | undefined>(
-  undefined
-);
+const AnimationContext = createContext<AnimationContextType | undefined>(undefined);
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   // Build Leva schema for master, category bases, springs, and system constants
@@ -42,21 +40,22 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
           const label = (scalar as any).label ?? key;
           const hint = (scalar as any).hint ? `${(scalar as any).hint} | ${key}` : key;
           return [key, { ...(scalar as any), label, hint }];
-        })
+        }),
       );
-      return [
-        _meta.title,
-        folder(scalarsWithLabels, { collapsed: _meta.collapsed ?? true }),
-      ];
-    })
+      return [_meta.title, folder(scalarsWithLabels, { collapsed: _meta.collapsed ?? true })];
+    }),
   );
 
-  const systemControls = useControls("Animation System", {
-    ...systemSchema,
-    "✨ Transitions": folder(extractLevaSchema(TRANSITIONS_CONFIG), { collapsed: true }),
-  }, {
-    collapsed: false,
-  });
+  const systemControls = useControls(
+    'Animation System',
+    {
+      ...systemSchema,
+      '✨ Transitions': folder(extractLevaSchema(TRANSITIONS_CONFIG), { collapsed: true }),
+    },
+    {
+      collapsed: false,
+    },
+  );
 
   const {
     ANIMATION_MASTER_BASE,
@@ -98,12 +97,12 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
       NAV_BASE_SCALAR,
       TEXT_BASE_SCALAR,
       COMPONENT_BASE_SCALAR,
-    ]
+    ],
   );
 
   const transitions = useMemo(
     () => buildTransitionsFromConfig(TRANSITIONS_CONFIG, systemControls, bases),
-    [systemControls, bases]
+    [systemControls, bases],
   );
 
   const springs = useMemo(
@@ -125,10 +124,16 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
       },
     }),
     [
-      SPRING_SMOOTH_TENSION, SPRING_SMOOTH_FRICTION, SPRING_SMOOTH_MASS,
-      SPRING_BOUNCY_TENSION, SPRING_BOUNCY_FRICTION, SPRING_BOUNCY_MASS,
-      SPRING_SLOW_TENSION,   SPRING_SLOW_FRICTION,   SPRING_SLOW_MASS,
-    ]
+      SPRING_SMOOTH_TENSION,
+      SPRING_SMOOTH_FRICTION,
+      SPRING_SMOOTH_MASS,
+      SPRING_BOUNCY_TENSION,
+      SPRING_BOUNCY_FRICTION,
+      SPRING_BOUNCY_MASS,
+      SPRING_SLOW_TENSION,
+      SPRING_SLOW_FRICTION,
+      SPRING_SLOW_MASS,
+    ],
   );
 
   const debounceDelays = useMemo(
@@ -137,7 +142,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
       WINDOW_RESIZE: DEBOUNCE_WINDOW_RESIZE as unknown as number,
       SCROLL: DEBOUNCE_SCROLL as unknown as number,
     }),
-    [DEBOUNCE_COLOR_UPDATE, DEBOUNCE_WINDOW_RESIZE, DEBOUNCE_SCROLL]
+    [DEBOUNCE_COLOR_UPDATE, DEBOUNCE_WINDOW_RESIZE, DEBOUNCE_SCROLL],
   );
 
   const loadingTimeouts = useMemo(
@@ -145,7 +150,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
       LITE_MODE_FALLBACK: TIMEOUT_LITE_MODE_FALLBACK as unknown as number,
       USER_INITIATED_FALLBACK: TIMEOUT_USER_INITIATED_FALLBACK as unknown as number,
     }),
-    [TIMEOUT_LITE_MODE_FALLBACK, TIMEOUT_USER_INITIATED_FALLBACK]
+    [TIMEOUT_LITE_MODE_FALLBACK, TIMEOUT_USER_INITIATED_FALLBACK],
   );
 
   return (
@@ -167,7 +172,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
 export const useAnimations = () => {
   const context = useContext(AnimationContext);
   if (context === undefined) {
-    throw new Error("useAnimations must be used within AnimationProvider");
+    throw new Error('useAnimations must be used within AnimationProvider');
   }
   return context;
 };
