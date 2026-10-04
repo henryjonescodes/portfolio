@@ -21,6 +21,8 @@ type SettingsContextType = {
   // Set by the debug panel
   useOrbitControls: boolean;
   setUseOrbitControls: (value: boolean) => void;
+  globalRotation: boolean;
+  setGlobalRotation: (value: boolean) => void;
 };
 
 const defaultSettings: SettingsContextType = {
@@ -33,6 +35,8 @@ const defaultSettings: SettingsContextType = {
   toggleDebugMode: () => {},
   useOrbitControls: false,
   setUseOrbitControls: () => {},
+  globalRotation: false,
+  setGlobalRotation: () => {},
 };
 
 const SettingsContext = createContext<SettingsContextType>(defaultSettings);
@@ -57,6 +61,7 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
 
   const [animationDisabled, setAnimationDisabledState] = useState(false);
   const [useOrbitControls, setUseOrbitControls] = useState(false);
+  const [globalRotation, setGlobalRotation] = useState(false);
   // A user's explicit choice to disable animation wins over automatic re-enables.
   const userLocked = useRef(false);
 
@@ -80,8 +85,17 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
       setAnimationDisabled,
       useOrbitControls: isDebugMode && useOrbitControls,
       setUseOrbitControls,
+      globalRotation: isDebugMode && globalRotation,
+      setGlobalRotation,
     }),
-    [toggleDebugMode, isDebugMode, animationDisabled, setAnimationDisabled, useOrbitControls],
+    [
+      toggleDebugMode,
+      isDebugMode,
+      animationDisabled,
+      setAnimationDisabled,
+      useOrbitControls,
+      globalRotation,
+    ],
   );
 
   return <SettingsContext.Provider value={contextValue}>{children}</SettingsContext.Provider>;

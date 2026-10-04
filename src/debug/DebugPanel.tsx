@@ -10,8 +10,11 @@ export default function DebugPanel() {
   const tune = useAnimationTuning();
   const values = useControls('Animation System', ANIMATION_SCHEMA, { collapsed: false });
 
-  const { setUseOrbitControls } = useSettings();
-  const { useOrbitControls } = useControls('3D Scene', { useOrbitControls: false });
+  const { setUseOrbitControls, setGlobalRotation } = useSettings();
+  const { useOrbitControls, globalRotation } = useControls('3D Scene Toggles', {
+    useOrbitControls: false,
+    globalRotation: { value: false, hint: 'Rotate the whole scene with mouse drag' },
+  });
 
   useEffect(() => {
     tune(values as TunableValues);
@@ -19,7 +22,8 @@ export default function DebugPanel() {
 
   useEffect(() => {
     setUseOrbitControls(useOrbitControls);
-  }, [useOrbitControls, setUseOrbitControls]);
+    setGlobalRotation(globalRotation);
+  }, [useOrbitControls, globalRotation, setUseOrbitControls, setGlobalRotation]);
 
   return <Leva collapsed oneLineLabels={false} theme={{ sizes: { rootWidth: '500px' } }} />;
 }

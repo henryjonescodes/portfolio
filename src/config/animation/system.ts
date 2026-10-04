@@ -48,6 +48,44 @@ export const SYSTEM_TUNABLES = {
       ),
     },
   },
+  scene: {
+    title: '🎬 3D Scene',
+    values: {
+      DIR_LIGHT_X: tune(undefined, 5.2, { min: -20, max: 20, step: 0.1 }, 'Dir Light X'),
+      DIR_LIGHT_Y: tune(undefined, 2.1, { min: -20, max: 20, step: 0.1 }, 'Dir Light Y'),
+      DIR_LIGHT_Z: tune(undefined, 6.5, { min: -20, max: 20, step: 0.1 }, 'Dir Light Z'),
+      DIR_LIGHT_INTENSITY: tune(
+        undefined,
+        0.4,
+        { min: 0, max: 3, step: 0.1 },
+        'Dir Light Intensity',
+        'Brightness of the main light (creates shadows)',
+      ),
+      AMBIENT_INTENSITY: tune(
+        undefined,
+        0.7,
+        { min: 0, max: 3, step: 0.1 },
+        'Ambient Intensity',
+        'Overall scene brightness (no shadows)',
+      ),
+      ROTATE_POLAR_LIMIT: tune(
+        undefined,
+        32,
+        { min: 0, max: 90, step: 1 },
+        'Vertical Limit (°)',
+        'Max rotation up/down from center',
+      ),
+      ROTATE_AZIMUTH_LIMIT: tune(
+        undefined,
+        32,
+        { min: 0, max: 90, step: 1 },
+        'Horizontal Limit (°)',
+        'Max rotation left/right from center',
+      ),
+      ...spring('ROTATE_SNAP', 600, 26, 2.5),
+      ...spring('ROTATE_DRAG', 950, 26, 0.7),
+    },
+  },
   constants: {
     title: '⚙️ System Constants',
     values: {

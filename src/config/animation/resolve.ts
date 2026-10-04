@@ -86,6 +86,15 @@ export function resolveAnimations(v: TunableValues) {
     TRANSITIONS,
     SPRINGS: { button: springFrom(v, 'BUTTON'), camera: springFrom(v, 'CAMERA') },
     CAMERA_LERP: v.CAMERA_LERP,
+    SCENE: {
+      dirLightPosition: [v.DIR_LIGHT_X, v.DIR_LIGHT_Y, v.DIR_LIGHT_Z] as [number, number, number],
+      dirLightIntensity: v.DIR_LIGHT_INTENSITY,
+      ambientIntensity: v.AMBIENT_INTENSITY,
+      polarLimitDeg: v.ROTATE_POLAR_LIMIT,
+      azimuthLimitDeg: v.ROTATE_AZIMUTH_LIMIT,
+      snap: springFrom(v, 'ROTATE_SNAP'),
+      drag: springFrom(v, 'ROTATE_DRAG'),
+    },
     TIMEOUTS: {
       LITE_MODE_FALLBACK: v.TIMEOUT_LITE_MODE_FALLBACK,
       USER_INITIATED_FALLBACK: v.TIMEOUT_USER_INITIATED_FALLBACK,

@@ -90,5 +90,8 @@ test('3D mode mounts a canvas without errors', async ({ page }) => {
   const errors = trackErrors(page);
   await page.goto('/');
   await expect(page.locator('canvas')).toHaveCount(1, { timeout: 20_000 });
+  await page.waitForTimeout(2000);
+  // Without ?debug=true no Leva panel may appear, including one auto-mounted by a stray useControls.
+  await expect(page.getByText(/Animation System|3D Scene/)).toHaveCount(0);
   expect(errors.filter((e) => !/WebGL|GPU|GL_/i.test(e))).toEqual([]);
 });
