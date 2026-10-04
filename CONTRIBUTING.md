@@ -1,6 +1,6 @@
 # Work board
 
-_Updated 2026-10-04 19:11 UTC on `` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:12 UTC on `` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
@@ -64,8 +64,8 @@ flowchart LR
 
 ## 🕘 Just happened
 
-- 0m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/shareable-urls`
-- 2m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
+- 1m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/shareable-urls`
+- 3m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
 - 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
 - 5h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
 - 5h ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
