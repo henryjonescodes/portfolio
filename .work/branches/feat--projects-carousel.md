@@ -3,7 +3,7 @@ branch: feat/projects-carousel
 parent: anim/motion-idioms
 status: active
 title: Projects carousel
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/61
 updated: 2026-10-04
 ---
 
