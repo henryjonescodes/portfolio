@@ -38,3 +38,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: dropped "Paint-in like the old entries: border draws, divider line draws, typewriter title, media glitches in"
 - 2026-10-04: dropped "Open view: opaque window filling the whole visible content area, page darkened behind it during the morph"
 - 2026-10-04: dropped "Re-sample the morph tests for both layouts"
+- 2026-10-04: Carousel retired after design review; list layout kept for its line draw-in. Carousel archived on local branch archive/projects-carousel
