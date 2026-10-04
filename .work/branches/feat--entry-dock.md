@@ -14,10 +14,11 @@ Open entries switch efforts from a compact retro dock with a sliding indicator i
 ## Todo
 
 - [x] Dock replaces the effort tab buttons (modal, expanded, phone open view)
-- [ ] Placeholder media component, labelled with what image belongs there
+- [x] Placeholder media component, labelled with what image belongs there
 - [ ] Placeholders on experience entries and efforts
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Dock replaces the effort tab buttons (modal, expanded, phone open view)" at e36a4f0c
+- 2026-10-04: done "Placeholder media component, labelled with what image belongs there" at de70c74d
