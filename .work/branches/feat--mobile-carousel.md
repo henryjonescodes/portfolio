@@ -1,6 +1,6 @@
 ---
 branch: feat/mobile-carousel
-parent: feat/modal-panels
+parent: design/retro-chrome
 status: planned
 title: Mobile carousel (nice to have)
 pr: null
