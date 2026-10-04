@@ -18,6 +18,7 @@ The open entry, modal or phone, renders one EntryWindow: the main nav bar with t
 - [ ] Phone open view covers the full height, nav included; Close reads clearly
 - [ ] Media sits under the bar on phones, beside the text on wide screens, by CSS
 - [ ] e2e: the same window on both widths
+- [ ] The entry's main image shows only on Overview, never on an effort or the gallery
 
 ## Log
 
