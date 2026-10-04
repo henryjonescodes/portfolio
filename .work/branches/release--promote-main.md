@@ -24,7 +24,7 @@ Retire the old webpack site once staging carries everything above.
 - [?] Design review on a phone (from feat/mobile-carousel)
 - [?] Design review of the list and modal in 3D and lite mode (from feat/modal-panels)
 - [?] Curate real panel content (screenshots, galleries, stats) per project (from feat/modal-panels)
-- [ ] Confirm the first CI run is green on every stacked PR (from modalize-leva-work)
+- [x] Confirm the first CI run is green on every stacked PR (from modalize-leva-work)
 - [ ] Compress the GLB: meshopt quantization moves a correction into node transforms that SiteMixer's hand-written meshes ignore, so render the glTF's node transforms (or regenerate SiteMixer with gltfjsx --transform) first (from perf/assets)
 - [?] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check (from perf/assets)
 - [?] Approve the share image and description, and confirm the canonical domain is henryjones.xyz (from seo/meta)
@@ -32,3 +32,4 @@ Retire the old webpack site once staging carries everything above.
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Confirm the first CI run is green on every stacked PR (from modalize-leva-work)" at 3c85ce68
