@@ -16,6 +16,7 @@ The links page reworked to match the old site's links page in the retro, skeuomo
 - [x] Restyle /links as raised retro keys, in theme with the old links page
 - [x] Link to /links from About, with the old site's link icon
 - [x] Axe and e2e stay green
+- [?] media: An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels)
 
 ## Log
 
@@ -23,3 +24,4 @@ The links page reworked to match the old site's links page in the retro, skeuomo
 - 2026-10-04: done "Restyle /links as raised retro keys, in theme with the old links page" at ee9510a8
 - 2026-10-04: done "Link to /links from About, with the old site's link icon" at 34069fa6
 - 2026-10-04: done "Axe and e2e stay green" at 5ecbcb43
+- 2026-10-04: carried 1 open todo(s) from feat/mobile-carousels
