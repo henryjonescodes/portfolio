@@ -1,5 +1,3 @@
-import { Vector3 } from '$three';
-
 export const screenSize = {
   height: 610,
   width: 685,
@@ -20,11 +18,14 @@ export const screenWidths: Record<string, number> = {
 export const widthMobile = screenWidths.mobile;
 export const widthSmall = screenWidths.small;
 
+/** A camera position as plain data; the 3D code turns it into a Vector3. */
+export type Vec3 = [number, number, number];
+
 export type ZoomLevel = {
-  fullScreen: Vector3;
-  info: Vector3;
-  handheld: Vector3;
-  wide: Vector3; // Used for initialCameraPosition
+  fullScreen: Vec3;
+  info: Vec3;
+  handheld: Vec3;
+  wide: Vec3; // Used for initialCameraPosition
 };
 
 export type ScreenWidthKey =
@@ -39,52 +40,52 @@ export type ScreenWidthKey =
 
 export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
   tiny: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(2.29, 0.5, 2.8),
-    handheld: new Vector3(0, 0, 10),
-    wide: new Vector3(0, 0, 13),
+    fullScreen: [-0.7, 0, 1],
+    info: [2.29, 0.5, 2.8],
+    handheld: [0, 0, 10],
+    wide: [0, 0, 13],
   },
   mobile: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(2.29, 0.5, 2),
-    handheld: new Vector3(0, 0, 7.5),
-    wide: new Vector3(0, 0, 8),
+    fullScreen: [-0.7, 0, 1],
+    info: [2.29, 0.5, 2],
+    handheld: [0, 0, 7.5],
+    wide: [0, 0, 8],
   },
   small: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(2.29, 0.5, 2),
-    handheld: new Vector3(0, 0, 5),
-    wide: new Vector3(0, 0, 7),
+    fullScreen: [-0.7, 0, 1],
+    info: [2.29, 0.5, 2],
+    handheld: [0, 0, 5],
+    wide: [0, 0, 7],
   },
   medium: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(1.5, 0.7, 2),
-    handheld: new Vector3(0, 0, 4),
-    wide: new Vector3(0, 0, 6),
+    fullScreen: [-0.7, 0, 1],
+    info: [1.5, 0.7, 2],
+    handheld: [0, 0, 4],
+    wide: [0, 0, 6],
   },
   compact: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(1.5, 0.7, 2),
-    handheld: new Vector3(0, 0, 3.5),
-    wide: new Vector3(0, 0, 5),
+    fullScreen: [-0.7, 0, 1],
+    info: [1.5, 0.7, 2],
+    handheld: [0, 0, 3.5],
+    wide: [0, 0, 5],
   },
   default: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(1.5, 0.7, 2),
-    handheld: new Vector3(0, 0, 3),
-    wide: new Vector3(0, 0, 5),
+    fullScreen: [-0.7, 0, 1],
+    info: [1.5, 0.7, 2],
+    handheld: [0, 0, 3],
+    wide: [0, 0, 5],
   },
   large: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(1.5, 0.7, 2),
-    handheld: new Vector3(0, 0, 3),
-    wide: new Vector3(0, 0, 5),
+    fullScreen: [-0.7, 0, 1],
+    info: [1.5, 0.7, 2],
+    handheld: [0, 0, 3],
+    wide: [0, 0, 5],
   },
   extraLarge: {
-    fullScreen: new Vector3(-0.7, 0, 1),
-    info: new Vector3(1.5, 0.7, 2),
-    handheld: new Vector3(0, 0, 3),
-    wide: new Vector3(0, 0, 5),
+    fullScreen: [-0.7, 0, 1],
+    info: [1.5, 0.7, 2],
+    handheld: [0, 0, 3],
+    wide: [0, 0, 5],
   },
 };
 

@@ -20,24 +20,8 @@ const CustomControls: React.FC = () => {
 
   // Adjust focus based on zoom level
   useEffect(() => {
-    let focusLocal = undefined;
-    switch (zoomLevel) {
-      case 'wide':
-        focusLocal = zoomPositions.wide.clone();
-        break;
-      case 'handheld':
-        focusLocal = zoomPositions.handheld.clone();
-        break;
-      case 'info':
-        focusLocal = zoomPositions.info.clone();
-        break;
-      case 'fullscreen':
-        focusLocal = zoomPositions.fullScreen.clone();
-        break;
-      default:
-        focusLocal = new Vector3(0, 0, 0);
-        break;
-    }
+    const key = zoomLevel === 'fullscreen' ? 'fullScreen' : zoomLevel;
+    const focusLocal = new Vector3(...(zoomPositions[key] ?? [0, 0, 0]));
     // Adjust focus based on landscape orientation
     if (isLandscape && isMobile) {
       focusLocal.z = focusLocal.z * landscapeZoomPositionOffset;
