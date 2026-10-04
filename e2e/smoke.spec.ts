@@ -95,3 +95,13 @@ test('3D mode mounts a canvas without errors', async ({ page }) => {
   await expect(page.getByText(/Animation System|3D Scene/)).toHaveCount(0);
   expect(errors.filter((e) => !/WebGL|GPU|GL_/i.test(e))).toEqual([]);
 });
+
+test('Escape closes the modal dialog', async ({ page }) => {
+  await page.goto('/experience?lite=true');
+  await page.waitForTimeout(1500);
+  await openFirstEntry(page);
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.waitForTimeout(800);
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('modal-overlay')).toHaveCSS('pointer-events', 'none');
+});

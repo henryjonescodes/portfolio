@@ -9,6 +9,7 @@ import Framer from '@assets/svg/tools/Framer.svg?react';
 export const projectsData: Record<string, EntryData> = {
   portfoliov2: {
     id: 'portfoliov2',
+    media: { video: 'video/v2-loop.mp4', objectPosition: '0%' },
     title: 'Portfolio v2',
     description: [
       'Portfolio site showcasing 2D animations, work experience, and my presence online,',
@@ -35,6 +36,7 @@ export const projectsData: Record<string, EntryData> = {
   },
   virtualportfolio: {
     id: 'virtualportfolio',
+    media: { video: 'video/tower-loop.mp4' },
     title: 'Virtual Portfolio',
     description: [
       'Experiment with using Three.js to build a 3D portfolio site.',
@@ -62,6 +64,7 @@ export const projectsData: Record<string, EntryData> = {
   },
   portfoliov1: {
     id: 'portfoliov1',
+    media: { img: 'images/v1.png' },
     title: 'Portfolio v1',
     description: [
       'Playful portfolio site showcasing pre-tech work experience & interactive 2D animations,',
@@ -84,6 +87,7 @@ export const projectsData: Record<string, EntryData> = {
   },
   thesis: {
     id: 'thesis',
+    media: { img: 'images/thesis.png' },
     title: 'Senior Thesis',
     description: [
       'Trust Response to Anticipatory Software Agents',
