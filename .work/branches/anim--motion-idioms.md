@@ -18,6 +18,7 @@ Finish the animation cleanup the refactor started, behind the e2e net and the la
 - [ ] Replace setTimeout sequencing in PageContents, Page, MapSlider, ZoomContext with when/delayChildren or cleaned-up effects
 - [ ] Walk the regression checklist in 3D and lite mode
 - [ ] Write the portfolio-animation-system and portfolio-regression-checklist skills
+- [ ] Resolve the 27 lint warnings (hook deps, fast-refresh exports)
 
 ## Log
 
