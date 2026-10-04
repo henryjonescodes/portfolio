@@ -112,3 +112,13 @@ test('a new page starts scrolled to the top', async ({ page }) => {
   await expect(page.locator('h1').first()).toHaveText(/projects/i, { timeout: 10_000 });
   await expect.poll(() => scroller.evaluate((el) => el.scrollTop)).toBe(0);
 });
+
+test('Escape closes the modal dialog', async ({ page }) => {
+  await page.goto('/experience?lite=true');
+  await page.waitForTimeout(1500);
+  await openFirstEntry(page);
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.waitForTimeout(800);
+  await page.keyboard.press('Escape');
+  await expect(page.getByTestId('modal-overlay')).toHaveCSS('pointer-events', 'none');
+});
