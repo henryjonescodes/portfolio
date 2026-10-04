@@ -77,21 +77,22 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/crosshair-cursor` |  | planned, pushed | 3/3 | nothing open |  |
+| `feat/crosshair-cursor` |  | planned, 1 to push | 3/3 | nothing open |  |
 
 ## 🕘 Just happened
 
-**fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 2026-10-04 20:28 · `fix/about-card` · `250dbac3`
-The card's location reads NYC and both tags share a row; the location tags render once for both layouts. Skill bars have a fixed width so every row lines up. The links under the bio come from the shared links data, two rows of four ending with All links. GlitchIcon keeps page paths in the app but opens files (the resume PDF) as files.
+**fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 2026-10-04 20:31 · `feat/crosshair-cursor` · `ed401577`
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 20:28 · `fix/about-card` · `250dbac3`
 - **fix(modal): the window bar is the main nav: mini items, the name on the right** · 20:24 · `fix/modal-nav-mini` · `d6f7dca5`
 - **feat(cursor): a crosshair pointer with dashed guides behind the content** · 20:18 · `feat/crosshair-cursor` · `21cece7c`
-- **fix(modal): the close button sits inside the title bar, with the frame as its edge** · 20:13 · `fix/about-card` · `e0c96483`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | `fix/about-card` · `e0c96483` |
 | 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | `fix/modal-nav-mini` · `be7fc0f6` |
 | 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | `fix/modal-nav-mini` · `d6eb511a` |
 | 2026-10-04 20:06 | feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `1881a411` |
@@ -191,7 +192,7 @@ The card's location reads NYC and both tags share a row; the location tags rende
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 3/3 | 1 | pushed |  |
+| `feat/crosshair-cursor` ◀ | A crosshair cursor | planned |  | 3/3 | 2 | 1 to push |  |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
 | `fix/modal-nav-mini` | The window's bar is the main nav | planned |  | 1/1 | 6 | pushed |  |
 | `refactor/entry-cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
