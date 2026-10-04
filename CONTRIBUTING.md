@@ -1,6 +1,6 @@
 # Work board
 
-_Updated 2026-10-04 19:50 UTC on `feat/entry-tabs` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:56 UTC on `feat/entry-tabs` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
@@ -57,9 +57,10 @@ flowchart LR
 
 ## 🕘 Just happened
 
-- 0m ago · feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll · `feat/entry-tabs`
-- 15m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
-- 16m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
+- 0m ago · fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls · `feat/entry-tabs`
+- 6m ago · feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll · `feat/entry-tabs`
+- 20m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
+- 21m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
 
 **Merged, not yet landed** (run `bw land <branch> --into <next branch>`)
 
@@ -89,7 +90,7 @@ flowchart LR
 | `bw/inbox` | planned | 0/3 | 0 | local only | bw renders INBOX.md with one answer slot per open question |  |
 | `feat/content-requests` | planned | 0/3 | 0 | local only | Request ids on mock media and drafted prose |  |
 | `feat/entry-dock` | planned | 3/4 | 2 | pushed | — |  |
-| `feat/entry-tabs` ◀ | planned | 3/3 | 1 | local only | — |  |
+| `feat/entry-tabs` ◀ | planned | 3/3 | 2 | 1 to push | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
@@ -140,6 +141,7 @@ An open entry's subpages use the main nav's tabs (Overview is the home icon, no 
 
 Commits:
 
+- `d14aab9a` fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls
 - `e4dc73fc` feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll
 
 </details>
