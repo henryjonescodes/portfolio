@@ -132,6 +132,11 @@
     max-width: 50%;
   }
 
+  .children {
+    flex: 1;
+    min-width: 0;
+  }
+
   .children video,
   .children img {
     object-fit: contain;
@@ -232,11 +237,17 @@
   }
 }
 
-// Phones stack media under the text, so the expanded split must not apply there.
+// Phones stack media under the text, so the side-by-side split must not apply there.
 @media (max-width: styles.$width-mobile) {
-  .notInList.expanded {
+  .notInList {
+    .descriptionContents {
+      flex-direction: column;
+    }
+
     .descriptionContentsFlex,
-    .childrenWrapper {
+    .childrenWrapper,
+    &.expanded .descriptionContentsFlex,
+    &.expanded .childrenWrapper {
       flex-basis: auto;
       max-width: 100%;
     }

@@ -69,7 +69,7 @@ test('Escape closes the modal dialog', async ({ page }) => {
   await expect(page.getByRole('dialog')).toBeVisible();
   await page.waitForTimeout(800);
   await page.keyboard.press('Escape');
-  await expect(page.getByTestId('modal-overlay')).toHaveCSS('pointer-events', 'none');
+  await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 5_000 });
 });
 
 test('open project shows its panels, and the modal expands and restores', async ({ page }) => {
