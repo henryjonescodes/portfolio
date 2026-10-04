@@ -39,7 +39,20 @@ const NavBarItem = ({ label, onClick, selected = false, mini, Icon }: NavBarItem
   };
 
   return (
-    <motion.span className={cn(styles.navItem, { [styles.mini]: mini })} onClick={onClick}>
+    <motion.span
+      className={cn(styles.navItem, { [styles.mini]: mini })}
+      onClick={onClick}
+      role="link"
+      tabIndex={0}
+      aria-label={label}
+      aria-current={selected ? 'page' : undefined}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
       <motion.span
         className={cn(styles.border, { [styles.selected]: selected })}
         variants={borderVariants}
