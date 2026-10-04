@@ -1,20 +1,31 @@
 # Work board
 
-_Updated 2026-10-04 20:07 UTC on `feat/entry-tabs` by `bw board`. Generated; edit seeds with `bw`._
+<details><summary><b>About this board</b> · updated 2026-10-04 20:11 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+
+| | |
+|---|---|
+| Generated | 2026-10-04 20:11 UTC by `bw board` on `feat/entry-tabs` |
+| Trunk | `staging` |
+| Live branches | 4 |
+| Open PRs | none |
+| Waiting on you | 16 |
+| Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
+
+</details>
 
 ```mermaid
 flowchart LR
   n_staging([staging])
-  n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/3<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
+  n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/5<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
-  n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/13 · 🙋 10<br/><i>next: Request ids on mock media and drafted…</i>"]
+  n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
-  n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs<br/>planned · 3/3"]
-  class n_feat_entry_tabs planned,current
+  n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs<br/>review · 3/3"]
+  class n_feat_entry_tabs review,current
   n_staging --> n_feat_entry_tabs
-  n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/14 · 🙋 11<br/><i>next: PR staging into main</i>"]
+  n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
   n_staging --> n_release_promote_main
   classDef planned fill:#eef,stroke:#88a,color:#223
@@ -24,89 +35,160 @@ flowchart LR
   classDef current stroke:#06c,stroke-width:4px
 ```
 
-<sub>🟩 active · 🟨 in review · 🟦 planned · 🟥 blocked · blue outline: checked out · 🙋 questions waiting on you</sub>
+<details><summary><b>Legend</b></summary>
 
-## 🙋 Needs you
+- 🟩 active: being worked on now
+- 🟨 review: a PR is open and waiting on CI, review or a merge
+- 🟦 planned: sketched as a branch with a seed, not started
+- 🟥 blocked: waiting on something outside the branch
+- Blue outline: the branch checked out in the working copy
+- `3/4`: todos done out of total · 🙋 n: questions on that branch waiting on you
+- Arrows point from a branch to the branches built on top of it
 
-**Questions**
-
-- [ ] Approve per-entry preview images, or generate them (from feat/shareable-urls) · `feat/content-requests`
-- [ ] Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal) · `feat/content-requests`
-- [ ] Feel check of the new open in lite and 3D (from anim/modal-open) · `release/promote-main`
-- [ ] Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy) · `release/promote-main`
-- [ ] Decide where /links appears (home menu, nav bar, or as home like the old branch) (from content/real-copy) · `release/promote-main`
-- [ ] The resume PDF is the 2024 copy from the old site and predates Arbor (from content/real-copy) · `release/promote-main`
-- [ ] Design review in 3D and lite mode (from design/retro-chrome) · `release/promote-main`
-- [ ] Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line) (from design/retro-chrome) · `release/promote-main`
-- [ ] Design review on a phone (from feat/mobile-carousel) · `release/promote-main`
-- [ ] Design review of the list and modal in 3D and lite mode (from feat/modal-panels) · `release/promote-main`
-- [ ] Curate real panel content (screenshots, galleries, stats) per project (from feat/modal-panels) · `release/promote-main`
-- [ ] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check (from perf/assets) · `release/promote-main`
-- [ ] Approve the share image and description, and confirm the canonical domain is henryjones.xyz (from seo/meta) · `release/promote-main`
-
-**Claims to verify** (shown on the site, marked unverified until checked)
-
-- [ ] User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
-- [ ] User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
-- [ ] Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
-- [ ] Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
-- [ ] User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
-
-**Media to find**
-
-- [ ] Screens or recordings of Almanac, Kiki UI and the notifier (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
-- [ ] An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro) (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
-- [ ] Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) · `feat/content-requests`
+</details>
 
 ## 🟢 Happening now
 
-- **Entry subpages as nav tabs, and a masonry gallery** · `feat/entry-tabs` (checked out) · 3/3  
-  next: nothing open
+**What.** An open entry's subpages use the main nav's tabs (Overview is the home icon, no text), a Gallery tab appears when an entry has one, and the gallery is a two-column masonry of square, wide (2:1) and tall (1:2) cards. A check fails the build when an effort subpage has no mention in the prose.
+
+**How, next.** Every todo is done; it waits on review and merge.
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `feat/entry-tabs` |  | review, 10 to push, 9 to pull | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
 
 ## 🕘 Just happened
 
-- 1m ago · fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs · `feat/entry-tabs`
-- 11m ago · fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls · `feat/entry-tabs`
-- 17m ago · feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll · `feat/entry-tabs`
+**fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs** · 2026-10-04 20:06 · `feat/entry-tabs` · `41e91db8`
+The bar holds the home key, the entry's name in hero type and the sections as icon and label nav items, all one NavBarItem, with underlines on the bar's bottom edge. The phone card hides overview extras on the gallery, the tab title names the gallery, and focus only moves on a real tab change.
 
-**Landed and folded**
+- **fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls** · 19:56 · `feat/entry-tabs` · `d14aab9a`
+- **feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll** · 19:50 · `feat/entry-tabs` · `e4dc73fc`
+- **feat(entries): an effort dock and labelled placeholder media** · 19:35 · [#81](https://github.com/henryjonescodes/portfolio/pull/81) · `a099d865`
 
-- 2026-10-04 **feat/efforts** → `staging`: Highlighted efforts inside experience entries. Effort data model and a mini nav inside the open entry; Efforts: Almanac skill manager (Arbor), Kiki UI design system (ChannelAI), User notifier (Arbor); Hero numbers kit: big numbers plus simple theme charts for efforts without flashy visuals; Deep links from prose open the entry modal on one effort; Mark unverified data claims in the data and show it only in debug
-- 2026-10-04 **feat/links-retro** → `staging`: Links page in the retro style. Restyle /links as raised retro keys, in theme with the old links page; Link to /links from About, with the old site's link icon; Axe and e2e stay green
-- 2026-10-04 **feat/mobile-carousels** → `staging`: Experience and projects carousels on phones. One carousel component for experience and projects on phones; First tile centred on both axes; scroll area full width; no side dead space; Borrow the paint-in from the list entries: border draws, typewriter titles, staggered children; Keep the tile-to-page morph exactly as it is now; e2e for the experience carousel and centring
-- 2026-10-04 **anim/restore-timing** → `staging`: Restore from expanded on the window's clock. Measure restore frame by frame and confirm the reflow runs ahead of the container; Copy the carousel's approach (one element owns the size change, content follows) to restore; e2e: restore keeps content inside the window and settles with it
-- 2026-10-04 **fix/mobile-polish** → `staging`: Phone polish and an updated map. iOS Safari shows the page colour behind and around the page, not white (html background, theme-color); Mobile site header about 15% larger; Map: no longer on the job market; working at Arbor (remote), based in New York City; Prune the plans whose branches have all landed
+<details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
+
+| When | What | Where |
+|---|---|---|
+| 2026-10-04 19:18 | test: modal close asserts the outcome, not a mid-close style the faster close skips | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `db04bcdf` |
+| 2026-10-04 19:15 | fix(modal): a window with nothing to land on shrinks and fades about the middle | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `05b63c49` |
+| 2026-10-04 19:12 | feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `63c1f59e` |
+| 2026-10-04 19:12 | docs: roadmap reflects efforts, sharing and entry links | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `f2d37efd` |
+| 2026-10-04 19:11 | feat(modal): any link can open an entry, zooming out of where it was clicked | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `21bfc4b4` |
+| 2026-10-04 19:11 | fix(share): restore a shared link from the address bar, not the router's stale query | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `e18c2be4` |
+| 2026-10-04 13:45 | fix(share): no closed-modal flash on arrival, page titles, no router render mid-morph | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `646fcd90` |
+| 2026-10-04 13:45 | fix(a11y): nav items are keyboard-reachable links | [#80](https://github.com/henryjonescodes/portfolio/pull/80) · `fa77adbf` |
+
+</details>
+
+## 🙋 Questions for you
+
+### Facts to confirm
+
+**1. User notifier sends about 250,000 notifications a month**
+- *Why:* The User notifier effort leads with this figure, shown as unverified on the live site until you confirm it.
+- `claim` · `feat/content-requests` · from `feat/efforts`
+
+**2. User notifier delivers at a 99.99% success rate**
+- *Why:* The second headline figure on the User notifier effort, also marked unverified until confirmed.
+- `claim` · `feat/content-requests` · from `feat/efforts`
+
+### Writing
+
+**3. Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo**
+- *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
+- `prose` · `feat/content-requests` · from `feat/efforts`
+
+**4. Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography)**
+- *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
+- `prose` · `feat/content-requests` · from `feat/efforts`
+
+**5. User notifier summary: a real-time email notification system that shows Arbor users what they are saving**
+- *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
+- `prose` · `feat/content-requests` · from `feat/efforts`
+
+**6. Review the Arbor and project blurbs (written from existing descriptions)**
+- *Why:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
+- `prose` · `release/promote-main` · from `content/real-copy`
+
+### Decisions
+
+**7. Approve per-entry preview images, or generate them**
+- *Why:* Shared links show a per-page title and description, but one site-wide image for every entry.
+- `decision` · `feat/content-requests` · from `feat/shareable-urls`
+
+**8. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
+- *Why:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
+- `decision` · `feat/content-requests` · from `feat/global-modal`
+
+**9. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
+- *Why:* The page exists and About links to it, but nothing else on the site leads there.
+- `decision` · `release/promote-main` · from `content/real-copy`
+
+**10. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
+- *Why:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
+- `decision` · `release/promote-main` · from `design/retro-chrome`
+
+**11. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
+- *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
+- `decision` · `release/promote-main` · from `perf/assets`
+
+**12. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
+- *Why:* Every shared link shows this card; it also settles which domain is canonical.
+- `decision` · `release/promote-main` · from `seo/meta`
+
+### Files to send
+
+**13. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
+- *Why:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
+- `media` · `feat/content-requests` · from `feat/entry-dock`
+
+**14. The resume PDF is the 2024 copy from the old site and predates Arbor**
+- *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
+- `media` · `release/promote-main` · from `content/real-copy`
+
+**15. Curate real panel content (screenshots, galleries, stats) per project**
+- *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
+- `media` · `release/promote-main` · from `feat/modal-panels`
+
+### Reviews
+
+**16. Design review in 3D and lite mode**
+- *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
+- `review` · `release/promote-main` · from `design/retro-chrome`
 
 <details><summary><b>Plans</b></summary>
 
-- `2026-10-content-and-inbox.md`: 0/3 branches done
-- `2026-10-mobile-efforts.md`: 7/7 branches done (complete; the next `bw land` removes it)
-- `2026-10-roadmap.md`: 3/4 branches done
+| Plan | Progress |
+|---|---|
+| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 0 of 3 branches done |
+| [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
+| [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
 </details>
 
 <details><summary><b>All branches</b></summary>
 
-| Branch | Status | Done | Commits | Remote | Next | PR |
-|---|---|---|---|---|---|---|
-| `bw/inbox` | planned | 0/3 | 0 | local only | bw renders INBOX.md with one answer slot per open question |  |
-| `feat/content-requests` | planned | 0/13 | 0 | local only | Request ids on mock media and drafted prose |  |
-| `feat/entry-tabs` ◀ | planned | 3/3 | 3 | 9 to push, 9 to pull | — |  |
-| `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
+| Branch | Title | Status | PR | Todos | Commits | Remote | Next |
+|---|---|---|---|---|---|---|---|
+| `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
+| `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
+| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review |  | 3/3 | 3 | 10 to push, 9 to pull |  |
+| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 11 to push | PR staging into main |
 
-</details>
-
-<details><summary><b>bw/inbox</b>: One inbox for the owner's answers (0/3)</summary>
+<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
 
 Every open question and claim across branches is gathered into INBOX.md on the board branch, answerable from GitHub's editor. bw pulls answers back into the right branch's seed as a todo to act on, so the session on that workstream picks it up.
 
 - [ ] bw renders INBOX.md with one answer slot per open question
 - [ ] bw ingests answers (from origin/board) into seeds and logs them
 - [ ] branchwork-loop applies the inbox at the start of a session
+- [ ] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
+- [ ] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
 
 </details>
 
-<details><summary><b>feat/content-requests</b>: Mock media and a list of content to source (0/13)</summary>
+<details><summary><code>feat/content-requests</code>: Mock media and a list of content to source (0/11)</summary>
 
 Layouts are built against mock images and drafted prose, each tagged with a request id. A generated REQUESTS page lists everything the owner needs to source (images, links, prose, icons) with the draft beside it and where to drop the real thing; dropping a file or prose named by its id replaces the mock or draft with no code change.
 
@@ -117,16 +199,14 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 - [ ] 🙋 Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal)
 - [ ] 🙋 claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 claim: User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal)
-- [ ] 🙋 media: Screens or recordings of Almanac, Kiki UI and the notifier (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal)
-- [ ] 🙋 media: An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro) (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock)
 
 </details>
 
-<details><summary><b>feat/entry-tabs</b>: Entry subpages as nav tabs, and a masonry gallery (3/3)</summary>
+<details><summary><code>feat/entry-tabs</code>: Entry subpages as nav tabs, and a masonry gallery (3/3)</summary>
 
 An open entry's subpages use the main nav's tabs (Overview is the home icon, no text), a Gallery tab appears when an entry has one, and the gallery is a two-column masonry of square, wide (2:1) and tall (1:2) cards. A check fails the build when an effort subpage has no mention in the prose.
 
@@ -134,31 +214,34 @@ An open entry's subpages use the main nav's tabs (Overview is the home icon, no 
 - [x] Gallery subpage: masonry with square, wide and tall cards, animated reflow
 - [x] check:mentions in npm run check, and a repertoire rule for it
 
-Commits:
-
-- `41e91db8` fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs
-- `d14aab9a` fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls
-- `e4dc73fc` feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll
-
 </details>
 
-<details><summary><b>release/promote-main</b>: Promote the new site to main (2/14)</summary>
+<details><summary><code>release/promote-main</code>: Promote the new site to main (2/11)</summary>
 
 Retire the old webpack site once staging carries everything above.
 
 - [x] Confirm Netlify deploy settings for main and staging
 - [ ] PR staging into main
-- [ ] 🙋 Feel check of the new open in lite and 3D (from anim/modal-open)
 - [ ] 🙋 Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 - [ ] 🙋 Decide where /links appears (home menu, nav bar, or as home like the old branch) (from content/real-copy)
 - [ ] 🙋 The resume PDF is the 2024 copy from the old site and predates Arbor (from content/real-copy)
 - [ ] 🙋 Design review in 3D and lite mode (from design/retro-chrome)
 - [ ] 🙋 Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line) (from design/retro-chrome)
-- [ ] 🙋 Design review on a phone (from feat/mobile-carousel)
-- [ ] 🙋 Design review of the list and modal in 3D and lite mode (from feat/modal-panels)
 - [ ] 🙋 Curate real panel content (screenshots, galleries, stats) per project (from feat/modal-panels)
 - [x] Confirm the first CI run is green on every stacked PR (from modalize-leva-work)
 - [ ] 🙋 Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check (from perf/assets)
 - [ ] 🙋 Approve the share image and description, and confirm the canonical domain is henryjones.xyz (from seo/meta)
+
+</details>
+
+</details>
+
+<details><summary><b>How to use this board</b></summary>
+
+- **Start at Happening now.** It says why the current work matters, what is being built, how, and where to look. The diagram above it maps everything in flight.
+- **Just happened** is newest first: one full entry, three short ones, the rest folded with links to the changelog, which keeps the full notes for every landed branch.
+- **Questions are grouped** by what they need from you: a fact, some writing, a decision, a file, a check or a review. Each says why it is asked and links the file it is about, so you can decide without opening a session.
+- **Answering:** reply in chat for now; a single INBOX.md you can answer on GitHub is on the way.
+- **This file is generated** on every commit from the branches' seeds, so edits here are overwritten. To change what is tracked, ask in chat or edit a seed with `bw`.
 
 </details>
