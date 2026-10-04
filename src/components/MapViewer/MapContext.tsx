@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect, useRef } from "react";
-import { locationData, LocationPinKeys } from "./map-viewer.contents";
+import React, { createContext, useState, useEffect, useRef } from 'react';
+import { locationData, LocationPinKeys } from './map-viewer.contents';
 
 interface MapContextProps {
   currentKey: LocationPinKeys | null;
@@ -18,14 +18,10 @@ const defaultMapContext: MapContextProps = {
 export const MapContext = createContext<MapContextProps>(defaultMapContext);
 
 export const MapProvider = ({ children }: { children: React.ReactElement }) => {
-  const [currentKey, setCurrentKeyState] = useState<LocationPinKeys | null>(
-    "nyc"
-  );
+  const [currentKey, setCurrentKeyState] = useState<LocationPinKeys | null>('nyc');
   const [previousKey, setPreviousKey] = useState<LocationPinKeys | null>(null);
 
-  const [lastInteractionTime, setLastInteractionTime] = useState<number>(
-    Date.now() - 30000
-  );
+  const [lastInteractionTime, setLastInteractionTime] = useState<number>(Date.now() - 30000);
   const [preventAutoCycle, setPreventAutoCycle] = useState<boolean>(false);
   const [autoCycleActive, setAutoCycleActive] = useState<boolean>(false);
 
@@ -37,10 +33,7 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
 
   // Wrap setCurrentKey to handle user interactions
-  const setCurrentKey = (
-    key: LocationPinKeys | null,
-    isUserAction: boolean = true
-  ) => {
+  const setCurrentKey = (key: LocationPinKeys | null, isUserAction: boolean = true) => {
     setCurrentKeyState(key);
 
     if (isUserAction) {
@@ -154,9 +147,7 @@ export const MapProvider = ({ children }: { children: React.ReactElement }) => {
   }, []);
 
   return (
-    <MapContext.Provider
-      value={{ currentKey, setCurrentKey, previousKey, locationData }}
-    >
+    <MapContext.Provider value={{ currentKey, setCurrentKey, previousKey, locationData }}>
       {children}
     </MapContext.Provider>
   );

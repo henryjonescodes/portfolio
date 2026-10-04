@@ -1,47 +1,44 @@
-import USA from "@assets/svg/backgrounds/usa.svg?react";
-import Corner from "@assets/svg/icons/corner.svg?react";
-import cn from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
-import AnimatedBorderBox from "@components/AnimatedBorderBox";
-import AnimatedLine from "@components/AnimatedLine";
-import { usePage } from "@components/Page";
-import { MapContext } from "./MapContext";
-import styles from "./map-components.module.scss";
-import MapSlider from "./MapSlider";
-import Pin from "./Pin";
-import { LocationPinKeys } from "./map-viewer.contents";
-
-const mapContainerVariants = {
-  initial: {},
-  animate: {
-    transition: {},
-  },
-  exit: {},
-};
-
-const mapContentVariants = {
-  initial: {
-    opacity: 0,
-  },
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 2.3,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
+import USA from '@assets/svg/backgrounds/usa.svg?react';
+import Corner from '@assets/svg/icons/corner.svg?react';
+import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useContext } from 'react';
+import AnimatedBorderBox from '@components/AnimatedBorderBox';
+import AnimatedLine from '@components/AnimatedLine';
+import { useAnimations } from '@context/AnimationContext';
+import { usePage } from '@context/PageContext';
+import { MapContext } from './MapContext';
+import styles from './map-components.module.scss';
+import MapSlider from './MapSlider';
+import Pin from './Pin';
+import { LocationPinKeys } from './map-viewer.contents';
 
 const Map = () => {
+  const { TRANSITIONS } = useAnimations();
+
+  const mapContainerVariants = {
+    initial: {},
+    animate: {
+      transition: {},
+    },
+    exit: {},
+  };
+
+  const mapContentVariants = {
+    initial: {
+      opacity: 0,
+    },
+    animate: {
+      opacity: 1,
+      transition: TRANSITIONS.MAP.CONTENT_ANIMATE,
+    },
+    exit: {
+      opacity: 0,
+      transition: TRANSITIONS.MAP.EXIT,
+    },
+  };
   const { currentKey, setCurrentKey, locationData } = useContext(MapContext);
-  const { mapTitle: title, mapHighlights: highlights } =
-    locationData[currentKey ?? "nyc"] ?? {};
+  const { mapTitle: title, mapHighlights: highlights } = locationData[currentKey ?? 'nyc'] ?? {};
   const { embedded } = usePage();
   const stopKeys = Object.keys(locationData) as LocationPinKeys[];
 
@@ -56,7 +53,7 @@ const Map = () => {
     >
       <motion.div
         className={cn(styles.contents, {
-          [locationData[currentKey ?? "nyc"].className]: currentKey !== null,
+          [locationData[currentKey ?? 'nyc'].className]: currentKey !== null,
         })}
         onClick={() => {
           setCurrentKey(null);
@@ -76,9 +73,9 @@ const Map = () => {
           <motion.div className={styles.pins}>
             <AnimatePresence>
               {!!currentKey && (
-                <motion.div className={styles.details} layout key={"map"}>
+                <motion.div className={styles.details} layout key={'map'}>
                   <motion.span>
-                    <motion.h4>{title ?? ""}</motion.h4>
+                    <motion.h4>{title ?? ''}</motion.h4>
                   </motion.span>
                   {highlights?.map((highlight, index) => (
                     <motion.span key={index}>
@@ -108,7 +105,7 @@ const Map = () => {
             ))}
           </motion.div>
           <USA className={styles.usa} />;
-          <motion.img src={"images/grid.png"} className={styles.grid} />
+          <motion.img src={'images/grid.png'} className={styles.grid} />
         </motion.div>
       </motion.div>
       <AnimatedLine className={styles.divider} horizontal={true} />

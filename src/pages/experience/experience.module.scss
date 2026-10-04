@@ -1,9 +1,9 @@
-@use '@styles'as styles;
+@use '@styles' as styles;
 
 .experience {
   @include styles.page-padding-vertical;
 
-  >.content {
+  > .content {
     @include styles.list-flex;
   }
 }

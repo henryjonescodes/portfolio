@@ -1,12 +1,14 @@
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import styles from "./nav-bar.module.scss";
-import GlitchIcon from "@components/GlitchIcon";
+import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './nav-bar.module.scss';
+import GlitchIcon from '@components/GlitchIcon';
 
 // NavBarButton Component
 // Define mutually exclusive types
 type NavBarButtonIconOnlyProps = {
   onClick: () => void;
+  label?: string;
   Icon: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
@@ -18,6 +20,7 @@ type NavBarButtonIconOnlyProps = {
 
 type NavBarButtonWithActiveProps = {
   onClick: () => void;
+  label?: string;
   Icon: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
@@ -32,18 +35,25 @@ type NavBarButtonWithActiveProps = {
 };
 
 // Combine the mutually exclusive types using a union
-type NavBarButtonProps =
-  | NavBarButtonIconOnlyProps
-  | NavBarButtonWithActiveProps;
+type NavBarButtonProps = NavBarButtonIconOnlyProps | NavBarButtonWithActiveProps;
 
-export const NavBarButton = ({
-  onClick,
-  Icon,
-  ActiveIcon,
-  active,
-}: NavBarButtonProps) => {
+export const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active }: NavBarButtonProps) => {
+  const { TRANSITIONS } = useAnimations();
+
   return (
-    <motion.span className={styles.navButton} onClick={onClick}>
+    <motion.span
+      className={styles.navButton}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      aria-label={label}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick();
+        }
+      }}
+    >
       <AnimatePresence mode="wait">
         {active && ActiveIcon ? (
           <motion.span
@@ -52,7 +62,7 @@ export const NavBarButton = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={TRANSITIONS.NAV_BUTTON.ACTIVE_ANIMATE}
           >
             <GlitchIcon Icon={ActiveIcon} className={styles.image} />
           </motion.span>
@@ -63,7 +73,7 @@ export const NavBarButton = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={TRANSITIONS.NAV_BUTTON.INACTIVE_ANIMATE}
           >
             <GlitchIcon Icon={Icon} className={styles.image} />
           </motion.span>

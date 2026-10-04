@@ -1,8 +1,9 @@
-import { motion, useIsPresent } from "framer-motion";
-import { useEffect, useRef, useState, ReactNode } from "react";
-import cn from "classnames";
-import styles from "./local.module.scss";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
+import { motion, useIsPresent } from 'framer-motion';
+import { useEffect, useRef, useState, ReactNode } from 'react';
+import cn from 'classnames';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './local.module.scss';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
 
 interface AnimatedBorderProps {
   width: number;
@@ -12,24 +13,6 @@ interface AnimatedBorderProps {
   onAnimationComplete?: () => void;
 }
 
-const pathVariants = {
-  initial: { pathLength: 0 },
-  animate: {
-    pathLength: 1,
-    transition: {
-      duration: 1.5,
-      ease: "easeInOut",
-    },
-  },
-  exit: {
-    pathLength: 0,
-    transition: {
-      duration: 1,
-      ease: "easeInOut",
-    },
-  },
-};
-
 const AnimatedBorder = ({
   width,
   height,
@@ -37,6 +20,20 @@ const AnimatedBorder = ({
   borderRadius = 20,
   onAnimationComplete,
 }: AnimatedBorderProps) => {
+  const { TRANSITIONS } = useAnimations();
+
+  const pathVariants = {
+    initial: { pathLength: 0 },
+    animate: {
+      pathLength: 1,
+      transition: TRANSITIONS.BORDER_BOX.ANIMATE,
+    },
+    exit: {
+      pathLength: 0,
+      transition: TRANSITIONS.BORDER_BOX.EXIT,
+    },
+  };
+
   return (
     <motion.svg
       className={styles.animatedBorder}
@@ -50,8 +47,8 @@ const AnimatedBorder = ({
         y={borderWidth / 2}
         rx={borderRadius}
         ry={borderRadius}
-        width={width - borderWidth}
-        height={height - borderWidth}
+        width={Math.max(0, width - borderWidth)}
+        height={Math.max(0, height - borderWidth)}
         fill="transparent"
         strokeWidth={borderWidth}
         variants={pathVariants}
@@ -96,7 +93,7 @@ const AnimatedBorderBox = ({
     if (!containerRef.current) return;
 
     const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {
         const { width, height } = entry.contentRect;
         setDimensions({ width, height });
       }

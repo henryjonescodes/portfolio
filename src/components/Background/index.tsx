@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
-import styles from "./background.module.scss";
-import cn from "classnames";
-import { useSettings } from "@context/SettingsContext";
+import { motion } from 'framer-motion';
+import styles from './background.module.scss';
+import cn from 'classnames';
+import { useSettings } from '@context/SettingsContext';
 
 const Background = () => {
   const { animationDisabled } = useSettings();
@@ -12,7 +12,7 @@ const Background = () => {
         className={cn(styles.scanlines, {
           [styles.noAnimation]: animationDisabled, // Conditionally apply a no-animation style
         })}
-      />{" "}
+      />{' '}
     </>
   );
 };

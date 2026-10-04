@@ -1,18 +1,21 @@
 // CustomControls.tsx
-import { useFrame, useThree } from "@react-three/fiber";
-import React, { useEffect, useState } from "react";
-import { useSpring } from "react-spring";
-import { Vector3 } from "$three";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
-import { useZoom } from "@context/ZoomContext";
-import { useMobileOrientation, isMobile } from "react-device-detect";
-import { landscapeZoomPositionOffset } from "@styles/layout.constants";
+import { useFrame, useThree } from '@react-three/fiber';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useSpring } from '@react-spring/three';
+import { useAnimations } from '@context/AnimationContext';
+import { Vector3 } from '$three';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { useZoom } from '@context/ZoomContext';
+import { useMobileOrientation, isMobile } from 'react-device-detect';
+import { landscapeZoomPositionOffset } from '@styles/layout.constants';
 
 const CustomControls: React.FC = () => {
   const { camera } = useThree();
   const { zoomLevel } = useZoom();
   const { zoomPositions } = useWindowDimensions();
   const { isLandscape } = useMobileOrientation();
+  const { SPRINGS, CAMERA_LERP } = useAnimations();
+  const target = useMemo(() => new Vector3(), []);
 
   const [focus, setFocus] = useState<Vector3>(new Vector3(0, 0, 0));
 
@@ -20,16 +23,16 @@ const CustomControls: React.FC = () => {
   useEffect(() => {
     let focusLocal = undefined;
     switch (zoomLevel) {
-      case "wide":
+      case 'wide':
         focusLocal = zoomPositions.wide.clone();
         break;
-      case "handheld":
+      case 'handheld':
         focusLocal = zoomPositions.handheld.clone();
         break;
-      case "info":
+      case 'info':
         focusLocal = zoomPositions.info.clone();
         break;
-      case "fullscreen":
+      case 'fullscreen':
         focusLocal = zoomPositions.fullScreen.clone();
         break;
       default:
@@ -49,14 +52,12 @@ const CustomControls: React.FC = () => {
       position: [camera.position.x, camera.position.y, camera.position.z],
     },
     to: { position: focus.toArray() },
-    config: { mass: 1, tension: 170, friction: 26 },
+    config: SPRINGS.camera,
     reset: false,
   });
 
   useFrame(() => {
-    const newPosition = new Vector3(...position.get());
-
-    camera.position.lerp(newPosition, 0.1);
+    camera.position.lerp(target.fromArray(position.get()), CAMERA_LERP);
     camera.updateProjectionMatrix();
   });
 

@@ -1,20 +1,14 @@
-import React, {
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from "react";
-import { ThreeEvent } from "@react-three/fiber";
+import React, { useContext, useEffect, useRef, useState, useCallback } from 'react';
+import { ThreeEvent } from '@react-three/fiber';
 import {
   InteractionContext,
   InteractiveElement,
   InteractiveElementProps,
-} from "@context/InteractionContext";
+} from '@context/InteractionContext';
 
 type KnobProps = {
   position?: [number, number, number];
-  axis?: "x" | "y" | "z";
+  axis?: 'x' | 'y' | 'z';
   min?: number;
   max?: number;
   mapMin?: number;
@@ -27,7 +21,7 @@ type KnobProps = {
 } & InteractiveElementProps;
 
 export function Knob({
-  axis = "z",
+  axis = 'z',
   min = 0,
   max = 360,
   mapMin = 0,
@@ -69,8 +63,7 @@ export function Knob({
       let newRotation = rotationRef.current + deltaRotation;
       newRotation = Math.max(min, Math.min(newRotation, max));
 
-      const normalizedValue =
-        ((newRotation - min) / (max - min)) * (mapMax - mapMin) + mapMin;
+      const normalizedValue = ((newRotation - min) / (max - min)) * (mapMax - mapMin) + mapMin;
 
       onChange?.(normalizedValue);
       rotationRef.current = newRotation;
@@ -81,7 +74,7 @@ export function Knob({
         setInternalRotation(newRotation);
       }
     },
-    [isControlled, min, max, mapMin, mapMax, onChange, setRotation]
+    [isControlled, min, max, mapMin, mapMax, onChange, setRotation],
   );
 
   useEffect(() => {
@@ -92,9 +85,9 @@ export function Knob({
         applyRotation(deltaRotation);
       };
 
-      window.addEventListener("wheel", handleWheel);
+      window.addEventListener('wheel', handleWheel);
       return () => {
-        window.removeEventListener("wheel", handleWheel);
+        window.removeEventListener('wheel', handleWheel);
       };
     }
   }, [isActive, isDragging, applyRotation]);
@@ -116,12 +109,12 @@ export function Knob({
         setIsDragging(false);
       };
 
-      window.addEventListener("pointermove", handlePointerMove);
-      window.addEventListener("pointerup", handlePointerUp);
+      window.addEventListener('pointermove', handlePointerMove);
+      window.addEventListener('pointerup', handlePointerUp);
 
       return () => {
-        window.removeEventListener("pointermove", handlePointerMove);
-        window.removeEventListener("pointerup", handlePointerUp);
+        window.removeEventListener('pointermove', handlePointerMove);
+        window.removeEventListener('pointerup', handlePointerUp);
       };
     }
   }, [isDragging, applyRotation, sensitivity]);
@@ -133,16 +126,11 @@ export function Knob({
   };
 
   const rotationArray: [number, number, number] = [0, 0, 0];
-  rotationArray[axis === "x" ? 0 : axis === "y" ? 1 : 2] =
-    degreesToRadians(currentRotation);
+  rotationArray[axis === 'x' ? 0 : axis === 'y' ? 1 : 2] = degreesToRadians(currentRotation);
 
   return (
     <group rotation={rotationArray} position={position}>
-      <InteractiveElement
-        {...rest}
-        name={name}
-        onPointerDown={handlePointerDown}
-      >
+      <InteractiveElement {...rest} name={name} onPointerDown={handlePointerDown}>
         {children}
       </InteractiveElement>
     </group>

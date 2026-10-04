@@ -1,16 +1,9 @@
 // ColorsContext.tsx
-import { colord, extend } from "colord";
-import mixPlugin from "colord/plugins/mix";
-import React, {
-  createContext,
-  ReactNode,
-  useCallback,
-  useContext,
-  useMemo,
-  useState,
-} from "react";
-import useDebounceEffect from "@hooks/useDebouncedEffect";
-import { colors as defaultColors } from "@styles/sass-variables";
+import { colord, extend } from 'colord';
+import mixPlugin from 'colord/plugins/mix';
+import React, { createContext, ReactNode, useCallback, useContext, useMemo, useState } from 'react';
+import useDebounceEffect from '@hooks/useDebouncedEffect';
+import { colors as defaultColors } from '@styles/sass-variables';
 
 // Extend colord with plugins
 extend([mixPlugin]);
@@ -27,13 +20,13 @@ export interface PrimaryHues {
 
 // Derived color keys for extrapolated colors
 interface DerivedColors {
-  "foreground-secondary": ColorHex;
-  "foreground-tertiary": ColorHex;
-  "foreground-quaternary": ColorHex;
-  "accent-secondary": ColorHex;
-  "accent-tertiary": ColorHex;
-  "background-secondary": ColorHex;
-  "background-tertiary": ColorHex;
+  'foreground-secondary': ColorHex;
+  'foreground-tertiary': ColorHex;
+  'foreground-quaternary': ColorHex;
+  'accent-secondary': ColorHex;
+  'accent-tertiary': ColorHex;
+  'background-secondary': ColorHex;
+  'background-tertiary': ColorHex;
 }
 
 // Functions to adjust saturation and lightness
@@ -50,9 +43,9 @@ const adjustLightness = (color: string, amount: number): ColorHex => {
 };
 
 // Extract default HSL values from default colors
-const defaultForegroundColor = defaultColors["foreground-primary"];
-const defaultAccentColor = defaultColors["accent-primary"];
-const defaultBackgroundColor = defaultColors["background-primary"];
+const defaultForegroundColor = defaultColors['foreground-primary'];
+const defaultAccentColor = defaultColors['accent-primary'];
+const defaultBackgroundColor = defaultColors['background-primary'];
 
 const defaultForegroundHSL = colord(defaultForegroundColor).toHsl();
 const defaultAccentHSL = colord(defaultAccentColor).toHsl();
@@ -80,9 +73,7 @@ const defaultContextValue: ColorsContextType = {
 const ColorsContext = createContext<ColorsContextType>(defaultContextValue);
 
 // Create the Provider component
-export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
-  children,
-}) => {
+export const ColorsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Initialize primary hues with default values
   const [primaryHues, setPrimaryHues] = useState<PrimaryHues>({
     foregroundPrimary: defaultForegroundHSL.h,
@@ -117,36 +108,21 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
         l: defaultBackgroundHSL.l,
       }).toHex() as ColorHex,
     }),
-    [primaryHues]
+    [primaryHues],
   );
 
   // Update the derived colors based on the primary colors
   const derivedColors: DerivedColors = useMemo(
     () => ({
-      "foreground-secondary": adjustSaturation(
-        primaryColors.foregroundPrimary,
-        -10
-      ),
-      "foreground-tertiary": adjustSaturation(
-        primaryColors.foregroundPrimary,
-        -40
-      ),
-      "foreground-quaternary": adjustLightness(
-        primaryColors.foregroundPrimary,
-        -30
-      ),
-      "accent-secondary": adjustSaturation(primaryColors.accentPrimary, -10),
-      "accent-tertiary": adjustSaturation(primaryColors.accentPrimary, -30),
-      "background-secondary": adjustLightness(
-        primaryColors.backgroundPrimary,
-        -8
-      ),
-      "background-tertiary": adjustSaturation(
-        primaryColors.backgroundPrimary,
-        -8
-      ),
+      'foreground-secondary': adjustSaturation(primaryColors.foregroundPrimary, -10),
+      'foreground-tertiary': adjustSaturation(primaryColors.foregroundPrimary, -40),
+      'foreground-quaternary': adjustLightness(primaryColors.foregroundPrimary, -30),
+      'accent-secondary': adjustSaturation(primaryColors.accentPrimary, -10),
+      'accent-tertiary': adjustSaturation(primaryColors.accentPrimary, -30),
+      'background-secondary': adjustLightness(primaryColors.backgroundPrimary, -8),
+      'background-tertiary': adjustSaturation(primaryColors.backgroundPrimary, -8),
     }),
-    [primaryColors]
+    [primaryColors],
   );
 
   // Update the CSS variables in :root whenever colors change
@@ -155,15 +131,9 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
       const root = document.documentElement;
 
       // Set primary colors
-      root.style.setProperty(
-        "--foreground-primary",
-        primaryColors.foregroundPrimary
-      );
-      root.style.setProperty("--accent-primary", primaryColors.accentPrimary);
-      root.style.setProperty(
-        "--background-primary",
-        primaryColors.backgroundPrimary
-      );
+      root.style.setProperty('--foreground-primary', primaryColors.foregroundPrimary);
+      root.style.setProperty('--accent-primary', primaryColors.accentPrimary);
+      root.style.setProperty('--background-primary', primaryColors.backgroundPrimary);
 
       // Set derived colors
       Object.entries(derivedColors).forEach(([key, value]) => {
@@ -171,13 +141,11 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
       });
     },
     [derivedColors],
-    100
+    100,
   );
 
   return (
-    <ColorsContext.Provider
-      value={{ primaryHues, setPrimaryHues, resetColors }}
-    >
+    <ColorsContext.Provider value={{ primaryHues, setPrimaryHues, resetColors }}>
       {children}
     </ColorsContext.Provider>
   );
@@ -187,7 +155,7 @@ export const ColorsProvider: React.FC<{ children: ReactNode }> = ({
 export const useColors = () => {
   const context = useContext(ColorsContext);
   if (!context) {
-    throw new Error("useColors must be used within a ColorsProvider");
+    throw new Error('useColors must be used within a ColorsProvider');
   }
   return context;
 };

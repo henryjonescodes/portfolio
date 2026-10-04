@@ -1,13 +1,13 @@
-import { useGLTF } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
-import { useLocation } from "react-router-dom";
-import * as THREE from "three";
-import { GLTF } from "three-stdlib";
-import { TextureLoader, Vector2 } from "$three";
-import { useColors } from "@context/ColorsContext";
-import { useNavigatePreserveQuery } from "@hooks/useNavigatePreserveQuery";
-import { Button } from "./Button";
-import { Knob } from "./Knob";
+import { useGLTF } from '@react-three/drei';
+import { useLoader } from '@react-three/fiber';
+import { useLocation } from 'react-router-dom';
+import * as THREE from 'three';
+import { GLTF } from 'three-stdlib';
+import { TextureLoader, Vector2 } from '$three';
+import { useColors } from '@context/ColorsContext';
+import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';
+import { Button } from './Button';
+import { Knob } from './Knob';
 
 // Type definition for GLTF model (generated via gltfjsx)
 type SiteMixerGLTF = GLTF & {
@@ -36,37 +36,34 @@ type SiteMixerGLTF = GLTF & {
 
 // ?? Preload Textures
 const texturePaths = [
-  "3D/images/delit_bake_1.png",
-  "3D/images/normal_bake_1.png",
-  "3D/images/roughness_bake_1.png",
+  '3D/images/delit_bake_1.png',
+  '3D/images/normal_bake_1.png',
+  '3D/images/roughness_bake_1.png',
 ];
 texturePaths.forEach((path) => useLoader.preload(TextureLoader, path));
-useGLTF.preload("/3D/models/site-mixer-1.glb");
+useGLTF.preload('/3D/models/site-mixer-1.glb');
 
-export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
+export function SiteMixer(props: JSX.IntrinsicElements['group']) {
   const location = useLocation();
   const navigate = useNavigatePreserveQuery();
   const { primaryHues, setPrimaryHues } = useColors();
 
   // ?? Load Scene Components & Textures
-  const { nodes, materials } = useGLTF("3D/models/site-mixer-1.glb") as SiteMixerGLTF;
-  const [bakeImage, normalMap, roughnessMap] = useLoader(
-    TextureLoader,
-    texturePaths
-  );
+  const { nodes, materials } = useGLTF('3D/models/site-mixer-1.glb') as SiteMixerGLTF;
+  const [bakeImage, normalMap, roughnessMap] = useLoader(TextureLoader, texturePaths);
 
   bakeImage.flipY = false;
   normalMap.flipY = false;
   roughnessMap.flipY = false;
 
   // ?? Extract Current Page
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const page = pathSegments[0] || "";
+  const pathSegments = location.pathname.split('/').filter(Boolean);
+  const page = pathSegments[0] || '';
 
   // ?? Helpers
   const handleClick = (label: string, path: string) => {
     if (page === label) {
-      navigate("/");
+      navigate('/');
     } else {
       navigate(path);
     }
@@ -98,10 +95,10 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
       <Button
         name="AboutButton"
         position={[0.636, -0.157, 0.054]}
-        on={page === "about"}
+        on={page === 'about'}
         onChange={(val) => {
           if (val) {
-            handleClick("about", "/about");
+            handleClick('about', '/about');
           }
         }}
       >
@@ -112,21 +109,18 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
             geometry={nodes.button1.geometry}
             material={materials.bake}
           />
-          {page === "about" && (
-            <mesh
-              geometry={nodes.button1_emission.geometry}
-              material={materials.emission}
-            />
+          {page === 'about' && (
+            <mesh geometry={nodes.button1_emission.geometry} material={materials.emission} />
           )}
         </group>
       </Button>
       <Button
         name="ExperienceButton"
         position={[0.759, -0.156, 0.055]}
-        on={page === "experience"}
+        on={page === 'experience'}
         onChange={(val) => {
           if (val) {
-            handleClick("experience", "/experience");
+            handleClick('experience', '/experience');
           }
         }}
       >
@@ -137,21 +131,18 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
             geometry={nodes.button2.geometry}
             material={materials.bake}
           />
-          {page === "experience" && (
-            <mesh
-              geometry={nodes.button2_emission.geometry}
-              material={materials.emission}
-            />
+          {page === 'experience' && (
+            <mesh geometry={nodes.button2_emission.geometry} material={materials.emission} />
           )}
         </group>
       </Button>
       <Button
         name="ProjectsButton"
         position={[0.893, -0.158, 0.055]}
-        on={page === "projects"}
+        on={page === 'projects'}
         onChange={(val) => {
           if (val) {
-            handleClick("projects", "/projects");
+            handleClick('projects', '/projects');
           }
         }}
       >
@@ -162,11 +153,8 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
             geometry={nodes.button3.geometry}
             material={materials.bake}
           />
-          {page === "projects" && (
-            <mesh
-              geometry={nodes.button3_emission.geometry}
-              material={materials.emission}
-            />
+          {page === 'projects' && (
+            <mesh geometry={nodes.button3_emission.geometry} material={materials.emission} />
           )}
         </group>
       </Button>
@@ -205,12 +193,7 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
           }));
         }}
       >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.knobl.geometry}
-          material={materials.bake}
-        />
+        <mesh castShadow receiveShadow geometry={nodes.knobl.geometry} material={materials.bake} />
       </Knob>
       <Knob
         name="Knob-C"
@@ -223,12 +206,7 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
           }));
         }}
       >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.knobc.geometry}
-          material={materials.bake}
-        />
+        <mesh castShadow receiveShadow geometry={nodes.knobc.geometry} material={materials.bake} />
       </Knob>
       <Knob
         name="Knob-R"
@@ -241,12 +219,7 @@ export function SiteMixer(props: JSX.IntrinsicElements["group"]) {
           }));
         }}
       >
-        <mesh
-          castShadow
-          receiveShadow
-          geometry={nodes.knobr.geometry}
-          material={materials.bake}
-        />
+        <mesh castShadow receiveShadow geometry={nodes.knobr.geometry} material={materials.bake} />
       </Knob>
       <mesh
         castShadow

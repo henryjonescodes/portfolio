@@ -1,9 +1,6 @@
-import { NavigateOptions, useLocation, useNavigate } from "react-router-dom";
+import { NavigateOptions, useLocation, useNavigate } from 'react-router-dom';
 
-type NavigatePreserveQuery = (
-  pathname: string,
-  options?: NavigateOptions
-) => void;
+type NavigatePreserveQuery = (pathname: string, options?: NavigateOptions) => void;
 
 export function useNavigatePreserveQuery(): NavigatePreserveQuery {
   const navigate = useNavigate();
@@ -15,7 +12,7 @@ export function useNavigatePreserveQuery(): NavigatePreserveQuery {
         pathname,
         search: location.search, // Preserve the current query parameters
       },
-      options
+      options,
     );
   };
 

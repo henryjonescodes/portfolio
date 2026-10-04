@@ -1,14 +1,14 @@
 // designConstants.ts
 
-import { Vector3 } from "$three";
+import { Vector3 } from '$three';
 
 export const borderRadiusCard: number = 16;
 export const borderRadiusItem: number = 8;
 
 export const screenSize = {
   height: 610,
-  width: 685
-}
+  width: 685,
+};
 // New screenWidths record for consolidated width values
 export const screenWidths: Record<string, number> = {
   tiny: 450,
@@ -37,71 +37,78 @@ export type ZoomLevel = {
   wide: Vector3; // Used for initialCameraPosition
 };
 
-export type ScreenWidthKey = 'tiny' | 'mobile' | 'small' | 'medium' | 'compact' | 'default' | 'large' | 'extraLarge';
+export type ScreenWidthKey =
+  | 'tiny'
+  | 'mobile'
+  | 'small'
+  | 'medium'
+  | 'compact'
+  | 'default'
+  | 'large'
+  | 'extraLarge';
 
 export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
-  tiny: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(2.29, 0.5, 2.8), 
-    handheld: new Vector3(0, 0, 10), 
-    wide: new Vector3(0, 0, 13), 
+  tiny: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(2.29, 0.5, 2.8),
+    handheld: new Vector3(0, 0, 10),
+    wide: new Vector3(0, 0, 13),
   },
-  mobile: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(2.29, 0.5, 2), 
-    handheld: new Vector3(0, 0, 7.5), 
-    wide: new Vector3(0, 0, 8), 
+  mobile: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(2.29, 0.5, 2),
+    handheld: new Vector3(0, 0, 7.5),
+    wide: new Vector3(0, 0, 8),
   },
-  small: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(2.29, 0.5, 2), 
-    handheld: new Vector3(0, 0, 5), 
-    wide: new Vector3(0, 0, 7), 
+  small: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(2.29, 0.5, 2),
+    handheld: new Vector3(0, 0, 5),
+    wide: new Vector3(0, 0, 7),
   },
-  medium: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(1.5, 0.7, 2), 
-    handheld: new Vector3(0, 0, 4),  
-    wide: new Vector3(0, 0, 6), 
+  medium: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(1.5, 0.7, 2),
+    handheld: new Vector3(0, 0, 4),
+    wide: new Vector3(0, 0, 6),
   },
-  compact: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(1.5, 0.7, 2), 
-    handheld: new Vector3(0, 0, 3.5),  
-    wide: new Vector3(0, 0, 5), 
+  compact: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(1.5, 0.7, 2),
+    handheld: new Vector3(0, 0, 3.5),
+    wide: new Vector3(0, 0, 5),
   },
-  default: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(1.5, 0.7, 2), 
-    handheld: new Vector3(0, 0, 3),  
-    wide: new Vector3(0, 0, 5), 
+  default: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(1.5, 0.7, 2),
+    handheld: new Vector3(0, 0, 3),
+    wide: new Vector3(0, 0, 5),
   },
-  large: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(1.5, 0.7, 2), 
-    handheld: new Vector3(0, 0, 3),  
-    wide: new Vector3(0, 0, 5), 
+  large: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(1.5, 0.7, 2),
+    handheld: new Vector3(0, 0, 3),
+    wide: new Vector3(0, 0, 5),
   },
-  extraLarge: { 
-    fullScreen: new Vector3(-0.7, 0, 1), 
-    info: new Vector3(1.5, 0.7, 2), 
-    handheld: new Vector3(0, 0, 3),  
-    wide: new Vector3(0, 0, 5), 
+  extraLarge: {
+    fullScreen: new Vector3(-0.7, 0, 1),
+    info: new Vector3(1.5, 0.7, 2),
+    handheld: new Vector3(0, 0, 3),
+    wide: new Vector3(0, 0, 5),
   },
 };
 
-export const landscapeZoomPositionOffset: number = 0.6
-
+export const landscapeZoomPositionOffset: number = 0.6;
 
 export const maxWidthPage: number = 2000;
 
 export const spacingParagraph: number = 24;
 
-export const pagePaddingLarge: string = "6.25rem";
-export const pagePaddingDefault: string = "4rem";
-export const pagePaddingCompact: string = "3.5rem";
-export const pagePaddingSmall: string = "2.5rem";
-export const pagePaddingMobile: string = "1.5rem";
+export const pagePaddingLarge: string = '6.25rem';
+export const pagePaddingDefault: string = '4rem';
+export const pagePaddingCompact: string = '3.5rem';
+export const pagePaddingSmall: string = '2.5rem';
+export const pagePaddingMobile: string = '1.5rem';
 
-export const paragraphSpacingLarge: string = "2rem";
-export const paragraphSpacingSmall: string = "1.4rem";
+export const paragraphSpacingLarge: string = '2rem';
+export const paragraphSpacingSmall: string = '1.4rem';

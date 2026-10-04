@@ -8,7 +8,7 @@ A personal site created as a space to experiment with new styles and refine my a
 
 ## Page Transition Timeline
 
-All animation timings are defined in `src/config/animations.ts` and can be adjusted globally or via the Leva debug panel (`?debug=true`).
+All animation timings are defined in `src/config/animation/` and can be adjusted globally or via the Leva debug panel (`?debug=true`).
 
 ```
 User clicks navigation link

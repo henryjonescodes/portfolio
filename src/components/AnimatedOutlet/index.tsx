@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useOutlet } from "react-router-dom";
+import { useState } from 'react';
+import { useOutlet } from 'react-router-dom';
 
 const AnimatedOutlet = () => {
   const o = useOutlet();

@@ -1,17 +1,10 @@
-import Loading from "@components/Loading";
-import React, {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { isMobile } from "react-device-detect";
-import { useLocation, useNavigate } from "react-router-dom";
-import { LOADING_TIMEOUTS } from "@config/animations";
+import Loading from '@components/Loading';
+import React, { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useAnimations } from '@context/AnimationContext';
 
-export type LoadingStates = undefined | "loading" | "loaded" | "complete";
+export type LoadingStates = undefined | 'loading' | 'loaded' | 'complete';
 
 interface LoadingContextType {
   liteMode: boolean;
@@ -41,31 +34,24 @@ interface LoadingProviderProps {
   children: ReactNode;
 }
 
-const LOADING_TIMEOUT_MS: number = LOADING_TIMEOUTS.AUTO_TIMEOUT_MS;
-const LOADING_TIMEOUT_USER_INITIATED_MS: number = LOADING_TIMEOUTS.USER_INITIATED_TIMEOUT_MS;
-export const LoadingProvider: React.FC<LoadingProviderProps> = ({
-  children,
-}) => {
+export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
   // ? Hooks & Ref
   const navigate = useNavigate();
   const location = useLocation();
+  const { TIMEOUTS } = useAnimations();
 
   // ? Get initial lite mode value from url
   const searchParams = new URLSearchParams(location.search);
-  const liteModeFlag = searchParams.get("lite") === "true";
+  const liteModeFlag = searchParams.get('lite') === 'true';
 
   // ? Timeout timer setup
   const preventTimeout = useRef(false);
-  const loadingTimerMs = useRef<number>(LOADING_TIMEOUT_MS);
+  const loadingTimerMs = useRef<number>(TIMEOUTS.LITE_MODE_FALLBACK);
 
   // ? Setup States
-  const [liteMode, setLiteModeState] = useState<boolean>(
-    liteModeFlag || isMobile
-  );
+  const [liteMode, setLiteModeState] = useState<boolean>(liteModeFlag || isMobile);
   const [progress, setProgress] = useState<number>(0);
-  const [loadingState, setLoadingState] = useState<LoadingStates>(
-    liteMode ? undefined : "loading"
-  );
+  const [loadingState, setLoadingState] = useState<LoadingStates>(liteMode ? undefined : 'loading');
   const [firstPageLoad, setFirstPageLoad] = useState<boolean>(true);
 
   // ? Add lite mode query param if lite mode started due to mobile device
@@ -84,38 +70,38 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
   // ? Internal
   const updateLiteModeFlag = (to: boolean) => {
     const searchParams = new URLSearchParams(location.search);
-    const liteModeFlag = searchParams.get("lite");
+    const liteModeFlag = searchParams.get('lite');
 
-    if (to && liteModeFlag !== "true") {
-      searchParams.set("lite", "true");
+    if (to && liteModeFlag !== 'true') {
+      searchParams.set('lite', 'true');
       navigate({ search: searchParams.toString() });
-    } else if (!to && liteModeFlag === "true") {
-      searchParams.delete("lite");
+    } else if (!to && liteModeFlag === 'true') {
+      searchParams.delete('lite');
       navigate({ search: searchParams.toString() });
     }
   };
 
   // ? Loading management functions
   const startLoading = () => {
-    if (loadingState === "complete") return;
-    console.log("[LoadingContext]: Started loading");
-    loadingTimerMs.current = LOADING_TIMEOUT_USER_INITIATED_MS;
+    if (loadingState === 'complete') return;
+    console.log('[LoadingContext]: Started loading');
+    loadingTimerMs.current = TIMEOUTS.USER_INITIATED_FALLBACK;
     preventTimeout.current = false;
     setLiteMode(false);
-    setLoadingState("loading");
+    setLoadingState('loading');
   };
 
   const finishLoading = () => {
-    console.log("[LoadingContext]: Completed loading");
+    console.log('[LoadingContext]: Completed loading');
 
     setLiteMode(false);
-    setLoadingState("complete");
+    setLoadingState('complete');
   };
 
   const stopLoading = () => {
     if (loadingState === undefined) return;
 
-    console.log("[LoadingContext]: Stopped loading");
+    console.log('[LoadingContext]: Stopped loading');
     setLiteMode(true);
     setLoadingState(undefined);
   };
@@ -127,7 +113,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
     let loadingTimer: NodeJS.Timeout | null = null;
 
     // If we're loading, start a timer to cancel loading after a delay
-    if (loadingState === "loading" && !preventTimeout.current) {
+    if (loadingState === 'loading' && !preventTimeout.current) {
       loadingTimer = setTimeout(() => {
         preventTimeout.current = true;
         stopLoading();
@@ -149,9 +135,9 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
   // ? Update loading state on progress
   useEffect(() => {
     if (progress >= 100) {
-      if (loadingState !== "complete") {
-        console.log("[LoadingContext]: Finished loading");
-        setLoadingState("loaded");
+      if (loadingState !== 'complete') {
+        console.log('[LoadingContext]: Finished loading');
+        setLoadingState('loaded');
       }
     }
   }, [progress]);
@@ -178,7 +164,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({
 export const useLoading = (): LoadingContextType => {
   const context = useContext(LoadingContext);
   if (!context) {
-    throw new Error("useLoading must be used within a LoadingProvider");
+    throw new Error('useLoading must be used within a LoadingProvider');
   }
   return context;
 };

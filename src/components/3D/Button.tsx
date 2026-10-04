@@ -1,14 +1,12 @@
-import { animated, useSpring } from "@react-spring/three";
-import { useEffect, useState } from "react";
-import { ThreeEvent } from "@react-three/fiber";
-import {
-  InteractiveElement,
-  InteractiveElementProps,
-} from "@context/InteractionContext";
+import { animated, useSpring } from '@react-spring/three';
+import { useAnimations } from '@context/AnimationContext';
+import { useEffect, useState } from 'react';
+import { ThreeEvent } from '@react-three/fiber';
+import { InteractiveElement, InteractiveElementProps } from '@context/InteractionContext';
 
 type ButtonProps = {
   position?: [number, number, number];
-  axis?: "x" | "y" | "z";
+  axis?: 'x' | 'y' | 'z';
   flip?: boolean;
   on?: boolean;
   onChange?: (value: boolean) => void;
@@ -18,7 +16,7 @@ type ButtonProps = {
 
 export function Button({
   position = [0, 0, 0],
-  axis = "z",
+  axis = 'z',
   flip = false,
   on,
   onChange,
@@ -38,24 +36,22 @@ export function Button({
   const currentOn = isControlled ? on : internalOn;
 
   // Use spring for animation, animating the position directly
-  const [spring, api] = useSpring(() => ({
-    position: position,
-    config: { mass: 1, tension: 300, friction: 20 },
-  }));
+  const { SPRINGS } = useAnimations();
+  const [spring, api] = useSpring(() => ({ position, config: SPRINGS.button }));
 
   // Update spring when currentOn changes
   useEffect(() => {
     const offset = currentOn ? (flip ? travel : -travel) : 0;
     const newPos = [...position] as [number, number, number];
-    if (axis === "x") {
+    if (axis === 'x') {
       newPos[0] += offset;
-    } else if (axis === "y") {
+    } else if (axis === 'y') {
       newPos[1] += offset;
-    } else if (axis === "z") {
+    } else if (axis === 'z') {
       newPos[2] += offset;
     }
-    api.start({ position: newPos });
-  }, [currentOn, flip, travel, axis, position, api]);
+    api.start({ position: newPos, config: SPRINGS.button });
+  }, [currentOn, flip, travel, axis, position, api, SPRINGS.button]);
 
   // Handle pointer events
   const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {

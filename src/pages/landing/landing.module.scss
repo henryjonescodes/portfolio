@@ -1,4 +1,4 @@
-@use '@styles'as styles;
+@use '@styles' as styles;
 
 .landing {
   width: 100vw;
@@ -39,7 +39,7 @@
   top: 2rem;
   right: 2rem;
 
-  >svg {
+  > svg {
     height: 100%;
     width: 100%;
   }
@@ -57,13 +57,12 @@
   position: relative;
   overflow: hidden;
 
-  >video {
+  > video {
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
 }
-
 
 .infoPanel {
   @include styles.unselectable;
@@ -89,7 +88,7 @@
     }
   }
 
-  >.content {
+  > .content {
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -99,7 +98,7 @@
       pointer-events: none;
     }
 
-    >.background {
+    > .background {
       height: 100%;
       width: 100%;
       position: absolute;
@@ -108,14 +107,14 @@
       z-index: 0;
     }
 
-    >.navbar {
+    > .navbar {
       position: relative;
       min-height: styles.$height-nav-bar;
       display: flex;
       align-items: center;
       justify-content: flex-end;
 
-      >.border {
+      > .border {
         top: unset !important;
         transform: translateY(100%);
         bottom: 0;
@@ -123,7 +122,7 @@
       }
     }
 
-    >.colorPicker {
+    > .colorPicker {
       position: relative;
       z-index: 2;
       display: flex;
