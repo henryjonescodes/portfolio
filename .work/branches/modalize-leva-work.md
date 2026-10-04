@@ -14,7 +14,7 @@ Make the animations easy to tweak and idiomatic without regressing them; ship as
 ## Todo
 
 - [x] Playwright smoke tests and lint tooling
-- [ ] Fix overlay swallowing clicks after modal close
+- [x] Fix overlay swallowing clicks after modal close
 - [ ] Split animation config; wire dead Leva controls; lazy-load Leva
 - [ ] Write ROADMAP.md and update LEVA.md and CLAUDE.md
 - [ ] Fix the 21 lint errors
