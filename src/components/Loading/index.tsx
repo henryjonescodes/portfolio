@@ -1,9 +1,10 @@
-import { useLoading } from "@context/LoadingContext";
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import styles from "./loading.module.scss";
+import { useLoading } from '@context/LoadingContext';
+import { useAnimations } from '@context/AnimationContext';
+import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
+import styles from './loading.module.scss';
 
-export const Spinner: React.FC = () => {
+const Spinner: React.FC = () => {
   return (
     <div className={styles.spinner}>
       <div className={`${styles.spinnerItem} ${styles.item1}`}></div>
@@ -14,16 +15,16 @@ export const Spinner: React.FC = () => {
 };
 
 export const PageLoading: React.FC = () => {
+  const { TRANSITIONS } = useAnimations();
+
   const wrapperVariants = {
     visible: { opacity: 1 },
     hidden: {
       opacity: 0,
-      transition: {
-        duration: 0.5,
-        delay: 0,
-      },
+      transition: TRANSITIONS.LOADING_PAGE.ANIMATE,
     },
   };
+
   return (
     <AnimatePresence>
       <motion.div
@@ -41,19 +42,17 @@ export const PageLoading: React.FC = () => {
 
 const Loading = () => {
   const { loadingState, finishLoading } = useLoading();
+  const { TRANSITIONS } = useAnimations();
 
   const wrapperVariants = {
     visible: { opacity: 1 },
     hidden: {
       opacity: 0,
-      transition: {
-        duration: 0.3,
-        delay: 1.95,
-      },
+      transition: TRANSITIONS.LOADING_PAGE.ANIMATE,
     },
   };
 
-  if (!loadingState || loadingState === "complete") {
+  if (!loadingState || loadingState === 'complete') {
     return null;
   }
 
@@ -63,7 +62,7 @@ const Loading = () => {
         finishLoading();
       }}
     >
-      {loadingState === "loading" && (
+      {loadingState === 'loading' && (
         <motion.div
           className={styles.loadingWrapper}
           initial="visible"

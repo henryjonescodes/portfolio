@@ -1,0 +1,31 @@
+@use '@styles' as styles;
+@use './nav-bar.module.scss' as navBar;
+
+.modalNavbar {
+  @include navBar.navBarContainer;
+  @include styles.title-bar;
+}
+
+.contents {
+  @include navBar.navBarContents;
+}
+
+.left {
+  @include navBar.navBarSection;
+}
+
+.center {
+  @include navBar.navBarSection;
+}
+
+.right {
+  @include navBar.navBarSection;
+}
+
+.dragHandle {
+  cursor: grab;
+
+  &:active {
+    cursor: grabbing;
+  }
+}

@@ -48,12 +48,22 @@ exported.variables.forEach((variable) => {
   // Convert RGB values to hex if necessary
   variables[name] = value.startsWith("rgb") ? rgbToHex(value) : value;
 });
+// Radii come from the chrome partial, as numbers in px for SVG and inline styles.
+const radius = {};
+sassExport
+  .exporter({ inputFiles: [path.resolve(__dirname, "../src/styles/_chrome.scss")] })
+  .getStructured()
+  .variables.filter((v) => v.name.startsWith("$radius-"))
+  .forEach((v) => {
+    radius[v.name.replace("$radius-", "")] = parseFloat(v.compiledValue);
+  });
+
 // Generate TypeScript content
 const tsContent = `export const colors = ${JSON.stringify(
   variables,
   null,
   2
-)} as const;\n`;
+)} as const;\n\nexport const radius = ${JSON.stringify(radius, null, 2)} as const;\n`;
 
 // Write the variables to a TypeScript file
 fs.writeFileSync(

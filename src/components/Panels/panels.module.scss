@@ -1,0 +1,146 @@
+@use '@styles' as styles;
+
+// Panels are sections of the open entry, not windows of their own: the modal is the window.
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px 32px;
+  width: 100%;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.full {
+  grid-column: span 6;
+}
+
+.twoThirds {
+  grid-column: span 4;
+}
+
+.half {
+  grid-column: span 3;
+}
+
+.third {
+  grid-column: span 2;
+}
+
+@media (max-width: styles.$width-mobile) {
+  .twoThirds,
+  .half,
+  .third {
+    grid-column: span 6;
+  }
+}
+
+.label {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.media {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  video,
+  img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: styles.$radius-sm;
+  }
+
+  figcaption {
+    font-size: 0.8rem;
+  }
+}
+
+.cover {
+  video,
+  img {
+    object-fit: cover;
+  }
+}
+
+.contain {
+  video,
+  img {
+    object-fit: contain;
+    background: black;
+  }
+}
+
+.gallery {
+  display: grid;
+  gap: 8px;
+
+  img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: styles.$radius-sm;
+  }
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+// Nested under .links so it outranks the overlay's `.overlay a { color: inherit }`.
+.links .link {
+  color: var(--foreground-primary);
+  cursor: pointer;
+
+  &::before {
+    content: '→ ';
+    color: var(--accent-secondary);
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--accent-primary);
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin: 0;
+
+  dt {
+    font-size: 0.75rem;
+    color: var(--accent-secondary);
+  }
+
+  dd {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+}

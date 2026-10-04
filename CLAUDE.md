@@ -25,9 +25,23 @@ npm run export-sass-variables
 
 # Generate QR code for mobile testing on local network
 npm run generate-qr-code
+
+# Lint, type check and knip (unused files, exports, dependencies); must pass before pushing
+npm run check
+
+# Playwright smoke suite
+npm run test:e2e
 ```
 
 **Important**: The build process automatically exports SASS variables before building. If you modify `src/styles/_colors.scss`, run `npm run export-sass-variables` to update `sass-variables.ts`.
+
+## Development Guidelines
+
+**DO NOT obsessively run TypeScript checks or builds:**
+- Don't run `npm run build` or `tsc` after every small change
+- Type errors can be fixed later as needed
+- Focus on implementing features, not validating constantly
+- Only build when explicitly requested or when there's a specific reason to verify compilation
 
 ## Architecture Overview
 
@@ -45,16 +59,17 @@ The application uses a **dual-render approach** where the same UI can exist in t
 
 ### State Management: Context-First Architecture
 
-Six specialized contexts handle global state (no Redux/Zustand):
+Specialized contexts handle global state (no Redux/Zustand):
 
-- **ColorsContext** (`/src/context/ColorsContext.tsx`): Dynamic theming synced with 3D knobs, updates CSS custom properties in real-time with debouncing
-- **ZoomContext** (`/src/context/ZoomContext.tsx`): Camera positions (`fullscreen | wide | handheld | info`) synced with routes
-- **LoadingContext** (`/src/context/LoadingContext.tsx`): 3D asset loading with auto-timeout fallback to lite mode
-- **InteractionContext** (`/src/context/InteractionContext.tsx`): Active 3D object tracking, provides `InteractiveElement` HOC
-- **WindowDimensionContext** (`/src/context/WindowDimensionContext.tsx`): Responsive breakpoints and zoom position calculations
-- **SettingsContext** (`/src/context/SettingsContext.tsx`): Debug mode (`?debug=true`), Leva panel integration
+- **ColorsContext** (`/src/context/ColorsContext.ts`, provider in `ColorsProvider.tsx`): Dynamic theming synced with 3D knobs, updates CSS custom properties in real-time with debouncing
+- **ZoomContext** (`/src/context/ZoomContext.ts`, provider in `ZoomProvider.tsx`): Camera positions (`fullscreen | wide | handheld | info`) synced with routes
+- **LoadingContext** (`/src/context/LoadingContext.ts`, provider in `LoadingProvider.tsx`): 3D asset loading with auto-timeout fallback to lite mode
+- **InteractionContext** (`/src/context/InteractionContext.ts`, provider in `InteractionProvider.tsx`): Active 3D object tracking, provides `InteractiveElement` HOC
+- **WindowDimensionContext** (`/src/context/WindowDimensionContext.ts`, provider in `WindowDimensionProvider.tsx`): Responsive breakpoints and zoom position calculations
+- **SettingsContext** (`/src/context/SettingsContext.ts`, provider in `SettingsProvider.tsx`): Debug mode (`?debug=true`), animation disable lock, orbit-controls toggle
+- **AnimationContext** (`/src/context/AnimationContext.ts`, provider in `AnimationProvider.tsx`): Resolved animation timing (`useAnimations()`); defaults from `src/config/animation/`, live values from the debug panel
 
-All providers nest in `/src/pages/landing/index.tsx`.
+All global providers nest in `/src/context/AppProviders.tsx`; page-level ones (Page, the entry modal) in `/src/components/Page/PageProviders.tsx`. Each context is split so Fast Refresh works: `XContext.ts` holds the types, context object and `useX` hook, `XProvider.tsx` only the provider.
 
 ### Animation System: Three Libraries, Three Purposes
 
@@ -149,7 +164,7 @@ All content routes nest under Landing (`/*`) to share 3D scene context:
 3. **Main Model**: `/src/components/3D/SiteMixer.tsx` - Button/knob interaction logic
 4. **2D/3D Bridge**: `/src/components/3D/CustomHTML.tsx` - Context bridging
 5. **Camera**: `/src/components/3D/CustomControls.tsx` - Zoom/position logic
-6. **Theming**: `/src/context/ColorsContext.tsx` - Dynamic color system
+6. **Theming**: `/src/context/ColorsProvider.tsx` - Dynamic color system
 
 ## Common Workflows
 
@@ -177,8 +192,8 @@ All content routes nest under Landing (`/*`) to share 3D scene context:
 ### Debugging 3D Scene
 
 1. Add `?debug=true` to URL
-2. Use Leva panel to adjust camera, animation timings, object positions
-3. Toggle OrbitControls for manual camera control
+2. Use the Leva panel (lazy-loaded from `src/debug/`) to adjust every animation timing, the 3D springs and timeouts
+3. Toggle OrbitControls for manual camera control in the panel's 3D Scene folder
 4. Check InteractionContext for active object state
 
 ## Performance Considerations
@@ -212,8 +227,35 @@ All content routes nest under Landing (`/*`) to share 3D scene context:
 
 ## Critical Patterns to Maintain
 
-1. **Context Bridging**: Always include all required contexts in CustomHTML's `useContextBridge()` when adding new global state
+1. **Context Bridging**: `CustomHTML` bridges every context automatically (`its-fine`); a new provider only needs to sit above the Canvas
 2. **Zoom-Route Sync**: ZoomContext listens to route changes; ensure new routes have appropriate zoom level mapping
 3. **CSS Custom Properties**: Dynamic theme colors must update CSS variables in `:root`, not just React state
 4. **InteractiveElement HOC**: All clickable 3D objects must use this pattern to prevent event conflicts
 5. **Lite Mode Compatibility**: All UI must work in both 3D and 2D modes (test with `?lite=true`)
+
+## Animation Config
+
+All timing lives in `src/config/animation/`: `transitions.ts` (every Framer Motion transition as
+`tune(base, value, range, label)` multiples of a category base), `system.ts` (master speed,
+category bases, 3D springs, timeouts) and `resolve.ts` (turns values into what components read).
+Add a tunable there and read it through `useAnimations()`; never hardcode a duration or spring.
+
+## Shared Helpers
+
+- `src/utils/debug.ts`: `debugLog(scope, ...)` logs only with `?debug=true`; never use `console.log`.
+- `src/utils/color.ts`: colour adjustment helpers used by the theming.
+- `src/hooks/useLatest.ts`: lets an effect that fires on one change read the latest props and callbacks.
+- `src/config/animation/variants.ts`: `fade(animate, exit)` for the standard opacity variants.
+- `src/components/EntryMedia`: renders an entry's video or image with the glitch treatment.
+- `src/components/Panels`: data-driven sections for open entries (see the panels skill).
+
+## Testing
+
+`npm run test:e2e` runs the Playwright smoke suite in `e2e/` (pages, the modal morph and close,
+the debug panel, the 3D canvas). Run it before pushing anything that touches animation, the
+modal or the 3D bridge. `npm run lint` and `npm run format` cover source style.
+
+## Work Tracking
+
+Work is tracked as branches with seeds in `.work/branches/` (see `ROADMAP.md`). Edit seeds only
+through the branchwork tool; `.work/BOARD.md` is generated.

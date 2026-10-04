@@ -1,5 +1,4 @@
-@use '@styles'as styles;
-
+@use '@styles' as styles;
 
 .backdrop {
   @include styles.glowing-background;

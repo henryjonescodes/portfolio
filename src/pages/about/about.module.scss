@@ -1,4 +1,4 @@
-@use '@styles'as styles;
+@use '@styles' as styles;
 
 .about {
   @include styles.text-large;
@@ -8,7 +8,7 @@
   height: min-content;
   gap: 128px;
 
-  >.content {
+  > .content {
     @include styles.page-padding-vertical;
     scroll-snap-align: start;
     display: flex;
@@ -40,12 +40,10 @@
 
       .right {
         flex-basis: 45%;
-        // min-width: 45%;
         flex-grow: 0;
         flex-shrink: 1;
       }
     }
-
   }
 }
 
@@ -78,8 +76,6 @@
 
     .right {
       .border {
-
-
         &Content {
           display: flex;
           flex-direction: column;
@@ -113,7 +109,6 @@
             left: 100%;
           }
         }
-
 
         .tags {
           display: flex;
@@ -168,7 +163,6 @@
       }
     }
   }
-
 }
 
 .mapViewer {
@@ -185,7 +179,6 @@
   display: grid;
   grid-template-columns: 1.6fr 1fr;
   grid-gap: 10px;
-
 
   .tracker {
     position: relative;
@@ -205,7 +198,7 @@
       max-width: 100%;
       width: 100%;
       overflow: hidden;
-      border-radius: 16px;
+      border-radius: styles.$radius-lg;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -246,14 +239,14 @@
     font-size: 1.1rem;
   }
 
-  >.content {
+  > .content {
     scroll-snap-align: none;
     display: flex;
     align-items: start;
     min-height: unset;
     padding: 48px 0px;
 
-    >.twoColumns {
+    > .twoColumns {
       gap: 32px;
     }
   }
@@ -288,7 +281,6 @@
 
         .border {
           .viewer {
-
             height: 200px;
 
             .avatar {
@@ -313,7 +305,7 @@
               }
 
               .text {
-                font-size: .8rem;
+                font-size: 0.8rem;
               }
             }
           }
@@ -349,7 +341,6 @@
       }
     }
   }
-
 }
 
 .handheld {
@@ -364,7 +355,6 @@
   }
 
   .fullscreen {
-
     .aboutMe {
       .flex {
         .left {
@@ -407,9 +397,8 @@
 
     .statTracker {
       .tracker {
-
         .track {
-          gap: 3px
+          gap: 3px;
         }
       }
 
@@ -422,17 +411,14 @@
   }
 }
 
-
 @media (max-width: styles.$width-small) {
   .fullscreen {
     p {
       font-size: 1.1rem;
     }
-
   }
 
   .fullscreen {
-
     .aboutMe {
       h3 {
         font-size: 1.7rem;
@@ -458,7 +444,6 @@
           flex-basis: 38%;
 
           .border {
-
             &Content {
               display: flex;
               flex-direction: column;
@@ -471,7 +456,6 @@
               align-items: flex-start;
               gap: 16px;
               padding: 16px;
-
 
               .tag {
                 .iconWrapper {
@@ -508,10 +492,8 @@
         }
       }
     }
-
   }
 }
-
 
 @media (max-width: styles.$width-mobile-large) {
   .fullscreen {
@@ -519,9 +501,7 @@
       font-size: 1.1rem;
     }
 
-
     .aboutMe {
-
       .flex {
         flex-direction: column;
 
@@ -552,11 +532,10 @@
           width: 100%;
 
           .border {
-
             &Content {
               flex-direction: row-reverse;
               position: relative;
-              height: min-content
+              height: min-content;
             }
 
             .viewer {
@@ -577,7 +556,6 @@
               gap: 16px;
               padding: 0px 16px;
 
-
               .tag {
                 .iconWrapper {
                   .icon {
@@ -596,7 +574,6 @@
               position: relative;
               padding: 16px 0px;
               gap: 12px;
-
 
               .sliders {
                 padding: 0px 16px;
@@ -625,7 +602,6 @@
       }
 
       .label {
-
         h4 {
           font-size: 1.2rem;
         }
@@ -668,15 +644,11 @@
   }
 }
 
-
-
-
 @media (max-width: styles.$width-mobile) {
   .fullscreen {
-    >.content {
+    > .content {
       scroll-snap-align: none;
     }
-
 
     .aboutMe {
       .flex {
@@ -738,14 +710,12 @@
   }
 }
 
-
-
 @media (max-width: styles.$width-tiny) {
   .fullscreen {
     margin-bottom: 5vh;
     gap: 48px;
 
-    >.content {
+    > .content {
       height: min-content;
       min-height: unset;
     }
@@ -800,14 +770,9 @@
                 }
               }
             }
-
-            .values {
-              .sliders {}
-            }
           }
         }
       }
-
     }
 
     .statTracker {
@@ -816,15 +781,12 @@
       .tracker {
         min-width: 80px;
 
-        &Content {}
-
         .track {
           gap: 0px;
         }
       }
 
       .label {
-
         h4 {
           font-size: 0.8rem;
         }

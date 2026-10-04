@@ -1,4 +1,4 @@
-@use '@styles'as styles;
+@use '@styles' as styles;
 
 .link {
   &Text {
@@ -30,8 +30,6 @@
         color: var(--accent-secondary);
       }
     }
-
-    .subtitle {}
   }
 
   .box {
@@ -46,13 +44,23 @@
     }
   }
 
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--background-secondary);
+    pointer-events: none;
+    z-index: 0;
+  }
 
-  .descriptionWrapper {
-    flex: 1 1 auto;
+  .body {
+    position: relative;
+    z-index: 1;
+    flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    padding: 16px;
   }
 
   .childrenWrapper {
@@ -64,8 +72,13 @@
     flex-grow: 0;
     max-width: 40%;
     max-height: 100%;
-  }
+    z-index: 0;
 
+    &Modal {
+      aspect-ratio: unset;
+      max-width: 100%;
+    }
+  }
 
   .children {
     z-index: 1;
@@ -76,6 +89,69 @@
 
   .line {
     z-index: 2;
+  }
+
+  .description {
+    &Contents {
+      display: flex;
+
+      &Flex {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+
+        .text {
+          flex: 1 1 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          padding: 16px;
+        }
+
+        .tools {
+          position: relative;
+          display: flex;
+          padding: 16px 16px;
+          gap: 8px;
+        }
+      }
+    }
+  }
+}
+
+.notInList {
+  // Open: the media column grows and shows the whole frame instead of a cropped third.
+  .descriptionContentsFlex {
+    flex: 1 1 50%;
+    min-width: 0;
+  }
+
+  .childrenWrapper {
+    aspect-ratio: auto;
+    flex: 1 1 50%;
+    max-width: 50%;
+  }
+
+  .children video,
+  .children img {
+    object-fit: contain;
+    background: black;
+  }
+
+  &.expanded {
+    // Taller panels scroll inside the expanded window instead of being clipped.
+    .boxContent {
+      overflow-y: auto;
+    }
+
+    .descriptionContentsFlex {
+      flex-basis: 40%;
+    }
+
+    .childrenWrapper {
+      flex-basis: 60%;
+      max-width: 60%;
+    }
   }
 }
 
@@ -93,8 +169,6 @@
       max-height: unset;
     }
 
-    .children {}
-
     .line {
       top: 100%;
     }
@@ -103,7 +177,6 @@
 
 @media (max-width: styles.$width-tiny) {
   .fullScreen {
-
     .header {
       gap: 8px;
 
@@ -115,5 +188,46 @@
       }
     }
   }
+}
 
+.modalWrapper {
+  max-width: 100%;
+
+  &Expanded {
+    flex: 1;
+    display: flex;
+    min-height: 100%;
+  }
+}
+
+.expanded {
+  flex: 1;
+  margin-bottom: 0;
+
+  .box {
+    flex: 1;
+  }
+}
+
+.panels {
+  position: relative;
+  padding: 24px 16px 16px;
+  width: 100%;
+
+  .line {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+// Phones stack media under the text, so the expanded split must not apply there.
+@media (max-width: styles.$width-mobile) {
+  .notInList.expanded {
+    .descriptionContentsFlex,
+    .childrenWrapper {
+      flex-basis: auto;
+      max-width: 100%;
+    }
+  }
 }

@@ -1,10 +1,10 @@
-@use "sass:color";
-@use '@styles'as styles;
+@use 'sass:color';
+@use '@styles' as styles;
 
 .projects {
   @include styles.page-padding-vertical;
 
-  >.content {
+  > .content {
     @include styles.list-flex;
   }
 }
@@ -14,7 +14,6 @@
   align-items: center;
   justify-content: center;
   min-height: 100%;
-  max-width: 400px;
   overflow: hidden;
   position: relative;
 
@@ -27,7 +26,6 @@
     object-fit: cover; // Ensures the video maintains its aspect ratio and fits within the container
   }
 }
-
 
 @media (max-width: styles.$width-mobile) {
   .fullscreen {

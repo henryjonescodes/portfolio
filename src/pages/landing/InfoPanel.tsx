@@ -1,23 +1,22 @@
-// InfoPanel.tsx
-import { motion } from "framer-motion";
-import React from "react";
-import cn from "classnames";
+import { motion } from 'framer-motion';
+import React from 'react';
+import cn from 'classnames';
 
-import styles from "./landing.module.scss";
+import styles from './landing.module.scss';
 
-import Background from "@components/Background";
-import CustomHTML from "@components/3D/CustomHTML";
-import NavBarButton from "@components/NavBar/NavBarButton";
-import AnimatedLine from "@components/AnimatedLine";
+import Background from '@components/Background';
+import CustomHTML from '@components/3D/CustomHTML';
+import NavBarButton from '@components/NavBar/NavBarButton';
+import AnimatedLine from '@components/AnimatedLine';
 
-import { useColors } from "@context/ColorsContext";
-import { useSettings } from "@context/SettingsContext";
-import { useZoom } from "@context/ZoomContext";
+import { useColors } from '@context/ColorsContext';
+import { useSettings } from '@context/SettingsContext';
+import { useZoom } from '@context/ZoomContext';
 
-import Close from "@assets/svg/icons/close-01.svg?react";
-import Trash from "@assets/svg/icons/trash.svg?react";
-import Locked from "@assets/svg/icons/locked.svg?react";
-import Unlocked from "@assets/svg/icons/unlocked.svg?react";
+import Close from '@assets/svg/icons/close-01.svg?react';
+import Trash from '@assets/svg/icons/trash.svg?react';
+import Locked from '@assets/svg/icons/locked.svg?react';
+import Unlocked from '@assets/svg/icons/unlocked.svg?react';
 
 const InfoPanel = () => {
   const { primaryHues, setPrimaryHues, resetColors } = useColors();
@@ -28,10 +27,10 @@ const InfoPanel = () => {
     <CustomHTML transform occlude="blending">
       <motion.div
         className={cn(styles.infoPanel, {
-          [styles.button]: zoomLevel !== "info",
+          [styles.button]: zoomLevel !== 'info',
         })}
         onClick={() => {
-          if (zoomLevel === "info") {
+          if (zoomLevel === 'info') {
             return;
           }
           toggleInfoModeZoomPosition();
@@ -43,7 +42,7 @@ const InfoPanel = () => {
         <motion.div
           className={cn({
             [styles.content]: true,
-            [styles.disabled]: zoomLevel !== "info",
+            [styles.disabled]: zoomLevel !== 'info',
           })}
         >
           <motion.div className={styles.background}>
@@ -71,11 +70,7 @@ const InfoPanel = () => {
               }}
               Icon={Close}
             />
-            <AnimatedLine
-              className={styles.border}
-              borderWidth={5}
-              horizontal
-            />
+            <AnimatedLine className={styles.border} borderWidth={5} horizontal />
           </motion.span>
           <motion.div className={styles.colorPicker}>
             <HueSlider
@@ -125,12 +120,7 @@ interface HueSliderProps {
   className: string;
 }
 
-const HueSlider: React.FC<HueSliderProps> = ({
-  label,
-  hue,
-  onChange,
-  className,
-}) => {
+const HueSlider: React.FC<HueSliderProps> = ({ label, hue, onChange, className }) => {
   const handleHueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newHue = parseInt(event.target.value, 10);
     onChange(newHue);

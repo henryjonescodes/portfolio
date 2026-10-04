@@ -1,6 +1,6 @@
-import { useProgress } from "@react-three/drei";
-import { useEffect } from "react";
-import { useLoading } from "@context/LoadingContext";
+import { useProgress } from '@react-three/drei';
+import { useEffect } from 'react';
+import { useLoading } from '@context/LoadingContext';
 
 const LoadingHelper = () => {
   const { progress } = useProgress();
@@ -9,7 +9,7 @@ const LoadingHelper = () => {
   useEffect(() => {
     // ?? Update Loading Context Progress State
     setProgress(progress);
-  }, [progress]);
+  }, [progress, setProgress]);
 
   return null;
 };

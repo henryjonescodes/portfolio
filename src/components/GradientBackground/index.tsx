@@ -1,4 +1,4 @@
-import styles from "./gradient-background.module.scss";
+import styles from './gradient-background.module.scss';
 
 const GradientBackground = () => {
   return (

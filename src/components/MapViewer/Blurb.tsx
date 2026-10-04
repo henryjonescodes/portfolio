@@ -1,36 +1,20 @@
-import cn from "classnames";
-import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
-import { commonInitial } from "@styles/variants";
-import TypewriterText from "@components/TypewriterText";
-import { usePage } from "@components/Page";
-import { MapContext } from "./MapContext";
-import styles from "./map-components.module.scss";
-
-const blurbVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0, // Control exit duration
-      when: "afterChildren", // Ensure parent waits for children to exit
-    },
-  },
-};
+import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useContext } from 'react';
+import TypewriterText from '@components/TypewriterText';
+import { useAnimations } from '@context/AnimationContext';
+import { fade } from '@config/animation';
+import { usePage } from '@context/PageContext';
+import { MapContext } from './MapContext';
+import styles from './map-components.module.scss';
 
 const Blurb = () => {
-  const { currentKey, previousKey, setCurrentKey, locationData } =
-    useContext(MapContext);
+  const { TRANSITIONS } = useAnimations();
+
+  const blurbVariants = fade(TRANSITIONS.MAP_DESCRIPTION.ANIMATE, TRANSITIONS.MAP_DESCRIPTION.EXIT);
+  const { currentKey, previousKey, setCurrentKey, locationData } = useContext(MapContext);
   const keyToShow = currentKey !== null ? currentKey : previousKey;
-  const { title, prefix, description } =
-    locationData[keyToShow ?? "portland"] ?? {};
+  const { title, prefix, description } = locationData[keyToShow ?? 'portland'] ?? {};
 
   const { embedded } = usePage();
 

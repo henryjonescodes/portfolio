@@ -1,5 +1,5 @@
-@use "sass:color";
-@use '@styles'as styles;
+@use 'sass:color';
+@use '@styles' as styles;
 
 /////////////////////////////////////////////////
 //                   BLURB                    //
@@ -14,7 +14,6 @@
     gap: 0.2rem;
 
     .header {
-
       .prefix {
         font-size: 1.3rem;
       }
@@ -27,20 +26,14 @@
     .description {
       font-size: 1.1rem;
     }
-
   }
 
   .description {
     font-size: 1.6rem;
   }
 
-  &.fullscreen {}
-
   .header {
-
     .prefix,
-    .title {}
-
     .prefix {
       font-size: 2rem;
     }
@@ -74,7 +67,6 @@
       gap: 0.2rem;
 
       .header {
-
         .prefix {
           font-size: 1.3rem;
         }
@@ -97,12 +89,9 @@
       .description {
         font-size: 1.1rem;
       }
-
     }
   }
-
 }
-
 
 @media (max-width: styles.$width-mobile-medium) {
   .blurb {
@@ -110,7 +99,6 @@
       gap: 0.2rem;
 
       .header {
-
         .prefix {
           font-size: 1.3rem;
         }
@@ -159,11 +147,14 @@ $line-selected-width: 5px;
   align-items: center;
 
   &::before {
-    content: "";
+    content: '';
     display: block;
     margin: 0 auto;
-    transition: background-color 0.3s, height 0.2s, width 0.2s;
-    border-radius: 4px;
+    transition:
+      background-color 0.3s,
+      height 0.2s,
+      width 0.2s;
+    border-radius: styles.$radius-sm;
   }
 
   &:hover::before {
@@ -175,7 +166,10 @@ $line-selected-width: 5px;
     height: $line-medium-height;
     width: $line-medium-width;
     background-color: color.adjust(styles.$foreground-secondary, $saturation: -50%);
-    transition: background-color 0.1s, height 0.02s, width 0.02s;
+    transition:
+      background-color 0.1s,
+      height 0.02s,
+      width 0.02s;
   }
 }
 
@@ -232,12 +226,6 @@ $line-selected-width: 5px;
   }
 }
 
-// @media (max-width: $width-small) {
-//   .line {
-//     pointer-events: none;
-//   }
-// }
-
 /////////////////////////////////////////////////
 //                 MAP PIN                     //
 /////////////////////////////////////////////////
@@ -251,23 +239,19 @@ $line-selected-width: 5px;
   rotate: 225deg;
   transform-origin: top left;
 
-
   &Minimized {
     transform: scale(0.5);
     opacity: 0.6;
   }
 
-
   path,
   svg {
-
     fill: styles.$foreground-primary;
     stroke: styles.$foreground-primary;
     fill: var(--foreground-primary);
     stroke: var(--foreground-primary);
   }
 }
-
 
 /////////////////////////////////////////////////
 //                 MAP VIEWER                  //
@@ -279,9 +263,6 @@ $line-selected-width: 5px;
   justify-content: center;
 
   // TODO: fullscreen styles
-  &.handHeld {}
-
-  &.fullscreen {}
 
   .border {
     height: 100%;
@@ -293,14 +274,13 @@ $line-selected-width: 5px;
     left: 0px;
   }
 
-  >.contents {
-    border-radius: 32px 32px 0 0px;
+  > .contents {
+    border-radius: styles.$radius-lg styles.$radius-lg 0 0;
     overflow: hidden;
     aspect-ratio: 1.4 !important;
     position: relative;
 
-
-    >.blackBackground {
+    > .blackBackground {
       background-color: black;
       position: absolute;
       height: 100%;
@@ -309,8 +289,7 @@ $line-selected-width: 5px;
       left: 0;
     }
 
-
-    >.map {
+    > .map {
       position: absolute;
       z-index: 1;
       width: 100%;
@@ -318,7 +297,7 @@ $line-selected-width: 5px;
 
       display: flex;
 
-      >.grid {
+      > .grid {
         position: absolute;
         left: -28%;
         top: -10%;
@@ -329,7 +308,7 @@ $line-selected-width: 5px;
         z-index: 0;
       }
 
-      >.usa {
+      > .usa {
         z-index: 1;
         padding: 4.5%;
         height: 100%;
@@ -343,7 +322,7 @@ $line-selected-width: 5px;
         }
       }
 
-      >.pins {
+      > .pins {
         z-index: 2;
         position: absolute;
         height: 100%;
@@ -352,7 +331,7 @@ $line-selected-width: 5px;
         left: 0;
         opacity: 1;
 
-        >.details {
+        > .details {
           transition: opacity 0.2s ease-in-out;
           position: absolute;
           z-index: 2;
@@ -365,7 +344,7 @@ $line-selected-width: 5px;
           top: 50%;
           opacity: 0;
 
-          >span {
+          > span {
             width: 100%;
             display: flex;
             gap: 4px;
@@ -388,7 +367,6 @@ $line-selected-width: 5px;
             }
 
             svg {
-
               svg,
               path {
                 stroke: styles.$accent-primary;
@@ -401,13 +379,12 @@ $line-selected-width: 5px;
             }
           }
 
-          >div {
+          > div {
             position: absolute;
             height: 100%;
             width: 100%;
 
-
-            >svg {
+            > svg {
               position: absolute;
 
               svg,
@@ -439,11 +416,11 @@ $line-selected-width: 5px;
     }
   }
 
-  >.divider {
+  > .divider {
     position: relative;
   }
 
-  >.slider {
+  > .slider {
     flex: 1;
     display: flex;
     align-items: center;
@@ -466,14 +443,14 @@ $line-selected-width: 5px;
 
   &Pin {
     left: 91.2%;
-    top: 27.0%;
+    top: 27%;
   }
 
   .pinSelected {
     rotate: 380deg !important;
   }
 
-  >.map {
+  > .map {
     left: -127%;
     top: -15%;
     min-height: $scale;
@@ -498,7 +475,7 @@ $line-selected-width: 5px;
     rotate: 380deg !important;
   }
 
-  >.map {
+  > .map {
     left: -135%;
     top: -25%;
     min-height: $scale;
@@ -523,7 +500,7 @@ $line-selected-width: 5px;
     rotate: 180deg !important;
   }
 
-  >.map {
+  > .map {
     left: 50%;
     top: 0%;
     min-height: $scale;
@@ -550,7 +527,7 @@ $line-selected-width: 5px;
     rotate: 190deg !important;
   }
 
-  >.map {
+  > .map {
     left: -75%;
     top: 7%;
     min-height: $scale;
@@ -566,15 +543,13 @@ $line-selected-width: 5px;
 
 @media (max-width: styles.$width-mobile-large) {
   .fullscreen {
-    >.contents {
-      >.map {
-        >.pins {
-          >.details {
+    > .contents {
+      > .map {
+        > .pins {
+          > .details {
             padding: 6px;
 
-            >span {
-
-
+            > span {
               h4 {
                 font-size: 1.2rem;
                 line-height: 1.1rem;
@@ -594,9 +569,8 @@ $line-selected-width: 5px;
   .portland {
     $scale: 160%;
 
-    >.map {
+    > .map {
       left: -105%;
-      // top: -10%;
       min-height: $scale;
       min-width: $scale;
     }
@@ -605,7 +579,7 @@ $line-selected-width: 5px;
   .nyc {
     $scale: 160%;
 
-    >.map {
+    > .map {
       left: -100%;
       min-height: $scale;
       min-width: $scale;
@@ -615,9 +589,8 @@ $line-selected-width: 5px;
   .paloAlto {
     $scale: 150%;
 
-    >.map {
+    > .map {
       left: 43%;
-      // top: -10%;
       min-height: $scale;
       min-width: $scale;
     }
@@ -626,7 +599,7 @@ $line-selected-width: 5px;
   .schenectady {
     $scale: 150%;
 
-    >.map {
+    > .map {
       left: -55%;
       top: 15%;
       min-height: $scale;
@@ -634,136 +607,3 @@ $line-selected-width: 5px;
     }
   }
 }
-
-//   .mapViewer {
-//     min-width: 375px;
-//     max-width: 375px;
-
-//     &Contents {
-//       >.map {
-
-//         >.grid {
-//           left: -35%;
-//           height: 167%;
-//           width: 167%;
-//         }
-
-//         >.pins {
-//           >.details {
-//             >span {
-//               h4 {
-//                 font-size: 1.3rem;
-//                 line-height: 1.35rem;
-//               }
-
-//               h5 {
-//                 font-size: 1.2rem;
-//                 line-height: 1.3rem;
-//               }
-
-//               svg {
-//                 height: 1.1rem;
-//                 width: 1.1rem;
-//               }
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-
-//   .portland {
-//     >.map {
-//       left: -105%;
-//     }
-//   }
-
-//   .nyc {
-//     >.map {
-//       left: -124%;
-//     }
-//   }
-
-//   .paloAlto {
-//     >.map {
-//       left: 48%;
-//     }
-//   }
-
-//   .schenectady {
-//     >.map {
-//       top: -4%;
-//     }
-//   }
-// }
-
-// @media (max-width: $width-small) {
-//   .mapViewer {
-//     max-width: unset;
-
-//     &Contents {}
-//   }
-
-//   .portland {
-//     >.map {
-//       left: -110%;
-//     }
-//   }
-
-//   .paloAlto {
-//     $scale: 190%;
-
-//     >.map {
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .schenectady {
-//     >.map {
-//       top: -0%;
-//     }
-
-//     .details {
-//       left: 85% !important;
-//       top: 17.5% !important;
-//     }
-//   }
-// }
-
-// @media (max-width: $width-small) {
-//   .paloAlto {
-//     $scale: 180%;
-
-//     >.map {
-//       left: 53%;
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .nyc {
-//     $scale: 180%;
-
-//     >.map {
-//       min-height: $scale;
-//       min-width: $scale;
-//     }
-//   }
-
-//   .schenectady {
-//     .details {
-//       left: 87% !important;
-//       top: 16.5% !important;
-//     }
-//   }
-// }
-
-// @media (max-width: $width-small) {
-//   .mapViewer {
-//     min-width: 100%;
-//     max-width: 100%;
-
-//     &Contents {}
-//   }
-// }

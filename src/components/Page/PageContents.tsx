@@ -1,14 +1,13 @@
-import classNames from "classnames";
-import { motion } from "framer-motion";
-import { ReactNode, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
-import { useSettings } from "@context/SettingsContext";
-import styles from "./page.module.scss";
-import { folder, useControls } from "leva";
-import { usePage } from ".";
+import classNames from 'classnames';
+import { motion } from 'framer-motion';
+import { ReactNode, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useSettings } from '@context/SettingsContext';
+import { useAnimations } from '@context/AnimationContext';
+import styles from './page.module.scss';
+import { usePage } from '@context/PageContext';
 
 // Define the props interface
-export type PageContentsProps = {
+type PageContentsProps = {
   className?: string; // Add an optional className prop
 };
 
@@ -17,75 +16,18 @@ type Props = {
 } & PageContentsProps;
 
 const PageContents: React.FC<Props> = ({ children, className }) => {
-  const location = useLocation();
-  const pathSegments = location.pathname.split("/").filter(Boolean);
-  const page = pathSegments[0];
-  const [delayedPage, setDelayedPage] = useState(page);
   const { animationDisabled } = useSettings();
   const { embedded } = usePage();
+  const { TRANSITIONS } = useAnimations();
+  // Each page mounts fresh per route, and keeps the mode it mounted with through its exit,
+  // so a zoom toggle mid-visit does not swap its variants.
+  const [minimal] = useState(animationDisabled);
 
-  const {
-    transitionDuration,
-    exitDuration,
-    staggerChildren,
-    fullscreenDelay,
-    notFullscreenDelay,
-  } = useControls("Page Contents", {
-    "Fade Transitions": folder({
-      transitionDuration: {
-        value: 0.1,
-        min: 0,
-        max: 0.5,
-        step: 0.05,
-        label: "Fade In",
-        hint: "How long page contents take to fade in",
-      },
-      exitDuration: {
-        value: 0.1,
-        min: 0,
-        max: 0.5,
-        step: 0.05,
-        label: "Fade Out",
-        hint: "How long page contents take to fade out",
-      },
-    }, { collapsed: false }),
-
-    "Timing Delays": folder({
-      staggerChildren: {
-        value: 0.5,
-        min: 0,
-        max: 1,
-        step: 0.05,
-        label: "Stagger Children",
-        hint: "Delay between animating each child element",
-      },
-      fullscreenDelay: {
-        value: 0.3,
-        min: 0,
-        max: 2,
-        step: 0.1,
-        label: "Fullscreen Delay",
-        hint: "Delay before animating when in fullscreen (2D) mode",
-      },
-      notFullscreenDelay: {
-        value: 0.3,
-        min: 0,
-        max: 2,
-        step: 0.1,
-        label: "3D Embedded Delay",
-        hint: "Delay before animating when embedded in 3D scene",
-      },
-    }, { collapsed: false }),
-  });
-
-  useEffect(() => {
-    let timerDur = 400;
-    if (animationDisabled) {
-      timerDur = 400;
-    }
-    const timer = setTimeout(() => setDelayedPage(`${page}`), timerDur);
-    return () => clearTimeout(timer); // Clean up on unmount or page change
-  }, [page, animationDisabled]);
+  // A page mounts once the previous one has gone, so start it scrolled to the top.
+  const ref = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    ref.current?.closest('[data-scroll-root]')?.scrollTo(0, 0);
+  }, []);
 
   const pageVariants = useMemo(
     () => ({
@@ -94,67 +36,43 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
       },
       animate: {
         opacity: 1,
-        transition: {
-          duration: transitionDuration, // Controlled by Leva
-          delay: !embedded ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
-          delayChildren: !embedded ? fullscreenDelay : notFullscreenDelay, // Controlled by Leva
-          staggerChildren: staggerChildren, // Controlled by Leva
-        },
+        transition: !embedded
+          ? TRANSITIONS.PAGE_CONTENTS.FULLSCREEN_ANIMATE
+          : TRANSITIONS.PAGE_CONTENTS.EMBEDDED_ANIMATE,
       },
       exit: {
-        transition: {
-          duration: exitDuration, // Controlled by Leva
-          when: "afterChildren", // Ensure parent waits for children to exit
-        },
+        opacity: 0,
+        transition: TRANSITIONS.PAGE_CONTENTS.EXIT,
       },
     }),
-    [
-      transitionDuration,
-      fullscreenDelay,
-      notFullscreenDelay,
-      staggerChildren,
-      exitDuration,
-    ]
+    [embedded, TRANSITIONS],
   );
 
-  const minimalPageVariants = {
-    animate: {
-      opacity: 0,
-    },
-    shown: {
-      opacity: 1,
-      transition: {
-        duration: 0.5,
+  const minimalPageVariants = useMemo(
+    () => ({
+      animate: {
+        opacity: 0,
       },
-    },
-    removed: {
-      opacity: 0,
-      transition: {
-        when: "beforeChildren",
+      shown: {
+        opacity: 1,
+        transition: TRANSITIONS.PAGE_CONTENTS.MINIMAL_SHOWN,
       },
-    },
-  };
+      removed: {
+        opacity: 0,
+        transition: TRANSITIONS.PAGE_CONTENTS.MINIMAL_REMOVED,
+      },
+    }),
+    [TRANSITIONS],
+  );
 
-  const { initial, animate, exit, variants } = useMemo(() => {
-    if (animationDisabled) {
-      return {
-        initial: "animate",
-        animate: "shown",
-        exit: "removed",
-        variants: minimalPageVariants,
-      };
-    }
-    return {
-      initial: "initial",
-      animate: "animate",
-      exit: "exit",
-      variants: pageVariants,
-    };
-  }, [delayedPage]);
+  const { initial, animate, exit, variants } = minimal
+    ? { initial: 'animate', animate: 'shown', exit: 'removed', variants: minimalPageVariants }
+    : { initial: 'initial', animate: 'animate', exit: 'exit', variants: pageVariants };
 
   return (
     <motion.div
-      className={classNames(styles.pageContents, className)} // Merge classnames
+      ref={ref}
+      className={classNames(styles.pageContents, className)}
       variants={variants}
       initial={initial}
       animate={animate}

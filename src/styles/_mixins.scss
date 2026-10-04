@@ -1,5 +1,5 @@
-@use "sass:color";
-@use '@styles/colors'as colors;
+@use 'sass:color';
+@use '@styles/colors' as colors;
 
 @mixin retro-scrollbar {
   overflow-y: scroll;
@@ -13,10 +13,6 @@
     background: black; // Ensure the track has a visible background
     border-radius: 10px; // Add some rounding to match thumb
   }
-
-  &::-webkit-scrollbar-thumb {}
-
-  &::-webkit-scrollbar-thumb:hover {}
 }
 
 // Mixin for glowing background
@@ -62,10 +58,8 @@
 
 @mixin scanlines-effect {
   opacity: 0.8;
-  background: repeating-linear-gradient(transparent 0px 1px,
-      colors.$background-secondary 3px 4px);
-  background: repeating-linear-gradient(transparent 0px 1px,
-      var(--background-secondary) 3px 4px);
+  background: repeating-linear-gradient(transparent 0px 1px, colors.$background-secondary 3px 4px);
+  background: repeating-linear-gradient(transparent 0px 1px, var(--background-secondary) 3px 4px);
   position: fixed;
   top: 0;
   left: 0;

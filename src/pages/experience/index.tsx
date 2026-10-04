@@ -1,8 +1,12 @@
-import { motion } from "framer-motion";
-import ExperienceEntry from "@components/ExperienceEntry";
-import PageContents from "@components/Page/PageContents";
-import TypewriterText from "@components/TypewriterText";
-import styles from "./experience.module.scss";
+import { motion } from 'framer-motion';
+import { useRef, createRef } from 'react';
+import ExperienceEntry from '@components/ExperienceEntry';
+import PageContents from '@components/Page/PageContents';
+import TypewriterText from '@components/TypewriterText';
+import { experienceData, experienceOrder } from '@data/experience';
+import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
+import styles from './experience.module.scss';
+
 const experienceVariants = {
   animate: {
     transition: {
@@ -12,64 +16,39 @@ const experienceVariants = {
 };
 
 const Experience = () => {
+  const { openModal, selectedEntry } = useExperienceEntryModal();
+
+  // Create refs for each entry
+  const entryRefs = useRef<Record<string, React.RefObject<HTMLDivElement>>>(
+    experienceOrder.reduce(
+      (acc, id) => {
+        acc[id] = createRef<HTMLDivElement>();
+        return acc;
+      },
+      {} as Record<string, React.RefObject<HTMLDivElement>>,
+    ),
+  );
+
   return (
-    <PageContents key={"experience"} className={styles.experience}>
+    <PageContents key={'experience'} className={styles.experience}>
       <motion.div variants={experienceVariants} className={styles.content}>
         <motion.h1>
-          <TypewriterText text={"Experience"} staggerChildren={0.05} />
+          <TypewriterText text={'Experience'} staggerChildren={0.05} />
         </motion.h1>
-        <ExperienceEntry
-          title="Arbor"
-          subtitle="Full Stack Engineer"
-          description={[
-            "— Designed and delivered custom email notification system to provide real-time insights to users about their savings with Arbor ",
-          ]}
-          startDate={new Date(2025, 0)}
-        />
-        <ExperienceEntry
-          title="ChannelAI"
-          subtitle="iOS Engineer, Design System Lead"
-          description={[
-            "— Delivered interactive UI features and maintained design assets across departments for Channel's AI-powered chat platform.",
-            "— Worked extensively with Objective-C, Swift, and SwiftUI to implement core iOS features such as user profiles, media galleries, and app settings.",
-            "— Led design system management, ensuring consistency in components, color, and typography across the app.",
-          ]}
-          startDate={new Date(2024, 0)}
-          endDate={new Date(2024, 4)}
-        />
 
-        <ExperienceEntry
-          title="Mushroom.gg"
-          subtitle="Full Stack Engineer, Design System Lead"
-          description={[
-            "— Contributed to the implementation of chat and feed features for a gaming-focused social media platform.",
-            "— Managed cross-platform development for web and mobile using React, React Native, and GraphQL.",
-            "— Led the development and maintenance of design libraries, including UI components and iconography.",
-          ]}
-          startDate={new Date(2022, 2)}
-          endDate={new Date(2024, 0)}
-        />
-
-        <ExperienceEntry
-          title="Union College"
-          subtitle="UI/UX Researcher"
-          description={[
-            "— Conducted a research study on user trust in software agents, using a custom Java game environment.",
-            "— Designed and analyzed experiments to measure user interactions with varying levels of agent reliability.",
-          ]}
-          startDate={new Date(2020, 8)}
-          endDate={new Date(2021, 5)}
-        />
-
-        <ExperienceEntry
-          title="Tumblr"
-          subtitle="Systems Intern"
-          description={[
-            "— Supported the systems department in various tasks during a high-school internship.",
-            "— Gained exposure to the fast-paced environment of a tech startup, learning foundational industry skills.",
-          ]}
-          endDate={new Date(2014, 1)}
-        />
+        {experienceOrder.map((id) => {
+          const isSelected = selectedEntry?.id === id;
+          return (
+            <ExperienceEntry
+              key={`${id}-inList`}
+              data={experienceData[id]}
+              entryRef={entryRefs.current[id]}
+              onClick={() => openModal(experienceData[id], entryRefs.current[id])}
+              inList={true}
+              isSelected={isSelected}
+            />
+          );
+        })}
       </motion.div>
     </PageContents>
   );

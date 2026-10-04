@@ -1,5 +1,5 @@
-@use "sass:color";
-@use '@styles'as styles;
+@use 'sass:color';
+@use '@styles' as styles;
 
 $animation-duration: 1s;
 $onion-skin-animation-duration: 0.6s;
@@ -11,7 +11,6 @@ $color-1: color.adjust($color-0, $lightness: 5%);
 $color-2: color.adjust($color-0, $lightness: -5%);
 $color-3: color.adjust($color-0, $lightness: 5%);
 $color-4: color.adjust($color-0, $lightness: -5%);
-
 
 .glitch {
   position: relative;
@@ -112,8 +111,6 @@ $color-4: color.adjust($color-0, $lightness: -5%);
   width: 100%;
   height: 100%;
 }
-
-
 
 .glitch__layer0 {
   animation: glitch-flicker $line-flicker-animation-duration infinite;
@@ -338,7 +335,6 @@ $color-4: color.adjust($color-0, $lightness: -5%);
 }
 
 @keyframes glitch-flicker {
-
   0%,
   9%,
   30%,

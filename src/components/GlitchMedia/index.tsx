@@ -1,8 +1,11 @@
-import React from "react";
-import { motion } from "framer-motion";
-import cn from "classnames";
-import styles from "./glitch-media.module.scss";
-import { useSettings } from "@context/SettingsContext";
+import React from 'react';
+import { motion } from 'framer-motion';
+import cn from 'classnames';
+import styles from './glitch-media.module.scss';
+import { useSettings } from '@context/SettingsContext';
+
+/** Offset copies stacked over the original for the glitch effect (styled per index). */
+const GLITCH_LAYERS = [0, 1, 2, 3, 4];
 
 type GlitchMediaProps = {
   className?: string;
@@ -29,14 +32,7 @@ type GlitchMediaProps = {
 ) &
   ({ url: string; onClick?: never } | { onClick?: () => void; url?: never });
 
-const GlitchMedia: React.FC<GlitchMediaProps> = ({
-  Icon,
-  video,
-  img,
-  className,
-  url,
-  onClick,
-}) => {
+const GlitchMedia: React.FC<GlitchMediaProps> = ({ Icon, video, img, className, url, onClick }) => {
   const { animationDisabled } = useSettings();
 
   // Function to handle the content within the wrapper
@@ -64,11 +60,8 @@ const GlitchMedia: React.FC<GlitchMediaProps> = ({
       <motion.div className={styles.glitch__warp}>
         {MediaElement}
         <motion.div className={styles.glitch__layers}>
-          {[...Array(5)].map((_, i) => (
-            <motion.div
-              key={i}
-              className={cn(styles.glitch__layer, styles[`glitch__layer${i}`])}
-            >
+          {GLITCH_LAYERS.map((i) => (
+            <motion.div key={i} className={cn(styles.glitch__layer, styles[`glitch__layer${i}`])}>
               {Icon ? (
                 <Icon className={styles.icon} />
               ) : img ? (

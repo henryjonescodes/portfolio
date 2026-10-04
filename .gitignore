@@ -39,3 +39,17 @@ dist-ssr/
 *.njsproj
 *.sln
 *.sw?
+
+# Skills linked by repertoire from the personal pool. They are symlinks to
+# one machine's checkout, so they never belong in this repository.
+.claude/skills/
+.claude/rules/
+.claude/agents/
+.claude/.repertoire-sync.json
+
+# Playwright
+test-results/
+playwright-report/
+
+# branchwork board, generated
+.work/BOARD.md

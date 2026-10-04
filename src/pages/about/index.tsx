@@ -1,124 +1,47 @@
-import { motion } from "framer-motion";
-import cn from "classnames";
+import { motion } from 'framer-motion';
+import cn from 'classnames';
 
-import GitHub from "@assets/svg/socials/github.svg?react";
-import Instagram from "@assets/svg/socials/Instagram.svg?react";
-import LinkedIn from "@assets/svg/socials/linkedIn.svg?react";
-import Book from "@assets/svg/icons/book-01.svg?react";
-import Home from "@assets/svg/icons/home.svg?react";
+import GitHub from '@assets/svg/socials/github.svg?react';
+import Instagram from '@assets/svg/socials/Instagram.svg?react';
+import LinkedIn from '@assets/svg/socials/linkedIn.svg?react';
+import Book from '@assets/svg/icons/book-01.svg?react';
+import Home from '@assets/svg/icons/home.svg?react';
 
-import TypewriterText from "@components/TypewriterText";
-import AnimatedBorderBox from "@components/AnimatedBorderBox";
-import Map from "@components/MapViewer/Map";
-import PageContents from "@components/Page/PageContents";
-import AnimatedLine from "@components/AnimatedLine";
-import GlitchIcon from "@components/GlitchIcon";
-import Blurb from "@components/MapViewer/Blurb";
-import { MapProvider } from "@components/MapViewer/MapContext";
-import { usePage } from "@components/Page";
-import { useColors } from "@context/ColorsContext";
-import { useWindowDimensions } from "@context/WindowDimensionContext";
+import TypewriterText from '@components/TypewriterText';
+import AnimatedBorderBox from '@components/AnimatedBorderBox';
+import Map from '@components/MapViewer/Map';
+import PageContents from '@components/Page/PageContents';
+import AnimatedLine from '@components/AnimatedLine';
+import GlitchIcon from '@components/GlitchIcon';
+import Blurb from '@components/MapViewer/Blurb';
+import { MapProvider } from '@components/MapViewer/MapProvider';
+import { usePage } from '@context/PageContext';
+import { useColors } from '@context/ColorsContext';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { useAnimations } from '@context/AnimationContext';
+import { fade } from '@config/animation';
 
-import { screenWidths } from "@styles/layout.constants.ts";
-import { iconVariants } from "@styles/variants";
+import { screenWidths } from '@styles/layout.constants.ts';
 
-import styles from "./about.module.scss";
-import StatTracker from "./StatTracker";
-
-const commonExit = {
-  opacity: 0,
-  transition: {
-    duration: 0,
-    when: "afterChildren",
-  },
-};
-
-const commonInitial = {
-  opacity: 0,
-};
-
-const heroVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-    },
-  },
-  exit: commonExit,
-};
-
-const mapViewerVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.1,
-    },
-  },
-  exit: commonExit,
-};
-
-const socialsVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 1.5,
-      delayChildren: 1.5,
-      duration: 0.3,
-      staggerChildren: 0.4,
-    },
-  },
-  exit: commonExit,
-};
-
-const statsVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      duration: 0.3,
-      staggerChildren: 0.4,
-    },
-  },
-  exit: commonExit,
-};
-
-const tagsVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 1,
-      delayChildren: 1,
-      duration: 0.3,
-      staggerChildren: 0.4,
-    },
-  },
-  exit: commonExit,
-};
-const avatarVariants = {
-  initial: commonInitial,
-  animate: {
-    opacity: 1,
-    transition: {
-      delay: 1.5,
-      duration: 2.5,
-    },
-  },
-  exit: {
-    opacity: 0,
-    transition: {
-      duration: 0.3,
-    },
-  },
-};
+import styles from './about.module.scss';
+import StatTracker from './StatTracker';
 
 const About = () => {
   const { width } = useWindowDimensions();
+  const { TRANSITIONS } = useAnimations();
+
+  const heroVariants = fade(TRANSITIONS.ABOUT_HERO.ANIMATE, TRANSITIONS.ABOUT_HERO.EXIT);
+
+  const mapViewerVariants = fade(TRANSITIONS.ABOUT_MAP.ANIMATE, TRANSITIONS.ABOUT_MAP.EXIT);
+
+  const socialsVariants = fade(TRANSITIONS.ABOUT_SOCIALS.ANIMATE, TRANSITIONS.ABOUT_SOCIALS.EXIT);
+
+  const statsVariants = fade(TRANSITIONS.ABOUT_STATS.ANIMATE, TRANSITIONS.ABOUT_STATS.EXIT);
+
+  const tagsVariants = fade(TRANSITIONS.ABOUT_TAGS.ANIMATE, TRANSITIONS.ABOUT_TAGS.EXIT);
+
+  const iconVariants = fade(TRANSITIONS.ICON.ANIMATE, TRANSITIONS.ICON.EXIT);
+  const avatarVariants = fade(TRANSITIONS.ABOUT_AVATAR.ANIMATE, TRANSITIONS.ABOUT_AVATAR.EXIT);
 
   const { primaryHues } = useColors();
   const { embedded } = usePage();
@@ -131,11 +54,9 @@ const About = () => {
 
   const moveTags = width > screenWidths.mobileLarge || embedded;
 
-  // const moveSocials = width < screenWidths.tiny && zoomLevel === "fullscreen";
-
   return (
     <PageContents
-      key={"about"}
+      key={'about'}
       className={cn(styles.about, {
         [styles.handheld]: embedded,
         [styles.fullscreen]: !embedded,
@@ -143,16 +64,13 @@ const About = () => {
     >
       <motion.div className={cn(styles.content, styles.aboutMe)}>
         {/* First Page */}
-        <motion.div
-          className={cn(styles.twoColumns, styles.flex)}
-          variants={heroVariants}
-        >
+        <motion.div className={cn(styles.twoColumns, styles.flex)} variants={heroVariants}>
           {/* Info Section (Left/Top) */}
           <motion.div className={styles.left}>
             {/* Title */}
             <motion.div className={styles.title}>
               <motion.h1>
-                <TypewriterText text={"Henry Jones"} staggerChildren={0.05} />
+                <TypewriterText text={'Henry Jones'} staggerChildren={0.05} />
               </motion.h1>
               <motion.h3>
                 <TypewriterText text="Creative Developer" />
@@ -169,30 +87,21 @@ const About = () => {
             {/* Socials */}
             {/* {!moveSocials && ( */}
             <motion.div className={styles.socials} variants={socialsVariants}>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
+              <motion.div variants={iconVariants} className={styles.iconWrapper}>
                 <GlitchIcon
                   Icon={GitHub}
                   className={styles.icon}
                   url="https://github.com/henryjonescodes"
                 />
               </motion.div>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
+              <motion.div variants={iconVariants} className={styles.iconWrapper}>
                 <GlitchIcon
                   Icon={LinkedIn}
                   className={styles.icon}
                   url="https://www.linkedin.com/in/henryjonescodes/"
                 />
               </motion.div>
-              <motion.div
-                variants={iconVariants}
-                className={styles.iconWrapper}
-              >
+              <motion.div variants={iconVariants} className={styles.iconWrapper}>
                 <GlitchIcon
                   Icon={Instagram}
                   className={styles.icon}
@@ -205,10 +114,7 @@ const About = () => {
 
           {/* Stats Section (Right/Bottom) */}
           <motion.div className={styles.right} variants={statsVariants}>
-            <AnimatedBorderBox
-              className={styles.border}
-              contentClassName={styles.borderContent}
-            >
+            <AnimatedBorderBox className={styles.border} contentClassName={styles.borderContent}>
               {/* Avatar */}
               <motion.div className={styles.viewer}>
                 <motion.img
@@ -223,46 +129,26 @@ const About = () => {
               {/* Tags */}
               {moveTags && (
                 <>
-                  <AnimatedLine
-                    className={styles.divider}
-                    horizontal={true}
-                    borderWidth={2}
-                  />
+                  <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                   <motion.div className={styles.tags} variants={tagsVariants}>
                     <motion.span className={styles.tag}>
-                      <motion.div
-                        variants={iconVariants}
-                        className={styles.iconWrapper}
-                      >
+                      <motion.div variants={iconVariants} className={styles.iconWrapper}>
                         <Home className={styles.icon} />
                       </motion.div>
                       <motion.h4 className={styles.text}>
-                        <TypewriterText
-                          text="Brooklyn, NY"
-                          staggerChildren={0.05}
-                        />
+                        <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
                       </motion.h4>
                     </motion.span>
                     <motion.span className={styles.tag}>
-                      <motion.div
-                        variants={iconVariants}
-                        className={styles.iconWrapper}
-                      >
+                      <motion.div variants={iconVariants} className={styles.iconWrapper}>
                         <Book className={styles.icon} />
                       </motion.div>
                       <motion.h4 className={styles.text}>
-                        <TypewriterText
-                          text="Union College"
-                          staggerChildren={0.05}
-                        />
+                        <TypewriterText text="Union College" staggerChildren={0.05} />
                       </motion.h4>
                     </motion.span>
                   </motion.div>
-                  <AnimatedLine
-                    className={styles.divider}
-                    horizontal={true}
-                    borderWidth={2}
-                  />
+                  <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                 </>
               )}
 
@@ -280,39 +166,23 @@ const About = () => {
                     />
                     <motion.div className={styles.tags} variants={tagsVariants}>
                       <motion.span className={styles.tag}>
-                        <motion.div
-                          variants={iconVariants}
-                          className={styles.iconWrapper}
-                        >
+                        <motion.div variants={iconVariants} className={styles.iconWrapper}>
                           <Home className={styles.icon} />
                         </motion.div>
                         <motion.h4 className={styles.text}>
-                          <TypewriterText
-                            text="Brooklyn, NY"
-                            staggerChildren={0.05}
-                          />
+                          <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
                         </motion.h4>
                       </motion.span>
                       <motion.span className={styles.tag}>
-                        <motion.div
-                          variants={iconVariants}
-                          className={styles.iconWrapper}
-                        >
+                        <motion.div variants={iconVariants} className={styles.iconWrapper}>
                           <Book className={styles.icon} />
                         </motion.div>
                         <motion.h4 className={styles.text}>
-                          <TypewriterText
-                            text="Union College"
-                            staggerChildren={0.05}
-                          />
+                          <TypewriterText text="Union College" staggerChildren={0.05} />
                         </motion.h4>
                       </motion.span>
                     </motion.div>
-                    <AnimatedLine
-                      className={styles.divider}
-                      horizontal={true}
-                      borderWidth={2}
-                    />
+                    <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                   </>
                 )}
                 <motion.div className={styles.sliders}>
@@ -330,10 +200,7 @@ const About = () => {
       <motion.div className={cn(styles.content, styles.mapViewer)}>
         {/* Second Page */}
         <MapProvider>
-          <motion.div
-            className={cn(styles.twoColumns, styles.flex)}
-            variants={mapViewerVariants}
-          >
+          <motion.div className={cn(styles.twoColumns, styles.flex)} variants={mapViewerVariants}>
             {/* Map Viewer */}
             <motion.div className={styles.left}>
               <Map />
