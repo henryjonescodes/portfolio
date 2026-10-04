@@ -34,3 +34,4 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 - 2026-10-04: done "e2e: panels render; expand fills the overlay and restores" at 65b63dfd
 - 2026-10-04: done "Self-maintain portfolio skills for panels and modal sizes" at 82a86157
 - 2026-10-04: done "Expanded layout: the right-third media clips at full width; decide whether it grows or moves into a panel" at b42a0d89
+- 2026-10-04: Design feedback applied: media expands, panels flattened into the modal
