@@ -1,15 +1,15 @@
 # Work board
 
-_Updated 2026-10-04 19:15 UTC on `feat/global-modal` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:15 UTC on `feat/entry-dock` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
   n_staging([staging])
   n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/4 · 🙋 1"]
-  class n_feat_entry_dock planned
+  class n_feat_entry_dock planned,current
   n_feat_global_modal --> n_feat_entry_dock
   n_feat_global_modal["<b>Inline links that open any modal</b><br/>feat/global-modal<br/>planned · 2/10 · 🙋 8"]
-  class n_feat_global_modal planned,current
+  class n_feat_global_modal planned
   n_staging --> n_feat_global_modal
   n_feat_shareable_urls["<b>Shareable state and per-link previews</b><br/>feat/shareable-urls<br/>planned · 2/3 · 🙋 1"]
   class n_feat_shareable_urls planned
@@ -60,14 +60,14 @@ flowchart LR
 
 ## 🟢 Happening now
 
-- **Inline links that open any modal** · `feat/global-modal` (checked out) · 2/10  
+- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 3/4  
   next: nothing open
 
 ## 🕘 Just happened
 
 - 0m ago · fix(modal): a window with nothing to land on shrinks and fades about the middle · `feat/global-modal`
 - 3m ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
-- 3m ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
+- 4m ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
 - 4m ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
 - 4m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/global-modal`
 - 6m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
@@ -93,8 +93,8 @@ flowchart LR
 
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
-| `feat/entry-dock` | planned | 3/4 | 4 | pushed | — |  |
-| `feat/global-modal` ◀ | planned | 2/10 | 8 | 10 to push, 8 to pull | — |  |
+| `feat/entry-dock` ◀ | planned | 3/4 | 4 | pushed | — |  |
+| `feat/global-modal` | planned | 2/10 | 8 | 10 to push, 8 to pull | — |  |
 | `feat/shareable-urls` | planned | 2/3 | 4 | 1 to push | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
