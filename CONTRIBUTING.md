@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:43 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:43 UTC · 8 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-04 20:43 UTC by `bw board` on `entry/list` |
 | Trunk | `staging` |
-| Live branches | 7 |
+| Live branches | 8 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Merged, not yet landed | `feat/entry-tabs` (run `bw land <branch> --into <next>`) |
@@ -21,6 +21,9 @@ flowchart LR
   n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/6<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
+  n_entry_list["<b>One list that is a carousel on phones</b><br/>entry/list<br/>planned · 0/3<br/><i>next: EntryList with the list and tile pres…</i>"]
+  class n_entry_list planned,current
+  n_entry_window --> n_entry_list
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
   class n_entry_window planned
   n_staging --> n_entry_window
@@ -60,7 +63,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-Nothing checked out or active.
+**Motivation.** Resizing should re-lay out the same entries, not swap one component tree for another.
+
+**What.** Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go.
+
+**How, next.**
+
+- EntryList with the list and tile presentations from CSS container queries
+- One paint-in (border, typewriter, stagger) for list items and tiles
+- Resizing across the breakpoint keeps the same elements (e2e)
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `entry/list` |  | planned, local only | 0/3 | EntryList with the list and tile presentations from CSS container queries |  |
 
 ## 🕘 Just happened
 
@@ -175,6 +190,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
+| `entry/list` ◀ | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/window` | One window for every open entry | planned |  | 6/6 | 7 | local only |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
@@ -192,6 +208,16 @@ Every open question and claim across branches is gathered into INBOX.md on the b
 - [ ] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
 - [ ] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
 - [ ] Ambient branchwork-quiz skill: offer a quiz at natural pauses without blocking, ask the juiciest few open questions (max 4) with AskUserQuestion, record answers with bw answer
+
+</details>
+
+<details><summary><code>entry/list</code>: One list that is a carousel on phones (0/3)</summary>
+
+Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go.
+
+- [ ] EntryList with the list and tile presentations from CSS container queries
+- [ ] One paint-in (border, typewriter, stagger) for list items and tiles
+- [ ] Resizing across the breakpoint keeps the same elements (e2e)
 
 </details>
 
