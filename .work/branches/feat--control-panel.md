@@ -20,6 +20,8 @@ A gear in the main nav opens a three-page panel (colour, type, FX) built from a 
 - [ ] Type page (families, size, typewriter)
 - [ ] FX page (CRT, grain, motion speed, sound)
 - [?] Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk)
+  - why: The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
+  - kind: decision
 - [?] Sound: synthesised clicks (no files) or recorded samples you pick?
 - [?] Should the panel be on phones, or desktop only?
 
