@@ -1,6 +1,6 @@
 ---
 branch: a11y/pass
-parent: feat/mobile-carousel
+parent: staging
 status: review
 title: Accessibility pass
 pr: https://github.com/henryjonescodes/portfolio/pull/68
