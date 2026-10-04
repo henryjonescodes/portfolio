@@ -170,3 +170,27 @@
     }
   }
 }
+
+.modalWrapper {
+  max-width: 100%;
+
+  &Expanded {
+    flex: 1;
+    display: flex;
+    min-height: 100%;
+  }
+}
+
+.expanded {
+  flex: 1;
+  margin-bottom: 0;
+
+  .box {
+    flex: 1;
+  }
+}
+
+.panels {
+  padding: 16px;
+  width: 100%;
+}

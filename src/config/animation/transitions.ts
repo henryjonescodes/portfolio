@@ -285,6 +285,22 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
+  PANELS: {
+    STAGGER: {
+      delayChildren: tune(
+        'MODAL',
+        1.5,
+        S,
+        'Panels > Delay',
+        'Wait for the modal morph before panels appear',
+      ),
+      staggerChildren: tune('MODAL', 0.4, F, 'Panels > Stagger', 'Delay between panels appearing'),
+    },
+    PANEL: {
+      duration: tune('MODAL', 1.0, S, 'Panels > Fade In'),
+    },
+  },
+
   LOADING: {
     EXIT: {
       duration: tune(

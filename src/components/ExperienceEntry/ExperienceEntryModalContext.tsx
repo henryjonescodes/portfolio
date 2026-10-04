@@ -42,6 +42,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   const [entryRect, setEntryRect] = useState<DOMRect | null>(null);
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
   const [modalUrl, setModalUrl] = useState<string | undefined>(undefined);
   const [modalDateString, setModalDateString] = useState<string | undefined>(undefined);
@@ -78,6 +79,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     setModalUrl(url);
     setModalDateString(dateString);
     setIsClosing(false);
+    setExpanded(false);
   };
 
   const closeModal = () => {
@@ -134,6 +136,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
             transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
           >
             <div
+              className={expanded ? styles.dialogExpanded : styles.dialog}
               role="dialog"
               aria-modal="true"
               aria-label={selectedEntry.title}
@@ -146,6 +149,8 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
                 inList={false}
                 overlayStyle={overlayStyle}
                 onClose={closeModal}
+                expanded={expanded}
+                onToggleExpand={() => setExpanded((e) => !e)}
                 url={modalUrl}
                 dateString={modalDateString}
               >

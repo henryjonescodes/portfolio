@@ -9,6 +9,14 @@ import Framer from '@assets/svg/tools/Framer.svg?react';
 export const projectsData: Record<string, EntryData> = {
   portfoliov2: {
     id: 'portfoliov2',
+    panels: [
+      {
+        type: 'links',
+        title: 'Links',
+        span: 'half',
+        links: [{ label: 'Visit v2.henryjones.xyz', href: 'https://v2.henryjones.xyz' }],
+      },
+    ],
     media: { video: 'video/v2-loop.mp4', objectPosition: '0%' },
     title: 'Portfolio v2',
     description: [
@@ -36,6 +44,14 @@ export const projectsData: Record<string, EntryData> = {
   },
   virtualportfolio: {
     id: 'virtualportfolio',
+    panels: [
+      {
+        type: 'links',
+        title: 'Links',
+        span: 'half',
+        links: [{ label: 'Visit tower.henryjones.xyz', href: 'https://tower.henryjones.xyz' }],
+      },
+    ],
     media: { video: 'video/tower-loop.mp4' },
     title: 'Virtual Portfolio',
     description: [
@@ -64,6 +80,14 @@ export const projectsData: Record<string, EntryData> = {
   },
   portfoliov1: {
     id: 'portfoliov1',
+    panels: [
+      {
+        type: 'links',
+        title: 'Links',
+        span: 'half',
+        links: [{ label: 'Visit v1.henryjones.xyz', href: 'https://v1.henryjones.xyz' }],
+      },
+    ],
     media: { img: 'images/v1.png' },
     title: 'Portfolio v1',
     description: [
@@ -87,6 +111,16 @@ export const projectsData: Record<string, EntryData> = {
   },
   thesis: {
     id: 'thesis',
+    panels: [
+      {
+        type: 'links',
+        title: 'Read',
+        span: 'half',
+        links: [
+          { label: 'Thesis (PDF)', href: '/pdf/TrustResponseToAnticipatorySoftwareAgents.pdf' },
+        ],
+      },
+    ],
     media: { img: 'images/thesis.png' },
     title: 'Senior Thesis',
     description: [

@@ -122,3 +122,24 @@ test('Escape closes the modal dialog', async ({ page }) => {
   await page.keyboard.press('Escape');
   await expect(page.getByTestId('modal-overlay')).toHaveCSS('pointer-events', 'none');
 });
+
+test('open project shows its panels, and the modal expands and restores', async ({ page }) => {
+  await page.goto('/projects?lite=true');
+  await page.waitForTimeout(1500);
+  await openFirstEntry(page);
+  const dialog = page.getByRole('dialog');
+  await expect(dialog.getByRole('region', { name: 'Links' })).toBeVisible({ timeout: 5_000 });
+
+  const overlay = (await page.getByTestId('modal-overlay').boundingBox())!;
+  const cozy = (await page.getByTestId('modal-entry').boundingBox())!;
+  await dialog.getByRole('button', { name: 'Expand' }).click();
+  await page.waitForTimeout(1200);
+  const expanded = (await page.getByTestId('modal-entry').boundingBox())!;
+  expect(expanded.width).toBeGreaterThanOrEqual(overlay.width - 2);
+  expect(expanded.height).toBeGreaterThan(cozy.height);
+
+  await dialog.getByRole('button', { name: 'Restore' }).click();
+  await page.waitForTimeout(1200);
+  const restored = (await page.getByTestId('modal-entry').boundingBox())!;
+  expect(Math.abs(restored.width - cozy.width)).toBeLessThan(4);
+});

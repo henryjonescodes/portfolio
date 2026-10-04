@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import { motion, LayoutGroup } from 'framer-motion';
-import { useMemo } from 'react';
+import { animate, motion, LayoutGroup, useMotionValue } from 'framer-motion';
+import { useEffect, useMemo } from 'react';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { widthMobile } from '@styles/layout.constants.ts';
 import TypewriterText from '@components/TypewriterText';
@@ -9,6 +9,7 @@ import AnimatedLine from '@components/AnimatedLine';
 import ModalNavBar from '@components/NavBar/ModalNavBar';
 import { useAnimations } from '@context/AnimationContext';
 import { buildEntryVariants } from './variants';
+import PanelGrid from '@components/Panels';
 import styles from './experience-entry.module.scss';
 import { usePage } from '@context/PageContext';
 import { formatDateRange } from '@utils/text';
@@ -30,8 +31,11 @@ const ExperienceEntry = ({
   isSelected = false,
   overlayStyle,
   onClose,
+  expanded = false,
+  onToggleExpand,
 }: ExperienceEntryProps) => {
-  const { id, title, subtitle, description, blurb, startDate, endDate, dateString, tools } = data;
+  const { id, title, subtitle, description, blurb, startDate, endDate, dateString, tools, panels } =
+    data;
   const dateRange = dateString ? dateString : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
@@ -42,6 +46,16 @@ const ExperienceEntry = ({
   const layoutTransition = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
 
   const variants = useMemo(() => buildEntryVariants(TRANSITIONS), [TRANSITIONS]);
+
+  // Expanding snaps the modal back from wherever it was dragged.
+  const dragX = useMotionValue(0);
+  const dragY = useMotionValue(0);
+  useEffect(() => {
+    if (!expanded) return;
+    const { duration } = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
+    const controls = [animate(dragX, 0, { duration }), animate(dragY, 0, { duration })];
+    return () => controls.forEach((c) => c.stop());
+  }, [expanded, dragX, dragY, TRANSITIONS]);
 
   const containerContent = (
     <>
@@ -55,6 +69,7 @@ const ExperienceEntry = ({
           [styles.fullScreen]: !embedded,
           [styles.inList]: inList,
           [styles.notInList]: !inList,
+          [styles.expanded]: !inList && expanded,
         })}
         onClick={onClick}
         style={onClick ? { cursor: 'pointer' } : undefined}
@@ -118,7 +133,14 @@ const ExperienceEntry = ({
               transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
               variants={variants.entryText}
             >
-              {isOpen && <ModalNavBar title={title} onClose={onClose} />}
+              {isOpen && (
+                <ModalNavBar
+                  title={title}
+                  onClose={onClose}
+                  expanded={expanded}
+                  onToggleExpand={onToggleExpand}
+                />
+              )}
               <motion.div className={styles.descriptionContents}>
                 <motion.div className={styles.descriptionContentsFlex}>
                   <motion.div className={styles.text}>
@@ -211,6 +233,11 @@ const ExperienceEntry = ({
                   </motion.div>
                 )}
               </motion.div>
+              {isOpen && !!panels?.length && (
+                <div className={styles.panels}>
+                  <PanelGrid panels={panels} />
+                </div>
+              )}
             </motion.div>
           </motion.div>
         </AnimatedBorderBox>
@@ -222,11 +249,13 @@ const ExperienceEntry = ({
     <LayoutGroup id={id}>
       {!inList && overlayStyle ? (
         <motion.div
+          className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
           variants={variants.modalContainer}
           initial="animate"
-          animate="modalAnimate"
+          animate={expanded ? 'expanded' : 'modalAnimate'}
           exit="modalExit"
-          drag
+          style={{ x: dragX, y: dragY }}
+          drag={!expanded}
           dragMomentum={false}
           dragElastic={0.1}
           dragConstraints={{

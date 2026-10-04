@@ -3,14 +3,18 @@ import { useAnimations } from '@context/AnimationContext';
 import NavBarButton from './NavBarButton';
 import AnimatedLine from '@components/AnimatedLine';
 import Close from '@assets/svg/icons/close.svg?react';
+import Expand from '@assets/svg/icons/expand.svg?react';
+import Shrink from '@assets/svg/icons/shrink.svg?react';
 import styles from './modal-nav-bar.module.scss';
 
 type ModalNavBarProps = {
   title: string;
   onClose?: () => void;
+  expanded?: boolean;
+  onToggleExpand?: () => void;
 };
 
-const ModalNavBar = ({ title, onClose }: ModalNavBarProps) => {
+const ModalNavBar = ({ title, onClose, expanded = false, onToggleExpand }: ModalNavBarProps) => {
   const { TRANSITIONS } = useAnimations();
 
   const modalNavBarVariants = {
@@ -44,6 +48,15 @@ const ModalNavBar = ({ title, onClose }: ModalNavBarProps) => {
           <motion.h2 className={styles.title}>{title}</motion.h2>
         </motion.div>
         <motion.div className={styles.right}>
+          {onToggleExpand && (
+            <NavBarButton
+              onClick={onToggleExpand}
+              Icon={Expand}
+              ActiveIcon={Shrink}
+              active={expanded}
+              label={expanded ? 'Restore' : 'Expand'}
+            />
+          )}
           {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" />}
         </motion.div>
         <AnimatedLine

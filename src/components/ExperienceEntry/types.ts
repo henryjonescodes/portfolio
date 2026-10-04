@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Panel } from '@components/Panels/types';
 
 export type ToolEntry = {
   Icon: React.FunctionComponent<
@@ -25,6 +26,8 @@ export type EntryData = {
   dateString?: string;
   tools?: ToolEntry[];
   media?: EntryMedia;
+  /** Extra blocks shown only when the entry is open. */
+  panels?: Panel[];
 };
 
 // Component props type
@@ -39,6 +42,9 @@ export type ExperienceEntryProps = {
   overlayStyle?: React.CSSProperties;
   dateString?: string;
   onClose?: () => void;
+  /** Open entry fills the overlay instead of its cozy size. */
+  expanded?: boolean;
+  onToggleExpand?: () => void;
 } & (
   | {
       url?: string;
