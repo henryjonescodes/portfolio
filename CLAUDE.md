@@ -155,7 +155,10 @@ All content routes nest under Landing (`/*`) to share 3D scene context:
 **URL Parameters**:
 - `?lite=true` → Force 2D-only mode
 - `?debug=true` → Show Leva debug panel
+- `?entry=<id>&effort=<id>&size=full` → The open modal; set by the modal provider as it changes, so any URL shares what is on screen
 - Preserved across navigation via `useNavigatePreserveQuery` hook
+
+**Link previews**: `netlify/edge-functions/share-meta.ts` rewrites the title, description and Open Graph tags per route, entry and effort, from `netlify/share-data.json`, which `npm run build` generates from `src/data` (`npm run share-data`).
 
 ## Key Files for Understanding Flow
 

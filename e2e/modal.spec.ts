@@ -212,6 +212,9 @@ test('efforts: tabs switch the open entry, and a mention opens its effort', asyn
 });
 
 test('efforts: a mention hands focus to the tab it selects', async ({ page }) => {
+test('the open modal is shareable: its state is in the URL and a link reopens it', async ({
+  page,
+}) => {
   await page.goto('/experience?lite=true');
   await page.waitForTimeout(1500);
   await openFirstEntry(page);
@@ -229,4 +232,28 @@ test('hero figures show their value with reduced motion', async ({ page }) => {
   const dialog = page.getByRole('dialog');
   await dialog.getByRole('tab', { name: 'User notifier' }).click();
   await expect(dialog.getByText('99.99%').first()).toBeVisible();
+  await expect(page).toHaveURL(/entry=arbor/);
+  await dialog.getByRole('tab', { name: 'User notifier' }).click();
+  await dialog.getByRole('button', { name: 'Expand' }).click();
+  await expect(page).toHaveURL(/effort=notifier/);
+  await expect(page).toHaveURL(/size=full/);
+  await expect(page).toHaveTitle('User notifier | Arbor | Henry Jones');
+  const shared = page.url();
+
+  await closeModal(page);
+  await expect(page).not.toHaveURL(/entry=/);
+  await expect(page).toHaveURL(/lite=true/);
+
+  await page.goto(shared);
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await expect(page.getByRole('tab', { name: 'User notifier' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
+  await expect(page.getByRole('dialog').getByRole('button', { name: 'Restore' })).toBeVisible();
+});
+
+test('a link names any entry, projects included', async ({ page }) => {
+  await page.goto('/projects?lite=true&entry=thesis');
+  await expect(page.getByRole('dialog', { name: 'Senior Thesis' })).toBeVisible();
 });

@@ -52,8 +52,8 @@ export type ExperienceEntryProps = {
   pageOpen?: boolean;
   inList?: boolean;
   isSelected?: boolean;
-  overlayStyle?: React.CSSProperties;
-  dateString?: string;
+  /** Renders as the modal's window (drag, expand) instead of in place. */
+  modal?: boolean;
   onClose?: () => void;
   /** Open entry fills the overlay instead of its cozy size. */
   expanded?: boolean;

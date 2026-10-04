@@ -73,15 +73,7 @@ const Projects = () => {
                 key={`${id}-inList`}
                 data={project}
                 entryRef={entryRefs.current[id]}
-                onClick={() =>
-                  openModal(
-                    project,
-                    entryRefs.current[id],
-                    renderMedia(project.media),
-                    project.url,
-                    project.dateString,
-                  )
-                }
+                onClick={() => openModal(project, entryRefs.current[id])}
                 inList={true}
                 isSelected={isSelected}
               >

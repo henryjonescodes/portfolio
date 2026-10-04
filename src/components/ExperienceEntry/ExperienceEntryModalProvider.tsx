@@ -1,12 +1,18 @@
 import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import EntryMediaView from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
-import { experienceData } from '@data/experience';
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import { findEntry } from '@data/entries';
 import styles from './experience-entry-modal.module.scss';
 import { ExperienceEntryModalContext } from './ExperienceEntryModalContext';
+
+/** Query keys that describe the open modal, so a link can reopen it. */
+const PARAMS = { entry: 'entry', effort: 'effort', size: 'size' } as const;
+const SITE_TITLE = 'Henry Jones';
 
 type ExperienceEntryModalProviderProps = {
   children: React.ReactNode;
@@ -14,15 +20,12 @@ type ExperienceEntryModalProviderProps = {
 
 export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalProviderProps) => {
   const { TRANSITIONS } = useAnimations();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedEntry, setSelectedEntry] = useState<EntryData | null>(null);
-  const [entryRect, setEntryRect] = useState<DOMRect | null>(null);
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [effortId, setEffortId] = useState<string | null>(null);
-  const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
-  const [modalUrl, setModalUrl] = useState<string | undefined>(undefined);
-  const [modalDateString, setModalDateString] = useState<string | undefined>(undefined);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => () => clearTimeout(closeTimer.current), []);
@@ -38,43 +41,24 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     setPageOpen(selectedEntry != null && !isClosing);
   }, [selectedEntry, isClosing]);
 
-  const openModal = (
-    entry: EntryData,
-    entryRef: React.RefObject<HTMLDivElement>,
-    children?: React.ReactNode,
-    url?: string,
-    dateString?: string,
-  ) => {
-    const entryElement = entryRef.current;
-    if (!entryElement) return;
+  const open = (entry: EntryData, options: { effort?: string | null; expanded?: boolean } = {}) => {
     clearTimeout(closeTimer.current);
-
-    const rect = entryElement.getBoundingClientRect();
-    setEntryRect(rect);
     setSelectedEntry(entry);
-    setModalChildren(children);
-    setModalUrl(url);
-    setModalDateString(dateString);
     setIsClosing(false);
-    setExpanded(false);
-    setEffortId(null);
+    setExpanded(options.expanded ?? false);
+    setEffortId(options.effort ?? null);
+  };
+
+  const openModal = (entry: EntryData, entryRef: React.RefObject<HTMLDivElement>) => {
+    if (!entryRef.current) return;
+    open(entry);
   };
 
   const openEffort = (entryId: string, nextEffortId: string) => {
-    const entry = experienceData[entryId];
-    if (!entry) return;
-    clearTimeout(closeTimer.current);
-    if (selectedEntry?.id !== entryId) {
-      // No list item to grow from here, so the entry opens in place over the page.
-      setEntryRect(null);
-      setSelectedEntry(entry);
-      setModalChildren(null);
-      setModalUrl(undefined);
-      setModalDateString(undefined);
-      setExpanded(false);
-    }
-    setIsClosing(false);
-    setEffortId(nextEffortId);
+    if (selectedEntry?.id === entryId && !isClosing) return setEffortId(nextEffortId);
+    const entry = findEntry(entryId);
+    // No list item to grow from here, so the entry opens in place over the page.
+    if (entry) open(entry, { effort: nextEffortId });
   };
 
   const closeModal = () => {
@@ -85,16 +69,41 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     // true so the fading overlay never blocks clicks while its children finish exiting.
     const totalDuration = (TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration || 0) * 1000;
     clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => {
-      setSelectedEntry(null);
-      setEntryRect(null);
-      setModalChildren(null);
-      setModalUrl(undefined);
-      setModalDateString(undefined);
-    }, totalDuration);
+    closeTimer.current = setTimeout(() => setSelectedEntry(null), totalDuration);
   };
 
-  const overlayStyle = entryRect ? { width: entryRect.width, height: entryRect.height } : {};
+  // A shared link reopens the entry it names, once, on arrival.
+  useEffect(() => {
+    const entry = findEntry(searchParams.get(PARAMS.entry) ?? '');
+    if (!entry) return;
+    const effort = searchParams.get(PARAMS.effort);
+    open(entry, {
+      effort: entry.efforts?.some((e) => e.id === effort) ? effort : null,
+      expanded: searchParams.get(PARAMS.size) === 'full',
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // The address bar and tab title follow the open modal, so copying the URL shares it.
+  const openId = pageOpen ? selectedEntry?.id : undefined;
+  useEffect(() => {
+    setSearchParams(
+      (params) => {
+        const next = new URLSearchParams(params);
+        const set = (key: string, value: string | null | undefined) =>
+          value ? next.set(key, value) : next.delete(key);
+        set(PARAMS.entry, openId);
+        set(PARAMS.effort, openId && effortId);
+        set(PARAMS.size, openId && expanded ? 'full' : null);
+        return next.toString() === params.toString() ? params : next;
+      },
+      { replace: true },
+    );
+    const effortTitle = selectedEntry?.efforts?.find((e) => e.id === effortId)?.title;
+    document.title = openId
+      ? [effortTitle, selectedEntry?.title, SITE_TITLE].filter(Boolean).join(' | ')
+      : SITE_TITLE;
+  }, [openId, effortId, expanded, selectedEntry, setSearchParams]);
 
   return (
     <ExperienceEntryModalContext.Provider
@@ -103,10 +112,6 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
         openModal,
         closeModal,
         pageOpen,
-        overlayStyle,
-        modalChildren,
-        modalUrl,
-        modalDateString,
         effortId,
         setEffortId,
         openEffort,
@@ -143,17 +148,20 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
                 data={selectedEntry}
                 pageOpen={pageOpen}
                 inList={false}
-                overlayStyle={overlayStyle}
+                modal
                 onClose={closeModal}
                 expanded={expanded}
                 onToggleExpand={() => setExpanded((e) => !e)}
                 effortId={effortId}
                 onSelectEffort={setEffortId}
                 onMention={openEffort}
-                url={modalUrl}
-                dateString={modalDateString}
+                url={selectedEntry.url}
               >
-                {modalChildren}
+                {selectedEntry.media && (
+                  <div className={styles.media}>
+                    <EntryMediaView media={selectedEntry.media} />
+                  </div>
+                )}
               </ExperienceEntry>
             </div>
           </motion.div>

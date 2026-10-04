@@ -29,7 +29,7 @@ const ExperienceEntry = ({
   pageOpen = false,
   inList = false,
   isSelected = false,
-  overlayStyle,
+  modal = false,
   onClose,
   expanded = false,
   onToggleExpand,
@@ -295,7 +295,7 @@ const ExperienceEntry = ({
     // the window instead of on its own clock.
     <MotionConfig transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}>
       <LayoutGroup id={id}>
-        {!inList && overlayStyle ? (
+        {!inList && modal ? (
           <motion.div
             className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
             style={{ x: dragX, y: dragY }}

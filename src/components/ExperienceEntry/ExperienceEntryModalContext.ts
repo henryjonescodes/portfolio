@@ -4,22 +4,13 @@ import React, { createContext, useContext } from 'react';
 type ModalContextType = {
   selectedEntry: EntryData | null;
   pageOpen: boolean;
-  overlayStyle: React.CSSProperties;
-  modalChildren: React.ReactNode;
-  modalUrl?: string;
-  modalDateString?: string;
-  openModal: (
-    entry: EntryData,
-    entryRef: React.RefObject<HTMLDivElement>,
-    children?: React.ReactNode,
-    url?: string,
-    dateString?: string,
-  ) => void;
+  /** Opens an entry from its list item; the modal grows out of it. */
+  openModal: (entry: EntryData, entryRef: React.RefObject<HTMLDivElement>) => void;
   closeModal: () => void;
   /** The effort shown in the open entry; null shows its overview. */
   effortId: string | null;
   setEffortId: (effortId: string | null) => void;
-  /** Opens an experience entry on one of its efforts, from a mention anywhere. */
+  /** Opens any entry on one of its efforts, from a mention anywhere. */
   openEffort: (entryId: string, effortId: string) => void;
 };
 
