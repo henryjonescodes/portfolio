@@ -1,4 +1,5 @@
 import { animated, useSpring } from '@react-spring/three';
+import { useAnimations } from '@context/AnimationContext';
 import { useEffect, useState } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
 import { InteractiveElement, InteractiveElementProps } from '@context/InteractionContext';
@@ -35,10 +36,8 @@ export function Button({
   const currentOn = isControlled ? on : internalOn;
 
   // Use spring for animation, animating the position directly
-  const [spring, api] = useSpring(() => ({
-    position: position,
-    config: { mass: 1, tension: 300, friction: 20 },
-  }));
+  const { SPRINGS } = useAnimations();
+  const [spring, api] = useSpring(() => ({ position, config: SPRINGS.button }));
 
   // Update spring when currentOn changes
   useEffect(() => {
@@ -51,8 +50,8 @@ export function Button({
     } else if (axis === 'z') {
       newPos[2] += offset;
     }
-    api.start({ position: newPos });
-  }, [currentOn, flip, travel, axis, position, api]);
+    api.start({ position: newPos, config: SPRINGS.button });
+  }, [currentOn, flip, travel, axis, position, api, SPRINGS.button]);
 
   // Handle pointer events
   const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {

@@ -1,7 +1,8 @@
 // CustomControls.tsx
 import { useFrame, useThree } from '@react-three/fiber';
-import React, { useEffect, useState } from 'react';
-import { useSpring } from 'react-spring';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useSpring } from '@react-spring/three';
+import { useAnimations } from '@context/AnimationContext';
 import { Vector3 } from '$three';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { useZoom } from '@context/ZoomContext';
@@ -13,6 +14,8 @@ const CustomControls: React.FC = () => {
   const { zoomLevel } = useZoom();
   const { zoomPositions } = useWindowDimensions();
   const { isLandscape } = useMobileOrientation();
+  const { SPRINGS, CAMERA_LERP } = useAnimations();
+  const target = useMemo(() => new Vector3(), []);
 
   const [focus, setFocus] = useState<Vector3>(new Vector3(0, 0, 0));
 
@@ -49,14 +52,12 @@ const CustomControls: React.FC = () => {
       position: [camera.position.x, camera.position.y, camera.position.z],
     },
     to: { position: focus.toArray() },
-    config: { mass: 1, tension: 170, friction: 26 },
+    config: SPRINGS.camera,
     reset: false,
   });
 
   useFrame(() => {
-    const newPosition = new Vector3(...position.get());
-
-    camera.position.lerp(newPosition, 0.1);
+    camera.position.lerp(target.fromArray(position.get()), CAMERA_LERP);
     camera.updateProjectionMatrix();
   });
 

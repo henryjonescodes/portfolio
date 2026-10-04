@@ -1,5 +1,12 @@
-import { Leva, useControls } from 'leva';
-import React, { createContext, ReactNode, useContext, useMemo, useState } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 type SettingsContextType = {
@@ -11,8 +18,9 @@ type SettingsContextType = {
   isDebugMode: boolean;
   toggleDebugMode: () => void;
 
-  // ? 3D Controls
+  // Set by the debug panel
   useOrbitControls: boolean;
+  setUseOrbitControls: (value: boolean) => void;
 };
 
 const defaultSettings: SettingsContextType = {
@@ -23,9 +31,8 @@ const defaultSettings: SettingsContextType = {
   // ? Debug mode
   isDebugMode: false,
   toggleDebugMode: () => {},
-
-  // ? 3D Controls
   useOrbitControls: false,
+  setUseOrbitControls: () => {},
 };
 
 const SettingsContext = createContext<SettingsContextType>(defaultSettings);
@@ -45,74 +52,39 @@ export const SettingsProvider: React.FC<SettingsProviderProps> = ({ children }) 
   // ? Parse query parameters
   const isDebugMode = useMemo(() => {
     const searchParams = new URLSearchParams(location.search);
-    console.log('hello', searchParams.get('debug'));
     return searchParams.get('debug') === 'true';
   }, [location.search]);
 
-  // ? Setup States
-  const [lockAnimationReEnable, setLockAnimationReEnable] = useState(false);
-  const [animationDisabled, setAnimationDisabledInternal] = useState(
-    defaultSettings.animationDisabled,
-  );
+  const [animationDisabled, setAnimationDisabledState] = useState(false);
+  const [useOrbitControls, setUseOrbitControls] = useState(false);
+  // A user's explicit choice to disable animation wins over automatic re-enables.
+  const userLocked = useRef(false);
 
-  // ? Leva Controls
-  const { useOrbitControls } = useControls('3D Scene', {
-    useOrbitControls: false,
-  });
+  const setAnimationDisabled = useCallback((value: boolean, userInitiated = false) => {
+    if (userInitiated) userLocked.current = value;
+    if (value || userInitiated || !userLocked.current) setAnimationDisabledState(value);
+  }, []);
 
-  // ?? Manages animation disabled setting/state changes
-  const setAnimationDisabled = (value: boolean, userInitiated?: boolean) => {
-    if (value === true) {
-      if (userInitiated) {
-        setLockAnimationReEnable(true);
-      }
-      setAnimationDisabledInternal(true);
-    } else {
-      if (userInitiated) {
-        setLockAnimationReEnable(false);
-        setAnimationDisabledInternal(false);
-      } else if (!lockAnimationReEnable) {
-        setAnimationDisabledInternal(false);
-      }
-    }
-  };
-
-  const toggleDebugMode = () => {
+  const toggleDebugMode = useCallback(() => {
     const searchParams = new URLSearchParams(location.search);
-    if (isDebugMode) {
-      searchParams.delete('debug');
-    } else {
-      searchParams.set('debug', 'true');
-    }
+    if (isDebugMode) searchParams.delete('debug');
+    else searchParams.set('debug', 'true');
     navigate({ search: searchParams.toString() });
-  };
+  }, [isDebugMode, location.search, navigate]);
 
   const contextValue = useMemo(
     () => ({
-      useOrbitControls,
       toggleDebugMode,
       isDebugMode,
       animationDisabled,
       setAnimationDisabled,
+      useOrbitControls: isDebugMode && useOrbitControls,
+      setUseOrbitControls,
     }),
-    [useOrbitControls, toggleDebugMode, isDebugMode, animationDisabled],
+    [toggleDebugMode, isDebugMode, animationDisabled, setAnimationDisabled, useOrbitControls],
   );
 
-  return (
-    <SettingsContext.Provider value={contextValue}>
-      <Leva
-        collapsed
-        hidden={!isDebugMode}
-        oneLineLabels={false}
-        theme={{
-          sizes: {
-            rootWidth: '500px',
-          },
-        }}
-      />
-      {children}
-    </SettingsContext.Provider>
-  );
+  return <SettingsContext.Provider value={contextValue}>{children}</SettingsContext.Provider>;
 };
 
 // * * * * * * * * * * useSettings Hook * * * * * * * * * * //

@@ -2,7 +2,7 @@ import Loading from '@components/Loading';
 import React, { createContext, ReactNode, useContext, useEffect, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { LOADING_TIMEOUTS } from '@config/new-animations';
+import { useAnimations } from '@context/AnimationContext';
 
 export type LoadingStates = undefined | 'loading' | 'loaded' | 'complete';
 
@@ -34,12 +34,11 @@ interface LoadingProviderProps {
   children: ReactNode;
 }
 
-const LOADING_TIMEOUT_MS: number = LOADING_TIMEOUTS.LITE_MODE_FALLBACK;
-const LOADING_TIMEOUT_USER_INITIATED_MS: number = LOADING_TIMEOUTS.USER_INITIATED_FALLBACK;
 export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
   // ? Hooks & Ref
   const navigate = useNavigate();
   const location = useLocation();
+  const { TIMEOUTS } = useAnimations();
 
   // ? Get initial lite mode value from url
   const searchParams = new URLSearchParams(location.search);
@@ -47,7 +46,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
 
   // ? Timeout timer setup
   const preventTimeout = useRef(false);
-  const loadingTimerMs = useRef<number>(LOADING_TIMEOUT_MS);
+  const loadingTimerMs = useRef<number>(TIMEOUTS.LITE_MODE_FALLBACK);
 
   // ? Setup States
   const [liteMode, setLiteModeState] = useState<boolean>(liteModeFlag || isMobile);
@@ -86,7 +85,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   const startLoading = () => {
     if (loadingState === 'complete') return;
     console.log('[LoadingContext]: Started loading');
-    loadingTimerMs.current = LOADING_TIMEOUT_USER_INITIATED_MS;
+    loadingTimerMs.current = TIMEOUTS.USER_INITIATED_FALLBACK;
     preventTimeout.current = false;
     setLiteMode(false);
     setLoadingState('loading');
