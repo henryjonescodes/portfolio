@@ -19,7 +19,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - [x] e2e test for the morph and close
 - [?] Design review of the carousel in 3D and lite mode
 - [x] Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)
-- [ ] Remove the now unused projects path from ExperienceEntry (url and media children)
+- [x] Remove the now unused projects path from ExperienceEntry (url and media children)
 
 ## Log
 
@@ -30,3 +30,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: done "e2e test for the morph and close" at a8b92322
 - 2026-10-04: EntryData gained media only; color and logo were not needed for the new style
 - 2026-10-04: done "Fallback unmount if onLayoutAnimationComplete never fires (reduced motion)" at f0c814ca
+- 2026-10-04: done "Remove the now unused projects path from ExperienceEntry (url and media children)" at 04abdffc
