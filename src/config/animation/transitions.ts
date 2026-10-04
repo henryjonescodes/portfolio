@@ -536,6 +536,25 @@ export const TRANSITIONS_CONFIG = {
       ),
       ease: 'easeInOut',
     },
+    SOURCE_PRESENCE: {
+      duration: tune(
+        'MODAL',
+        0.6,
+        S,
+        'Modal > Link Word Out/In',
+        'The clicked word leaving as its window opens, and returning after it closes',
+      ),
+      ease: 'easeOut',
+    },
+    SOURCE_LEAD: {
+      delay: tune(
+        'MODAL',
+        0.35,
+        S,
+        'Modal > Link Word Lead',
+        'How far the word leads the window it opens',
+      ),
+    },
     CONTENT_ANIMATE: {
       duration: tune(
         'MODAL',

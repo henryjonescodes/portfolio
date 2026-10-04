@@ -1,5 +1,5 @@
+import SourceButton from '@components/EntryLink/SourceButton';
 import TypewriterText from '@components/TypewriterText';
-import type { Point } from '@components/ExperienceEntry/ExperienceEntryModalContext';
 import styles from './efforts.module.scss';
 
 const MENTION = /\{\{([\w-]+)(?:\/([\w-]+))?\|([^}]+)\}\}/g;
@@ -21,7 +21,7 @@ function parseMentions(text: string): Segment[] {
 type RichTextProps = {
   text: string;
   /** Mentions become buttons; without it they read as highlighted text (inside a tile, say). */
-  onMention?: (entryId: string, effortId: string | null, origin?: Point) => void;
+  onMention?: (entryId: string, effortId: string | null, source?: HTMLElement) => void;
   staggerChildren?: number;
 };
 
@@ -38,21 +38,13 @@ const RichText = ({ text, onMention, staggerChildren }: RichTextProps) => (
           </span>
         );
       return (
-        <button
+        <SourceButton
           key={i}
-          type="button"
           className={styles.mention}
-          onClick={(e) => {
-            e.stopPropagation();
-            const r = e.currentTarget.getBoundingClientRect();
-            onMention(mention.entryId, mention.effortId, {
-              x: r.left + r.width / 2,
-              y: r.top + r.height / 2,
-            });
-          }}
+          onActivate={(el) => onMention(mention.entryId, mention.effortId, el)}
         >
           {typed}
-        </button>
+        </SourceButton>
       );
     })}
   </>

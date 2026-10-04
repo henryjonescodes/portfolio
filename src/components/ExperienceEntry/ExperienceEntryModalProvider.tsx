@@ -1,6 +1,6 @@
 import cn from 'classnames';
-import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import React, { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLocation } from 'react-router-dom';
 import EntryMediaView from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
@@ -8,8 +8,9 @@ import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
 import { findEntry } from '@data/entries';
 import { entryTitle, pageTitle } from '@data/pages';
+import { boxWithin } from '@utils/geometry';
 import styles from './experience-entry-modal.module.scss';
-import { ExperienceEntryModalContext, type Point } from './ExperienceEntryModalContext';
+import { ExperienceEntryModalContext } from './ExperienceEntryModalContext';
 
 /** Query keys that describe the open modal, so a link can reopen it. */
 const PARAMS = { entry: 'entry', effort: 'effort', size: 'size' } as const;
@@ -39,12 +40,20 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   const [isClosing, setIsClosing] = useState(false);
   const [expanded, setExpanded] = useState(linked.expanded);
   const [effortId, setEffortId] = useState<string | null>(linked.effort);
-  // Set when a link opened the entry: the window zooms from here instead of morphing.
-  const [origin, setOrigin] = useState<Point | null>(null);
+  // The element the window grows out of and shrinks back into (a list item or a link), and
+  // its box within the dialog. Like the phone carousel: the window mounts over the source,
+  // opens to its own place, and on close morphs back and unmounts when the morph ends.
+  const [source, setSource] = useState<HTMLElement | null>(null);
+  const [from, setFrom] = useState<CSSProperties | null>(null);
+  // A link is not the window's shape, so the window zooms out of its centre instead, kept in
+  // its open layout, rather than squashing a layout morph into a word.
+  const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+  // Read by animation callbacks, which can fire from a window that a newer open replaced.
+  const closingRef = useRef(false);
   const dialogRef = useRef<HTMLDivElement>(null);
-  const closeTimer = useRef<ReturnType<typeof setTimeout>>();
-
-  useEffect(() => () => clearTimeout(closeTimer.current), []);
+  // With reduced motion the layout snaps and may not report completion, so close outright.
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     if (!selectedEntry || isClosing) return;
@@ -53,54 +62,57 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     return () => window.removeEventListener('keydown', onKey);
   });
 
+  // Open after the window has rendered over its source, so the morph has an origin.
   useEffect(() => {
     setPageOpen(selectedEntry != null && !isClosing);
   }, [selectedEntry, isClosing]);
 
   const open = (
     entry: EntryData,
-    options: { effort?: string | null; expanded?: boolean; origin?: Point } = {},
+    options: {
+      effort?: string | null;
+      expanded?: boolean;
+      source?: HTMLElement;
+      zoom?: boolean;
+    } = {},
   ) => {
-    clearTimeout(closeTimer.current);
-    setOrigin(options.origin ?? null);
+    const el = options.source ?? null;
+    const stage = stageRef.current;
+    const box = el && stage ? (boxWithin(el, stage) as Record<string, number>) : null;
+    setSource(el);
+    setZoom(
+      options.zoom && box ? { x: box.left + box.width / 2, y: box.top + box.height / 2 } : null,
+    );
+    setFrom(!options.zoom && box ? box : null);
     setSelectedEntry(entry);
+    closingRef.current = false;
     setIsClosing(false);
     setExpanded(options.expanded ?? false);
     setEffortId(options.effort ?? null);
   };
 
   const openModal = (entry: EntryData, entryRef: React.RefObject<HTMLDivElement>) => {
-    if (!entryRef.current) return;
-    open(entry);
+    if (entryRef.current) open(entry, { source: entryRef.current });
   };
 
-  const openEntry = (entryId: string, nextEffortId: string | null = null, from?: Point) => {
+  const openEntry = (entryId: string, nextEffortId: string | null = null, el?: HTMLElement) => {
     if (selectedEntry?.id === entryId && !isClosing) return setEffortId(nextEffortId);
     const entry = findEntry(entryId);
-    if (entry) open(entry, { effort: nextEffortId, origin: from });
+    if (entry) open(entry, { effort: nextEffortId, source: el, zoom: true });
   };
+
+  const finishClose = () => setSelectedEntry(null);
 
   const closeModal = () => {
+    closingRef.current = true;
     setIsClosing(true);
     setPageOpen(false);
-
-    // Unmount once the layout morph back to the list has finished. isClosing stays
-    // true so the fading overlay never blocks clicks while its children finish exiting.
-    // A zoomed-in window zooms straight back out; a list morph waits for the morph.
-    const totalDuration = origin ? 0 : (TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration || 0) * 1000;
-    clearTimeout(closeTimer.current);
-    closeTimer.current = setTimeout(() => setSelectedEntry(null), totalDuration);
-  };
-
-  // Zoom about the link's point. The dialog fills the overlay and is already scaled, so the
-  // overlay gives its unscaled box.
-  useLayoutEffect(() => {
     const dialog = dialogRef.current;
-    const box = dialog?.parentElement;
-    if (!dialog || !box || !origin) return;
-    const rect = box.getBoundingClientRect();
-    dialog.style.transformOrigin = `${origin.x - rect.left}px ${origin.y - rect.top}px`;
-  }, [origin, selectedEntry]);
+    // Morph back to wherever the source sits now; without one, the overlay just fades.
+    if (reduceMotion || !source?.isConnected || !dialog) return finishClose();
+    // A zoomed window zooms back through its own animation; a morph re-measures its source.
+    if (!zoom) setFrom(boxWithin(source, dialog));
+  };
 
   // The address bar and tab title follow the open modal, so copying the URL shares it. The
   // URL is replaced in place rather than through the router, whose re-render mid-morph would
@@ -121,6 +133,76 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
       openId && selectedEntry ? entryTitle(selectedEntry.title, effortTitle) : pageTitle(pathname);
   }, [openId, effortId, expanded, selectedEntry, pathname]);
 
+  const overlay = selectedEntry && (
+    <motion.div
+      key="modal-overlay"
+      data-testid="modal-overlay"
+      className={styles.overlay}
+      style={{ pointerEvents: isClosing ? 'none' : 'auto' }}
+      onClick={closeModal}
+      exit={{ opacity: 0 }}
+      transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
+    >
+      <motion.div
+        className={styles.backdrop}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: pageOpen ? 1 : 0 }}
+        transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
+      />
+      <motion.div
+        ref={dialogRef}
+        className={cn(styles.dialog, { [styles.expanded]: expanded })}
+        style={zoom ? { transformOrigin: `${zoom.x}px ${zoom.y}px` } : undefined}
+        initial={zoom ? { scale: 0.1, opacity: 0 } : false}
+        animate={zoom && isClosing ? { scale: 0.1, opacity: 0 } : { scale: 1, opacity: 1 }}
+        transition={{
+          ...TRANSITIONS.MODAL.CONTAINER_ANIMATE,
+          // The word leads on the way in; on the way out the window goes first.
+          delay: zoom && !isClosing ? TRANSITIONS.MODAL.SOURCE_LEAD.delay : 0,
+        }}
+        onAnimationComplete={() => {
+          if (zoom && closingRef.current) finishClose();
+        }}
+        role="dialog"
+        aria-modal="true"
+        aria-label={selectedEntry.title}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (e.target === e.currentTarget) closeModal();
+        }}
+      >
+        <ExperienceEntry
+          key={selectedEntry.id}
+          data={selectedEntry}
+          pageOpen={pageOpen || !!zoom}
+          inList={false}
+          modal
+          windowStyle={
+            !pageOpen && !zoom && from
+              ? { ...from, position: 'absolute', margin: 0, minHeight: 0 }
+              : undefined
+          }
+          onLayoutAnimationComplete={() => {
+            if (closingRef.current) finishClose();
+          }}
+          onClose={closeModal}
+          expanded={expanded}
+          onToggleExpand={() => setExpanded((e) => !e)}
+          effortId={effortId}
+          onSelectEffort={setEffortId}
+          onMention={openEntry}
+          url={selectedEntry.url}
+        >
+          {selectedEntry.media && (
+            <div className={styles.media}>
+              <EntryMediaView media={selectedEntry.media} />
+            </div>
+          )}
+        </ExperienceEntry>
+      </motion.div>
+    </motion.div>
+  );
+
   return (
     <ExperienceEntryModalContext.Provider
       value={{
@@ -131,66 +213,18 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
         effortId,
         setEffortId,
         openEntry,
+        source: selectedEntry ? source : null,
       }}
     >
       {children}
 
-      {/* Modal overlay rendered as sibling to page content */}
-      <AnimatePresence>
-        {selectedEntry && (
-          <motion.div
-            key="modal-overlay"
-            data-testid="modal-overlay"
-            className={styles.overlay}
-            style={{ pointerEvents: isClosing ? 'none' : 'auto' }}
-            onClick={closeModal}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
-          >
-            <motion.div
-              ref={dialogRef}
-              className={cn(styles.dialog, { [styles.expanded]: expanded })}
-              initial={origin ? { scale: 0.1, opacity: 0 } : false}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={origin ? { scale: 0.1, opacity: 0 } : undefined}
-              transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
-              role="dialog"
-              aria-modal="true"
-              aria-label={selectedEntry.title}
-              onClick={(e) => {
-                e.stopPropagation();
-                if (e.target === e.currentTarget) closeModal();
-              }}
-            >
-              <ExperienceEntry
-                key={selectedEntry.id}
-                data={selectedEntry}
-                // A window opened from a link has no list form to morph to or from, so it
-                // stays in its open layout while it zooms in and out.
-                pageOpen={pageOpen || !!origin}
-                inList={false}
-                modal
-                standalone={!!origin}
-                onClose={closeModal}
-                expanded={expanded}
-                onToggleExpand={() => setExpanded((e) => !e)}
-                effortId={effortId}
-                onSelectEffort={setEffortId}
-                onMention={openEntry}
-                url={selectedEntry.url}
-              >
-                {selectedEntry.media && (
-                  <div className={styles.media}>
-                    <EntryMediaView media={selectedEntry.media} />
-                  </div>
-                )}
-              </ExperienceEntry>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Same box as the dialog, always mounted, so a source can be measured before opening. */}
+      <div ref={stageRef} className={styles.stage} aria-hidden />
+
+      {/* Modal overlay rendered as sibling to page content. A window that came from a source
+          lands back on it and unmounts at once, like the phone carousel's; one opened without
+          a source (a shared link) fades out instead. */}
+      {source ? overlay : <AnimatePresence>{overlay}</AnimatePresence>}
     </ExperienceEntryModalContext.Provider>
   );
 };

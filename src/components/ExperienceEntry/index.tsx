@@ -30,7 +30,8 @@ const ExperienceEntry = ({
   inList = false,
   isSelected = false,
   modal = false,
-  standalone = false,
+  windowStyle,
+  onLayoutAnimationComplete,
   onClose,
   expanded = false,
   onToggleExpand,
@@ -62,15 +63,20 @@ const ExperienceEntry = ({
 
   const variants = useMemo(() => buildEntryVariants(TRANSITIONS), [TRANSITIONS]);
 
-  // Expanding snaps the modal back from wherever it was dragged.
+  // Expanding snaps the modal back from wherever it was dragged; closing drops the offset so
+  // the window lands on its source.
   const dragX = useMotionValue(0);
   const dragY = useMotionValue(0);
   useEffect(() => {
+    if (!pageOpen) {
+      dragX.set(0);
+      dragY.set(0);
+    }
     if (!expanded) return;
     const { duration } = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
     const controls = [animate(dragX, 0, { duration }), animate(dragY, 0, { duration })];
     return () => controls.forEach((c) => c.stop());
-  }, [expanded, dragX, dragY, TRANSITIONS]);
+  }, [expanded, pageOpen, dragX, dragY, TRANSITIONS]);
 
   // The open entry's heading. Both the overview and an effort render it, so its shared
   // layoutIds stay mounted when tabs switch instead of handing back to the list item.
@@ -100,6 +106,7 @@ const ExperienceEntry = ({
         data-entry-id={id}
         layout
         layoutId={id}
+        onLayoutAnimationComplete={onLayoutAnimationComplete}
         className={cn(styles.entry, {
           [styles.fullScreen]: !embedded,
           [styles.inList]: inList,
@@ -121,10 +128,9 @@ const ExperienceEntry = ({
         })}
         initial={false}
         animate={{
-          opacity: inList && isSelected ? 0 : !inList ? 1 : 1,
-          transition: {
-            duration: inList && isSelected ? 0 : TRANSITIONS.MODAL.CONTAINER_ANIMATE.duration,
-          },
+          // The open window stands in for its list item, then hands back without a fade.
+          opacity: inList && isSelected ? 0 : 1,
+          transition: { duration: 0 },
         }}
       >
         {!isOpen && (
@@ -295,11 +301,11 @@ const ExperienceEntry = ({
     // One timing for every layout animation inside the entry, so the content moves with
     // the window instead of on its own clock.
     <MotionConfig transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}>
-      <LayoutGroup id={standalone ? `${id}-standalone` : id}>
+      <LayoutGroup id={modal ? `${id}-modal` : id}>
         {!inList && modal ? (
           <motion.div
             className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
-            style={{ x: dragX, y: dragY }}
+            style={{ ...windowStyle, x: dragX, y: dragY }}
             drag={!expanded}
             dragMomentum={false}
             dragElastic={0.1}

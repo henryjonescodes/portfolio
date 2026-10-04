@@ -9,11 +9,18 @@
   right: 0;
   bottom: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.7);
   pointer-events: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  // Clicks fall through to the overlay, which closes the modal and ignores them while closing.
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .dialog {
@@ -55,4 +62,11 @@
       object-fit: contain;
     }
   }
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  pointer-events: none;
 }

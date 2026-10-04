@@ -1,6 +1,5 @@
 import React from 'react';
 import type { Panel } from '@components/Panels/types';
-import type { Point } from './ExperienceEntryModalContext';
 
 export type ToolEntry = {
   Icon: React.FunctionComponent<
@@ -55,15 +54,16 @@ export type ExperienceEntryProps = {
   isSelected?: boolean;
   /** Renders as the modal's window (drag, expand) instead of in place. */
   modal?: boolean;
-  /** Opened from a link rather than its list item, so it shares no layout with the list. */
-  standalone?: boolean;
+  /** Positions the modal's window; the provider sets it over the source while opening and closing. */
+  windowStyle?: React.CSSProperties;
+  onLayoutAnimationComplete?: () => void;
   onClose?: () => void;
   /** Open entry fills the overlay instead of its cozy size. */
   expanded?: boolean;
   onToggleExpand?: () => void;
   effortId?: string | null;
   onSelectEffort?: (effortId: string | null) => void;
-  onMention?: (entryId: string, effortId: string | null, origin?: Point) => void;
+  onMention?: (entryId: string, effortId: string | null, source?: HTMLElement) => void;
 } & (
   | {
       url?: string;

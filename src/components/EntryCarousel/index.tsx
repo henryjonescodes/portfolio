@@ -2,27 +2,11 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
+import { boxWithin } from '@utils/geometry';
 import EntryCard from './EntryCard';
 import styles from './entry-carousel.module.scss';
 
 type Selection = { id: string; from: CSSProperties; to: CSSProperties };
-
-/** Measures `el` against `root` in root's own CSS pixels, undoing any ancestor scale. */
-function boxWithin(
-  el: Element,
-  root: HTMLElement,
-  size?: { width: number; height: number },
-): CSSProperties {
-  const rootRect = root.getBoundingClientRect();
-  const rect = el.getBoundingClientRect();
-  const scale = rootRect.width / root.offsetWidth || 1;
-  return {
-    top: (rect.top - rootRect.top) / scale,
-    left: (rect.left - rootRect.left) / scale,
-    width: size?.width ?? rect.width / scale,
-    height: size?.height ?? rect.height / scale,
-  };
-}
 
 /**
  * Entries as a horizontal row of tiles for phones. Selecting one mounts an overlay copy

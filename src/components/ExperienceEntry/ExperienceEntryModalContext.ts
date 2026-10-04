@@ -1,8 +1,6 @@
 import type { EntryData } from '@components/ExperienceEntry/types';
 import React, { createContext, useContext } from 'react';
 
-export type Point = { x: number; y: number };
-
 type ModalContextType = {
   selectedEntry: EntryData | null;
   pageOpen: boolean;
@@ -13,10 +11,12 @@ type ModalContextType = {
   effortId: string | null;
   setEffortId: (effortId: string | null) => void;
   /**
-   * Opens any entry by id, optionally on one of its efforts, from a link anywhere. With an
-   * origin (viewport point, usually the link's centre) the window zooms out of it.
+   * Opens any entry by id, optionally on one of its efforts. Given the element that was
+   * clicked, the window grows out of it and shrinks back into it.
    */
-  openEntry: (entryId: string, effortId?: string | null, origin?: Point) => void;
+  openEntry: (entryId: string, effortId?: string | null, source?: HTMLElement) => void;
+  /** The element the open window grew from, which stays hidden while it is open. */
+  source: HTMLElement | null;
 };
 
 export const ExperienceEntryModalContext = createContext<ModalContextType | undefined>(undefined);
