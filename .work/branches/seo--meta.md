@@ -13,10 +13,11 @@ Links to the site unfurl with a title, description and image, and the page has t
 
 ## Todo
 
-- [ ] Description, theme-color and canonical URL in index.html
+- [x] Description, theme-color and canonical URL in index.html
 - [ ] Open Graph and Twitter card tags with a share image
 - [?] Pick or approve the share image and the one-line description
 
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Description, theme-color and canonical URL in index.html" at b3c8628a
