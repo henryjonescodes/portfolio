@@ -1,7 +1,7 @@
 ---
 branch: chore/split-e2e
 parent: staging
-status: active
+status: review
 title: One spec file per feature
 pr: null
 updated: 2026-10-04
