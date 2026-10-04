@@ -4,10 +4,14 @@ import React from '@assets/svg/tools/React.svg?react';
 import Sass from '@assets/svg/tools/Sass.svg?react';
 import Typescript from '@assets/svg/tools/Typescript.svg?react';
 import Swift from '@assets/svg/tools/Swift.svg?react';
+import Book from '@assets/svg/icons/book-01.svg?react';
+import Handheld from '@assets/svg/icons/handheld.svg?react';
+import Mail from '@assets/svg/socials/mail.svg?react';
 
 export const experienceData: Record<string, EntryData> = {
   arbor: {
     id: 'arbor',
+    media: { placeholder: 'Arbor product screens: the savings view or a notification' },
     title: 'Arbor',
     subtitle: 'Full Stack Engineer',
     description: [
@@ -30,6 +34,8 @@ export const experienceData: Record<string, EntryData> = {
       {
         id: 'notifier',
         title: 'User notifier',
+        Icon: Mail,
+        paint: 'stroke',
         summary:
           'A real-time email notification system that shows Arbor users what they are saving.',
         panels: [
@@ -53,18 +59,32 @@ export const experienceData: Record<string, EntryData> = {
               },
             ],
           },
+          {
+            type: 'media',
+            span: 'full',
+            media: { placeholder: 'A savings email as it lands in an inbox' },
+          },
         ],
       },
       {
         id: 'almanac',
         title: 'Almanac',
+        Icon: Book,
         summary:
           'A skill manager for the team’s AI coding agents: one catalogue of shared skills, kept in step across every repo.',
+        panels: [
+          {
+            type: 'media',
+            span: 'full',
+            media: { placeholder: 'Screenshot of the Almanac skill catalogue' },
+          },
+        ],
       },
     ],
   },
   channelai: {
     id: 'channelai',
+    media: { placeholder: 'ChannelAI iOS screens on a phone frame' },
     title: 'ChannelAI',
     subtitle: 'iOS Engineer, Design System Lead',
     description: [
@@ -86,13 +106,22 @@ export const experienceData: Record<string, EntryData> = {
       {
         id: 'kiki',
         title: 'Kiki UI',
+        Icon: Handheld,
         summary:
           'The design system behind ChannelAI’s iOS app: shared components, color and typography, kept consistent across the app and with design.',
+        panels: [
+          {
+            type: 'media',
+            span: 'full',
+            media: { placeholder: 'Kiki UI component sheet, or a few screens built with it' },
+          },
+        ],
       },
     ],
   },
   mushroom: {
     id: 'mushroom',
+    media: { placeholder: 'Mushroom.gg feed or chat screens, web and mobile' },
     title: 'Mushroom.gg',
     subtitle: 'Full Stack Engineer, Design System Lead',
     description: [
@@ -125,6 +154,7 @@ export const experienceData: Record<string, EntryData> = {
   },
   union: {
     id: 'union',
+    media: { placeholder: 'A still from the thesis or a Union College project' },
     title: 'Union College',
     subtitle: 'UI/UX Researcher',
     description: [
@@ -144,6 +174,7 @@ export const experienceData: Record<string, EntryData> = {
   },
   tumblr: {
     id: 'tumblr',
+    media: { placeholder: 'A sample of the Tumblr-era work' },
     title: 'Tumblr',
     subtitle: 'Systems Intern',
     description: [

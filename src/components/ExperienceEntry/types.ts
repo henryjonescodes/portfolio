@@ -10,8 +10,14 @@ export type ToolEntry = {
   label: string;
 };
 
-/** A project's preview: a looping video or a still image, served from /public. */
-export type EntryMedia = { video: string; objectPosition?: string } | { img: string };
+/**
+ * A preview: a looping video or a still image served from /public, or a placeholder that says
+ * which image belongs there until it is supplied.
+ */
+export type EntryMedia =
+  | { video: string; objectPosition?: string }
+  | { img: string }
+  | { placeholder: string };
 
 /**
  * A highlighted piece of work inside an entry (a project, a system, a responsibility). Shown
@@ -21,6 +27,10 @@ export type EntryMedia = { video: string; objectPosition?: string } | { img: str
 export type Effort = {
   id: string;
   title: string;
+  /** Shown on the effort's key in the dock. */
+  Icon?: ToolEntry['Icon'];
+  /** Whether the icon is drawn with fills or strokes, which the theme colours differently. */
+  paint?: 'fill' | 'stroke';
   summary: string;
   panels?: Panel[];
 };
