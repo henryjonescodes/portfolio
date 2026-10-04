@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:19 UTC by `bw board` on `` |
+| Generated | 2026-10-04 20:19 UTC by `bw board` on `feat/content-requests` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) |
@@ -20,7 +20,7 @@ flowchart LR
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
-  class n_feat_content_requests planned
+  class n_feat_content_requests planned,current
   n_feat_entry_tabs --> n_feat_content_requests
   n_feat_crosshair_cursor["<b>A crosshair cursor</b><br/>feat/crosshair-cursor<br/>planned · 3/3"]
   class n_feat_crosshair_cursor planned
@@ -52,7 +52,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-Nothing checked out or active.
+**What.** Layouts are built against mock images and drafted prose, each tagged with a request id. A generated REQUESTS page lists everything the owner needs to source (images, links, prose, icons) with the draft beside it and where to drop the real thing; dropping a file or prose named by its id replaces the mock or draft with no code change.
+
+**How, next.**
+
+- Request ids on mock media and drafted prose
+- Sourced files and prose resolve by id at build time
+- npm run requests renders the list; bw publishes it next to the board
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `feat/content-requests` |  | planned, local only | 0/11 | Request ids on mock media and drafted prose |  |
 
 ## 🕘 Just happened
 
@@ -172,7 +182,7 @@ On mouse and trackpad the system cursor becomes a small crosshair that inverts a
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
-| `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
+| `feat/content-requests` ◀ | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 1 | pushed |  |
 | `feat/entry-tabs` | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 4 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
