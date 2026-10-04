@@ -14,9 +14,10 @@ Later, once the rest has landed. Any text can link to an experience, project or 
 ## Todo
 
 - [x] One global modal host and an inline link component
-- [ ] The map's single-line experience entries become entry variants that open the modal
+- [x] The map's single-line experience entries become entry variants that open the modal
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "One global modal host and an inline link component" at 39218fb6
+- 2026-10-04: done "The map's single-line experience entries become entry variants that open the modal" at 3eb70e81
