@@ -14,8 +14,9 @@ An open entry's title bar uses exactly the main nav's mini items (icons that ope
 
 ## Todo
 
-- [ ] Mini nav items in the window bar; name floated right
+- [x] Mini nav items in the window bar; name floated right
 
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Mini nav items in the window bar; name floated right" at d6f7dca5
