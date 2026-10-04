@@ -179,7 +179,7 @@
 
   // A fixed-width bar, so every row's bar lines up whatever its label.
   display: grid;
-  grid-template-columns: 96px 1fr;
+  grid-template-columns: 136px 1fr;
   grid-gap: 10px;
 
   .tracker {
