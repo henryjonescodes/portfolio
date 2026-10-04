@@ -27,3 +27,4 @@ Phones and lite mode never download three.js, and the 3D scene's 13 MB of textur
 - 2026-10-04: done "e2e: lite mode loads no three.js chunk" at b5d8a303
 - 2026-10-04: done "Convert the baked textures from PNG to WebP (or KTX2) with no visible loss" at 40000ba1
 - 2026-10-04: dropped "Compress the GLB (meshopt or Draco) and load it with the matching decoder"
+- 2026-10-04: Measured: lite mode no longer fetches the 877 kB (242 kB gzip) Scene chunk; 3D textures 12.3 MB to 6.5 MB lossless
