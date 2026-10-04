@@ -3,7 +3,7 @@ branch: content/real-copy
 parent: modalize-leva-work
 status: active
 title: Real copy and missing content
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/60
 updated: 2026-10-04
 ---
 
