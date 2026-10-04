@@ -1,7 +1,7 @@
 ---
 branch: perf/glb-draco
 parent: staging
-status: active
+status: review
 title: Draco-compressed 3D model
 pr: null
 updated: 2026-10-04
