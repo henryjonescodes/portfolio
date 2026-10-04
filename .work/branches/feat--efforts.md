@@ -23,6 +23,7 @@ Experience entries can carry efforts (projects or responsibilities) browsable wi
 - [?] media: Screens or recordings of Almanac, Kiki UI and the notifier
 - [?] claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo
 - [?] claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography)
+- [?] claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving
 
 ## Log
 
