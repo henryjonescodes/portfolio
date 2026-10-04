@@ -20,7 +20,7 @@ Leave the codebase lean and consistent before more features land: no unused code
 - [ ] Remove commented-out code and SCSS across src
 - [ ] Split context modules so component files export only components (fast-refresh warnings)
 - [ ] Refactor the remaining hook dependencies in Loading, Map and useDebouncedEffect, behind tests
-- [ ] knip config that understands the SCSS alias and types/, and an npm run check (lint, tsc, knip)
+- [x] knip config that understands the SCSS alias and types/, and an npm run check (lint, tsc, knip)
 - [ ] Self-maintain CLAUDE.md and the portfolio skills
 
 ## Log
@@ -28,3 +28,4 @@ Leave the codebase lean and consistent before more features land: no unused code
 - 2026-10-04: seeded
 - 2026-10-04: done "Drop unused dependencies (react-spring, @use-gesture/react, concurrently) and list three-stdlib" at b125d1ef
 - 2026-10-04: done "Delete unused exports, dead constants and leftover variants (knip report), and the stale SESSION_LOG.md" at ab9645b5
+- 2026-10-04: done "knip config that understands the SCSS alias and types/, and an npm run check (lint, tsc, knip)" at 943c79d6
