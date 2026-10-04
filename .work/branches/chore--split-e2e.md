@@ -14,9 +14,10 @@ Split the single e2e smoke file by feature so parallel branches stop colliding i
 ## Todo
 
 - [x] Split smoke.spec.ts into feature specs with the same tests
-- [ ] Confirm the suite count and results are unchanged
+- [x] Confirm the suite count and results are unchanged
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Split smoke.spec.ts into feature specs with the same tests" at 1be4be38
+- 2026-10-04: done "Confirm the suite count and results are unchanged" at 397e97c4
