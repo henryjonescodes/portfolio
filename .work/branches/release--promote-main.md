@@ -13,7 +13,7 @@ Retire the old webpack site once staging carries everything above.
 
 ## Todo
 
-- [?] Confirm Netlify deploy settings for main and staging
+- [x] Confirm Netlify deploy settings for main and staging
 - [ ] PR staging into main
 - [?] Feel check of the new open in lite and 3D (from anim/modal-open)
 - [?] Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
@@ -34,3 +34,4 @@ Retire the old webpack site once staging carries everything above.
 - 2026-10-04: done "Confirm the first CI run is green on every stacked PR (from modalize-leva-work)" at 3c85ce68
 - 2026-10-04: dropped "Compress the GLB: meshopt quantization moves a correction into node transforms that SiteMixer's hand-written meshes ignore, so render the glTF's node transforms (or regenerate SiteMixer with gltfjsx --transform) first (from perf/assets)"
 - 2026-10-04: GLB compressed with Draco in #71; meshopt route dropped
+- 2026-10-04: done "Confirm Netlify deploy settings for main and staging" at 2ae07a6f
