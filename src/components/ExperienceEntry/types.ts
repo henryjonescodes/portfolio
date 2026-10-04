@@ -27,14 +27,25 @@ export type EntryData = {
   media?: EntryMedia;
 };
 
+// Component props type
 export type ExperienceEntryProps = {
   data: EntryData;
   borderWidth?: number;
+  children?: React.ReactNode;
   entryRef?: React.RefObject<HTMLDivElement>;
-  onClick?: () => void;
   pageOpen?: boolean;
   inList?: boolean;
   isSelected?: boolean;
   overlayStyle?: React.CSSProperties;
+  dateString?: string;
   onClose?: () => void;
-};
+} & (
+  | {
+      url?: string;
+      onClick?: never;
+    }
+  | {
+      onClick?: () => void;
+      url?: never;
+    }
+);

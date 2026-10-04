@@ -1,6 +1,8 @@
 import cn from 'classnames';
 import { motion, LayoutGroup } from 'framer-motion';
 import { useMemo } from 'react';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { widthMobile } from '@styles/layout.constants.ts';
 import TypewriterText from '@components/TypewriterText';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import AnimatedLine from '@components/AnimatedLine';
@@ -16,6 +18,8 @@ import GlitchIconItem from '@components/GlitchIconItem';
 const ExperienceEntry = ({
   data,
   borderWidth = 2.5,
+  children,
+  url,
   onClick,
   entryRef,
   pageOpen = false,
@@ -26,6 +30,7 @@ const ExperienceEntry = ({
 }: ExperienceEntryProps) => {
   const { id, title, subtitle, description, blurb, startDate, endDate, dateString, tools } = data;
   const dateRange = dateString ? dateString : formatDateRange(startDate, endDate);
+  const { width } = useWindowDimensions();
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
   const isOpen = pageOpen && !inList;
@@ -168,6 +173,39 @@ const ExperienceEntry = ({
                     </motion.div>
                   )}
                 </motion.div>
+                {children && (
+                  <motion.div
+                    className={styles.childrenWrapper}
+                    layoutId="childrenWrapper"
+                    transition={TRANSITIONS.MODAL.CONTENT_ANIMATE}
+                  >
+                    <AnimatedLine
+                      borderWidth={borderWidth}
+                      horizontal={width < widthMobile}
+                      className={styles.line}
+                    />
+                    {url ? (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(styles.children, styles.linkArea)}
+                      >
+                        {children}
+                      </a>
+                    ) : onClick ? (
+                      <motion.div
+                        onClick={onClick}
+                        className={cn(styles.children, styles.linkArea)}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        {children}
+                      </motion.div>
+                    ) : (
+                      <motion.div className={styles.children}>{children}</motion.div>
+                    )}
+                  </motion.div>
+                )}
               </motion.div>
             </motion.div>
           </motion.div>
