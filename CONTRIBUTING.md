@@ -58,7 +58,7 @@ flowchart LR
 ## 🕘 Just happened
 
 - 0m ago · feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll · `feat/entry-tabs`
-- 14m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
+- 15m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
 - 15m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
 
 **Merged, not yet landed** (run `bw land <branch> --into <next branch>`)
