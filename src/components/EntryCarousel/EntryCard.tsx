@@ -5,6 +5,8 @@ import Close from '@assets/svg/icons/close.svg?react';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import AnimatedLine from '@components/AnimatedLine';
 import EffortNav from '@components/Efforts/EffortNav';
+import { GALLERY } from '@components/Efforts/subpages';
+import MasonryGallery from '@components/MasonryGallery';
 import EffortView from '@components/Efforts/EffortView';
 import RichText from '@components/Efforts/RichText';
 import EntryMediaView from '@components/EntryMedia';
@@ -51,6 +53,8 @@ const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
   const { openEntry } = useExperienceEntryModal();
   const [effortId, setEffortId] = useState<string | null>(null);
   const effort = isOpen ? entry.efforts?.find((e) => e.id === effortId) : undefined;
+  const showGallery = isOpen && effortId === GALLERY && !!entry.gallery?.length;
+  const subpageId = effort?.id ?? (showGallery ? GALLERY : null);
   // A mention of this entry's own effort switches tabs; any other opens that entry's modal.
   const onMention = isOpen
     ? (entryId: string, id: string | null, source?: HTMLElement) =>
@@ -128,21 +132,28 @@ const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
                 <TypewriterText text={entry.subtitle} />
               </motion.h3>
             )}
-            {isOpen && !!entry.efforts?.length && (
-              <EffortNav
-                idPrefix={`${layoutKey}-card`}
-                efforts={entry.efforts}
-                selected={effort?.id ?? null}
-                onSelect={setEffortId}
-              />
+            {isOpen && (!!entry.efforts?.length || !!entry.gallery?.length) && (
+              <div className={styles.subnav}>
+                <EffortNav
+                  idPrefix={`${layoutKey}-card`}
+                  efforts={entry.efforts ?? []}
+                  hasGallery={!!entry.gallery?.length}
+                  selected={subpageId}
+                  onSelect={setEffortId}
+                />
+              </div>
             )}
-            {effort ? (
+            {subpageId ? (
               <div
                 role="tabpanel"
                 id={`${layoutKey}-card-panel`}
-                aria-labelledby={`${layoutKey}-card-tab-${effort.id}`}
+                aria-labelledby={`${layoutKey}-card-tab-${subpageId}`}
               >
-                <EffortView key={effort.id} effort={effort} onMention={onMention} />
+                {effort ? (
+                  <EffortView key={effort.id} effort={effort} onMention={onMention} />
+                ) : (
+                  <MasonryGallery items={entry.gallery ?? []} />
+                )}
               </div>
             ) : (
               entry.description.map((line) => (

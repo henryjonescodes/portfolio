@@ -188,6 +188,10 @@
     }
   }
 
+  &.iconOnly {
+    padding: 0 12px;
+  }
+
   &.mini {
     transition: width 0.2s ease-in-out;
     width: 50px;

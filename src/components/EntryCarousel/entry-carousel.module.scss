@@ -205,3 +205,8 @@ $side: calc((100cqw - #{$tile}) / 2);
     flex: 1;
   }
 }
+
+// The subpage tabs run edge to edge across the card, like the site's nav bar.
+.subnav {
+  margin: 0 -16px;
+}

@@ -35,6 +35,13 @@ export type Effort = {
   panels?: Panel[];
 };
 
+/** One gallery card. Shapes pack on a two-column grid: square, wide (2:1) or tall (1:2). */
+export type GalleryItem = {
+  media: EntryMedia;
+  shape?: 'square' | 'wide' | 'tall';
+  caption?: string;
+};
+
 // Base entry data type
 export type EntryData = {
   id: string;
@@ -51,6 +58,8 @@ export type EntryData = {
   /** Extra blocks shown only when the entry is open. */
   panels?: Panel[];
   efforts?: Effort[];
+  /** Shown as the entry's Gallery subpage. */
+  gallery?: GalleryItem[];
 };
 
 // Component props type

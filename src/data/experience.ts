@@ -20,6 +20,13 @@ export const experienceData: Record<string, EntryData> = {
     blurb:
       'Full stack engineer building the features that show people how much they save with Arbor, starting with a real-time {{arbor/notifier|email notification system}}, and building {{arbor/almanac|Almanac}}, the team’s skill manager.',
     startDate: new Date(2025, 0),
+    gallery: [
+      { shape: 'wide', media: { placeholder: 'Arbor savings dashboard, desktop' } },
+      { shape: 'tall', media: { placeholder: 'A savings email on a phone' } },
+      { shape: 'square', media: { placeholder: 'Notification template close-up' } },
+      { shape: 'square', media: { placeholder: 'Team or office photo' } },
+      { shape: 'wide', media: { placeholder: 'Almanac skill catalogue' } },
+    ],
     tools: [
       {
         Icon: React,
@@ -96,6 +103,12 @@ export const experienceData: Record<string, EntryData> = {
       'iOS developer crafting the future of AI-enhanced communication. Design-Tech Bridge facilitating rapid iteration and design system consistency.',
     startDate: new Date(2024, 0),
     endDate: new Date(2024, 4),
+    gallery: [
+      { shape: 'tall', media: { placeholder: 'ChannelAI chat screen on an iPhone' } },
+      { shape: 'square', media: { placeholder: 'Profile screen' } },
+      { shape: 'square', media: { placeholder: 'Media gallery screen' } },
+      { shape: 'wide', media: { placeholder: 'Kiki UI component sheet' } },
+    ],
     tools: [
       {
         Icon: Swift,
@@ -133,6 +146,11 @@ export const experienceData: Record<string, EntryData> = {
       'Frontend focused engineer and design/engineering liaison. Balanced technical precision with creative flair to create engaging gamified social media experiences across web, mobile, and Discord.',
     startDate: new Date(2022, 2),
     endDate: new Date(2024, 0),
+    gallery: [
+      { shape: 'wide', media: { placeholder: 'Mushroom.gg feed on web' } },
+      { shape: 'tall', media: { placeholder: 'Chat on mobile' } },
+      { shape: 'square', media: { placeholder: 'Icon set from the design library' } },
+    ],
     tools: [
       {
         Icon: React,

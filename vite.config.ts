@@ -14,6 +14,8 @@ function sassExportPlugin() {
   return {
     name: 'sass-export',
     buildStart() {
+      // Scripts that only load site data (scripts/lib/load-site-data.mjs) skip the export.
+      if (process.env.SKIP_SASS_EXPORT) return;
       console.log('[sass-export] Exporting SASS variables...');
       try {
         execSync('node ./scripts/export-sass-variables.js', { stdio: 'inherit' });

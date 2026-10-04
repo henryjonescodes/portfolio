@@ -6,6 +6,7 @@ import EntryMediaView from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
+import { GALLERY } from '@components/Efforts/subpages';
 import { findEntry } from '@data/entries';
 import { entryTitle, pageTitle } from '@data/pages';
 import { boxWithin } from '@utils/geometry';
@@ -31,7 +32,11 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     const effort = searchParams.get(PARAMS.effort);
     return {
       entry: entry ?? null,
-      effort: entry?.efforts?.some((e) => e.id === effort) ? effort : null,
+      effort:
+        entry?.efforts?.some((e) => e.id === effort) ||
+        (effort === GALLERY && !!entry?.gallery?.length)
+          ? effort
+          : null,
       expanded: !!entry && searchParams.get(PARAMS.size) === 'full',
     };
   });

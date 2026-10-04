@@ -190,7 +190,7 @@ test('efforts: tabs switch the open entry, and a mention opens its effort', asyn
   await page.waitForTimeout(1500);
   await openFirstEntry(page);
   const dialog = page.getByRole('dialog');
-  const tabs = dialog.getByRole('tablist', { name: 'Highlights' });
+  const tabs = dialog.getByRole('tablist', { name: 'Sections' });
   await expect(tabs.getByRole('tab', { name: 'Overview' })).toHaveAttribute(
     'aria-selected',
     'true',
@@ -290,4 +290,19 @@ test('with reduced motion, and without a source, the modal still closes', async 
   await page.waitForTimeout(800);
   await closeModal(page);
   await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 5_000 });
+});
+
+test('the gallery subpage packs cards and enlarges one in place', async ({ page }) => {
+  await page.goto('/experience?lite=true&entry=arbor&effort=gallery');
+  const dialog = page.getByRole('dialog');
+  await expect(dialog.getByRole('tab', { name: 'Gallery' })).toHaveAttribute(
+    'aria-selected',
+    'true',
+  );
+  const card = dialog.getByRole('button', { name: /^Enlarge/ }).nth(2);
+  await card.click();
+  await expect(dialog.getByRole('button', { name: 'Shrink' })).toHaveAttribute(
+    'aria-expanded',
+    'true',
+  );
 });
