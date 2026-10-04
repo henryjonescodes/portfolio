@@ -15,7 +15,7 @@ flowchart LR
   n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/4 · 🙋 1"]
   class n_feat_entry_dock planned
   n_feat_global_modal --> n_feat_entry_dock
-  n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs<br/>planned · 2/3<br/><i>next: check:mentions in npm run check, and …</i>"]
+  n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs<br/>planned · 3/3"]
   class n_feat_entry_tabs planned,current
   n_feat_entry_dock --> n_feat_entry_tabs
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/14 · 🙋 11<br/><i>next: PR staging into main</i>"]
@@ -52,14 +52,14 @@ flowchart LR
 
 ## 🟢 Happening now
 
-- **Entry subpages as nav tabs, and a masonry gallery** · `feat/entry-tabs` (checked out) · 2/3  
-  next: check:mentions in npm run check, and a repertoire rule for it
+- **Entry subpages as nav tabs, and a masonry gallery** · `feat/entry-tabs` (checked out) · 3/3  
+  next: nothing open
 
 ## 🕘 Just happened
 
 - 0m ago · feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll · `feat/entry-tabs`
 - 15m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
-- 15m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
+- 16m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
 
 **Merged, not yet landed** (run `bw land <branch> --into <next branch>`)
 
@@ -89,7 +89,7 @@ flowchart LR
 | `bw/inbox` | planned | 0/3 | 0 | local only | bw renders INBOX.md with one answer slot per open question |  |
 | `feat/content-requests` | planned | 0/3 | 0 | local only | Request ids on mock media and drafted prose |  |
 | `feat/entry-dock` | planned | 3/4 | 2 | pushed | — |  |
-| `feat/entry-tabs` ◀ | planned | 2/3 | 1 | local only | check:mentions in npm run check, and a repertoire rule for it |  |
+| `feat/entry-tabs` ◀ | planned | 3/3 | 1 | local only | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
@@ -130,13 +130,13 @@ Commits:
 
 </details>
 
-<details><summary><b>feat/entry-tabs</b>: Entry subpages as nav tabs, and a masonry gallery (2/3)</summary>
+<details><summary><b>feat/entry-tabs</b>: Entry subpages as nav tabs, and a masonry gallery (3/3)</summary>
 
 An open entry's subpages use the main nav's tabs (Overview is the home icon, no text), a Gallery tab appears when an entry has one, and the gallery is a two-column masonry of square, wide (2:1) and tall (1:2) cards. A check fails the build when an effort subpage has no mention in the prose.
 
 - [x] Subpage tabs styled and built like the main nav items
 - [x] Gallery subpage: masonry with square, wide and tall cards, animated reflow
-- [ ] check:mentions in npm run check, and a repertoire rule for it
+- [x] check:mentions in npm run check, and a repertoire rule for it
 
 Commits:
 
