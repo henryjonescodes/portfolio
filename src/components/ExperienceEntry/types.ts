@@ -13,6 +13,18 @@ export type ToolEntry = {
 /** A project's preview: a looping video or a still image, served from /public. */
 export type EntryMedia = { video: string; objectPosition?: string } | { img: string };
 
+/**
+ * A highlighted piece of work inside an entry (a project, a system, a responsibility). Shown
+ * only in the open entry, one at a time, behind a small tab strip. Prose mentions an effort
+ * with `{{entryId/effortId|text}}`.
+ */
+export type Effort = {
+  id: string;
+  title: string;
+  summary: string;
+  panels?: Panel[];
+};
+
 // Base entry data type
 export type EntryData = {
   id: string;
@@ -28,6 +40,7 @@ export type EntryData = {
   media?: EntryMedia;
   /** Extra blocks shown only when the entry is open. */
   panels?: Panel[];
+  efforts?: Effort[];
 };
 
 // Component props type
@@ -45,6 +58,9 @@ export type ExperienceEntryProps = {
   /** Open entry fills the overlay instead of its cozy size. */
   expanded?: boolean;
   onToggleExpand?: () => void;
+  effortId?: string | null;
+  onSelectEffort?: (effortId: string | null) => void;
+  onMention?: (entryId: string, effortId: string) => void;
 } & (
   | {
       url?: string;

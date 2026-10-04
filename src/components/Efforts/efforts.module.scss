@@ -1,0 +1,60 @@
+@use '@styles' as styles;
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+// Small retro keys; the selected one sits pressed in.
+.tab {
+  @include styles.bevel;
+  padding: 6px 12px;
+  border: 2px solid var(--foreground-secondary);
+  border-radius: styles.$radius-sm;
+  background: var(--background-primary);
+  color: var(--foreground-primary);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--accent-primary);
+  }
+
+  &.active {
+    @include styles.bevel-pressed;
+    border-color: var(--accent-primary);
+    background: var(--background-secondary);
+    color: var(--accent-primary);
+  }
+}
+
+.effort {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  h3 {
+    color: var(--accent-primary);
+  }
+}
+
+// A mention of an effort: underlined like a link, typed like the prose around it.
+.mention {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--accent-primary);
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+
+  &:is(button) {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration-style: solid;
+    }
+  }
+}

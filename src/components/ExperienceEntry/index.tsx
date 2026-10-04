@@ -15,6 +15,9 @@ import { usePage } from '@context/PageContext';
 import { formatDateRange } from '@utils/text';
 import type { ExperienceEntryProps } from './types';
 import GlitchIconItem from '@components/GlitchIconItem';
+import EffortNav from '@components/Efforts/EffortNav';
+import EffortView from '@components/Efforts/EffortView';
+import RichText from '@components/Efforts/RichText';
 
 const ExperienceEntry = ({
   data,
@@ -30,14 +33,31 @@ const ExperienceEntry = ({
   onClose,
   expanded = false,
   onToggleExpand,
+  effortId = null,
+  onSelectEffort,
+  onMention,
 }: ExperienceEntryProps) => {
-  const { id, title, subtitle, description, blurb, startDate, endDate, dateString, tools, panels } =
-    data;
+  const {
+    id,
+    title,
+    subtitle,
+    description,
+    blurb,
+    startDate,
+    endDate,
+    dateString,
+    tools,
+    panels,
+    efforts,
+  } = data;
   const dateRange = dateString ? dateString : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
   const isOpen = pageOpen && !inList;
+  const effort = isOpen ? efforts?.find((e) => e.id === effortId) : undefined;
+  // Mentions are buttons only in the open entry; a list item is already one big button.
+  const mentionHandler = isOpen ? onMention : undefined;
 
   const variants = useMemo(() => buildEntryVariants(TRANSITIONS), [TRANSITIONS]);
 
@@ -143,95 +163,120 @@ const ExperienceEntry = ({
                   onToggleExpand={onToggleExpand}
                 />
               )}
-              <motion.div layout className={styles.descriptionContents}>
-                <motion.div className={styles.descriptionContentsFlex}>
-                  <motion.div className={styles.text}>
-                    {isOpen && (
-                      <motion.div layoutId="bodyTitle">
-                        <motion.h2 layoutId="title" layout="position">
-                          <TypewriterText text={title} />
-                        </motion.h2>
-                        {!!subtitle && (
-                          <motion.h3 layoutId="subtitle" layout="position">
-                            {subtitle}
-                          </motion.h3>
-                        )}
-                        {!!dateRange && (
-                          <motion.p layoutId="date" layout="position">
-                            {dateRange}
-                          </motion.p>
-                        )}
-                      </motion.div>
-                    )}
-                    {description.map((desc, index) => (
-                      <motion.p key={index}>
-                        <TypewriterText text={desc} />
-                      </motion.p>
-                    ))}
-                    {isOpen && blurb && (
-                      <motion.div
-                        variants={variants.entryText}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        transition={TRANSITIONS.MODAL.DESCRIPTION_ANIMATE}
-                      >
-                        <motion.p>
-                          <TypewriterText text={blurb} />
-                        </motion.p>
-                      </motion.div>
-                    )}
-                  </motion.div>
-                  {!!tools && (
-                    <motion.div className={styles.tools} variants={variants.tools}>
-                      <AnimatedLine
-                        borderWidth={borderWidth}
-                        horizontal={true}
-                        className={styles.line}
-                      />
-                      {tools.map((t, index) => (
-                        <GlitchIconItem key={index} Icon={t.Icon}>
-                          {t.label}
-                        </GlitchIconItem>
-                      ))}
-                    </motion.div>
-                  )}
+              {isOpen && !!efforts?.length && onSelectEffort && (
+                <motion.div layout className={styles.effortNav}>
+                  <EffortNav
+                    idPrefix={id}
+                    efforts={efforts}
+                    selected={effort?.id ?? null}
+                    onSelect={onSelectEffort}
+                  />
                 </motion.div>
-                {children && (
-                  <motion.div className={styles.childrenWrapper} layoutId="childrenWrapper">
-                    <AnimatedLine
-                      borderWidth={borderWidth}
-                      horizontal={width < widthMobile}
-                      className={styles.line}
-                    />
-                    {url ? (
-                      <a
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={cn(styles.children, styles.linkArea)}
-                      >
-                        {children}
-                      </a>
-                    ) : onClick ? (
-                      <motion.div
-                        onClick={onClick}
-                        className={cn(styles.children, styles.linkArea)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        {children}
+              )}
+              {effort ? (
+                <motion.div
+                  layout
+                  key={effort.id}
+                  className={styles.effortContents}
+                  role="tabpanel"
+                  id={`${id}-panel`}
+                  aria-labelledby={`${id}-tab-${effort.id}`}
+                >
+                  <EffortView effort={effort} onMention={mentionHandler} />
+                </motion.div>
+              ) : (
+                <>
+                  <motion.div layout className={styles.descriptionContents}>
+                    <motion.div className={styles.descriptionContentsFlex}>
+                      <motion.div className={styles.text}>
+                        {isOpen && (
+                          <motion.div layoutId="bodyTitle">
+                            <motion.h2 layoutId="title" layout="position">
+                              <TypewriterText text={title} />
+                            </motion.h2>
+                            {!!subtitle && (
+                              <motion.h3 layoutId="subtitle" layout="position">
+                                {subtitle}
+                              </motion.h3>
+                            )}
+                            {!!dateRange && (
+                              <motion.p layoutId="date" layout="position">
+                                {dateRange}
+                              </motion.p>
+                            )}
+                          </motion.div>
+                        )}
+                        {description.map((desc, index) => (
+                          <motion.p key={index}>
+                            <RichText text={desc} onMention={mentionHandler} />
+                          </motion.p>
+                        ))}
+                        {isOpen && blurb && (
+                          <motion.div
+                            variants={variants.entryText}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            transition={TRANSITIONS.MODAL.DESCRIPTION_ANIMATE}
+                          >
+                            <motion.p>
+                              <RichText text={blurb} onMention={mentionHandler} />
+                            </motion.p>
+                          </motion.div>
+                        )}
                       </motion.div>
-                    ) : (
-                      <motion.div className={styles.children}>{children}</motion.div>
+                      {!!tools && (
+                        <motion.div className={styles.tools} variants={variants.tools}>
+                          <AnimatedLine
+                            borderWidth={borderWidth}
+                            horizontal={true}
+                            className={styles.line}
+                          />
+                          {tools.map((t, index) => (
+                            <GlitchIconItem key={index} Icon={t.Icon}>
+                              {t.label}
+                            </GlitchIconItem>
+                          ))}
+                        </motion.div>
+                      )}
+                    </motion.div>
+                    {children && (
+                      <motion.div className={styles.childrenWrapper} layoutId="childrenWrapper">
+                        <AnimatedLine
+                          borderWidth={borderWidth}
+                          horizontal={width < widthMobile}
+                          className={styles.line}
+                        />
+                        {url ? (
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={cn(styles.children, styles.linkArea)}
+                          >
+                            {children}
+                          </a>
+                        ) : onClick ? (
+                          <motion.div
+                            onClick={onClick}
+                            className={cn(styles.children, styles.linkArea)}
+                            style={{ cursor: 'pointer' }}
+                          >
+                            {children}
+                          </motion.div>
+                        ) : (
+                          <motion.div className={styles.children}>{children}</motion.div>
+                        )}
+                      </motion.div>
                     )}
                   </motion.div>
-                )}
-              </motion.div>
-              {isOpen && !!panels?.length && (
-                <div className={styles.panels}>
-                  <AnimatedLine borderWidth={borderWidth} horizontal className={styles.line} />
-                  <PanelGrid panels={panels} />
-                </div>
+                  {isOpen && !!panels?.length && (
+                    <div className={styles.panels}>
+                      <AnimatedLine borderWidth={borderWidth} horizontal className={styles.line} />
+                      <PanelGrid panels={panels} />
+                    </div>
+                  )}
+                </>
               )}
             </motion.div>
           </motion.div>

@@ -16,6 +16,11 @@ type ModalContextType = {
     dateString?: string,
   ) => void;
   closeModal: () => void;
+  /** The effort shown in the open entry; null shows its overview. */
+  effortId: string | null;
+  setEffortId: (effortId: string | null) => void;
+  /** Opens an experience entry on one of its efforts, from a mention anywhere. */
+  openEffort: (entryId: string, effortId: string) => void;
 };
 
 export const ExperienceEntryModalContext = createContext<ModalContextType | undefined>(undefined);

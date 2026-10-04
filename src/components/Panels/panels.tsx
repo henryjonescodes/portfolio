@@ -1,7 +1,15 @@
 import cn from 'classnames';
 import EntryMediaView from '@components/EntryMedia';
+import HeroNumber from '@components/HeroNumber';
 import { linkProps } from '@utils/links';
-import type { GalleryPanel, LinksPanel, MediaPanel, StatsPanel, TextPanel } from './types';
+import type {
+  GalleryPanel,
+  HeroPanel,
+  LinksPanel,
+  MediaPanel,
+  StatsPanel,
+  TextPanel,
+} from './types';
 import styles from './panels.module.scss';
 
 export const TextPanelView = ({ paragraphs }: TextPanel) => (
@@ -50,4 +58,12 @@ export const StatsPanelView = ({ items }: StatsPanel) => (
       </div>
     ))}
   </dl>
+);
+
+export const HeroPanelView = ({ items }: HeroPanel) => (
+  <div className={styles.hero}>
+    {items.map((item) => (
+      <HeroNumber key={item.label} {...item} />
+    ))}
+  </div>
 );

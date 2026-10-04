@@ -1,0 +1,62 @@
+@use '@styles' as styles;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.value {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 2.75rem;
+  line-height: 1;
+  color: var(--accent-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.suffix {
+  font-size: 1rem;
+  color: var(--accent-secondary);
+}
+
+.label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--foreground-secondary);
+}
+
+// Flags a figure that still waits on confirmation.
+.unverified {
+  padding: 1px 6px;
+  border: 1px dashed var(--foreground-tertiary);
+  border-radius: styles.$radius-sm;
+  font-size: 0.7rem;
+  color: var(--foreground-tertiary);
+  cursor: help;
+}
+
+.meter {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 3px;
+  height: 10px;
+}
+
+.segment {
+  border-radius: 1px;
+  background: var(--foreground-primary);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

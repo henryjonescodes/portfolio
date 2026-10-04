@@ -1,10 +1,14 @@
 import cn from 'classnames';
 import { LayoutGroup, motion } from 'framer-motion';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import Close from '@assets/svg/icons/close.svg?react';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import AnimatedLine from '@components/AnimatedLine';
+import EffortNav from '@components/Efforts/EffortNav';
+import EffortView from '@components/Efforts/EffortView';
+import RichText from '@components/Efforts/RichText';
 import EntryMediaView from '@components/EntryMedia';
+import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import GlitchIconItem from '@components/GlitchIconItem';
 import NavBarButton from '@components/NavBar/NavBarButton';
@@ -44,6 +48,14 @@ const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
   const isTile = !!onSelect;
   const date = entry.dateString ?? formatDateRange(entry.startDate, entry.endDate);
   const stagger = { animate: { transition: T.TILE_STAGGER } };
+  const { openEffort } = useExperienceEntryModal();
+  const [effortId, setEffortId] = useState<string | null>(null);
+  const effort = isOpen ? entry.efforts?.find((e) => e.id === effortId) : undefined;
+  // A mention of this entry's own effort switches tabs; any other opens that entry's modal.
+  const onMention = isOpen
+    ? (entryId: string, id: string) =>
+        entryId === entry.id ? setEffortId(id) : openEffort(entryId, id)
+    : undefined;
 
   return (
     <LayoutGroup id={layoutKey}>
@@ -116,18 +128,40 @@ const EntryCard = forwardRef<HTMLElement, EntryCardProps>(function EntryCard(
                 <TypewriterText text={entry.subtitle} />
               </motion.h3>
             )}
-            {entry.description.map((line) => (
-              <motion.p key={line} layout="position" transition={T.CONTENT}>
-                <TypewriterText text={line} staggerChildren={0.004} />
-              </motion.p>
-            ))}
-            {isOpen && (
+            {isOpen && !!entry.efforts?.length && (
+              <EffortNav
+                idPrefix={`${layoutKey}-card`}
+                efforts={entry.efforts}
+                selected={effort?.id ?? null}
+                onSelect={setEffortId}
+              />
+            )}
+            {effort ? (
+              <div
+                role="tabpanel"
+                id={`${layoutKey}-card-panel`}
+                aria-labelledby={`${layoutKey}-card-tab-${effort.id}`}
+              >
+                <EffortView key={effort.id} effort={effort} onMention={onMention} />
+              </div>
+            ) : (
+              entry.description.map((line) => (
+                <motion.p key={line} layout="position" transition={T.CONTENT}>
+                  <RichText text={line} onMention={onMention} staggerChildren={0.004} />
+                </motion.p>
+              ))
+            )}
+            {isOpen && !effort && (
               <motion.div
                 className={styles.details}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1, transition: T.DETAILS_ANIMATE }}
               >
-                {entry.blurb && <p>{entry.blurb}</p>}
+                {entry.blurb && (
+                  <p>
+                    <RichText text={entry.blurb} onMention={onMention} />
+                  </p>
+                )}
                 {!!entry.tools?.length && (
                   <div className={styles.tools}>
                     {entry.tools.map((t) => (

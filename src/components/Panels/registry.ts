@@ -1,6 +1,7 @@
 import type { ComponentType } from 'react';
 import {
   GalleryPanelView,
+  HeroPanelView,
   LinksPanelView,
   MediaPanelView,
   StatsPanelView,
@@ -15,4 +16,5 @@ export const PANEL_VIEWS: { [T in PanelType]: ComponentType<Extract<Panel, { typ
   gallery: GalleryPanelView,
   links: LinksPanelView,
   stats: StatsPanelView,
+  hero: HeroPanelView,
 };

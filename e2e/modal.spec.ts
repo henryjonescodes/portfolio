@@ -186,3 +186,24 @@ test('opening the modal moves its content with the window, never ahead of it', a
   const frameGap = gaps[Math.floor(gaps.length / 2)] ?? 16;
   expect(Math.abs(innerDone - boxDone)).toBeLessThan(Math.max(120, frameGap * 2.5));
 });
+
+test('efforts: tabs switch the open entry, and a mention opens its effort', async ({ page }) => {
+  await page.goto('/experience?lite=true');
+  await page.waitForTimeout(1500);
+  await openFirstEntry(page);
+  const dialog = page.getByRole('dialog');
+  const tabs = dialog.getByRole('tablist', { name: 'Highlights' });
+  await expect(tabs.getByRole('tab', { name: 'Overview' })).toHaveAttribute('aria-selected', 'true');
+
+  await tabs.getByRole('tab', { name: 'User notifier' }).click();
+  await expect(dialog.getByRole('tabpanel')).toContainText('Notifications sent');
+  await expect(dialog.getByText('unverified').first()).toBeVisible();
+
+  await tabs.getByRole('tab', { name: 'Overview' }).click();
+  await dialog.getByRole('button', { name: 'Almanac', exact: true }).click();
+  await expect(tabs.getByRole('tab', { name: 'Almanac' })).toHaveAttribute('aria-selected', 'true');
+
+  // List items show mentions as text, never as nested buttons.
+  await closeModal(page);
+  await expect(page.getByTestId('entry').first().getByRole('button')).toHaveCount(0);
+});

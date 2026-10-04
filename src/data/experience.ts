@@ -11,10 +11,10 @@ export const experienceData: Record<string, EntryData> = {
     title: 'Arbor',
     subtitle: 'Full Stack Engineer',
     description: [
-      '— Designed and delivered custom email notification system to provide real-time insights to users about their savings with Arbor ',
+      '— Designed and delivered custom {{arbor/notifier|email notification system}} to provide real-time insights to users about their savings with Arbor',
     ],
     blurb:
-      'Full stack engineer building the features that show people how much they save with Arbor, starting with a real-time email notification system.',
+      'Full stack engineer building the features that show people how much they save with Arbor, starting with a real-time {{arbor/notifier|email notification system}}, and building {{arbor/almanac|Almanac}}, the team’s skill manager.',
     startDate: new Date(2025, 0),
     tools: [
       {
@@ -26,6 +26,42 @@ export const experienceData: Record<string, EntryData> = {
         label: 'Typescript',
       },
     ],
+    efforts: [
+      {
+        id: 'notifier',
+        title: 'User notifier',
+        summary:
+          'A real-time email notification system that shows Arbor users what they are saving.',
+        panels: [
+          {
+            type: 'hero',
+            title: 'At a glance',
+            items: [
+              {
+                value: 250000,
+                format: 'compact',
+                suffix: '/ month',
+                label: 'Notifications sent',
+                unverified: true,
+              },
+              {
+                value: 99.99,
+                format: 'percent',
+                label: 'Delivered successfully',
+                meter: 0.9999,
+                unverified: true,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'almanac',
+        title: 'Almanac',
+        summary:
+          'A skill manager for the team’s AI coding agents: one catalogue of shared skills, kept in step across every repo.',
+      },
+    ],
   },
   channelai: {
     id: 'channelai',
@@ -34,7 +70,7 @@ export const experienceData: Record<string, EntryData> = {
     description: [
       "— Delivered interactive UI features and maintained design assets across departments for Channel's AI-powered chat platform.",
       '— Worked extensively with Objective-C, Swift, and SwiftUI to implement core iOS features such as user profiles, media galleries, and app settings.',
-      '— Led design system management, ensuring consistency in components, color, and typography across the app.',
+      '— Led {{channelai/kiki|design system}} management, ensuring consistency in components, color, and typography across the app.',
     ],
     blurb:
       'iOS developer crafting the future of AI-enhanced communication. Design-Tech Bridge facilitating rapid iteration and design system consistency.',
@@ -44,6 +80,14 @@ export const experienceData: Record<string, EntryData> = {
       {
         Icon: Swift,
         label: 'Swift',
+      },
+    ],
+    efforts: [
+      {
+        id: 'kiki',
+        title: 'Kiki UI',
+        summary:
+          'The design system behind ChannelAI’s iOS app: shared components, color and typography, kept consistent across the app and with design.',
       },
     ],
   },
