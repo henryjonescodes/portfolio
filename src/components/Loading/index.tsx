@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import styles from './loading.module.scss';
 
-export const Spinner: React.FC = () => {
+const Spinner: React.FC = () => {
   return (
     <div className={styles.spinner}>
       <div className={`${styles.spinnerItem} ${styles.item1}`}></div>

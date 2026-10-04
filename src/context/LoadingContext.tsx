@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useAnimations } from '@context/AnimationContext';
 
-export type LoadingStates = undefined | 'loading' | 'loaded' | 'complete';
+type LoadingStates = undefined | 'loading' | 'loaded' | 'complete';
 
 interface LoadingContextType {
   liteMode: boolean;

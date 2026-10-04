@@ -11,12 +11,12 @@ import {
 
 type TransitionsShape = typeof TRANSITIONS_CONFIG;
 /** A resolved transition; every config entry is a tween with optional orchestration. */
-export type TimedTransition = Transition & { duration?: number; delay?: number; ease?: Easing };
-export type ResolvedTransitions = {
+type TimedTransition = Transition & { duration?: number; delay?: number; ease?: Easing };
+type ResolvedTransitions = {
   [C in keyof TransitionsShape]: { [A in keyof TransitionsShape[C]]: TimedTransition };
 };
 
-export type SpringConfig = { tension: number; friction: number; mass: number };
+type SpringConfig = { tension: number; friction: number; mass: number };
 
 function collectDefaults(): TunableValues {
   const values: TunableValues = {};

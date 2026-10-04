@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import TypewriterText from '@components/TypewriterText';
 import { useAnimations } from '@context/AnimationContext';
+import { fade } from '@config/animation';
 import styles from './about.module.scss';
 
 import cn from 'classnames';
@@ -14,19 +15,7 @@ type StatTrackerProps = {
 const StatTracker = ({ label, rating }: StatTrackerProps) => {
   const { TRANSITIONS } = useAnimations();
 
-  const statTrackerVariants = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.STAT_TRACKER.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.STAT_TRACKER.EXIT,
-    },
-  };
+  const statTrackerVariants = fade(TRANSITIONS.STAT_TRACKER.ANIMATE, TRANSITIONS.STAT_TRACKER.EXIT);
 
   const trackerVariants = {
     initial: { opacity: 0 },

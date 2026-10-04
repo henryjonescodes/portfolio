@@ -6,8 +6,6 @@ import { PANEL_VIEWS } from './registry';
 import type { Panel } from './types';
 import styles from './panels.module.scss';
 
-export type { Panel } from './types';
-
 /** Lays panels out as sections of the open entry on a 6-column grid, fading in in turn. */
 const PanelGrid = ({ panels }: { panels: Panel[] }) => {
   const { TRANSITIONS } = useAnimations();

@@ -1,6 +1,6 @@
 import { expect, type Page } from '@playwright/test';
 
-export type Box = { x: number; y: number; width: number; height: number };
+type Box = { x: number; y: number; width: number; height: number };
 
 /** Collects console errors and uncaught exceptions for the life of the page. */
 export function trackErrors(page: Page) {
@@ -16,7 +16,7 @@ export function trackErrors(page: Page) {
  * Samples an element's bounding box every animation frame for `ms`, starting
  * immediately. Used to prove a transition actually interpolates instead of snapping.
  */
-export async function sampleBoxes(
+async function sampleBoxes(
   page: Page,
   selector: string,
   ms: number,

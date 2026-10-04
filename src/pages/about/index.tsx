@@ -19,9 +19,9 @@ import { usePage } from '@context/PageContext';
 import { useColors } from '@context/ColorsContext';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { useAnimations } from '@context/AnimationContext';
+import { fade } from '@config/animation';
 
 import { screenWidths } from '@styles/layout.constants.ts';
-import { iconVariants } from '@styles/variants';
 
 import styles from './about.module.scss';
 import StatTracker from './StatTracker';
@@ -30,81 +30,18 @@ const About = () => {
   const { width } = useWindowDimensions();
   const { TRANSITIONS } = useAnimations();
 
-  const commonInitial = {
-    opacity: 0,
-  };
+  const heroVariants = fade(TRANSITIONS.ABOUT_HERO.ANIMATE, TRANSITIONS.ABOUT_HERO.EXIT);
 
-  const heroVariants = {
-    initial: commonInitial,
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.ABOUT_HERO.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.ABOUT_HERO.EXIT,
-    },
-  };
+  const mapViewerVariants = fade(TRANSITIONS.ABOUT_MAP.ANIMATE, TRANSITIONS.ABOUT_MAP.EXIT);
 
-  const mapViewerVariants = {
-    initial: commonInitial,
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.ABOUT_MAP.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.ABOUT_MAP.EXIT,
-    },
-  };
+  const socialsVariants = fade(TRANSITIONS.ABOUT_SOCIALS.ANIMATE, TRANSITIONS.ABOUT_SOCIALS.EXIT);
 
-  const socialsVariants = {
-    initial: commonInitial,
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.ABOUT_SOCIALS.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.ABOUT_SOCIALS.EXIT,
-    },
-  };
+  const statsVariants = fade(TRANSITIONS.ABOUT_STATS.ANIMATE, TRANSITIONS.ABOUT_STATS.EXIT);
 
-  const statsVariants = {
-    initial: commonInitial,
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.ABOUT_STATS.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.ABOUT_STATS.EXIT,
-    },
-  };
+  const tagsVariants = fade(TRANSITIONS.ABOUT_TAGS.ANIMATE, TRANSITIONS.ABOUT_TAGS.EXIT);
 
-  const tagsVariants = {
-    initial: commonInitial,
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.ABOUT_TAGS.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.ABOUT_TAGS.EXIT,
-    },
-  };
-
-  const avatarVariants = {
-    initial: commonInitial,
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.ABOUT_AVATAR.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.ABOUT_AVATAR.EXIT,
-    },
-  };
+  const iconVariants = fade(TRANSITIONS.ICON.ANIMATE, TRANSITIONS.ICON.EXIT);
+  const avatarVariants = fade(TRANSITIONS.ABOUT_AVATAR.ANIMATE, TRANSITIONS.ABOUT_AVATAR.EXIT);
 
   const { primaryHues } = useColors();
   const { embedded } = usePage();

@@ -4,7 +4,7 @@ import Book from '@assets/svg/icons/book.svg?react';
 import Building from '@assets/svg/icons/building.svg?react';
 import styles from './map-components.module.scss';
 
-export type PointOfInterest = {
+type PointOfInterest = {
   prefix: string;
   title: string;
   description: string;

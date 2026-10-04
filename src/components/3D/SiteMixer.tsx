@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import { useLocation } from 'react-router-dom';
 import * as THREE from 'three';
-import { GLTF } from 'three-stdlib';
+import type { GLTF } from 'three-stdlib';
 import { TextureLoader, Vector2 } from '$three';
 import { useColors } from '@context/ColorsContext';
 import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';

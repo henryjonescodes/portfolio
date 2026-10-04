@@ -5,8 +5,8 @@ import { useLoading } from './LoadingContext';
 import { useAnimations } from '@context/AnimationContext';
 import { useSettings } from './SettingsContext';
 
-export type handheldZoomType = 'handheld' | 'info' | 'wide';
-export type zoomLevelType = 'fullscreen' | handheldZoomType;
+type handheldZoomType = 'handheld' | 'info' | 'wide';
+type zoomLevelType = 'fullscreen' | handheldZoomType;
 
 interface ZoomContextType {
   zoomLevel: zoomLevelType;

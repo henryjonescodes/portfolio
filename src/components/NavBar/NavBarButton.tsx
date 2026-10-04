@@ -37,7 +37,7 @@ type NavBarButtonWithActiveProps = {
 // Combine the mutually exclusive types using a union
 type NavBarButtonProps = NavBarButtonIconOnlyProps | NavBarButtonWithActiveProps;
 
-export const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active }: NavBarButtonProps) => {
+const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active }: NavBarButtonProps) => {
   const { TRANSITIONS } = useAnimations();
 
   return (

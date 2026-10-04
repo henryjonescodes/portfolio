@@ -4,6 +4,7 @@ import ExperienceEntry from '@components/ExperienceEntry';
 import PageContents from '@components/Page/PageContents';
 import TypewriterText from '@components/TypewriterText';
 import { useAnimations } from '@context/AnimationContext';
+import { fade } from '@config/animation';
 import { projectsData, projectsOrder } from '@data/projects';
 import type { EntryMedia } from '@components/ExperienceEntry/types';
 import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
@@ -23,19 +24,7 @@ const Projects = () => {
     },
   };
 
-  const entryContentVariants = {
-    initial: {
-      opacity: 0,
-    },
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.PROJECTS.ENTRY_ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.PROJECTS.EXIT,
-    },
-  };
+  const entryContentVariants = fade(TRANSITIONS.PROJECTS.ENTRY_ANIMATE, TRANSITIONS.PROJECTS.EXIT);
 
   const renderMedia = (media?: EntryMedia) =>
     media && (

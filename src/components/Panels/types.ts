@@ -1,7 +1,7 @@
 import type { EntryMedia } from '@components/ExperienceEntry/types';
 
 /** Columns a panel spans on the 6-column grid; every panel is full width on phones. */
-export type PanelSpan = 'full' | 'twoThirds' | 'half' | 'third';
+type PanelSpan = 'full' | 'twoThirds' | 'half' | 'third';
 
 type PanelBase = {
   /** Shown in the panel's title bar; omit for a bare panel. */

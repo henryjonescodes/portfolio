@@ -7,7 +7,7 @@ import styles from './page.module.scss';
 import { usePage } from '@context/PageContext';
 
 // Define the props interface
-export type PageContentsProps = {
+type PageContentsProps = {
   className?: string; // Add an optional className prop
 };
 

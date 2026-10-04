@@ -2,9 +2,6 @@
 
 import { Vector3 } from '$three';
 
-export const borderRadiusCard: number = 16;
-export const borderRadiusItem: number = 8;
-
 export const screenSize = {
   height: 610,
   width: 685,
@@ -22,13 +19,8 @@ export const screenWidths: Record<string, number> = {
 };
 
 // Export old constants for backwards compatibility
-export const widthTiny = screenWidths.tiny;
 export const widthMobile = screenWidths.mobile;
 export const widthSmall = screenWidths.small;
-export const widthMedium = screenWidths.medium;
-export const widthCompact = screenWidths.compact;
-export const widthDefault = screenWidths.default;
-export const widthLarge = screenWidths.large;
 
 export type ZoomLevel = {
   fullScreen: Vector3;
@@ -99,16 +91,3 @@ export const ScreenWidthZoomPositions: Record<ScreenWidthKey, ZoomLevel> = {
 };
 
 export const landscapeZoomPositionOffset: number = 0.6;
-
-export const maxWidthPage: number = 2000;
-
-export const spacingParagraph: number = 24;
-
-export const pagePaddingLarge: string = '6.25rem';
-export const pagePaddingDefault: string = '4rem';
-export const pagePaddingCompact: string = '3.5rem';
-export const pagePaddingSmall: string = '2.5rem';
-export const pagePaddingMobile: string = '1.5rem';
-
-export const paragraphSpacingLarge: string = '2rem';
-export const paragraphSpacingSmall: string = '1.4rem';

@@ -9,10 +9,10 @@ import { colors as defaultColors } from '@styles/sass-variables';
 extend([mixPlugin]);
 
 // Define types for color values and control options
-export type ColorHex = `#${string}`;
+type ColorHex = `#${string}`;
 
 // Primary hues interface
-export interface PrimaryHues {
+interface PrimaryHues {
   foregroundPrimary: number;
   accentPrimary: number;
   backgroundPrimary: number;

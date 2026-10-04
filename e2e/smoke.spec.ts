@@ -129,6 +129,7 @@ test('open project shows its panels, and the modal expands and restores', async 
   await openFirstEntry(page);
   const dialog = page.getByRole('dialog');
   await expect(dialog.getByRole('region', { name: 'Links' })).toBeVisible({ timeout: 5_000 });
+  await page.waitForTimeout(1200); // let the open morph and media settle before measuring
 
   const box = async () => (await page.getByTestId('modal-entry').boundingBox())!;
   // Wait for the open morph to settle before taking the cozy size.

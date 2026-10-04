@@ -6,6 +6,6 @@
  * feeds Leva values back through AnimationProvider, so production never loads Leva.
  */
 export { SYSTEM_TUNABLES } from './system';
-export { TRANSITIONS_CONFIG } from './transitions';
 export * from './tunable';
 export * from './resolve';
+export * from './variants';

@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import cn from 'classnames';
 import { animate, motion, type AnimationPlaybackControls } from 'framer-motion';
 import { useAnimations } from '@context/AnimationContext';
+import { fade } from '@config/animation';
 import styles from './map-components.module.scss';
 import { MapContext } from './MapContext';
 import { LocationPinKeys } from './map-viewer.contents';
@@ -9,17 +10,7 @@ import { LocationPinKeys } from './map-viewer.contents';
 const MapSlider = () => {
   const { TRANSITIONS, MAP_SLIDER_CASCADE_MS } = useAnimations();
 
-  const staggerVariants = {
-    initial: { opacity: 0 },
-    animate: {
-      opacity: 1,
-      transition: TRANSITIONS.MAP_SLIDER.ANIMATE,
-    },
-    exit: {
-      opacity: 0,
-      transition: TRANSITIONS.MAP_SLIDER.EXIT,
-    },
-  };
+  const staggerVariants = fade(TRANSITIONS.MAP_SLIDER.ANIMATE, TRANSITIONS.MAP_SLIDER.EXIT);
 
   const lineVariants = {
     initial: { opacity: 0 },
