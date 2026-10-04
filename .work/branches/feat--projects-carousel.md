@@ -14,7 +14,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 ## Todo
 
 - [x] Opaque open view and a darker backdrop behind the modal
-- [ ] Escape closes the modal; the open entry is a labelled dialog
+- [x] Escape closes the modal; the open entry is a labelled dialog
 - [ ] Smaller corner radius and bevelled, skeuomorphic title bars on entries and the modal
 - [ ] Move project media into the project data
 - [?] Design review of the list and modal in 3D and lite mode
@@ -45,3 +45,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: dropped "Retro tablet chrome: bevelled title bars, smaller corner radius, skeuomorphic controls"
 - 2026-10-04: dropped "Design review of the carousel in 3D and lite mode"
 - 2026-10-04: done "Opaque open view and a darker backdrop behind the modal" at a7a5cf4b
+- 2026-10-04: done "Escape closes the modal; the open entry is a labelled dialog" at 0792d78a
