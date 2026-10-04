@@ -19,6 +19,7 @@ Replace lorem ipsum and bring over content only the old site has.
 - [x] Add the resume PDF and a link to it
 - [x] Salvage the Links page from origin/Add-Links-Page
 - [?] Review the Arbor and project blurbs (written from existing descriptions)
+- [?] Decide where /links appears (home menu, nav bar, or as home like the old branch)
 
 ## Log
 
