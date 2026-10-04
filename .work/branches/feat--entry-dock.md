@@ -16,6 +16,7 @@ Open entries switch efforts from a compact retro dock with a sliding indicator i
 - [x] Dock replaces the effort tab buttons (modal, expanded, phone open view)
 - [x] Placeholder media component, labelled with what image belongs there
 - [x] Placeholders on experience entries and efforts
+- [?] media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there
 
 ## Log
 
