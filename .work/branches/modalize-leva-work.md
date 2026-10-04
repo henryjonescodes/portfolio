@@ -23,3 +23,4 @@ Make the animations easy to tweak and idiomatic without regressing them; ship as
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: Roadmap written; LEVA.md and CLAUDE.md still to update
