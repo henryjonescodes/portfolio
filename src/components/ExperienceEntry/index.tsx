@@ -330,7 +330,8 @@ const ExperienceEntry = ({
           <motion.div
             className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
             style={{ ...windowStyle, x: dragX, y: dragY }}
-            drag={!expanded}
+            // Phones show the window full screen, so it does not drag there.
+            drag={!expanded && width >= widthMobile}
             dragMomentum={false}
             dragElastic={0.1}
             dragConstraints={{
