@@ -20,7 +20,7 @@ export const InteractionProvider = ({ children }: { children: React.ReactNode })
   useEffect(() => {
     if (!isDebugMode) return;
     console.log(`[InteractionContext]: active object: ${activeObject}`);
-  }, [activeObject]);
+  }, [activeObject, isDebugMode]);
 
   return (
     <InteractionContext.Provider value={{ activeObject, setActiveObject }}>
