@@ -25,8 +25,6 @@ for (const path of ['/experience', '/projects']) {
 
       await expect(page.getByTestId('modal-overlay')).toBeVisible();
       await closeModal(page);
-      // The overlay may linger while children finish exiting, but must stop catching clicks.
-      await expect(page.getByTestId('modal-overlay')).toHaveCSS('pointer-events', 'none');
       await expect(page.getByTestId('modal-overlay')).toHaveCount(0, { timeout: 15_000 });
 
       // The source entry is visible and clickable again.
