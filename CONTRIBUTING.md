@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:48 UTC by `bw board` on `` |
+| Generated | 2026-10-04 20:48 UTC by `bw board` on `entry/window` |
 | Trunk | `staging` |
 | Live branches | 9 |
 | Open PRs | none |
@@ -31,7 +31,7 @@ flowchart LR
   class n_entry_open planned
   n_entry_list --> n_entry_open
   n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
-  class n_entry_window planned
+  class n_entry_window planned,current
   n_staging --> n_entry_window
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
@@ -66,11 +66,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-Nothing checked out or active.
+**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
+
+**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
+
+**How, next.** Every todo is done; it waits on review and merge.
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `entry/window` |  | planned, 15 to push, 14 to pull | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
 
 ## 🕘 Just happened
 
-**feat(entries): phone tiles open the shared window, full screen, image first** · 2026-10-04 20:42 · `entry/window` · `b89de966`
+**feat(entries): phone tiles open the shared window, full screen, image first** · 2026-10-04 20:47 · `entry/window` · `c69e8718`
 Phone tiles open the same window as wide screens. On phones it takes the whole screen over the site nav, the image sits first under the bar on Overview, and Expand is hidden. Sections drop the entry heading the bar already shows; an effort shows dates only when it has its own. A closed window over a source with no image hides the pane, so it grows in as it opens. The window takes focus as it opens, traps Tab and returns focus to its source. The carousel keeps only its tiles.
 
 - **fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 20:31 · `feat/crosshair-cursor` · `ed401577`
@@ -184,7 +192,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/5 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` | One window for every open entry | planned |  | 6/6 | 7 | pushed |  |
+| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 8 | 15 to push, 14 to pull |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
