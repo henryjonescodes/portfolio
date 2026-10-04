@@ -15,10 +15,10 @@ Links to the site unfurl with a title, description and image, and the page has t
 
 - [x] Description, theme-color and canonical URL in index.html
 - [x] Open Graph and Twitter card tags with a share image
-- [?] Pick or approve the share image and the one-line description
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-04: done "Description, theme-color and canonical URL in index.html" at b3c8628a
 - 2026-10-04: done "Open Graph and Twitter card tags with a share image" at 1832634f
+- 2026-10-04: dropped "Pick or approve the share image and the one-line description"
