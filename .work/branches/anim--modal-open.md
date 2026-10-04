@@ -3,7 +3,7 @@ branch: anim/modal-open
 parent: feat/mobile-carousel
 status: active
 title: Modal opens as cleanly as it closes
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/70
 updated: 2026-10-04
 ---
 
