@@ -1,13 +1,13 @@
 # Work board
 
-_Updated 2026-10-04 19:36 UTC on `` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:36 UTC on `feat/entry-dock` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
   n_feat_global_modal([feat/global-modal])
   n_staging([staging])
   n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/4 · 🙋 1"]
-  class n_feat_entry_dock planned
+  class n_feat_entry_dock planned,current
   n_feat_global_modal --> n_feat_entry_dock
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/14 · 🙋 11<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -43,14 +43,13 @@ flowchart LR
 
 ## 🟢 Happening now
 
-- Nothing active.
+- **Effort dock and placeholder media** · `feat/entry-dock` (checked out) · 3/4  
+  next: nothing open
 
 ## 🕘 Just happened
 
-- 27m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
-- 5h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/entry-dock`
-- 6h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/entry-dock`
-- 6h ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/entry-dock`
+- 0m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
+- 1m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
 
 **Merged, not yet landed** (run `bw land <branch> --into <next branch>`)
 
@@ -76,7 +75,7 @@ flowchart LR
 
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
-| `feat/entry-dock` | planned | 3/4 | 4 | pushed | — |  |
+| `feat/entry-dock` ◀ | planned | 3/4 | 2 | 18 to push, 14 to pull | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
@@ -92,10 +91,8 @@ Open entries switch efforts from a compact retro dock with a sliding indicator i
 
 Commits:
 
-- `e36a4f0c` feat(entries): an effort dock and labelled placeholder media
-- `a0dee110` feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word
-- `5c351640` docs: roadmap reflects efforts, sharing and entry links
-- `026e795a` feat(modal): any link can open an entry, zooming out of where it was clicked
+- `a099d865` feat(entries): an effort dock and labelled placeholder media
+- `0b398e70` Merge pull request #80 from henryjonescodes/feat/global-modal
 
 </details>
 
