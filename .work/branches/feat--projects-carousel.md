@@ -1,7 +1,7 @@
 ---
 branch: feat/projects-carousel
 parent: anim/motion-idioms
-status: planned
+status: active
 title: Projects carousel
 pr: null
 updated: 2026-10-04
