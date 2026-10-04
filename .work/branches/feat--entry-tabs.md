@@ -1,10 +1,11 @@
 ---
 branch: feat/entry-tabs
 parent: staging
-status: planned
+status: review
 title: Entry subpages as nav tabs, and a masonry gallery
 pr: null
 updated: 2026-10-04
+motivation: null
 ---
 
 ## Goal
