@@ -11,50 +11,31 @@ const server = await createServer({
 });
 
 try {
-  const { experienceData, experienceOrder } = await server.ssrLoadModule('/src/data/experience.ts');
-  const { projectsData, projectsOrder } = await server.ssrLoadModule('/src/data/projects.ts');
+  const { experienceData } = await server.ssrLoadModule('/src/data/experience.ts');
+  const { projectsData } = await server.ssrLoadModule('/src/data/projects.ts');
+  const { pageMeta, entryTitle, SITE_TITLE } = await server.ssrLoadModule('/src/data/pages.ts');
 
   // Mentions read as their text, and list bullets lose their leading dash.
   const plain = (text = '') =>
     text
-      .replace(/\{\{[\w-]+\/[\w-]+\|([^}]+)\}\}/g, '$1')
+      .replace(/\{\{[\w-]+(?:\/[\w-]+)?\|([^}]+)\}\}/g, '$1')
       .replace(/^\s*[—-]\s*/, '')
       .trim();
 
   const entry = (e) => ({
-    title: e.title,
+    title: entryTitle(e.title),
     description: plain(e.blurb ?? e.description[0]),
     efforts: Object.fromEntries(
-      (e.efforts ?? []).map((f) => [f.id, { title: f.title, description: plain(f.summary) }]),
+      (e.efforts ?? []).map((f) => [
+        f.id,
+        { title: entryTitle(e.title, f.title), description: plain(f.summary) },
+      ]),
     ),
   });
-  const titles = (order, data) => order.map((id) => data[id].title).join(', ');
 
   const shareData = {
-    site: 'Henry Jones',
-    routes: {
-      '/': {
-        title: 'Henry Jones, creative developer',
-        description:
-          'Shaping human-oriented digital experiences, from interactive 3D to iOS and the web.',
-      },
-      '/about': {
-        title: 'About | Henry Jones',
-        description: 'Henry Jones is a creative developer based in New York City.',
-      },
-      '/experience': {
-        title: 'Experience | Henry Jones',
-        description: `Where Henry has built things: ${titles(experienceOrder, experienceData)}.`,
-      },
-      '/projects': {
-        title: 'Projects | Henry Jones',
-        description: `Projects by Henry Jones: ${titles(projectsOrder, projectsData)}.`,
-      },
-      '/links': {
-        title: 'Links | Henry Jones',
-        description: 'Email, calendar, LinkedIn, Instagram, GitHub and resume.',
-      },
-    },
+    site: SITE_TITLE,
+    routes: pageMeta,
     entries: Object.fromEntries(
       [...Object.values(experienceData), ...Object.values(projectsData)].map((e) => [
         e.id,

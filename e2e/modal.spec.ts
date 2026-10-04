@@ -212,9 +212,6 @@ test('efforts: tabs switch the open entry, and a mention opens its effort', asyn
 });
 
 test('efforts: a mention hands focus to the tab it selects', async ({ page }) => {
-test('the open modal is shareable: its state is in the URL and a link reopens it', async ({
-  page,
-}) => {
   await page.goto('/experience?lite=true');
   await page.waitForTimeout(1500);
   await openFirstEntry(page);
@@ -232,17 +229,27 @@ test('hero figures show their value with reduced motion', async ({ page }) => {
   const dialog = page.getByRole('dialog');
   await dialog.getByRole('tab', { name: 'User notifier' }).click();
   await expect(dialog.getByText('99.99%').first()).toBeVisible();
+});
+
+test('the open modal is shareable: its state is in the URL and a link reopens it', async ({
+  page,
+}) => {
+  await page.goto('/experience?lite=true');
+  await page.waitForTimeout(1500);
+  await openFirstEntry(page);
+  const dialog = page.getByRole('dialog');
   await expect(page).toHaveURL(/entry=arbor/);
   await dialog.getByRole('tab', { name: 'User notifier' }).click();
   await dialog.getByRole('button', { name: 'Expand' }).click();
   await expect(page).toHaveURL(/effort=notifier/);
   await expect(page).toHaveURL(/size=full/);
-  await expect(page).toHaveTitle('User notifier | Arbor | Henry Jones');
+  await expect(page).toHaveTitle('User notifier at Arbor | Henry Jones');
   const shared = page.url();
 
   await closeModal(page);
   await expect(page).not.toHaveURL(/entry=/);
   await expect(page).toHaveURL(/lite=true/);
+  await expect(page).toHaveTitle('Experience | Henry Jones');
 
   await page.goto(shared);
   await expect(page.getByRole('dialog')).toBeVisible();
@@ -256,4 +263,17 @@ test('hero figures show their value with reduced motion', async ({ page }) => {
 test('a link names any entry, projects included', async ({ page }) => {
   await page.goto('/projects?lite=true&entry=thesis');
   await expect(page.getByRole('dialog', { name: 'Senior Thesis' })).toBeVisible();
+});
+
+test('after closing a shared entry, moving on does not reopen it', async ({ page }) => {
+  await page.goto('/experience?lite=true&entry=arbor');
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await page.waitForTimeout(1200);
+  await closeModal(page);
+  await expect(dialog).toHaveCount(0);
+  await page.getByRole('link', { name: 'About' }).first().click();
+  await expect(page).toHaveURL(/\/about\?lite=true$/);
+  await page.waitForTimeout(1200);
+  await expect(dialog).toHaveCount(0);
 });

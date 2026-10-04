@@ -9,9 +9,14 @@ const data: ShareData = {
   },
   entries: {
     arbor: {
-      title: 'Arbor',
+      title: 'Arbor | Henry Jones',
       description: 'Full stack engineer',
-      efforts: { notifier: { title: 'User notifier', description: 'Emails "savings" & more' } },
+      efforts: {
+        notifier: {
+          title: 'User notifier at Arbor | Henry Jones',
+          description: 'Emails "savings" & more',
+        },
+      },
     },
   },
 };

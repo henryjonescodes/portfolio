@@ -1,18 +1,18 @@
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import EntryMediaView from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
 import { findEntry } from '@data/entries';
+import { entryTitle, pageTitle } from '@data/pages';
 import styles from './experience-entry-modal.module.scss';
 import { ExperienceEntryModalContext } from './ExperienceEntryModalContext';
 
 /** Query keys that describe the open modal, so a link can reopen it. */
 const PARAMS = { entry: 'entry', effort: 'effort', size: 'size' } as const;
-const SITE_TITLE = 'Henry Jones';
 
 type ExperienceEntryModalProviderProps = {
   children: React.ReactNode;
@@ -20,12 +20,24 @@ type ExperienceEntryModalProviderProps = {
 
 export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalProviderProps) => {
   const { TRANSITIONS } = useAnimations();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedEntry, setSelectedEntry] = useState<EntryData | null>(null);
+  const [searchParams] = useSearchParams();
+  const { pathname } = useLocation();
+  // A shared link names the entry to open, read on the first render so the URL never sees
+  // a closed modal in between.
+  const [linked] = useState(() => {
+    const entry = findEntry(searchParams.get(PARAMS.entry) ?? '');
+    const effort = searchParams.get(PARAMS.effort);
+    return {
+      entry: entry ?? null,
+      effort: entry?.efforts?.some((e) => e.id === effort) ? effort : null,
+      expanded: !!entry && searchParams.get(PARAMS.size) === 'full',
+    };
+  });
+  const [selectedEntry, setSelectedEntry] = useState<EntryData | null>(linked.entry);
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [expanded, setExpanded] = useState(false);
-  const [effortId, setEffortId] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(linked.expanded);
+  const [effortId, setEffortId] = useState<string | null>(linked.effort);
   const closeTimer = useRef<ReturnType<typeof setTimeout>>();
 
   useEffect(() => () => clearTimeout(closeTimer.current), []);
@@ -72,38 +84,24 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     closeTimer.current = setTimeout(() => setSelectedEntry(null), totalDuration);
   };
 
-  // A shared link reopens the entry it names, once, on arrival.
+  // The address bar and tab title follow the open modal, so copying the URL shares it. The
+  // URL is replaced in place rather than through the router, whose re-render mid-morph would
+  // restart the layout animation; the router only reads it on arrival.
+  const openId = selectedEntry && !isClosing ? selectedEntry.id : undefined;
   useEffect(() => {
-    const entry = findEntry(searchParams.get(PARAMS.entry) ?? '');
-    if (!entry) return;
-    const effort = searchParams.get(PARAMS.effort);
-    open(entry, {
-      effort: entry.efforts?.some((e) => e.id === effort) ? effort : null,
-      expanded: searchParams.get(PARAMS.size) === 'full',
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const url = new URL(window.location.href);
+    const set = (key: string, value: string | null | undefined) =>
+      value ? url.searchParams.set(key, value) : url.searchParams.delete(key);
+    set(PARAMS.entry, openId);
+    set(PARAMS.effort, openId && effortId);
+    set(PARAMS.size, openId && expanded ? 'full' : null);
+    if (url.href !== window.location.href)
+      window.history.replaceState(window.history.state, '', url);
 
-  // The address bar and tab title follow the open modal, so copying the URL shares it.
-  const openId = pageOpen ? selectedEntry?.id : undefined;
-  useEffect(() => {
-    setSearchParams(
-      (params) => {
-        const next = new URLSearchParams(params);
-        const set = (key: string, value: string | null | undefined) =>
-          value ? next.set(key, value) : next.delete(key);
-        set(PARAMS.entry, openId);
-        set(PARAMS.effort, openId && effortId);
-        set(PARAMS.size, openId && expanded ? 'full' : null);
-        return next.toString() === params.toString() ? params : next;
-      },
-      { replace: true },
-    );
     const effortTitle = selectedEntry?.efforts?.find((e) => e.id === effortId)?.title;
-    document.title = openId
-      ? [effortTitle, selectedEntry?.title, SITE_TITLE].filter(Boolean).join(' | ')
-      : SITE_TITLE;
-  }, [openId, effortId, expanded, selectedEntry, setSearchParams]);
+    document.title =
+      openId && selectedEntry ? entryTitle(selectedEntry.title, effortTitle) : pageTitle(pathname);
+  }, [openId, effortId, expanded, selectedEntry, pathname]);
 
   return (
     <ExperienceEntryModalContext.Provider

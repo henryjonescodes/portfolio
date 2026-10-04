@@ -4,22 +4,17 @@ export type ShareData = {
   routes: Record<string, Meta>;
   entries: Record<string, { title: string; description: string; efforts: Record<string, Meta> }>;
 };
-type Meta = { title: string; description: string };
+export type Meta = { title: string; description: string };
 
-/** The preview for a URL: its route, narrowed to the entry and effort its query names. */
+/** The preview for a URL: its route, narrowed to the entry and effort its query names. Titles
+ * arrive formatted from the site's own title helpers. */
 export function resolveMeta(url: URL, data: ShareData): Meta | undefined {
   const path = url.pathname.replace(/\/+$/, '') || '/';
   const route = data.routes[path];
   if (!route) return undefined;
   const entry = data.entries[url.searchParams.get('entry') ?? ''];
   if (!entry) return route;
-  const effort = entry.efforts[url.searchParams.get('effort') ?? ''];
-  if (effort)
-    return {
-      title: `${effort.title} at ${entry.title} | ${data.site}`,
-      description: effort.description,
-    };
-  return { title: `${entry.title} | ${data.site}`, description: entry.description };
+  return entry.efforts[url.searchParams.get('effort') ?? ''] ?? entry;
 }
 
 const escape = (s: string) =>
