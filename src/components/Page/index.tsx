@@ -62,6 +62,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
             <LazyNavBar page={page} />
           </Suspense>
           <motion.div
+            data-scroll-root
             className={cn(styles.content, {
               [styles.contentFullScreen]: !embedded,
             })}
@@ -70,11 +71,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
             ref={contentRef}
           >
             <motion.div className={styles.contentInner}>
-              {/* Reset scroll once the old page has exited, before the new one paints in. */}
-              <AnimatePresence
-                mode="wait"
-                onExitComplete={() => contentRef.current?.scrollTo(0, 0)}
-              >
+              <AnimatePresence mode="wait">
                 <Suspense fallback={null}>
                   <LazyAnimatedOutlet key={page} />
                 </Suspense>

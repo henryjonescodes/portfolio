@@ -96,3 +96,19 @@ test('3D mode mounts a canvas without errors', async ({ page }) => {
   await expect(page.getByText(/Animation System|3D Scene/)).toHaveCount(0);
   expect(errors.filter((e) => !/WebGL|GPU|GL_/i.test(e))).toEqual([]);
 });
+
+test('a new page starts scrolled to the top', async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 500 });
+  await page.goto('/experience?lite=true');
+  await page.waitForTimeout(1500);
+  const scroller = page.locator('[data-scroll-root]');
+  await scroller.evaluate((el) => el.scrollTo(0, 400));
+  expect(await scroller.evaluate((el) => el.scrollTop)).toBeGreaterThan(100);
+  // Navigate inside the app (a fresh load would trivially start at the top).
+  await page.evaluate(() => {
+    window.history.pushState({}, '', '/projects?lite=true');
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  });
+  await expect(page.locator('h1').first()).toHaveText(/projects/i, { timeout: 10_000 });
+  await expect.poll(() => scroller.evaluate((el) => el.scrollTop)).toBe(0);
+});

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useSettings } from '@context/SettingsContext';
 import { useAnimations } from '@context/AnimationContext';
 import styles from './page.module.scss';
@@ -22,6 +22,12 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
   // Each page mounts fresh per route, and keeps the mode it mounted with through its exit,
   // so a zoom toggle mid-visit does not swap its variants.
   const [minimal] = useState(animationDisabled);
+
+  // A page mounts once the previous one has gone, so start it scrolled to the top.
+  const ref = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    ref.current?.closest('[data-scroll-root]')?.scrollTo(0, 0);
+  }, []);
 
   const pageVariants = useMemo(
     () => ({
@@ -65,7 +71,8 @@ const PageContents: React.FC<Props> = ({ children, className }) => {
 
   return (
     <motion.div
-      className={classNames(styles.pageContents, className)} // Merge classnames
+      ref={ref}
+      className={classNames(styles.pageContents, className)}
       variants={variants}
       initial={initial}
       animate={animate}
