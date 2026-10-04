@@ -3,7 +3,7 @@ branch: seo/meta
 parent: feat/mobile-carousel
 status: review
 title: Sharing and search metadata
-pr: null
+pr: https://github.com/henryjonescodes/portfolio/pull/69
 updated: 2026-10-04
 ---
 
