@@ -1,7 +1,7 @@
 ---
 branch: seo/meta
 parent: feat/mobile-carousel
-status: active
+status: review
 title: Sharing and search metadata
 pr: null
 updated: 2026-10-04
