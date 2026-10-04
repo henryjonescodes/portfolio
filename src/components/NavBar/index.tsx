@@ -86,7 +86,8 @@ const NavBar = ({ page }: NavBarProps) => {
   const centerText = mini ? pageName : `$henry-jones/${pageName}`;
 
   return (
-    <motion.span
+    <motion.nav
+      aria-label="Site"
       className={styles.navigationBar}
       variants={firstPageLoad ? navBarVariants : minimalNavBarVariants}
       initial={firstPageLoad ? 'initial' : 'animate'}
@@ -145,6 +146,7 @@ const NavBar = ({ page }: NavBarProps) => {
             Icon={Pause}
             ActiveIcon={Play}
             active={animationDisabled}
+            label={animationDisabled ? 'Play animations' : 'Pause animations'}
           />
           <NavBarButton
             onClick={() => {
@@ -153,11 +155,12 @@ const NavBar = ({ page }: NavBarProps) => {
             active={zoomLevel === 'fullscreen'}
             Icon={Expand}
             ActiveIcon={Handheld}
+            label={zoomLevel === 'fullscreen' ? 'Back to the device' : 'Full screen'}
           />
-          <NavBarButton onClick={() => navigate(`/`, { replace: true })} Icon={Home} />
+          <NavBarButton onClick={() => navigate(`/`, { replace: true })} Icon={Home} label="Home" />
         </motion.span>
       </motion.span>
-    </motion.span>
+    </motion.nav>
   );
 };
 

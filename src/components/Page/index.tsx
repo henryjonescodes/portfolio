@@ -70,13 +70,13 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
             variants={pageVariants}
             ref={contentRef}
           >
-            <motion.div className={styles.contentInner}>
+            <motion.main className={styles.contentInner}>
               <AnimatePresence mode="wait">
                 <Suspense fallback={null}>
                   <LazyAnimatedOutlet key={page} />
                 </Suspense>
               </AnimatePresence>
-            </motion.div>
+            </motion.main>
           </motion.div>
         </motion.div>
       </AnimatePresence>

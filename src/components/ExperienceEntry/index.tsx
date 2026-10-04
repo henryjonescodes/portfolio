@@ -70,6 +70,17 @@ const ExperienceEntry = ({
         })}
         onClick={onClick}
         style={onClick ? { cursor: 'pointer' } : undefined}
+        {...(onClick && {
+          role: 'button',
+          tabIndex: 0,
+          'aria-label': `Open ${title}`,
+          onKeyDown: (e: React.KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onClick();
+            }
+          },
+        })}
         transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
         initial={false}
         animate={{

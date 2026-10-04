@@ -5,11 +5,16 @@ import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';
 import { useAnimations } from '@context/AnimationContext';
 import styles from './home.module.scss';
 
+const MENU = [
+  { path: '/about', label: 'About' },
+  { path: '/experience', label: 'Experience' },
+  { path: '/projects', label: 'Projects' },
+];
+
 const Home = () => {
-  const navigate = useNavigatePreserveQuery(); // Initialize the navigate function
+  const navigate = useNavigatePreserveQuery();
   const { TRANSITIONS } = useAnimations();
 
-  // Define animation variants for the menu with staggered children
   const menuVariants = {
     animate: {
       transition: TRANSITIONS.HOME.MENU_ANIMATE_STAGGER,
@@ -20,30 +25,29 @@ const Home = () => {
 
   return (
     <PageContents key={'menu'} className={styles.menu}>
-      {/* Henry Jones */}
       <motion.h1 variants={menuVariants}>
         <TypewriterText text="Henry Jones" staggerChildren={textStaggerSeconds} />
       </motion.h1>
 
-      {/* Creative Developer */}
-      <motion.h3 variants={menuVariants}>
+      <motion.h3 variants={menuVariants} aria-level={2}>
         <TypewriterText text="Creative Developer" staggerChildren={textStaggerSeconds} />
       </motion.h3>
 
-      {/* About (Link) */}
-      <motion.h2 variants={menuVariants} onClick={() => navigate('/about')}>
-        <TypewriterText text="About" staggerChildren={textStaggerSeconds} />
-      </motion.h2>
-
-      {/* Experience (Link) */}
-      <motion.h2 variants={menuVariants} onClick={() => navigate('/experience')}>
-        <TypewriterText text="Experience" staggerChildren={textStaggerSeconds} />
-      </motion.h2>
-
-      {/* Projects (Link) */}
-      <motion.h2 variants={menuVariants} onClick={() => navigate('/projects')}>
-        <TypewriterText text="Projects" staggerChildren={textStaggerSeconds} />
-      </motion.h2>
+      <motion.nav aria-label="Pages" className={styles.links}>
+        {MENU.map(({ path, label }) => (
+          <motion.h2 key={path} variants={menuVariants}>
+            <a
+              href={path}
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(path);
+              }}
+            >
+              <TypewriterText text={label} staggerChildren={textStaggerSeconds} />
+            </a>
+          </motion.h2>
+        ))}
+      </motion.nav>
     </PageContents>
   );
 };
