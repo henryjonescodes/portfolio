@@ -1,14 +1,12 @@
 import { motion } from 'framer-motion';
 import cn from 'classnames';
 
-import GitHub from '@assets/svg/socials/github.svg?react';
-import Instagram from '@assets/svg/socials/Instagram.svg?react';
-import LinkedIn from '@assets/svg/socials/linkedIn.svg?react';
 import Book from '@assets/svg/icons/book-01.svg?react';
 import Home from '@assets/svg/icons/home.svg?react';
 import LinkIcon from '@assets/svg/icons/link.svg?react';
 
 import TypewriterText from '@components/TypewriterText';
+import { links } from '@data/links';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import Map from '@components/MapViewer/Map';
 import PageContents from '@components/Page/PageContents';
@@ -55,6 +53,27 @@ const About = () => {
 
   const moveTags = width > screenWidths.mobileLarge || embedded;
 
+  const tags = (
+    <motion.div className={styles.tags} variants={tagsVariants}>
+      <motion.span className={styles.tag}>
+        <motion.div variants={iconVariants} className={styles.iconWrapper}>
+          <Home className={styles.icon} />
+        </motion.div>
+        <motion.h4 className={styles.text} role="none">
+          <TypewriterText text="NYC" staggerChildren={0.05} />
+        </motion.h4>
+      </motion.span>
+      <motion.span className={styles.tag}>
+        <motion.div variants={iconVariants} className={styles.iconWrapper}>
+          <Book className={styles.icon} />
+        </motion.div>
+        <motion.h4 className={styles.text} role="none">
+          <TypewriterText text="Union College" staggerChildren={0.05} />
+        </motion.h4>
+      </motion.span>
+    </motion.div>
+  );
+
   return (
     <PageContents
       key={'about'}
@@ -88,39 +107,20 @@ const About = () => {
             {/* Socials */}
             {/* {!moveSocials && ( */}
             <motion.div className={styles.socials} variants={socialsVariants}>
-              <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                <GlitchIcon
-                  Icon={GitHub}
-                  className={styles.icon}
-                  url="https://github.com/henryjonescodes"
-                  label="GitHub"
-                />
-              </motion.div>
-              <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                <GlitchIcon
-                  Icon={LinkedIn}
-                  className={styles.icon}
-                  url="https://www.linkedin.com/in/henryjonescodes/"
-                  label="LinkedIn"
-                />
-              </motion.div>
-              <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                <GlitchIcon
-                  Icon={Instagram}
-                  className={styles.icon}
-                  url="https://www.instagram.com/theycallmezonez/"
-                  label="Instagram"
-                />
-              </motion.div>
-              <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                <GlitchIcon
-                  Icon={LinkIcon}
-                  paint="stroke"
-                  className={styles.icon}
-                  url="/links"
-                  label="All links"
-                />
-              </motion.div>
+              {[
+                ...links,
+                { label: 'All links', href: '/links', Icon: LinkIcon, paint: 'stroke' as const },
+              ].map((link) => (
+                <motion.div key={link.label} variants={iconVariants} className={styles.iconWrapper}>
+                  <GlitchIcon
+                    Icon={link.Icon}
+                    paint={link.paint}
+                    className={styles.icon}
+                    url={link.href}
+                    label={link.label}
+                  />
+                </motion.div>
+              ))}
             </motion.div>
             {/* )} */}
           </motion.div>
@@ -143,24 +143,7 @@ const About = () => {
               {moveTags && (
                 <>
                   <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
-                  <motion.div className={styles.tags} variants={tagsVariants}>
-                    <motion.span className={styles.tag}>
-                      <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                        <Home className={styles.icon} />
-                      </motion.div>
-                      <motion.h4 className={styles.text} role="none">
-                        <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
-                      </motion.h4>
-                    </motion.span>
-                    <motion.span className={styles.tag}>
-                      <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                        <Book className={styles.icon} />
-                      </motion.div>
-                      <motion.h4 className={styles.text} role="none">
-                        <TypewriterText text="Union College" staggerChildren={0.05} />
-                      </motion.h4>
-                    </motion.span>
-                  </motion.div>
+                  {tags}
                   <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                 </>
               )}
@@ -177,24 +160,7 @@ const About = () => {
                       horizontal={false}
                       borderWidth={2}
                     />
-                    <motion.div className={styles.tags} variants={tagsVariants}>
-                      <motion.span className={styles.tag}>
-                        <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                          <Home className={styles.icon} />
-                        </motion.div>
-                        <motion.h4 className={styles.text} role="none">
-                          <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
-                        </motion.h4>
-                      </motion.span>
-                      <motion.span className={styles.tag}>
-                        <motion.div variants={iconVariants} className={styles.iconWrapper}>
-                          <Book className={styles.icon} />
-                        </motion.div>
-                        <motion.h4 className={styles.text} role="none">
-                          <TypewriterText text="Union College" staggerChildren={0.05} />
-                        </motion.h4>
-                      </motion.span>
-                    </motion.div>
+                    {tags}
                     <AnimatedLine className={styles.divider} horizontal={true} borderWidth={2} />
                   </>
                 )}

@@ -50,8 +50,9 @@ const GlitchIcon: React.FC<GlitchIconProps> = ({
       </motion.div>
     );
 
-  // A path stays in the app and keeps the query (lite, debug); anything else opens a tab.
-  if (url?.startsWith('/')) {
+  // A page path stays in the app and keeps the query (lite, debug); files and other sites
+  // open in a tab.
+  if (url && /^\/[^.]*$/.test(url)) {
     return (
       <Link
         to={{ pathname: url, search }}
