@@ -47,3 +47,4 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - 2026-10-04: done "Opaque open view and a darker backdrop behind the modal" at a7a5cf4b
 - 2026-10-04: done "Escape closes the modal; the open entry is a labelled dialog" at 0792d78a
 - 2026-10-04: done "Move project media into the project data" at 49baae04
+- 2026-10-04: Bevel applied to the modal title bar only; entry headers unchanged pending design review
