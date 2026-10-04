@@ -1,7 +1,7 @@
 ---
 branch: design/retro-chrome
 parent: chore/foundation
-status: planned
+status: active
 title: Retro tablet chrome pass
 pr: null
 updated: 2026-10-04
