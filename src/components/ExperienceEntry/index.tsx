@@ -34,6 +34,7 @@ const ExperienceEntry = ({
   modal = false,
   windowStyle,
   onLayoutAnimationComplete,
+  mediaWhenClosed = true,
   onClose,
   expanded = false,
   onToggleExpand,
@@ -222,7 +223,6 @@ const ExperienceEntry = ({
                   id={`${id}-panel`}
                   aria-labelledby={`${id}-tab-${subpageId}`}
                 >
-                  {bodyTitle}
                   {effort ? (
                     <EffortView effort={effort} onMention={mentionHandler} />
                   ) : (
@@ -270,7 +270,14 @@ const ExperienceEntry = ({
                       )}
                     </motion.div>
                     {children && (
-                      <motion.div className={styles.childrenWrapper} layoutId="childrenWrapper">
+                      <motion.div
+                        className={cn(styles.childrenWrapper, {
+                          [styles.mediaCollapsed]: modal && !isOpen && !mediaWhenClosed,
+                        })}
+                        layoutId="childrenWrapper"
+                        initial={false}
+                        animate={{ opacity: modal && !isOpen && !mediaWhenClosed ? 0 : 1 }}
+                      >
                         <AnimatedLine
                           borderWidth={borderWidth}
                           horizontal={width < widthMobile}

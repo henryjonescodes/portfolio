@@ -1,28 +1,19 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { motion } from 'framer-motion';
+import { useMemo, useRef } from 'react';
+import { useExperienceEntryModal } from '@components/ExperienceEntry/ExperienceEntryModalContext';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
-import { boxWithin } from '@utils/geometry';
 import EntryCard from './EntryCard';
 import styles from './entry-carousel.module.scss';
 
-type Selection = { id: string; from: CSSProperties; to: CSSProperties };
-
 /**
- * Entries as a horizontal row of tiles for phones. Selecting one mounts an overlay copy
- * exactly over it, then opens it to fill the visible scroll area, so `layout` morphs tile to
- * page; closing morphs back and unmounts when the layout animation completes.
+ * Entries as a horizontal row of tiles for phones. A tile opens the shared entry window, which
+ * grows out of the tile and shrinks back into it.
  */
 const EntryCarousel = ({ entries }: { entries: EntryData[] }) => {
   const { TRANSITIONS } = useAnimations();
-  const rootRef = useRef<HTMLDivElement>(null);
-  const rowRef = useRef<HTMLDivElement>(null);
-  const openRef = useRef<HTMLElement>(null);
+  const { openModal, selectedEntry } = useExperienceEntryModal();
   const cardRefs = useRef<Record<string, HTMLElement | null>>({});
-  const [selection, setSelection] = useState<Selection | null>(null);
-  const [open, setOpen] = useState(false);
-  // With reduced motion the layout snaps and may not report completion, so close outright.
-  const reduceMotion = useReducedMotion();
 
   const variants = useMemo(
     () => ({
@@ -32,108 +23,22 @@ const EntryCarousel = ({ entries }: { entries: EntryData[] }) => {
     [TRANSITIONS],
   );
 
-  const select = (id: string) => {
-    const card = cardRefs.current[id];
-    const root = rootRef.current;
-    if (!card || !root) return;
-    const scroller = root.closest<HTMLElement>('[data-scroll-root]') ?? root;
-    setSelection({
-      id,
-      from: boxWithin(card, root),
-      to: boxWithin(scroller, root, { width: scroller.clientWidth, height: scroller.clientHeight }),
-    });
-  };
-
-  // Open after the overlay copy has rendered at the tile's spot, so the morph has an origin.
-  useEffect(() => {
-    if (selection) setOpen(true);
-  }, [selection]);
-
-  // While an entry is open the tiles behind it leave the tab order, focus moves into the
-  // dialog, and closing hands focus back to the tile it came from.
-  useEffect(() => {
-    const row = rowRef.current;
-    if (!selection || !row) return;
-    row.inert = true;
-    openRef.current?.focus();
-    const tile = cardRefs.current[selection.id];
-    return () => {
-      row.inert = false;
-      tile?.focus();
-    };
-  }, [selection]);
-
-  // Hold the page still while an entry is open.
-  useEffect(() => {
-    const scroller = rootRef.current?.closest<HTMLElement>('[data-scroll-root]');
-    if (!selection || !scroller) return;
-    const previous = scroller.style.overflow;
-    scroller.style.overflow = 'hidden';
-    return () => {
-      scroller.style.overflow = previous;
-    };
-  }, [selection]);
-
-  const close = useCallback(() => {
-    setOpen(false);
-    if (reduceMotion) setSelection(null);
-  }, [reduceMotion]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close();
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, [open, close]);
-
-  const selected = selection && entries.find((e) => e.id === selection.id);
-
   return (
-    <div ref={rootRef} className={styles.carousel}>
-      <motion.div ref={rowRef} layoutScroll className={styles.row} variants={variants.row}>
+    <div className={styles.carousel}>
+      <motion.div layoutScroll className={styles.row} variants={variants.row}>
         {entries.map((entry) => (
           <motion.div key={entry.id} className={styles.slot} variants={variants.slot}>
             <EntryCard
               ref={(el) => (cardRefs.current[entry.id] = el)}
               entry={entry}
-              layoutKey={`${entry.id}-tile`}
-              isOpen={false}
-              hidden={selection?.id === entry.id}
-              onSelect={() => select(entry.id)}
+              hidden={selectedEntry?.id === entry.id}
+              onSelect={() =>
+                openModal(entry, { current: cardRefs.current[entry.id] as HTMLDivElement })
+              }
             />
           </motion.div>
         ))}
       </motion.div>
-      {selection && selected && (
-        <>
-          <motion.div
-            className={styles.backdrop}
-            style={selection.to}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: open ? 1 : 0 }}
-            transition={TRANSITIONS.CAROUSEL.CARD}
-          />
-          {/* initial={false}: the open copy shows its text instead of replaying the paint-in. */}
-          <motion.div
-            className={styles.overlay}
-            style={open ? selection.to : selection.from}
-            initial={false}
-            animate="open"
-          >
-            <EntryCard
-              ref={openRef}
-              key={selection.id}
-              entry={selected}
-              layoutKey={selection.id}
-              isOpen={open}
-              onClose={close}
-              onLayoutAnimationComplete={() => {
-                if (!open) setSelection(null);
-              }}
-            />
-          </motion.div>
-        </>
-      )}
     </div>
   );
 };

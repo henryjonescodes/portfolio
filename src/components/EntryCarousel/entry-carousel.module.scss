@@ -4,9 +4,8 @@ $tile: 82cqw;
 $side: calc((100cqw - #{$tile}) / 2);
 
 .carousel {
-  // The overlay and backdrop position against this box. It bleeds through the page
-  // padding so the row scrolls edge to edge, and fills the height left under the title
-  // so the row sits in the middle of it.
+  // Bleeds through the page padding so the row scrolls edge to edge, and fills the height
+  // left under the title so the row sits in the middle of it.
   position: relative;
   container-type: inline-size;
   align-self: stretch;
@@ -57,19 +56,12 @@ $side: calc((100cqw - #{$tile}) / 2);
     outline-offset: 2px;
   }
 
-  &.open {
-    cursor: default;
-    border-width: 0;
-  }
+  // The border is painted in, so the card trades it for equal padding inside the clip.
+  border-width: 0;
+  padding: 2.5px;
 
-  // Tiles trade the border for equal padding, inside the clip, and paint the border in.
-  &.tile {
-    border-width: 0;
-    padding: 2.5px;
-
-    .titleBar {
-      border-bottom-color: transparent;
-    }
+  .titleBar {
+    border-bottom-color: transparent;
   }
 }
 
@@ -111,19 +103,11 @@ $side: calc((100cqw - #{$tile}) / 2);
   }
 }
 
-.close {
-  margin-left: 4px;
-}
-
 .scroll {
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 0;
-
-  .open & {
-    overflow-y: auto;
-  }
 }
 
 .media {
@@ -136,13 +120,6 @@ $side: calc((100cqw - #{$tile}) / 2);
     height: 100%;
     object-fit: cover;
   }
-
-  .open & {
-    video,
-    img {
-      object-fit: contain;
-    }
-  }
 }
 
 .card .line {
@@ -154,11 +131,6 @@ $side: calc((100cqw - #{$tile}) / 2);
   top: auto;
   bottom: -2.5px;
   background-color: var(--foreground-secondary);
-}
-
-.rule {
-  height: 2.5px;
-  background: var(--foreground-secondary);
 }
 
 .body {
@@ -175,38 +147,4 @@ $side: calc((100cqw - #{$tile}) / 2);
   h3 {
     color: var(--accent-primary);
   }
-}
-
-.details {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  margin-top: 8px;
-}
-
-.tools {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.backdrop {
-  position: absolute;
-  z-index: 9;
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.overlay {
-  position: absolute;
-  z-index: 10;
-  display: flex;
-
-  > * {
-    flex: 1;
-  }
-}
-
-// The subpage tabs run edge to edge across the card, like the site's nav bar.
-.subnav {
-  margin: 0 -16px;
 }

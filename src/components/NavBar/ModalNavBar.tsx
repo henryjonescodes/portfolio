@@ -59,13 +59,16 @@ const ModalNavBar = ({
         </motion.div>
         <motion.div className={styles.right}>
           {onToggleExpand && (
-            <NavBarButton
-              onClick={onToggleExpand}
-              Icon={Expand}
-              ActiveIcon={Shrink}
-              active={expanded}
-              label={expanded ? 'Restore' : 'Expand'}
-            />
+            // Phones show the window full screen already, so they get no Expand.
+            <span className={styles.expand}>
+              <NavBarButton
+                onClick={onToggleExpand}
+                Icon={Expand}
+                ActiveIcon={Shrink}
+                active={expanded}
+                label={expanded ? 'Restore' : 'Expand'}
+              />
+            </span>
           )}
           {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" />}
         </motion.div>

@@ -137,6 +137,14 @@
     min-width: 0;
   }
 
+  // The closed window over a source with no image: the pane takes no room, and grows in.
+  .childrenWrapper.mediaCollapsed {
+    flex-basis: 0;
+    max-width: 0;
+    max-height: 0;
+    overflow: hidden;
+  }
+
   .children video,
   .children img {
     object-fit: contain;
@@ -205,6 +213,11 @@
 
   max-height: 100%;
 
+  // Phones: the window takes the whole screen, over the site's nav.
+  @media (max-width: styles.$width-mobile) {
+    height: 100%;
+  }
+
   > .entry {
     flex: 1;
     min-height: 0;
@@ -263,11 +276,15 @@
   }
 }
 
-// Phones stack media under the text, so the side-by-side split must not apply there.
+// Phones stack the image first, under the bar, then the text; no side-by-side split.
 @media (max-width: styles.$width-mobile) {
   .notInList {
     .descriptionContents {
       flex-direction: column;
+    }
+
+    .childrenWrapper {
+      order: -1;
     }
 
     .descriptionContentsFlex,
