@@ -19,7 +19,7 @@ Leave the codebase lean and consistent before more features land: no unused code
 - [x] One EntryMedia view shared by the projects list and the media panel
 - [x] Remove commented-out code and SCSS across src
 - [x] Split context modules so component files export only components (fast-refresh warnings)
-- [ ] Refactor the remaining hook dependencies in Loading, Map and useDebouncedEffect, behind tests
+- [x] Refactor the remaining hook dependencies in Loading, Map and useDebouncedEffect, behind tests
 - [x] knip config that understands the SCSS alias and types/, and an npm run check (lint, tsc, knip)
 - [ ] Self-maintain CLAUDE.md and the portfolio skills
 
@@ -33,3 +33,4 @@ Leave the codebase lean and consistent before more features land: no unused code
 - 2026-10-04: done "One EntryMedia view shared by the projects list and the media panel" at 7a6f49f5
 - 2026-10-04: done "Remove commented-out code and SCSS across src" at 84b81d41
 - 2026-10-04: done "Split context modules so component files export only components (fast-refresh warnings)" at e9fc386a
+- 2026-10-04: done "Refactor the remaining hook dependencies in Loading, Map and useDebouncedEffect, behind tests" at 8dc9c1a9
