@@ -42,7 +42,7 @@ flowchart LR
   n_refactor_entry_open["<b>One open morph, the carousel's, at every width</b><br/>refactor/entry-open<br/>planned · 0/4<br/><i>next: Closed and open layouts keep the same…</i>"]
   class n_refactor_entry_open planned
   n_refactor_entry_list --> n_refactor_entry_open
-  n_refactor_entry_window["<b>One window for every open entry</b><br/>refactor/entry-window<br/>planned · 5/6<br/><i>next: e2e: the same window on both widths</i>"]
+  n_refactor_entry_window["<b>One window for every open entry</b><br/>refactor/entry-window<br/>planned · 6/6"]
   class n_refactor_entry_window planned,current
   n_staging --> n_refactor_entry_window
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
@@ -73,13 +73,11 @@ flowchart LR
 
 **What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
 
-**How, next.**
-
-- e2e: the same window on both widths
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `refactor/entry-window` |  | planned, local only | 5/6 | e2e: the same window on both widths | 2026-10-entry-reconcile, 0 of 4 |
+| `refactor/entry-window` |  | planned, local only | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
 
 ## 🕘 Just happened
 
@@ -203,7 +201,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | `refactor/entry-cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `refactor/entry-list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `refactor/entry-open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `refactor/entry-window` ◀ | One window for every open entry | planned |  | 5/6 | 7 | local only | e2e: the same window on both widths |
+| `refactor/entry-window` ◀ | One window for every open entry | planned |  | 6/6 | 7 | local only |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
@@ -295,14 +293,14 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>refactor/entry-window</code>: One window for every open entry (5/6)</summary>
+<details><summary><code>refactor/entry-window</code>: One window for every open entry (6/6)</summary>
 
 The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
 
 - [x] EntryWindow: bar, media, body and sections, used by the modal and the phone open view
 - [x] Phone open view covers the full height, nav included; Close reads clearly
 - [x] Media sits under the bar on phones, beside the text on wide screens, by CSS
-- [ ] e2e: the same window on both widths
+- [x] e2e: the same window on both widths
 - [x] The entry's main image shows only on Overview, never on an effort or the gallery
 - [x] Sections (efforts, gallery) drop the entry heading the nav already shows; an effort shows dates only when it has its own
 
