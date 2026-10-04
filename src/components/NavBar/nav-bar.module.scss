@@ -204,15 +204,6 @@
     }
   }
 
-  // The name of whatever the bar belongs to, set in display type.
-  &.hero {
-    padding: 0 12px;
-    color: var(--foreground-primary);
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-  }
-
   &.mini {
     transition: width 0.2s ease-in-out;
     width: 50px;

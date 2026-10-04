@@ -25,8 +25,6 @@ type NavBarItemProps = {
   /** Role and state when the item is a tab rather than a page link. */
   tab?: { id: string; controls?: string; onKeyDown: (e: React.KeyboardEvent) => void };
   itemRef?: (el: HTMLElement | null) => void;
-  /** Shown as a name rather than a control: hero type, no role, out of the tab order. */
-  hero?: boolean;
 };
 
 const NavBarItem = ({
@@ -40,7 +38,6 @@ const NavBarItem = ({
   Icon,
   tab,
   itemRef,
-  hero = false,
 }: NavBarItemProps) => {
   const { TRANSITIONS } = useAnimations();
 
@@ -69,24 +66,21 @@ const NavBarItem = ({
         [styles.iconOnly]: iconOnly,
         [styles.withIcon]: withIcon,
         [styles.strokeIcon]: strokeIcon,
-        [styles.hero]: hero,
       })}
       onClick={(e) => {
         e.stopPropagation();
         onClick();
       }}
-      aria-label={hero ? undefined : label}
-      {...(hero
-        ? { 'aria-hidden': true }
-        : tab
-          ? {
-              role: 'tab',
-              id: tab.id,
-              'aria-selected': selected,
-              'aria-controls': tab.controls,
-              tabIndex: selected ? 0 : -1,
-            }
-          : { role: 'link', tabIndex: 0, 'aria-current': selected ? 'page' : undefined })}
+      aria-label={label}
+      {...(tab
+        ? {
+            role: 'tab',
+            id: tab.id,
+            'aria-selected': selected,
+            'aria-controls': tab.controls,
+            tabIndex: selected ? 0 : -1,
+          }
+        : { role: 'link', tabIndex: 0, 'aria-current': selected ? 'page' : undefined })}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
