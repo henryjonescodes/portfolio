@@ -248,7 +248,7 @@ test('lite mode never downloads three.js or the 3D scene', async ({ page }) => {
 });
 
 test.describe('accessibility', () => {
-  for (const path of ['/', '/about', '/experience', '/projects']) {
+  for (const path of ['/', '/about', '/experience', '/projects', '/links']) {
     test(`${path} has no axe violations in lite mode`, async ({ page }) => {
       await page.goto(`${path}?lite=true`);
       await page.waitForTimeout(2500); // let paint-in finish so contrast is measured on final colours

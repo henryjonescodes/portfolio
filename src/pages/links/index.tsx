@@ -19,7 +19,7 @@ const Links = () => {
       <motion.h1>
         <TypewriterText text="Henry Jones" staggerChildren={0.05} />
       </motion.h1>
-      <motion.h3>
+      <motion.h3 aria-level={2}>
         <TypewriterText text="Creative Developer" />
       </motion.h3>
       <motion.nav variants={listVariants} className={styles.content} aria-label="Links">
