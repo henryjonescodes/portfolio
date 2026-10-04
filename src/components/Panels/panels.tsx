@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import GlitchMedia from '@components/GlitchMedia';
+import { linkProps } from '@utils/links';
 import type { GalleryPanel, LinksPanel, MediaPanel, StatsPanel, TextPanel } from './types';
 import styles from './panels.module.scss';
 

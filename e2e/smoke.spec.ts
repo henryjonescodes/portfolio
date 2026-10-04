@@ -130,16 +130,21 @@ test('open project shows its panels, and the modal expands and restores', async 
   const dialog = page.getByRole('dialog');
   await expect(dialog.getByRole('region', { name: 'Links' })).toBeVisible({ timeout: 5_000 });
 
-  const overlay = (await page.getByTestId('modal-overlay').boundingBox())!;
-  const cozy = (await page.getByTestId('modal-entry').boundingBox())!;
-  await dialog.getByRole('button', { name: 'Expand' }).click();
+  const box = async () => (await page.getByTestId('modal-entry').boundingBox())!;
+  // Wait for the open morph to settle before taking the cozy size.
+  await expect.poll(async () => (await box()).width, { timeout: 5_000 }).toBeGreaterThan(0);
   await page.waitForTimeout(1200);
-  const expanded = (await page.getByTestId('modal-entry').boundingBox())!;
-  expect(expanded.width).toBeGreaterThanOrEqual(overlay.width - 2);
-  expect(expanded.height).toBeGreaterThan(cozy.height);
+  const overlay = (await page.getByTestId('modal-overlay').boundingBox())!;
+  const cozy = await box();
+
+  await dialog.getByRole('button', { name: 'Expand' }).click();
+  await expect
+    .poll(async () => (await box()).width, { timeout: 5_000 })
+    .toBeGreaterThanOrEqual(overlay.width - 2);
+  expect((await box()).height).toBeGreaterThan(cozy.height);
 
   await dialog.getByRole('button', { name: 'Restore' }).click();
-  await page.waitForTimeout(1200);
-  const restored = (await page.getByTestId('modal-entry').boundingBox())!;
-  expect(Math.abs(restored.width - cozy.width)).toBeLessThan(4);
+  await expect
+    .poll(async () => Math.abs((await box()).width - cozy.width), { timeout: 5_000 })
+    .toBeLessThan(4);
 });
