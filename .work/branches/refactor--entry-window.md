@@ -5,7 +5,7 @@ status: planned
 title: One window for every open entry
 pr: null
 updated: 2026-10-04
-motivation: null
+motivation: Phone and desktop open views should be the same window, so a fix or a polish lands once.
 ---
 
 ## Goal
