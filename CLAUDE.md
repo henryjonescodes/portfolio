@@ -53,14 +53,15 @@ The application uses a **dual-render approach** where the same UI can exist in t
 
 ### State Management: Context-First Architecture
 
-Six specialized contexts handle global state (no Redux/Zustand):
+Specialized contexts handle global state (no Redux/Zustand):
 
 - **ColorsContext** (`/src/context/ColorsContext.tsx`): Dynamic theming synced with 3D knobs, updates CSS custom properties in real-time with debouncing
 - **ZoomContext** (`/src/context/ZoomContext.tsx`): Camera positions (`fullscreen | wide | handheld | info`) synced with routes
 - **LoadingContext** (`/src/context/LoadingContext.tsx`): 3D asset loading with auto-timeout fallback to lite mode
 - **InteractionContext** (`/src/context/InteractionContext.tsx`): Active 3D object tracking, provides `InteractiveElement` HOC
 - **WindowDimensionContext** (`/src/context/WindowDimensionContext.tsx`): Responsive breakpoints and zoom position calculations
-- **SettingsContext** (`/src/context/SettingsContext.tsx`): Debug mode (`?debug=true`), Leva panel integration
+- **SettingsContext** (`/src/context/SettingsContext.tsx`): Debug mode (`?debug=true`), animation disable lock, orbit-controls toggle
+- **AnimationContext** (`/src/context/AnimationContext.tsx`): Resolved animation timing (`useAnimations()`); defaults from `src/config/animation/`, live values from the debug panel
 
 All providers nest in `/src/pages/landing/index.tsx`.
 
@@ -185,8 +186,8 @@ All content routes nest under Landing (`/*`) to share 3D scene context:
 ### Debugging 3D Scene
 
 1. Add `?debug=true` to URL
-2. Use Leva panel to adjust camera, animation timings, object positions
-3. Toggle OrbitControls for manual camera control
+2. Use the Leva panel (lazy-loaded from `src/debug/`) to adjust every animation timing, the 3D springs and timeouts
+3. Toggle OrbitControls for manual camera control in the panel's 3D Scene folder
 4. Check InteractionContext for active object state
 
 ## Performance Considerations
@@ -220,8 +221,26 @@ All content routes nest under Landing (`/*`) to share 3D scene context:
 
 ## Critical Patterns to Maintain
 
-1. **Context Bridging**: Always include all required contexts in CustomHTML's `useContextBridge()` when adding new global state
+1. **Context Bridging**: `CustomHTML` bridges every context automatically (`its-fine`); a new provider only needs to sit above the Canvas
 2. **Zoom-Route Sync**: ZoomContext listens to route changes; ensure new routes have appropriate zoom level mapping
 3. **CSS Custom Properties**: Dynamic theme colors must update CSS variables in `:root`, not just React state
 4. **InteractiveElement HOC**: All clickable 3D objects must use this pattern to prevent event conflicts
 5. **Lite Mode Compatibility**: All UI must work in both 3D and 2D modes (test with `?lite=true`)
+
+## Animation Config
+
+All timing lives in `src/config/animation/`: `transitions.ts` (every Framer Motion transition as
+`tune(base, value, range, label)` multiples of a category base), `system.ts` (master speed,
+category bases, 3D springs, timeouts) and `resolve.ts` (turns values into what components read).
+Add a tunable there and read it through `useAnimations()`; never hardcode a duration or spring.
+
+## Testing
+
+`npm run test:e2e` runs the Playwright smoke suite in `e2e/` (pages, the modal morph and close,
+the debug panel, the 3D canvas). Run it before pushing anything that touches animation, the
+modal or the 3D bridge. `npm run lint` and `npm run format` cover source style.
+
+## Work Tracking
+
+Work is tracked as branches with seeds in `.work/branches/` (see `ROADMAP.md`). Edit seeds only
+through the branchwork tool; `.work/BOARD.md` is generated.
