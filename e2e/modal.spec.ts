@@ -148,5 +148,11 @@ test('opening the modal moves its content with the window, never ahead of it', a
   };
   const boxDone = settledAt((f) => round(f.box));
   const innerDone = settledAt((f) => round(f.inner.flat()));
-  expect(Math.abs(innerDone - boxDone)).toBeLessThan(120);
+  // Settling is only measurable to the frame, and slow runners deliver frames far apart.
+  const gaps = frames
+    .slice(1)
+    .map((f, i) => f.t - frames[i].t)
+    .sort((a, b) => a - b);
+  const frameGap = gaps[Math.floor(gaps.length / 2)] ?? 16;
+  expect(Math.abs(innerDone - boxDone)).toBeLessThan(Math.max(120, frameGap * 2.5));
 });
