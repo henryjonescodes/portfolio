@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:44 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:46 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:44 UTC by `bw board` on `fix/modal-nav-mini` |
+| Generated | 2026-10-04 20:46 UTC by `bw board` on `pr84-merge` |
 | Trunk | `staging` |
 | Live branches | 10 |
 | Open PRs | none |
@@ -43,7 +43,7 @@ flowchart LR
   class n_fix_about_card planned
   n_staging --> n_fix_about_card
   n_fix_modal_nav_mini["<b>The window's bar is the main nav</b><br/>fix/modal-nav-mini<br/>planned · 1/1"]
-  class n_fix_modal_nav_mini planned,current
+  class n_fix_modal_nav_mini planned
   n_staging --> n_fix_modal_nav_mini
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -69,13 +69,7 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** An open entry's title bar uses exactly the main nav's mini items (icons that open to show their label), with the entry's name floated right before the buttons.
-
-**How, next.** Every todo is done; it waits on review and merge.
-
-| Branch | PR | Status | Progress | Next | Plan |
-|---|---|---|---|---|---|
-| `fix/modal-nav-mini` |  | planned, pushed | 1/1 | nothing open |  |
+Nothing checked out or active.
 
 ## 🕘 Just happened
 
@@ -198,7 +192,7 @@ Phone tiles open the same window as wide screens. On phones it takes the whole s
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
-| `fix/modal-nav-mini` ◀ | The window's bar is the main nav | planned |  | 1/1 | 6 | pushed |  |
+| `fix/modal-nav-mini` | The window's bar is the main nav | planned |  | 1/1 | 6 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
