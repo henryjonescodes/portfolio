@@ -1,7 +1,7 @@
 ---
 branch: chore/foundation
 parent: feat/modal-panels
-status: active
+status: review
 title: Foundation: DRY, code splitting, cleanup
 pr: https://github.com/henryjonescodes/portfolio/pull/63
 updated: 2026-10-04
