@@ -25,6 +25,7 @@ Replace the Projects list with a carousel that mimics the old card-to-page morph
 - [ ] Paint-in like the old entries: border draws, divider line draws, typewriter title, media glitches in
 - [ ] Open view: opaque window filling the whole visible content area, page darkened behind it during the morph
 - [ ] Retro tablet chrome: bevelled title bars, smaller corner radius, skeuomorphic controls
+- [ ] Re-sample the morph tests for both layouts
 
 ## Log
 
