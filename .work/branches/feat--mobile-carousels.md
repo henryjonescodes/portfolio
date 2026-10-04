@@ -14,7 +14,7 @@ Both lists become the phone carousel, with the first tile centred in the availab
 ## Todo
 
 - [x] One carousel component for experience and projects on phones
-- [ ] First tile centred on both axes; scroll area full width; no side dead space
+- [x] First tile centred on both axes; scroll area full width; no side dead space
 - [ ] Borrow the paint-in from the list entries: border draws, typewriter titles, staggered children
 - [ ] Keep the tile-to-page morph exactly as it is now
 - [ ] e2e for the experience carousel and centring
@@ -24,3 +24,4 @@ Both lists become the phone carousel, with the first tile centred in the availab
 
 - 2026-10-04: seeded
 - 2026-10-04: done "One carousel component for experience and projects on phones" at cbcae99c
+- 2026-10-04: done "First tile centred on both axes; scroll area full width; no side dead space" at 3492f89a
