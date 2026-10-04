@@ -49,13 +49,15 @@ flowchart LR
 
 ## 🟢 Happening now
 
+**Motivation.** Make every open entry feel like a real window on a small operating system, so the site reads as one designed object rather than a page with popups.
+
 **What.** An open entry's subpages use the main nav's tabs (Overview is the home icon, no text), a Gallery tab appears when an entry has one, and the gallery is a two-column masonry of square, wide (2:1) and tall (1:2) cards. A check fails the build when an effort subpage has no mention in the prose.
 
 **How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/entry-tabs` | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | review, 11 to push, 9 to pull | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
+| `feat/entry-tabs` | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | review, 12 to push, 9 to pull | 3/3 | nothing open | 2026-10-content-and-inbox, 0 of 3 |
 
 ## 🕘 Just happened
 
@@ -177,7 +179,7 @@ The bar holds the home key, the entry's name in hero type and the sections as ic
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 3 | 11 to push, 9 to pull |  |
+| `feat/entry-tabs` ◀ | Entry subpages as nav tabs, and a masonry gallery | review | [#82](https://github.com/henryjonescodes/portfolio/pull/82) | 3/3 | 3 | 12 to push, 9 to pull |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 11 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
