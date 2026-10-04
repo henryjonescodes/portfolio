@@ -1,7 +1,7 @@
 ---
 branch: content/real-copy
 parent: modalize-leva-work
-status: planned
+status: active
 title: Real copy and missing content
 pr: null
 updated: 2026-10-04
