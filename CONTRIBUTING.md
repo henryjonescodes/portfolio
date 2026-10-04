@@ -1,23 +1,19 @@
 # Work board
 
-_Updated 2026-10-04 20:06 UTC on `feat/entry-tabs` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 20:07 UTC on `feat/entry-tabs` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
   n_staging([staging])
-  n_feat_global_modal([feat/global-modal])
   n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/3<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
-  n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/3<br/><i>next: Request ids on mock media and drafted…</i>"]
+  n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/13 · 🙋 10<br/><i>next: Request ids on mock media and drafted…</i>"]
   class n_feat_content_requests planned
   n_feat_entry_tabs --> n_feat_content_requests
-  n_feat_entry_dock["<b>Effort dock and placeholder media</b><br/>feat/entry-dock<br/>planned · 3/4 · 🙋 1"]
-  class n_feat_entry_dock planned
-  n_feat_global_modal --> n_feat_entry_dock
   n_feat_entry_tabs["<b>Entry subpages as nav tabs, and a masonry gallery</b><br/>feat/entry-tabs<br/>planned · 3/3"]
   class n_feat_entry_tabs planned,current
-  n_feat_entry_dock --> n_feat_entry_tabs
+  n_staging --> n_feat_entry_tabs
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/14 · 🙋 11<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
   n_staging --> n_release_promote_main
@@ -34,6 +30,8 @@ flowchart LR
 
 **Questions**
 
+- [ ] Approve per-entry preview images, or generate them (from feat/shareable-urls) · `feat/content-requests`
+- [ ] Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal) · `feat/content-requests`
 - [ ] Feel check of the new open in lite and 3D (from anim/modal-open) · `release/promote-main`
 - [ ] Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy) · `release/promote-main`
 - [ ] Decide where /links appears (home menu, nav bar, or as home like the old branch) (from content/real-copy) · `release/promote-main`
@@ -46,9 +44,19 @@ flowchart LR
 - [ ] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check (from perf/assets) · `release/promote-main`
 - [ ] Approve the share image and description, and confirm the canonical domain is henryjones.xyz (from seo/meta) · `release/promote-main`
 
+**Claims to verify** (shown on the site, marked unverified until checked)
+
+- [ ] User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
+- [ ] User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
+- [ ] Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
+- [ ] Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
+- [ ] User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
+
 **Media to find**
 
-- [ ] Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there · `feat/entry-dock`
+- [ ] Screens or recordings of Almanac, Kiki UI and the notifier (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
+- [ ] An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro) (from feat/efforts) (from feat/global-modal) · `feat/content-requests`
+- [ ] Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) · `feat/content-requests`
 
 ## 🟢 Happening now
 
@@ -57,16 +65,9 @@ flowchart LR
 
 ## 🕘 Just happened
 
-- 0m ago · fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs · `feat/entry-tabs`
-- 10m ago · fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls · `feat/entry-tabs`
-- 16m ago · feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll · `feat/entry-tabs`
-- 31m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
-- 31m ago · Merge pull request #80 from henryjonescodes/feat/global-modal · `feat/entry-dock`
-
-**Merged, not yet landed** (run `bw land <branch> --into <next branch>`)
-
-- `feat/global-modal` into `staging`: Inline links that open any modal
-- `feat/shareable-urls` into `staging`: Shareable state and per-link previews
+- 1m ago · fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs · `feat/entry-tabs`
+- 11m ago · fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls · `feat/entry-tabs`
+- 17m ago · feat(entries): subpages as nav tabs, a masonry gallery, and a windowed scroll · `feat/entry-tabs`
 
 **Landed and folded**
 
@@ -89,9 +90,8 @@ flowchart LR
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
 | `bw/inbox` | planned | 0/3 | 0 | local only | bw renders INBOX.md with one answer slot per open question |  |
-| `feat/content-requests` | planned | 0/3 | 0 | local only | Request ids on mock media and drafted prose |  |
-| `feat/entry-dock` | planned | 3/4 | 2 | pushed | — |  |
-| `feat/entry-tabs` ◀ | planned | 3/3 | 3 | 1 to push | — |  |
+| `feat/content-requests` | planned | 0/13 | 0 | local only | Request ids on mock media and drafted prose |  |
+| `feat/entry-tabs` ◀ | planned | 3/3 | 3 | 9 to push, 9 to pull | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
@@ -106,29 +106,23 @@ Every open question and claim across branches is gathered into INBOX.md on the b
 
 </details>
 
-<details><summary><b>feat/content-requests</b>: Mock media and a list of content to source (0/3)</summary>
+<details><summary><b>feat/content-requests</b>: Mock media and a list of content to source (0/13)</summary>
 
 Layouts are built against mock images and drafted prose, each tagged with a request id. A generated REQUESTS page lists everything the owner needs to source (images, links, prose, icons) with the draft beside it and where to drop the real thing; dropping a file or prose named by its id replaces the mock or draft with no code change.
 
 - [ ] Request ids on mock media and drafted prose
 - [ ] Sourced files and prose resolve by id at build time
 - [ ] npm run requests renders the list; bw publishes it next to the board
-
-</details>
-
-<details><summary><b>feat/entry-dock</b>: Effort dock and placeholder media (3/4)</summary>
-
-Open entries switch efforts from a compact retro dock with a sliding indicator instead of big buttons, and every listing shows labelled placeholder media where a specific image belongs, so the owner can see what to supply.
-
-- [x] Dock replaces the effort tab buttons (modal, expanded, phone open view)
-- [x] Placeholder media component, labelled with what image belongs there
-- [x] Placeholders on experience entries and efforts
-- [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there
-
-Commits:
-
-- `a099d865` feat(entries): an effort dock and labelled placeholder media
-- `0b398e70` Merge pull request #80 from henryjonescodes/feat/global-modal
+- [ ] 🙋 Approve per-entry preview images, or generate them (from feat/shareable-urls)
+- [ ] 🙋 Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal)
+- [ ] 🙋 claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal)
+- [ ] 🙋 claim: User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal)
+- [ ] 🙋 media: Screens or recordings of Almanac, Kiki UI and the notifier (from feat/efforts) (from feat/global-modal)
+- [ ] 🙋 claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal)
+- [ ] 🙋 claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal)
+- [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal)
+- [ ] 🙋 media: An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr) (from feat/mobile-carousels) (from feat/links-retro) (from feat/efforts) (from feat/global-modal)
+- [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock)
 
 </details>
 
