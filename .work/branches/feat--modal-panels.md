@@ -13,7 +13,7 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 
 ## Todo
 
-- [ ] Panel types, registry and PanelGrid with span layout
+- [x] Panel types, registry and PanelGrid with span layout
 - [ ] Panels render in the open modal, fading in after the morph
 - [ ] Cozy and expanded modal sizes with an Expand/Restore button in the title bar
 - [ ] Expanding resets any drag offset; Escape and Close still work
@@ -25,3 +25,4 @@ Expanded entries show configurable panels (text, media, gallery, links, stats) l
 ## Log
 
 - 2026-10-04: seeded
+- 2026-10-04: done "Panel types, registry and PanelGrid with span layout" at c81cd113
