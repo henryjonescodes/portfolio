@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:32 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-04 20:42 UTC · 10 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:32 UTC by `bw board` on `refactor/entry-window` |
+| Generated | 2026-10-04 20:42 UTC by `bw board` on `refactor/entry-window` |
 | Trunk | `staging` |
 | Live branches | 10 |
 | Open PRs | none |
@@ -18,7 +18,7 @@
 flowchart LR
   n_staging([staging])
   n_feat_entry_tabs([feat/entry-tabs])
-  n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/5<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
+  n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 0/6<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
   class n_bw_inbox planned
   n_staging --> n_bw_inbox
   n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
@@ -42,7 +42,7 @@ flowchart LR
   n_refactor_entry_open["<b>One open morph, the carousel's, at every width</b><br/>refactor/entry-open<br/>planned · 0/4<br/><i>next: Closed and open layouts keep the same…</i>"]
   class n_refactor_entry_open planned
   n_refactor_entry_list --> n_refactor_entry_open
-  n_refactor_entry_window["<b>One window for every open entry</b><br/>refactor/entry-window<br/>planned · 0/6<br/><i>next: EntryWindow: bar, media, body and sec…</i>"]
+  n_refactor_entry_window["<b>One window for every open entry</b><br/>refactor/entry-window<br/>planned · 1/6<br/><i>next: Phone open view covers the full heigh…</i>"]
   class n_refactor_entry_window planned,current
   n_staging --> n_refactor_entry_window
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
@@ -75,27 +75,28 @@ flowchart LR
 
 **How, next.**
 
-- EntryWindow: bar, media, body and sections, used by the modal and the phone open view
 - Phone open view covers the full height, nav included; Close reads clearly
 - Media sits under the bar on phones, beside the text on wide screens, by CSS
+- e2e: the same window on both widths
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `refactor/entry-window` |  | planned, local only | 0/6 | EntryWindow: bar, media, body and sections, used by the modal and the phone open view | 2026-10-entry-reconcile, 0 of 4 |
+| `refactor/entry-window` |  | planned, local only | 1/6 | Phone open view covers the full height, nav included; Close reads clearly | 2026-10-entry-reconcile, 0 of 4 |
 
 ## 🕘 Just happened
 
-**fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 2026-10-04 20:31 · `feat/crosshair-cursor` · `ed401577`
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+**feat(entries): phone tiles open the shared window, full screen, image first** · 2026-10-04 20:42 · `refactor/entry-window` · `b89de966`
+Phone tiles open the same window as wide screens. On phones it takes the whole screen over the site nav, the image sits first under the bar on Overview, and Expand is hidden. Sections drop the entry heading the bar already shows; an effort shows dates only when it has its own. A closed window over a source with no image hides the pane, so it grows in as it opens. The window takes focus as it opens, traps Tab and returns focus to its source. The carousel keeps only its tiles.
 
+- **fix(cursor): hide the system cursor only while the crosshair tracks the pointer** · 20:31 · `feat/crosshair-cursor` · `ed401577`
 - **fix(about): NYC, tags on one row, fixed-width sliders, two rows of links** · 20:28 · `fix/about-card` · `250dbac3`
 - **fix(modal): the window bar is the main nav: mini items, the name on the right** · 20:24 · `fix/modal-nav-mini` · `d6f7dca5`
-- **feat(cursor): a crosshair pointer with dashed guides behind the content** · 20:18 · `feat/crosshair-cursor` · `21cece7c`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | `feat/crosshair-cursor` · `21cece7c` |
 | 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | `fix/about-card` · `e0c96483` |
 | 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | `fix/modal-nav-mini` · `be7fc0f6` |
 | 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | `fix/modal-nav-mini` · `d6eb511a` |
@@ -196,7 +197,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `bw/inbox` | One inbox for the owner's answers | planned |  | 0/5 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
+| `bw/inbox` | One inbox for the owner's answers | planned |  | 0/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/crosshair-cursor` | A crosshair cursor | planned |  | 3/3 | 2 | pushed |  |
 | `fix/about-card` | About card tidy | planned |  | 3/3 | 6 | pushed |  |
@@ -204,10 +205,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `refactor/entry-cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `refactor/entry-list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `refactor/entry-open` | One open morph, the carousel's, at every width | planned |  | 0/4 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `refactor/entry-window` ◀ | One window for every open entry | planned |  | 0/6 | 6 | local only | EntryWindow: bar, media, body and sections, used by the modal and the phone open view |
+| `refactor/entry-window` ◀ | One window for every open entry | planned |  | 1/6 | 7 | local only | Phone open view covers the full height, nav included; Close reads clearly |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
-<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/5)</summary>
+<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (0/6)</summary>
 
 Every open question and claim across branches is gathered into INBOX.md on the board branch, answerable from GitHub's editor. bw pulls answers back into the right branch's seed as a todo to act on, so the session on that workstream picks it up.
 
@@ -216,6 +217,7 @@ Every open question and claim across branches is gathered into INBOX.md on the b
 - [ ] branchwork-loop applies the inbox at the start of a session
 - [ ] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
 - [ ] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
+- [ ] Ambient branchwork-quiz skill: offer a quiz at natural pauses without blocking, ask the juiciest few open questions (max 4) with AskUserQuestion, record answers with bw answer
 
 </details>
 
@@ -295,11 +297,11 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>refactor/entry-window</code>: One window for every open entry (0/6)</summary>
+<details><summary><code>refactor/entry-window</code>: One window for every open entry (1/6)</summary>
 
 The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
 
-- [ ] EntryWindow: bar, media, body and sections, used by the modal and the phone open view
+- [x] EntryWindow: bar, media, body and sections, used by the modal and the phone open view
 - [ ] Phone open view covers the full height, nav included; Close reads clearly
 - [ ] Media sits under the bar on phones, beside the text on wide screens, by CSS
 - [ ] e2e: the same window on both widths
