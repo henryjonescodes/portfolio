@@ -191,7 +191,8 @@
 }
 
 .modalWrapper {
-  max-width: 100%;
+  // Full width, so switching tabs changes only the height.
+  width: 100%;
   margin: auto;
 
   &Expanded {
@@ -232,4 +233,13 @@
       max-width: 100%;
     }
   }
+}
+
+.effortNav {
+  padding: 12px 16px 0;
+}
+
+.effortContents {
+  padding: 16px;
+  width: 100%;
 }

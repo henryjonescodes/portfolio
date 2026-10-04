@@ -2,6 +2,7 @@ import cn from 'classnames';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
+import { experienceData } from '@data/experience';
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './experience-entry-modal.module.scss';
@@ -18,6 +19,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   const [pageOpen, setPageOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [expanded, setExpanded] = useState(false);
+  const [effortId, setEffortId] = useState<string | null>(null);
   const [modalChildren, setModalChildren] = useState<React.ReactNode>(null);
   const [modalUrl, setModalUrl] = useState<string | undefined>(undefined);
   const [modalDateString, setModalDateString] = useState<string | undefined>(undefined);
@@ -55,6 +57,24 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     setModalDateString(dateString);
     setIsClosing(false);
     setExpanded(false);
+    setEffortId(null);
+  };
+
+  const openEffort = (entryId: string, nextEffortId: string) => {
+    const entry = experienceData[entryId];
+    if (!entry) return;
+    clearTimeout(closeTimer.current);
+    if (selectedEntry?.id !== entryId) {
+      // No list item to grow from here, so the entry opens in place over the page.
+      setEntryRect(null);
+      setSelectedEntry(entry);
+      setModalChildren(null);
+      setModalUrl(undefined);
+      setModalDateString(undefined);
+      setExpanded(false);
+    }
+    setIsClosing(false);
+    setEffortId(nextEffortId);
   };
 
   const closeModal = () => {
@@ -74,12 +94,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     }, totalDuration);
   };
 
-  const overlayStyle = entryRect
-    ? {
-        width: entryRect.width,
-        height: entryRect.height,
-      }
-    : {};
+  const overlayStyle = entryRect ? { width: entryRect.width, height: entryRect.height } : {};
 
   return (
     <ExperienceEntryModalContext.Provider
@@ -92,6 +107,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
         modalChildren,
         modalUrl,
         modalDateString,
+        effortId,
+        setEffortId,
+        openEffort,
       }}
     >
       {children}
@@ -129,6 +147,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
                 onClose={closeModal}
                 expanded={expanded}
                 onToggleExpand={() => setExpanded((e) => !e)}
+                effortId={effortId}
+                onSelectEffort={setEffortId}
+                onMention={openEffort}
                 url={modalUrl}
                 dateString={modalDateString}
               >

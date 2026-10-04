@@ -368,6 +368,21 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
+  HERO: {
+    COUNT: {
+      duration: tune('COMPONENT', 1.5, S, 'Hero Number > Count Up'),
+    },
+    SEGMENT_STAGGER: {
+      staggerChildren: tune(
+        'COMPONENT',
+        0.03,
+        F,
+        'Hero Number > Meter Segment Stagger',
+        'Delay between meter segments lighting',
+      ),
+    },
+  },
+
   LINKS: {
     ANIMATE_STAGGER: {
       staggerChildren: tune(

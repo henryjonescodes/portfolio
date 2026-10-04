@@ -25,6 +25,19 @@ export type GalleryPanel = PanelBase & {
 export type LinksPanel = PanelBase & { type: 'links'; links: { label: string; href: string }[] };
 export type StatsPanel = PanelBase & { type: 'stats'; items: { label: string; value: string }[] };
 
+/** A headline figure. `unverified` marks a claim that has not been confirmed yet. */
+export type HeroNumber = {
+  value: number;
+  label: string;
+  /** `compact` reads 250000 as 250K; `percent` reads 99.99 as 99.99%. */
+  format?: 'compact' | 'percent' | 'plain';
+  suffix?: string;
+  /** 0 to 1: draws a segmented meter under the number. */
+  meter?: number;
+  unverified?: boolean;
+};
+export type HeroPanel = PanelBase & { type: 'hero'; items: HeroNumber[] };
+
 /** One block of an expanded entry. Add a type here and register its component in `registry.ts`. */
-export type Panel = TextPanel | MediaPanel | GalleryPanel | LinksPanel | StatsPanel;
+export type Panel = TextPanel | MediaPanel | GalleryPanel | LinksPanel | StatsPanel | HeroPanel;
 export type PanelType = Panel['type'];
