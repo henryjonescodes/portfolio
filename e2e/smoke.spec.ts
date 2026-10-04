@@ -193,6 +193,23 @@ test.describe('projects carousel on phones', () => {
     expect(errors).toEqual([]);
   });
 
+  test('an open tile takes focus and the tiles behind it leave the tab order', async ({ page }) => {
+    await page.goto('/projects?lite=true');
+    await page.waitForTimeout(1500);
+    await page.getByTestId('project-card').first().click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toBeFocused();
+    await expect(dialog.getByRole('button', { name: 'Close' })).toBeVisible();
+    // Tab and Shift+Tab both stay inside the dialog.
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Tab');
+    await page.keyboard.press('Shift+Tab');
+    const focusedInDialog = await page.evaluate(
+      () => !!document.activeElement?.closest('[role="dialog"]'),
+    );
+    expect(focusedInDialog).toBe(true);
+  });
+
   test('keyboard opens a tile, Escape closes it, and reduced motion still closes', async ({
     page,
   }) => {

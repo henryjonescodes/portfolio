@@ -107,6 +107,11 @@
   position: relative;
 }
 
+.rule {
+  height: 2.5px;
+  background: var(--foreground-secondary);
+}
+
 .body {
   display: flex;
   flex-direction: column;

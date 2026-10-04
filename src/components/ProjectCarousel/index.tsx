@@ -32,6 +32,8 @@ function boxWithin(
 const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
   const { TRANSITIONS } = useAnimations();
   const rootRef = useRef<HTMLDivElement>(null);
+  const rowRef = useRef<HTMLDivElement>(null);
+  const openRef = useRef<HTMLElement>(null);
   const cardRefs = useRef<Record<string, HTMLElement | null>>({});
   const [selection, setSelection] = useState<Selection | null>(null);
   const [open, setOpen] = useState(false);
@@ -63,6 +65,20 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
     if (selection) setOpen(true);
   }, [selection]);
 
+  // While a project is open the tiles behind it leave the tab order, focus moves into the
+  // dialog, and closing hands focus back to the tile it came from.
+  useEffect(() => {
+    const row = rowRef.current;
+    if (!selection || !row) return;
+    row.inert = true;
+    openRef.current?.focus();
+    const tile = cardRefs.current[selection.id];
+    return () => {
+      row.inert = false;
+      tile?.focus();
+    };
+  }, [selection]);
+
   // Hold the page still while a project is open.
   useEffect(() => {
     const scroller = rootRef.current?.closest<HTMLElement>('[data-scroll-root]');
@@ -90,7 +106,7 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
 
   return (
     <div ref={rootRef} className={styles.carousel}>
-      <motion.div layoutScroll className={styles.row} variants={variants.row}>
+      <motion.div ref={rowRef} layoutScroll className={styles.row} variants={variants.row}>
         {projects.map((project) => (
           <motion.div key={project.id} className={styles.slot} variants={variants.slot}>
             <ProjectCard
@@ -121,6 +137,7 @@ const ProjectCarousel = ({ projects }: { projects: EntryData[] }) => {
             animate="open"
           >
             <ProjectCard
+              ref={openRef}
               key={selection.id}
               project={selected}
               layoutKey={selection.id}

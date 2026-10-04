@@ -10,6 +10,7 @@ import NavBarButton from '@components/NavBar/NavBarButton';
 import PanelGrid from '@components/Panels';
 import { useAnimations } from '@context/AnimationContext';
 import { radius } from '@styles/sass-variables';
+import { trapFocus } from '@utils/focus';
 import styles from './project-carousel.module.scss';
 
 type ProjectCardProps = {
@@ -50,12 +51,14 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
         onLayoutAnimationComplete={onLayoutAnimationComplete}
         onClick={(e) => (onSelect ? onSelect() : e.stopPropagation())}
         onKeyDown={(e) => {
-          if (onSelect && (e.key === 'Enter' || e.key === ' ')) {
+          if (!onSelect) return trapFocus(e);
+          if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
             onSelect();
           }
         }}
         role={onSelect ? 'button' : 'dialog'}
+        aria-modal={onSelect ? undefined : true}
         tabIndex={onSelect ? 0 : -1}
         aria-label={onSelect ? `Open ${project.title}` : project.title}
       >
@@ -84,7 +87,12 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(function ProjectCa
               <EntryMediaView media={project.media} />
             </motion.div>
           )}
-          <AnimatedLine horizontal borderWidth={2.5} className={styles.line} />
+          {/* The tile draws its divider in; the open copy skips the paint-in, so its rule is static. */}
+          {onSelect ? (
+            <AnimatedLine horizontal borderWidth={2.5} className={styles.line} />
+          ) : (
+            <div className={styles.rule} />
+          )}
           <motion.div layoutId="body" className={styles.body} transition={T.CONTENT}>
             {project.description.map((line) => (
               <motion.p key={line} layout="position" transition={T.CONTENT}>
