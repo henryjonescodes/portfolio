@@ -1,0 +1,22 @@
+---
+branch: feat/links-retro
+parent: staging
+status: planned
+title: Links page in the retro style
+pr: null
+updated: 2026-10-04
+---
+
+## Goal
+
+The links page reworked to match the old site's links page in the retro, skeuomorphic style, with a link to it from About using the old site's link icon.
+
+## Todo
+
+- [ ] Restyle /links as raised retro keys, in theme with the old links page
+- [ ] Link to /links from About, with the old site's link icon
+- [ ] Axe and e2e stay green
+
+## Log
+
+- 2026-10-04: seeded
