@@ -1,6 +1,6 @@
 # Work board
 
-_Updated 2026-10-04 19:12 UTC on `` by `bw board`. Generated; edit seeds with `bw`._
+_Updated 2026-10-04 19:12 UTC on `feat/shareable-urls` by `bw board`. Generated; edit seeds with `bw`._
 
 ```mermaid
 flowchart LR
@@ -12,7 +12,7 @@ flowchart LR
   class n_feat_global_modal planned
   n_staging --> n_feat_global_modal
   n_feat_shareable_urls["<b>Shareable state and per-link previews</b><br/>feat/shareable-urls<br/>planned · 2/3 · 🙋 1"]
-  class n_feat_shareable_urls planned
+  class n_feat_shareable_urls planned,current
   n_staging --> n_feat_shareable_urls
   n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/14 · 🙋 11<br/><i>next: PR staging into main</i>"]
   class n_release_promote_main planned
@@ -60,26 +60,27 @@ flowchart LR
 
 ## 🟢 Happening now
 
-- Nothing active.
+- **Shareable state and per-link previews** · `feat/shareable-urls` (checked out) · 2/3  
+  next: nothing open
 
 ## 🕘 Just happened
 
-- 1m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/shareable-urls`
+- 0m ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
+- 0m ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
+- 1m ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
+- 1m ago · fix(share): restore a shared link from the address bar, not the router's stale query · `feat/global-modal`
 - 3m ago · feat(entries): an effort dock and labelled placeholder media · `feat/entry-dock`
-- 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/global-modal`
-- 5h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/global-modal`
-- 5h ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/global-modal`
-- 5h ago · fix(share): no closed-modal flash on arrival, page titles, no router render mid-morph · `feat/global-modal`
-- 5h ago · fix(a11y): nav items are keyboard-reachable links · `feat/global-modal`
-- 5h ago · feat(share): the open modal lives in the URL, and links preview what they share · `feat/global-modal`
+- 4h ago · feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word · `feat/entry-dock`
+- 5h ago · docs: roadmap reflects efforts, sharing and entry links · `feat/entry-dock`
+- 5h ago · feat(modal): any link can open an entry, zooming out of where it was clicked · `feat/entry-dock`
 
 **Landed and folded**
 
-- 2026-10-04 **feat/efforts** → `staging`: Highlighted efforts inside experience entries. Effort data model and a mini nav inside the open entry; Efforts: Almanac skill manager (Arbor), Kiki UI design system (ChannelAI), User notifier (Arbor); Hero numbers kit: big numbers plus simple theme charts for efforts without flashy visuals; Deep links from prose open the entry modal on one effort; Mark unverified data claims in the data and show it only in debug
 - 2026-10-04 **feat/links-retro** → `staging`: Links page in the retro style. Restyle /links as raised retro keys, in theme with the old links page; Link to /links from About, with the old site's link icon; Axe and e2e stay green
 - 2026-10-04 **feat/mobile-carousels** → `staging`: Experience and projects carousels on phones. One carousel component for experience and projects on phones; First tile centred on both axes; scroll area full width; no side dead space; Borrow the paint-in from the list entries: border draws, typewriter titles, staggered children; Keep the tile-to-page morph exactly as it is now; e2e for the experience carousel and centring
 - 2026-10-04 **anim/restore-timing** → `staging`: Restore from expanded on the window's clock. Measure restore frame by frame and confirm the reflow runs ahead of the container; Copy the carousel's approach (one element owns the size change, content follows) to restore; e2e: restore keeps content inside the window and settles with it
 - 2026-10-04 **fix/mobile-polish** → `staging`: Phone polish and an updated map. iOS Safari shows the page colour behind and around the page, not white (html background, theme-color); Mobile site header about 15% larger; Map: no longer on the job market; working at Arbor (remote), based in New York City; Prune the plans whose branches have all landed
+- 2026-10-04 plan `2026-10-quality.md` complete: perf/assets, a11y/pass, seo/meta
 
 <details><summary><b>Plans</b></summary>
 
@@ -92,9 +93,9 @@ flowchart LR
 
 | Branch | Status | Done | Commits | Remote | Next | PR |
 |---|---|---|---|---|---|---|
-| `feat/entry-dock` | planned | 3/4 | 1 | pushed | — |  |
-| `feat/global-modal` | planned | 2/10 | 6 | pushed | — |  |
-| `feat/shareable-urls` | planned | 2/3 | 4 | 1 to push | — |  |
+| `feat/entry-dock` | planned | 3/4 | 4 | pushed | — |  |
+| `feat/global-modal` | planned | 2/10 | 7 | 9 to push, 8 to pull | — |  |
+| `feat/shareable-urls` ◀ | planned | 2/3 | 4 | 1 to push | — |  |
 | `release/promote-main` | planned | 2/14 | 0 | pushed | PR staging into main |  |
 
 </details>
@@ -111,6 +112,9 @@ Open entries switch efforts from a compact retro dock with a sliding indicator i
 Commits:
 
 - `e36a4f0c` feat(entries): an effort dock and labelled placeholder media
+- `a0dee110` feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word
+- `5c351640` docs: roadmap reflects efforts, sharing and entry links
+- `026e795a` feat(modal): any link can open an entry, zooming out of where it was clicked
 
 </details>
 
@@ -131,9 +135,10 @@ Later, once the rest has landed. Any text can link to an experience, project or 
 
 Commits:
 
-- `a0dee110` feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word
-- `5c351640` docs: roadmap reflects efforts, sharing and entry links
-- `026e795a` feat(modal): any link can open an entry, zooming out of where it was clicked
+- `63c1f59e` feat(modal): the desktop modal opens like the phone carousel; links zoom out of their word
+- `f2d37efd` docs: roadmap reflects efforts, sharing and entry links
+- `21bfc4b4` feat(modal): any link can open an entry, zooming out of where it was clicked
+- `e18c2be4` fix(share): restore a shared link from the address bar, not the router's stale query
 - `646fcd90` fix(share): no closed-modal flash on arrival, page titles, no router render mid-morph
 - `fa77adbf` fix(a11y): nav items are keyboard-reachable links
 - `5b0412e4` feat(share): the open modal lives in the URL, and links preview what they share
