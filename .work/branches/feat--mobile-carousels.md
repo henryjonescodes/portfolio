@@ -17,7 +17,7 @@ Both lists become the phone carousel, with the first tile centred in the availab
 - [x] First tile centred on both axes; scroll area full width; no side dead space
 - [x] Borrow the paint-in from the list entries: border draws, typewriter titles, staggered children
 - [x] Keep the tile-to-page morph exactly as it is now
-- [ ] e2e for the experience carousel and centring
+- [x] e2e for the experience carousel and centring
 - [?] media: An image or video for each experience entry (Arbor, ChannelAI, Mushroom, Union, Tumblr)
 
 ## Log
@@ -27,3 +27,4 @@ Both lists become the phone carousel, with the first tile centred in the availab
 - 2026-10-04: done "First tile centred on both axes; scroll area full width; no side dead space" at 3492f89a
 - 2026-10-04: done "Borrow the paint-in from the list entries: border draws, typewriter titles, staggered children" at 68354ea4
 - 2026-10-04: done "Keep the tile-to-page morph exactly as it is now" at d1e057e9
+- 2026-10-04: done "e2e for the experience carousel and centring" at 91fc26ca
