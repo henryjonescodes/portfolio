@@ -1,7 +1,7 @@
 ---
 branch: a11y/pass
 parent: feat/mobile-carousel
-status: active
+status: review
 title: Accessibility pass
 pr: null
 updated: 2026-10-04
