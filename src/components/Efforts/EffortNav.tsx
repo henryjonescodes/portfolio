@@ -12,13 +12,22 @@ type EffortNavProps = {
   hasGallery: boolean;
   selected: string | null;
   onSelect: (subpageId: string | null) => void;
+  /** Sits inside a title bar rather than as its own strip. */
+  inline?: boolean;
 };
 
 /**
  * An open entry's subpages as the site's nav tabs: the home key for the overview, then each
  * effort and the gallery by name. Arrow keys move between tabs.
  */
-const EffortNav = ({ idPrefix, efforts, hasGallery, selected, onSelect }: EffortNavProps) => {
+const EffortNav = ({
+  idPrefix,
+  efforts,
+  hasGallery,
+  selected,
+  onSelect,
+  inline = false,
+}: EffortNavProps) => {
   const tabs = [
     { id: '', title: 'Overview' },
     ...efforts.map(({ id, title }) => ({ id, title })),
@@ -50,7 +59,7 @@ const EffortNav = ({ idPrefix, efforts, hasGallery, selected, onSelect }: Effort
   };
 
   return (
-    <div className={styles.subnav} role="tablist" aria-label="Sections">
+    <div className={inline ? styles.inline : styles.subnav} role="tablist" aria-label="Sections">
       {tabs.map((tab, i) => (
         <NavBarItem
           key={tab.id || 'overview'}

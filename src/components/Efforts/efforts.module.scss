@@ -1,6 +1,11 @@
 @use '@styles' as styles;
 
-// The same tabs as the site's nav bar, in a strip under the window's title bar.
+.inline {
+  display: flex;
+  height: 100%;
+}
+
+// The same tabs as the site's nav bar, in a strip of their own (the phone card's).
 .subnav {
   @include styles.title-bar;
   display: flex;

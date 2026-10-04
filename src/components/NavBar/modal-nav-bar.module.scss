@@ -12,6 +12,20 @@
 
 .left {
   @include navBar.navBarSection;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+// On phones the tabs need the room, so the title gives way to them.
+@media (max-width: styles.$width-mobile) {
+  .hasLeft {
+    grid-template-columns: 1fr auto;
+
+    .center {
+      display: none;
+    }
+  }
 }
 
 .center {

@@ -175,8 +175,34 @@ const ExperienceEntry = ({
               transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
             />
           )}
+          {isOpen && (
+            // The frame's fixed top: the title bar, with the section tabs on its left. Only the body below scrolls,
+            // and `layout` keeps this pinned to the top edge while the window resizes.
+            <motion.div layout className={styles.windowHeader}>
+              <ModalNavBar
+                title={title}
+                onClose={onClose}
+                expanded={expanded}
+                onToggleExpand={onToggleExpand}
+                left={
+                  (!!efforts?.length || !!gallery?.length) &&
+                  onSelectEffort && (
+                    <EffortNav
+                      inline
+                      idPrefix={id}
+                      efforts={efforts ?? []}
+                      hasGallery={!!gallery?.length}
+                      selected={subpageId}
+                      onSelect={onSelectEffort}
+                    />
+                  )
+                }
+              />
+            </motion.div>
+          )}
           <motion.div
             layoutId="body"
+            layoutScroll={isOpen}
             className={styles.body}
             initial={inList ? 'initial' : 'animate'}
             animate={inList ? 'animate' : 'modalAnimate'}
@@ -187,28 +213,6 @@ const ExperienceEntry = ({
               className={styles.description}
               variants={variants.entryText}
             >
-              {isOpen && (
-                // Title bar and section tabs stay put while the window's body scrolls.
-                <div className={styles.windowHeader}>
-                  <ModalNavBar
-                    title={title}
-                    onClose={onClose}
-                    expanded={expanded}
-                    onToggleExpand={onToggleExpand}
-                  />
-                  {(!!efforts?.length || !!gallery?.length) && onSelectEffort && (
-                    <motion.div layout className={styles.effortNav}>
-                      <EffortNav
-                        idPrefix={id}
-                        efforts={efforts ?? []}
-                        hasGallery={!!gallery?.length}
-                        selected={subpageId}
-                        onSelect={onSelectEffort}
-                      />
-                    </motion.div>
-                  )}
-                </div>
-              )}
               {subpageId ? (
                 <motion.div
                   layout

@@ -219,11 +219,19 @@
     flex-direction: column;
   }
 
+  // The frame is a fixed header over a body that alone scrolls.
   .boxContent {
     flex: 1;
     min-height: 0;
-    overflow-y: auto;
+    flex-direction: column;
+    overflow: hidden;
     background: var(--background-secondary);
+  }
+
+  .body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
   }
 
   &Expanded {
@@ -272,14 +280,10 @@
   }
 }
 
-.effortNav {
-  width: 100%;
-}
-
 .windowHeader {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 3;
+  flex-shrink: 0;
   background: var(--background-secondary);
 }
 
