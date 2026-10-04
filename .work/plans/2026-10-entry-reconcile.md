@@ -21,7 +21,7 @@ open to the target box, morph back, unmount on completion) serves every width. T
 window takes the full height on phones, the main nav's bar on top, media directly under the
 bar, then text.
 
-## refactor/entry-window
+## entry/window
 parent: staging
 title: One window for every open entry
 motivation: Phone and desktop open views should be the same window, so a fix or a polish lands once.
@@ -31,8 +31,8 @@ goal: The open entry, modal or phone, renders one EntryWindow: the main nav bar 
 - [ ] Media sits under the bar on phones, beside the text on wide screens, by CSS
 - [ ] e2e: the same window on both widths
 
-## refactor/entry-list
-parent: refactor/entry-window
+## entry/list
+parent: entry/window
 title: One list that is a carousel on phones
 motivation: Resizing should re-lay out the same entries, not swap one component tree for another.
 goal: Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go.
@@ -40,8 +40,8 @@ goal: Experience and projects render one EntryList. A container query turns it f
 - [ ] One paint-in (border, typewriter, stagger) for list items and tiles
 - [ ] Resizing across the breakpoint keeps the same elements (e2e)
 
-## refactor/entry-open
-parent: refactor/entry-list
+## entry/open
+parent: entry/list
 title: One open morph, the carousel's, at every width
 motivation: The phone morph is the reference; every open should feel like it.
 goal: Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
@@ -50,8 +50,8 @@ goal: Opening any entry mounts the window over its source in the closed layout a
 - [ ] Remove EntryCarousel and EntryCard; one provider opens everything
 - [ ] e2e: open and close at both widths, and a resize while open
 
-## refactor/entry-cleanup
-parent: refactor/entry-open
+## entry/cleanup
+parent: entry/open
 title: Tidy after the entry merge
 goal: Specs, skills and docs describe one entry component.
 - [ ] Merge carousel.spec into modal.spec; drop dead styles and tunables
