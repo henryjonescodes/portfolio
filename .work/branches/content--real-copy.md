@@ -31,3 +31,4 @@ Replace lorem ipsum and bring over content only the old site has.
 - 2026-10-04: done "Add the resume PDF and a link to it" at 392b66bb
 - 2026-10-04: done "Salvage the Links page from origin/Add-Links-Page" at 03413ddf
 - 2026-10-04: done "Confirm tumblr dates (old site says 2015 to present, new says 2014)" at 941a0088
+- 2026-10-04: Tumblr confirmed as 2015 in chat
