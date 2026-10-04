@@ -40,7 +40,9 @@
   flex-direction: column;
   align-items: center;
 
+  // Positioned so it stacks above the crosshair guides, which sit over the background.
   &FullScreen {
+    position: relative;
     z-index: 1;
   }
 
