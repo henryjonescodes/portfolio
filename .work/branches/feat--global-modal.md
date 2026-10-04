@@ -15,6 +15,7 @@ Later, once the rest has landed. Any text can link to an experience, project or 
 
 - [x] One global modal host and an inline link component
 - [x] The map's single-line experience entries become entry variants that open the modal
+- [?] Which page titles should link to entries? Map lines and prose mentions do now; headings are plain
 
 ## Log
 
