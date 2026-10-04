@@ -24,6 +24,7 @@ Retire the old webpack site once staging carries everything above.
 - [?] Design review on a phone (from feat/mobile-carousel)
 - [?] Design review of the list and modal in 3D and lite mode (from feat/modal-panels)
 - [?] Curate real panel content (screenshots, galleries, stats) per project (from feat/modal-panels)
+- [ ] Confirm the first CI run is green on every stacked PR (from modalize-leva-work)
 
 ## Log
 
