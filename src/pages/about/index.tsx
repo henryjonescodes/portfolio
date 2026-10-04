@@ -72,7 +72,7 @@ const About = () => {
               <motion.h1>
                 <TypewriterText text={'Henry Jones'} staggerChildren={0.05} />
               </motion.h1>
-              <motion.h3>
+              <motion.h3 aria-level={2}>
                 <TypewriterText text="Creative Developer" />
               </motion.h3>
             </motion.div>
@@ -92,6 +92,7 @@ const About = () => {
                   Icon={GitHub}
                   className={styles.icon}
                   url="https://github.com/henryjonescodes"
+                  label="GitHub"
                 />
               </motion.div>
               <motion.div variants={iconVariants} className={styles.iconWrapper}>
@@ -99,6 +100,7 @@ const About = () => {
                   Icon={LinkedIn}
                   className={styles.icon}
                   url="https://www.linkedin.com/in/henryjonescodes/"
+                  label="LinkedIn"
                 />
               </motion.div>
               <motion.div variants={iconVariants} className={styles.iconWrapper}>
@@ -106,6 +108,7 @@ const About = () => {
                   Icon={Instagram}
                   className={styles.icon}
                   url="https://www.instagram.com/theycallmezonez/"
+                  label="Instagram"
                 />
               </motion.div>
             </motion.div>
@@ -135,7 +138,7 @@ const About = () => {
                       <motion.div variants={iconVariants} className={styles.iconWrapper}>
                         <Home className={styles.icon} />
                       </motion.div>
-                      <motion.h4 className={styles.text}>
+                      <motion.h4 className={styles.text} role="none">
                         <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
                       </motion.h4>
                     </motion.span>
@@ -143,7 +146,7 @@ const About = () => {
                       <motion.div variants={iconVariants} className={styles.iconWrapper}>
                         <Book className={styles.icon} />
                       </motion.div>
-                      <motion.h4 className={styles.text}>
+                      <motion.h4 className={styles.text} role="none">
                         <TypewriterText text="Union College" staggerChildren={0.05} />
                       </motion.h4>
                     </motion.span>
@@ -169,7 +172,7 @@ const About = () => {
                         <motion.div variants={iconVariants} className={styles.iconWrapper}>
                           <Home className={styles.icon} />
                         </motion.div>
-                        <motion.h4 className={styles.text}>
+                        <motion.h4 className={styles.text} role="none">
                           <TypewriterText text="Brooklyn, NY" staggerChildren={0.05} />
                         </motion.h4>
                       </motion.span>
@@ -177,7 +180,7 @@ const About = () => {
                         <motion.div variants={iconVariants} className={styles.iconWrapper}>
                           <Book className={styles.icon} />
                         </motion.div>
-                        <motion.h4 className={styles.text}>
+                        <motion.h4 className={styles.text} role="none">
                           <TypewriterText text="Union College" staggerChildren={0.05} />
                         </motion.h4>
                       </motion.span>

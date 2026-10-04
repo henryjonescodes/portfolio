@@ -14,9 +14,12 @@ type GlitchIconProps = {
     }
   >;
   className?: string;
-} & ({ url: string; onClick?: never } | { onClick?: () => void; url?: never });
+} & ({ url: string; onClick?: never } | { onClick?: () => void; url?: never }) & {
+    /** Accessible name; required in practice when the link shows only an icon. */
+    label?: string;
+  };
 
-const GlitchIcon: React.FC<GlitchIconProps> = ({ Icon, className, url, onClick }) => {
+const GlitchIcon: React.FC<GlitchIconProps> = ({ Icon, className, url, onClick, label }) => {
   const { animationDisabled } = useSettings();
   // Function to handle the content within the wrapper
   const renderContent = () =>
@@ -25,7 +28,7 @@ const GlitchIcon: React.FC<GlitchIconProps> = ({ Icon, className, url, onClick }
     ) : (
       <motion.div className={styles.glitch__warp}>
         <Icon className={cn(styles.icon, styles.iconPrimary)} />
-        <motion.div className={styles.glitch__layers}>
+        <motion.div className={styles.glitch__layers} aria-hidden>
           {GLITCH_LAYERS.map((i) => (
             <motion.div key={i} className={cn(styles.glitch__layer, styles[`glitch__layer${i}`])}>
               <Icon className={styles.icon} />
@@ -40,6 +43,7 @@ const GlitchIcon: React.FC<GlitchIconProps> = ({ Icon, className, url, onClick }
     return (
       <a
         href={url}
+        aria-label={label}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(styles.glitch, className)}

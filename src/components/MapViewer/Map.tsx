@@ -75,12 +75,12 @@ const Map = () => {
               {!!currentKey && (
                 <motion.div className={styles.details} layout key={'map'}>
                   <motion.span>
-                    <motion.h4>{title ?? ''}</motion.h4>
+                    <motion.h4 role="none">{title ?? ''}</motion.h4>
                   </motion.span>
                   {highlights?.map((highlight, index) => (
                     <motion.span key={index}>
                       <highlight.icon />
-                      <motion.h5>{highlight.text}</motion.h5>
+                      <motion.h5 role="none">{highlight.text}</motion.h5>
                     </motion.span>
                   ))}
                   <motion.div>
@@ -105,7 +105,7 @@ const Map = () => {
             ))}
           </motion.div>
           <USA className={styles.usa} />;
-          <motion.img src={'images/grid.png'} className={styles.grid} />
+          <motion.img src={'images/grid.png'} className={styles.grid} alt="" />
         </motion.div>
       </motion.div>
       <AnimatedLine className={styles.divider} horizontal={true} />

@@ -32,3 +32,9 @@ h6,
 p {
   margin: 0px;
 }
+
+// One visible focus ring for every keyboard-reachable control.
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}

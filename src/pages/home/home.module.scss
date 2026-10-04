@@ -16,3 +16,8 @@
     @include styles.hover-color-foreground-secondary;
   }
 }
+
+// The menu's nav landmark must not change the menu's flex layout.
+.links {
+  display: contents;
+}

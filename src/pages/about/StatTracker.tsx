@@ -59,7 +59,7 @@ const StatTracker = ({ label, rating }: StatTrackerProps) => {
         </motion.span>
       </AnimatedBorderBox>
       <motion.div className={styles.label}>
-        <motion.h4 className={styles.label}>
+        <motion.h4 className={styles.label} role="none">
           <TypewriterText
             text={label}
             staggerDirection={-1}

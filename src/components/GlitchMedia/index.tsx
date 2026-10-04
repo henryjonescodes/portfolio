@@ -30,9 +30,20 @@ type GlitchMediaProps = {
       video?: never;
     }
 ) &
-  ({ url: string; onClick?: never } | { onClick?: () => void; url?: never });
+  ({ url: string; onClick?: never } | { onClick?: () => void; url?: never }) & {
+    /** Accessible name; required in practice when the link shows only an icon. */
+    label?: string;
+  };
 
-const GlitchMedia: React.FC<GlitchMediaProps> = ({ Icon, video, img, className, url, onClick }) => {
+const GlitchMedia: React.FC<GlitchMediaProps> = ({
+  Icon,
+  video,
+  img,
+  className,
+  url,
+  onClick,
+  label,
+}) => {
   const { animationDisabled } = useSettings();
 
   // Function to handle the content within the wrapper
@@ -59,7 +70,7 @@ const GlitchMedia: React.FC<GlitchMediaProps> = ({ Icon, video, img, className, 
     return (
       <motion.div className={styles.glitch__warp}>
         {MediaElement}
-        <motion.div className={styles.glitch__layers}>
+        <motion.div className={styles.glitch__layers} aria-hidden>
           {GLITCH_LAYERS.map((i) => (
             <motion.div key={i} className={cn(styles.glitch__layer, styles[`glitch__layer${i}`])}>
               {Icon ? (
@@ -86,6 +97,7 @@ const GlitchMedia: React.FC<GlitchMediaProps> = ({ Icon, video, img, className, 
     return (
       <a
         href={url}
+        aria-label={label}
         target="_blank"
         rel="noopener noreferrer"
         className={cn(styles.glitch, className)}
