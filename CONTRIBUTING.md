@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:01 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:02 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:01 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:02 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -23,6 +23,47 @@ flowchart LR
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_next
+  n_next_m0["✅ <code>feat/phone-3d</code>"]
+  class n_next_m0 merged
+  n_next_m0 --> n_next
+  n_next_m1["✅ <code>feat/synth</code>"]
+  class n_next_m1 merged
+  n_next_m1 --> n_next
+  n_next_m2["✅ <code>entry/list</code>"]
+  class n_next_m2 merged
+  n_next_m2 --> n_next
+  n_next_m3["✅ <code>feat/content-requests</code>"]
+  class n_next_m3 merged
+  n_next_m3 --> n_next
+  n_next_t0["2D knob, mini slider and key<br/>controls, keyboard and mouse"]
+  class n_next_t0 todo
+  n_next -.-> n_next_t0
+  n_next_t1["npm run requests renders the<br/>list; bw publishes it next to<br/>…"]
+  class n_next_t1 todo
+  n_next -.-> n_next_t1
+  n_next_t2["Act on the answer to 'Should<br/>the panel be on phones, or<br/>des…"]
+  class n_next_t2 todo
+  n_next -.-> n_next_t2
+  n_next_t3["Phones: the 3D view always<br/>renders landscape, whatever<br/>the …"]
+  class n_next_t3 todo
+  n_next -.-> n_next_t3
+  n_next_t4["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
+  class n_next_t4 todo
+  n_next -.-> n_next_t4
+  n_next_t5["Window bar: the entry name has<br/>no left divider in the modal"]
+  class n_next_t5 todo
+  n_next -.-> n_next_t5
+  n_next_t6["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  class n_next_t6 todo
+  n_next -.-> n_next_t6
+  n_next_t7["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
+  class n_next_t7 todo
+  n_next -.-> n_next_t7
+  n_next_more["… 1 more todos"]
+  class n_next_more todo
+  n_next -.-> n_next_more
+  classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
+  classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
   classDef sketched fill:#f8fafc,stroke:#64748b,stroke-dasharray:4 3,color:#334155
   classDef active fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#052e16
@@ -59,6 +100,8 @@ flowchart LR
   n_next --> n_entry_open
   n_staging --> n_next
   n_staging --> n_release_promote_main
+  classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
+  classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
   classDef sketched fill:#f8fafc,stroke:#64748b,stroke-dasharray:4 3,color:#334155
   classDef active fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#052e16
@@ -96,21 +139,22 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 6 to push | 25/42 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, pushed | 25/42 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
-**fix(nav): the filled Close button needs no divider on its left** · 2026-10-05 09:30 · `next` · `47ba4547`
+**chore: ignore a node_modules link as well as a folder** · 2026-10-05 13:02 · `next` · `89c22a1f`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **fix(nav): the filled Close button needs no divider on its left** · 09:30 · `next` · `47ba4547`
 - **test(phone-3d): lite nav offers 3D, the stage turns, taps land in the turned stage** · 05:22 · `next` · `b537549d`
 - **feat(phone-3d): taps and drags follow the finger on the turned stage** · 05:21 · `next` · `b5cab823`
-- **feat(phone-3d): an upright phone shows the 3D stage turned to landscape** · 05:21 · `next` · `3f5431c4`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 05:21 | feat(phone-3d): an upright phone shows the 3D stage turned to landscape | `next` · `3f5431c4` |
 | 2026-10-05 05:21 | feat(phone-3d): phones can choose the 3D view from the lite nav | `next` · `1cfec04c` |
 | 2026-10-05 02:09 | test(panel): skip the full screen round trip on CI, which cannot load the 3D scene | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b` |
 | 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
@@ -223,7 +267,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/42 | 32 | 6 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/42 | 33 | pushed | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
