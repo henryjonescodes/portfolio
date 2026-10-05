@@ -14,7 +14,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 
 ## Todo
 
-- [ ] EntryList with the list and tile presentations from CSS container queries (from entry/list)
+- [x] EntryList with the list and tile presentations from CSS container queries (from entry/list)
 - [ ] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [ ] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
 - [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
@@ -89,3 +89,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: answered "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - 2026-10-05: answered "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
 - 2026-10-05: answered "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
+- 2026-10-05: done "EntryList with the list and tile presentations from CSS container queries (from entry/list)" at c16a0721
