@@ -83,3 +83,24 @@
   -webkit-touch-callout: none;
   /* Disable callout on iOS */
 }
+
+// A box that its video or image fills edge to edge, cropping rather than letterboxing. It needs a
+// definite height, so the glitch frame and the media inside resolve against it.
+@mixin media-fill {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+
+  video,
+  img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+  }
+}

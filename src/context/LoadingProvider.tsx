@@ -7,6 +7,26 @@ import { isMobile } from 'react-device-detect';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { LoadingContext, LoadingStates } from './LoadingContext';
 
+// A phone that chose the 3D view keeps it for the rest of the session.
+const PHONE_3D_KEY = 'phone-3d';
+
+const readPhone3D = () => {
+  try {
+    return sessionStorage.getItem(PHONE_3D_KEY) === 'true';
+  } catch {
+    return false;
+  }
+};
+
+const writePhone3D = (on: boolean) => {
+  try {
+    if (on) sessionStorage.setItem(PHONE_3D_KEY, 'true');
+    else sessionStorage.removeItem(PHONE_3D_KEY);
+  } catch {
+    // Storage can be blocked; the choice then lasts only until a reload.
+  }
+};
+
 interface LoadingProviderProps {
   children: ReactNode;
 }
@@ -25,8 +45,12 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
   const preventTimeout = useRef(false);
   const loadingTimerMs = useRef<number>(TIMEOUTS.LITE_MODE_FALLBACK);
 
+  const phone3D = useRef(isMobile && readPhone3D());
+
   // ? Setup States
-  const [liteMode, setLiteModeState] = useState<boolean>(liteModeFlag || isMobile);
+  const [liteMode, setLiteModeState] = useState<boolean>(
+    liteModeFlag || (isMobile && !phone3D.current),
+  );
   const [progress, setProgress] = useState<number>(0);
   const [loadingState, setLoadingState] = useState<LoadingStates>(liteMode ? undefined : 'loading');
   const [firstPageLoad, setFirstPageLoad] = useState<boolean>(true);
@@ -48,12 +72,16 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
     [location.search, navigate],
   );
 
-  // Phones always run in lite mode, so make the URL say so.
+  // Phones run in lite mode unless they chose 3D, so make the URL say so.
   useEffect(() => {
-    if (isMobile) updateLiteModeFlag(true);
+    if (isMobile && !phone3D.current) updateLiteModeFlag(true);
   }, [updateLiteModeFlag]);
 
   const setLiteMode = (to: boolean) => {
+    if (isMobile) {
+      phone3D.current = !to;
+      writePhone3D(!to);
+    }
     updateLiteModeFlag(to);
     setLiteModeState(to);
   };

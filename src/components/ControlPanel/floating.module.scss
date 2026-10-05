@@ -13,3 +13,17 @@
   background: black;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
+
+// Phones: a bottom sheet in reach of a thumb, tall enough for the FX page's sound rows.
+@media (max-width: styles.$width-mobile) {
+  .floating {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: min(60dvh, 460px);
+    border-bottom: none;
+    border-radius: styles.$radius-lg styles.$radius-lg 0 0;
+  }
+}

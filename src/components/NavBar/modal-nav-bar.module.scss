@@ -4,10 +4,13 @@
 .modalNavbar {
   @include navBar.navBarContainer;
   @include styles.title-bar;
+  height: 40px;
 }
 
 .contents {
   @include navBar.navBarContents;
+  // The window sets the bar's width, so its buttons reach the window's edge.
+  max-width: none;
 }
 
 .left {

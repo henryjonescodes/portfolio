@@ -46,6 +46,97 @@ test.describe('control panel', () => {
     expect(value).toBe('0.5');
   });
 
+  test('the sound switch persists across reload', async ({ page }) => {
+    const panel = await openPanel(page);
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    const sound = panel.getByRole('switch');
+    await expect(sound).toHaveAttribute('aria-checked', 'true');
+    await sound.click();
+    await expect(sound).toHaveAttribute('aria-checked', 'false');
+
+    await page.reload();
+    await expect(page.getByRole('button', { name: 'Sound off' })).toBeVisible();
+    await page.getByRole('button', { name: 'Open control panel' }).click();
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    await expect(panel.getByRole('switch')).toHaveAttribute('aria-checked', 'false');
+  });
+
+  test('the waveform row is keyboard operable', async ({ page }) => {
+    const panel = await openPanel(page);
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    await expect(panel.getByRole('radio', { name: 'square' })).toHaveAttribute(
+      'aria-checked',
+      'true',
+    );
+    await panel.getByRole('radio', { name: 'square' }).focus();
+    await page.keyboard.press('ArrowRight');
+    const saw = panel.getByRole('radio', { name: 'sawtooth' });
+    await expect(saw).toBeFocused();
+    await expect(saw).toHaveAttribute('aria-checked', 'true');
+  });
+
+  test('a knob turns with the arrow keys and applies its value', async ({ page }) => {
+    const panel = await openPanel(page);
+    const accent = () =>
+      page.evaluate(() => document.documentElement.style.getPropertyValue('--accent-primary'));
+    const knob = panel.getByRole('slider', { name: 'Accent' });
+    const before = Number(await knob.getAttribute('aria-valuenow'));
+    const colourBefore = await accent();
+
+    await knob.focus();
+    await page.keyboard.press('PageUp');
+    await expect(knob).toHaveAttribute('aria-valuenow', String(before + 10));
+    await expect.poll(accent).not.toBe(colourBefore);
+
+    await page.keyboard.press('Home');
+    await expect(knob).toHaveAttribute('aria-valuenow', '0');
+    await page.keyboard.press('End');
+    await expect(knob).toHaveAttribute('aria-valuenow', '360');
+    await expect(knob).toHaveAttribute('aria-valuetext', '360\u00b0');
+  });
+
+  test('a knob follows a drag', async ({ page }) => {
+    const panel = await openPanel(page);
+    const knob = panel.getByRole('slider', { name: 'Foreground' });
+    const before = Number(await knob.getAttribute('aria-valuenow'));
+    const box = (await knob.boundingBox())!;
+    const x = box.x + box.width / 2;
+    const y = box.y + box.height / 2;
+
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x, y - 45, { steps: 5 });
+    await page.mouse.up();
+    await expect(knob).toBeFocused();
+    expect(Number(await knob.getAttribute('aria-valuenow'))).toBeGreaterThan(before + 30);
+  });
+
+  test('the sound knobs and mini sliders both drive preferences', async ({ page }) => {
+    const panel = await openPanel(page);
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    const cutoff = panel.getByRole('slider', { name: 'Cutoff' });
+    await cutoff.focus();
+    await page.keyboard.press('ArrowUp');
+    await expect(cutoff).toHaveAttribute('aria-valuetext', /Hz$/);
+    const value = Number(await cutoff.getAttribute('aria-valuenow'));
+    await page.reload();
+    await page.getByRole('button', { name: 'Open control panel' }).click();
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    await expect(panel.getByRole('slider', { name: 'Cutoff' })).toHaveAttribute(
+      'aria-valuenow',
+      String(value),
+    );
+    await expect(panel.locator('input[type="range"]').first()).toBeVisible();
+  });
+
+  test('the nav speaker button toggles sound', async ({ page }) => {
+    await page.goto('/about?lite=true');
+    await page.getByRole('button', { name: 'Sound on' }).click();
+    await expect(page.getByRole('button', { name: 'Sound off' })).toBeVisible();
+    await page.getByRole('button', { name: 'Sound off' }).click();
+    await expect(page.getByRole('button', { name: 'Sound on' })).toBeVisible();
+  });
+
   test('closes with Close and with Escape', async ({ page }) => {
     const panel = await openPanel(page);
     await panel.getByRole('button', { name: 'Close' }).click();
@@ -75,9 +166,9 @@ test.describe('control panel', () => {
     await page.keyboard.press('ArrowLeft');
     await panel.getByRole('radio', { name: 'Pixelify Sans' }).focus();
     await page.keyboard.press('ArrowDown');
-    const plex = panel.getByRole('radio', { name: 'IBM Plex Mono' });
-    await expect(plex).toBeFocused();
-    await expect(plex).toHaveAttribute('aria-checked', 'true');
+    const vt323 = panel.getByRole('radio', { name: 'VT323' });
+    await expect(vt323).toBeFocused();
+    await expect(vt323).toHaveAttribute('aria-checked', 'true');
   });
 
   test('focus stays inside and returns to the gear on close', async ({ page }) => {
@@ -97,6 +188,8 @@ test.describe('control panel', () => {
 
   test('leaving full screen closes it for good', async ({ page }) => {
     test.skip(!!process.env.CI, 'needs the 3D scene, which CI runners cannot load in time');
+    // Loads the 3D scene twice, which can outlast the default timeout on a busy machine.
+    test.setTimeout(120_000);
     await page.goto('/about');
     await page.getByRole('button', { name: 'Full screen' }).click();
     await page.getByRole('button', { name: 'Open control panel' }).click();

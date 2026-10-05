@@ -5,14 +5,15 @@ import { useAnimations } from '@context/AnimationContext';
 import { Vector3 } from '$three';
 import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { useZoom } from '@context/ZoomContext';
-import { useMobileOrientation, isMobile } from 'react-device-detect';
+import { isMobile } from 'react-device-detect';
 import { landscapeZoomPositionOffset } from '@styles/layout.constants';
 
 const CustomControls: React.FC = () => {
   const { camera } = useThree();
   const { zoomLevel } = useZoom();
-  const { zoomPositions } = useWindowDimensions();
-  const { isLandscape } = useMobileOrientation();
+  // The stage's own size, so an upright phone showing the stage sideways counts as landscape.
+  const { zoomPositions, width, height } = useWindowDimensions();
+  const isLandscape = width > height;
   const { SPRINGS, CAMERA_LERP } = useAnimations();
   const target = useMemo(() => new Vector3(), []);
 

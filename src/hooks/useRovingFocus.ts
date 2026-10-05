@@ -22,5 +22,7 @@ export function useRovingFocus(count: number, onSelect: (index: number) => void)
     refs.current[next]?.focus();
   };
 
-  return { itemRef, onKeyDown };
+  const focus = (index: number) => refs.current[index]?.focus();
+
+  return { itemRef, onKeyDown, focus };
 }

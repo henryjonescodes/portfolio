@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { useAnimations } from '@context/AnimationContext';
 import NavBarButton from './NavBarButton';
 import AnimatedLine from '@components/AnimatedLine';
-import Close from '@assets/svg/icons/close.svg?react';
+import Close from '@assets/svg/icons/x.svg?react';
 import Expand from '@assets/svg/icons/expand.svg?react';
 import Shrink from '@assets/svg/icons/shrink.svg?react';
 import styles from './modal-nav-bar.module.scss';
@@ -16,6 +16,8 @@ type ModalNavBarProps = {
   onToggleExpand?: () => void;
   /** Fills the bar's left side, such as an entry's section tabs. */
   left?: ReactNode;
+  /** Appears with the window's morph rather than after it, for a bar that morphs into place. */
+  quick?: boolean;
 };
 
 const ModalNavBar = ({
@@ -24,6 +26,7 @@ const ModalNavBar = ({
   expanded = false,
   onToggleExpand,
   left,
+  quick = false,
 }: ModalNavBarProps) => {
   const { TRANSITIONS } = useAnimations();
 
@@ -35,6 +38,7 @@ const ModalNavBar = ({
       opacity: 1,
       transition: {
         ...TRANSITIONS.MODAL_NAVBAR.ANIMATE,
+        ...(quick && { delay: 0 }),
         delayChildren: 1,
       },
     },
@@ -70,7 +74,7 @@ const ModalNavBar = ({
               />
             </span>
           )}
-          {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" />}
+          {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" filled />}
         </motion.div>
         <AnimatedLine
           className={styles.navbarBorder}

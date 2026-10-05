@@ -250,16 +250,16 @@ Add a tunable there and read it through `useAnimations()`; never hardcode a dura
 - `src/hooks/useLatest.ts`: lets an effect that fires on one change read the latest props and callbacks.
 - `src/config/animation/variants.ts`: `fade(animate, exit)` for the standard opacity variants.
 - `src/components/EntryMedia`: renders an entry's video or image with the glitch treatment.
-- `src/assets/requests/`: sourced media. A placeholder carries a `request` id; a file named `<id>.jpg|png|webp|mp4` here replaces it with no code change (`src/utils/requests.ts`). `npm run requests` writes `.work/REQUESTS.md`, the list of what is still missing and where to drop each file.
+- `src/assets/requests/`: sourced media and approved prose. A placeholder carries a `request` id; a file named `<id>.jpg|png|webp|mp4` here replaces it with no code change (`src/utils/requests.ts`). Drafted prose is wrapped in `draft('<id>', '...')`, and an `<id>.md` file here replaces the draft text. `npm run requests` writes `.work/REQUESTS.md`, the list of what is still missing or awaiting approval and where to drop each file.
 - `src/components/Panels`: data-driven sections for open entries (see the panels skill).
 
 ## Testing
 
 `npm run test:e2e` runs the Playwright suite in `e2e/`, one spec per feature (`pages`, `modal`,
-`carousel`, `scene`, `a11y`) with shared helpers in `helpers.ts`; add tests to the matching spec.
+`scene`, `a11y`, `panel`, `share`; entry rows and phone tiles both live in `modal`) with shared helpers in `helpers.ts`; add tests to the matching spec.
 Run it before pushing anything that touches animation, the modal or the 3D bridge.
 `npm run check` (lint, types, knip, asset check) must pass; `npm run format` applies Prettier.
-`npm run modal-frames` captures modal open and close frames for a visual check.
+To judge an animation by eye, use the `portfolio-motion-sheet` skill (a real-time contact sheet of frames).
 
 ## Work Tracking
 

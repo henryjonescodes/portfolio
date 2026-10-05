@@ -302,6 +302,17 @@
       max-height: unset;
     }
 
+    // The window's media keeps the tile's shape, so the morph between them is a plain scale
+    // and an image fills its box rather than letterboxing.
+    &.notInList .childrenWrapper:not(.mediaCollapsed) {
+      aspect-ratio: 16 / 10;
+    }
+
+    &.notInList .children video,
+    &.notInList .children img {
+      object-fit: cover;
+    }
+
     .line {
       top: 100%;
     }

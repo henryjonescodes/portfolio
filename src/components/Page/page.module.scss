@@ -21,19 +21,12 @@
   }
 }
 
-.background {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-}
-
 .content {
   @include styles.retro-scrollbar;
   @include styles.page-padding-horizontal;
   scroll-snap-type: y mandatory;
   overflow: auto;
+  overscroll-behavior: contain;
   width: 100%;
   flex: 1;
   display: flex;

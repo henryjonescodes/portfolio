@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { motion } from 'framer-motion';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styles from './crosshair.module.scss';
 import { useFinePointer, usePointer } from './usePointer';
 
@@ -30,10 +30,13 @@ export const CrosshairGuides = () => {
 export const CrosshairMark = () => {
   const fine = useFinePointer();
   const [over, setOver] = useState(false);
-  const onMove = useCallback(
-    (e: PointerEvent) => setOver(!!(e.target as Element | null)?.closest?.(INTERACTIVE)),
-    [],
-  );
+  const overRef = useRef(false);
+  const onMove = useCallback((e: PointerEvent) => {
+    const next = !!(e.target as Element | null)?.closest?.(INTERACTIVE);
+    if (next === overRef.current) return;
+    overRef.current = next;
+    setOver(next);
+  }, []);
   const { x, y, inside } = usePointer(onMove);
 
   // The system cursor hides only while the crosshair is tracking the pointer, so a page loaded

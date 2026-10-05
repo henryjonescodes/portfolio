@@ -3,9 +3,24 @@
 .landing {
   width: 100vw;
   height: 100vh;
+  // The visible viewport, so iOS toolbars never leave the shell taller than the screen.
+  height: 100dvh;
   position: relative;
   overflow: hidden;
   pointer-events: auto;
+
+  // An upright phone: the shell takes landscape proportions and turns 90 degrees clockwise,
+  // its top-left corner pinned to the screen's top-right. src/utils/stage.ts maps input to match.
+  &.rotated {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    width: 100dvh;
+    height: 100vw;
+    transform-origin: top left;
+    transform: translateX(100vw) rotate(90deg);
+  }
 }
 
 .wrapper {
