@@ -32,3 +32,4 @@ Landed branches, newest last. Appended by `bw land`.
 - 2026-10-05 **feat/panel-phones** → `next`: The control panel on phones. Gear shows in the phone nav; Panel opens as a bottom sheet on phones, scrolls inside; Touch works for every control, including the knob
 - 2026-10-05 plan `2026-10-content-and-inbox.md` complete: feat/entry-tabs, feat/content-requests, bw/inbox
 - 2026-10-05 plan `2026-10-roadmap.md` complete: anim/motion-idioms, content/real-copy, feat/projects-carousel, release/promote-main
+- 2026-10-05 **entry/open** → `next`: One open morph, the carousel's, at every width. Closed and open layouts keep the same elements in the same order, with shared layoutIds; Remove EntryCarousel and EntryCard; one provider opens everything; Phones: the entry image animates between list and window (its shape and fill now match)

@@ -119,6 +119,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Every shared link shows this card; it also settles which domain is canonical.
   - file: public/og-image.png
   - kind: decision
+- [ ] Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- [ ] e2e: open and close at both widths, and a resize while open (from entry/open)
+- [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts (from entry/open)
 
 ## Log
 
@@ -161,3 +165,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: dropped "Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images"
 - 2026-10-05: dropped "Phones: the entry image animates between list and window, and fills its space"
 - 2026-10-05: dropped "After the stream lands: DRY and code-splitting pass, delete unused code"
+- 2026-10-05: carried 4 open todo(s) from entry/open
