@@ -35,7 +35,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
   - kind: decision
   - answer: Yes, phones too where possible: the site is a resume but a toy at heart
-- [ ] Request ids on mock media and drafted prose (from feat/content-requests)
+- [x] Request ids on mock media and drafted prose (from feat/content-requests)
 - [ ] Sourced files and prose resolve by id at build time (from feat/content-requests)
 - [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
 - [?] Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)
@@ -97,3 +97,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Colour page with presets (from feat/control-panel)" at 26849088
 - 2026-10-05: done "Type page (families, size, typewriter) (from feat/control-panel)" at 216bbb4f
 - 2026-10-05: done "FX page (CRT, grain, motion speed, sound) (from feat/control-panel)" at 6232ae9f
+- 2026-10-05: done "Request ids on mock media and drafted prose (from feat/content-requests)" at 20040d4d
