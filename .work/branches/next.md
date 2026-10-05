@@ -91,6 +91,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [ ] 3D view socials: smaller, no Instagram, two rows of three
 - [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
+- [ ] Rule in repertoire: keep bw and the refactor's skills current while working
 
 ## Log
 
