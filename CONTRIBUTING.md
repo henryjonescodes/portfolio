@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:42 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:43 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:42 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:43 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
@@ -27,8 +27,8 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob active
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
+    class n_feat_panel_knob planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -38,18 +38,6 @@ flowchart LR
   n_next --> n_entry_cleanup
   n_next --> n_feat_panel_knob
   n_staging --> n_next
-  n_feat_panel_knob_t0["Knob component: drag, wheel<br/>and arrow keys, with aria<br/>slide…"]
-  class n_feat_panel_knob_t0 todo
-  n_feat_panel_knob -.-> n_feat_panel_knob_t0
-  n_feat_panel_knob_t1["Mini slider variant of the<br/>range rows"]
-  class n_feat_panel_knob_t1 todo
-  n_feat_panel_knob -.-> n_feat_panel_knob_t1
-  n_feat_panel_knob_t2["Colour hues and FX ranges use<br/>them; each tick plays the tog…"]
-  class n_feat_panel_knob_t2 todo
-  n_feat_panel_knob -.-> n_feat_panel_knob_t2
-  n_feat_panel_knob_t3["Touch drag works on phones<br/>(the panel is a bottom sheet<br/>the…"]
-  class n_feat_panel_knob_t3 todo
-  n_feat_panel_knob -.-> n_feat_panel_knob_t3
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -89,8 +77,8 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob active
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
+    class n_feat_panel_knob planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -184,7 +172,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 14 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `next` |  | active, 19 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
@@ -201,7 +189,6 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|
 | 2026-10-05 13:21 | perf(crosshair): follow raw pointer updates, re-render only when state changes | `next` · `21de6907` |
 | 2026-10-05 13:21 | feat(scripts): motion-sheet captures an animation in real time as one contact sheet | `next` · `aba8b241` |
-| 2026-10-05 13:15 | feat(panel): rotary knobs for hues and sound filter, mini slider styling | `feat/panel-knob` · `cb52e756` |
 | 2026-10-05 02:09 | test(panel): skip the full screen round trip on CI, which cannot load the 3D scene | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b` |
 | 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
 | 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
@@ -312,8 +299,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 43 | 14 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/4 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | 19 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
