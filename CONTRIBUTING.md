@@ -177,7 +177,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `content/prose-requests` |  | active, 42 to push | 0/2 | Request ids on drafted prose (summaries, blurbs, claims) |  |
+| `content/prose-requests` |  | active, pushed | 0/2 | Request ids on drafted prose (summaries, blurbs, claims) |  |
 
 ## 🕘 Just happened
 
@@ -298,7 +298,7 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `content/prose-requests` ◀ | Drafted prose in the request list | active |  | 0/2 | 2 | 42 to push | Request ids on drafted prose (summaries, blurbs, claims) |
+| `content/prose-requests` ◀ | Drafted prose in the request list | active |  | 0/2 | 2 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | active |  | 0/2 | 1 | 106 to push | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
