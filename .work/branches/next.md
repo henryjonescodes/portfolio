@@ -83,6 +83,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - file: scripts/build-requests.mjs
 - [x] Entry tabs use the shared useRovingFocus hook
 - [ ] Modal window gets a max width on wide screens
+- [ ] Window bar: the entry name has no left divider in the modal
 
 ## Log
 
