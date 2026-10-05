@@ -113,6 +113,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
   - file: src/styles/_colors.scss#L12
   - kind: decision
+- [?] Curate real panel content (screenshots, galleries, stats) per project
+  - why: Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
+  - file: src/data/projects.ts
+  - kind: media
 
 ## Log
 
