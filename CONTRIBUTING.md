@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:43 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:46 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:43 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:46 UTC by `bw board` on `feat/panel-knob` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
@@ -27,10 +27,10 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob planned
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: Mini slider variant of the range …</i>"]
+    class n_feat_panel_knob planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -77,10 +77,10 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob planned
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: Mini slider variant of the range …</i>"]
+    class n_feat_panel_knob planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -88,49 +88,49 @@ flowchart LR
   n_next --> n_entry_cleanup
   n_next --> n_feat_panel_knob
   n_staging --> n_next
-  landed_0["✅ Modal opens as cleanly as it<br/>closes<br/><code>anim/modal-open</code> · 2026-10-04"]
+  landed_0["✅ Accessibility pass<br/><code>a11y/pass</code> · 2026-10-04"]
   class landed_0 merged
   n_staging --- landed_0
-  landed_1["✅ Real copy and missing<br/>content<br/><code>content/real-copy</code> · 2026-10-04"]
+  landed_1["✅ Modal opens as cleanly as it<br/>closes<br/><code>anim/modal-open</code> · 2026-10-04"]
   class landed_1 merged
   n_staging --- landed_1
-  landed_2["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
+  landed_2["✅ Real copy and missing<br/>content<br/><code>content/real-copy</code> · 2026-10-04"]
   class landed_2 merged
   n_staging --- landed_2
-  landed_3["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
+  landed_3["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
   class landed_3 merged
   n_staging --- landed_3
-  landed_4["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
+  landed_4["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
   class landed_4 merged
   n_staging --- landed_4
-  landed_5["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
+  landed_5["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
   class landed_5 merged
   n_staging --- landed_5
-  landed_6["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
+  landed_6["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
   class landed_6 merged
   n_staging --- landed_6
-  landed_7["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
+  landed_7["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
   class landed_7 merged
   n_staging --- landed_7
-  landed_8["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
+  landed_8["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
   class landed_8 merged
   n_staging --- landed_8
-  landed_9["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
+  landed_9["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
   class landed_9 merged
   n_staging --- landed_9
-  landed_10["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
+  landed_10["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
   class landed_10 merged
   n_staging --- landed_10
-  landed_11["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
+  landed_11["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
   class landed_11 merged
   n_staging --- landed_11
-  landed_12["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
+  landed_12["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
   class landed_12 merged
   n_staging --- landed_12
-  landed_13["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
+  landed_13["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
   class landed_13 merged
-  n_next --- landed_13
-  landed_14["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
+  n_staging --- landed_13
+  landed_14["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
   class landed_14 merged
   n_next --- landed_14
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
@@ -162,17 +162,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**What.** The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
 **How, next.**
 
-- Per-part timings from the carousel tunables, shared by every width (from entry/open)
-- e2e: open and close at both widths, and a resize while open (from entry/open)
-- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- Mini slider variant of the range rows
+- Colour hues and FX ranges use them; each tick plays the toggle sound
+- Touch drag works on phones (the panel is a bottom sheet there)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 19 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `feat/panel-knob` |  | planned, 1 to push | 1/4 | Mini slider variant of the range rows |  |
 
 ## 🕘 Just happened
 
@@ -299,8 +299,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/4 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | 19 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | planned |  | 1/4 | 0 | 1 to push | Mini slider variant of the range rows |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | 19 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -330,11 +330,11 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (0/4)</summary>
+<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (1/4)</summary>
 
 The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
-- [ ] Knob component: drag, wheel and arrow keys, with aria slider semantics
+- [x] Knob component: drag, wheel and arrow keys, with aria slider semantics
 - [ ] Mini slider variant of the range rows
 - [ ] Colour hues and FX ranges use them; each tick plays the toggle sound
 - [ ] Touch drag works on phones (the panel is a bottom sheet there)
