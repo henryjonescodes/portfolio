@@ -1,3 +1,4 @@
+import { draft } from '@utils/requests';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import Java from '@assets/svg/tools/Java.svg?react';
 import React from '@assets/svg/tools/React.svg?react';
@@ -20,8 +21,10 @@ export const experienceData: Record<string, EntryData> = {
     description: [
       '— Designed and delivered custom {{arbor/notifier|email notification system}} to provide real-time insights to users about their savings with Arbor',
     ],
-    blurb:
+    blurb: draft(
+      'arbor-blurb',
       'Full stack engineer building the features that show people how much they save with Arbor, starting with a real-time {{arbor/notifier|email notification system}}, and building {{arbor/almanac|Almanac}}, the team’s skill manager.',
+    ),
     startDate: new Date(2025, 0),
     gallery: [
       {
@@ -64,8 +67,10 @@ export const experienceData: Record<string, EntryData> = {
         title: 'User notifier',
         Icon: Mail,
         paint: 'stroke',
-        summary:
+        summary: draft(
+          'arbor-notifier-summary',
           'A real-time email notification system that shows Arbor users what they are saving.',
+        ),
         panels: [
           {
             type: 'hero',
@@ -101,8 +106,10 @@ export const experienceData: Record<string, EntryData> = {
         id: 'almanac',
         title: 'Almanac',
         Icon: Book,
-        summary:
+        summary: draft(
+          'arbor-almanac-summary',
           'A skill manager for the team’s AI coding agents: one catalogue of shared skills, kept in step across every repo.',
+        ),
         panels: [
           {
             type: 'media',
@@ -162,8 +169,10 @@ export const experienceData: Record<string, EntryData> = {
         id: 'kiki',
         title: 'Kiki UI',
         Icon: Handheld,
-        summary:
+        summary: draft(
+          'channelai-kiki-summary',
           'The design system behind ChannelAI’s iOS app: shared components, color and typography, kept consistent across the app and with design.',
+        ),
         panels: [
           {
             type: 'media',

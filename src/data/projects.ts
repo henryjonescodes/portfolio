@@ -1,3 +1,4 @@
+import { draft } from '@utils/requests';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import ThreeJs from '@assets/svg/tools/ThreeJs.svg?react';
 import Blender from '@assets/svg/tools/Blender.svg?react';
@@ -23,8 +24,10 @@ export const projectsData: Record<string, EntryData> = {
       'Portfolio site showcasing 2D animations, work experience, and my presence online,',
       'Tools: Framer Motion, React, SASS, Webpack, SVG',
     ],
-    blurb:
+    blurb: draft(
+      'portfoliov2-blurb',
       'The second version of this site: a 2D portfolio built around Framer Motion, with animated SVG work, work experience, and links to everywhere I am online.',
+    ),
     url: 'https://v2.henryjones.xyz',
     dateString: '2023',
     tools: [
@@ -59,8 +62,10 @@ export const projectsData: Record<string, EntryData> = {
       'All models were custom made in Blender.',
       'Tools: Three.js, React, Blender',
     ],
-    blurb:
+    blurb: draft(
+      'virtualportfolio-blurb',
       'An experiment in building a portfolio as a 3D space with Three.js and React. Every model in the scene was made by hand in Blender.',
+    ),
     url: 'https://tower.henryjones.xyz',
     tools: [
       {
@@ -94,8 +99,10 @@ export const projectsData: Record<string, EntryData> = {
       'Playful portfolio site showcasing pre-tech work experience & interactive 2D animations,',
       'Tools: Framer Motion, React',
     ],
-    blurb:
+    blurb: draft(
+      'portfoliov1-blurb',
       'The first portfolio: a playful site with interactive 2D animations that showcased my work before I moved into tech.',
+    ),
     url: 'https://v1.henryjones.xyz',
     dateString: '2021',
     tools: [
@@ -128,8 +135,10 @@ export const projectsData: Record<string, EntryData> = {
       'Undergraduate capstone project on human computer interaction exploring the trust response of study subjects with unreliable suggestions from a software agent,',
       'Tools: Java, Swing',
     ],
-    blurb:
+    blurb: draft(
+      'thesis-blurb',
       'My undergraduate capstone in human computer interaction. Study participants worked with a software agent whose suggestions were deliberately unreliable, and the study measured how their trust in it responded.',
+    ),
     url: '/pdf/TrustResponseToAnticipatorySoftwareAgents.pdf',
     startDate: new Date(2020, 8),
     endDate: new Date(2021, 5),
