@@ -27,7 +27,7 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: A label strip over the three knob…</i>"]
+    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▱▱▱▱ 2/4<br/><i>next: The 3D knobs drive the current pa…</i>"]
     class n_feat_knob_mapping active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -38,15 +38,12 @@ flowchart LR
   n_next --> n_entry_cleanup
   n_next --> n_feat_knob_mapping
   n_staging --> n_next
-  n_feat_knob_mapping_t0["A label strip over the three<br/>knobs naming what each<br/>control…"]
+  n_feat_knob_mapping_t0["The 3D knobs drive the current<br/>page's three main controls, …"]
   class n_feat_knob_mapping_t0 todo
   n_feat_knob_mapping -.-> n_feat_knob_mapping_t0
-  n_feat_knob_mapping_t1["The 3D knobs drive the current<br/>page's three main controls, …"]
+  n_feat_knob_mapping_t1["Turning a 3D knob moves the<br/>matching panel control and<br/>tick…"]
   class n_feat_knob_mapping_t1 todo
   n_feat_knob_mapping -.-> n_feat_knob_mapping_t1
-  n_feat_knob_mapping_t2["Turning a 3D knob moves the<br/>matching panel control and<br/>tick…"]
-  class n_feat_knob_mapping_t2 todo
-  n_feat_knob_mapping -.-> n_feat_knob_mapping_t2
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -86,7 +83,7 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: A label strip over the three knob…</i>"]
+    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▱▱▱▱ 2/4<br/><i>next: The 3D knobs drive the current pa…</i>"]
     class n_feat_knob_mapping active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -175,13 +172,12 @@ flowchart LR
 
 **How, next.**
 
-- A label strip over the three knobs naming what each controls on the current page
 - The 3D knobs drive the current page's three main controls, not only colour
 - Turning a 3D knob moves the matching panel control and ticks the synth
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/knob-mapping` |  | active, 2 to push | 1/4 | A label strip over the three knobs naming what each controls on the current page |  |
+| `feat/knob-mapping` |  | active, 3 to push | 2/4 | The 3D knobs drive the current page's three main controls, not only colour |  |
 
 ## 🕘 Just happened
 
@@ -308,7 +304,7 @@ Colour turns the hues, Type the font, text size and motion speed, FX the CRT, vo
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/knob-mapping` ◀ | The 3D knobs drive the control panel's page | active |  | 1/4 | 1 | 2 to push | A label strip over the three knobs naming what each controls on the current page |
+| `feat/knob-mapping` ◀ | The 3D knobs drive the control panel's page | active |  | 2/4 | 1 | 3 to push | The 3D knobs drive the current page's three main controls, not only colour |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
@@ -339,12 +335,12 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>feat/knob-mapping</code>: The 3D knobs drive the control panel's page (1/4)</summary>
+<details><summary><code>feat/knob-mapping</code>: The 3D knobs drive the control panel's page (2/4)</summary>
 
 In 3D the model's three knobs control whatever the info screen's panel page shows (colour hues, FX levels, sound), with a label strip on the screen naming what each knob does; the panel's labels read clearly on the 3D screen.
 
 - [x] Panel labels legible on the 3D info screen (contrast and font)
-- [ ] A label strip over the three knobs naming what each controls on the current page
+- [x] A label strip over the three knobs naming what each controls on the current page
 - [ ] The 3D knobs drive the current page's three main controls, not only colour
 - [ ] Turning a 3D knob moves the matching panel control and ticks the synth
 
