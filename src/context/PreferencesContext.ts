@@ -1,11 +1,12 @@
 import { createContext, useContext } from 'react';
 
-export type FontFamilyId = 'pixelify' | 'plex' | 'grotesk';
+export type FontFamilyId = 'pixelify' | 'vt323' | 'plex' | 'orbitron';
 
 export const FONT_FAMILIES: Record<FontFamilyId, { label: string; css: string }> = {
   pixelify: { label: 'Pixelify Sans', css: "'Pixelify Sans', sans-serif" },
+  vt323: { label: 'VT323', css: "'VT323', monospace" },
   plex: { label: 'IBM Plex Mono', css: "'IBM Plex Mono', monospace" },
-  grotesk: { label: 'Space Grotesk', css: "'Space Grotesk', sans-serif" },
+  orbitron: { label: 'Orbitron', css: "'Orbitron', sans-serif" },
 };
 
 export const DEFAULT_PREFERENCES = {

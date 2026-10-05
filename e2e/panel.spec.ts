@@ -75,9 +75,9 @@ test.describe('control panel', () => {
     await page.keyboard.press('ArrowLeft');
     await panel.getByRole('radio', { name: 'Pixelify Sans' }).focus();
     await page.keyboard.press('ArrowDown');
-    const plex = panel.getByRole('radio', { name: 'IBM Plex Mono' });
-    await expect(plex).toBeFocused();
-    await expect(plex).toHaveAttribute('aria-checked', 'true');
+    const vt323 = panel.getByRole('radio', { name: 'VT323' });
+    await expect(vt323).toBeFocused();
+    await expect(vt323).toHaveAttribute('aria-checked', 'true');
   });
 
   test('focus stays inside and returns to the gear on close', async ({ page }) => {
