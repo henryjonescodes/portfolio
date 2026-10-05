@@ -262,6 +262,7 @@
   &.filled {
     background: var(--foreground-primary);
     box-shadow: none;
+    border-left: none;
 
     .icon {
       width: 18px;
