@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:37 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:39 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:37 UTC by `bw board` on `entry/open` |
+| Generated | 2026-10-05 13:39 UTC by `bw board` on `entry/open` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
@@ -198,21 +198,22 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/open` |  | active, 83 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
+| `entry/open` |  | active, 84 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
-**fix(entries): a video carries its frame and time between list and window** · 2026-10-05 13:37 · `entry/open` · `48913e6f`
-The window's video shows the source's current frame until it decodes and starts from the same time; on close the list's video picks up from the window's.
+**chore(scripts): motion-sheet moves to the portfolio-motion-sheet skill in repertoire** · 2026-10-05 13:39 · `entry/open` · `da2ab139`
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **fix(entries): a video carries its frame and time between list and window** · 13:37 · `entry/open` · `48913e6f`
 - **fix(nav): the window bar spans its window at a fixed 40px, and Close simply fills its slot** · 13:33 · `entry/open` · `9922dfdd`
 - **feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line** · 13:22 · `entry/open` · `72f91b91`
-- **perf(crosshair): follow raw pointer updates, re-render only when state changes** · 13:21 · `entry/open` · `21de6907`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 13:21 | perf(crosshair): follow raw pointer updates, re-render only when state changes | `entry/open` · `21de6907` |
 | 2026-10-05 13:21 | feat(scripts): motion-sheet captures an animation in real time as one contact sheet | `entry/open` · `aba8b241` |
 | 2026-10-05 13:15 | feat(panel): rotary knobs for hues and sound filter, mini slider styling | `feat/panel-knob` · `cb52e756` |
 | 2026-10-05 13:07 | feat(panel): a bottom sheet on phones, and the waveform keys in one row | `next` · `b795c7ca` |
@@ -326,7 +327,7 @@ The window's video shows the source's current frame until it decodes and starts 
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 6 | 83 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 7 | 84 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
