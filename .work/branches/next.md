@@ -81,6 +81,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - file: e2e/modal.spec.ts
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
   - file: scripts/build-requests.mjs
+- [ ] Entry tabs use the shared useRovingFocus hook
 
 ## Log
 
