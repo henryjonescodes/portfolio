@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:38 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:40 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 02:38 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 02:40 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 13/29 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▱▱▱▱▱ 13/30 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -51,7 +51,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 13/29 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▱▱▱▱▱ 13/30 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -96,21 +96,22 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 13/29 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 1 to push | 13/30 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
-**feat(panel): retro type choices (VT323, Orbitron) replace the grotesk; placeholder test looks inside the dialog** · 2026-10-05 02:36 · `next` · `002423a3`
+**refactor(efforts): entry tabs use the shared roving focus hook** · 2026-10-05 02:40 · `next` · `e8477117`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **feat(panel): retro type choices (VT323, Orbitron) replace the grotesk; placeholder test looks inside the dialog** · 02:36 · `next` · `002423a3`
 - **fix(layout): no document overscroll on iOS; the shell fits the visible viewport** · 02:24 · `next` · `77e75ae0`
 - **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
-- **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
 | 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
 | 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
@@ -220,7 +221,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 13/29 | 20 | pushed | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 13/30 | 21 | 1 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
@@ -245,7 +246,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (13/29)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (13/30)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -278,6 +279,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
 - [ ] Placeholder e2e test looks inside the dialog, not the first match on the page
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
+- [ ] Entry tabs use the shared useRovingFocus hook
 
 </details>
 
