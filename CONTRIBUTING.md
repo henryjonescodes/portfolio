@@ -18,8 +18,8 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
-    class n_entry_cleanup active
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
+    class n_entry_cleanup planned
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -71,8 +71,8 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
-    class n_entry_cleanup active
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
+    class n_entry_cleanup planned
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -88,49 +88,49 @@ flowchart LR
   n_next --> n_content_prose_requests
   n_next --> n_entry_cleanup
   n_staging --> n_next
-  landed_0["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
+  landed_0["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
   class landed_0 merged
   n_staging --- landed_0
-  landed_1["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
+  landed_1["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
   class landed_1 merged
   n_staging --- landed_1
-  landed_2["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
+  landed_2["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
   class landed_2 merged
   n_staging --- landed_2
-  landed_3["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
+  landed_3["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
   class landed_3 merged
   n_staging --- landed_3
-  landed_4["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
+  landed_4["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
   class landed_4 merged
   n_staging --- landed_4
-  landed_5["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
+  landed_5["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
   class landed_5 merged
   n_staging --- landed_5
-  landed_6["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
+  landed_6["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
   class landed_6 merged
   n_staging --- landed_6
-  landed_7["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
+  landed_7["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
   class landed_7 merged
   n_staging --- landed_7
-  landed_8["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
+  landed_8["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
   class landed_8 merged
   n_staging --- landed_8
-  landed_9["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
+  landed_9["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
   class landed_9 merged
   n_staging --- landed_9
-  landed_10["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
+  landed_10["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
   class landed_10 merged
-  n_staging --- landed_10
-  landed_11["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
+  n_next --- landed_10
+  landed_11["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
   class landed_11 merged
   n_next --- landed_11
-  landed_12["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
+  landed_12["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
   class landed_12 merged
   n_next --- landed_12
-  landed_13["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
+  landed_13["✅ The 3D knobs drive the<br/>control panel's page<br/><code>feat/knob-mapping</code> · 2026-10-05"]
   class landed_13 merged
   n_next --- landed_13
-  landed_14["✅ The 3D knobs drive the<br/>control panel's page<br/><code>feat/knob-mapping</code> · 2026-10-05"]
+  landed_14["✅ Tidy after the entry merge<br/><code>entry/cleanup</code> · 2026-10-05"]
   class landed_14 merged
   n_next --- landed_14
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
@@ -172,11 +172,11 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `next` |  | active, 7 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
-**chore(entries): one entry spec, no dead tunables or page styles, CLAUDE.md points at the motion-sheet skill** · 2026-10-05 14:20 · `entry/cleanup` · `84cb9976`
+**chore(entries): one entry spec, no dead tunables or page styles, CLAUDE.md points at the motion-sheet skill** · 2026-10-05 14:20 · `next` · `84cb9976`
 The phone tile tests join modal.spec; five unused transition groups go; the slow 3D panel test gets a longer timeout.
 
 - **feat(requests): drafted prose carries request ids and approved .md files replace it** · 14:19 · `content/prose-requests` · `ce7e18d3`
@@ -295,8 +295,8 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | active |  | 0/2 | 2 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
-| `entry/cleanup` | Tidy after the entry merge | active |  | 2/2 | 2 | 109 to push |  |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `entry/cleanup` | Tidy after the entry merge | planned |  | 2/2 | 0 | 109 to push |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 51 | 7 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
 
