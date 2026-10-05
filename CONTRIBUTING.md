@@ -88,22 +88,23 @@ flowchart LR
 
 ## 🕘 Just happened
 
-**feat(entries): one CSS-switched list for rows and tiles** · 2026-10-05 00:15 · `entry/list` · `8c5be480`
-EntryList renders the same list items in both layouts and switches on a container query. The carousel, its card and useAsCarousel are removed.
+**test: tiles use the list markup; crossing the breakpoint keeps the elements** · 2026-10-05 00:15 · `entry/list` · `697bd107`
+Co-Authored-By: Claude Sonnet <noreply@anthropic.com>
 
+- **feat(entries): one CSS-switched list for rows and tiles** · 00:15 · `entry/list` · `8c5be480`
 - **feat(border): redraw a border or line quickly on demand** · 00:15 · `entry/list` · `0d0980f8`
 - **feat(panel): colour, type and FX control panel in 3D and 2D** · 00:11 · `feat/control-panel` · `3d6f0049`
-- **test: make the e2e port configurable** · 00:08 · `entry/list` · `ebb70005`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 00:08 | test: make the e2e port configurable | `entry/list` · `ebb70005` |
 | 2026-10-05 00:08 | feat(prefs): type, motion speed and CRT preferences with persistence | `feat/control-panel` · `8e9b356a` |
 | 2026-10-05 00:07 | test: let the e2e port come from E2E_PORT | `feat/control-panel` · `b2165509` |
 | 2026-10-05 00:06 | fix(entries): a phone-sized window drops any drag offset | `entry/list` · `7de48b4c` |
 | 2026-10-05 00:02 | test: skip the open-sync check on CI only until the morph is rebuilt | `entry/list` · `0d2e49d1` |
-| 2026-10-04 20:55 | fix(entries): focus trap skips hidden controls; the phone window does not drag | `entry/list` · `962a491a` |
+| 2026-10-04 20:55 | fix(entries): focus trap skips hidden controls; the phone window does not drag | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `962a491a` |
 | 2026-10-04 20:51 | fix(view): full screen lives in the URL, so a refresh keeps it | [#87](https://github.com/henryjonescodes/portfolio/pull/87) · `85092fc6` |
 | 2026-10-04 20:49 | fix(about): readable skill bars; email opens mail, not a blank tab | [#85](https://github.com/henryjonescodes/portfolio/pull/85) · `267bbf6a` |
 | 2026-10-04 20:47 | feat(entries): phone tiles open the shared window, full screen, image first | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `c69e8718` |
@@ -214,7 +215,7 @@ EntryList renders the same list items in both layouts and switches on a containe
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 7 | local only | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 8 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 3 | pushed | 2D knob, mini slider and key controls, keyboard and mouse |
