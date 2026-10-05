@@ -88,6 +88,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Close button: full size, border-colour fill with the X knocked out
 - [ ] Phones: the entry image animates between list and window, and fills its space
 - [ ] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
+- [ ] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 
 ## Log
 
