@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:28 UTC by `bw board` on `chore/dry-pass` |
+| Generated | 2026-10-05 14:28 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 2 |
 | Open PRs | none |
@@ -19,9 +19,9 @@ flowchart LR
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_chore_dry_pass active,current
+    class n_chore_dry_pass active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -57,9 +57,9 @@ flowchart LR
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_chore_dry_pass active,current
+    class n_chore_dry_pass active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -138,13 +138,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Once the stream's work is in, one pass removes dead code and styles, merges duplicates and checks the bundle splits, so next goes to staging lean.
+**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
-**How, next.** Every todo is done; it waits on review and merge.
+**How, next.**
+
+- Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- e2e: open and close at both widths, and a resize while open (from entry/open)
+- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `chore/dry-pass` |  | active, 59 to push | 4/4 | nothing open |  |
+| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
@@ -258,8 +262,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `chore/dry-pass` ◀ | DRY and code-splitting pass after the stream | active |  | 4/4 | 3 | 59 to push |  |
-| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `chore/dry-pass` | DRY and code-splitting pass after the stream | active |  | 4/4 | 3 | 60 to push |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (4/4)</summary>
 
