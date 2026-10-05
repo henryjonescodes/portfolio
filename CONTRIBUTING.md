@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:08 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:08 UTC by `bw board` on `feat/panel-knob` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
@@ -19,7 +19,7 @@ flowchart LR
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_next
@@ -67,10 +67,10 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob planned
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
+    class n_feat_panel_knob planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -108,13 +108,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**What.** The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
-**How, next.** Every todo is done; it waits on review and merge.
+**How, next.**
+
+- Knob component: drag, wheel and arrow keys, with aria slider semantics
+- Mini slider variant of the range rows
+- Colour hues and FX ranges use them; each tick plays the toggle sound
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 7 to push | 29/45 | nothing open |  |
+| `feat/panel-knob` |  | planned, pushed | 0/4 | Knob component: drag, wheel and arrow keys, with aria slider semantics |  |
 
 ## 🕘 Just happened
 
@@ -237,8 +241,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | 7 to push |  |
+| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | planned |  | 0/4 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -282,13 +286,14 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (0/3)</summary>
+<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (0/4)</summary>
 
 The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
 - [ ] Knob component: drag, wheel and arrow keys, with aria slider semantics
 - [ ] Mini slider variant of the range rows
 - [ ] Colour hues and FX ranges use them; each tick plays the toggle sound
+- [ ] Touch drag works on phones (the panel is a bottom sheet there)
 
 </details>
 
