@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▰▰▰▰▱▱▱▱ 2/4<br/><i>next: Check route and 3D code splitting…</i>"]
+    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▰▰▰▰▰▰▱▱ 3/4<br/><i>next: Move capture-modal-frames.mjs and…</i>"]
     class n_chore_dry_pass active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -26,12 +26,9 @@ flowchart LR
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
   n_staging --> n_next
-  n_chore_dry_pass_t0["Check route and 3D code<br/>splitting in the bundle report"]
+  n_chore_dry_pass_t0["Move capture-modal-frames.mjs<br/>and other agent-only scripts …"]
   class n_chore_dry_pass_t0 todo
   n_chore_dry_pass -.-> n_chore_dry_pass_t0
-  n_chore_dry_pass_t1["Move capture-modal-frames.mjs<br/>and other agent-only scripts …"]
-  class n_chore_dry_pass_t1 todo
-  n_chore_dry_pass -.-> n_chore_dry_pass_t1
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -62,7 +59,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▰▰▰▰▱▱▱▱ 2/4<br/><i>next: Check route and 3D code splitting…</i>"]
+    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▰▰▰▰▰▰▱▱ 3/4<br/><i>next: Move capture-modal-frames.mjs and…</i>"]
     class n_chore_dry_pass active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -148,12 +145,11 @@ flowchart LR
 
 **How, next.**
 
-- Check route and 3D code splitting in the bundle report
 - Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `chore/dry-pass` |  | active, 57 to push | 2/4 | Check route and 3D code splitting in the bundle report |  |
+| `chore/dry-pass` |  | active, 58 to push | 3/4 | Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet) |  |
 
 ## 🕘 Just happened
 
@@ -267,16 +263,16 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `chore/dry-pass` ◀ | DRY and code-splitting pass after the stream | active |  | 2/4 | 3 | 57 to push | Check route and 3D code splitting in the bundle report |
+| `chore/dry-pass` ◀ | DRY and code-splitting pass after the stream | active |  | 3/4 | 3 | 58 to push | Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet) |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
-<details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (2/4)</summary>
+<details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (3/4)</summary>
 
 Once the stream's work is in, one pass removes dead code and styles, merges duplicates and checks the bundle splits, so next goes to staging lean.
 
 - [x] Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep)
 - [x] Merge duplicated helpers and styles
-- [ ] Check route and 3D code splitting in the bundle report
+- [x] Check route and 3D code splitting in the bundle report
 - [ ] Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet)
 
 </details>
