@@ -1,7 +1,7 @@
 ---
 branch: feat/knob-mapping
 parent: next
-status: planned
+status: landed
 title: The 3D knobs drive the control panel's page
 pr: null
 updated: 2026-10-05
