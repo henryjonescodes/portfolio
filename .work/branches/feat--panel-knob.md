@@ -17,6 +17,7 @@ The panel's colour and FX controls become hardware: a rotary knob and mini slide
 - [ ] Knob component: drag, wheel and arrow keys, with aria slider semantics
 - [ ] Mini slider variant of the range rows
 - [ ] Colour hues and FX ranges use them; each tick plays the toggle sound
+- [ ] Touch drag works on phones (the panel is a bottom sheet there)
 
 ## Log
 
