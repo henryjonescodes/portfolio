@@ -90,6 +90,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [ ] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [ ] 3D view socials: smaller, no Instagram, two rows of three
+- [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 
 ## Log
 
