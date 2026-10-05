@@ -1,6 +1,6 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:03 UTC · 4 live branches · 0 PRs open · 23 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:03 UTC · 4 live branches · 0 PRs open · 24 waiting on you</summary>
 
 | | |
 |---|---|
@@ -8,7 +8,7 @@
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
-| Waiting on you | 23 |
+| Waiting on you | 24 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/49 · 🙋 15<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -92,7 +92,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/49 · 🙋 15<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -139,7 +139,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 8 to push | 25/49 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 8 to push | 25/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
@@ -227,51 +227,55 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
 - `decision` · `next` · [images](https://github.com/henryjonescodes/portfolio/blob/staging/public/3D/images)
 
-**13. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
+**13. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
+- *Why:* Every shared link shows this card; it also settles which domain is canonical.
+- `decision` · `next` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
+
+**14. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
 - *Why:* The page exists and About links to it, but nothing else on the site leads there.
 - `decision` · `release/promote-main` · from `content/real-copy` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/pages/links/index.tsx)
 
-**14. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
+**15. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
 - *Why:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
 - `decision` · `release/promote-main` · from `design/retro-chrome` · [_colors.scss](https://github.com/henryjonescodes/portfolio/blob/staging/src/styles/_colors.scss#L12)
 
-**15. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
+**16. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
 - *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
 - `decision` · `release/promote-main` · from `perf/assets` · [images](https://github.com/henryjonescodes/portfolio/blob/staging/public/3D/images)
 
-**16. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
+**17. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
 - *Why:* Every shared link shows this card; it also settles which domain is canonical.
 - `decision` · `release/promote-main` · from `seo/meta` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
 ### Files to send
 
-**17. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
+**18. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
 - *Why:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
 - `media` · `next` · from `feat/entry-dock` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
-**18. The resume PDF is the 2024 copy from the old site and predates Arbor**
+**19. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
 - `media` · `next` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
 
-**19. Curate real panel content (screenshots, galleries, stats) per project**
+**20. Curate real panel content (screenshots, galleries, stats) per project**
 - *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
 - `media` · `next` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
 
-**20. The resume PDF is the 2024 copy from the old site and predates Arbor**
+**21. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
 - `media` · `release/promote-main` · from `content/real-copy` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
 
-**21. Curate real panel content (screenshots, galleries, stats) per project**
+**22. Curate real panel content (screenshots, galleries, stats) per project**
 - *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
 - `media` · `release/promote-main` · from `feat/modal-panels` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
 
 ### Reviews
 
-**22. Design review in 3D and lite mode**
+**23. Design review in 3D and lite mode**
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `next`
 
-**23. Design review in 3D and lite mode**
+**24. Design review in 3D and lite mode**
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
@@ -281,7 +285,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 3 of 3 branches done (complete) |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 2 of 4 branches done |
-| [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
+| [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 4 of 4 branches done (complete) |
 
 </details>
 
@@ -291,8 +295,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/49 | 33 | 8 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
-| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/50 | 33 | 8 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 24 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
 
@@ -316,7 +320,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (25/49)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (25/50)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -369,6 +373,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 🙋 Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)
 - [ ] 🙋 Curate real panel content (screenshots, galleries, stats) per project
 - [ ] 🙋 Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check
+- [ ] 🙋 Approve the share image and description, and confirm the canonical domain is henryjones.xyz
 
 </details>
 

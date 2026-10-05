@@ -8,7 +8,7 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 13:03 UTC by `bw s
 | Pull requests merged | 27 |
 | Lines added | +16,061 |
 | Lines removed | -15,672 |
-| Branches in flight | 4 |
+| Branches in flight | 3 |
 
 ## Lines by file type
 
@@ -108,4 +108,3 @@ src/  🚧
 
 - `entry/cleanup`: Tidy after the entry merge
 - `entry/open`: One open morph, the carousel's, at every width
-- `release/promote-main`: Promote the new site to main
