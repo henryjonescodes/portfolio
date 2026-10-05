@@ -94,6 +94,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Rule in repertoire: keep bw and the refactor's skills current while working
 - [ ] After the stream lands: DRY and code-splitting pass, delete unused code
 - [ ] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
+- [?] Review the Arbor and project blurbs (written from existing descriptions)
+  - why: They were rewritten from older descriptions and are the first thing visitors read in each entry.
+  - file: src/data/experience.ts
+  - kind: prose
 
 ## Log
 
