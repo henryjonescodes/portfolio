@@ -9,10 +9,18 @@ import { ScreenSizeType, WindowDimensionContext } from './WindowDimensionContext
 
 // Define a provider component
 export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [screenSize, setScreenSize] = useState<ScreenSizeType>({
+  const [viewport, setViewport] = useState<ScreenSizeType>({
     width: window.innerWidth,
     height: window.innerHeight,
   });
+  const [phoneStage, setPhoneStage] = useState(false);
+
+  // An upright phone turns the 3D stage sideways, so everything inside it sees landscape.
+  const stageRotated = phoneStage && viewport.height > viewport.width;
+  const screenSize = useMemo<ScreenSizeType>(
+    () => (stageRotated ? { width: viewport.height, height: viewport.width } : viewport),
+    [stageRotated, viewport],
+  );
 
   const screenWidthKey: ScreenWidthKey = useMemo(() => {
     if (screenSize.width > 3000) {
@@ -67,7 +75,7 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({ chi
 
   useEffect(() => {
     const handleResize = () => {
-      setScreenSize({
+      setViewport({
         width: window.innerWidth,
         height: window.innerHeight,
       });
@@ -82,7 +90,9 @@ export const WindowDimensionProvider: React.FC<{ children: ReactNode }> = ({ chi
   }, []);
 
   return (
-    <WindowDimensionContext.Provider value={{ ...screenSize, screenWidthKey, zoomPositions }}>
+    <WindowDimensionContext.Provider
+      value={{ ...screenSize, screenWidthKey, zoomPositions, stageRotated, setPhoneStage }}
+    >
       {children}
     </WindowDimensionContext.Provider>
   );

@@ -4,6 +4,7 @@ import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';
 import { useAnimations } from '@context/AnimationContext';
 import { widthSmall } from '@styles/layout.constants.ts';
+import { isMobile } from 'react-device-detect';
 import TypewriterText from '@components/TypewriterText';
 import AnimatedLine from '@components/AnimatedLine';
 
@@ -38,7 +39,7 @@ const NavBar = ({ page }: NavBarProps) => {
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
   const { animationDisabled, setAnimationDisabled } = useSettings();
-  const { firstPageLoad } = useLoading();
+  const { firstPageLoad, liteMode } = useLoading();
   const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
   const { TRANSITIONS } = useAnimations();
   const { preferences, setPreference } = usePreferences();
@@ -176,7 +177,13 @@ const NavBar = ({ page }: NavBarProps) => {
             active={zoomLevel === 'fullscreen'}
             Icon={Expand}
             ActiveIcon={Handheld}
-            label={zoomLevel === 'fullscreen' ? 'Back to the device' : 'Full screen'}
+            label={
+              zoomLevel !== 'fullscreen'
+                ? 'Full screen'
+                : liteMode && isMobile
+                  ? 'View in 3D'
+                  : 'Back to the device'
+            }
           />
           <NavBarButton onClick={() => navigate(`/`, { replace: true })} Icon={Home} label="Home" />
         </motion.span>

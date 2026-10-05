@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useRef, useState, useCallback } from 'rea
 import { ThreeEvent } from '@react-three/fiber';
 import { InteractionContext } from '@context/InteractionContext';
 import { useSound } from '@hooks/useSound';
+import { useWindowDimensions } from '@context/WindowDimensionContext';
+import { toStagePoint } from '@utils/stage';
 import { InteractiveElement, InteractiveElementProps } from '@context/InteractionProvider';
 
 /** Degrees of turn between ticks. */
@@ -38,6 +40,7 @@ export function Knob({
   const [internalRotation, setInternalRotation] = useState(rotation || 0);
   const { activeObject } = useContext(InteractionContext);
   const isActive = activeObject === name;
+  const { stageRotated } = useWindowDimensions();
 
   const isControlled = rotation !== undefined && setRotation !== undefined;
   const currentRotation = isControlled ? rotation : internalRotation;
@@ -104,13 +107,14 @@ export function Knob({
     if (isDragging) {
       const handlePointerMove = (e: PointerEvent) => {
         e.preventDefault();
-        const deltaX = e.clientX - startDragPosition.current.x;
-        const deltaY = e.clientY - startDragPosition.current.y;
+        const [x, y] = toStagePoint(e.clientX, e.clientY, stageRotated);
+        const deltaX = x - startDragPosition.current.x;
+        const deltaY = y - startDragPosition.current.y;
 
         const deltaRotation = (deltaX - deltaY) * sensitivity;
         applyRotation(deltaRotation);
 
-        startDragPosition.current = { x: e.clientX, y: e.clientY };
+        startDragPosition.current = { x, y };
       };
 
       const handlePointerUp = () => {
@@ -125,12 +129,13 @@ export function Knob({
         window.removeEventListener('pointerup', handlePointerUp);
       };
     }
-  }, [isDragging, applyRotation, sensitivity]);
+  }, [isDragging, applyRotation, sensitivity, stageRotated]);
 
   const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
     setIsDragging(true);
-    startDragPosition.current = { x: e.clientX, y: e.clientY };
+    const [x, y] = toStagePoint(e.clientX, e.clientY, stageRotated);
+    startDragPosition.current = { x, y };
   };
 
   const rotationArray: [number, number, number] = [0, 0, 0];
