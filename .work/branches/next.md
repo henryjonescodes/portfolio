@@ -93,6 +93,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [ ] Rule in repertoire: keep bw and the refactor's skills current while working
 - [ ] After the stream lands: DRY and code-splitting pass, delete unused code
+- [ ] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
 
 ## Log
 
