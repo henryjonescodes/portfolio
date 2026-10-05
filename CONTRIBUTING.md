@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:04 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:05 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:04 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:05 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | none |
@@ -114,7 +114,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 17 to push | 29/45 | nothing open |  |
+| `next` |  | active, pushed | 29/45 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -234,13 +234,13 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | local only | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | local only | Request ids on drafted prose (summaries, blurbs, claims) |
+| `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
+| `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | local only | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | local only | Gear shows in the phone nav |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | 17 to push |  |
+| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
+| `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | pushed | Gear shows in the phone nav |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | pushed |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
