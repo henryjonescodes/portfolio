@@ -14,10 +14,11 @@ The owner wants the toy on phones too: the gear shows on phones, the panel opens
 
 ## Todo
 
-- [ ] Gear shows in the phone nav
+- [x] Gear shows in the phone nav
 - [ ] Panel opens as a bottom sheet on phones, scrolls inside
 - [ ] Touch works for every control, including the knob
 
 ## Log
 
 - 2026-10-05: seeded
+- 2026-10-05: done "Gear shows in the phone nav" at b795c7ca
