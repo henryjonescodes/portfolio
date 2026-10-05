@@ -8,7 +8,7 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 13:46 UTC by `bw s
 | Pull requests merged | 27 |
 | Lines added | +16,061 |
 | Lines removed | -15,672 |
-| Branches in flight | 4 |
+| Branches in flight | 5 |
 
 ## Lines by file type
 
@@ -110,3 +110,4 @@ src/  🚧
 - `chore/dry-pass`: DRY and code-splitting pass after the stream
 - `content/prose-requests`: Drafted prose in the request list
 - `entry/cleanup`: Tidy after the entry merge
+- `feat/knob-mapping`: The 3D knobs drive the control panel's page
