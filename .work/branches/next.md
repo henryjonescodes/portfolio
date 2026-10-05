@@ -121,6 +121,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
   - file: public/3D/images
   - kind: decision
+- [?] Approve the share image and description, and confirm the canonical domain is henryjones.xyz
+  - why: Every shared link shows this card; it also settles which domain is canonical.
+  - file: public/og-image.png
+  - kind: decision
 
 ## Log
 
