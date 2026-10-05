@@ -20,7 +20,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
 - [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - [x] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
-- [ ] Colour page with presets (from feat/control-panel)
+- [x] Colour page with presets (from feat/control-panel)
 - [ ] Type page (families, size, typewriter) (from feat/control-panel)
 - [ ] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
 - [x] Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
@@ -94,3 +94,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)" at 410d170d
 - 2026-10-05: done "Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)" at e64b5f53
 - 2026-10-05: done "Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)" at 126027bd
+- 2026-10-05: done "Colour page with presets (from feat/control-panel)" at 26849088
