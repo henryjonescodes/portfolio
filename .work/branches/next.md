@@ -87,7 +87,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] 3D view socials: smaller, no Instagram, two rows of three
 - [x] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [x] Rule in repertoire: keep bw and the refactor's skills current while working
-- [ ] After the stream lands: DRY and code-splitting pass, delete unused code
 - [x] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
 - [?] Review the Arbor and project blurbs (written from existing descriptions)
   - why: They were rewritten from older descriptions and are the first thing visitors read in each entry.
@@ -161,3 +160,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: dropped "Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart"
 - 2026-10-05: dropped "Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images"
 - 2026-10-05: dropped "Phones: the entry image animates between list and window, and fills its space"
+- 2026-10-05: dropped "After the stream lands: DRY and code-splitting pass, delete unused code"
