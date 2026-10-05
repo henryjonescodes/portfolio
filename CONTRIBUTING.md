@@ -31,7 +31,7 @@ flowchart LR
     class n_content_prose_requests planned
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
     class n_feat_panel_knob active
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -53,6 +53,18 @@ flowchart LR
   n_feat_panel_knob_t3["Touch drag works on phones<br/>(the panel is a bottom sheet<br/>the…"]
   class n_feat_panel_knob_t3 todo
   n_feat_panel_knob -.-> n_feat_panel_knob_t3
+  n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
+  class n_next_t0 todo
+  n_next -.-> n_next_t0
+  n_next_t1["e2e: open and close at both<br/>widths, and a resize while<br/>open"]
+  class n_next_t1 todo
+  n_next -.-> n_next_t1
+  n_next_t2["The 'content never ahead of<br/>the window' check fails on the<br/>…"]
+  class n_next_t2 todo
+  n_next -.-> n_next_t2
+  n_next_t3["Re-enable the CI skip on the<br/>open-sync check in<br/>e2e/modal.s…"]
+  class n_next_t3 todo
+  n_next -.-> n_next_t3
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -84,7 +96,7 @@ flowchart LR
     class n_content_prose_requests planned
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
     class n_feat_panel_knob active
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -170,11 +182,15 @@ flowchart LR
 
 **What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
-**How, next.** Every todo is done; it waits on review and merge.
+**How, next.**
+
+- Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- e2e: open and close at both widths, and a resize while open (from entry/open)
+- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 13 to push | 29/45 | nothing open |  |
+| `next` |  | active, 14 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
@@ -304,7 +320,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 3/7 | 0 | 87 to push | Per-part timings from the carousel tunables, shared by every width |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 43 | 13 to push |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 43 | 14 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -359,7 +375,7 @@ The panel's colour and FX controls become hardware: a rotary knob and mini slide
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/45)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/49)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -408,6 +424,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 🙋 Curate real panel content (screenshots, galleries, stats) per project
 - [ ] 🙋 Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check
 - [ ] 🙋 Approve the share image and description, and confirm the canonical domain is henryjones.xyz
+- [ ] Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- [ ] e2e: open and close at both widths, and a resize while open (from entry/open)
+- [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts (from entry/open)
 
 </details>
 
