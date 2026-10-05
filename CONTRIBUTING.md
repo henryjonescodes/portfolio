@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:47 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:53 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:47 UTC by `bw board` on `feat/knob-mapping` |
+| Generated | 2026-10-05 13:53 UTC by `bw board` on `feat/knob-mapping` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
@@ -27,8 +27,8 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Panel labels legible on the 3D in…</i>"]
-    class n_feat_knob_mapping planned,current
+    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: A label strip over the three knob…</i>"]
+    class n_feat_knob_mapping active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
   end
@@ -38,6 +38,15 @@ flowchart LR
   n_next --> n_entry_cleanup
   n_next --> n_feat_knob_mapping
   n_staging --> n_next
+  n_feat_knob_mapping_t0["A label strip over the three<br/>knobs naming what each<br/>control…"]
+  class n_feat_knob_mapping_t0 todo
+  n_feat_knob_mapping -.-> n_feat_knob_mapping_t0
+  n_feat_knob_mapping_t1["The 3D knobs drive the current<br/>page's three main controls, …"]
+  class n_feat_knob_mapping_t1 todo
+  n_feat_knob_mapping -.-> n_feat_knob_mapping_t1
+  n_feat_knob_mapping_t2["Turning a 3D knob moves the<br/>matching panel control and<br/>tick…"]
+  class n_feat_knob_mapping_t2 todo
+  n_feat_knob_mapping -.-> n_feat_knob_mapping_t2
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -77,8 +86,8 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Panel labels legible on the 3D in…</i>"]
-    class n_feat_knob_mapping planned,current
+    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: A label strip over the three knob…</i>"]
+    class n_feat_knob_mapping active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
   end
@@ -166,27 +175,28 @@ flowchart LR
 
 **How, next.**
 
-- Panel labels legible on the 3D info screen (contrast and font)
 - A label strip over the three knobs naming what each controls on the current page
 - The 3D knobs drive the current page's three main controls, not only colour
+- Turning a 3D knob moves the matching panel control and ticks the synth
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/knob-mapping` |  | planned, pushed | 0/4 | Panel labels legible on the 3D info screen (contrast and font) |  |
+| `feat/knob-mapping` |  | active, 2 to push | 1/4 | A label strip over the three knobs naming what each controls on the current page |  |
 
 ## 🕘 Just happened
 
-**chore(scripts): motion-sheet moves to the portfolio-motion-sheet skill in repertoire** · 2026-10-05 13:39 · `next` · `da2ab139`
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+**feat(panel): the model's knobs turn the shown page's three main controls, named on the info screen** · 2026-10-05 13:53 · `feat/knob-mapping` · `1e027660`
+Colour turns the hues, Type the font, text size and motion speed, FX the CRT, volume and cutoff. Panel labels and buttons read in the site's colour and face on the 3D screen.
 
+- **chore(scripts): motion-sheet moves to the portfolio-motion-sheet skill in repertoire** · 13:39 · `next` · `da2ab139`
 - **fix(entries): a video carries its frame and time between list and window** · 13:37 · `next` · `48913e6f`
 - **fix(nav): the window bar spans its window at a fixed 40px, and Close simply fills its slot** · 13:33 · `next` · `9922dfdd`
-- **feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line** · 13:22 · `next` · `72f91b91`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 13:22 | feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line | `next` · `72f91b91` |
 | 2026-10-05 13:21 | perf(crosshair): follow raw pointer updates, re-render only when state changes | `next` · `21de6907` |
 | 2026-10-05 02:09 | test(panel): skip the full screen round trip on CI, which cannot load the 3D scene | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b` |
 | 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
@@ -298,7 +308,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/knob-mapping` ◀ | The 3D knobs drive the control panel's page | planned |  | 0/4 | 0 | pushed | Panel labels legible on the 3D info screen (contrast and font) |
+| `feat/knob-mapping` ◀ | The 3D knobs drive the control panel's page | active |  | 1/4 | 1 | 2 to push | A label strip over the three knobs naming what each controls on the current page |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
@@ -329,11 +339,11 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>feat/knob-mapping</code>: The 3D knobs drive the control panel's page (0/4)</summary>
+<details><summary><code>feat/knob-mapping</code>: The 3D knobs drive the control panel's page (1/4)</summary>
 
 In 3D the model's three knobs control whatever the info screen's panel page shows (colour hues, FX levels, sound), with a label strip on the screen naming what each knob does; the panel's labels read clearly on the 3D screen.
 
-- [ ] Panel labels legible on the 3D info screen (contrast and font)
+- [x] Panel labels legible on the 3D info screen (contrast and font)
 - [ ] A label strip over the three knobs naming what each controls on the current page
 - [ ] The 3D knobs drive the current page's three main controls, not only colour
 - [ ] Turning a 3D knob moves the matching panel control and ticks the synth
