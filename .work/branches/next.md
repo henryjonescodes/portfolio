@@ -89,7 +89,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Phones: the entry image animates between list and window, and fills its space
 - [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [x] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
-- [ ] 3D view socials: smaller, no Instagram, two rows of three
+- [x] 3D view socials: smaller, no Instagram, two rows of three
 - [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [ ] Rule in repertoire: keep bw and the refactor's skills current while working
 - [ ] After the stream lands: DRY and code-splitting pass, delete unused code
@@ -122,3 +122,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Close button: full size, border-colour fill with the X knocked out" at 5da8f30e
 - 2026-10-05: done "StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper" at 3d4c09c4
 - 2026-10-05: done "Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects" at 30285022
+- 2026-10-05: done "3D view socials: smaller, no Instagram, two rows of three" at 7d00a432
