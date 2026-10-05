@@ -170,6 +170,7 @@ const ExperienceEntry = ({
                 borderWidth={borderWidth}
                 animationDuration={redrawDuration}
                 horizontal
+                drawOnMount
                 className={styles.barLine}
               />
             )}

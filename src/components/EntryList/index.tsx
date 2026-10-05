@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { motion } from 'framer-motion';
 import { createRef, useEffect, useRef, useState } from 'react';
 import EntryMediaView from '@components/EntryMedia';
@@ -47,7 +48,7 @@ const EntryList = ({ entries, mediaInList = false }: EntryListProps) => {
 
   return (
     <EntryRedrawContext.Provider value={redraw}>
-      <div ref={listRef} className={styles.list}>
+      <div ref={listRef} className={cn(styles.list, { [styles.embedded]: embedded })}>
         <motion.div layoutScroll className={styles.row} data-testid="entry-row">
           {entries.map((entry) => {
             const ref = (refs.current[entry.id] ??= createRef<HTMLDivElement>());

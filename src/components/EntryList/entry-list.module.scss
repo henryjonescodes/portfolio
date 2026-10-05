@@ -11,6 +11,11 @@ $bleed: styles.$padding-page-mobile;
   flex-direction: column;
 }
 
+// The 3D screen keeps the stacked list at any width, so no tile query can match there.
+.embedded {
+  container: none;
+}
+
 .row {
   @include styles.list-flex;
 }
