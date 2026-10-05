@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Act on the answer to 'Should the …</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/48 · 🙋 16<br/><i>next: Drafted prose gets request ids to…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -35,18 +35,15 @@ flowchart LR
   n_next_m3["✅ <code>feat/content-requests</code>"]
   class n_next_m3 merged
   n_next_m3 --> n_next
-  n_next_t0["Act on the answer to 'Should<br/>the panel be on phones, or<br/>des…"]
+  n_next_t0["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
-  n_next_t1["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
+  n_next_t1["Phones: the entry image<br/>animates between list and<br/>window, a…"]
   class n_next_t1 todo
   n_next -.-> n_next_t1
-  n_next_t2["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  n_next_t2["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
   class n_next_t2 todo
   n_next -.-> n_next_t2
-  n_next_t3["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
-  class n_next_t3 todo
-  n_next -.-> n_next_t3
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -80,7 +77,7 @@ flowchart LR
     class n_feat_panel_knob planned
     n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
     class n_feat_panel_phones planned
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Act on the answer to 'Should the …</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/48 · 🙋 16<br/><i>next: Drafted prose gets request ids to…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -124,13 +121,13 @@ flowchart LR
 
 **How, next.**
 
-- Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 - Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
 - Phones: the entry image animates between list and window, and fills its space
+- After the stream lands: DRY and code-splitting pass, delete unused code
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 14 to push | 29/49 | Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart |  |
+| `next` |  | active, 15 to push | 29/48 | Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images |  |
 
 ## 🕘 Just happened
 
@@ -256,7 +253,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | local only | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | local only | Gear shows in the phone nav |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 33 | 14 to push | Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/48 | 33 | 15 to push | Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -320,7 +317,7 @@ The owner wants the toy on phones too: the gear shows on phones, the panel opens
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/49)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/48)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -348,7 +345,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) (from feat/content-requests)
 - [x] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - [x] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
-- [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 - [x] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
 - [x] Placeholder e2e test looks inside the dialog, not the first match on the page
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
