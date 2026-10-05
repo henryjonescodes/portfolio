@@ -250,6 +250,7 @@ Add a tunable there and read it through `useAnimations()`; never hardcode a dura
 - `src/hooks/useLatest.ts`: lets an effect that fires on one change read the latest props and callbacks.
 - `src/config/animation/variants.ts`: `fade(animate, exit)` for the standard opacity variants.
 - `src/components/EntryMedia`: renders an entry's video or image with the glitch treatment.
+- `src/assets/requests/`: sourced media. A placeholder carries a `request` id; a file named `<id>.jpg|png|webp|mp4` here replaces it with no code change (`src/utils/requests.ts`). `npm run requests` writes `.work/REQUESTS.md`, the list of what is still missing and where to drop each file.
 - `src/components/Panels`: data-driven sections for open entries (see the panels skill).
 
 ## Testing

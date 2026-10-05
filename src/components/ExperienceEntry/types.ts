@@ -17,7 +17,7 @@ export type ToolEntry = {
 export type EntryMedia =
   | { video: string; objectPosition?: string }
   | { img: string }
-  | { placeholder: string };
+  | { placeholder: string; request: string; kind?: 'image' | 'icon' };
 
 /**
  * A highlighted piece of work inside an entry (a project, a system, a responsibility). Shown
@@ -82,6 +82,8 @@ export type ExperienceEntryProps = {
   onLayoutAnimationComplete?: () => void;
   /** In the window's closed layout, keep the image pane (the source showed one) or collapse it. */
   mediaWhenClosed?: boolean;
+  /** In a list item, show the media only when the list is laid out as tiles. */
+  mediaInTilesOnly?: boolean;
   onClose?: () => void;
   /** Open entry fills the overlay instead of its cozy size. */
   expanded?: boolean;

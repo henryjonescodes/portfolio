@@ -8,6 +8,8 @@ type AnimatedLineProps = {
   borderWidth?: number;
   animationDuration?: number;
   horizontal?: boolean;
+  /** Draws from nothing on mount, for a line outside any parent's variant labels. */
+  drawOnMount?: boolean;
 };
 
 const AnimatedLine = ({
@@ -15,6 +17,7 @@ const AnimatedLine = ({
   borderWidth = 2.5,
   horizontal = false,
   animationDuration,
+  drawOnMount,
 }: AnimatedLineProps) => {
   const { TRANSITIONS } = useAnimations();
   const [animateOnLoad, setAnimateOnLoad] = useState(true);
@@ -68,6 +71,7 @@ const AnimatedLine = ({
         height: horizontal ? `${borderWidth}px` : 0,
       }}
       variants={lineVariants}
+      {...(drawOnMount && { initial: 'initial', animate: 'animate' })}
     />
   );
 };

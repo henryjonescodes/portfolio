@@ -16,6 +16,7 @@
     "check": "npm run lint && tsc -b && knip && npm run check:assets && npm run check:mentions",
     "check:assets": "node scripts/check-assets.mjs",
     "check:mentions": "node scripts/check-mentions.mjs",
+    "requests": "node scripts/build-requests.mjs",
     "modal-frames": "node scripts/capture-modal-frames.mjs",
     "og-image": "node scripts/capture-og-image.mjs"
   },

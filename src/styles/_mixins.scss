@@ -58,6 +58,7 @@
 
 @mixin scanlines-effect {
   opacity: 0.8;
+  opacity: calc(0.8 * var(--crt-intensity, 1));
   background: repeating-linear-gradient(transparent 0px 1px, colors.$background-secondary 3px 4px);
   background: repeating-linear-gradient(transparent 0px 1px, var(--background-secondary) 3px 4px);
   position: fixed;
