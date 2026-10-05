@@ -35,7 +35,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▱▱▱▱▱▱ 6/28 · 🙋 8<br/><i>next: Resizing across the breakpoint ke…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▱▱▱▱▱▱ 7/28 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -70,13 +70,13 @@ flowchart LR
 
 **How, next.**
 
-- Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
 - 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
+- Colour page with presets (from feat/control-panel)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, local only | 6/28 | Resizing across the breakpoint keeps the same elements (e2e) (from entry/list) |  |
+| `next` |  | active, local only | 7/28 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
@@ -199,7 +199,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 6/28 | 18 | local only | Resizing across the breakpoint keeps the same elements (e2e) (from entry/list) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 7/28 | 18 | local only | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
@@ -237,14 +237,14 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (6/28)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (7/28)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
 - [x] EntryList with the list and tile presentations from CSS container queries (from entry/list)
 - [x] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [x] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
-- [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
+- [x] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
 - [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - [ ] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
 - [ ] Colour page with presets (from feat/control-panel)
