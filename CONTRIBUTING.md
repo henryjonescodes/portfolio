@@ -1,15 +1,14 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 00:02 UTC · 10 live branches · 0 PRs open · 19 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 00:04 UTC · 8 live branches · 1 PRs open · 20 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 00:02 UTC by `bw board` on `entry/window` |
+| Generated | 2026-10-05 00:04 UTC by `bw board` on `` |
 | Trunk | `staging` |
-| Live branches | 10 |
-| Open PRs | none |
-| Waiting on you | 19 |
-| Merged, not yet landed | `feat/crosshair-cursor`, `feat/entry-tabs`, `fix/modal-nav-mini` (run `bw land <branch> --into <next>`) |
+| Live branches | 8 |
+| Open PRs | [#86](https://github.com/henryjonescodes/portfolio/pull/86) |
+| Waiting on you | 20 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -17,42 +16,49 @@
 ```mermaid
 flowchart LR
   n_staging([staging])
-  n_feat_entry_tabs([feat/entry-tabs])
-  n_bw_inbox["<b>One inbox for the owner's answers</b><br/>bw/inbox<br/>planned · 2/6<br/><i>next: bw renders INBOX.md with one answer s…</i>"]
-  class n_bw_inbox planned
+  class n_staging trunk
+  subgraph plan_0["📋 Entry tabs"]
+    n_bw_inbox["<b>One inbox for the owner's<br/>answers</b><br/>🟦 planned<br/><code>bw/inbox</code><br/>▰▰▰▱▱▱▱▱ 2/6<br/><i>next: bw renders INBOX.md with one answ…</i>"]
+    class n_bw_inbox planned
+    n_feat_content_requests["<b>Mock media and a list of<br/>content to source</b><br/>🟦 planned<br/><code>feat/content-requests</code><br/>▱▱▱▱▱▱▱▱ 0/11 · 🙋 8<br/><i>next: Request ids on mock media and dra…</i>"]
+    class n_feat_content_requests planned
+  end
+  style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
+  subgraph plan_1["📋 One entry component: list"]
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
+    class n_entry_cleanup planned
+    n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟦 planned<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: EntryList with the list and tile …</i>"]
+    class n_entry_list planned
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
+    class n_entry_open planned
+    n_entry_window["<b>One window for every open<br/>entry</b><br/>🟨 review · #86<br/><code>entry/window</code><br/>▰▰▰▰▰▰▰▰ 6/6"]
+    class n_entry_window review
+  end
+  style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
+  subgraph plan_3["📋 Portfolio roadmap"]
+    n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
+    class n_release_promote_main planned
+  end
+  style plan_3 fill:#fef3c7,stroke:#64748b,color:#0f172a
+  subgraph loose["🧩 Not in a plan"]
+    n_feat_control_panel["<b>A control panel for<br/>colour, type and effects</b><br/>🟦 planned<br/><code>feat/control-panel</code><br/>▱▱▱▱▱▱▱▱ 0/8 · 🙋 3<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    class n_feat_control_panel planned
+  end
+  style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_bw_inbox
-  n_entry_cleanup["<b>Tidy after the entry merge</b><br/>entry/cleanup<br/>planned · 0/2<br/><i>next: Merge carousel.spec into modal.spec; …</i>"]
-  class n_entry_cleanup planned
   n_entry_open --> n_entry_cleanup
-  n_entry_list["<b>One list that is a carousel on phones</b><br/>entry/list<br/>planned · 0/3<br/><i>next: EntryList with the list and tile pres…</i>"]
-  class n_entry_list planned
   n_entry_window --> n_entry_list
-  n_entry_open["<b>One open morph, the carousel's, at every width</b><br/>entry/open<br/>planned · 0/5<br/><i>next: Closed and open layouts keep the same…</i>"]
-  class n_entry_open planned
   n_entry_list --> n_entry_open
-  n_entry_window["<b>One window for every open entry</b><br/>entry/window<br/>planned · 6/6"]
-  class n_entry_window planned,current
   n_staging --> n_entry_window
-  n_feat_content_requests["<b>Mock media and a list of content to source</b><br/>feat/content-requests<br/>planned · 0/11 · 🙋 8<br/><i>next: Request ids on mock media and drafted…</i>"]
-  class n_feat_content_requests planned
-  n_feat_entry_tabs --> n_feat_content_requests
-  n_feat_control_panel["<b>A control panel for colour, type and effects</b><br/>feat/control-panel<br/>planned · 0/8 · 🙋 3<br/><i>next: 2D knob, mini slider and key controls…</i>"]
-  class n_feat_control_panel planned
+  n_staging --> n_feat_content_requests
   n_staging --> n_feat_control_panel
-  n_fix_about_card["<b>About card tidy</b><br/>fix/about-card<br/>planned · 3/3"]
-  class n_fix_about_card planned
-  n_staging --> n_fix_about_card
-  n_fix_fullscreen_url["<b>Full screen survives a refresh</b><br/>fix/fullscreen-url<br/>planned · 1/1"]
-  class n_fix_fullscreen_url planned
-  n_staging --> n_fix_fullscreen_url
-  n_release_promote_main["<b>Promote the new site to main</b><br/>release/promote-main<br/>planned · 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
-  class n_release_promote_main planned
   n_staging --> n_release_promote_main
-  classDef planned fill:#eef,stroke:#88a,color:#223
-  classDef active fill:#dfd,stroke:#3a3,stroke-width:3px,color:#132
-  classDef blocked fill:#fdd,stroke:#c33,color:#311
-  classDef review fill:#ffd,stroke:#cc3,color:#331
-  classDef current stroke:#06c,stroke-width:4px
+  classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
+  classDef active fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#052e16
+  classDef review fill:#fde68a,stroke:#d97706,stroke-width:3px,color:#451a03
+  classDef blocked fill:#fecaca,stroke:#dc2626,stroke-width:3px,color:#450a0a
+  classDef trunk fill:#1e293b,stroke:#0f172a,color:#f8fafc
+  classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
 <details><summary><b>Legend</b></summary>
@@ -69,36 +75,26 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
-
-**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
-
-**How, next.** Every todo is done; it waits on review and merge.
-
-| Branch | PR | Status | Progress | Next | Plan |
-|---|---|---|---|---|---|
-| `entry/window` |  | planned, 1 to push | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
+Nothing checked out or active.
 
 ## 🕘 Just happened
 
-**test: skip the open-sync check on CI only until the morph is rebuilt** · 2026-10-05 00:02 · `entry/window` · `0d2e49d1`
+**test: skip the open-sync check on CI only until the morph is rebuilt** · 2026-10-05 00:02 · [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `0d2e49d1`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
-- **fix(entries): focus trap skips hidden controls; the phone window does not drag** · 20:55 · `entry/window` · `962a491a`
-- **fix(view): full screen lives in the URL, so a refresh keeps it** · 20:51 · `fix/fullscreen-url` · `85092fc6`
-- **fix(about): readable skill bars; email opens mail, not a blank tab** · 20:49 · `fix/about-card` · `267bbf6a`
+- **fix(entries): focus trap skips hidden controls; the phone window does not drag** · 20:55 · [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `962a491a`
+- **fix(view): full screen lives in the URL, so a refresh keeps it** · 20:51 · [#87](https://github.com/henryjonescodes/portfolio/pull/87) · `85092fc6`
+- **fix(about): readable skill bars; email opens mail, not a blank tab** · 20:49 · [#85](https://github.com/henryjonescodes/portfolio/pull/85) · `267bbf6a`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
 | 2026-10-04 20:31 | fix(cursor): hide the system cursor only while the crosshair tracks the pointer | [#83](https://github.com/henryjonescodes/portfolio/pull/83) · `ed401577` |
-| 2026-10-04 20:28 | fix(about): NYC, tags on one row, fixed-width sliders, two rows of links | `fix/about-card` · `250dbac3` |
+| 2026-10-04 20:28 | fix(about): NYC, tags on one row, fixed-width sliders, two rows of links | [#85](https://github.com/henryjonescodes/portfolio/pull/85) · `250dbac3` |
 | 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | [#84](https://github.com/henryjonescodes/portfolio/pull/84) · `d6f7dca5` |
 | 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | [#83](https://github.com/henryjonescodes/portfolio/pull/83) · `21cece7c` |
 | 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e0c96483` |
-| 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6` |
-| 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a` |
 
 </details>
 
@@ -190,6 +186,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
+**20. Review and merge One window for every open entry**
+- *Why:* its PR is open and waiting on a merge
+- `review` · `entry/window` · [#86](https://github.com/henryjonescodes/portfolio/pull/86)
+
 <details><summary><b>Plans</b></summary>
 
 | Plan | Progress |
@@ -208,13 +208,11 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 2/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
-| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/5 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 3 | 1 to push |  |
+| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/window` | One window for every open entry | review | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | 6/6 | 3 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | planned |  | 0/8 | 0 | local only | 2D knob, mini slider and key controls, keyboard and mouse |
-| `fix/about-card` | About card tidy | planned |  | 3/3 | 2 | pushed |  |
-| `fix/fullscreen-url` | Full screen survives a refresh | planned |  | 1/1 | 1 | pushed |  |
-| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
+| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (2/6)</summary>
 
@@ -248,7 +246,7 @@ Experience and projects render one EntryList. A container query turns it from a 
 
 </details>
 
-<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (0/5)</summary>
+<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (0/6)</summary>
 
 Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
@@ -257,6 +255,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 - [ ] Remove EntryCarousel and EntryCard; one provider opens everything
 - [ ] e2e: open and close at both widths, and a resize while open
 - [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt
+- [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts
 
 </details>
 
@@ -303,24 +302,6 @@ A gear in the main nav opens a three-page panel (colour, type, FX) built from a 
 - [ ] 🙋 Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk)
 - [ ] 🙋 Sound: synthesised clicks (no files) or recorded samples you pick?
 - [ ] 🙋 Should the panel be on phones, or desktop only?
-
-</details>
-
-<details><summary><code>fix/about-card</code>: About card tidy (3/3)</summary>
-
-The About card says NYC, keeps its two info lines on one row, gives the skill sliders a fixed width, and shows two rows of links.
-
-- [x] NYC as the location; info lines share a row
-- [x] Fixed-width skill sliders
-- [x] Two rows of links under the bio
-
-</details>
-
-<details><summary><code>fix/fullscreen-url</code>: Full screen survives a refresh (1/1)</summary>
-
-The full-screen view is in the URL (?view=full), so a refresh or a shared link keeps it instead of relaunching into the 3D device.
-
-- [x] view=full read on load and kept in sync with the toggle
 
 </details>
 
