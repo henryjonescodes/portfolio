@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 01:08 UTC · 7 live branches · 1 PRs open · 20 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 01:10 UTC · 7 live branches · 1 PRs open · 20 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 01:08 UTC by `bw board` on `entry/list` |
+| Generated | 2026-10-05 01:10 UTC by `bw board` on `cp-review` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | [#88](https://github.com/henryjonescodes/portfolio/pull/88) |
@@ -24,25 +24,25 @@ flowchart LR
     class n_feat_content_requests planned
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
-  subgraph plan_1["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
-    class n_entry_cleanup planned
-    n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟨 review · #88<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_entry_list review,current
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
-    class n_entry_open planned
-  end
-  style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
-  subgraph plan_2["📋 Portfolio roadmap"]
-    n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
-    class n_release_promote_main planned
-  end
-  style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
-  subgraph loose["🧩 Not in a plan"]
+  subgraph plan_1["📋 A control panel: colour"]
     n_feat_control_panel["<b>A control panel for<br/>colour, type and effects</b><br/>🟩 active<br/><code>feat/control-panel</code><br/>▱▱▱▱▱▱▱▱ 0/8 · 🙋 3<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_feat_control_panel active
   end
-  style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
+  style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
+  subgraph plan_2["📋 One entry component: list"]
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
+    class n_entry_cleanup planned
+    n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟨 review · #88<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
+    class n_entry_list review
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
+    class n_entry_open planned
+  end
+  style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
+  subgraph plan_4["📋 Portfolio roadmap"]
+    n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
+    class n_release_promote_main planned
+  end
+  style plan_4 fill:#ede9fe,stroke:#64748b,color:#0f172a
   n_staging --> n_bw_inbox
   n_entry_open --> n_entry_cleanup
   n_staging --> n_entry_list
@@ -72,19 +72,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Resizing should re-lay out the same entries, not swap one component tree for another.
+**Motivation.** Let visitors play with the device, and give the model's knobs and buttons a reason to exist outside 3D.
 
-**What.** Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go. Crossing the breakpoint replays line draws very quickly rather than from scratch.
+**What.** A gear in the main nav opens a three-page panel (colour, type, FX) built from a 2D knob, a mini slider and a key. The model's three buttons switch pages and its knobs drive the open page. Settings persist in the URL and local storage.
 
 **How, next.**
 
-- EntryList with the list and tile presentations from CSS container queries
-- One paint-in (border, typewriter, stagger) for list items and tiles
-- Crossing the breakpoint replays line draws quickly, not from scratch
+- 2D knob, mini slider and key controls, keyboard and mouse
+- Panel shell from the gear in the nav; pages switch from tabs and the model's buttons
+- Colour page with presets
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/list` | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | review, pushed | 0/4 | EntryList with the list and tile presentations from CSS container queries | 2026-10-entry-reconcile, 1 of 4 |
+| `feat/control-panel` |  | active, pushed | 0/8 | 2D knob, mini slider and key controls, keyboard and mouse | 2026-10-control-panel, 0 of 1 |
 
 ## 🕘 Just happened
 
@@ -212,7 +212,9 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | Plan | Progress |
 |---|---|
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
+| [2026-10-control-panel.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-control-panel.md) | 0 of 1 branches done |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 1 of 4 branches done |
+| [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
 </details>
@@ -223,7 +225,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` ◀ | One list that is a carousel on phones | review | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | 0/4 | 6 | pushed | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` | One list that is a carousel on phones | review | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | 0/4 | 6 | pushed | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 5 | pushed | 2D knob, mini slider and key controls, keyboard and mouse |
