@@ -1,6 +1,6 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:02 UTC · 4 live branches · 0 PRs open · 18 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:02 UTC · 4 live branches · 0 PRs open · 19 waiting on you</summary>
 
 | | |
 |---|---|
@@ -8,7 +8,7 @@
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
-| Waiting on you | 18 |
+| Waiting on you | 19 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 25/44 · 🙋 10<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/45 · 🙋 11<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -92,7 +92,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 25/44 · 🙋 10<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/45 · 🙋 11<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -139,7 +139,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 2 to push | 25/44 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 4 to push | 25/45 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
@@ -247,15 +247,19 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 **16. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
+- `media` · `next` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
+
+**17. The resume PDF is the 2024 copy from the old site and predates Arbor**
+- *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
 - `media` · `release/promote-main` · from `content/real-copy` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
 
-**17. Curate real panel content (screenshots, galleries, stats) per project**
+**18. Curate real panel content (screenshots, galleries, stats) per project**
 - *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
 - `media` · `release/promote-main` · from `feat/modal-panels` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
 
 ### Reviews
 
-**18. Design review in 3D and lite mode**
+**19. Design review in 3D and lite mode**
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
@@ -275,7 +279,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/44 | 33 | 2 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/45 | 33 | 4 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
@@ -300,7 +304,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (25/44)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (25/45)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -348,6 +352,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
 - [ ] 🙋 Review the Arbor and project blurbs (written from existing descriptions)
 - [ ] 🙋 Decide where /links appears (home menu, nav bar, or as home like the old branch)
+- [ ] 🙋 The resume PDF is the 2024 copy from the old site and predates Arbor
 
 </details>
 
