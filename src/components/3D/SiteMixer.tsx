@@ -5,6 +5,8 @@ import * as THREE from 'three';
 import type { GLTF } from 'three-stdlib';
 import { TextureLoader, Vector2 } from '$three';
 import { useColors } from '@context/ColorsContext';
+import { useControlPanel, type ControlPanelPage } from '@context/ControlPanelContext';
+import { useZoom } from '@context/ZoomContext';
 import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';
 import { Button } from './Button';
 import { Knob } from './Knob';
@@ -49,6 +51,8 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
   const location = useLocation();
   const navigate = useNavigatePreserveQuery();
   const { primaryHues, setPrimaryHues } = useColors();
+  const { setPage: setPanelPage } = useControlPanel();
+  const { zoomLevel, toggleInfoModeZoomPosition } = useZoom();
 
   // ?? Load Scene Components & Textures
   const { nodes, materials } = useGLTF(
@@ -66,6 +70,11 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
   const page = pathSegments[0] || '';
 
   // ?? Helpers
+  const showPanel = (panelPage: ControlPanelPage) => {
+    setPanelPage(panelPage);
+    if (zoomLevel !== 'info') toggleInfoModeZoomPosition();
+  };
+
   const handleClick = (label: string, path: string) => {
     if (page === label) {
       navigate('/');
@@ -163,7 +172,7 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
           )}
         </group>
       </Button>
-      <Button name="Button4" position={[0.635, -0.045, 0.049]}>
+      <Button name="Button4" onClick={() => showPanel('colour')} position={[0.635, -0.045, 0.049]}>
         <mesh
           castShadow
           receiveShadow
@@ -171,7 +180,7 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
           material={materials.bake}
         />
       </Button>
-      <Button name="Button5" position={[0.764, -0.045, 0.049]}>
+      <Button name="Button5" onClick={() => showPanel('type')} position={[0.764, -0.045, 0.049]}>
         <mesh
           castShadow
           receiveShadow
@@ -179,7 +188,7 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
           material={materials.bake}
         />
       </Button>
-      <Button name="Button6" position={[0.892, -0.045, 0.049]}>
+      <Button name="Button6" onClick={() => showPanel('fx')} position={[0.892, -0.045, 0.049]}>
         <mesh
           castShadow
           receiveShadow

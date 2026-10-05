@@ -11,6 +11,7 @@ import { PageProviders } from './PageProviders';
 import styles from './page.module.scss';
 
 const LazyBackground = lazy(() => import('@components/Background'));
+const LazyControlPanel = lazy(() => import('@components/ControlPanel/FloatingControlPanel'));
 const LazyNavBar = lazy(() => import('@components/NavBar'));
 const LazyAnimatedOutlet = lazy(() => import('@components/AnimatedOutlet'));
 const Page = ({ embedded }: { embedded?: boolean }) => {
@@ -61,6 +62,7 @@ const Page = ({ embedded }: { embedded?: boolean }) => {
           <Suspense fallback={null}>
             <LazyNavBar page={page} />
           </Suspense>
+          <Suspense fallback={null}>{!embedded && <LazyControlPanel />}</Suspense>
           <motion.div
             data-scroll-root
             className={cn(styles.content, {

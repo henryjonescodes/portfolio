@@ -10,11 +10,14 @@ const STORAGE_KEY = 'portfolio.preferences';
 
 const load = (): Preferences => {
   try {
-    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}');
+    const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}') as Partial<Preferences>;
     const merged = { ...DEFAULT_PREFERENCES };
-    if (stored.fontFamily in FONT_FAMILIES) merged.fontFamily = stored.fontFamily;
+    if (stored.fontFamily && stored.fontFamily in FONT_FAMILIES) {
+      merged.fontFamily = stored.fontFamily;
+    }
     for (const key of ['textScale', 'motionSpeed', 'crt'] as const) {
-      if (typeof stored[key] === 'number') merged[key] = stored[key];
+      const value = stored[key];
+      if (typeof value === 'number') merged[key] = value;
     }
     return merged;
   } catch {
