@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 24/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 25/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -51,7 +51,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 24/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 25/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -92,26 +92,25 @@ flowchart LR
 
 - 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
-- Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 9 to push | 24/42 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 10 to push | 25/42 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
-**fix(entries): media fills its box, and the phone window keeps the tile's 16:10 shape** · 2026-10-05 05:11 · `next` · `5174cb51`
+**test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 2026-10-05 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
-- **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
 - **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
 - **feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list** · 01:23 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90`
+- **fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows** · 01:04 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6385b4c8` |
 | 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6b075a5` |
@@ -219,7 +218,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 24/42 | 26 | 9 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/42 | 26 | 10 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
@@ -244,7 +243,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (24/42)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (25/42)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -272,7 +271,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
 - [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) (from feat/content-requests)
 - [x] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
-- [ ] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- [x] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
 - [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 - [ ] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
 - [x] Placeholder e2e test looks inside the dialog, not the first match on the page
