@@ -49,23 +49,7 @@
 }
 
 .media {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  // A definite height, so the glitch frame and the video inside fill the media box.
-  height: 100%;
-  overflow: hidden;
-  position: relative;
-
-  video,
-  img {
-    width: 100%;
-    height: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: cover;
-  }
+  @include styles.media-fill;
 }
 
 .stage {
