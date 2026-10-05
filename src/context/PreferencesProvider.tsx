@@ -1,8 +1,10 @@
-import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import {
   DEFAULT_PREFERENCES,
   FONT_FAMILIES,
+  PREFERENCE_RANGES,
   PreferencesContext,
+  type NumericPreference,
   type Preferences,
 } from './PreferencesContext';
 
@@ -15,9 +17,10 @@ const load = (): Preferences => {
     if (stored.fontFamily && stored.fontFamily in FONT_FAMILIES) {
       merged.fontFamily = stored.fontFamily;
     }
-    for (const key of ['textScale', 'motionSpeed', 'crt'] as const) {
+    for (const key of Object.keys(PREFERENCE_RANGES) as NumericPreference[]) {
+      const { min, max } = PREFERENCE_RANGES[key];
       const value = stored[key];
-      if (typeof value === 'number') merged[key] = value;
+      if (typeof value === 'number' && value >= min && value <= max) merged[key] = value;
     }
     return merged;
   } catch {
@@ -29,7 +32,8 @@ const load = (): Preferences => {
 export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
   const [preferences, setPreferences] = useState<Preferences>(load);
 
-  useEffect(() => {
+  // Before paint, so a stored font never flashes the default first.
+  useLayoutEffect(() => {
     const root = document.documentElement.style;
     root.setProperty('--font-family', FONT_FAMILIES[preferences.fontFamily].css);
     root.setProperty('--text-scale', String(preferences.textScale));

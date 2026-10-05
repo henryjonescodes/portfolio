@@ -20,6 +20,18 @@ export const DEFAULT_PREFERENCES = {
 
 export type Preferences = typeof DEFAULT_PREFERENCES;
 
+export type NumericPreference = 'textScale' | 'motionSpeed' | 'crt';
+
+/** Slider bounds; stored values outside them are ignored. */
+export const PREFERENCE_RANGES: Record<
+  NumericPreference,
+  { min: number; max: number; step: number }
+> = {
+  textScale: { min: 0.8, max: 1.4, step: 0.1 },
+  motionSpeed: { min: 0.5, max: 2, step: 0.25 },
+  crt: { min: 0, max: 1, step: 0.1 },
+};
+
 type PreferencesContextType = {
   preferences: Preferences;
   setPreference: <K extends keyof Preferences>(key: K, value: Preferences[K]) => void;
