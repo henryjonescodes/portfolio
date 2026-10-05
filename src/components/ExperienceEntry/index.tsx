@@ -16,6 +16,8 @@ import { formatDateRange } from '@utils/text';
 import type { ExperienceEntryProps } from './types';
 import GlitchIconItem from '@components/GlitchIconItem';
 import EffortNav from '@components/Efforts/EffortNav';
+import { GALLERY } from '@components/Efforts/subpages';
+import MasonryGallery from '@components/MasonryGallery';
 import EffortView from '@components/Efforts/EffortView';
 import RichText from '@components/Efforts/RichText';
 
@@ -32,6 +34,7 @@ const ExperienceEntry = ({
   modal = false,
   windowStyle,
   onLayoutAnimationComplete,
+  mediaWhenClosed = true,
   onClose,
   expanded = false,
   onToggleExpand,
@@ -51,6 +54,7 @@ const ExperienceEntry = ({
     tools,
     panels,
     efforts,
+    gallery,
   } = data;
   const dateRange = dateString ? dateString : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
@@ -58,6 +62,8 @@ const ExperienceEntry = ({
   const { TRANSITIONS } = useAnimations();
   const isOpen = pageOpen && !inList;
   const effort = isOpen ? efforts?.find((e) => e.id === effortId) : undefined;
+  const showGallery = isOpen && effortId === GALLERY && !!gallery?.length;
+  const subpageId = effort?.id ?? (showGallery ? GALLERY : null);
   // Mentions are buttons only in the open entry; a list item is already one big button.
   const mentionHandler = isOpen ? onMention : undefined;
 
@@ -68,7 +74,8 @@ const ExperienceEntry = ({
   const dragX = useMotionValue(0);
   const dragY = useMotionValue(0);
   useEffect(() => {
-    if (!pageOpen) {
+    // Closing, or shrinking to a phone where the window is full screen, drops any drag offset.
+    if (!pageOpen || width < widthMobile) {
       dragX.set(0);
       dragY.set(0);
     }
@@ -76,7 +83,7 @@ const ExperienceEntry = ({
     const { duration } = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
     const controls = [animate(dragX, 0, { duration }), animate(dragY, 0, { duration })];
     return () => controls.forEach((c) => c.stop());
-  }, [expanded, pageOpen, dragX, dragY, TRANSITIONS]);
+  }, [expanded, pageOpen, width, dragX, dragY, TRANSITIONS]);
 
   // The open entry's heading. Both the overview and an effort render it, so its shared
   // layoutIds stay mounted when tabs switch instead of handing back to the list item.
@@ -170,8 +177,34 @@ const ExperienceEntry = ({
               transition={TRANSITIONS.MODAL.CONTAINER_ANIMATE}
             />
           )}
+          {isOpen && (
+            // The frame's fixed top: the title bar, with the section tabs on its left. Only the body below scrolls,
+            // and `layout` keeps this pinned to the top edge while the window resizes.
+            <motion.div layout className={styles.windowHeader}>
+              <ModalNavBar
+                title={title}
+                onClose={onClose}
+                expanded={expanded}
+                onToggleExpand={onToggleExpand}
+                left={
+                  (!!efforts?.length || !!gallery?.length) &&
+                  onSelectEffort && (
+                    <EffortNav
+                      inline
+                      idPrefix={id}
+                      efforts={efforts ?? []}
+                      hasGallery={!!gallery?.length}
+                      selected={subpageId}
+                      onSelect={onSelectEffort}
+                    />
+                  )
+                }
+              />
+            </motion.div>
+          )}
           <motion.div
             layoutId="body"
+            layoutScroll={isOpen}
             className={styles.body}
             initial={inList ? 'initial' : 'animate'}
             animate={inList ? 'animate' : 'modalAnimate'}
@@ -182,35 +215,20 @@ const ExperienceEntry = ({
               className={styles.description}
               variants={variants.entryText}
             >
-              {isOpen && (
-                <ModalNavBar
-                  title={title}
-                  onClose={onClose}
-                  expanded={expanded}
-                  onToggleExpand={onToggleExpand}
-                />
-              )}
-              {isOpen && !!efforts?.length && onSelectEffort && (
-                <motion.div layout className={styles.effortNav}>
-                  <EffortNav
-                    idPrefix={id}
-                    efforts={efforts}
-                    selected={effort?.id ?? null}
-                    onSelect={onSelectEffort}
-                  />
-                </motion.div>
-              )}
-              {effort ? (
+              {subpageId ? (
                 <motion.div
                   layout
-                  key={effort.id}
+                  key={subpageId}
                   className={styles.effortContents}
                   role="tabpanel"
                   id={`${id}-panel`}
-                  aria-labelledby={`${id}-tab-${effort.id}`}
+                  aria-labelledby={`${id}-tab-${subpageId}`}
                 >
-                  {bodyTitle}
-                  <EffortView effort={effort} onMention={mentionHandler} />
+                  {effort ? (
+                    <EffortView effort={effort} onMention={mentionHandler} />
+                  ) : (
+                    <MasonryGallery items={gallery ?? []} />
+                  )}
                 </motion.div>
               ) : (
                 <>
@@ -253,7 +271,14 @@ const ExperienceEntry = ({
                       )}
                     </motion.div>
                     {children && (
-                      <motion.div className={styles.childrenWrapper} layoutId="childrenWrapper">
+                      <motion.div
+                        className={cn(styles.childrenWrapper, {
+                          [styles.mediaCollapsed]: modal && !isOpen && !mediaWhenClosed,
+                        })}
+                        layoutId="childrenWrapper"
+                        initial={false}
+                        animate={{ opacity: modal && !isOpen && !mediaWhenClosed ? 0 : 1 }}
+                      >
                         <AnimatedLine
                           borderWidth={borderWidth}
                           horizontal={width < widthMobile}
@@ -306,7 +331,8 @@ const ExperienceEntry = ({
           <motion.div
             className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
             style={{ ...windowStyle, x: dragX, y: dragY }}
-            drag={!expanded}
+            // Phones show the window full screen, so it does not drag there.
+            drag={!expanded && width >= widthMobile}
             dragMomentum={false}
             dragElastic={0.1}
             dragConstraints={{

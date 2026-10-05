@@ -6,8 +6,10 @@ import EntryMediaView from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
+import { GALLERY } from '@components/Efforts/subpages';
 import { findEntry } from '@data/entries';
 import { entryTitle, pageTitle } from '@data/pages';
+import { trapFocus } from '@utils/focus';
 import { boxWithin } from '@utils/geometry';
 import styles from './experience-entry-modal.module.scss';
 import { ExperienceEntryModalContext } from './ExperienceEntryModalContext';
@@ -31,7 +33,11 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     const effort = searchParams.get(PARAMS.effort);
     return {
       entry: entry ?? null,
-      effort: entry?.efforts?.some((e) => e.id === effort) ? effort : null,
+      effort:
+        entry?.efforts?.some((e) => e.id === effort) ||
+        (effort === GALLERY && !!entry?.gallery?.length)
+          ? effort
+          : null,
       expanded: !!entry && searchParams.get(PARAMS.size) === 'full',
     };
   });
@@ -48,6 +54,9 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   // A link is not the window's shape, so the window zooms out of its centre instead, kept in
   // its open layout, rather than squashing a layout morph into a word.
   const [zoom, setZoom] = useState<{ x: number; y: number } | null>(null);
+  // Whether the source shows an image; if not, the closed window hides its image pane too, so
+  // the pane grows in as it opens instead of popping in.
+  const [sourceHasMedia, setSourceHasMedia] = useState(true);
   const stageRef = useRef<HTMLDivElement>(null);
   // Read by animation callbacks, which can fire from a window that a newer open replaced.
   const closingRef = useRef(false);
@@ -80,6 +89,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     const stage = stageRef.current;
     const box = el && stage ? (boxWithin(el, stage) as Record<string, number>) : null;
     setSource(el);
+    setSourceHasMedia(!!el?.querySelector('img, video, [role="img"]'));
     setZoom(
       options.zoom && box ? { x: box.left + box.width / 2, y: box.top + box.height / 2 } : null,
     );
@@ -101,7 +111,16 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     if (entry) open(entry, { effort: nextEffortId, source: el, zoom: true });
   };
 
-  const finishClose = () => setSelectedEntry(null);
+  const finishClose = () => {
+    setSelectedEntry(null);
+    // Focus goes back to whatever opened the window.
+    if (source?.isConnected) source.focus({ preventScroll: true });
+  };
+
+  // Focus moves into the window as it opens, for keyboards and screen readers.
+  useEffect(() => {
+    if (pageOpen) dialogRef.current?.focus({ preventScroll: true });
+  }, [pageOpen]);
 
   const closeModal = () => {
     closingRef.current = true;
@@ -131,7 +150,10 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     if (url.href !== window.location.href)
       window.history.replaceState(window.history.state, '', url);
 
-    const effortTitle = selectedEntry?.efforts?.find((e) => e.id === effortId)?.title;
+    const effortTitle =
+      effortId === GALLERY
+        ? 'Gallery'
+        : selectedEntry?.efforts?.find((e) => e.id === effortId)?.title;
     document.title =
       openId && selectedEntry ? entryTitle(selectedEntry.title, effortTitle) : pageTitle(pathname);
   }, [openId, effortId, expanded, selectedEntry, pathname]);
@@ -165,6 +187,8 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
         }}
         role="dialog"
         aria-modal="true"
+        tabIndex={-1}
+        onKeyDown={trapFocus}
         aria-label={selectedEntry.title}
         onClick={(e) => {
           e.stopPropagation();
@@ -177,6 +201,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
           pageOpen={pageOpen || !!zoom}
           inList={false}
           modal
+          mediaWhenClosed={sourceHasMedia}
           windowStyle={
             !pageOpen && !zoom && from
               ? { ...from, position: 'absolute', margin: 0, minHeight: 0 }

@@ -1,0 +1,89 @@
+@use '@styles' as styles;
+
+// Rows are one column wide, so a square card is one cell, a wide card spans two columns and
+// a tall card two rows; dense flow backfills the gaps.
+.gallery {
+  container-type: inline-size;
+}
+
+.grid {
+  --gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: calc((100cqw - var(--gap)) / 2);
+  grid-auto-flow: row dense;
+  gap: var(--gap);
+  margin: 0;
+}
+
+// Wide windows get four columns of the same cells, so cards stay a sensible size.
+@container (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-rows: calc((100cqw - 3 * var(--gap)) / 4);
+  }
+}
+
+.card {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid var(--foreground-tertiary);
+  border-radius: styles.$radius-sm;
+  background: var(--background-secondary);
+
+  figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    color: var(--foreground-primary);
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  }
+}
+
+.square {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+.wide {
+  grid-column: span 2;
+  grid-row: span 1;
+}
+
+.tall {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+// An opened card takes the whole row at a comfortable height.
+.card.open {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.hit {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: zoom-in;
+
+  .open & {
+    cursor: zoom-out;
+  }
+
+  img,
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

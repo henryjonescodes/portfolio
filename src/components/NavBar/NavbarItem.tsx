@@ -11,7 +11,13 @@ type NavBarItemProps = {
   onClick: () => void;
   selected: boolean;
   mini: boolean;
-  Icon: React.FunctionComponent<
+  /** Shows only the icon, never the label (a home key, say); the label stays its name. */
+  iconOnly?: boolean;
+  /** Icon and label together, as a mini item looks when it opens on hover. */
+  withIcon?: boolean;
+  /** The icon is drawn with strokes, so it is themed on the stroke. */
+  strokeIcon?: boolean;
+  Icon?: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
     }
@@ -26,6 +32,9 @@ const NavBarItem = ({
   onClick,
   selected = false,
   mini,
+  iconOnly = false,
+  withIcon = false,
+  strokeIcon = false,
   Icon,
   tab,
   itemRef,
@@ -52,8 +61,16 @@ const NavBarItem = ({
   return (
     <motion.span
       ref={itemRef}
-      className={cn(styles.navItem, { [styles.mini]: mini })}
-      onClick={onClick}
+      className={cn(styles.navItem, {
+        [styles.mini]: mini,
+        [styles.iconOnly]: iconOnly,
+        [styles.withIcon]: withIcon,
+        [styles.strokeIcon]: strokeIcon,
+      })}
+      onClick={(e) => {
+        e.stopPropagation();
+        onClick();
+      }}
       aria-label={label}
       {...(tab
         ? {
@@ -75,17 +92,19 @@ const NavBarItem = ({
         className={cn(styles.border, { [styles.selected]: selected })}
         variants={borderVariants}
       />
-      {mini && (
+      {(mini || iconOnly || withIcon) && Icon && (
         <motion.span className={styles.icon}>
           <Icon className={styles.image} />
         </motion.span>
       )}
-      <motion.span className={styles.label}>
-        <TypewriterText
-          text={label}
-          staggerChildren={TRANSITIONS.NAV_ITEM.TEXT_ANIMATE_STAGGER.staggerChildren}
-        />
-      </motion.span>
+      {!iconOnly && (
+        <motion.span className={styles.label}>
+          <TypewriterText
+            text={label}
+            staggerChildren={TRANSITIONS.NAV_ITEM.TEXT_ANIMATE_STAGGER.staggerChildren}
+          />
+        </motion.span>
+      )}
     </motion.span>
   );
 };

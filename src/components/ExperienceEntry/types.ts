@@ -27,12 +27,23 @@ export type EntryMedia =
 export type Effort = {
   id: string;
   title: string;
+  /** Only when the effort has dates of its own; otherwise it shows none. */
+  dateString?: string;
+  startDate?: Date;
+  endDate?: Date;
   /** Shown on the effort's key in the dock. */
   Icon?: ToolEntry['Icon'];
   /** Whether the icon is drawn with fills or strokes, which the theme colours differently. */
   paint?: 'fill' | 'stroke';
   summary: string;
   panels?: Panel[];
+};
+
+/** One gallery card. Shapes pack on a two-column grid: square, wide (2:1) or tall (1:2). */
+export type GalleryItem = {
+  media: EntryMedia;
+  shape?: 'square' | 'wide' | 'tall';
+  caption?: string;
 };
 
 // Base entry data type
@@ -51,6 +62,8 @@ export type EntryData = {
   /** Extra blocks shown only when the entry is open. */
   panels?: Panel[];
   efforts?: Effort[];
+  /** Shown as the entry's Gallery subpage. */
+  gallery?: GalleryItem[];
 };
 
 // Component props type
@@ -67,6 +80,8 @@ export type ExperienceEntryProps = {
   /** Positions the modal's window; the provider sets it over the source while opening and closing. */
   windowStyle?: React.CSSProperties;
   onLayoutAnimationComplete?: () => void;
+  /** In the window's closed layout, keep the image pane (the source showed one) or collapse it. */
+  mediaWhenClosed?: boolean;
   onClose?: () => void;
   /** Open entry fills the overlay instead of its cozy size. */
   expanded?: boolean;

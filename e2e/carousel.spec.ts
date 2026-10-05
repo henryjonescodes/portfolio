@@ -4,7 +4,9 @@ import { distinctBoxes, sampleBoxes, trackErrors } from './helpers';
 test.describe('entry carousels on phones', () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test('a tile morphs into the page, shows its panels, and closes back', async ({ page }) => {
+  test('a tile opens the shared window full screen, shows its panels, and closes back', async ({
+    page,
+  }) => {
     const errors = trackErrors(page);
     await page.goto('/projects?lite=true');
     const tile = page.getByTestId('carousel-card').first();
@@ -14,7 +16,7 @@ test.describe('entry carousels on phones', () => {
 
     const boxes = await sampleBoxes(
       page,
-      '[data-testid="carousel-card-open"]',
+      '[data-testid="modal-entry"]',
       1500,
       '[data-testid="carousel-card"]',
     );
@@ -23,11 +25,14 @@ test.describe('entry carousels on phones', () => {
     expect(Math.abs(first.x - source.x)).toBeLessThan(source.width / 2);
     expect(last.width).toBeGreaterThan(source.width);
     expect(distinctBoxes(boxes)).toBeGreaterThan(2);
+    // On phones the window is the whole screen, over the site nav.
+    expect(last.y).toBeLessThan(1);
+    expect(last.height).toBeGreaterThan(page.viewportSize()!.height - 2);
 
     const dialog = page.getByRole('dialog');
     await expect(dialog.getByRole('region', { name: 'Links' })).toBeVisible();
     await dialog.getByRole('button', { name: 'Close' }).click();
-    await expect(page.getByTestId('carousel-card-open')).toHaveCount(0, { timeout: 5_000 });
+    await expect(page.getByTestId('modal-entry')).toHaveCount(0, { timeout: 5_000 });
     await expect(tile).toBeVisible();
     expect(errors).toEqual([]);
   });

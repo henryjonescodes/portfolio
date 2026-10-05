@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import cn from 'classnames';
+import { linkProps } from '@utils/links';
 import { Link, useLocation } from 'react-router-dom';
 import styles from './glitch-icon.module.scss';
 import { useSettings } from '@context/SettingsContext';
@@ -50,8 +51,9 @@ const GlitchIcon: React.FC<GlitchIconProps> = ({
       </motion.div>
     );
 
-  // A path stays in the app and keeps the query (lite, debug); anything else opens a tab.
-  if (url?.startsWith('/')) {
+  // A page path stays in the app and keeps the query (lite, debug); files and other sites
+  // open in a tab.
+  if (url && /^\/[^.]*$/.test(url)) {
     return (
       <Link
         to={{ pathname: url, search }}
@@ -66,10 +68,8 @@ const GlitchIcon: React.FC<GlitchIconProps> = ({
   if (url) {
     return (
       <a
-        href={url}
+        {...linkProps(url)}
         aria-label={label}
-        target="_blank"
-        rel="noopener noreferrer"
         className={cn(styles.glitch, paintClass, className)}
       >
         {renderContent()}

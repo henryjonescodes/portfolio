@@ -12,6 +12,31 @@
 
 .left {
   @include navBar.navBarSection;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+// With tabs on the left, the name floats right, just before the buttons.
+.hasLeft {
+  display: flex;
+
+  // Stretched to the bar's full height, so tab underlines sit on its bottom edge.
+  .left {
+    flex: 1;
+    height: auto;
+    align-self: stretch;
+    align-items: stretch;
+  }
+
+  .center {
+    margin-left: auto;
+    padding: 0 16px;
+
+    @media (max-width: styles.$width-mobile) {
+      display: none;
+    }
+  }
 }
 
 .center {
@@ -27,5 +52,18 @@
 
   &:active {
     cursor: grabbing;
+  }
+}
+
+// The window's frame is the bar's right edge, so the last button needs no border of its own.
+.right > :last-child {
+  border-right: none;
+}
+
+.expand {
+  display: contents;
+
+  @media (max-width: styles.$width-mobile) {
+    display: none;
   }
 }

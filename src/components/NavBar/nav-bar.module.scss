@@ -188,6 +188,22 @@
     }
   }
 
+  &.iconOnly {
+    padding: 0 12px;
+  }
+
+  &.withIcon .icon {
+    margin-left: 12px;
+  }
+
+  &.strokeIcon .icon .image {
+    svg,
+    path {
+      fill: none;
+      stroke: var(--accent-primary);
+    }
+  }
+
   &.mini {
     transition: width 0.2s ease-in-out;
     width: 50px;

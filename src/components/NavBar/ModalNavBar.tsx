@@ -1,4 +1,6 @@
+import cn from 'classnames';
 import { motion } from 'framer-motion';
+import type { ReactNode } from 'react';
 import { useAnimations } from '@context/AnimationContext';
 import NavBarButton from './NavBarButton';
 import AnimatedLine from '@components/AnimatedLine';
@@ -12,9 +14,17 @@ type ModalNavBarProps = {
   onClose?: () => void;
   expanded?: boolean;
   onToggleExpand?: () => void;
+  /** Fills the bar's left side, such as an entry's section tabs. */
+  left?: ReactNode;
 };
 
-const ModalNavBar = ({ title, onClose, expanded = false, onToggleExpand }: ModalNavBarProps) => {
+const ModalNavBar = ({
+  title,
+  onClose,
+  expanded = false,
+  onToggleExpand,
+  left,
+}: ModalNavBarProps) => {
   const { TRANSITIONS } = useAnimations();
 
   const modalNavBarVariants = {
@@ -42,20 +52,23 @@ const ModalNavBar = ({ title, onClose, expanded = false, onToggleExpand }: Modal
       animate="animate"
       exit="exit"
     >
-      <motion.div className={styles.contents}>
-        <motion.div className={`${styles.left} ${styles.dragHandle}`} />
+      <motion.div className={cn(styles.contents, { [styles.hasLeft]: !!left })}>
+        <motion.div className={cn(styles.left, { [styles.dragHandle]: !left })}>{left}</motion.div>
         <motion.div className={`${styles.center} ${styles.dragHandle}`}>
           <motion.h2 className={styles.title}>{title}</motion.h2>
         </motion.div>
         <motion.div className={styles.right}>
           {onToggleExpand && (
-            <NavBarButton
-              onClick={onToggleExpand}
-              Icon={Expand}
-              ActiveIcon={Shrink}
-              active={expanded}
-              label={expanded ? 'Restore' : 'Expand'}
-            />
+            // Phones show the window full screen already, so they get no Expand.
+            <span className={styles.expand}>
+              <NavBarButton
+                onClick={onToggleExpand}
+                Icon={Expand}
+                ActiveIcon={Shrink}
+                active={expanded}
+                label={expanded ? 'Restore' : 'Expand'}
+              />
+            </span>
           )}
           {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" />}
         </motion.div>

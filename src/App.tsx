@@ -1,4 +1,5 @@
 import { MotionConfig } from 'framer-motion';
+import { CrosshairMark } from '@components/Crosshair';
 import { lazy, Suspense } from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.scss';
@@ -18,6 +19,7 @@ export default function App() {
     <ErrorBoundary>
       {/* Honour the OS reduced-motion setting: transforms and layout snap, opacity still fades. */}
       <MotionConfig reducedMotion="user">
+        <CrosshairMark />
         <Router>
           <Routes>
             <Route
