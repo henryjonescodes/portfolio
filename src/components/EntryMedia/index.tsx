@@ -5,7 +5,18 @@ import { sourcedRequests } from '@utils/requests';
 import styles from './entry-media.module.scss';
 
 /** An entry's looping video or still, with the site's glitch treatment. */
-const EntryMediaView = ({ media, alt = '' }: { media: EntryMedia; alt?: string }) => {
+/** Where a video picks up: a frame to show until it decodes, and the time to play from. */
+export type MediaStart = { poster: string; time: number };
+
+const EntryMediaView = ({
+  media,
+  alt = '',
+  start,
+}: {
+  media: EntryMedia;
+  alt?: string;
+  start?: MediaStart | null;
+}) => {
   if ('placeholder' in media) {
     const sourced = sourcedRequests[media.request];
     if (sourced)
@@ -36,6 +47,10 @@ const EntryMediaView = ({ media, alt = '' }: { media: EntryMedia; alt?: string }
           muted
           playsInline
           src={media.video}
+          poster={start?.poster}
+          onLoadedMetadata={(e) => {
+            if (start) e.currentTarget.currentTime = start.time;
+          }}
           style={{ objectPosition: media.objectPosition }}
         />
       }

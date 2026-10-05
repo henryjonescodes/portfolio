@@ -16,6 +16,8 @@ type ModalNavBarProps = {
   onToggleExpand?: () => void;
   /** Fills the bar's left side, such as an entry's section tabs. */
   left?: ReactNode;
+  /** Appears with the window's morph rather than after it, for a bar that morphs into place. */
+  quick?: boolean;
 };
 
 const ModalNavBar = ({
@@ -24,6 +26,7 @@ const ModalNavBar = ({
   expanded = false,
   onToggleExpand,
   left,
+  quick = false,
 }: ModalNavBarProps) => {
   const { TRANSITIONS } = useAnimations();
 
@@ -35,6 +38,7 @@ const ModalNavBar = ({
       opacity: 1,
       transition: {
         ...TRANSITIONS.MODAL_NAVBAR.ANIMATE,
+        ...(quick && { delay: 0 }),
         delayChildren: 1,
       },
     },
