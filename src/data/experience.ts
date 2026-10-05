@@ -11,7 +11,10 @@ import Mail from '@assets/svg/socials/mail.svg?react';
 export const experienceData: Record<string, EntryData> = {
   arbor: {
     id: 'arbor',
-    media: { placeholder: 'Arbor product screens: the savings view or a notification' },
+    media: {
+      placeholder: 'Arbor product screens: the savings view or a notification',
+      request: 'arbor-hero',
+    },
     title: 'Arbor',
     subtitle: 'Full Stack Engineer',
     description: [
@@ -21,11 +24,29 @@ export const experienceData: Record<string, EntryData> = {
       'Full stack engineer building the features that show people how much they save with Arbor, starting with a real-time {{arbor/notifier|email notification system}}, and building {{arbor/almanac|Almanac}}, the team’s skill manager.',
     startDate: new Date(2025, 0),
     gallery: [
-      { shape: 'wide', media: { placeholder: 'Arbor savings dashboard, desktop' } },
-      { shape: 'tall', media: { placeholder: 'A savings email on a phone' } },
-      { shape: 'square', media: { placeholder: 'Notification template close-up' } },
-      { shape: 'square', media: { placeholder: 'Team or office photo' } },
-      { shape: 'wide', media: { placeholder: 'Almanac skill catalogue' } },
+      {
+        shape: 'wide',
+        media: {
+          placeholder: 'Arbor savings dashboard, desktop',
+          request: 'arbor-gallery-dashboard',
+        },
+      },
+      {
+        shape: 'tall',
+        media: { placeholder: 'A savings email on a phone', request: 'arbor-gallery-email' },
+      },
+      {
+        shape: 'square',
+        media: { placeholder: 'Notification template close-up', request: 'arbor-gallery-template' },
+      },
+      {
+        shape: 'square',
+        media: { placeholder: 'Team or office photo', request: 'arbor-gallery-team' },
+      },
+      {
+        shape: 'wide',
+        media: { placeholder: 'Almanac skill catalogue', request: 'arbor-gallery-almanac' },
+      },
     ],
     tools: [
       {
@@ -69,7 +90,10 @@ export const experienceData: Record<string, EntryData> = {
           {
             type: 'media',
             span: 'full',
-            media: { placeholder: 'A savings email as it lands in an inbox' },
+            media: {
+              placeholder: 'A savings email as it lands in an inbox',
+              request: 'arbor-notifier-inbox',
+            },
           },
         ],
       },
@@ -83,7 +107,10 @@ export const experienceData: Record<string, EntryData> = {
           {
             type: 'media',
             span: 'full',
-            media: { placeholder: 'Screenshot of the Almanac skill catalogue' },
+            media: {
+              placeholder: 'Screenshot of the Almanac skill catalogue',
+              request: 'arbor-almanac-catalogue',
+            },
           },
         ],
       },
@@ -91,7 +118,7 @@ export const experienceData: Record<string, EntryData> = {
   },
   channelai: {
     id: 'channelai',
-    media: { placeholder: 'ChannelAI iOS screens on a phone frame' },
+    media: { placeholder: 'ChannelAI iOS screens on a phone frame', request: 'channelai-hero' },
     title: 'ChannelAI',
     subtitle: 'iOS Engineer, Design System Lead',
     description: [
@@ -104,10 +131,25 @@ export const experienceData: Record<string, EntryData> = {
     startDate: new Date(2024, 0),
     endDate: new Date(2024, 4),
     gallery: [
-      { shape: 'tall', media: { placeholder: 'ChannelAI chat screen on an iPhone' } },
-      { shape: 'square', media: { placeholder: 'Profile screen' } },
-      { shape: 'square', media: { placeholder: 'Media gallery screen' } },
-      { shape: 'wide', media: { placeholder: 'Kiki UI component sheet' } },
+      {
+        shape: 'tall',
+        media: {
+          placeholder: 'ChannelAI chat screen on an iPhone',
+          request: 'channelai-gallery-chat',
+        },
+      },
+      {
+        shape: 'square',
+        media: { placeholder: 'Profile screen', request: 'channelai-gallery-profile' },
+      },
+      {
+        shape: 'square',
+        media: { placeholder: 'Media gallery screen', request: 'channelai-gallery-media' },
+      },
+      {
+        shape: 'wide',
+        media: { placeholder: 'Kiki UI component sheet', request: 'channelai-gallery-kiki' },
+      },
     ],
     tools: [
       {
@@ -126,7 +168,10 @@ export const experienceData: Record<string, EntryData> = {
           {
             type: 'media',
             span: 'full',
-            media: { placeholder: 'Kiki UI component sheet, or a few screens built with it' },
+            media: {
+              placeholder: 'Kiki UI component sheet, or a few screens built with it',
+              request: 'channelai-kiki-sheet',
+            },
           },
         ],
       },
@@ -134,7 +179,10 @@ export const experienceData: Record<string, EntryData> = {
   },
   mushroom: {
     id: 'mushroom',
-    media: { placeholder: 'Mushroom.gg feed or chat screens, web and mobile' },
+    media: {
+      placeholder: 'Mushroom.gg feed or chat screens, web and mobile',
+      request: 'mushroom-hero',
+    },
     title: 'Mushroom.gg',
     subtitle: 'Full Stack Engineer, Design System Lead',
     description: [
@@ -147,9 +195,18 @@ export const experienceData: Record<string, EntryData> = {
     startDate: new Date(2022, 2),
     endDate: new Date(2024, 0),
     gallery: [
-      { shape: 'wide', media: { placeholder: 'Mushroom.gg feed on web' } },
-      { shape: 'tall', media: { placeholder: 'Chat on mobile' } },
-      { shape: 'square', media: { placeholder: 'Icon set from the design library' } },
+      {
+        shape: 'wide',
+        media: { placeholder: 'Mushroom.gg feed on web', request: 'mushroom-gallery-feed' },
+      },
+      { shape: 'tall', media: { placeholder: 'Chat on mobile', request: 'mushroom-gallery-chat' } },
+      {
+        shape: 'square',
+        media: {
+          placeholder: 'Icon set from the design library',
+          request: 'mushroom-gallery-icons',
+        },
+      },
     ],
     tools: [
       {
@@ -172,7 +229,10 @@ export const experienceData: Record<string, EntryData> = {
   },
   union: {
     id: 'union',
-    media: { placeholder: 'A still from the thesis or a Union College project' },
+    media: {
+      placeholder: 'A still from the thesis or a Union College project',
+      request: 'union-hero',
+    },
     title: 'Union College',
     subtitle: 'UI/UX Researcher',
     description: [
@@ -192,7 +252,7 @@ export const experienceData: Record<string, EntryData> = {
   },
   tumblr: {
     id: 'tumblr',
-    media: { placeholder: 'A sample of the Tumblr-era work' },
+    media: { placeholder: 'A sample of the Tumblr-era work', request: 'tumblr-hero' },
     title: 'Tumblr',
     subtitle: 'Systems Intern',
     description: [

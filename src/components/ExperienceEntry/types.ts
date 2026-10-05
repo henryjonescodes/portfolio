@@ -17,7 +17,7 @@ export type ToolEntry = {
 export type EntryMedia =
   | { video: string; objectPosition?: string }
   | { img: string }
-  | { placeholder: string };
+  | { placeholder: string; request: string; kind?: 'image' | 'icon' };
 
 /**
  * A highlighted piece of work inside an entry (a project, a system, a responsibility). Shown
