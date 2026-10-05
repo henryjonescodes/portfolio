@@ -28,10 +28,13 @@ body,
   font-style: normal;
 }
 
-// iOS Safari paints this behind overscroll and the toolbars.
+// iOS Safari paints this behind the toolbars. Pages scroll inside their own content, so the
+// document itself never scrolls or bounces, which keeps the nav pinned.
 html,
 body {
   background-color: var(--background-primary);
+  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 #root {

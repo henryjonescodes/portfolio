@@ -3,6 +3,8 @@
 .landing {
   width: 100vw;
   height: 100vh;
+  // The visible viewport, so iOS toolbars never leave the shell taller than the screen.
+  height: 100dvh;
   position: relative;
   overflow: hidden;
   pointer-events: auto;
