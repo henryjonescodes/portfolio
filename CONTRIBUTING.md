@@ -1,14 +1,14 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:03 UTC · 4 live branches · 0 PRs open · 24 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:03 UTC · 3 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-05 13:03 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 4 |
+| Live branches | 3 |
 | Open PRs | none |
-| Waiting on you | 24 |
+| Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 26/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -38,30 +38,27 @@ flowchart LR
   n_next_t0["2D knob, mini slider and key<br/>controls, keyboard and mouse"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
-  n_next_t1["npm run requests renders the<br/>list; bw publishes it next to<br/>…"]
+  n_next_t1["Act on the answer to 'Should<br/>the panel be on phones, or<br/>des…"]
   class n_next_t1 todo
   n_next -.-> n_next_t1
-  n_next_t2["Act on the answer to 'Should<br/>the panel be on phones, or<br/>des…"]
+  n_next_t2["Phones: the 3D view always<br/>renders landscape, whatever<br/>the …"]
   class n_next_t2 todo
   n_next -.-> n_next_t2
-  n_next_t3["Phones: the 3D view always<br/>renders landscape, whatever<br/>the …"]
+  n_next_t3["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
   class n_next_t3 todo
   n_next -.-> n_next_t3
-  n_next_t4["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
+  n_next_t4["Window bar: the entry name has<br/>no left divider in the modal"]
   class n_next_t4 todo
   n_next -.-> n_next_t4
-  n_next_t5["Window bar: the entry name has<br/>no left divider in the modal"]
+  n_next_t5["Phones: the entry image<br/>animates between list and<br/>window, a…"]
   class n_next_t5 todo
   n_next -.-> n_next_t5
-  n_next_t6["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  n_next_t6["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
   class n_next_t6 todo
   n_next -.-> n_next_t6
-  n_next_t7["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
+  n_next_t7["Resume feat/phone-3d from its<br/>local WIP commit 1fe59f9b, an…"]
   class n_next_t7 todo
   n_next -.-> n_next_t7
-  n_next_more["… 1 more todos"]
-  class n_next_more todo
-  n_next -.-> n_next_more
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -73,7 +70,7 @@ flowchart LR
   classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
-<details><summary><b>Everything planned</b> · 4 live branches</summary>
+<details><summary><b>Everything planned</b> · 3 live branches</summary>
 
 ```mermaid
 flowchart LR
@@ -86,20 +83,14 @@ flowchart LR
     class n_entry_open planned
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
-  subgraph plan_2["📋 Portfolio roadmap"]
-    n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
-    class n_release_promote_main planned
-  end
-  style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 25/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 26/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_entry_cleanup
   n_next --> n_entry_open
   n_staging --> n_next
-  n_staging --> n_release_promote_main
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -134,28 +125,26 @@ flowchart LR
 **How, next.**
 
 - 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
-- npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
 - Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
+- Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 8 to push | 25/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 10 to push | 26/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
-**chore: ignore a node_modules link as well as a folder** · 2026-10-05 13:02 · `next` · `89c22a1f`
+**test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 2026-10-05 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
-- **fix(nav): the filled Close button needs no divider on its left** · 09:30 · `next` · `47ba4547`
-- **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
 - **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
+- **feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list** · 01:23 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90`
+- **fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows** · 01:04 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
-| 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6385b4c8` |
 | 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6b075a5` |
@@ -201,83 +190,51 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - *Why:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
 - `prose` · `next` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
-**7. Review the Arbor and project blurbs (written from existing descriptions)**
-- *Why:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
-- `prose` · `release/promote-main` · from `content/real-copy` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
-
 ### Decisions
 
-**8. Approve per-entry preview images, or generate them**
+**7. Approve per-entry preview images, or generate them**
 - *Why:* Shared links show a per-page title and description, but one site-wide image for every entry.
 - `decision` · `next` · from `feat/shareable-urls` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
-**9. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
+**8. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
 - *Why:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
 - `decision` · `next` · from `feat/global-modal` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/components/EntryLink/index.tsx)
 
-**10. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
+**9. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
 - *Why:* The page exists and About links to it, but nothing else on the site leads there.
 - `decision` · `next` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/pages/links/index.tsx)
 
-**11. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
+**10. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
 - *Why:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
 - `decision` · `next` · [_colors.scss](https://github.com/henryjonescodes/portfolio/blob/staging/src/styles/_colors.scss#L12)
 
-**12. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
+**11. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
 - *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
 - `decision` · `next` · [images](https://github.com/henryjonescodes/portfolio/blob/staging/public/3D/images)
 
-**13. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
+**12. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
 - *Why:* Every shared link shows this card; it also settles which domain is canonical.
 - `decision` · `next` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
-**14. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
-- *Why:* The page exists and About links to it, but nothing else on the site leads there.
-- `decision` · `release/promote-main` · from `content/real-copy` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/pages/links/index.tsx)
-
-**15. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
-- *Why:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
-- `decision` · `release/promote-main` · from `design/retro-chrome` · [_colors.scss](https://github.com/henryjonescodes/portfolio/blob/staging/src/styles/_colors.scss#L12)
-
-**16. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
-- *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
-- `decision` · `release/promote-main` · from `perf/assets` · [images](https://github.com/henryjonescodes/portfolio/blob/staging/public/3D/images)
-
-**17. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
-- *Why:* Every shared link shows this card; it also settles which domain is canonical.
-- `decision` · `release/promote-main` · from `seo/meta` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
-
 ### Files to send
 
-**18. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
+**13. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
 - *Why:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
 - `media` · `next` · from `feat/entry-dock` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
-**19. The resume PDF is the 2024 copy from the old site and predates Arbor**
+**14. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
 - `media` · `next` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
 
-**20. Curate real panel content (screenshots, galleries, stats) per project**
+**15. Curate real panel content (screenshots, galleries, stats) per project**
 - *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
 - `media` · `next` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
 
-**21. The resume PDF is the 2024 copy from the old site and predates Arbor**
-- *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
-- `media` · `release/promote-main` · from `content/real-copy` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
-
-**22. Curate real panel content (screenshots, galleries, stats) per project**
-- *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
-- `media` · `release/promote-main` · from `feat/modal-panels` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
-
 ### Reviews
 
-**23. Design review in 3D and lite mode**
+**16. Design review in 3D and lite mode**
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `next`
-
-**24. Design review in 3D and lite mode**
-- *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
-- `review` · `release/promote-main` · from `design/retro-chrome`
 
 <details><summary><b>Plans</b></summary>
 
@@ -295,8 +252,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 25/50 | 33 | 8 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
-| `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 24 to push | PR staging into main |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 26/50 | 33 | 10 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
 
@@ -320,7 +276,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (25/50)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (26/50)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -338,7 +294,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Should the panel be on phones, or desktop only? (from feat/control-panel)
 - [x] Request ids on mock media and drafted prose (from feat/content-requests)
 - [x] Sourced files and prose resolve by id at build time (from feat/content-requests)
-- [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
+- [x] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
 - [ ] 🙋 Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)
 - [ ] 🙋 Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal) (from feat/content-requests)
 - [ ] 🙋 claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
@@ -374,24 +330,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 🙋 Curate real panel content (screenshots, galleries, stats) per project
 - [ ] 🙋 Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check
 - [ ] 🙋 Approve the share image and description, and confirm the canonical domain is henryjones.xyz
-
-</details>
-
-<details><summary><code>release/promote-main</code>: Promote the new site to main (2/11)</summary>
-
-Retire the old webpack site once staging carries everything above.
-
-- [x] Confirm Netlify deploy settings for main and staging
-- [ ] PR staging into main
-- [ ] 🙋 Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
-- [ ] 🙋 Decide where /links appears (home menu, nav bar, or as home like the old branch) (from content/real-copy)
-- [ ] 🙋 The resume PDF is the 2024 copy from the old site and predates Arbor (from content/real-copy)
-- [ ] 🙋 Design review in 3D and lite mode (from design/retro-chrome)
-- [ ] 🙋 Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line) (from design/retro-chrome)
-- [ ] 🙋 Curate real panel content (screenshots, galleries, stats) per project (from feat/modal-panels)
-- [x] Confirm the first CI run is green on every stacked PR (from modalize-leva-work)
-- [ ] 🙋 Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check (from perf/assets)
-- [ ] 🙋 Approve the share image and description, and confirm the canonical domain is henryjones.xyz (from seo/meta)
 
 </details>
 
