@@ -9,7 +9,7 @@ test.describe('entry carousels on phones', () => {
   }) => {
     const errors = trackErrors(page);
     await page.goto('/projects?lite=true');
-    const tile = page.getByTestId('carousel-card').first();
+    const tile = page.getByTestId('entry').first();
     await expect(tile).toBeVisible();
     await page.waitForTimeout(1500);
     const source = (await tile.boundingBox())!;
@@ -18,7 +18,7 @@ test.describe('entry carousels on phones', () => {
       page,
       '[data-testid="modal-entry"]',
       1500,
-      '[data-testid="carousel-card"]',
+      '[data-testid="entry"]',
     );
     const first = boxes[0];
     const last = boxes[boxes.length - 1];
@@ -40,13 +40,13 @@ test.describe('entry carousels on phones', () => {
   for (const path of ['/projects', '/experience']) {
     test(`${path}: the first tile is centred and the row runs edge to edge`, async ({ page }) => {
       await page.goto(`${path}?lite=true`);
-      const tile = page.getByTestId('carousel-card').first();
+      const tile = page.getByTestId('entry').first();
       await expect(tile).toBeVisible();
       await page.waitForTimeout(1500);
       const vw = page.viewportSize()!.width;
       const t = (await tile.boundingBox())!;
       expect(Math.abs(t.x + t.width / 2 - vw / 2)).toBeLessThan(2);
-      const row = (await tile.locator('xpath=../..').boundingBox())!;
+      const row = (await page.getByTestId('entry-row').boundingBox())!;
       expect(row.x).toBeLessThanOrEqual(0.5);
       expect(row.width).toBeGreaterThanOrEqual(vw - 1);
     });
@@ -55,7 +55,7 @@ test.describe('entry carousels on phones', () => {
   test('an open tile takes focus and the tiles behind it leave the tab order', async ({ page }) => {
     await page.goto('/projects?lite=true');
     await page.waitForTimeout(1500);
-    await page.getByTestId('carousel-card').first().click();
+    await page.getByTestId('entry').first().click();
     const dialog = page.getByRole('dialog');
     await expect(dialog).toBeFocused();
     await expect(dialog.getByRole('button', { name: 'Close' })).toBeVisible();
@@ -87,8 +87,43 @@ test.describe('entry carousels on phones', () => {
   });
 });
 
-test('wide lite view keeps the projects list', async ({ page }) => {
+test('wide lite view keeps the projects list stacked', async ({ page }) => {
   await page.goto('/projects?lite=true');
-  await expect(page.getByTestId('entry').first()).toBeVisible();
-  await expect(page.getByTestId('carousel-card')).toHaveCount(0);
+  const entries = page.getByTestId('entry');
+  await expect(entries.first()).toBeVisible();
+  const [a, b] = [await entries.nth(0).boundingBox(), await entries.nth(1).boundingBox()];
+  expect(b!.y).toBeGreaterThan(a!.y + a!.height - 1);
+  expect(Math.abs(a!.x - b!.x)).toBeLessThan(1);
+});
+
+test('crossing the breakpoint keeps the same entry elements and switches the layout', async ({
+  page,
+}) => {
+  const errors = trackErrors(page);
+  await page.setViewportSize({ width: 1100, height: 800 });
+  await page.goto('/experience?lite=true');
+  const first = page.getByTestId('entry').first();
+  await expect(first).toBeVisible();
+  await page.waitForTimeout(1500);
+  await first.evaluate((el) => el.setAttribute('data-same-node', 'yes'));
+  const wide = (await first.boundingBox())!;
+  expect(wide.width).toBeGreaterThan(500);
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(800);
+  const tile = (await first.boundingBox())!;
+  expect(tile.width).toBeLessThan(390);
+  await expect(page.locator('[data-same-node="yes"]')).toHaveCount(1);
+  await expect(page.locator('[data-testid="entry"]').first()).toHaveAttribute(
+    'data-same-node',
+    'yes',
+  );
+
+  await page.setViewportSize({ width: 1100, height: 800 });
+  await page.waitForTimeout(800);
+  await expect(page.locator('[data-testid="entry"]').first()).toHaveAttribute(
+    'data-same-node',
+    'yes',
+  );
+  expect(errors).toEqual([]);
 });
