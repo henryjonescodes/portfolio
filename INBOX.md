@@ -128,6 +128,15 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check
+<!-- bw:q {"branch":"next","text":"Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check"} -->
+*Why it matters:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
+*Where:* `public/3D/images`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
