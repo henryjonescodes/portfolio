@@ -12,7 +12,8 @@ const tracked = (args) =>
 // Not referenced by name: Netlify reads _redirects, and DRACOLoader fetches its decoder files
 // from the folder useGLTF is given.
 const KEEP = new Set(['public/_redirects']);
-const KEEP_DIRS = ['public/draco/'];
+// src/assets/requests holds sourced media found by request id (see src/utils/requests.ts).
+const KEEP_DIRS = ['public/draco/', 'src/assets/requests/'];
 const kept = (f) => KEEP.has(f) || KEEP_DIRS.some((d) => f.startsWith(d));
 
 const sources = tracked(['src', 'index.html', 'scripts']).filter((f) =>
@@ -23,7 +24,7 @@ const corpus = sources.map((f) => readFileSync(f, 'utf8')).join('\n');
 const isJunk = (f) => f.endsWith('.DS_Store');
 const unused = [
   ...tracked(['public']).filter((f) => !kept(f) && !isJunk(f) && !corpus.includes(basename(f))),
-  ...tracked(['src/assets']).filter((f) => !isJunk(f) && !corpus.includes(f.slice('src/'.length))),
+  ...tracked(['src/assets']).filter((f) => !kept(f) && !isJunk(f) && !corpus.includes(f.slice('src/'.length))),
 ];
 
 if (unused.length) {
