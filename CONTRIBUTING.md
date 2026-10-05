@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 00:11 UTC · 8 live branches · 1 PRs open · 20 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 00:12 UTC · 8 live branches · 1 PRs open · 20 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 00:11 UTC by `bw board` on `feat/control-panel` |
+| Generated | 2026-10-05 00:12 UTC by `bw board` on `cp-review` |
 | Trunk | `staging` |
 | Live branches | 8 |
 | Open PRs | [#86](https://github.com/henryjonescodes/portfolio/pull/86) |
@@ -19,7 +19,7 @@ flowchart LR
   class n_staging trunk
   subgraph plan_0["📋 A control panel: colour"]
     n_feat_control_panel["<b>A control panel for<br/>colour, type and effects</b><br/>🟩 active<br/><code>feat/control-panel</code><br/>▱▱▱▱▱▱▱▱ 0/8 · 🙋 3<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_feat_control_panel active,current
+    class n_feat_control_panel active
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph plan_2["📋 Portfolio roadmap"]
@@ -72,19 +72,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Let visitors play with the device, and give the model's knobs and buttons a reason to exist outside 3D.
+**Motivation.** Resizing should re-lay out the same entries, not swap one component tree for another.
 
-**What.** A gear in the main nav opens a three-page panel (colour, type, FX) built from a 2D knob, a mini slider and a key. The model's three buttons switch pages and its knobs drive the open page. Settings persist in the URL and local storage.
+**What.** Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go. Crossing the breakpoint replays line draws very quickly rather than from scratch.
 
 **How, next.**
 
-- 2D knob, mini slider and key controls, keyboard and mouse
-- Panel shell from the gear in the nav; pages switch from tabs and the model's buttons
-- Colour page with presets
+- EntryList with the list and tile presentations from CSS container queries
+- One paint-in (border, typewriter, stagger) for list items and tiles
+- Crossing the breakpoint replays line draws quickly, not from scratch
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/control-panel` |  | active, local only | 0/8 | 2D knob, mini slider and key controls, keyboard and mouse | 2026-10-control-panel, 0 of 1 |
+| `entry/list` |  | active, local only | 0/4 | EntryList with the list and tile presentations from CSS container queries |  |
 
 ## 🕘 Just happened
 
@@ -224,7 +224,7 @@ One ControlPanel component renders on the 3D info screen and as a floating windo
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `entry/window` | One window for every open entry | review | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | 6/6 | 4 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/control-panel` ◀ | A control panel for colour, type and effects | active |  | 0/8 | 3 | local only | 2D knob, mini slider and key controls, keyboard and mouse |
+| `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 3 | pushed | 2D knob, mini slider and key controls, keyboard and mouse |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
