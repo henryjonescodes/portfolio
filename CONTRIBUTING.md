@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 14:28 UTC · 1 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:29 UTC · 1 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:28 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 14:29 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 1 |
 | Open PRs | none |
@@ -142,7 +142,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 12 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
@@ -254,7 +254,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 58 | 12 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 58 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/49)</summary>
 
