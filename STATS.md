@@ -1,6 +1,6 @@
 # Work stats
 
-_From `origin/main` to `origin/staging`, generated 2026-10-05 02:22 UTC by `bw stats`._
+_From `origin/main` to `origin/staging`, generated 2026-10-05 02:25 UTC by `bw stats`._
 
 | | |
 |---|---|
@@ -56,11 +56,11 @@ src/
 **After** (`origin/staging`, plus work in flight): 🆕 new since before · 🚧 changed on an unmerged branch
 
 ```
-src/
+src/  🚧
 ├── assets/
 │   ├── requests/  🆕
 │   ├── svg/
-├── components/
+├── components/  🚧
 │   ├── 3D/  🆕
 │   ├── AnimatedBorderBox/  🆕
 │   ├── AnimatedLine/  🆕
@@ -76,13 +76,13 @@ src/
 │   ├── GlitchIcon/  🆕
 │   ├── GlitchIconItem/  🆕
 │   ├── GlitchMedia/  🆕
-│   ├── GradientBackground/  🆕
+│   ├── GradientBackground/  🆕  🚧
 │   ├── HeroNumber/  🆕
-│   ├── Loading/  🆕
+│   ├── Loading/  🆕  🚧
 │   ├── MapViewer/  🆕
 │   ├── MasonryGallery/  🆕
 │   ├── NavBar/  🆕
-│   ├── Page/  🆕
+│   ├── Page/  🆕  🚧
 │   ├── Panels/  🆕
 │   ├── TypewriterText/  🆕
 ├── config/  🆕
@@ -91,11 +91,11 @@ src/
 ├── data/  🆕
 ├── debug/  🆕
 ├── hooks/  🆕
-├── pages/
-│   ├── about/  🆕
+├── pages/  🚧
+│   ├── about/  🆕  🚧
 │   ├── experience/  🆕
 │   ├── home/  🆕
-│   ├── landing/  🆕
+│   ├── landing/  🆕  🚧
 │   ├── links/  🆕
 │   ├── projects/  🆕
 ├── styles/
