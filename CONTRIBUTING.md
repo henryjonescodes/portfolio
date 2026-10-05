@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:23 UTC by `bw board` on `content/prose-requests` |
+| Generated | 2026-10-05 14:23 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 2 |
 | Open PRs | none |
@@ -21,7 +21,7 @@ flowchart LR
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -59,54 +59,54 @@ flowchart LR
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
   n_staging --> n_next
-  landed_0["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
+  landed_0["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
   class landed_0 merged
   n_staging --- landed_0
-  landed_1["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
+  landed_1["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
   class landed_1 merged
   n_staging --- landed_1
-  landed_2["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
+  landed_2["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
   class landed_2 merged
   n_staging --- landed_2
-  landed_3["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
+  landed_3["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
   class landed_3 merged
   n_staging --- landed_3
-  landed_4["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
+  landed_4["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
   class landed_4 merged
   n_staging --- landed_4
-  landed_5["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
+  landed_5["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
   class landed_5 merged
   n_staging --- landed_5
-  landed_6["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
+  landed_6["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
   class landed_6 merged
   n_staging --- landed_6
-  landed_7["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
+  landed_7["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
   class landed_7 merged
   n_staging --- landed_7
-  landed_8["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
+  landed_8["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
   class landed_8 merged
   n_staging --- landed_8
-  landed_9["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
+  landed_9["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
   class landed_9 merged
-  n_staging --- landed_9
-  landed_10["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
+  n_next --- landed_9
+  landed_10["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
   class landed_10 merged
-  n_staging --- landed_10
-  landed_11["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
+  n_next --- landed_10
+  landed_11["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
   class landed_11 merged
   n_next --- landed_11
-  landed_12["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
+  landed_12["✅ The 3D knobs drive the<br/>control panel's page<br/><code>feat/knob-mapping</code> · 2026-10-05"]
   class landed_12 merged
   n_next --- landed_12
-  landed_13["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
+  landed_13["✅ Tidy after the entry merge<br/><code>entry/cleanup</code> · 2026-10-05"]
   class landed_13 merged
   n_next --- landed_13
-  landed_14["✅ The 3D knobs drive the<br/>control panel's page<br/><code>feat/knob-mapping</code> · 2026-10-05"]
+  landed_14["✅ Drafted prose in the request<br/>list<br/><code>content/prose-requests</code> · 2026-10-05"]
   class landed_14 merged
   n_next --- landed_14
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
@@ -148,7 +148,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 12 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
@@ -256,20 +256,12 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `next`
 
-<details><summary><b>Plans</b></summary>
-
-| Plan | Progress |
-|---|---|
-| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 4 of 4 branches done (complete) |
-
-</details>
-
 <details><summary><b>All branches</b></summary>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | 12 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
 
