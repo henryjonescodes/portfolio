@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/48 · 🙋 16<br/><i>next: Drafted prose gets request ids to…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/47 · 🙋 16<br/><i>next: Phones: the entry image animates …</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -35,15 +35,12 @@ flowchart LR
   n_next_m3["✅ <code>feat/content-requests</code>"]
   class n_next_m3 merged
   n_next_m3 --> n_next
-  n_next_t0["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
+  n_next_t0["Phones: the entry image<br/>animates between list and<br/>window, a…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
-  n_next_t1["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  n_next_t1["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
   class n_next_t1 todo
   n_next -.-> n_next_t1
-  n_next_t2["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
-  class n_next_t2 todo
-  n_next -.-> n_next_t2
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -77,7 +74,7 @@ flowchart LR
     class n_feat_panel_knob planned
     n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
     class n_feat_panel_phones planned
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/48 · 🙋 16<br/><i>next: Drafted prose gets request ids to…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/47 · 🙋 16<br/><i>next: Phones: the entry image animates …</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -121,13 +118,12 @@ flowchart LR
 
 **How, next.**
 
-- Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
 - Phones: the entry image animates between list and window, and fills its space
 - After the stream lands: DRY and code-splitting pass, delete unused code
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 15 to push | 29/48 | Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images |  |
+| `next` |  | active, 15 to push | 29/47 | Phones: the entry image animates between list and window, and fills its space |  |
 
 ## 🕘 Just happened
 
@@ -253,7 +249,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | local only | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | local only | Gear shows in the phone nav |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/48 | 33 | 15 to push | Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/47 | 33 | 15 to push | Phones: the entry image animates between list and window, and fills its space |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -317,7 +313,7 @@ The owner wants the toy on phones too: the gear shows on phones, the panel opens
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/48)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/47)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -347,7 +343,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
 - [x] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
 - [x] Placeholder e2e test looks inside the dialog, not the first match on the page
-- [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
 - [x] Entry tabs use the shared useRovingFocus hook
 - [x] Modal window gets a max width on wide screens
 - [x] Window bar: the entry name has no left divider in the modal
