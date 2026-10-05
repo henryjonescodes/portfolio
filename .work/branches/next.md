@@ -82,7 +82,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
   - file: scripts/build-requests.mjs
 - [x] Entry tabs use the shared useRovingFocus hook
-- [ ] Modal window gets a max width on wide screens
+- [x] Modal window gets a max width on wide screens
 - [ ] Window bar: the entry name has no left divider in the modal
 - [ ] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [ ] Close button: full size, border-colour fill with the X knocked out
@@ -117,3 +117,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Entry tabs use the shared useRovingFocus hook" at ad9e6486
 - 2026-10-05: done "Placeholder e2e test looks inside the dialog, not the first match on the page" at b0467dda
 - 2026-10-05: done "Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face" at 84a8c8a2
+- 2026-10-05: done "Modal window gets a max width on wide screens" at 5174cb51
