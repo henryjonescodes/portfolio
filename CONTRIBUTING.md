@@ -20,8 +20,8 @@ flowchart LR
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
-    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
-    class n_content_prose_requests active
+    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
+    class n_content_prose_requests planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -29,12 +29,6 @@ flowchart LR
   n_next --> n_chore_dry_pass
   n_next --> n_content_prose_requests
   n_staging --> n_next
-  n_content_prose_requests_t0["Request ids on drafted prose<br/>(summaries, blurbs, claims)"]
-  class n_content_prose_requests_t0 todo
-  n_content_prose_requests -.-> n_content_prose_requests_t0
-  n_content_prose_requests_t1["REQUESTS.md lists prose with<br/>the draft and where it shows"]
-  class n_content_prose_requests_t1 todo
-  n_content_prose_requests -.-> n_content_prose_requests_t1
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -67,8 +61,8 @@ flowchart LR
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
-    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
-    class n_content_prose_requests active
+    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
+    class n_content_prose_requests planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -160,22 +154,21 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 7 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `next` |  | active, 11 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
 **chore(entries): one entry spec, no dead tunables or page styles, CLAUDE.md points at the motion-sheet skill** · 2026-10-05 14:20 · `next` · `84cb9976`
 The phone tile tests join modal.spec; five unused transition groups go; the slow 3D panel test gets a longer timeout.
 
-- **feat(requests): drafted prose carries request ids and approved .md files replace it** · 14:19 · `content/prose-requests` · `ce7e18d3`
-- **feat(panel): the model's knobs turn the shown page's three main controls, named on the info screen** · 13:53 · `next` · `1e027660`
+- **feat(requests): drafted prose carries request ids and approved .md files replace it** · 14:19 · `next` · `ce7e18d3`
 - **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
+- **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
 | 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
 | 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
@@ -282,8 +275,8 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `content/prose-requests` | Drafted prose in the request list | active |  | 0/2 | 2 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 51 | 7 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | 11 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
 
