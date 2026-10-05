@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react';
+import type { Waveform } from '../audio/synth';
 
 export type FontFamilyId = 'pixelify' | 'vt323' | 'plex' | 'orbitron';
 
@@ -17,11 +18,42 @@ export const DEFAULT_PREFERENCES = {
   motionSpeed: 1,
   /** Opacity multiplier for the scanlines. */
   crt: 1,
+  /** Interaction sounds on or off. */
+  sound: true,
+  volume: 0.4,
+  waveform: 'square' as Waveform,
+  /** Lowpass cutoff in Hz. */
+  cutoff: 2400,
+  resonance: 2,
+  /** Envelope release in seconds. */
+  release: 0.12,
+  /** Second oscillator detune in cents. */
+  detune: 0,
 };
+
+export const WAVEFORM_IDS: Waveform[] = ['sine', 'square', 'sawtooth', 'triangle'];
 
 export type Preferences = typeof DEFAULT_PREFERENCES;
 
-export type NumericPreference = 'textScale' | 'motionSpeed' | 'crt';
+export type NumericPreference =
+  | 'textScale'
+  | 'motionSpeed'
+  | 'crt'
+  | 'volume'
+  | 'cutoff'
+  | 'resonance'
+  | 'release'
+  | 'detune';
+
+export const SOUND_KEYS: (keyof Preferences)[] = [
+  'sound',
+  'volume',
+  'waveform',
+  'cutoff',
+  'resonance',
+  'release',
+  'detune',
+];
 
 /** Slider bounds; stored values outside them are ignored. */
 export const PREFERENCE_RANGES: Record<
@@ -31,6 +63,11 @@ export const PREFERENCE_RANGES: Record<
   textScale: { min: 0.8, max: 1.4, step: 0.1 },
   motionSpeed: { min: 0.5, max: 2, step: 0.25 },
   crt: { min: 0, max: 1, step: 0.1 },
+  volume: { min: 0, max: 1, step: 0.05 },
+  cutoff: { min: 200, max: 8000, step: 100 },
+  resonance: { min: 0, max: 20, step: 1 },
+  release: { min: 0.02, max: 0.6, step: 0.02 },
+  detune: { min: 0, max: 50, step: 1 },
 };
 
 type PreferencesContextType = {

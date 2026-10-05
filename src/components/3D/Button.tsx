@@ -2,6 +2,7 @@ import { animated, useSpring } from '@react-spring/three';
 import { useAnimations } from '@context/AnimationContext';
 import { useEffect, useState } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
+import { useSound } from '@hooks/useSound';
 import { InteractiveElement, InteractiveElementProps } from '@context/InteractionProvider';
 
 type ButtonProps = {
@@ -31,6 +32,7 @@ export function Button({
 }: ButtonProps) {
   const [internalOn, setInternalOn] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
+  const play = useSound();
 
   const isControlled = on !== undefined && onChange !== undefined;
   const currentOn = isControlled ? on : internalOn;
@@ -56,6 +58,7 @@ export function Button({
   // Handle pointer events
   const handlePointerDown = (e: ThreeEvent<PointerEvent>) => {
     e.stopPropagation();
+    play('toggle');
     setIsPressed(true);
     if (!isControlled) {
       setInternalOn(true);
