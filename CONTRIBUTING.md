@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/47 · 🙋 16<br/><i>next: Phones: the entry image animates …</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/46 · 🙋 16<br/><i>next: After the stream lands: DRY and c…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -35,12 +35,9 @@ flowchart LR
   n_next_m3["✅ <code>feat/content-requests</code>"]
   class n_next_m3 merged
   n_next_m3 --> n_next
-  n_next_t0["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  n_next_t0["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
-  n_next_t1["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
-  class n_next_t1 todo
-  n_next -.-> n_next_t1
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -74,7 +71,7 @@ flowchart LR
     class n_feat_panel_knob planned
     n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
     class n_feat_panel_phones planned
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/47 · 🙋 16<br/><i>next: Phones: the entry image animates …</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/46 · 🙋 16<br/><i>next: After the stream lands: DRY and c…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -118,12 +115,11 @@ flowchart LR
 
 **How, next.**
 
-- Phones: the entry image animates between list and window, and fills its space
 - After the stream lands: DRY and code-splitting pass, delete unused code
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 15 to push | 29/47 | Phones: the entry image animates between list and window, and fills its space |  |
+| `next` |  | active, 17 to push | 29/46 | After the stream lands: DRY and code-splitting pass, delete unused code |  |
 
 ## 🕘 Just happened
 
@@ -249,7 +245,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | local only | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | local only | Gear shows in the phone nav |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/47 | 33 | 15 to push | Phones: the entry image animates between list and window, and fills its space |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/46 | 33 | 17 to push | After the stream lands: DRY and code-splitting pass, delete unused code |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -313,7 +309,7 @@ The owner wants the toy on phones too: the gear shows on phones, the panel opens
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/47)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/46)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -348,7 +344,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Window bar: the entry name has no left divider in the modal
 - [x] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [x] Close button: full size, border-colour fill with the X knocked out
-- [ ] Phones: the entry image animates between list and window, and fills its space
 - [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [x] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [x] 3D view socials: smaller, no Instagram, two rows of three
