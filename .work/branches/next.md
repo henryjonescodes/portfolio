@@ -32,9 +32,45 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [?] Should the panel be on phones, or desktop only? (from feat/control-panel)
   - why: Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
   - kind: decision
+- [ ] Request ids on mock media and drafted prose (from feat/content-requests)
+- [ ] Sourced files and prose resolve by id at build time (from feat/content-requests)
+- [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
+- [?] Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)
+  - why: Shared links show a per-page title and description, but one site-wide image for every entry.
+  - kind: decision
+  - file: public/og-image.png
+- [?] Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal) (from feat/content-requests)
+  - why: Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
+  - kind: decision
+  - file: src/components/EntryLink/index.tsx
+- [?] claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+  - why: The User notifier effort leads with this figure, shown as unverified on the live site until you confirm it.
+  - kind: claim
+  - file: src/data/experience.ts
+- [?] claim: User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+  - why: The second headline figure on the User notifier effort, also marked unverified until confirmed.
+  - kind: claim
+  - file: src/data/experience.ts
+- [?] claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+  - why: Drafted from the existing entry text; you want most prose human-written and lightly edited.
+  - kind: prose
+  - file: src/data/experience.ts
+- [?] claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+  - why: Drafted from the existing entry text; you want most prose human-written and lightly edited.
+  - kind: prose
+  - file: src/data/experience.ts
+- [?] claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+  - why: Drafted from the existing entry text; you want most prose human-written and lightly edited.
+  - kind: prose
+  - file: src/data/experience.ts
+- [?] media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) (from feat/content-requests)
+  - why: Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
+  - kind: media
+  - file: src/data/experience.ts
 
 ## Log
 
 - 2026-10-05: seeded
 - 2026-10-05: carried 4 open todo(s) from entry/list
 - 2026-10-05: carried 8 open todo(s) from feat/control-panel
+- 2026-10-05: carried 11 open todo(s) from feat/content-requests
