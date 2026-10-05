@@ -31,9 +31,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Synthesised sounds need no files and stay tiny; samples sound richer but you would choose them.
   - kind: decision
   - answer: A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
-- [?] Should the panel be on phones, or desktop only? (from feat/control-panel)
+- [x] Should the panel be on phones, or desktop only? (from feat/control-panel)
   - why: Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
   - kind: decision
+  - answer: Yes, phones too where possible: the site is a resume but a toy at heart
 - [ ] Request ids on mock media and drafted prose (from feat/content-requests)
 - [ ] Sourced files and prose resolve by id at build time (from feat/content-requests)
 - [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
@@ -71,6 +72,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - file: src/data/experience.ts
 - [ ] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - [ ] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 
 ## Log
 
@@ -80,3 +82,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: carried 11 open todo(s) from feat/content-requests
 - 2026-10-05: answered "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - 2026-10-05: answered "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- 2026-10-05: answered "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
