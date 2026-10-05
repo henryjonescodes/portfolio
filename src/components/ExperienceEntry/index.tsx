@@ -293,8 +293,12 @@ const ExperienceEntry = ({
                           [styles.tilesOnly]: inList && mediaInTilesOnly,
                         })}
                         layoutId="childrenWrapper"
-                        initial={false}
-                        animate={{ opacity: modal && !isOpen && !mediaWhenClosed ? 0 : 1 }}
+                        // Only the modal window drives this itself; in a list item an own `animate`
+                        // would cut the list's variants off from the media inside.
+                        {...(modal && {
+                          initial: false,
+                          animate: { opacity: !isOpen && !mediaWhenClosed ? 0 : 1 },
+                        })}
                       >
                         {inList ? (
                           // Both lines exist; the list's CSS shows the one that fits its layout.

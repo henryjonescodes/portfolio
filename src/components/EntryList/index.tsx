@@ -62,7 +62,13 @@ const EntryList = ({ entries, mediaInList = false }: EntryListProps) => {
                 mediaInTilesOnly={!mediaInList}
               >
                 {entry.media && (
-                  <motion.div className={styles.media} variants={mediaVariants}>
+                  <motion.div
+                    className={styles.media}
+                    variants={mediaVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                  >
                     <EntryMediaView media={entry.media} />
                   </motion.div>
                 )}

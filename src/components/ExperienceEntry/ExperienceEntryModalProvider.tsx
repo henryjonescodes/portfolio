@@ -89,7 +89,12 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     const stage = stageRef.current;
     const box = el && stage ? (boxWithin(el, stage) as Record<string, number>) : null;
     setSource(el);
-    setSourceHasMedia(!!el?.querySelector('img, video, [role="img"]'));
+    // Only an image the visitor can see counts (a list item may hold one CSS hides).
+    setSourceHasMedia(
+      [...(el?.querySelectorAll('img, video, [role="img"]') ?? [])].some(
+        (m) => m.getClientRects().length > 0,
+      ),
+    );
     setZoom(
       options.zoom && box ? { x: box.left + box.width / 2, y: box.top + box.height / 2 } : null,
     );

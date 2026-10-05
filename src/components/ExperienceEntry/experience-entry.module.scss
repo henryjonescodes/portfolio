@@ -264,6 +264,11 @@
       background: black;
     }
 
+    .children {
+      flex: 1;
+      min-width: 0;
+    }
+
     .tilesOnly {
       display: flex;
     }
