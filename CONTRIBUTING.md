@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 26/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 27/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -41,24 +41,21 @@ flowchart LR
   n_next_t1["Act on the answer to 'Should<br/>the panel be on phones, or<br/>des…"]
   class n_next_t1 todo
   n_next -.-> n_next_t1
-  n_next_t2["Phones: the 3D view always<br/>renders landscape, whatever<br/>the …"]
+  n_next_t2["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
   class n_next_t2 todo
   n_next -.-> n_next_t2
-  n_next_t3["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
+  n_next_t3["Window bar: the entry name has<br/>no left divider in the modal"]
   class n_next_t3 todo
   n_next -.-> n_next_t3
-  n_next_t4["Window bar: the entry name has<br/>no left divider in the modal"]
+  n_next_t4["Phones: the entry image<br/>animates between list and<br/>window, a…"]
   class n_next_t4 todo
   n_next -.-> n_next_t4
-  n_next_t5["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  n_next_t5["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
   class n_next_t5 todo
   n_next -.-> n_next_t5
-  n_next_t6["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
+  n_next_t6["Resume feat/phone-3d from its<br/>local WIP commit 1fe59f9b, an…"]
   class n_next_t6 todo
   n_next -.-> n_next_t6
-  n_next_t7["Resume feat/phone-3d from its<br/>local WIP commit 1fe59f9b, an…"]
-  class n_next_t7 todo
-  n_next -.-> n_next_t7
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -84,7 +81,7 @@ flowchart LR
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 26/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 27/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -126,11 +123,11 @@ flowchart LR
 
 - 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
-- Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
+- Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 10 to push | 26/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 11 to push | 27/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
@@ -252,7 +249,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 26/50 | 33 | 10 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 27/50 | 33 | 11 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
 
@@ -276,7 +273,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (26/50)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (27/50)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -306,7 +303,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - [x] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
 - [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
-- [ ] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
+- [x] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
 - [x] Placeholder e2e test looks inside the dialog, not the first match on the page
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
 - [x] Entry tabs use the shared useRovingFocus hook
