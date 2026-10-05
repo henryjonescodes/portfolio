@@ -1,6 +1,6 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:18 UTC · 5 live branches · 0 PRs open · 17 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:18 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
@@ -8,7 +8,7 @@
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
-| Waiting on you | 17 |
+| Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -35,7 +35,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▱▱▱▱▱▱▱ 2/25 · 🙋 9<br/><i>next: EntryList with the list and tile …</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▱▱▱▱▱▱▱ 3/26 · 🙋 8<br/><i>next: EntryList with the list and tile …</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -76,7 +76,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, local only | 2/25 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
+| `next` |  | active, local only | 3/26 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
 
 ## 🕘 Just happened
 
@@ -138,51 +138,47 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 ### Decisions
 
-**7. Should the panel be on phones, or desktop only?**
-- *Why:* Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
-- `decision` · `next` · from `feat/control-panel`
-
-**8. Approve per-entry preview images, or generate them**
+**7. Approve per-entry preview images, or generate them**
 - *Why:* Shared links show a per-page title and description, but one site-wide image for every entry.
 - `decision` · `next` · from `feat/shareable-urls` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
-**9. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
+**8. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
 - *Why:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
 - `decision` · `next` · from `feat/global-modal` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/components/EntryLink/index.tsx)
 
-**10. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
+**9. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
 - *Why:* The page exists and About links to it, but nothing else on the site leads there.
 - `decision` · `release/promote-main` · from `content/real-copy` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/pages/links/index.tsx)
 
-**11. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
+**10. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
 - *Why:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
 - `decision` · `release/promote-main` · from `design/retro-chrome` · [_colors.scss](https://github.com/henryjonescodes/portfolio/blob/staging/src/styles/_colors.scss#L12)
 
-**12. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
+**11. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
 - *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
 - `decision` · `release/promote-main` · from `perf/assets` · [images](https://github.com/henryjonescodes/portfolio/blob/staging/public/3D/images)
 
-**13. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
+**12. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
 - *Why:* Every shared link shows this card; it also settles which domain is canonical.
 - `decision` · `release/promote-main` · from `seo/meta` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
 ### Files to send
 
-**14. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
+**13. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
 - *Why:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
 - `media` · `next` · from `feat/entry-dock` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
-**15. The resume PDF is the 2024 copy from the old site and predates Arbor**
+**14. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
 - `media` · `release/promote-main` · from `content/real-copy` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
 
-**16. Curate real panel content (screenshots, galleries, stats) per project**
+**15. Curate real panel content (screenshots, galleries, stats) per project**
 - *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
 - `media` · `release/promote-main` · from `feat/modal-panels` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
 
 ### Reviews
 
-**17. Design review in 3D and lite mode**
+**16. Design review in 3D and lite mode**
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
@@ -203,7 +199,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 2/25 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 3/26 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
@@ -241,7 +237,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (2/25)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (3/26)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -256,7 +252,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
 - [x] Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
 - [x] Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)
-- [ ] 🙋 Should the panel be on phones, or desktop only? (from feat/control-panel)
+- [x] Should the panel be on phones, or desktop only? (from feat/control-panel)
 - [ ] Request ids on mock media and drafted prose (from feat/content-requests)
 - [ ] Sourced files and prose resolve by id at build time (from feat/content-requests)
 - [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
@@ -270,6 +266,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) (from feat/content-requests)
 - [ ] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - [ ] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 
 </details>
 
