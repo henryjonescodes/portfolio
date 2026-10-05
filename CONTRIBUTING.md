@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 05:15 UTC by `bw board` on `` |
+| Generated | 2026-10-05 05:15 UTC by `bw board` on `feat/phone-3d` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
