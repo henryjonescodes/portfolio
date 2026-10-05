@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 27/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 28/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -44,18 +44,15 @@ flowchart LR
   n_next_t2["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
   class n_next_t2 todo
   n_next -.-> n_next_t2
-  n_next_t3["Window bar: the entry name has<br/>no left divider in the modal"]
+  n_next_t3["Phones: the entry image<br/>animates between list and<br/>window, a…"]
   class n_next_t3 todo
   n_next -.-> n_next_t3
-  n_next_t4["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  n_next_t4["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
   class n_next_t4 todo
   n_next -.-> n_next_t4
-  n_next_t5["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
+  n_next_t5["Resume feat/phone-3d from its<br/>local WIP commit 1fe59f9b, an…"]
   class n_next_t5 todo
   n_next -.-> n_next_t5
-  n_next_t6["Resume feat/phone-3d from its<br/>local WIP commit 1fe59f9b, an…"]
-  class n_next_t6 todo
-  n_next -.-> n_next_t6
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -81,7 +78,7 @@ flowchart LR
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 27/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 28/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -127,7 +124,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 11 to push | 27/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 12 to push | 28/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
@@ -249,7 +246,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 27/50 | 33 | 11 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 28/50 | 33 | 12 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
 
@@ -273,7 +270,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (27/50)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (28/50)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -308,7 +305,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
 - [x] Entry tabs use the shared useRovingFocus hook
 - [x] Modal window gets a max width on wide screens
-- [ ] Window bar: the entry name has no left divider in the modal
+- [x] Window bar: the entry name has no left divider in the modal
 - [x] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [x] Close button: full size, border-colour fill with the X knocked out
 - [ ] Phones: the entry image animates between list and window, and fills its space
