@@ -71,7 +71,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - kind: media
   - file: src/data/experience.ts
 - [x] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
-- [ ] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- [x] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
 - [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 - [ ] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
   - why: The owner wants the 3D toy on phones in landscape; iOS cannot lock orientation, so the page has to rotate itself
@@ -125,3 +125,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "3D view socials: smaller, no Instagram, two rows of three" at 7d00a432
 - 2026-10-05: done "Page toolkit: layout ideas and components for building pages with content, delivered as skills" at 7a2760b3
 - 2026-10-05: done "Rule in repertoire: keep bw and the refactor's skills current while working" at c213133f
+- 2026-10-05: done "Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy" at bf04726a
