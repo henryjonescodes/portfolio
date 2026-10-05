@@ -261,9 +261,11 @@
   // A solid block in the border colour with the icon knocked out of it, as for Close.
   &.filled {
     background: var(--foreground-primary);
-    // Fills down to the bar's bottom line, so no dark strip shows between them.
-    box-shadow: 0 6px 0 var(--foreground-primary);
-    border-left: none;
+    box-shadow: none;
+    border: none;
+    padding: 0 12px;
+    align-self: stretch;
+    height: auto;
 
     .icon {
       width: 18px;
