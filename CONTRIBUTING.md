@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:03 UTC · 3 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:04 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:03 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:04 UTC by `bw board` on `entry/open` |
 | Trunk | `staging` |
-| Live branches | 3 |
+| Live branches | 7 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -19,7 +19,7 @@ flowchart LR
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_next
@@ -61,7 +61,7 @@ flowchart LR
   classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
-<details><summary><b>Everything planned</b> · 3 live branches</summary>
+<details><summary><b>Everything planned</b> · 7 live branches</summary>
 
 ```mermaid
 flowchart LR
@@ -70,17 +70,29 @@ flowchart LR
   subgraph plan_1["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
-    class n_entry_open planned
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/7<br/><i>next: Closed and open layouts keep the …</i>"]
+    class n_entry_open planned,current
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
+    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Delete unused components, styles,…</i>"]
+    class n_chore_dry_pass planned
+    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
+    class n_content_prose_requests planned
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Knob component: drag, wheel and a…</i>"]
+    class n_feat_panel_knob planned
+    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
+    class n_feat_panel_phones planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
+  n_next --> n_chore_dry_pass
+  n_next --> n_content_prose_requests
   n_next --> n_entry_cleanup
   n_next --> n_entry_open
+  n_next --> n_feat_panel_knob
+  n_next --> n_feat_panel_phones
   n_staging --> n_next
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
@@ -111,17 +123,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**Motivation.** The phone morph is the reference; every open should feel like it.
+
+**What.** Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
 **How, next.**
 
-- 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
-- Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
-- Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
+- Closed and open layouts keep the same elements in the same order, with shared layoutIds
+- Per-part timings from the carousel tunables, shared by every width
+- Remove EntryCarousel and EntryCard; one provider opens everything
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 12 to push | 29/50 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `entry/open` |  | planned, 1 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
@@ -241,9 +255,32 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
+| `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | local only | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
+| `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | local only | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/50 | 33 | 12 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | local only | Knob component: drag, wheel and arrow keys, with aria slider semantics |
+| `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | local only | Gear shows in the phone nav |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/50 | 33 | 13 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+
+<details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
+
+Once the stream's work is in, one pass removes dead code and styles, merges duplicates and checks the bundle splits, so next goes to staging lean.
+
+- [ ] Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep)
+- [ ] Merge duplicated helpers and styles
+- [ ] Check route and 3D code splitting in the bundle report
+
+</details>
+
+<details><summary><code>content/prose-requests</code>: Drafted prose in the request list (0/2)</summary>
+
+Drafted prose carries a request id like mock media does, so REQUESTS.md lists writing to approve beside the images, and approved text replaces the draft by id.
+
+- [ ] Request ids on drafted prose (summaries, blurbs, claims)
+- [ ] REQUESTS.md lists prose with the draft and where it shows
+
+</details>
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
 
@@ -254,7 +291,7 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (0/6)</summary>
+<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (0/7)</summary>
 
 Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
@@ -264,6 +301,27 @@ Opening any entry mounts the window over its source in the closed layout and ope
 - [ ] e2e: open and close at both widths, and a resize while open
 - [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt
 - [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts
+- [ ] Phones: the entry image animates between list and window (its shape and fill now match)
+
+</details>
+
+<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (0/3)</summary>
+
+The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
+
+- [ ] Knob component: drag, wheel and arrow keys, with aria slider semantics
+- [ ] Mini slider variant of the range rows
+- [ ] Colour hues and FX ranges use them; each tick plays the toggle sound
+
+</details>
+
+<details><summary><code>feat/panel-phones</code>: The control panel on phones (0/3)</summary>
+
+The owner wants the toy on phones too: the gear shows on phones, the panel opens as a bottom sheet that fits a small screen, and every control works by touch.
+
+- [ ] Gear shows in the phone nav
+- [ ] Panel opens as a bottom sheet on phones, scrolls inside
+- [ ] Touch works for every control, including the knob
 
 </details>
 
