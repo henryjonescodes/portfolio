@@ -98,6 +98,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: They were rewritten from older descriptions and are the first thing visitors read in each entry.
   - file: src/data/experience.ts
   - kind: prose
+- [?] Decide where /links appears (home menu, nav bar, or as home like the old branch)
+  - why: The page exists and About links to it, but nothing else on the site leads there.
+  - file: src/pages/links/index.tsx
+  - kind: decision
 
 ## Log
 
