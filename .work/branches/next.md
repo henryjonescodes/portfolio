@@ -85,7 +85,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Modal window gets a max width on wide screens
 - [ ] Window bar: the entry name has no left divider in the modal
 - [x] Nav item hover: the underline collapses smoothly when the pointer leaves
-- [ ] Close button: full size, border-colour fill with the X knocked out
+- [x] Close button: full size, border-colour fill with the X knocked out
 - [ ] Phones: the entry image animates between list and window, and fills its space
 - [ ] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [ ] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
@@ -119,3 +119,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face" at 84a8c8a2
 - 2026-10-05: done "Modal window gets a max width on wide screens" at 5174cb51
 - 2026-10-05: done "Nav item hover: the underline collapses smoothly when the pointer leaves" at b93b0e58
+- 2026-10-05: done "Close button: full size, border-colour fill with the X knocked out" at 5da8f30e
