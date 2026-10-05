@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 14:19 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:20 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:19 UTC by `bw board` on `content/prose-requests` |
+| Generated | 2026-10-05 14:20 UTC by `bw board` on `entry/cleanup` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -18,15 +18,15 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
-    class n_entry_cleanup active
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▱▱▱▱ 1/2<br/><i>next: Update the layout-modal, carousel…</i>"]
+    class n_entry_cleanup active,current
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
-    class n_content_prose_requests active,current
+    class n_content_prose_requests active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
   end
@@ -41,12 +41,9 @@ flowchart LR
   n_content_prose_requests_t1["REQUESTS.md lists prose with<br/>the draft and where it shows"]
   class n_content_prose_requests_t1 todo
   n_content_prose_requests -.-> n_content_prose_requests_t1
-  n_entry_cleanup_t0["Merge carousel.spec into<br/>modal.spec; drop dead styles<br/>and t…"]
+  n_entry_cleanup_t0["Update the layout-modal,<br/>carousel-spec and entry-panels<br/>ski…"]
   class n_entry_cleanup_t0 todo
   n_entry_cleanup -.-> n_entry_cleanup_t0
-  n_entry_cleanup_t1["Update the layout-modal,<br/>carousel-spec and entry-panels<br/>ski…"]
-  class n_entry_cleanup_t1 todo
-  n_entry_cleanup -.-> n_entry_cleanup_t1
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -77,15 +74,15 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
-    class n_entry_cleanup active
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▱▱▱▱ 1/2<br/><i>next: Update the layout-modal, carousel…</i>"]
+    class n_entry_cleanup active,current
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
-    class n_content_prose_requests active,current
+    class n_content_prose_requests active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
   end
@@ -168,30 +165,30 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Drafted prose carries a request id like mock media does, so REQUESTS.md lists writing to approve beside the images, and approved text replaces the draft by id.
+**What.** Specs, skills and docs describe one entry component.
 
 **How, next.**
 
-- Request ids on drafted prose (summaries, blurbs, claims)
-- REQUESTS.md lists prose with the draft and where it shows
+- Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `content/prose-requests` |  | active, pushed | 0/2 | Request ids on drafted prose (summaries, blurbs, claims) |  |
+| `entry/cleanup` |  | active, 108 to push | 1/2 | Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md | 2026-10-entry-reconcile, 3 of 4 |
 
 ## 🕘 Just happened
 
-**feat(requests): drafted prose carries request ids and approved .md files replace it** · 2026-10-05 14:19 · `content/prose-requests` · `ce7e18d3`
-Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+**chore(entries): one entry spec, no dead tunables or page styles, CLAUDE.md points at the motion-sheet skill** · 2026-10-05 14:20 · `entry/cleanup` · `84cb9976`
+The phone tile tests join modal.spec; five unused transition groups go; the slow 3D panel test gets a longer timeout.
 
+- **feat(requests): drafted prose carries request ids and approved .md files replace it** · 14:19 · `content/prose-requests` · `ce7e18d3`
 - **feat(panel): the model's knobs turn the shown page's three main controls, named on the info screen** · 13:53 · `next` · `1e027660`
 - **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
-- **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
 | 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
 | 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
@@ -298,8 +295,8 @@ Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `content/prose-requests` ◀ | Drafted prose in the request list | active |  | 0/2 | 2 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
-| `entry/cleanup` | Tidy after the entry merge | active |  | 0/2 | 1 | 106 to push | Merge carousel.spec into modal.spec; drop dead styles and tunables |
+| `content/prose-requests` | Drafted prose in the request list | active |  | 0/2 | 2 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
+| `entry/cleanup` ◀ | Tidy after the entry merge | active |  | 1/2 | 2 | 108 to push | Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
@@ -322,11 +319,11 @@ Drafted prose carries a request id like mock media does, so REQUESTS.md lists wr
 
 </details>
 
-<details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
+<details><summary><code>entry/cleanup</code>: Tidy after the entry merge (1/2)</summary>
 
 Specs, skills and docs describe one entry component.
 
-- [ ] Merge carousel.spec into modal.spec; drop dead styles and tunables
+- [x] Merge carousel.spec into modal.spec; drop dead styles and tunables
 - [ ] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
 
 </details>
