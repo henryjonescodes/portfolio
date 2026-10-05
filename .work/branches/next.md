@@ -90,7 +90,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [x] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [x] 3D view socials: smaller, no Instagram, two rows of three
-- [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
+- [x] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [ ] Rule in repertoire: keep bw and the refactor's skills current while working
 - [ ] After the stream lands: DRY and code-splitting pass, delete unused code
 - [ ] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
@@ -123,3 +123,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper" at 3d4c09c4
 - 2026-10-05: done "Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects" at 30285022
 - 2026-10-05: done "3D view socials: smaller, no Instagram, two rows of three" at 7d00a432
+- 2026-10-05: done "Page toolkit: layout ideas and components for building pages with content, delivered as skills" at 7a2760b3
