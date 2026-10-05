@@ -1,6 +1,6 @@
 # Work stats
 
-_From `origin/main` to `origin/staging`, generated 2026-10-05 00:08 UTC by `bw stats`._
+_From `origin/main` to `origin/staging`, generated 2026-10-05 00:11 UTC by `bw stats`._
 
 | | |
 |---|---|
@@ -60,11 +60,12 @@ src/  🚧
 ├── assets/  🚧
 │   ├── svg/  🚧
 ├── components/  🚧
-│   ├── 3D/  🆕
+│   ├── 3D/  🆕  🚧
 │   ├── AnimatedBorderBox/  🆕
 │   ├── AnimatedLine/  🆕
 │   ├── AnimatedOutlet/  🆕
 │   ├── Background/  🆕
+│   ├── ControlPanel/  🆕  🚧
 │   ├── Crosshair/  🆕
 │   ├── Efforts/  🆕  🚧
 │   ├── EntryCarousel/  🆕  🚧
@@ -80,7 +81,7 @@ src/  🚧
 │   ├── MapViewer/  🆕
 │   ├── MasonryGallery/  🆕
 │   ├── NavBar/  🆕  🚧
-│   ├── Page/  🆕
+│   ├── Page/  🆕  🚧
 │   ├── Panels/  🆕
 │   ├── TypewriterText/  🆕
 ├── config/  🆕
@@ -89,11 +90,11 @@ src/  🚧
 ├── data/  🆕
 ├── debug/  🆕
 ├── hooks/  🆕
-├── pages/
+├── pages/  🚧
 │   ├── about/  🆕
 │   ├── experience/  🆕
 │   ├── home/  🆕
-│   ├── landing/  🆕
+│   ├── landing/  🆕  🚧
 │   ├── links/  🆕
 │   ├── projects/  🆕
 ├── styles/  🚧
