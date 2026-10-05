@@ -17,7 +17,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] EntryList with the list and tile presentations from CSS container queries (from entry/list)
 - [x] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [x] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
-- [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
+- [x] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
 - [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - [ ] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
 - [ ] Colour page with presets (from feat/control-panel)
@@ -92,3 +92,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "EntryList with the list and tile presentations from CSS container queries (from entry/list)" at c16a0721
 - 2026-10-05: done "One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)" at 72fc4a56
 - 2026-10-05: done "Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)" at 410d170d
+- 2026-10-05: done "Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)" at e64b5f53
