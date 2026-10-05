@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:37 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:38 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 02:37 UTC by `bw board` on `feat/phone-3d` |
+| Generated | 2026-10-05 02:38 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -12,6 +12,27 @@
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
+
+```mermaid
+flowchart LR
+  n_staging([staging])
+  class n_staging trunk
+  subgraph loose["🧩 Not in a plan"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 13/29 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    class n_next active,current
+  end
+  style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
+  n_staging --> n_next
+  classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
+  classDef sketched fill:#f8fafc,stroke:#64748b,stroke-dasharray:4 3,color:#334155
+  classDef active fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#052e16
+  classDef review fill:#fde68a,stroke:#d97706,stroke-width:3px,color:#451a03
+  classDef blocked fill:#fecaca,stroke:#dc2626,stroke-width:3px,color:#450a0a
+  classDef trunk fill:#1e293b,stroke:#0f172a,color:#f8fafc
+  classDef current stroke:#0ea5e9,stroke-width:5px
+```
+
+<details><summary><b>Everything planned</b> · 4 live branches</summary>
 
 ```mermaid
 flowchart LR
@@ -31,7 +52,7 @@ flowchart LR
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 13/29 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_entry_cleanup
@@ -39,6 +60,7 @@ flowchart LR
   n_staging --> n_next
   n_staging --> n_release_promote_main
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
+  classDef sketched fill:#f8fafc,stroke:#64748b,stroke-dasharray:4 3,color:#334155
   classDef active fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#052e16
   classDef review fill:#fde68a,stroke:#d97706,stroke-width:3px,color:#451a03
   classDef blocked fill:#fecaca,stroke:#dc2626,stroke-width:3px,color:#450a0a
@@ -46,12 +68,16 @@ flowchart LR
   classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
+</details>
+
 <details><summary><b>Legend</b></summary>
 
 - 🟩 active: being worked on now
 - 🟨 review: a PR is open and waiting on CI, review or a merge
 - 🟦 planned: sketched as a branch with a seed, not started
 - 🟥 blocked: waiting on something outside the branch
+- Dashed: named in a plan, no branch yet (only under Everything planned)
+- The top graph shows work in flight and what it hangs off; planned work is under Everything planned
 - Blue outline: the branch checked out in the working copy
 - `3/4`: todos done out of total · 🙋 n: questions on that branch waiting on you
 - Arrows point from a branch to the branches built on top of it
@@ -194,7 +220,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` | Integration branch: the stream's second staging merge | active |  | 13/29 | 20 | pushed | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 13/29 | 20 | pushed | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
