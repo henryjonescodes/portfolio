@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import { useAnimations } from '@context/AnimationContext';
 import styles from './nav-bar.module.scss';
+import { useSound } from '@hooks/useSound';
 import GlitchIcon from '@components/GlitchIcon';
 
 // NavBarButton Component
@@ -39,18 +40,23 @@ type NavBarButtonProps = NavBarButtonIconOnlyProps | NavBarButtonWithActiveProps
 
 const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active }: NavBarButtonProps) => {
   const { TRANSITIONS } = useAnimations();
+  const play = useSound();
+  const press = () => {
+    play('click');
+    onClick();
+  };
 
   return (
     <motion.span
       className={styles.navButton}
-      onClick={onClick}
+      onClick={press}
       role="button"
       tabIndex={0}
       aria-label={label}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          onClick();
+          press();
         }
       }}
     >

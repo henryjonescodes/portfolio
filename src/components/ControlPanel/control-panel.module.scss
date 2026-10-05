@@ -109,6 +109,26 @@
   padding: 16px 20px;
 }
 
+.scrolling {
+  overflow-y: auto;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.sectionTitle {
+  margin: 8px 0 0;
+}
+
+.wave {
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .choice {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}
+
 .choices {
   display: flex;
   flex-direction: column;
@@ -145,6 +165,11 @@
 
   output {
     text-align: right;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 5.5rem 1fr 3.5rem;
+    gap: 8px;
   }
 }
 

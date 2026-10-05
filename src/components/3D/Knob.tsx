@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useRef, useState, useCallback } from 'react';
 import { ThreeEvent } from '@react-three/fiber';
 import { InteractionContext } from '@context/InteractionContext';
+import { useSound } from '@hooks/useSound';
 import { InteractiveElement, InteractiveElementProps } from '@context/InteractionProvider';
+
+/** Degrees of turn between ticks. */
+const TICK_DEGREES = 12;
 
 type KnobProps = {
   position?: [number, number, number];
@@ -38,6 +42,8 @@ export function Knob({
   const isControlled = rotation !== undefined && setRotation !== undefined;
   const currentRotation = isControlled ? rotation : internalRotation;
   const rotationRef = useRef(currentRotation);
+  const tickRef = useRef(currentRotation);
+  const play = useSound();
 
   const [isDragging, setIsDragging] = useState(false);
   const startDragPosition = useRef({ x: 0, y: 0 });
@@ -65,13 +71,18 @@ export function Knob({
       onChange?.(normalizedValue);
       rotationRef.current = newRotation;
 
+      if (Math.abs(newRotation - tickRef.current) >= TICK_DEGREES) {
+        tickRef.current = newRotation;
+        play('toggle');
+      }
+
       if (isControlled) {
         setRotation?.(newRotation);
       } else {
         setInternalRotation(newRotation);
       }
     },
-    [isControlled, min, max, mapMin, mapMax, onChange, setRotation],
+    [isControlled, min, max, mapMin, mapMax, onChange, setRotation, play],
   );
 
   useEffect(() => {

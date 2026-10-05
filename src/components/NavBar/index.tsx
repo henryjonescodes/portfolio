@@ -14,6 +14,8 @@ import Handheld from '@assets/svg/icons/handheld.svg?react';
 import Home from '@assets/svg/icons/home.svg?react';
 import Pause from '@assets/svg/icons/pause.svg?react';
 import Play from '@assets/svg/icons/play.svg?react';
+import SoundOff from '@assets/svg/icons/sound-off.svg?react';
+import SoundOn from '@assets/svg/icons/sound-on.svg?react';
 import Settings from '@assets/svg/icons/settings.svg?react';
 import User from '@assets/svg/icons/user.svg?react';
 
@@ -21,6 +23,7 @@ import { usePage } from '@context/PageContext';
 import { useZoom } from '@context/ZoomContext';
 import { useLoading } from '@context/LoadingContext';
 import { useControlPanel } from '@context/ControlPanelContext';
+import { usePreferences } from '@context/PreferencesContext';
 
 import styles from './nav-bar.module.scss';
 import NavBarButton from './NavBarButton';
@@ -38,6 +41,7 @@ const NavBar = ({ page }: NavBarProps) => {
   const { firstPageLoad } = useLoading();
   const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
   const { TRANSITIONS } = useAnimations();
+  const { preferences, setPreference } = usePreferences();
   const { open: panelOpen, setOpen: setPanelOpen } = useControlPanel();
 
   const navBarVariants = {
@@ -144,6 +148,13 @@ const NavBar = ({ page }: NavBarProps) => {
           </motion.h3>
         </motion.span>
         <motion.span className={styles.right}>
+          <NavBarButton
+            onClick={() => setPreference('sound', !preferences.sound)}
+            active={!preferences.sound}
+            Icon={SoundOn}
+            ActiveIcon={SoundOff}
+            label={preferences.sound ? 'Sound on' : 'Sound off'}
+          />
           {!embedded && zoomLevel === 'fullscreen' && (
             <NavBarButton
               onClick={() => setPanelOpen(!panelOpen)}
