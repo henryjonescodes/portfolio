@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:07 UTC by `bw board` on `feat/panel-phones` |
+| Generated | 2026-10-05 13:07 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | none |
@@ -18,17 +18,14 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▰▰▱▱▱ 2/3<br/><i>next: Touch works for every control, in…</i>"]
-    class n_feat_panel_phones active,current
+    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▰▰▰▰▰ 3/3"]
+    class n_feat_panel_phones active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_feat_panel_phones
   n_staging --> n_next
-  n_feat_panel_phones_t0["Touch works for every control,<br/>including the knob"]
-  class n_feat_panel_phones_t0 todo
-  n_feat_panel_phones -.-> n_feat_panel_phones_t0
   n_next_m0["✅ <code>feat/phone-3d</code>"]
   class n_next_m0 merged
   n_next_m0 --> n_next
@@ -72,10 +69,10 @@ flowchart LR
     class n_content_prose_requests planned
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Knob component: drag, wheel and a…</i>"]
     class n_feat_panel_knob planned
-    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▰▰▱▱▱ 2/3<br/><i>next: Touch works for every control, in…</i>"]
-    class n_feat_panel_phones active,current
+    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▰▰▰▰▰ 3/3"]
+    class n_feat_panel_phones active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -114,15 +111,13 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** The owner wants the toy on phones too: the gear shows on phones, the panel opens as a bottom sheet that fits a small screen, and every control works by touch.
+**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
-**How, next.**
-
-- Touch works for every control, including the knob
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/panel-phones` |  | active, 3 to push | 2/3 | Touch works for every control, including the knob |  |
+| `next` |  | active, pushed | 29/45 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -248,8 +243,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `feat/panel-phones` ◀ | The control panel on phones | active |  | 2/3 | 1 | 3 to push | Touch works for every control, including the knob |
-| `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | pushed |  |
+| `feat/panel-phones` | The control panel on phones | active |  | 3/3 | 1 | 4 to push |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | pushed |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -303,13 +298,13 @@ The panel's colour and FX controls become hardware: a rotary knob and mini slide
 
 </details>
 
-<details><summary><code>feat/panel-phones</code>: The control panel on phones (2/3)</summary>
+<details><summary><code>feat/panel-phones</code>: The control panel on phones (3/3)</summary>
 
 The owner wants the toy on phones too: the gear shows on phones, the panel opens as a bottom sheet that fits a small screen, and every control works by touch.
 
 - [x] Gear shows in the phone nav
 - [x] Panel opens as a bottom sheet on phones, scrolls inside
-- [ ] Touch works for every control, including the knob
+- [x] Touch works for every control, including the knob
 
 </details>
 
