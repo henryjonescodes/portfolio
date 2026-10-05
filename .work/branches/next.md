@@ -36,7 +36,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - kind: decision
   - answer: Yes, phones too where possible: the site is a resume but a toy at heart
 - [x] Request ids on mock media and drafted prose (from feat/content-requests)
-- [ ] Sourced files and prose resolve by id at build time (from feat/content-requests)
+- [x] Sourced files and prose resolve by id at build time (from feat/content-requests)
 - [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
 - [?] Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)
   - why: Shared links show a per-page title and description, but one site-wide image for every entry.
@@ -98,3 +98,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Type page (families, size, typewriter) (from feat/control-panel)" at 216bbb4f
 - 2026-10-05: done "FX page (CRT, grain, motion speed, sound) (from feat/control-panel)" at 6232ae9f
 - 2026-10-05: done "Request ids on mock media and drafted prose (from feat/content-requests)" at 20040d4d
+- 2026-10-05: done "Sourced files and prose resolve by id at build time (from feat/content-requests)" at 8e04965b
