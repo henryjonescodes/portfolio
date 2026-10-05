@@ -77,8 +77,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Placeholder e2e test looks inside the dialog, not the first match on the page
   - why: Bugbot on #88: the list's hidden copy of the placeholder can be the first match
   - file: e2e/modal.spec.ts
-- [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
-  - file: scripts/build-requests.mjs
 - [x] Entry tabs use the shared useRovingFocus hook
 - [x] Modal window gets a max width on wide screens
 - [x] Window bar: the entry name has no left divider in the modal
@@ -162,3 +160,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets" at 2800e9ec
 - 2026-10-05: dropped "2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)"
 - 2026-10-05: dropped "Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart"
+- 2026-10-05: dropped "Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images"
