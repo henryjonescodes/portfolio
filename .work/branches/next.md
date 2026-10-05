@@ -93,7 +93,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [x] Rule in repertoire: keep bw and the refactor's skills current while working
 - [ ] After the stream lands: DRY and code-splitting pass, delete unused code
-- [ ] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
+- [x] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
 - [?] Review the Arbor and project blurbs (written from existing descriptions)
   - why: They were rewritten from older descriptions and are the first thing visitors read in each entry.
   - file: src/data/experience.ts
@@ -161,3 +161,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)" at b2f27d68
 - 2026-10-05: done "Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)" at 222ef607
 - 2026-10-05: done "Window bar: the entry name has no left divider in the modal" at a80e210d
+- 2026-10-05: done "Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets" at 2800e9ec
