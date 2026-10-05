@@ -18,6 +18,7 @@
   position: absolute;
   top: 0;
   left: 0;
+  will-change: transform;
   opacity: 0.35;
 }
 
@@ -53,6 +54,7 @@
   height: 0;
   pointer-events: none;
   mix-blend-mode: difference;
+  will-change: transform;
   transition: opacity 0.15s ease-out;
 
   .arm {
