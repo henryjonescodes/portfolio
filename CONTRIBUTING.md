@@ -198,7 +198,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/open` |  | active, 80 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
+| `entry/open` |  | active, 81 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
@@ -324,7 +324,7 @@ The name and dates fade in place on phones instead of travelling past the image,
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 3 | 80 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 4 | 81 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
