@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:53 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:53 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-05 13:53 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 5 |
+| Live branches | 4 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -27,8 +27,6 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_feat_knob_mapping planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -36,7 +34,6 @@ flowchart LR
   n_next --> n_chore_dry_pass
   n_next --> n_content_prose_requests
   n_next --> n_entry_cleanup
-  n_next --> n_feat_knob_mapping
   n_staging --> n_next
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
@@ -61,7 +58,7 @@ flowchart LR
   classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
-<details><summary><b>The wider world</b> · 5 live branches, 15 recent landings</summary>
+<details><summary><b>The wider world</b> · 4 live branches, 15 recent landings</summary>
 
 ```mermaid
 flowchart LR
@@ -77,8 +74,6 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_feat_knob_mapping planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -86,7 +81,6 @@ flowchart LR
   n_next --> n_chore_dry_pass
   n_next --> n_content_prose_requests
   n_next --> n_entry_cleanup
-  n_next --> n_feat_knob_mapping
   n_staging --> n_next
   landed_0["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
   class landed_0 merged
@@ -294,7 +288,6 @@ Colour turns the hues, Type the font, text size and motion speed, FX the CRT, vo
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/knob-mapping` | The 3D knobs drive the control panel's page | planned |  | 4/4 | 0 | 5 to push |  |
 | `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | 8 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
@@ -322,17 +315,6 @@ Specs, skills and docs describe one entry component.
 
 - [ ] Merge carousel.spec into modal.spec; drop dead styles and tunables
 - [ ] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
-
-</details>
-
-<details><summary><code>feat/knob-mapping</code>: The 3D knobs drive the control panel's page (4/4)</summary>
-
-In 3D the model's three knobs control whatever the info screen's panel page shows (colour hues, FX levels, sound), with a label strip on the screen naming what each knob does; the panel's labels read clearly on the 3D screen.
-
-- [x] Panel labels legible on the 3D info screen (contrast and font)
-- [x] A label strip over the three knobs naming what each controls on the current page
-- [x] The 3D knobs drive the current page's three main controls, not only colour
-- [x] Turning a 3D knob moves the matching panel control and ticks the synth
 
 </details>
 
