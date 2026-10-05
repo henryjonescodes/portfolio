@@ -87,7 +87,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [x] Close button: full size, border-colour fill with the X knocked out
 - [ ] Phones: the entry image animates between list and window, and fills its space
-- [ ] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
+- [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [ ] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [ ] 3D view socials: smaller, no Instagram, two rows of three
 - [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
@@ -120,3 +120,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Modal window gets a max width on wide screens" at 5174cb51
 - 2026-10-05: done "Nav item hover: the underline collapses smoothly when the pointer leaves" at b93b0e58
 - 2026-10-05: done "Close button: full size, border-colour fill with the X knocked out" at 5da8f30e
+- 2026-10-05: done "StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper" at 3d4c09c4
