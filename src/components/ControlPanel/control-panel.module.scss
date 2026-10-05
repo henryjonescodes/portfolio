@@ -119,12 +119,15 @@
   margin: 8px 0 0;
 }
 
-.wave {
+// Waveforms sit in one row of equal keys.
+.choices.wave {
   flex-direction: row;
-  flex-wrap: wrap;
+  gap: 6px;
 
   .choice {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 4px;
     text-align: center;
   }
 }
