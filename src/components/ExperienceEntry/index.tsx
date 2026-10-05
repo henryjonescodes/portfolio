@@ -7,6 +7,7 @@ import TypewriterText from '@components/TypewriterText';
 import AnimatedBorderBox from '@components/AnimatedBorderBox';
 import AnimatedLine from '@components/AnimatedLine';
 import ModalNavBar from '@components/NavBar/ModalNavBar';
+import { fade } from '@config/animation';
 import { useAnimations } from '@context/AnimationContext';
 import { buildEntryVariants } from './variants';
 import PanelGrid from '@components/Panels';
@@ -60,6 +61,10 @@ const ExperienceEntry = ({
   } = data;
   const dateRange = dateString ? dateString : formatDateRange(startDate, endDate);
   const { width } = useWindowDimensions();
+  // On phones the tile's title bar becomes the window's bar, and the name and dates crossfade
+  // rather than travel past the image.
+  const phone = width < widthMobile;
+  const shared = (name: string) => (phone ? undefined : name);
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
   // After the list switches layout, its borders and lines remount and draw again quickly.
@@ -93,17 +98,25 @@ const ExperienceEntry = ({
   // The open entry's heading. Both the overview and an effort render it, so its shared
   // layoutIds stay mounted when tabs switch instead of handing back to the list item.
   const bodyTitle = (
-    <motion.div layoutId="bodyTitle">
-      <motion.h2 layoutId="title" layout="position">
+    <motion.div
+      layoutId={shared('bodyTitle')}
+      // Labels rather than targets, so the typed title inside still gets them.
+      {...(phone && {
+        variants: fade({ ...TRANSITIONS.MODAL.DESCRIPTION_ANIMATE, delay: 0 }),
+        initial: 'initial',
+        animate: 'animate',
+      })}
+    >
+      <motion.h2 layoutId={shared('title')} layout="position">
         <TypewriterText text={title} />
       </motion.h2>
       {!!subtitle && (
-        <motion.h3 layoutId="subtitle" layout="position">
+        <motion.h3 layoutId={shared('subtitle')} layout="position">
           {subtitle}
         </motion.h3>
       )}
       {!!dateRange && (
-        <motion.p layoutId="date" layout="position">
+        <motion.p layoutId={shared('date')} layout="position">
           {dateRange}
         </motion.p>
       )}
@@ -148,18 +161,18 @@ const ExperienceEntry = ({
         {!isOpen && (
           <motion.span layoutId="header" className={styles.header}>
             <motion.div className={styles.title}>
-              <motion.h2 layoutId="title" layout="position" variants={variants.headerText}>
+              <motion.h2 layoutId={shared('title')} layout="position" variants={variants.headerText}>
                 <TypewriterText text={title} />
               </motion.h2>
               {!!dateRange && (
-                <motion.p layoutId="date" layout="position" variants={variants.headerText}>
+                <motion.p layoutId={shared('date')} layout="position" variants={variants.headerText}>
                   <TypewriterText text={dateRange} />
                 </motion.p>
               )}
             </motion.div>
             {!!subtitle && (
               <motion.div className={styles.subtitle} variants={variants.headerText}>
-                <motion.h3 layoutId="subtitle" layout="position">
+                <motion.h3 layoutId={shared('subtitle')} layout="position">
                   <TypewriterText text={subtitle} />
                 </motion.h3>
               </motion.div>
@@ -197,8 +210,13 @@ const ExperienceEntry = ({
           {isOpen && (
             // The frame's fixed top: the title bar, with the section tabs on its left. Only the body below scrolls,
             // and `layout` keeps this pinned to the top edge while the window resizes.
-            <motion.div layout className={styles.windowHeader}>
+            <motion.div
+              layout
+              layoutId={phone ? 'header' : undefined}
+              className={styles.windowHeader}
+            >
               <ModalNavBar
+                quick={phone}
                 title={title}
                 onClose={onClose}
                 expanded={expanded}
