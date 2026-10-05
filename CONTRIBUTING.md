@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:18 UTC · 6 live branches · 0 PRs open · 19 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:18 UTC · 5 live branches · 0 PRs open · 19 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-05 02:18 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 6 |
+| Live branches | 5 |
 | Open PRs | none |
 | Waiting on you | 19 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -20,8 +20,6 @@ flowchart LR
   subgraph plan_0["📋 Entry tabs"]
     n_bw_inbox["<b>One inbox for the owner's<br/>answers</b><br/>🟦 planned<br/><code>bw/inbox</code><br/>▰▰▰▰▱▱▱▱ 3/6<br/><i>next: bw renders INBOX.md with one answ…</i>"]
     class n_bw_inbox planned
-    n_feat_content_requests["<b>Mock media and a list of<br/>content to source</b><br/>🟦 planned<br/><code>feat/content-requests</code><br/>▱▱▱▱▱▱▱▱ 0/11 · 🙋 8<br/><i>next: Request ids on mock media and dra…</i>"]
-    class n_feat_content_requests planned
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph plan_1["📋 One entry component: list"]
@@ -37,14 +35,13 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/12 · 🙋 3<br/><i>next: EntryList with the list and tile …</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/23 · 🙋 11<br/><i>next: EntryList with the list and tile …</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_bw_inbox
   n_entry_open --> n_entry_cleanup
   n_staging --> n_entry_open
-  n_staging --> n_feat_content_requests
   n_staging --> n_next
   n_staging --> n_release_promote_main
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -79,7 +76,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, local only | 0/12 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
+| `next` |  | active, local only | 0/23 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
 
 ## 🕘 Just happened
 
@@ -96,7 +93,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | `next` · `f6a2d263` |
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | `next` · `6385b4c8` |
-| 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | `next` · `f6b075a5` |
+| 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6b075a5` |
 | 2026-10-05 00:15 | test: tiles use the list markup; crossing the breakpoint keeps the elements | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `9cd6eff6` |
 | 2026-10-05 00:15 | feat(entries): one CSS-switched list for rows and tiles | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `c00d0c46` |
 | 2026-10-05 00:15 | feat(border): redraw a border or line quickly on demand | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `b6f49807` |
@@ -115,25 +112,25 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 **1. User notifier sends about 250,000 notifications a month**
 - *Why:* The User notifier effort leads with this figure, shown as unverified on the live site until you confirm it.
-- `claim` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
+- `claim` · `next` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **2. User notifier delivers at a 99.99% success rate**
 - *Why:* The second headline figure on the User notifier effort, also marked unverified until confirmed.
-- `claim` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
+- `claim` · `next` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 ### Writing
 
 **3. Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo**
 - *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
-- `prose` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
+- `prose` · `next` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **4. Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography)**
 - *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
-- `prose` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
+- `prose` · `next` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **5. User notifier summary: a real-time email notification system that shows Arbor users what they are saving**
 - *Why:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
-- `prose` · `feat/content-requests` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
+- `prose` · `next` · from `feat/efforts` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **6. Review the Arbor and project blurbs (written from existing descriptions)**
 - *Why:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
@@ -141,25 +138,25 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 ### Decisions
 
-**7. Approve per-entry preview images, or generate them**
-- *Why:* Shared links show a per-page title and description, but one site-wide image for every entry.
-- `decision` · `feat/content-requests` · from `feat/shareable-urls` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
-
-**8. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
-- *Why:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
-- `decision` · `feat/content-requests` · from `feat/global-modal` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/components/EntryLink/index.tsx)
-
-**9. Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk)**
+**7. Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk)**
 - *Why:* The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
 - `decision` · `next` · from `feat/control-panel`
 
-**10. Sound: synthesised clicks (no files) or recorded samples you pick?**
+**8. Sound: synthesised clicks (no files) or recorded samples you pick?**
 - *Why:* Synthesised sounds need no files and stay tiny; samples sound richer but you would choose them.
 - `decision` · `next` · from `feat/control-panel`
 
-**11. Should the panel be on phones, or desktop only?**
+**9. Should the panel be on phones, or desktop only?**
 - *Why:* Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
 - `decision` · `next` · from `feat/control-panel`
+
+**10. Approve per-entry preview images, or generate them**
+- *Why:* Shared links show a per-page title and description, but one site-wide image for every entry.
+- `decision` · `next` · from `feat/shareable-urls` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
+
+**11. Which page titles should link to entries? Map lines and prose mentions do now; headings are plain**
+- *Why:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
+- `decision` · `next` · from `feat/global-modal` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/components/EntryLink/index.tsx)
 
 **12. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
 - *Why:* The page exists and About links to it, but nothing else on the site leads there.
@@ -181,7 +178,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 **16. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
 - *Why:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
-- `media` · `feat/content-requests` · from `feat/entry-dock` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
+- `media` · `next` · from `feat/entry-dock` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
 **17. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
@@ -201,7 +198,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Plan | Progress |
 |---|---|
-| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
+| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 2 of 3 branches done |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 2 of 4 branches done |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -214,8 +211,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | 24 to push, 85 to pull | Request ids on mock media and drafted prose |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 0/12 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 0/23 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
@@ -253,25 +249,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>feat/content-requests</code>: Mock media and a list of content to source (0/11)</summary>
-
-Layouts are built against mock images and drafted prose, each tagged with a request id. A generated REQUESTS page lists everything the owner needs to source (images, links, prose, icons) with the draft beside it and where to drop the real thing; dropping a file or prose named by its id replaces the mock or draft with no code change.
-
-- [ ] Request ids on mock media and drafted prose
-- [ ] Sourced files and prose resolve by id at build time
-- [ ] npm run requests renders the list; bw publishes it next to the board
-- [ ] 🙋 Approve per-entry preview images, or generate them (from feat/shareable-urls)
-- [ ] 🙋 Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal)
-- [ ] 🙋 claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal)
-- [ ] 🙋 claim: User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal)
-- [ ] 🙋 claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal)
-- [ ] 🙋 claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal)
-- [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal)
-- [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock)
-
-</details>
-
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (0/12)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (0/23)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -287,6 +265,17 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 🙋 Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
 - [ ] 🙋 Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)
 - [ ] 🙋 Should the panel be on phones, or desktop only? (from feat/control-panel)
+- [ ] Request ids on mock media and drafted prose (from feat/content-requests)
+- [ ] Sourced files and prose resolve by id at build time (from feat/content-requests)
+- [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
+- [ ] 🙋 Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)
+- [ ] 🙋 Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal) (from feat/content-requests)
+- [ ] 🙋 claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+- [ ] 🙋 claim: User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+- [ ] 🙋 claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+- [ ] 🙋 claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+- [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+- [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) (from feat/content-requests)
 
 </details>
 

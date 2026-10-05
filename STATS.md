@@ -8,7 +8,7 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 02:18 UTC by `bw s
 | Pull requests merged | 27 |
 | Lines added | +16,061 |
 | Lines removed | -15,672 |
-| Branches in flight | 6 |
+| Branches in flight | 5 |
 
 ## Lines by file type
 
@@ -107,5 +107,4 @@ src/
 - `bw/inbox`: One inbox for the owner's answers
 - `entry/cleanup`: Tidy after the entry merge
 - `entry/open`: One open morph, the carousel's, at every width
-- `feat/content-requests`: Mock media and a list of content to source
 - `release/promote-main`: Promote the new site to main
