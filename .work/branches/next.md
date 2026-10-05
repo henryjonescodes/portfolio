@@ -84,6 +84,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Entry tabs use the shared useRovingFocus hook
 - [ ] Modal window gets a max width on wide screens
 - [ ] Window bar: the entry name has no left divider in the modal
+- [ ] Nav item hover: the underline collapses smoothly when the pointer leaves
 
 ## Log
 
