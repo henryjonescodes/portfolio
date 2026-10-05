@@ -82,7 +82,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Window bar: the entry name has no left divider in the modal
 - [x] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [x] Close button: full size, border-colour fill with the X knocked out
-- [ ] Phones: the entry image animates between list and window, and fills its space
 - [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [x] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [x] 3D view socials: smaller, no Instagram, two rows of three
@@ -161,3 +160,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: dropped "2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)"
 - 2026-10-05: dropped "Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart"
 - 2026-10-05: dropped "Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images"
+- 2026-10-05: dropped "Phones: the entry image animates between list and window, and fills its space"
