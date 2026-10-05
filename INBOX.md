@@ -75,6 +75,24 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: Review the Arbor and project blurbs (written from existing descriptions)
+<!-- bw:q {"branch":"next","text":"Review the Arbor and project blurbs (written from existing descriptions)"} -->
+*Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
+*Where:* `src/data/experience.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: Decide where /links appears (home menu, nav bar, or as home like the old branch)
+<!-- bw:q {"branch":"next","text":"Decide where /links appears (home menu, nav bar, or as home like the old branch)"} -->
+*Why it matters:* The page exists and About links to it, but nothing else on the site leads there.
+*Where:* `src/pages/links/index.tsx`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
