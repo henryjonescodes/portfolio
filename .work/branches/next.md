@@ -18,7 +18,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [x] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
 - [x] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
-- [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - [x] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
 - [x] Colour page with presets (from feat/control-panel)
 - [x] Type page (families, size, typewriter) (from feat/control-panel)
@@ -72,27 +71,22 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - file: src/data/experience.ts
 - [x] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - [x] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
-- [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
 - [x] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
   - why: The owner wants the 3D toy on phones in landscape; iOS cannot lock orientation, so the page has to rotate itself
   - file: src/pages/landing/Scene.tsx
 - [x] Placeholder e2e test looks inside the dialog, not the first match on the page
   - why: Bugbot on #88: the list's hidden copy of the placeholder can be the first match
   - file: e2e/modal.spec.ts
-- [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
-  - file: scripts/build-requests.mjs
 - [x] Entry tabs use the shared useRovingFocus hook
 - [x] Modal window gets a max width on wide screens
 - [x] Window bar: the entry name has no left divider in the modal
 - [x] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [x] Close button: full size, border-colour fill with the X knocked out
-- [ ] Phones: the entry image animates between list and window, and fills its space
 - [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 - [x] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [x] 3D view socials: smaller, no Instagram, two rows of three
 - [x] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [x] Rule in repertoire: keep bw and the refactor's skills current while working
-- [ ] After the stream lands: DRY and code-splitting pass, delete unused code
 - [x] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
 - [?] Review the Arbor and project blurbs (written from existing descriptions)
   - why: They were rewritten from older descriptions and are the first thing visitors read in each entry.
@@ -125,6 +119,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Every shared link shows this card; it also settles which domain is canonical.
   - file: public/og-image.png
   - kind: decision
+- [ ] Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- [ ] e2e: open and close at both widths, and a resize while open (from entry/open)
+- [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts (from entry/open)
 
 ## Log
 
@@ -162,3 +160,9 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)" at 222ef607
 - 2026-10-05: done "Window bar: the entry name has no left divider in the modal" at a80e210d
 - 2026-10-05: done "Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets" at 2800e9ec
+- 2026-10-05: dropped "2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)"
+- 2026-10-05: dropped "Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart"
+- 2026-10-05: dropped "Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images"
+- 2026-10-05: dropped "Phones: the entry image animates between list and window, and fills its space"
+- 2026-10-05: dropped "After the stream lands: DRY and code-splitting pass, delete unused code"
+- 2026-10-05: carried 4 open todo(s) from entry/open

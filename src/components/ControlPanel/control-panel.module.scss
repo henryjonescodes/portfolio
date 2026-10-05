@@ -55,49 +55,14 @@
   width: 100%;
   height: 100%;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 16px;
 }
 
-.hueSlider {
+.knobRow {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  flex: 1;
-
-  &.foreground .slider {
-    background: var(--foreground-primary);
-  }
-
-  &.backgroundHue .slider {
-    background: var(--background-primary);
-  }
-
-  &.accent .slider {
-    background: var(--accent-primary);
-  }
-
-  .slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 50px;
-    flex: 1;
-    margin-bottom: 8px;
-    writing-mode: vertical-lr;
-
-    &::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      width: 55px;
-      height: 55px;
-      background: var(--accent-tertiary);
-      cursor: pointer;
-    }
-  }
-
-  .label {
-    margin: 8px 0 0;
-  }
+  justify-content: space-around;
+  padding: 4px 0;
 }
 
 .controls {
@@ -119,12 +84,15 @@
   margin: 8px 0 0;
 }
 
-.wave {
+// Waveforms sit in one row of equal keys.
+.choices.wave {
   flex-direction: row;
-  flex-wrap: wrap;
+  gap: 6px;
 
   .choice {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 4px;
     text-align: center;
   }
 }
@@ -158,6 +126,7 @@
 }
 
 .row {
+  color: var(--foreground-primary);
   display: grid;
   grid-template-columns: 8.5rem 1fr 3.5rem;
   align-items: center;
@@ -176,24 +145,64 @@
 .range {
   -webkit-appearance: none;
   appearance: none;
-  height: 16px;
+  height: 20px;
   width: 100%;
-  background: var(--foreground-primary);
+  background: linear-gradient(var(--foreground-primary), var(--foreground-primary)) center / 100%
+    4px no-repeat;
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+  }
+
+  &::-webkit-slider-runnable-track {
+    background: transparent;
+  }
 
   &::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 22px;
-    height: 28px;
+    width: 12px;
+    height: 16px;
     background: var(--accent-tertiary);
     border: 2px solid var(--accent-primary);
+    border-radius: 0;
+  }
+
+  &::-moz-range-track {
+    background: transparent;
   }
 
   &::-moz-range-thumb {
-    width: 22px;
-    height: 28px;
+    width: 8px;
+    height: 12px;
     border-radius: 0;
     background: var(--accent-tertiary);
     border: 2px solid var(--accent-primary);
+  }
+}
+
+// Buttons in the panel take the site's face, not the browser's.
+.panel button,
+.choice {
+  font: inherit;
+}
+
+// Names what the model's three knobs turn, in three columns over them.
+.knobStrip {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 6px 12px;
+  border-top: 3px solid var(--foreground-primary);
+  color: var(--foreground-secondary);
+  font-size: 0.8rem;
+  text-align: center;
+
+  b {
+    display: block;
+    color: var(--foreground-primary);
   }
 }
