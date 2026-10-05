@@ -20,7 +20,7 @@ flowchart LR
   subgraph plan_0["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▱▱▱▱▱▱▱ 1/7<br/><i>next: Closed and open layouts keep the …</i>"]
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▰▱▱▱▱▱▱ 2/7<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_entry_open active,current
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
@@ -41,24 +41,21 @@ flowchart LR
   n_next --> n_entry_open
   n_next --> n_feat_panel_knob
   n_staging --> n_next
-  n_entry_open_t0["Closed and open layouts keep<br/>the same elements in the same<br/>…"]
+  n_entry_open_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_entry_open_t0 todo
   n_entry_open -.-> n_entry_open_t0
-  n_entry_open_t1["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
+  n_entry_open_t1["Remove EntryCarousel and<br/>EntryCard; one provider opens<br/>ever…"]
   class n_entry_open_t1 todo
   n_entry_open -.-> n_entry_open_t1
-  n_entry_open_t2["Remove EntryCarousel and<br/>EntryCard; one provider opens<br/>ever…"]
+  n_entry_open_t2["e2e: open and close at both<br/>widths, and a resize while<br/>open"]
   class n_entry_open_t2 todo
   n_entry_open -.-> n_entry_open_t2
-  n_entry_open_t3["e2e: open and close at both<br/>widths, and a resize while<br/>open"]
+  n_entry_open_t3["The 'content never ahead of<br/>the window' check fails on the<br/>…"]
   class n_entry_open_t3 todo
   n_entry_open -.-> n_entry_open_t3
-  n_entry_open_t4["The 'content never ahead of<br/>the window' check fails on the<br/>…"]
+  n_entry_open_t4["Re-enable the CI skip on the<br/>open-sync check in<br/>e2e/modal.s…"]
   class n_entry_open_t4 todo
   n_entry_open -.-> n_entry_open_t4
-  n_entry_open_more["… 1 more todos"]
-  class n_entry_open_more todo
-  n_entry_open -.-> n_entry_open_more
   n_feat_panel_knob_t0["Knob component: drag, wheel<br/>and arrow keys, with aria<br/>slide…"]
   class n_feat_panel_knob_t0 todo
   n_feat_panel_knob -.-> n_feat_panel_knob_t0
@@ -91,7 +88,7 @@ flowchart LR
   subgraph plan_0["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▱▱▱▱▱▱▱ 1/7<br/><i>next: Closed and open layouts keep the …</i>"]
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▰▱▱▱▱▱▱ 2/7<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_entry_open active,current
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
@@ -192,13 +189,13 @@ flowchart LR
 
 **How, next.**
 
-- Closed and open layouts keep the same elements in the same order, with shared layoutIds
 - Per-part timings from the carousel tunables, shared by every width
 - Remove EntryCarousel and EntryCard; one provider opens everything
+- e2e: open and close at both widths, and a resize while open
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/open` |  | active, 85 to push | 1/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
+| `entry/open` |  | active, 86 to push | 2/7 | Per-part timings from the carousel tunables, shared by every width | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
@@ -327,7 +324,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 1/7 | 7 | 85 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 2/7 | 7 | 86 to push | Per-part timings from the carousel tunables, shared by every width |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
@@ -359,11 +356,11 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (1/7)</summary>
+<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (2/7)</summary>
 
 Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
-- [ ] Closed and open layouts keep the same elements in the same order, with shared layoutIds
+- [x] Closed and open layouts keep the same elements in the same order, with shared layoutIds
 - [ ] Per-part timings from the carousel tunables, shared by every width
 - [ ] Remove EntryCarousel and EntryCard; one provider opens everything
 - [ ] e2e: open and close at both widths, and a resize while open
