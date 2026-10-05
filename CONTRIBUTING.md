@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:09 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:15 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:09 UTC by `bw board` on `entry/open` |
+| Generated | 2026-10-05 13:15 UTC by `bw board` on `feat/panel-knob` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
@@ -19,12 +19,12 @@ flowchart LR
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/7<br/><i>next: Closed and open layouts keep the …</i>"]
-    class n_entry_open active,current
+    class n_entry_open active
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob active
+    class n_feat_panel_knob active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active
   end
@@ -101,7 +101,7 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/7<br/><i>next: Closed and open layouts keep the …</i>"]
-    class n_entry_open active,current
+    class n_entry_open active
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -110,7 +110,7 @@ flowchart LR
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob active
+    class n_feat_panel_knob active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active
   end
@@ -150,33 +150,32 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** The phone morph is the reference; every open should feel like it.
-
-**What.** Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
+**What.** The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
 **How, next.**
 
-- Closed and open layouts keep the same elements in the same order, with shared layoutIds
-- Per-part timings from the carousel tunables, shared by every width
-- Remove EntryCarousel and EntryCard; one provider opens everything
+- Knob component: drag, wheel and arrow keys, with aria slider semantics
+- Mini slider variant of the range rows
+- Colour hues and FX ranges use them; each tick plays the toggle sound
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/open` |  | active, 78 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
+| `feat/panel-knob` |  | active, pushed | 0/4 | Knob component: drag, wheel and arrow keys, with aria slider semantics |  |
 
 ## 🕘 Just happened
 
-**feat(panel): a bottom sheet on phones, and the waveform keys in one row** · 2026-10-05 13:07 · `next` · `b795c7ca`
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+**feat(panel): rotary knobs for hues and sound filter, mini slider styling** · 2026-10-05 13:15 · `feat/panel-knob` · `cb52e756`
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
 
+- **feat(panel): a bottom sheet on phones, and the waveform keys in one row** · 13:07 · `next` · `b795c7ca`
 - **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
 - **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
-- **feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list** · 01:23 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
 | 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6385b4c8` |
@@ -284,8 +283,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 1 | 78 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 1 | 13 to push | Knob component: drag, wheel and arrow keys, with aria slider semantics |
+| `entry/open` | One open morph, the carousel's, at every width | active |  | 0/7 | 1 | 78 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
