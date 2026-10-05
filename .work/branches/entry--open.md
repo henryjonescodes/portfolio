@@ -16,7 +16,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 - [x] Closed and open layouts keep the same elements in the same order, with shared layoutIds
 - [ ] Per-part timings from the carousel tunables, shared by every width
-- [ ] Remove EntryCarousel and EntryCard; one provider opens everything
+- [x] Remove EntryCarousel and EntryCard; one provider opens everything
 - [ ] e2e: open and close at both widths, and a resize while open
 - [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt
 - [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts
@@ -27,3 +27,4 @@ Opening any entry mounts the window over its source in the closed layout and ope
 - 2026-10-04: seeded
 - 2026-10-05: done "Phones: the entry image animates between list and window (its shape and fill now match)" at da2ab139
 - 2026-10-05: done "Closed and open layouts keep the same elements in the same order, with shared layoutIds" at ad477c67
+- 2026-10-05: done "Remove EntryCarousel and EntryCard; one provider opens everything" at 41c9104d
