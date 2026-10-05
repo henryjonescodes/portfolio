@@ -28,7 +28,7 @@ const InfoPanel = () => {
         exit="exit"
       >
         <div className={cn(styles.content, { [styles.disabled]: zoomLevel !== 'info' })}>
-          <ControlPanel showLock onClose={toggleInfoModeZoomPosition} />
+          <ControlPanel showLock knobStrip onClose={toggleInfoModeZoomPosition} />
         </div>
       </motion.div>
     </CustomHTML>

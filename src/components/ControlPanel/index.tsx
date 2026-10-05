@@ -24,7 +24,7 @@ import { useRovingFocus } from '@hooks/useRovingFocus';
 import { useSound } from '@hooks/useSound';
 
 import Bolt from '@assets/svg/icons/bolt.svg?react';
-import Close from '@assets/svg/icons/close-01.svg?react';
+import Close from '@assets/svg/icons/x.svg?react';
 import Locked from '@assets/svg/icons/locked.svg?react';
 import Palette from '@assets/svg/icons/palette.svg?react';
 import Trash from '@assets/svg/icons/trash.svg?react';
@@ -32,6 +32,7 @@ import Type from '@assets/svg/icons/type.svg?react';
 import Unlocked from '@assets/svg/icons/unlocked.svg?react';
 
 import styles from './control-panel.module.scss';
+import { usePanelKnobs } from './usePanelKnobs';
 
 const PREVIEW_DELAY_MS = 30;
 const HUE_RANGE = { min: 0, max: 360, step: 1 };
@@ -47,10 +48,12 @@ type ControlPanelProps = {
   onClose: () => void;
   /** The debug lock lives on the 3D screen only. */
   showLock?: boolean;
+  /** On the 3D screen: a strip naming what each of the model's knobs turns on this page. */
+  knobStrip?: boolean;
 };
 
 /** Colour, Type and FX pages behind a tab row. Fills its parent, which sets the size. */
-const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
+const ControlPanel = ({ onClose, showLock = false, knobStrip = false }: ControlPanelProps) => {
   const { page, setPage } = useControlPanel();
   const { resetColors } = useColors();
   const { resetPreferences } = usePreferences();
@@ -109,6 +112,7 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
         {page === 'type' && <TypePage />}
         {page === 'fx' && <FxPage />}
       </div>
+      {knobStrip && <KnobStrip />}
     </div>
   );
 };
@@ -322,5 +326,16 @@ const RangeRow = ({ label, min, max, step, value, format, onChange }: RangeRowPr
     </div>
   );
 };
+
+/** Labels for the model's three knobs, left to right, with the value each holds now. */
+const KnobStrip = () => (
+  <div className={styles.knobStrip} aria-hidden>
+    {usePanelKnobs().map((k) => (
+      <span key={k.label}>
+        <b>{k.label}</b> {k.format(k.value)}
+      </span>
+    ))}
+  </div>
+);
 
 export default ControlPanel;

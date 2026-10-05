@@ -126,6 +126,7 @@
 }
 
 .row {
+  color: var(--foreground-primary);
   display: grid;
   grid-template-columns: 8.5rem 1fr 3.5rem;
   align-items: center;
@@ -178,5 +179,30 @@
     border-radius: 0;
     background: var(--accent-tertiary);
     border: 2px solid var(--accent-primary);
+  }
+}
+
+// Buttons in the panel take the site's face, not the browser's.
+.panel button,
+.choice {
+  font: inherit;
+}
+
+// Names what the model's three knobs turn, in three columns over them.
+.knobStrip {
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 6px 12px;
+  border-top: 3px solid var(--foreground-primary);
+  color: var(--foreground-secondary);
+  font-size: 0.8rem;
+  text-align: center;
+
+  b {
+    display: block;
+    color: var(--foreground-primary);
   }
 }
