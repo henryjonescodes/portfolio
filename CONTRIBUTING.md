@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 05:13 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 05:14 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 05:13 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 05:14 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 20/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 21/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -51,7 +51,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 20/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 21/42 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -96,7 +96,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 5 to push | 20/42 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, 6 to push | 21/42 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
@@ -221,7 +221,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 20/42 | 26 | 5 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 21/42 | 26 | 6 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
@@ -246,7 +246,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (20/42)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (21/42)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -286,7 +286,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Close button: full size, border-colour fill with the X knocked out
 - [ ] Phones: the entry image animates between list and window, and fills its space
 - [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
-- [ ] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
+- [x] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
 - [ ] 3D view socials: smaller, no Instagram, two rows of three
 - [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [ ] Rule in repertoire: keep bw and the refactor's skills current while working
