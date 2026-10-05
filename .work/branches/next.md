@@ -83,7 +83,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - file: scripts/build-requests.mjs
 - [x] Entry tabs use the shared useRovingFocus hook
 - [x] Modal window gets a max width on wide screens
-- [ ] Window bar: the entry name has no left divider in the modal
+- [x] Window bar: the entry name has no left divider in the modal
 - [x] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [x] Close button: full size, border-colour fill with the X knocked out
 - [ ] Phones: the entry image animates between list and window, and fills its space
@@ -160,3 +160,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: Phone window media now keeps the tile's 16:10 shape and fills its box; the presence hand-off between tile and window still needs the owner's eye on a phone
 - 2026-10-05: done "npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)" at b2f27d68
 - 2026-10-05: done "Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)" at 222ef607
+- 2026-10-05: done "Window bar: the entry name has no left divider in the modal" at a80e210d
