@@ -103,3 +103,17 @@ test.describe('3D on phones', () => {
     await expect(page).toHaveURL(/\/experience/);
   });
 });
+
+test("the info screen names what the model's knobs turn, and follows the panel's page", async ({
+  page,
+}) => {
+  test.skip(!!process.env.CI, 'needs the 3D scene, which CI runners cannot load in time');
+  await page.goto('/');
+  await expect(page.locator('canvas')).toHaveCount(1, { timeout: 20_000 });
+  const strip = page.locator('[class*=knobStrip]');
+  await expect(strip).toContainText('Foreground', { timeout: 20_000 });
+  await expect(strip).toContainText('Accent');
+  await page.getByRole('tab', { name: 'FX' }).first().click({ force: true });
+  await expect(strip).toContainText('Volume');
+  await expect(strip).toContainText('Cutoff');
+});
