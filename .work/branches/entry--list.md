@@ -1,6 +1,6 @@
 ---
 branch: entry/list
-parent: entry/window
+parent: staging
 status: planned
 title: One list that is a carousel on phones
 pr: null
