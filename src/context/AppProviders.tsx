@@ -12,7 +12,8 @@ import { DebugTools } from '../debug';
 
 /**
  * Global providers, ordered by dependency: each may use any provider above it.
- * Preferences feed Animation (motion speed). Loading reads timeouts from Animation; Zoom reads Loading, Settings and dimensions.
+ * Animation reads the motion speed from Preferences. Loading reads timeouts from Animation;
+ * Zoom reads Loading, Settings and dimensions; ControlPanel closes on Zoom changes.
  * DebugTools mounts the lazily loaded Leva panel only under `?debug=true`.
  */
 export function AppProviders({ children }: { children: ReactNode }) {

@@ -9,18 +9,17 @@ const openPanel = async (page: Page) => {
   return panel;
 };
 
-const fontFamily = (page: Page) =>
-  page.evaluate(() => getComputedStyle(document.body).fontFamily);
+const fontFamily = (page: Page) => page.evaluate(() => getComputedStyle(document.body).fontFamily);
 
 test.describe('control panel', () => {
   test('tabs switch pages', async ({ page }) => {
     const panel = await openPanel(page);
     await expect(panel.getByLabel('Foreground')).toBeVisible();
 
-    await panel.getByRole('link', { name: 'Type' }).click();
+    await panel.getByRole('tab', { name: 'Type' }).click();
     await expect(panel.getByRole('radio', { name: 'IBM Plex Mono' })).toBeVisible();
 
-    await panel.getByRole('link', { name: 'FX' }).click();
+    await panel.getByRole('tab', { name: 'FX' }).click();
     await expect(panel.getByLabel('Motion speed')).toBeVisible();
     await expect(panel.getByLabel('CRT intensity')).toBeVisible();
   });
@@ -29,17 +28,17 @@ test.describe('control panel', () => {
     const panel = await openPanel(page);
     expect(await fontFamily(page)).toContain('Pixelify Sans');
 
-    await panel.getByRole('link', { name: 'Type' }).click();
+    await panel.getByRole('tab', { name: 'Type' }).click();
     await panel.getByRole('radio', { name: 'IBM Plex Mono' }).click();
     expect(await fontFamily(page)).toContain('IBM Plex Mono');
 
     await page.reload();
-    expect(await fontFamily(page)).toContain('IBM Plex Mono');
+    await expect.poll(() => fontFamily(page)).toContain('IBM Plex Mono');
   });
 
   test('the FX page drives the CRT custom property', async ({ page }) => {
     const panel = await openPanel(page);
-    await panel.getByRole('link', { name: 'FX' }).click();
+    await panel.getByRole('tab', { name: 'FX' }).click();
     await panel.getByLabel('CRT intensity').fill('0.5');
     const value = await page.evaluate(() =>
       document.documentElement.style.getPropertyValue('--crt-intensity'),
@@ -58,11 +57,63 @@ test.describe('control panel', () => {
     await expect(panel).toBeHidden();
   });
 
+  test('tabs and font choices are keyboard rows', async ({ page }) => {
+    const panel = await openPanel(page);
+    const colour = panel.getByRole('tab', { name: 'Colour' });
+    await expect(colour).toBeFocused();
+    await expect(colour).toHaveAttribute('aria-selected', 'true');
+    await expect(panel.getByRole('tabpanel', { name: 'Colour' })).toBeVisible();
+
+    await page.keyboard.press('ArrowRight');
+    const type = panel.getByRole('tab', { name: 'Type' });
+    await expect(type).toBeFocused();
+    await expect(type).toHaveAttribute('aria-selected', 'true');
+    await page.keyboard.press('ArrowLeft');
+    await page.keyboard.press('ArrowLeft');
+    await expect(panel.getByRole('tab', { name: 'FX' })).toBeFocused();
+
+    await page.keyboard.press('ArrowLeft');
+    await panel.getByRole('radio', { name: 'Pixelify Sans' }).focus();
+    await page.keyboard.press('ArrowDown');
+    const plex = panel.getByRole('radio', { name: 'IBM Plex Mono' });
+    await expect(plex).toBeFocused();
+    await expect(plex).toHaveAttribute('aria-checked', 'true');
+  });
+
+  test('focus stays inside and returns to the gear on close', async ({ page }) => {
+    const panel = await openPanel(page);
+    const first = panel.getByRole('tab', { name: 'Colour' });
+    const last = panel.getByLabel('Accent');
+    await expect(first).toBeFocused();
+    await page.keyboard.press('Shift+Tab');
+    await expect(last).toBeFocused();
+    await page.keyboard.press('Tab');
+    await expect(first).toBeFocused();
+
+    await page.keyboard.press('Escape');
+    await expect(panel).toBeHidden();
+    await expect(page.getByRole('button', { name: 'Open control panel' })).toBeFocused();
+  });
+
+  test('leaving full screen closes it for good', async ({ page }) => {
+    await page.goto('/about');
+    await page.getByRole('button', { name: 'Full screen' }).click();
+    await page.getByRole('button', { name: 'Open control panel' }).click();
+    const panel = page.getByRole('dialog', { name: 'Control panel' });
+    await expect(panel).toBeVisible();
+
+    await page.getByRole('button', { name: 'Back to the device' }).click();
+    await expect(panel).toBeHidden();
+    await page.getByRole('button', { name: 'Full screen' }).click();
+    await expect(page.getByRole('button', { name: 'Open control panel' })).toBeVisible();
+    await expect(panel).toBeHidden();
+  });
+
   test('has no axe violations while open', async ({ page }) => {
     const panel = await openPanel(page);
     await page.waitForTimeout(2500);
     for (const tab of ['Colour', 'Type', 'FX']) {
-      await panel.getByRole('link', { name: tab }).click();
+      await panel.getByRole('tab', { name: tab }).click();
       const results = await new AxeBuilder({ page }).include('[role="dialog"]').analyze();
       expect(results.violations.map((v) => `${tab} ${v.id}: ${v.nodes.length}`)).toEqual([]);
     }

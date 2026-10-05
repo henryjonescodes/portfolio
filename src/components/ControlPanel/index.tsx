@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { motion } from 'framer-motion';
-import React from 'react';
+import { useId } from 'react';
 
 import Background from '@components/Background';
 import AnimatedLine from '@components/AnimatedLine';
@@ -9,8 +9,14 @@ import NavBarItem from '@components/NavBar/NavbarItem';
 
 import { useColors } from '@context/ColorsContext';
 import { useControlPanel, type ControlPanelPage } from '@context/ControlPanelContext';
-import { FONT_FAMILIES, usePreferences, type FontFamilyId } from '@context/PreferencesContext';
+import {
+  FONT_FAMILIES,
+  PREFERENCE_RANGES,
+  usePreferences,
+  type FontFamilyId,
+} from '@context/PreferencesContext';
 import { useSettings } from '@context/SettingsContext';
+import { useRovingFocus } from '@hooks/useRovingFocus';
 
 import Bolt from '@assets/svg/icons/bolt.svg?react';
 import Close from '@assets/svg/icons/close-01.svg?react';
@@ -40,6 +46,11 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
   const { resetColors } = useColors();
   const { resetPreferences } = usePreferences();
   const { toggleDebugMode, isDebugMode } = useSettings();
+  // Both the 3D screen and the floating window can be mounted at once.
+  const idPrefix = useId();
+  const tabId = (id: ControlPanelPage) => `${idPrefix}-tab-${id}`;
+  const panelId = `${idPrefix}-panel`;
+  const roving = useRovingFocus(TABS.length, (i) => setPage(TABS[i].id));
 
   const reset = () => {
     if (page === 'colour') resetColors();
@@ -53,8 +64,8 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
         <Background />
       </div>
       <motion.span className={styles.navbar}>
-        <span className={styles.tabs}>
-          {TABS.map(({ id, label, Icon }) => (
+        <span className={styles.tabs} role="tablist" aria-label="Control panel pages">
+          {TABS.map(({ id, label, Icon }, i) => (
             <NavBarItem
               key={id}
               mini
@@ -62,6 +73,12 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
               Icon={Icon}
               selected={page === id}
               onClick={() => setPage(id)}
+              itemRef={roving.itemRef(i)}
+              tab={{
+                id: tabId(id),
+                controls: page === id ? panelId : undefined,
+                onKeyDown: (e) => roving.onKeyDown(e, i),
+              }}
             />
           ))}
         </span>
@@ -78,7 +95,7 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
         <NavBarButton onClick={onClose} Icon={Close} label="Close" />
         <AnimatedLine className={styles.border} borderWidth={5} horizontal />
       </motion.span>
-      <div className={styles.body} role="region" aria-label={`${page} settings`}>
+      <div className={styles.body} role="tabpanel" id={panelId} aria-labelledby={tabId(page)}>
         {page === 'colour' && <ColourPage />}
         {page === 'type' && <TypePage />}
         {page === 'fx' && <FxPage />}
@@ -118,30 +135,40 @@ const ColourPage = () => {
 
 const TypePage = () => {
   const { preferences, setPreference } = usePreferences();
-  const families = Object.entries(FONT_FAMILIES) as [FontFamilyId, { label: string; css: string }][];
+  const families = Object.entries(FONT_FAMILIES) as [
+    FontFamilyId,
+    { label: string; css: string },
+  ][];
+  const roving = useRovingFocus(families.length, (i) =>
+    setPreference('fontFamily', families[i][0]),
+  );
 
   return (
     <div className={styles.controls}>
       <div role="radiogroup" aria-label="Font" className={styles.choices}>
-        {families.map(([id, { label, css }]) => (
-          <button
-            key={id}
-            type="button"
-            role="radio"
-            aria-checked={preferences.fontFamily === id}
-            className={cn(styles.choice, { [styles.chosen]: preferences.fontFamily === id })}
-            style={{ fontFamily: css }}
-            onClick={() => setPreference('fontFamily', id)}
-          >
-            {label}
-          </button>
-        ))}
+        {families.map(([id, { label, css }], i) => {
+          const chosen = preferences.fontFamily === id;
+          return (
+            <button
+              key={id}
+              ref={roving.itemRef(i)}
+              type="button"
+              role="radio"
+              aria-checked={chosen}
+              tabIndex={chosen ? 0 : -1}
+              className={cn(styles.choice, { [styles.chosen]: chosen })}
+              style={{ fontFamily: css }}
+              onClick={() => setPreference('fontFamily', id)}
+              onKeyDown={(e) => roving.onKeyDown(e, i)}
+            >
+              {label}
+            </button>
+          );
+        })}
       </div>
       <RangeRow
         label="Text size"
-        min={0.8}
-        max={1.4}
-        step={0.1}
+        {...PREFERENCE_RANGES.textScale}
         value={preferences.textScale}
         format={(v) => `${Math.round(v * 100)}%`}
         onChange={(v) => setPreference('textScale', v)}
@@ -157,18 +184,14 @@ const FxPage = () => {
     <div className={styles.controls}>
       <RangeRow
         label="Motion speed"
-        min={0.5}
-        max={2}
-        step={0.25}
+        {...PREFERENCE_RANGES.motionSpeed}
         value={preferences.motionSpeed}
         format={(v) => `${v}x`}
         onChange={(v) => setPreference('motionSpeed', v)}
       />
       <RangeRow
         label="CRT intensity"
-        min={0}
-        max={1}
-        step={0.1}
+        {...PREFERENCE_RANGES.crt}
         value={preferences.crt}
         format={(v) => `${Math.round(v * 100)}%`}
         onChange={(v) => setPreference('crt', v)}
@@ -188,7 +211,7 @@ type RangeRowProps = {
 };
 
 const RangeRow = ({ label, min, max, step, value, format, onChange }: RangeRowProps) => {
-  const id = React.useId();
+  const id = useId();
   return (
     <div className={styles.row}>
       <label htmlFor={id}>{label}</label>
@@ -200,6 +223,7 @@ const RangeRow = ({ label, min, max, step, value, format, onChange }: RangeRowPr
         max={max}
         step={step}
         value={value}
+        aria-valuetext={format(value)}
         onChange={(e) => onChange(parseFloat(e.target.value))}
       />
       <output htmlFor={id}>{format(value)}</output>
