@@ -93,7 +93,7 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
         )}
         <NavBarButton onClick={reset} Icon={Trash} label="Reset this page" />
         <NavBarButton onClick={onClose} Icon={Close} label="Close" />
-        <AnimatedLine className={styles.border} borderWidth={5} horizontal />
+        <AnimatedLine className={styles.border} borderWidth={5} horizontal drawOnMount />
       </motion.span>
       <div className={styles.body} role="tabpanel" id={panelId} aria-labelledby={tabId(page)}>
         {page === 'colour' && <ColourPage />}
