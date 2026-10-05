@@ -1,15 +1,14 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:17 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:18 UTC · 6 live branches · 0 PRs open · 19 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 02:17 UTC by `bw board` on `entry/list` |
+| Generated | 2026-10-05 02:18 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
-| Waiting on you | 16 |
-| Merged, not yet landed | `feat/control-panel` (run `bw land <branch> --into <next>`) |
+| Waiting on you | 19 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -38,8 +37,8 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_next active
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/12 · 🙋 3<br/><i>next: EntryList with the list and tile …</i>"]
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_bw_inbox
@@ -80,7 +79,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, local only | 0/4 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
+| `next` |  | active, local only | 0/12 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
 
 ## 🕘 Just happened
 
@@ -150,39 +149,51 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 - *Why:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
 - `decision` · `feat/content-requests` · from `feat/global-modal` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/components/EntryLink/index.tsx)
 
-**9. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
+**9. Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk)**
+- *Why:* The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
+- `decision` · `next` · from `feat/control-panel`
+
+**10. Sound: synthesised clicks (no files) or recorded samples you pick?**
+- *Why:* Synthesised sounds need no files and stay tiny; samples sound richer but you would choose them.
+- `decision` · `next` · from `feat/control-panel`
+
+**11. Should the panel be on phones, or desktop only?**
+- *Why:* Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
+- `decision` · `next` · from `feat/control-panel`
+
+**12. Decide where /links appears (home menu, nav bar, or as home like the old branch)**
 - *Why:* The page exists and About links to it, but nothing else on the site leads there.
 - `decision` · `release/promote-main` · from `content/real-copy` · [index.tsx](https://github.com/henryjonescodes/portfolio/blob/staging/src/pages/links/index.tsx)
 
-**10. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
+**13. Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)**
 - *Why:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
 - `decision` · `release/promote-main` · from `design/retro-chrome` · [_colors.scss](https://github.com/henryjonescodes/portfolio/blob/staging/src/styles/_colors.scss#L12)
 
-**11. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
+**14. Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check**
 - *Why:* The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
 - `decision` · `release/promote-main` · from `perf/assets` · [images](https://github.com/henryjonescodes/portfolio/blob/staging/public/3D/images)
 
-**12. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
+**15. Approve the share image and description, and confirm the canonical domain is henryjones.xyz**
 - *Why:* Every shared link shows this card; it also settles which domain is canonical.
 - `decision` · `release/promote-main` · from `seo/meta` · [og-image.png](https://github.com/henryjonescodes/portfolio/blob/staging/public/og-image.png)
 
 ### Files to send
 
-**13. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
+**16. Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there**
 - *Why:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
 - `media` · `feat/content-requests` · from `feat/entry-dock` · [experience.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/experience.ts)
 
-**14. The resume PDF is the 2024 copy from the old site and predates Arbor**
+**17. The resume PDF is the 2024 copy from the old site and predates Arbor**
 - *Why:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
 - `media` · `release/promote-main` · from `content/real-copy` · [Henry-Jones-Resume.pdf](https://github.com/henryjonescodes/portfolio/blob/staging/public/pdf/Henry-Jones-Resume.pdf)
 
-**15. Curate real panel content (screenshots, galleries, stats) per project**
+**18. Curate real panel content (screenshots, galleries, stats) per project**
 - *Why:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
 - `media` · `release/promote-main` · from `feat/modal-panels` · [projects.ts](https://github.com/henryjonescodes/portfolio/blob/staging/src/data/projects.ts)
 
 ### Reviews
 
-**16. Design review in 3D and lite mode**
+**19. Design review in 3D and lite mode**
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
@@ -204,7 +215,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | 24 to push, 85 to pull | Request ids on mock media and drafted prose |
-| `next` | Integration branch: the stream's second staging merge | active |  | 0/4 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 0/12 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
@@ -260,7 +271,7 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (0/4)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (0/12)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -268,6 +279,14 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [ ] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
 - [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
+- [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
+- [ ] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
+- [ ] Colour page with presets (from feat/control-panel)
+- [ ] Type page (families, size, typewriter) (from feat/control-panel)
+- [ ] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
+- [ ] 🙋 Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
+- [ ] 🙋 Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)
+- [ ] 🙋 Should the panel be on phones, or desktop only? (from feat/control-panel)
 
 </details>
 

@@ -99,6 +99,78 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)"} -->
+*Why it matters:* Shared links show a per-page title and description, but one site-wide image for every entry.
+*Where:* `public/og-image.png`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"Which page titles should link to entries? Map lines and prose mentions do now; headings are plain (from feat/global-modal) (from feat/content-requests)"} -->
+*Why it matters:* Map lines and prose mentions open entries anywhere on the site; headings are still plain text.
+*Where:* `src/components/EntryLink/index.tsx`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"claim: User notifier sends about 250,000 notifications a month (from feat/efforts) (from feat/global-modal) (from feat/content-requests)"} -->
+*Why it matters:* The User notifier effort leads with this figure, shown as unverified on the live site until you confirm it.
+*Where:* `src/data/experience.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: claim: User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"claim: User notifier delivers at a 99.99% success rate (from feat/efforts) (from feat/global-modal) (from feat/content-requests)"} -->
+*Why it matters:* The second headline figure on the User notifier effort, also marked unverified until confirmed.
+*Where:* `src/data/experience.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"claim: Almanac summary: a skill manager for the team's AI coding agents, one catalogue of shared skills kept in step across every repo (from feat/efforts) (from feat/global-modal) (from feat/content-requests)"} -->
+*Why it matters:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
+*Where:* `src/data/experience.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal) (from feat/content-requests)"} -->
+*Why it matters:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
+*Where:* `src/data/experience.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal) (from feat/content-requests)"} -->
+*Why it matters:* Drafted from the existing entry text; you want most prose human-written and lightly edited.
+*Where:* `src/data/experience.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) (from feat/content-requests)
+<!-- bw:q {"branch":"next","text":"media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock) (from feat/content-requests)"} -->
+*Why it matters:* Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
+*Where:* `src/data/experience.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
