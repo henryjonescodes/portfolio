@@ -1,6 +1,6 @@
 # Work stats
 
-_From `origin/main` to `origin/staging`, generated 2026-10-05 00:24 UTC by `bw stats`._
+_From `origin/main` to `origin/staging`, generated 2026-10-05 01:04 UTC by `bw stats`._
 
 | | |
 |---|---|
@@ -62,7 +62,7 @@ src/  🚧
 ├── components/  🚧
 │   ├── 3D/  🆕  🚧
 │   ├── AnimatedBorderBox/  🆕  🚧
-│   ├── AnimatedLine/  🆕
+│   ├── AnimatedLine/  🆕  🚧
 │   ├── AnimatedOutlet/  🆕
 │   ├── Background/  🆕
 │   ├── ControlPanel/  🆕  🚧
@@ -90,7 +90,7 @@ src/  🚧
 ├── context/  🚧
 ├── data/  🆕
 ├── debug/  🆕
-├── hooks/  🆕
+├── hooks/  🆕  🚧
 ├── pages/  🚧
 │   ├── about/  🆕
 │   ├── experience/  🆕  🚧

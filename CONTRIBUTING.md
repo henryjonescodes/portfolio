@@ -1,14 +1,14 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 00:24 UTC · 7 live branches · 0 PRs open · 19 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 01:04 UTC · 7 live branches · 1 PRs open · 20 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 00:24 UTC by `bw board` on `entry/list` |
+| Generated | 2026-10-05 01:04 UTC by `bw board` on `entry/list` |
 | Trunk | `staging` |
 | Live branches | 7 |
-| Open PRs | none |
-| Waiting on you | 19 |
+| Open PRs | [#88](https://github.com/henryjonescodes/portfolio/pull/88) |
+| Waiting on you | 20 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -27,8 +27,8 @@ flowchart LR
   subgraph plan_1["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟩 active<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_entry_list active,current
+    n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟨 review · #88<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
+    class n_entry_list review,current
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open planned
   end
@@ -84,26 +84,29 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/list` |  | active, 1 to push | 0/4 | EntryList with the list and tile presentations from CSS container queries | 2026-10-entry-reconcile, 1 of 4 |
+| `entry/list` | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | review, 1 to push | 0/4 | EntryList with the list and tile presentations from CSS container queries | 2026-10-entry-reconcile, 1 of 4 |
 
 ## 🕘 Just happened
 
-**fix(entries): tile media shows and fills the tile on phones** · 2026-10-05 00:24 · `entry/list` · `f6a2d263`
-The list media animates on its own labels, the list item's wrapper no longer animates outside the modal, and only visible media counts as the open window's source image.
+**fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows** · 2026-10-05 01:04 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12`
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
-- **test: tiles use the list markup; crossing the breakpoint keeps the elements** · 00:15 · `entry/list` · `9cd6eff6`
-- **feat(entries): one CSS-switched list for rows and tiles** · 00:15 · `entry/list` · `c00d0c46`
-- **feat(border): redraw a border or line quickly on demand** · 00:15 · `entry/list` · `b6f49807`
+- **fix(entries): tile media shows and fills the tile on phones** · 00:24 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263`
+- **fix(panel): real tabs, a keyboard font row, and a modal floating window** · 00:20 · `feat/control-panel` · `6385b4c8`
+- **fix(prefs): ignore out-of-range stored values and apply before paint** · 00:20 · `feat/control-panel` · `f6b075a5`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 00:15 | test: make the e2e port configurable | `entry/list` · `2425db0f` |
+| 2026-10-05 00:15 | test: tiles use the list markup; crossing the breakpoint keeps the elements | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `9cd6eff6` |
+| 2026-10-05 00:15 | feat(entries): one CSS-switched list for rows and tiles | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `c00d0c46` |
+| 2026-10-05 00:15 | feat(border): redraw a border or line quickly on demand | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `b6f49807` |
+| 2026-10-05 00:15 | test: make the e2e port configurable | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2425db0f` |
 | 2026-10-05 00:11 | feat(panel): colour, type and FX control panel in 3D and 2D | `feat/control-panel` · `3d6f0049` |
 | 2026-10-05 00:08 | feat(prefs): type, motion speed and CRT preferences with persistence | `feat/control-panel` · `8e9b356a` |
 | 2026-10-05 00:07 | test: let the e2e port come from E2E_PORT | `feat/control-panel` · `b2165509` |
-| 2026-10-05 00:06 | fix(entries): a phone-sized window drops any drag offset | `entry/list` · `7de48b4c` |
+| 2026-10-05 00:06 | fix(entries): a phone-sized window drops any drag offset | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `7de48b4c` |
 | 2026-10-05 00:02 | test: skip the open-sync check on CI only until the morph is rebuilt | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `0d2e49d1` |
 | 2026-10-04 20:55 | fix(entries): focus trap skips hidden controls; the phone window does not drag | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `962a491a` |
 | 2026-10-04 20:51 | fix(view): full screen lives in the URL, so a refresh keeps it | [#87](https://github.com/henryjonescodes/portfolio/pull/87) · `85092fc6` |
@@ -200,6 +203,10 @@ The list media animates on its own labels, the list item's wrapper no longer ani
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `release/promote-main` · from `design/retro-chrome`
 
+**20. Review and merge One list that is a carousel on phones**
+- *Why:* its PR is open and waiting on a merge
+- `review` · `entry/list` · [#88](https://github.com/henryjonescodes/portfolio/pull/88)
+
 <details><summary><b>Plans</b></summary>
 
 | Plan | Progress |
@@ -216,10 +223,10 @@ The list media animates on its own labels, the list item's wrapper no longer ani
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 15 | 1 to push | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` ◀ | One list that is a carousel on phones | review | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | 0/4 | 6 | 1 to push | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 3 | 0 to push, 2 to pull | 2D knob, mini slider and key controls, keyboard and mouse |
+| `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 5 | pushed | 2D knob, mini slider and key controls, keyboard and mouse |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
