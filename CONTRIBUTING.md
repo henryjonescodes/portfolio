@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:46 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:47 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:46 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:47 UTC by `bw board` on `feat/knob-mapping` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
@@ -28,9 +28,9 @@ flowchart LR
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
     n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Panel labels legible on the 3D in…</i>"]
-    class n_feat_knob_mapping planned
+    class n_feat_knob_mapping planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -78,9 +78,9 @@ flowchart LR
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
     n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Panel labels legible on the 3D in…</i>"]
-    class n_feat_knob_mapping planned
+    class n_feat_knob_mapping planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -162,17 +162,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**What.** In 3D the model's three knobs control whatever the info screen's panel page shows (colour hues, FX levels, sound), with a label strip on the screen naming what each knob does; the panel's labels read clearly on the 3D screen.
 
 **How, next.**
 
-- Per-part timings from the carousel tunables, shared by every width (from entry/open)
-- e2e: open and close at both widths, and a resize while open (from entry/open)
-- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- Panel labels legible on the 3D info screen (contrast and font)
+- A label strip over the three knobs naming what each controls on the current page
+- The 3D knobs drive the current page's three main controls, not only colour
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `feat/knob-mapping` |  | planned, pushed | 0/4 | Panel labels legible on the 3D info screen (contrast and font) |  |
 
 ## 🕘 Just happened
 
@@ -298,8 +298,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/knob-mapping` | The 3D knobs drive the control panel's page | planned |  | 0/4 | 0 | pushed | Panel labels legible on the 3D info screen (contrast and font) |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `feat/knob-mapping` ◀ | The 3D knobs drive the control panel's page | planned |  | 0/4 | 0 | pushed | Panel labels legible on the 3D info screen (contrast and font) |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
