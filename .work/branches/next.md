@@ -109,6 +109,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [?] Design review in 3D and lite mode
   - why: main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
   - kind: review
+- [?] Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)
+  - why: The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
+  - file: src/styles/_colors.scss#L12
+  - kind: decision
 
 ## Log
 
