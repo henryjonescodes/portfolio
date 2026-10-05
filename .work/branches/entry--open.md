@@ -20,6 +20,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 - [ ] e2e: open and close at both widths, and a resize while open
 - [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt
 - [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts
+- [ ] Phones: the entry image animates between list and window (its shape and fill now match)
 
 ## Log
 
