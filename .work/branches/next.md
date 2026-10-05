@@ -117,6 +117,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
   - file: src/data/projects.ts
   - kind: media
+- [?] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check
+  - why: The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
+  - file: public/3D/images
+  - kind: decision
 
 ## Log
 
