@@ -92,6 +92,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] 3D view socials: smaller, no Instagram, two rows of three
 - [ ] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [ ] Rule in repertoire: keep bw and the refactor's skills current while working
+- [ ] After the stream lands: DRY and code-splitting pass, delete unused code
 
 ## Log
 
