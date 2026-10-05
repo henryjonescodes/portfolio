@@ -1,6 +1,6 @@
 # Work stats
 
-_From `origin/main` to `origin/staging`, generated 2026-10-05 05:07 UTC by `bw stats`._
+_From `origin/main` to `origin/staging`, generated 2026-10-05 05:11 UTC by `bw stats`._
 
 | | |
 |---|---|
@@ -71,7 +71,7 @@ src/  🚧
 │   ├── Crosshair/  🆕
 │   ├── Efforts/  🆕  🚧
 │   ├── EntryLink/  🆕
-│   ├── EntryList/  🆕
+│   ├── EntryList/  🆕  🚧
 │   ├── EntryMedia/  🆕  🚧
 │   ├── ExperienceEntry/  🆕  🚧
 │   ├── GlitchIcon/  🆕
