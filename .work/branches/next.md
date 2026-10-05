@@ -76,6 +76,9 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
   - why: The owner wants the 3D toy on phones in landscape; iOS cannot lock orientation, so the page has to rotate itself
   - file: src/pages/landing/Scene.tsx
+- [ ] Placeholder e2e test looks inside the dialog, not the first match on the page
+  - why: Bugbot on #88: the list's hidden copy of the placeholder can be the first match
+  - file: e2e/modal.spec.ts
 
 ## Log
 
