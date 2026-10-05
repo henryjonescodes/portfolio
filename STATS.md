@@ -1,6 +1,6 @@
 # Work stats
 
-_From `origin/main` to `origin/staging`, generated 2026-10-05 09:30 UTC by `bw stats`._
+_From `origin/main` to `origin/staging`, generated 2026-10-05 09:31 UTC by `bw stats`._
 
 | | |
 |---|---|
@@ -101,7 +101,7 @@ src/  🚧
 │   ├── links/  🆕
 │   ├── projects/  🆕
 ├── styles/
-├── utils/  🆕
+├── utils/  🆕  🚧
 ```
 
 📝 **Planned, not started:**
