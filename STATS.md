@@ -8,7 +8,7 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 14:20 UTC by `bw s
 | Pull requests merged | 27 |
 | Lines added | +16,061 |
 | Lines removed | -15,672 |
-| Branches in flight | 4 |
+| Branches in flight | 3 |
 
 ## Lines by file type
 
@@ -109,4 +109,3 @@ src/  🚧
 
 - `chore/dry-pass`: DRY and code-splitting pass after the stream
 - `content/prose-requests`: Drafted prose in the request list
-- `entry/cleanup`: Tidy after the entry merge

@@ -5,7 +5,7 @@ Published 2026-10-05 14:20 UTC by `bw publish`. Nothing on this branch merges or
 | | |
 |---|---|
 | In flight | `next` |
-| Planned | `chore/dry-pass`, `content/prose-requests`, `entry/cleanup` |
+| Planned | `chore/dry-pass`, `content/prose-requests` |
 | Waiting on you | [16 questions](INBOX.md) |
 | Content to source | [20 missing](REQUESTS.md) |
 
