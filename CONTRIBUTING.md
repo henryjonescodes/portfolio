@@ -33,11 +33,11 @@ flowchart LR
     class n_entry_open planned
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
-  subgraph plan_3["📋 Portfolio roadmap"]
+  subgraph plan_2["📋 Portfolio roadmap"]
     n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
     class n_release_promote_main planned
   end
-  style plan_3 fill:#fef3c7,stroke:#64748b,color:#0f172a
+  style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_feat_control_panel["<b>A control panel for<br/>colour, type and effects</b><br/>🟩 active<br/><code>feat/control-panel</code><br/>▱▱▱▱▱▱▱▱ 0/8 · 🙋 3<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_feat_control_panel active
@@ -205,7 +205,6 @@ Co-Authored-By: Claude Sonnet <noreply@anthropic.com>
 |---|---|
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 1 of 4 branches done |
-| [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
 </details>
