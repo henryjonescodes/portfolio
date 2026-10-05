@@ -18,8 +18,7 @@
     "check:mentions": "node scripts/check-mentions.mjs",
     "requests": "node scripts/build-requests.mjs",
     "modal-frames": "node scripts/capture-modal-frames.mjs",
-    "og-image": "node scripts/capture-og-image.mjs",
-    "motion-sheet": "node scripts/motion-sheet.mjs"
+    "og-image": "node scripts/capture-og-image.mjs"
   },
   "dependencies": {
     "@react-spring/three": "^9.7.5",
