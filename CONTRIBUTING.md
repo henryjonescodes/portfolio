@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 00:06 UTC · 8 live branches · 1 PRs open · 20 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 00:07 UTC · 8 live branches · 1 PRs open · 20 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 00:06 UTC by `bw board` on `entry/list` |
+| Generated | 2026-10-05 00:07 UTC by `bw board` on `entry/window` |
 | Trunk | `staging` |
 | Live branches | 8 |
 | Open PRs | [#86](https://github.com/henryjonescodes/portfolio/pull/86) |
@@ -28,11 +28,11 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟦 planned<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_entry_list planned,current
+    class n_entry_list planned
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open planned
     n_entry_window["<b>One window for every open<br/>entry</b><br/>🟨 review · #86<br/><code>entry/window</code><br/>▰▰▰▰▰▰▰▰ 6/6"]
-    class n_entry_window review
+    class n_entry_window review,current
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph plan_3["📋 Portfolio roadmap"]
@@ -75,33 +75,30 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Resizing should re-lay out the same entries, not swap one component tree for another.
+**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
 
-**What.** Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go. Crossing the breakpoint replays line draws very quickly rather than from scratch.
+**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
 
-**How, next.**
-
-- EntryList with the list and tile presentations from CSS container queries
-- One paint-in (border, typewriter, stagger) for list items and tiles
-- Crossing the breakpoint replays line draws quickly, not from scratch
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/list` |  | planned, local only | 0/4 | EntryList with the list and tile presentations from CSS container queries | 2026-10-entry-reconcile, 0 of 4 |
+| `entry/window` | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | review, 1 to push | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
 
 ## 🕘 Just happened
 
-**test: skip the open-sync check on CI only until the morph is rebuilt** · 2026-10-05 00:02 · [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `0d2e49d1`
+**fix(entries): a phone-sized window drops any drag offset** · 2026-10-05 00:06 · [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `7de48b4c`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **test: skip the open-sync check on CI only until the morph is rebuilt** · 00:02 · [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `0d2e49d1`
 - **fix(entries): focus trap skips hidden controls; the phone window does not drag** · 20:55 · [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `962a491a`
 - **fix(view): full screen lives in the URL, so a refresh keeps it** · 20:51 · [#87](https://github.com/henryjonescodes/portfolio/pull/87) · `85092fc6`
-- **fix(about): readable skill bars; email opens mail, not a blank tab** · 20:49 · [#85](https://github.com/henryjonescodes/portfolio/pull/85) · `267bbf6a`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-04 20:49 | fix(about): readable skill bars; email opens mail, not a blank tab | [#85](https://github.com/henryjonescodes/portfolio/pull/85) · `267bbf6a` |
 | 2026-10-04 20:31 | fix(cursor): hide the system cursor only while the crosshair tracks the pointer | [#83](https://github.com/henryjonescodes/portfolio/pull/83) · `ed401577` |
 | 2026-10-04 20:28 | fix(about): NYC, tags on one row, fixed-width sliders, two rows of links | [#85](https://github.com/henryjonescodes/portfolio/pull/85) · `250dbac3` |
 | 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | [#84](https://github.com/henryjonescodes/portfolio/pull/84) · `d6f7dca5` |
@@ -219,9 +216,9 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 2/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` ◀ | One list that is a carousel on phones | planned |  | 0/4 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` | One list that is a carousel on phones | planned |  | 0/4 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` | One window for every open entry | review | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | 6/6 | 3 | pushed |  |
+| `entry/window` ◀ | One window for every open entry | review | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | 6/6 | 4 | 1 to push |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | planned |  | 0/8 | 0 | local only | 2D knob, mini slider and key controls, keyboard and mouse |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
