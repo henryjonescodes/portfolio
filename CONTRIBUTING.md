@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 14:20 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:20 UTC · 3 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-05 14:20 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 4 |
+| Live branches | 3 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -17,11 +17,6 @@
 flowchart LR
   n_staging([staging])
   class n_staging trunk
-  subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
-    class n_entry_cleanup planned
-  end
-  style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
@@ -33,7 +28,6 @@ flowchart LR
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
   n_next --> n_content_prose_requests
-  n_next --> n_entry_cleanup
   n_staging --> n_next
   n_content_prose_requests_t0["Request ids on drafted prose<br/>(summaries, blurbs, claims)"]
   class n_content_prose_requests_t0 todo
@@ -64,17 +58,12 @@ flowchart LR
   classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
-<details><summary><b>The wider world</b> · 4 live branches, 15 recent landings</summary>
+<details><summary><b>The wider world</b> · 3 live branches, 15 recent landings</summary>
 
 ```mermaid
 flowchart LR
   n_staging([staging])
   class n_staging trunk
-  subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
-    class n_entry_cleanup planned
-  end
-  style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
@@ -86,7 +75,6 @@ flowchart LR
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
   n_next --> n_content_prose_requests
-  n_next --> n_entry_cleanup
   n_staging --> n_next
   landed_0["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
   class landed_0 merged
@@ -285,7 +273,7 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 
 | Plan | Progress |
 |---|---|
-| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 3 of 4 branches done |
+| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 4 of 4 branches done (complete) |
 
 </details>
 
@@ -295,7 +283,6 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | active |  | 0/2 | 2 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
-| `entry/cleanup` | Tidy after the entry merge | planned |  | 2/2 | 0 | 109 to push |  |
 | `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 51 | 7 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
@@ -315,15 +302,6 @@ Drafted prose carries a request id like mock media does, so REQUESTS.md lists wr
 
 - [ ] Request ids on drafted prose (summaries, blurbs, claims)
 - [ ] REQUESTS.md lists prose with the draft and where it shows
-
-</details>
-
-<details><summary><code>entry/cleanup</code>: Tidy after the entry merge (2/2)</summary>
-
-Specs, skills and docs describe one entry component.
-
-- [x] Merge carousel.spec into modal.spec; drop dead styles and tunables
-- [x] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
 
 </details>
 
