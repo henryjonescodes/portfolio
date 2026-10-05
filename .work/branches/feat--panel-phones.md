@@ -1,7 +1,7 @@
 ---
 branch: feat/panel-phones
 parent: next
-status: planned
+status: landed
 title: The control panel on phones
 pr: null
 updated: 2026-10-05
