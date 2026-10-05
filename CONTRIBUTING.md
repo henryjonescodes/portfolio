@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 14:23 UTC · 3 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:23 UTC · 2 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:23 UTC by `bw board` on `content/prose-requests` |
+| Generated | 2026-10-05 14:23 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 3 |
+| Live branches | 2 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -20,14 +20,11 @@ flowchart LR
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
-    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▰▰▰▰▱▱▱▱ 1/2<br/><i>next: REQUESTS.md lists prose with the …</i>"]
-    class n_content_prose_requests planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
-  n_next --> n_content_prose_requests
   n_staging --> n_next
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
@@ -52,7 +49,7 @@ flowchart LR
   classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
-<details><summary><b>The wider world</b> · 3 live branches, 15 recent landings</summary>
+<details><summary><b>The wider world</b> · 2 live branches, 15 recent landings</summary>
 
 ```mermaid
 flowchart LR
@@ -61,58 +58,55 @@ flowchart LR
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
-    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▰▰▰▰▱▱▱▱ 1/2<br/><i>next: REQUESTS.md lists prose with the …</i>"]
-    class n_content_prose_requests planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
-  n_next --> n_content_prose_requests
   n_staging --> n_next
-  landed_0["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
+  landed_0["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
   class landed_0 merged
   n_staging --- landed_0
-  landed_1["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
+  landed_1["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
   class landed_1 merged
   n_staging --- landed_1
-  landed_2["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
+  landed_2["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
   class landed_2 merged
   n_staging --- landed_2
-  landed_3["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
+  landed_3["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
   class landed_3 merged
   n_staging --- landed_3
-  landed_4["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
+  landed_4["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
   class landed_4 merged
   n_staging --- landed_4
-  landed_5["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
+  landed_5["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
   class landed_5 merged
   n_staging --- landed_5
-  landed_6["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
+  landed_6["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
   class landed_6 merged
   n_staging --- landed_6
-  landed_7["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
+  landed_7["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
   class landed_7 merged
   n_staging --- landed_7
-  landed_8["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
+  landed_8["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
   class landed_8 merged
   n_staging --- landed_8
-  landed_9["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
+  landed_9["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
   class landed_9 merged
-  n_staging --- landed_9
-  landed_10["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
+  n_next --- landed_9
+  landed_10["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
   class landed_10 merged
-  n_staging --- landed_10
-  landed_11["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
+  n_next --- landed_10
+  landed_11["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
   class landed_11 merged
   n_next --- landed_11
-  landed_12["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
+  landed_12["✅ The 3D knobs drive the<br/>control panel's page<br/><code>feat/knob-mapping</code> · 2026-10-05"]
   class landed_12 merged
   n_next --- landed_12
-  landed_13["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
+  landed_13["✅ Tidy after the entry merge<br/><code>entry/cleanup</code> · 2026-10-05"]
   class landed_13 merged
   n_next --- landed_13
-  landed_14["✅ The 3D knobs drive the<br/>control panel's page<br/><code>feat/knob-mapping</code> · 2026-10-05"]
+  landed_14["✅ Drafted prose in the request<br/>list<br/><code>content/prose-requests</code> · 2026-10-05"]
   class landed_14 merged
   n_next --- landed_14
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
@@ -144,15 +138,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Drafted prose carries a request id like mock media does, so REQUESTS.md lists writing to approve beside the images, and approved text replaces the draft by id.
+**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
 **How, next.**
 
-- REQUESTS.md lists prose with the draft and where it shows
+- Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- e2e: open and close at both widths, and a resize while open (from entry/open)
+- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `content/prose-requests` |  | planned, 1 to push | 1/2 | REQUESTS.md lists prose with the draft and where it shows |  |
+| `next` |  | active, 12 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
@@ -260,21 +256,12 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 - *Why:* main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
 - `review` · `next`
 
-<details><summary><b>Plans</b></summary>
-
-| Plan | Progress |
-|---|---|
-| [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 4 of 4 branches done (complete) |
-
-</details>
-
 <details><summary><b>All branches</b></summary>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `content/prose-requests` ◀ | Drafted prose in the request list | planned |  | 1/2 | 0 | 1 to push | REQUESTS.md lists prose with the draft and where it shows |
-| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | 11 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | 12 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
 
@@ -284,15 +271,6 @@ Once the stream's work is in, one pass removes dead code and styles, merges dupl
 - [ ] Merge duplicated helpers and styles
 - [ ] Check route and 3D code splitting in the bundle report
 - [ ] Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet)
-
-</details>
-
-<details><summary><code>content/prose-requests</code>: Drafted prose in the request list (1/2)</summary>
-
-Drafted prose carries a request id like mock media does, so REQUESTS.md lists writing to approve beside the images, and approved text replaces the draft by id.
-
-- [x] Request ids on drafted prose (summaries, blurbs, claims)
-- [ ] REQUESTS.md lists prose with the draft and where it shows
 
 </details>
 
