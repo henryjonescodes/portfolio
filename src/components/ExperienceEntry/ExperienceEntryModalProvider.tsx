@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { motion, useReducedMotion } from 'framer-motion';
 import React, { useEffect, useRef, useState, type CSSProperties } from 'react';
 import { useLocation } from 'react-router-dom';
-import EntryMediaView from '@components/EntryMedia';
+import EntryMediaView, { type MediaStart } from '@components/EntryMedia';
 import ExperienceEntry from '@components/ExperienceEntry';
 import type { EntryData } from '@components/ExperienceEntry/types';
 import { useAnimations } from '@context/AnimationContext';
@@ -20,6 +20,20 @@ const PARAMS = { entry: 'entry', effort: 'effort', size: 'size' } as const;
 
 type ExperienceEntryModalProviderProps = {
   children: React.ReactNode;
+};
+
+/** A still of a playing video and its time, or null when it has no frame to give yet. */
+const videoStart = (video?: HTMLVideoElement | null): MediaStart | null => {
+  if (!video || video.readyState < 2 || !video.videoWidth) return null;
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d')?.drawImage(video, 0, 0);
+    return { poster: canvas.toDataURL('image/jpeg', 0.8), time: video.currentTime };
+  } catch {
+    return null;
+  }
 };
 
 export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalProviderProps) => {
@@ -59,6 +73,8 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   // Whether the source shows an image; if not, the closed window hides its image pane too, so
   // the pane grows in as it opens instead of popping in.
   const [sourceHasMedia, setSourceHasMedia] = useState(true);
+  // The source's video frame and time, so the window's video carries on rather than blinking.
+  const [mediaStart, setMediaStart] = useState<MediaStart | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
   // Read by animation callbacks, which can fire from a window that a newer open replaced.
   const closingRef = useRef(false);
@@ -92,6 +108,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
     const stage = stageRef.current;
     const box = el && stage ? (boxWithin(el, stage) as Record<string, number>) : null;
     setSource(el);
+    setMediaStart(videoStart(el?.querySelector('video')));
     // Only an image the visitor can see counts (a list item may hold one CSS hides).
     setSourceHasMedia(
       [...(el?.querySelectorAll('img, video, [role="img"]') ?? [])].some(
@@ -132,6 +149,10 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
 
   const closeModal = () => {
     play('close');
+    // The list's video picks up where the window's left off.
+    const playing = dialogRef.current?.querySelector('video');
+    const resting = source?.querySelector('video');
+    if (playing && resting) resting.currentTime = playing.currentTime;
     closingRef.current = true;
     setIsClosing(true);
     setPageOpen(false);
@@ -229,7 +250,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
         >
           {selectedEntry.media && (
             <div className={styles.media}>
-              <EntryMediaView media={selectedEntry.media} />
+              <EntryMediaView media={selectedEntry.media} start={mediaStart} />
             </div>
           )}
         </ExperienceEntry>
