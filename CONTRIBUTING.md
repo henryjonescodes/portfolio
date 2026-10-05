@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 09:30 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:00 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 09:30 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:00 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
