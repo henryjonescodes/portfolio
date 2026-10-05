@@ -23,9 +23,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Colour page with presets (from feat/control-panel)
 - [ ] Type page (families, size, typewriter) (from feat/control-panel)
 - [ ] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
-- [?] Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
+- [x] Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
   - why: The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
   - kind: decision
+  - answer: Stay full retro, and maybe add one synthwave face
 - [?] Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)
   - why: Synthesised sounds need no files and stay tiny; samples sound richer but you would choose them.
   - kind: decision
@@ -67,6 +68,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
   - kind: media
   - file: src/data/experience.ts
+- [ ] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 
 ## Log
 
@@ -74,3 +76,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: carried 4 open todo(s) from entry/list
 - 2026-10-05: carried 8 open todo(s) from feat/control-panel
 - 2026-10-05: carried 11 open todo(s) from feat/content-requests
+- 2026-10-05: answered "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
