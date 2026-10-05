@@ -1,6 +1,6 @@
 # Work stats
 
-_From `origin/main` to `origin/staging`, generated 2026-10-05 13:07 UTC by `bw stats`._
+_From `origin/main` to `origin/staging`, generated 2026-10-05 13:08 UTC by `bw stats`._
 
 | | |
 |---|---|
@@ -8,7 +8,7 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 13:07 UTC by `bw s
 | Pull requests merged | 27 |
 | Lines added | +16,061 |
 | Lines removed | -15,672 |
-| Branches in flight | 7 |
+| Branches in flight | 6 |
 
 ## Lines by file type
 
@@ -111,4 +111,3 @@ src/  🚧
 - `entry/cleanup`: Tidy after the entry merge
 - `entry/open`: One open morph, the carousel's, at every width
 - `feat/panel-knob`: A 2D knob and mini sliders for the control panel
-- `feat/panel-phones`: The control panel on phones

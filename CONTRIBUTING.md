@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:07 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:08 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:07 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:08 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | none |
@@ -18,26 +18,26 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▰▰▰▰▰ 3/3"]
-    class n_feat_panel_phones active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
-  n_next --> n_feat_panel_phones
   n_staging --> n_next
-  n_next_m0["✅ <code>feat/phone-3d</code>"]
+  n_next_m0["✅ <code>feat/panel-phones</code>"]
   class n_next_m0 merged
   n_next_m0 --> n_next
-  n_next_m1["✅ <code>feat/synth</code>"]
+  n_next_m1["✅ <code>feat/phone-3d</code>"]
   class n_next_m1 merged
   n_next_m1 --> n_next
-  n_next_m2["✅ <code>entry/list</code>"]
+  n_next_m2["✅ <code>feat/synth</code>"]
   class n_next_m2 merged
   n_next_m2 --> n_next
-  n_next_m3["✅ <code>feat/content-requests</code>"]
+  n_next_m3["✅ <code>entry/list</code>"]
   class n_next_m3 merged
   n_next_m3 --> n_next
+  n_next_m4["✅ <code>feat/content-requests</code>"]
+  class n_next_m4 merged
+  n_next_m4 --> n_next
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -55,13 +55,13 @@ flowchart LR
 flowchart LR
   n_staging([staging])
   class n_staging trunk
-  subgraph plan_1["📋 One entry component: list"]
+  subgraph plan_0["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/7<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open planned
   end
-  style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
+  style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
@@ -69,8 +69,8 @@ flowchart LR
     class n_content_prose_requests planned
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Knob component: drag, wheel and a…</i>"]
     class n_feat_panel_knob planned
-    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▰▰▰▰▰ 3/3"]
-    class n_feat_panel_phones active
+    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▰▰▰▰▰▰▰▰ 3/3"]
+    class n_feat_panel_phones planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active,current
   end
@@ -117,11 +117,11 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/45 | nothing open |  |
+| `next` |  | active, 7 to push | 29/45 | nothing open |  |
 
 ## 🕘 Just happened
 
-**feat(panel): a bottom sheet on phones, and the waveform keys in one row** · 2026-10-05 13:07 · `feat/panel-phones` · `b795c7ca`
+**feat(panel): a bottom sheet on phones, and the waveform keys in one row** · 2026-10-05 13:07 · `next` · `b795c7ca`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 - **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
@@ -228,9 +228,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Plan | Progress |
 |---|---|
-| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 3 of 3 branches done (complete) |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 2 of 4 branches done |
-| [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 4 of 4 branches done (complete) |
 
 </details>
 
@@ -243,8 +241,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `feat/panel-phones` | The control panel on phones | active |  | 3/3 | 1 | 4 to push |  |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | pushed |  |
+| `feat/panel-phones` | The control panel on phones | planned |  | 3/3 | 0 | 4 to push |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | 7 to push |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
