@@ -93,6 +93,15 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: The resume PDF is the 2024 copy from the old site and predates Arbor
+<!-- bw:q {"branch":"next","text":"The resume PDF is the 2024 copy from the old site and predates Arbor"} -->
+*Why it matters:* The linked resume predates Arbor; send a new PDF or keep the old one for now.
+*Where:* `public/pdf/Henry-Jones-Resume.pdf`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
