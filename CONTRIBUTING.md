@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:54 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:10 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:54 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 14:10 UTC by `bw board` on `content/prose-requests` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -18,23 +18,35 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
-    class n_entry_cleanup planned
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
+    class n_entry_cleanup active
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
-    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
-    class n_content_prose_requests planned
+    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
+    class n_content_prose_requests active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
   n_next --> n_content_prose_requests
   n_next --> n_entry_cleanup
   n_staging --> n_next
+  n_content_prose_requests_t0["Request ids on drafted prose<br/>(summaries, blurbs, claims)"]
+  class n_content_prose_requests_t0 todo
+  n_content_prose_requests -.-> n_content_prose_requests_t0
+  n_content_prose_requests_t1["REQUESTS.md lists prose with<br/>the draft and where it shows"]
+  class n_content_prose_requests_t1 todo
+  n_content_prose_requests -.-> n_content_prose_requests_t1
+  n_entry_cleanup_t0["Merge carousel.spec into<br/>modal.spec; drop dead styles<br/>and t…"]
+  class n_entry_cleanup_t0 todo
+  n_entry_cleanup -.-> n_entry_cleanup_t0
+  n_entry_cleanup_t1["Update the layout-modal,<br/>carousel-spec and entry-panels<br/>ski…"]
+  class n_entry_cleanup_t1 todo
+  n_entry_cleanup -.-> n_entry_cleanup_t1
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -65,17 +77,17 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
-    class n_entry_cleanup planned
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
+    class n_entry_cleanup active
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
     class n_chore_dry_pass planned
-    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
-    class n_content_prose_requests planned
+    n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
+    class n_content_prose_requests active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -156,17 +168,16 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**What.** Drafted prose carries a request id like mock media does, so REQUESTS.md lists writing to approve beside the images, and approved text replaces the draft by id.
 
 **How, next.**
 
-- Per-part timings from the carousel tunables, shared by every width (from entry/open)
-- e2e: open and close at both widths, and a resize while open (from entry/open)
-- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- Request ids on drafted prose (summaries, blurbs, claims)
+- REQUESTS.md lists prose with the draft and where it shows
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `content/prose-requests` |  | active, 41 to push | 0/2 | Request ids on drafted prose (summaries, blurbs, claims) |  |
 
 ## 🕘 Just happened
 
@@ -286,9 +297,9 @@ Colour turns the hues, Type the font, text size and motion speed, FX the CRT, vo
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
-| `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `content/prose-requests` ◀ | Drafted prose in the request list | active |  | 0/2 | 1 | 41 to push | Request ids on drafted prose (summaries, blurbs, claims) |
+| `entry/cleanup` | Tidy after the entry merge | active |  | 0/2 | 1 | 106 to push | Merge carousel.spec into modal.spec; drop dead styles and tunables |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
 
