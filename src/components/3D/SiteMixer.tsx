@@ -4,12 +4,12 @@ import { useLocation } from 'react-router-dom';
 import * as THREE from 'three';
 import type { GLTF } from 'three-stdlib';
 import { TextureLoader, Vector2 } from '$three';
-import { useColors } from '@context/ColorsContext';
 import { useControlPanel, type ControlPanelPage } from '@context/ControlPanelContext';
 import { useZoom } from '@context/ZoomContext';
 import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';
 import { Button } from './Button';
 import { Knob } from './Knob';
+import { usePanelKnobs, type PanelKnob } from '@components/ControlPanel/usePanelKnobs';
 
 // Type definition for GLTF model (generated via gltfjsx)
 type SiteMixerGLTF = GLTF & {
@@ -47,10 +47,20 @@ texturePaths.forEach((path) => useLoader.preload(TextureLoader, path));
 const DRACO_DECODER = '/draco/';
 useGLTF.preload('/3D/models/site-mixer-1.glb', DRACO_DECODER);
 
+/** A control's value as a knob angle, a full turn spanning its range. */
+const toDegrees = (k: PanelKnob) => ((k.value - k.min) / (k.max - k.min)) * 360;
+
+const fromDegrees = (k: PanelKnob, degrees: number) => {
+  const raw = k.min + (degrees / 360) * (k.max - k.min);
+  const stepped = Math.round(raw / k.step) * k.step;
+  if (stepped !== k.value) k.set(Number(stepped.toFixed(4)));
+};
+
 export function SiteMixer(props: JSX.IntrinsicElements['group']) {
   const location = useLocation();
   const navigate = useNavigatePreserveQuery();
-  const { primaryHues, setPrimaryHues } = useColors();
+  // The knobs turn the three main controls of whichever panel page the info screen shows.
+  const knobs = usePanelKnobs();
   const { setPage: setPanelPage } = useControlPanel();
   const { zoomLevel, toggleInfoModeZoomPosition } = useZoom();
 
@@ -199,39 +209,24 @@ export function SiteMixer(props: JSX.IntrinsicElements['group']) {
       <Knob
         name="Knob-L"
         position={[0.631, 0.076, 0.081]}
-        rotation={primaryHues.foregroundPrimary}
-        onChange={(newHue) => {
-          setPrimaryHues((prev) => ({
-            ...prev,
-            foregroundPrimary: newHue,
-          }));
-        }}
+        rotation={toDegrees(knobs[0])}
+        onChange={(degrees) => fromDegrees(knobs[0], degrees)}
       >
         <mesh castShadow receiveShadow geometry={nodes.knobl.geometry} material={materials.bake} />
       </Knob>
       <Knob
         name="Knob-C"
         position={[0.766, 0.076, 0.081]}
-        rotation={primaryHues.backgroundPrimary}
-        onChange={(newHue) => {
-          setPrimaryHues((prev) => ({
-            ...prev,
-            backgroundPrimary: newHue,
-          }));
-        }}
+        rotation={toDegrees(knobs[1])}
+        onChange={(degrees) => fromDegrees(knobs[1], degrees)}
       >
         <mesh castShadow receiveShadow geometry={nodes.knobc.geometry} material={materials.bake} />
       </Knob>
       <Knob
         name="Knob-R"
         position={[0.901, 0.076, 0.081]}
-        rotation={primaryHues.accentPrimary}
-        onChange={(newHue) => {
-          setPrimaryHues((prev) => ({
-            ...prev,
-            accentPrimary: newHue,
-          }));
-        }}
+        rotation={toDegrees(knobs[2])}
+        onChange={(degrees) => fromDegrees(knobs[2], degrees)}
       >
         <mesh castShadow receiveShadow geometry={nodes.knobr.geometry} material={materials.bake} />
       </Knob>

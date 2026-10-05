@@ -3,6 +3,7 @@ import GalleryIcon from '@assets/svg/icons/gallery.svg?react';
 import Home from '@assets/svg/icons/home.svg?react';
 import type { Effort } from '@components/ExperienceEntry/types';
 import NavBarItem from '@components/NavBar/NavbarItem';
+import { useRovingFocus } from '@hooks/useRovingFocus';
 import { GALLERY } from './subpages';
 import styles from './efforts.module.scss';
 
@@ -34,37 +35,28 @@ const EffortNav = ({
     ...efforts.map(({ id, title, Icon, paint }) => ({ id, title, Icon, paint })),
     ...(hasGallery ? [{ id: GALLERY, title: 'Gallery', Icon: GalleryIcon }] : []),
   ];
-  const refs = useRef<(HTMLElement | null)[]>([]);
   const selectedIndex = Math.max(
     0,
     tabs.findIndex((t) => t.id === (selected ?? '')),
   );
+
+  const select = (index: number) => onSelect(tabs[index].id || null);
+  const roving = useRovingFocus(tabs.length, select);
 
   // A mention that switches tabs unmounts itself; hand focus to the tab it selected.
   const shown = useRef(selectedIndex);
   useEffect(() => {
     if (shown.current === selectedIndex) return;
     shown.current = selectedIndex;
-    if (document.activeElement === document.body) refs.current[selectedIndex]?.focus();
-  }, [selectedIndex]);
-
-  const select = (index: number) => onSelect(tabs[index].id || null);
-
-  const onKeyDown = (e: React.KeyboardEvent, index: number) => {
-    const step = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-    if (!step) return;
-    e.preventDefault();
-    const next = (index + step + tabs.length) % tabs.length;
-    select(next);
-    refs.current[next]?.focus();
-  };
+    if (document.activeElement === document.body) roving.focus(selectedIndex);
+  }, [selectedIndex, roving]);
 
   return (
     <div className={inline ? styles.inline : styles.subnav} role="tablist" aria-label="Sections">
       {tabs.map((tab, i) => (
         <NavBarItem
           key={tab.id || 'overview'}
-          itemRef={(el) => (refs.current[i] = el)}
+          itemRef={roving.itemRef(i)}
           label={tab.title}
           Icon={tab.Icon}
           // Inline in a window bar, the tabs are the main nav's own mini items.
@@ -78,7 +70,7 @@ const EffortNav = ({
             id: `${idPrefix}-tab-${tab.id || 'overview'}`,
             // Only a subpage's view is a labelled panel; the overview is the entry itself.
             controls: i === selectedIndex && tab.id ? `${idPrefix}-panel` : undefined,
-            onKeyDown: (e) => onKeyDown(e, i),
+            onKeyDown: (e) => roving.onKeyDown(e, i),
           }}
         />
       ))}

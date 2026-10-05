@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import React from 'react';
 import TypewriterText from '@components/TypewriterText';
 import { useAnimations } from '@context/AnimationContext';
+import { useSound } from '@hooks/useSound';
 import styles from './nav-bar.module.scss';
 
 // NavBarItem Component
@@ -40,6 +41,11 @@ const NavBarItem = ({
   itemRef,
 }: NavBarItemProps) => {
   const { TRANSITIONS } = useAnimations();
+  const play = useSound();
+  const press = () => {
+    play('click');
+    onClick();
+  };
 
   const borderVariants = {
     initial: {
@@ -69,7 +75,7 @@ const NavBarItem = ({
       })}
       onClick={(e) => {
         e.stopPropagation();
-        onClick();
+        press();
       }}
       aria-label={label}
       {...(tab
@@ -84,7 +90,7 @@ const NavBarItem = ({
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          onClick();
+          press();
         } else tab?.onKeyDown(e);
       }}
     >

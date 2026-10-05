@@ -14,15 +14,14 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 
 ## Todo
 
-- [ ] EntryList with the list and tile presentations from CSS container queries (from entry/list)
-- [ ] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
-- [ ] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
-- [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
-- [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
-- [ ] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
-- [ ] Colour page with presets (from feat/control-panel)
-- [ ] Type page (families, size, typewriter) (from feat/control-panel)
-- [ ] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
+- [x] EntryList with the list and tile presentations from CSS container queries (from entry/list)
+- [x] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
+- [x] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
+- [x] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
+- [x] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
+- [x] Colour page with presets (from feat/control-panel)
+- [x] Type page (families, size, typewriter) (from feat/control-panel)
+- [x] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
 - [x] Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
   - why: The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
   - kind: decision
@@ -35,9 +34,9 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
   - kind: decision
   - answer: Yes, phones too where possible: the site is a resume but a toy at heart
-- [ ] Request ids on mock media and drafted prose (from feat/content-requests)
-- [ ] Sourced files and prose resolve by id at build time (from feat/content-requests)
-- [ ] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
+- [x] Request ids on mock media and drafted prose (from feat/content-requests)
+- [x] Sourced files and prose resolve by id at build time (from feat/content-requests)
+- [x] npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
 - [?] Approve per-entry preview images, or generate them (from feat/shareable-urls) (from feat/content-requests)
   - why: Shared links show a per-page title and description, but one site-wide image for every entry.
   - kind: decision
@@ -70,15 +69,60 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: Every entry, effort and gallery shows a labelled stand-in until a real image or video arrives.
   - kind: media
   - file: src/data/experience.ts
-- [ ] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
-- [ ] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
-- [ ] Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
-- [ ] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
+- [x] Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
+- [x] Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- [x] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
   - why: The owner wants the 3D toy on phones in landscape; iOS cannot lock orientation, so the page has to rotate itself
   - file: src/pages/landing/Scene.tsx
-- [ ] Placeholder e2e test looks inside the dialog, not the first match on the page
+- [x] Placeholder e2e test looks inside the dialog, not the first match on the page
   - why: Bugbot on #88: the list's hidden copy of the placeholder can be the first match
   - file: e2e/modal.spec.ts
+- [x] Entry tabs use the shared useRovingFocus hook
+- [x] Modal window gets a max width on wide screens
+- [x] Window bar: the entry name has no left divider in the modal
+- [x] Nav item hover: the underline collapses smoothly when the pointer leaves
+- [x] Close button: full size, border-colour fill with the X knocked out
+- [x] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
+- [x] Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects
+- [x] 3D view socials: smaller, no Instagram, two rows of three
+- [x] Page toolkit: layout ideas and components for building pages with content, delivered as skills
+- [x] Rule in repertoire: keep bw and the refactor's skills current while working
+- [x] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
+- [?] Review the Arbor and project blurbs (written from existing descriptions)
+  - why: They were rewritten from older descriptions and are the first thing visitors read in each entry.
+  - file: src/data/experience.ts
+  - kind: prose
+- [?] Decide where /links appears (home menu, nav bar, or as home like the old branch)
+  - why: The page exists and About links to it, but nothing else on the site leads there.
+  - file: src/pages/links/index.tsx
+  - kind: decision
+- [?] The resume PDF is the 2024 copy from the old site and predates Arbor
+  - why: The linked resume predates Arbor; send a new PDF or keep the old one for now.
+  - file: public/pdf/Henry-Jones-Resume.pdf
+  - kind: media
+- [?] Design review in 3D and lite mode
+  - why: main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
+  - kind: review
+- [?] Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)
+  - why: The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
+  - file: src/styles/_colors.scss#L12
+  - kind: decision
+- [?] Curate real panel content (screenshots, galleries, stats) per project
+  - why: Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
+  - file: src/data/projects.ts
+  - kind: media
+- [?] Allow lossy WebP for the colour bake (q85 saves about 0.8 MB more) after a visual check
+  - why: The 3D colour texture could be about 0.8 MB smaller, but only if it still looks right to you.
+  - file: public/3D/images
+  - kind: decision
+- [?] Approve the share image and description, and confirm the canonical domain is henryjones.xyz
+  - why: Every shared link shows this card; it also settles which domain is canonical.
+  - file: public/og-image.png
+  - kind: decision
+- [ ] Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- [ ] e2e: open and close at both widths, and a resize while open (from entry/open)
+- [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts (from entry/open)
 
 ## Log
 
@@ -89,3 +133,36 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: answered "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face
 - 2026-10-05: answered "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
 - 2026-10-05: answered "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
+- 2026-10-05: done "EntryList with the list and tile presentations from CSS container queries (from entry/list)" at c16a0721
+- 2026-10-05: done "One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)" at 72fc4a56
+- 2026-10-05: done "Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)" at 410d170d
+- 2026-10-05: done "Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)" at e64b5f53
+- 2026-10-05: done "Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)" at 126027bd
+- 2026-10-05: done "Colour page with presets (from feat/control-panel)" at 26849088
+- 2026-10-05: done "Type page (families, size, typewriter) (from feat/control-panel)" at 216bbb4f
+- 2026-10-05: done "FX page (CRT, grain, motion speed, sound) (from feat/control-panel)" at 6232ae9f
+- 2026-10-05: done "Request ids on mock media and drafted prose (from feat/content-requests)" at 20040d4d
+- 2026-10-05: done "Sourced files and prose resolve by id at build time (from feat/content-requests)" at 8e04965b
+- 2026-10-05: done "Entry tabs use the shared useRovingFocus hook" at ad9e6486
+- 2026-10-05: done "Placeholder e2e test looks inside the dialog, not the first match on the page" at b0467dda
+- 2026-10-05: done "Act on the answer to "Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)": Stay full retro, and maybe add one synthwave face" at 84a8c8a2
+- 2026-10-05: done "Modal window gets a max width on wide screens" at 5174cb51
+- 2026-10-05: done "Nav item hover: the underline collapses smoothly when the pointer leaves" at b93b0e58
+- 2026-10-05: done "Close button: full size, border-colour fill with the X knocked out" at 5da8f30e
+- 2026-10-05: done "StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper" at 3d4c09c4
+- 2026-10-05: done "Retro grid background: wide dashed grid (dashes about 80% of a cell), circular mask, full page below the header, layered with the existing effects" at 30285022
+- 2026-10-05: done "3D view socials: smaller, no Instagram, two rows of three" at 7d00a432
+- 2026-10-05: done "Page toolkit: layout ideas and components for building pages with content, delivered as skills" at 7a2760b3
+- 2026-10-05: done "Rule in repertoire: keep bw and the refactor's skills current while working" at c213133f
+- 2026-10-05: done "Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy" at bf04726a
+- 2026-10-05: Phone window media now keeps the tile's 16:10 shape and fills its box; the presence hand-off between tile and window still needs the owner's eye on a phone
+- 2026-10-05: done "npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)" at b2f27d68
+- 2026-10-05: done "Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)" at 222ef607
+- 2026-10-05: done "Window bar: the entry name has no left divider in the modal" at a80e210d
+- 2026-10-05: done "Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets" at 2800e9ec
+- 2026-10-05: dropped "2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)"
+- 2026-10-05: dropped "Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart"
+- 2026-10-05: dropped "Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images"
+- 2026-10-05: dropped "Phones: the entry image animates between list and window, and fills its space"
+- 2026-10-05: dropped "After the stream lands: DRY and code-splitting pass, delete unused code"
+- 2026-10-05: carried 4 open todo(s) from entry/open
