@@ -20,8 +20,8 @@ flowchart LR
   subgraph plan_0["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▰▰▱▱▱▱▱ 3/7<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_entry_open active
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▰▰▰▱▱▱▱▱ 3/7<br/><i>next: Per-part timings from the carouse…</i>"]
+    class n_entry_open planned
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -41,18 +41,6 @@ flowchart LR
   n_next --> n_entry_open
   n_next --> n_feat_panel_knob
   n_staging --> n_next
-  n_entry_open_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
-  class n_entry_open_t0 todo
-  n_entry_open -.-> n_entry_open_t0
-  n_entry_open_t1["e2e: open and close at both<br/>widths, and a resize while<br/>open"]
-  class n_entry_open_t1 todo
-  n_entry_open -.-> n_entry_open_t1
-  n_entry_open_t2["The 'content never ahead of<br/>the window' check fails on the<br/>…"]
-  class n_entry_open_t2 todo
-  n_entry_open -.-> n_entry_open_t2
-  n_entry_open_t3["Re-enable the CI skip on the<br/>open-sync check in<br/>e2e/modal.s…"]
-  class n_entry_open_t3 todo
-  n_entry_open -.-> n_entry_open_t3
   n_feat_panel_knob_t0["Knob component: drag, wheel<br/>and arrow keys, with aria<br/>slide…"]
   class n_feat_panel_knob_t0 todo
   n_feat_panel_knob -.-> n_feat_panel_knob_t0
@@ -85,8 +73,8 @@ flowchart LR
   subgraph plan_0["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▰▰▱▱▱▱▱ 3/7<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_entry_open active
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▰▰▰▱▱▱▱▱ 3/7<br/><i>next: Per-part timings from the carouse…</i>"]
+    class n_entry_open planned
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -106,49 +94,49 @@ flowchart LR
   n_next --> n_entry_open
   n_next --> n_feat_panel_knob
   n_staging --> n_next
-  landed_0["✅ Accessibility pass<br/><code>a11y/pass</code> · 2026-10-04"]
+  landed_0["✅ Modal opens as cleanly as it<br/>closes<br/><code>anim/modal-open</code> · 2026-10-04"]
   class landed_0 merged
   n_staging --- landed_0
-  landed_1["✅ Modal opens as cleanly as it<br/>closes<br/><code>anim/modal-open</code> · 2026-10-04"]
+  landed_1["✅ Real copy and missing<br/>content<br/><code>content/real-copy</code> · 2026-10-04"]
   class landed_1 merged
   n_staging --- landed_1
-  landed_2["✅ Real copy and missing<br/>content<br/><code>content/real-copy</code> · 2026-10-04"]
+  landed_2["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
   class landed_2 merged
   n_staging --- landed_2
-  landed_3["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
+  landed_3["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
   class landed_3 merged
   n_staging --- landed_3
-  landed_4["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
+  landed_4["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
   class landed_4 merged
   n_staging --- landed_4
-  landed_5["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
+  landed_5["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
   class landed_5 merged
   n_staging --- landed_5
-  landed_6["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
+  landed_6["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
   class landed_6 merged
   n_staging --- landed_6
-  landed_7["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
+  landed_7["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
   class landed_7 merged
   n_staging --- landed_7
-  landed_8["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
+  landed_8["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
   class landed_8 merged
   n_staging --- landed_8
-  landed_9["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
+  landed_9["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
   class landed_9 merged
   n_staging --- landed_9
-  landed_10["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
+  landed_10["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
   class landed_10 merged
   n_staging --- landed_10
-  landed_11["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
+  landed_11["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
   class landed_11 merged
   n_staging --- landed_11
-  landed_12["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
+  landed_12["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
   class landed_12 merged
   n_staging --- landed_12
-  landed_13["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
+  landed_13["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
   class landed_13 merged
-  n_staging --- landed_13
-  landed_14["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
+  n_next --- landed_13
+  landed_14["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
   class landed_14 merged
   n_next --- landed_14
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
@@ -186,25 +174,24 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/45 | nothing open |  |
+| `next` |  | active, 13 to push | 29/45 | nothing open |  |
 
 ## 🕘 Just happened
 
-**chore(scripts): motion-sheet moves to the portfolio-motion-sheet skill in repertoire** · 2026-10-05 13:39 · `entry/open` · `da2ab139`
+**chore(scripts): motion-sheet moves to the portfolio-motion-sheet skill in repertoire** · 2026-10-05 13:39 · `next` · `da2ab139`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
-- **fix(entries): a video carries its frame and time between list and window** · 13:37 · `entry/open` · `48913e6f`
-- **fix(nav): the window bar spans its window at a fixed 40px, and Close simply fills its slot** · 13:33 · `entry/open` · `9922dfdd`
-- **feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line** · 13:22 · `entry/open` · `72f91b91`
+- **fix(entries): a video carries its frame and time between list and window** · 13:37 · `next` · `48913e6f`
+- **fix(nav): the window bar spans its window at a fixed 40px, and Close simply fills its slot** · 13:33 · `next` · `9922dfdd`
+- **feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line** · 13:22 · `next` · `72f91b91`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 13:21 | perf(crosshair): follow raw pointer updates, re-render only when state changes | `entry/open` · `21de6907` |
-| 2026-10-05 13:21 | feat(scripts): motion-sheet captures an animation in real time as one contact sheet | `entry/open` · `aba8b241` |
+| 2026-10-05 13:21 | perf(crosshair): follow raw pointer updates, re-render only when state changes | `next` · `21de6907` |
+| 2026-10-05 13:21 | feat(scripts): motion-sheet captures an animation in real time as one contact sheet | `next` · `aba8b241` |
 | 2026-10-05 13:15 | feat(panel): rotary knobs for hues and sound filter, mini slider styling | `feat/panel-knob` · `cb52e756` |
-| 2026-10-05 13:07 | feat(panel): a bottom sheet on phones, and the waveform keys in one row | `next` · `b795c7ca` |
 | 2026-10-05 02:09 | test(panel): skip the full screen round trip on CI, which cannot load the 3D scene | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b` |
 | 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
 | 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
@@ -315,9 +302,9 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` | One open morph, the carousel's, at every width | active |  | 3/7 | 7 | 87 to push | Per-part timings from the carousel tunables, shared by every width |
+| `entry/open` | One open morph, the carousel's, at every width | planned |  | 3/7 | 0 | 87 to push | Per-part timings from the carousel tunables, shared by every width |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 43 | 13 to push |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
