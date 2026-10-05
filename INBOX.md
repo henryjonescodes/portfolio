@@ -119,6 +119,15 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: Curate real panel content (screenshots, galleries, stats) per project
+<!-- bw:q {"branch":"next","text":"Curate real panel content (screenshots, galleries, stats) per project"} -->
+*Why it matters:* Project modals show panels built from existing copy only; screenshots, galleries and stats make them worth opening.
+*Where:* `src/data/projects.ts`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
