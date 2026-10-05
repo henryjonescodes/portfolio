@@ -81,7 +81,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - file: e2e/modal.spec.ts
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
   - file: scripts/build-requests.mjs
-- [ ] Entry tabs use the shared useRovingFocus hook
+- [x] Entry tabs use the shared useRovingFocus hook
 
 ## Log
 
@@ -102,3 +102,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "FX page (CRT, grain, motion speed, sound) (from feat/control-panel)" at 6232ae9f
 - 2026-10-05: done "Request ids on mock media and drafted prose (from feat/content-requests)" at 20040d4d
 - 2026-10-05: done "Sourced files and prose resolve by id at build time (from feat/content-requests)" at 8e04965b
+- 2026-10-05: done "Entry tabs use the shared useRovingFocus hook" at ad9e6486
