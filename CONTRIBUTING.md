@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 00:12 UTC by `bw board` on `entry/list` |
+| Generated | 2026-10-05 00:12 UTC by `bw board` on `entry/window` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | none |
@@ -28,16 +28,16 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟩 active<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_entry_list active,current
+    class n_entry_list active
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open planned
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
-  subgraph plan_2["📋 Portfolio roadmap"]
+  subgraph plan_3["📋 Portfolio roadmap"]
     n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
     class n_release_promote_main planned
   end
-  style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
+  style plan_3 fill:#fef3c7,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_feat_control_panel["<b>A control panel for<br/>colour, type and effects</b><br/>🟩 active<br/><code>feat/control-panel</code><br/>▱▱▱▱▱▱▱▱ 0/8 · 🙋 3<br/><i>next: 2D knob, mini slider and key cont…</i>"]
     class n_feat_control_panel active
@@ -202,6 +202,7 @@ One ControlPanel component renders on the 3D info screen and as a floating windo
 |---|---|
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 1 of 4 branches done |
+| [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
 </details>
@@ -212,7 +213,7 @@ One ControlPanel component renders on the 3D info screen and as a floating windo
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 5 | local only | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` | One list that is a carousel on phones | active |  | 0/4 | 5 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 3 | pushed | 2D knob, mini slider and key controls, keyboard and mouse |
