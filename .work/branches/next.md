@@ -79,6 +79,8 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Placeholder e2e test looks inside the dialog, not the first match on the page
   - why: Bugbot on #88: the list's hidden copy of the placeholder can be the first match
   - file: e2e/modal.spec.ts
+- [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
+  - file: scripts/build-requests.mjs
 
 ## Log
 
