@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-04 20:55 UTC · 10 live branches · 0 PRs open · 19 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 00:02 UTC · 10 live branches · 0 PRs open · 19 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-04 20:55 UTC by `bw board` on `entry/window` |
+| Generated | 2026-10-05 00:02 UTC by `bw board` on `entry/window` |
 | Trunk | `staging` |
 | Live branches | 10 |
 | Open PRs | none |
@@ -81,22 +81,22 @@ flowchart LR
 
 ## 🕘 Just happened
 
-**fix(entries): focus trap skips hidden controls; the phone window does not drag** · 2026-10-04 20:55 · `entry/window` · `962a491a`
+**test: skip the open-sync check on CI only until the morph is rebuilt** · 2026-10-05 00:02 · `entry/window` · `0d2e49d1`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **fix(entries): focus trap skips hidden controls; the phone window does not drag** · 20:55 · `entry/window` · `962a491a`
 - **fix(view): full screen lives in the URL, so a refresh keeps it** · 20:51 · `fix/fullscreen-url` · `85092fc6`
 - **fix(about): readable skill bars; email opens mail, not a blank tab** · 20:49 · `fix/about-card` · `267bbf6a`
-- **feat(entries): phone tiles open the shared window, full screen, image first** · 20:47 · `entry/window` · `c69e8718`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-04 20:31 | fix(cursor): hide the system cursor only while the crosshair tracks the pointer | `fix/fullscreen-url` · `ed401577` |
+| 2026-10-04 20:31 | fix(cursor): hide the system cursor only while the crosshair tracks the pointer | [#83](https://github.com/henryjonescodes/portfolio/pull/83) · `ed401577` |
 | 2026-10-04 20:28 | fix(about): NYC, tags on one row, fixed-width sliders, two rows of links | `fix/about-card` · `250dbac3` |
-| 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | `fix/fullscreen-url` · `d6f7dca5` |
+| 2026-10-04 20:24 | fix(modal): the window bar is the main nav: mini items, the name on the right | [#84](https://github.com/henryjonescodes/portfolio/pull/84) · `d6f7dca5` |
 | 2026-10-04 20:18 | feat(cursor): a crosshair pointer with dashed guides behind the content | [#83](https://github.com/henryjonescodes/portfolio/pull/83) · `21cece7c` |
-| 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | `fix/about-card` · `e0c96483` |
+| 2026-10-04 20:13 | fix(modal): the close button sits inside the title bar, with the frame as its edge | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `e0c96483` |
 | 2026-10-04 20:06 | fix(modal): the title bar reads like the main nav: home, the entry's name, icon tabs | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `be7fc0f6` |
 | 2026-10-04 20:06 | fix(modal): the title bar holds the section tabs, stays pinned, and only the body scrolls | [#82](https://github.com/henryjonescodes/portfolio/pull/82) · `d6eb511a` |
 
@@ -209,11 +209,11 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/list` | One list that is a carousel on phones | planned |  | 0/3 | 0 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/5 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 9 | 1 to push |  |
+| `entry/window` ◀ | One window for every open entry | planned |  | 6/6 | 3 | 1 to push |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | planned |  | 0/8 | 0 | local only | 2D knob, mini slider and key controls, keyboard and mouse |
-| `fix/about-card` | About card tidy | planned |  | 3/3 | 7 | pushed |  |
-| `fix/fullscreen-url` | Full screen survives a refresh | planned |  | 1/1 | 11 | pushed |  |
+| `fix/about-card` | About card tidy | planned |  | 3/3 | 2 | pushed |  |
+| `fix/fullscreen-url` | Full screen survives a refresh | planned |  | 1/1 | 1 | pushed |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 18 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (2/6)</summary>
