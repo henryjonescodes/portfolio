@@ -18,11 +18,26 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
+    class n_feat_panel_knob active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
+  n_next --> n_feat_panel_knob
   n_staging --> n_next
+  n_feat_panel_knob_t0["Knob component: drag, wheel<br/>and arrow keys, with aria<br/>slide…"]
+  class n_feat_panel_knob_t0 todo
+  n_feat_panel_knob -.-> n_feat_panel_knob_t0
+  n_feat_panel_knob_t1["Mini slider variant of the<br/>range rows"]
+  class n_feat_panel_knob_t1 todo
+  n_feat_panel_knob -.-> n_feat_panel_knob_t1
+  n_feat_panel_knob_t2["Colour hues and FX ranges use<br/>them; each tick plays the tog…"]
+  class n_feat_panel_knob_t2 todo
+  n_feat_panel_knob -.-> n_feat_panel_knob_t2
+  n_feat_panel_knob_t3["Touch drag works on phones<br/>(the panel is a bottom sheet<br/>the…"]
+  class n_feat_panel_knob_t3 todo
+  n_feat_panel_knob -.-> n_feat_panel_knob_t3
   n_next_m0["✅ <code>feat/panel-phones</code>"]
   class n_next_m0 merged
   n_next_m0 --> n_next
@@ -67,8 +82,8 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
-    class n_feat_panel_knob planned,current
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟩 active<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Knob component: drag, wheel and a…</i>"]
+    class n_feat_panel_knob active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active
   end
@@ -118,7 +133,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/panel-knob` |  | planned, pushed | 0/4 | Knob component: drag, wheel and arrow keys, with aria slider semantics |  |
+| `feat/panel-knob` |  | active, 13 to push | 0/4 | Knob component: drag, wheel and arrow keys, with aria slider semantics |  |
 
 ## 🕘 Just happened
 
@@ -241,7 +256,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | planned |  | 0/4 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
+| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 1 | 13 to push | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
