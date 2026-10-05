@@ -34,6 +34,7 @@ const ExperienceEntry = ({
   modal = false,
   windowStyle,
   onLayoutAnimationComplete,
+  mediaWhenClosed = true,
   onClose,
   expanded = false,
   onToggleExpand,
@@ -73,7 +74,8 @@ const ExperienceEntry = ({
   const dragX = useMotionValue(0);
   const dragY = useMotionValue(0);
   useEffect(() => {
-    if (!pageOpen) {
+    // Closing, or shrinking to a phone where the window is full screen, drops any drag offset.
+    if (!pageOpen || width < widthMobile) {
       dragX.set(0);
       dragY.set(0);
     }
@@ -81,7 +83,7 @@ const ExperienceEntry = ({
     const { duration } = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
     const controls = [animate(dragX, 0, { duration }), animate(dragY, 0, { duration })];
     return () => controls.forEach((c) => c.stop());
-  }, [expanded, pageOpen, dragX, dragY, TRANSITIONS]);
+  }, [expanded, pageOpen, width, dragX, dragY, TRANSITIONS]);
 
   // The open entry's heading. Both the overview and an effort render it, so its shared
   // layoutIds stay mounted when tabs switch instead of handing back to the list item.
@@ -222,7 +224,6 @@ const ExperienceEntry = ({
                   id={`${id}-panel`}
                   aria-labelledby={`${id}-tab-${subpageId}`}
                 >
-                  {bodyTitle}
                   {effort ? (
                     <EffortView effort={effort} onMention={mentionHandler} />
                   ) : (
@@ -270,7 +271,14 @@ const ExperienceEntry = ({
                       )}
                     </motion.div>
                     {children && (
-                      <motion.div className={styles.childrenWrapper} layoutId="childrenWrapper">
+                      <motion.div
+                        className={cn(styles.childrenWrapper, {
+                          [styles.mediaCollapsed]: modal && !isOpen && !mediaWhenClosed,
+                        })}
+                        layoutId="childrenWrapper"
+                        initial={false}
+                        animate={{ opacity: modal && !isOpen && !mediaWhenClosed ? 0 : 1 }}
+                      >
                         <AnimatedLine
                           borderWidth={borderWidth}
                           horizontal={width < widthMobile}
@@ -323,7 +331,8 @@ const ExperienceEntry = ({
           <motion.div
             className={cn(styles.modalWrapper, { [styles.modalWrapperExpanded]: expanded })}
             style={{ ...windowStyle, x: dragX, y: dragY }}
-            drag={!expanded}
+            // Phones show the window full screen, so it does not drag there.
+            drag={!expanded && width >= widthMobile}
             dragMomentum={false}
             dragElastic={0.1}
             dragConstraints={{

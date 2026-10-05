@@ -36,6 +36,12 @@
   h3 {
     color: var(--accent-primary);
   }
+
+  .dates {
+    margin-top: -8px;
+    font-size: 0.85rem;
+    color: var(--foreground-secondary);
+  }
 }
 
 // A mention of an effort: underlined like a link, typed like the prose around it.

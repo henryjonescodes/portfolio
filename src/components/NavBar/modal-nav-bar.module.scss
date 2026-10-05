@@ -59,3 +59,11 @@
 .right > :last-child {
   border-right: none;
 }
+
+.expand {
+  display: contents;
+
+  @media (max-width: styles.$width-mobile) {
+    display: none;
+  }
+}

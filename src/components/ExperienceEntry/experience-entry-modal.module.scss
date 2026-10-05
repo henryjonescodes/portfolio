@@ -26,7 +26,8 @@
 .dialog {
   // Always fills the overlay and only centres the window, so nothing here clips the window
   // while its layout animation runs; the window alone changes size.
-  // The window keeps a margin of desktop around it and scrolls inside its own frame.
+  // The window keeps a margin of desktop around it (none on phones, where it is the screen)
+  // and scrolls inside its own frame.
   position: absolute;
   inset: 0;
   display: flex;
@@ -34,7 +35,7 @@
   padding: 32px;
 
   @media (max-width: styles.$width-mobile) {
-    padding: 16px;
+    padding: 0;
   }
 
   &.expanded {
