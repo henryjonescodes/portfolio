@@ -38,6 +38,11 @@
     padding: 0;
   }
 
+  // Wide screens keep the window readable; expanded lets it fill the screen.
+  &:not(.expanded) > * {
+    max-width: 1200px;
+  }
+
   &.expanded {
     padding: 0;
   }

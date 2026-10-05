@@ -205,12 +205,14 @@
   }
 
   &.mini {
-    transition: width 0.2s ease-in-out;
+    // Collapsing is slower than expanding, and the label fades rather than vanishing.
+    transition: width 0.35s ease-in-out;
     width: 50px;
     justify-content: flex-start;
 
     .label {
-      display: none;
+      opacity: 0;
+      transition: opacity 0.2s ease-out;
     }
 
     .icon {
@@ -219,10 +221,11 @@
 
     &:hover {
       width: 130px;
+      transition: width 0.2s ease-out;
 
       .label {
-        display: inline-block;
         opacity: 0.8;
+        transition: opacity 0.2s ease-in 0.05s;
       }
     }
 
@@ -254,5 +257,20 @@
   &:last-of-type {
     border-right: 4px solid styles.$foreground-primary;
     border-right: 4px solid var(--foreground-primary);
+  }
+  // A solid block in the border colour with the icon knocked out of it, as for Close.
+  &.filled {
+    background: var(--foreground-primary);
+    box-shadow: none;
+
+    .icon {
+      width: 18px;
+      height: 18px;
+
+      .image svg,
+      .image path {
+        fill: var(--background-secondary);
+      }
+    }
   }
 }

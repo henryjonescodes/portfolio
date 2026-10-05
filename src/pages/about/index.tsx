@@ -108,7 +108,8 @@ const About = () => {
             {/* {!moveSocials && ( */}
             <motion.div className={styles.socials} variants={socialsVariants}>
               {[
-                ...links,
+                // Two rows of three; the full list, Instagram included, is on the links page.
+                ...links.filter((l) => l.label !== 'Instagram'),
                 { label: 'All links', href: '/links', Icon: LinkIcon, paint: 'stroke' as const },
               ].map((link) => (
                 <motion.div key={link.label} variants={iconVariants} className={styles.iconWrapper}>

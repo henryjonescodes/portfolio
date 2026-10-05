@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import { useAnimations } from '@context/AnimationContext';
@@ -10,6 +11,8 @@ import GlitchIcon from '@components/GlitchIcon';
 type NavBarButtonIconOnlyProps = {
   onClick: () => void;
   label?: string;
+  /** Fills the whole button with the border colour; the icon shows the background through it. */
+  filled?: boolean;
   Icon: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
@@ -22,6 +25,7 @@ type NavBarButtonIconOnlyProps = {
 type NavBarButtonWithActiveProps = {
   onClick: () => void;
   label?: string;
+  filled?: never;
   Icon: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & {
       title?: string;
@@ -38,7 +42,7 @@ type NavBarButtonWithActiveProps = {
 // Combine the mutually exclusive types using a union
 type NavBarButtonProps = NavBarButtonIconOnlyProps | NavBarButtonWithActiveProps;
 
-const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active }: NavBarButtonProps) => {
+const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active, filled }: NavBarButtonProps) => {
   const { TRANSITIONS } = useAnimations();
   const play = useSound();
   const press = () => {
@@ -48,7 +52,7 @@ const NavBarButton = ({ onClick, label, Icon, ActiveIcon, active }: NavBarButton
 
   return (
     <motion.span
-      className={styles.navButton}
+      className={cn(styles.navButton, { [styles.filled]: filled })}
       onClick={press}
       role="button"
       tabIndex={0}
