@@ -5,7 +5,7 @@ status: planned
 title: One list that is a carousel on phones
 pr: null
 updated: 2026-10-05
-motivation: null
+motivation: Resizing should re-lay out the same entries, not swap one component tree for another.
 ---
 
 ## Goal
