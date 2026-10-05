@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:22 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:33 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:22 UTC by `bw board` on `entry/open` |
+| Generated | 2026-10-05 13:33 UTC by `bw board` on `entry/open` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
@@ -198,21 +198,22 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/open` |  | active, 81 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
+| `entry/open` |  | active, 82 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
-**feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line** · 2026-10-05 13:22 · `entry/open` · `72f91b91`
-The name and dates fade in place on phones instead of travelling past the image, and the window bar appears with the morph rather than after it.
+**fix(nav): the window bar spans its window at a fixed 40px, and Close simply fills its slot** · 2026-10-05 13:33 · `entry/open` · `9922dfdd`
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line** · 13:22 · `entry/open` · `72f91b91`
 - **perf(crosshair): follow raw pointer updates, re-render only when state changes** · 13:21 · `entry/open` · `21de6907`
 - **feat(scripts): motion-sheet captures an animation in real time as one contact sheet** · 13:21 · `entry/open` · `aba8b241`
-- **feat(panel): rotary knobs for hues and sound filter, mini slider styling** · 13:15 · `feat/panel-knob` · `cb52e756`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 13:15 | feat(panel): rotary knobs for hues and sound filter, mini slider styling | `feat/panel-knob` · `cb52e756` |
 | 2026-10-05 13:07 | feat(panel): a bottom sheet on phones, and the waveform keys in one row | `next` · `b795c7ca` |
 | 2026-10-05 02:09 | test(panel): skip the full screen round trip on CI, which cannot load the 3D scene | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b` |
 | 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
@@ -324,7 +325,7 @@ The name and dates fade in place on phones instead of travelling past the image,
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 4 | 81 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 5 | 82 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
