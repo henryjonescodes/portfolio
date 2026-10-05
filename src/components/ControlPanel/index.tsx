@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useId } from 'react';
 
 import Background from '@components/Background';
+import ControlKnob from '@components/ControlKnob';
 import AnimatedLine from '@components/AnimatedLine';
 import NavBarButton from '@components/NavBar/NavBarButton';
 import NavBarItem from '@components/NavBar/NavbarItem';
@@ -33,6 +34,8 @@ import Unlocked from '@assets/svg/icons/unlocked.svg?react';
 import styles from './control-panel.module.scss';
 
 const PREVIEW_DELAY_MS = 30;
+const HUE_RANGE = { min: 0, max: 360, step: 1 };
+const formatHue = (hue: number) => `${hue}\u00b0`;
 
 const TABS: { id: ControlPanelPage; label: string; Icon: typeof Palette }[] = [
   { id: 'colour', label: 'Colour', Icon: Palette },
@@ -117,22 +120,28 @@ const ColourPage = () => {
 
   return (
     <div className={styles.colourPicker}>
-      <HueSlider
+      <ControlKnob
         label="Foreground"
-        hue={primaryHues.foregroundPrimary}
-        className={styles.foreground}
+        {...HUE_RANGE}
+        value={primaryHues.foregroundPrimary}
+        format={formatHue}
+        color="var(--foreground-primary)"
         onChange={set('foregroundPrimary')}
       />
-      <HueSlider
+      <ControlKnob
         label="Background"
-        hue={primaryHues.backgroundPrimary}
-        className={styles.backgroundHue}
+        {...HUE_RANGE}
+        value={primaryHues.backgroundPrimary}
+        format={formatHue}
+        color="var(--background-primary)"
         onChange={set('backgroundPrimary')}
       />
-      <HueSlider
+      <ControlKnob
         label="Accent"
-        hue={primaryHues.accentPrimary}
-        className={styles.accent}
+        {...HUE_RANGE}
+        value={primaryHues.accentPrimary}
+        format={formatHue}
+        color="var(--accent-primary)"
         onChange={set('accentPrimary')}
       />
     </div>
@@ -249,20 +258,22 @@ const FxPage = () => {
           );
         })}
       </div>
-      <RangeRow
-        label="Cutoff"
-        {...soundRange('cutoff')}
-        value={preferences.cutoff}
-        format={(v) => `${v} Hz`}
-        onChange={(v) => change('cutoff', v)}
-      />
-      <RangeRow
-        label="Resonance"
-        {...soundRange('resonance')}
-        value={preferences.resonance}
-        format={(v) => String(v)}
-        onChange={(v) => change('resonance', v)}
-      />
+      <div className={styles.knobRow}>
+        <ControlKnob
+          label="Cutoff"
+          {...soundRange('cutoff')}
+          value={preferences.cutoff}
+          format={(v) => `${v} Hz`}
+          onChange={(v) => setPreference('cutoff', v)}
+        />
+        <ControlKnob
+          label="Resonance"
+          {...soundRange('resonance')}
+          value={preferences.resonance}
+          format={String}
+          onChange={(v) => setPreference('resonance', v)}
+        />
+      </div>
       <RangeRow
         label="Release"
         {...soundRange('release')}
@@ -311,27 +322,5 @@ const RangeRow = ({ label, min, max, step, value, format, onChange }: RangeRowPr
     </div>
   );
 };
-
-type HueSliderProps = {
-  label: string;
-  hue: number;
-  onChange: (newHue: number) => void;
-  className: string;
-};
-
-const HueSlider = ({ label, hue, onChange, className }: HueSliderProps) => (
-  <div className={cn(styles.hueSlider, className)}>
-    <input
-      type="range"
-      min="0"
-      max="360"
-      value={hue}
-      aria-label={label}
-      onChange={(e) => onChange(parseInt(e.target.value, 10))}
-      className={styles.slider}
-    />
-    <h4 className={styles.label}>{label}</h4>
-  </div>
-);
 
 export default ControlPanel;

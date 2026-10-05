@@ -75,6 +75,60 @@ test.describe('control panel', () => {
     await expect(saw).toHaveAttribute('aria-checked', 'true');
   });
 
+  test('a knob turns with the arrow keys and applies its value', async ({ page }) => {
+    const panel = await openPanel(page);
+    const accent = () =>
+      page.evaluate(() => document.documentElement.style.getPropertyValue('--accent-primary'));
+    const knob = panel.getByRole('slider', { name: 'Accent' });
+    const before = Number(await knob.getAttribute('aria-valuenow'));
+    const colourBefore = await accent();
+
+    await knob.focus();
+    await page.keyboard.press('PageUp');
+    await expect(knob).toHaveAttribute('aria-valuenow', String(before + 10));
+    await expect.poll(accent).not.toBe(colourBefore);
+
+    await page.keyboard.press('Home');
+    await expect(knob).toHaveAttribute('aria-valuenow', '0');
+    await page.keyboard.press('End');
+    await expect(knob).toHaveAttribute('aria-valuenow', '360');
+    await expect(knob).toHaveAttribute('aria-valuetext', '360\u00b0');
+  });
+
+  test('a knob follows a drag', async ({ page }) => {
+    const panel = await openPanel(page);
+    const knob = panel.getByRole('slider', { name: 'Foreground' });
+    const before = Number(await knob.getAttribute('aria-valuenow'));
+    const box = (await knob.boundingBox())!;
+    const x = box.x + box.width / 2;
+    const y = box.y + box.height / 2;
+
+    await page.mouse.move(x, y);
+    await page.mouse.down();
+    await page.mouse.move(x, y - 45, { steps: 5 });
+    await page.mouse.up();
+    await expect(knob).toBeFocused();
+    expect(Number(await knob.getAttribute('aria-valuenow'))).toBeGreaterThan(before + 30);
+  });
+
+  test('the sound knobs and mini sliders both drive preferences', async ({ page }) => {
+    const panel = await openPanel(page);
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    const cutoff = panel.getByRole('slider', { name: 'Cutoff' });
+    await cutoff.focus();
+    await page.keyboard.press('ArrowUp');
+    await expect(cutoff).toHaveAttribute('aria-valuetext', /Hz$/);
+    const value = Number(await cutoff.getAttribute('aria-valuenow'));
+    await page.reload();
+    await page.getByRole('button', { name: 'Open control panel' }).click();
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    await expect(panel.getByRole('slider', { name: 'Cutoff' })).toHaveAttribute(
+      'aria-valuenow',
+      String(value),
+    );
+    await expect(panel.locator('input[type="range"]').first()).toBeVisible();
+  });
+
   test('the nav speaker button toggles sound', async ({ page }) => {
     await page.goto('/about?lite=true');
     await page.getByRole('button', { name: 'Sound on' }).click();
