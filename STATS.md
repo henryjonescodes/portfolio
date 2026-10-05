@@ -8,7 +8,7 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 00:12 UTC by `bw s
 | Pull requests merged | 26 |
 | Lines added | +15,252 |
 | Lines removed | -15,672 |
-| Branches in flight | 8 |
+| Branches in flight | 7 |
 
 ## Lines by file type
 
@@ -107,7 +107,6 @@ src/  🚧
 - `entry/cleanup`: Tidy after the entry merge
 - `entry/list`: One list that is a carousel on phones
 - `entry/open`: One open morph, the carousel's, at every width
-- `entry/window`: One window for every open entry
 - `feat/content-requests`: Mock media and a list of content to source
 - `feat/control-panel`: A control panel for colour, type and effects
 - `release/promote-main`: Promote the new site to main

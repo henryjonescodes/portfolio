@@ -9,7 +9,6 @@
 | Live branches | 7 |
 | Open PRs | none |
 | Waiting on you | 19 |
-| Merged, not yet landed | `entry/window` (run `bw land <branch> --into <next>`) |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -18,8 +17,6 @@
 flowchart LR
   n_staging([staging])
   class n_staging trunk
-  n_entry_window([entry/window])
-  class n_entry_window trunk
   subgraph plan_0["📋 Entry tabs"]
     n_bw_inbox["<b>One inbox for the owner's<br/>answers</b><br/>🟦 planned<br/><code>bw/inbox</code><br/>▰▰▰▰▱▱▱▱ 3/6<br/><i>next: bw renders INBOX.md with one answ…</i>"]
     class n_bw_inbox planned
@@ -48,7 +45,7 @@ flowchart LR
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_bw_inbox
   n_entry_open --> n_entry_cleanup
-  n_entry_window --> n_entry_list
+  n_staging --> n_entry_list
   n_entry_list --> n_entry_open
   n_staging --> n_feat_content_requests
   n_staging --> n_feat_control_panel
@@ -102,9 +99,9 @@ One ControlPanel component renders on the 3D info screen and as a floating windo
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 00:06 | fix(entries): a phone-sized window drops any drag offset | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `7de48b4c` |
-| 2026-10-05 00:02 | test: skip the open-sync check on CI only until the morph is rebuilt | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `0d2e49d1` |
-| 2026-10-04 20:55 | fix(entries): focus trap skips hidden controls; the phone window does not drag | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `962a491a` |
+| 2026-10-05 00:06 | fix(entries): a phone-sized window drops any drag offset | `entry/list` · `7de48b4c` |
+| 2026-10-05 00:02 | test: skip the open-sync check on CI only until the morph is rebuilt | `entry/list` · `0d2e49d1` |
+| 2026-10-04 20:55 | fix(entries): focus trap skips hidden controls; the phone window does not drag | `entry/list` · `962a491a` |
 | 2026-10-04 20:51 | fix(view): full screen lives in the URL, so a refresh keeps it | [#87](https://github.com/henryjonescodes/portfolio/pull/87) · `85092fc6` |
 | 2026-10-04 20:49 | fix(about): readable skill bars; email opens mail, not a blank tab | [#85](https://github.com/henryjonescodes/portfolio/pull/85) · `267bbf6a` |
 | 2026-10-04 20:47 | feat(entries): phone tiles open the shared window, full screen, image first | [#86](https://github.com/henryjonescodes/portfolio/pull/86) · `c69e8718` |
@@ -215,7 +212,7 @@ One ControlPanel component renders on the 3D info screen and as a floating windo
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 1 | local only | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 5 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 3 | pushed | 2D knob, mini slider and key controls, keyboard and mouse |
