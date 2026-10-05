@@ -137,6 +137,15 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: Approve the share image and description, and confirm the canonical domain is henryjones.xyz
+<!-- bw:q {"branch":"next","text":"Approve the share image and description, and confirm the canonical domain is henryjones.xyz"} -->
+*Why it matters:* Every shared link shows this card; it also settles which domain is canonical.
+*Where:* `public/og-image.png`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
