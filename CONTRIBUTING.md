@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:04 UTC by `bw board` on `entry/open` |
+| Generated | 2026-10-05 13:04 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | none |
@@ -18,8 +18,8 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_next active
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Act on the answer to 'Should the …</i>"]
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_next
@@ -35,21 +35,18 @@ flowchart LR
   n_next_m3["✅ <code>feat/content-requests</code>"]
   class n_next_m3 merged
   n_next_m3 --> n_next
-  n_next_t0["2D knob, mini slider and key<br/>controls, keyboard and mouse"]
+  n_next_t0["Act on the answer to 'Should<br/>the panel be on phones, or<br/>des…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
-  n_next_t1["Act on the answer to 'Should<br/>the panel be on phones, or<br/>des…"]
+  n_next_t1["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
   class n_next_t1 todo
   n_next -.-> n_next_t1
-  n_next_t2["Drafted prose gets request ids<br/>too, so REQUESTS.md lists wr…"]
+  n_next_t2["Phones: the entry image<br/>animates between list and<br/>window, a…"]
   class n_next_t2 todo
   n_next -.-> n_next_t2
-  n_next_t3["Phones: the entry image<br/>animates between list and<br/>window, a…"]
+  n_next_t3["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
   class n_next_t3 todo
   n_next -.-> n_next_t3
-  n_next_t4["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
-  class n_next_t4 todo
-  n_next -.-> n_next_t4
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -71,7 +68,7 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/7<br/><i>next: Closed and open layouts keep the …</i>"]
-    class n_entry_open planned,current
+    class n_entry_open planned
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -83,8 +80,8 @@ flowchart LR
     class n_feat_panel_knob planned
     n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
     class n_feat_panel_phones planned
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/50 · 🙋 16<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_next active
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Act on the answer to 'Should the …</i>"]
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -123,19 +120,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** The phone morph is the reference; every open should feel like it.
-
-**What.** Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
+**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
 **How, next.**
 
-- Closed and open layouts keep the same elements in the same order, with shared layoutIds
-- Per-part timings from the carousel tunables, shared by every width
-- Remove EntryCarousel and EntryCard; one provider opens everything
+- Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart
+- Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
+- Phones: the entry image animates between list and window, and fills its space
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/open` |  | planned, 1 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
+| `next` |  | active, 14 to push | 29/49 | Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart |  |
 
 ## 🕘 Just happened
 
@@ -258,10 +253,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | local only | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | local only | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | local only | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | local only | Gear shows in the phone nav |
-| `next` | Integration branch: the stream's second staging merge | active |  | 29/50 | 33 | 13 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 33 | 14 to push | Act on the answer to "Should the panel be on phones, or desktop only? (from feat/control-panel)": Yes, phones too where possible: the site is a resume but a toy at heart |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -325,7 +320,7 @@ The owner wants the toy on phones too: the gear shows on phones, the panel opens
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/50)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/49)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -333,7 +328,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [x] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
 - [x] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
-- [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - [x] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
 - [x] Colour page with presets (from feat/control-panel)
 - [x] Type page (families, size, typewriter) (from feat/control-panel)
