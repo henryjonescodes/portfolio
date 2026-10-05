@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:21 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:21 UTC · 4 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-05 02:21 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 5 |
+| Live branches | 4 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -17,11 +17,6 @@
 flowchart LR
   n_staging([staging])
   class n_staging trunk
-  subgraph plan_0["📋 Entry tabs"]
-    n_bw_inbox["<b>One inbox for the owner's<br/>answers</b><br/>🟦 planned<br/><code>bw/inbox</code><br/>▰▰▰▰▱▱▱▱ 3/6<br/><i>next: bw renders INBOX.md with one answ…</i>"]
-    class n_bw_inbox planned
-  end
-  style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph plan_1["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
@@ -39,7 +34,6 @@ flowchart LR
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
-  n_staging --> n_bw_inbox
   n_next --> n_entry_cleanup
   n_next --> n_entry_open
   n_staging --> n_next
@@ -186,7 +180,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Plan | Progress |
 |---|---|
-| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 2 of 3 branches done |
+| [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 3 of 3 branches done (complete) |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 2 of 4 branches done |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -196,24 +190,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `next` ◀ | Integration branch: the stream's second staging merge | active |  | 13/29 | 18 | local only | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
-
-<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
-
-Every open question and claim across branches is gathered into INBOX.md on the board branch, answerable from GitHub's editor. bw pulls answers back into the right branch's seed as a todo to act on, so the session on that workstream picks it up.
-
-- [ ] bw renders INBOX.md with one answer slot per open question
-- [ ] bw ingests answers (from origin/board) into seeds and logs them
-- [ ] branchwork-loop applies the inbox at the start of a session
-- [x] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
-- [x] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
-- [x] Ambient branchwork-quiz skill: offer a quiz at natural pauses without blocking, ask the juiciest few open questions (max 4) with AskUserQuestion, record answers with bw answer
-
-</details>
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
 
