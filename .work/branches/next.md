@@ -14,7 +14,12 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 
 ## Todo
 
+- [ ] EntryList with the list and tile presentations from CSS container queries (from entry/list)
+- [ ] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
+- [ ] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
+- [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
 
 ## Log
 
 - 2026-10-05: seeded
+- 2026-10-05: carried 4 open todo(s) from entry/list
