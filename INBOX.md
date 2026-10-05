@@ -75,6 +75,30 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
+<!-- bw:q {"branch":"next","text":"Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)"} -->
+*Why it matters:* The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)
+<!-- bw:q {"branch":"next","text":"Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)"} -->
+*Why it matters:* Synthesised sounds need no files and stay tiny; samples sound richer but you would choose them.
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
+### next: Should the panel be on phones, or desktop only? (from feat/control-panel)
+<!-- bw:q {"branch":"next","text":"Should the panel be on phones, or desktop only? (from feat/control-panel)"} -->
+*Why it matters:* Knobs and sliders are fiddly on touch; a desktop-only panel keeps phones simple.
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.

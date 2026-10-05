@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 02:17 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 02:17 UTC by `bw board` on `entry/list` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
@@ -39,7 +39,7 @@ flowchart LR
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_bw_inbox
@@ -98,7 +98,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | `next` · `f6a2d263` |
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | `next` · `6385b4c8` |
 | 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | `next` · `f6b075a5` |
-| 2026-10-05 00:15 | test: tiles use the list markup; crossing the breakpoint keeps the elements | `next` · `9cd6eff6` |
+| 2026-10-05 00:15 | test: tiles use the list markup; crossing the breakpoint keeps the elements | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `9cd6eff6` |
 | 2026-10-05 00:15 | feat(entries): one CSS-switched list for rows and tiles | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `c00d0c46` |
 | 2026-10-05 00:15 | feat(border): redraw a border or line quickly on demand | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `b6f49807` |
 | 2026-10-05 00:15 | test: make the e2e port configurable | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2425db0f` |
@@ -204,7 +204,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | 24 to push, 85 to pull | Request ids on mock media and drafted prose |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 0/4 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
+| `next` | Integration branch: the stream's second staging merge | active |  | 0/4 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
