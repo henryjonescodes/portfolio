@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 00:08 UTC by `bw board` on `` |
+| Generated | 2026-10-05 00:08 UTC by `bw board` on `entry/list` |
 | Trunk | `staging` |
 | Live branches | 8 |
 | Open PRs | [#86](https://github.com/henryjonescodes/portfolio/pull/86) |
@@ -28,7 +28,7 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟩 active<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_entry_list active
+    class n_entry_list active,current
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open planned
     n_entry_window["<b>One window for every open<br/>entry</b><br/>🟨 review · #86<br/><code>entry/window</code><br/>▰▰▰▰▰▰▰▰ 6/6"]
@@ -91,7 +91,7 @@ flowchart LR
 
 ## 🕘 Just happened
 
-**test: make the e2e port configurable** · 2026-10-05 00:08 · `entry/list` · `397e691d`
+**test: make the e2e port configurable** · 2026-10-05 00:08 · `entry/list` · `ebb70005`
 Co-Authored-By: Claude Sonnet <noreply@anthropic.com>
 
 - **feat(prefs): type, motion speed and CRT preferences with persistence** · 00:08 · `feat/control-panel` · `8e9b356a`
@@ -223,7 +223,7 @@ Co-Authored-By: Claude Sonnet <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 2/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` | One list that is a carousel on phones | active |  | 0/4 | 1 | local only | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 1 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `entry/window` | One window for every open entry | review | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | 6/6 | 4 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
