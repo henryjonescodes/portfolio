@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 14:24 UTC · 2 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:25 UTC · 2 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:24 UTC by `bw board` on `chore/dry-pass` |
+| Generated | 2026-10-05 14:25 UTC by `bw board` on `chore/dry-pass` |
 | Trunk | `staging` |
 | Live branches | 2 |
 | Open PRs | none |
@@ -160,21 +160,22 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `chore/dry-pass` |  | active, 53 to push | 0/4 | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |  |
+| `chore/dry-pass` |  | active, 54 to push | 0/4 | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |  |
 
 ## 🕘 Just happened
 
-**chore(entries): one entry spec, no dead tunables or page styles, CLAUDE.md points at the motion-sheet skill** · 2026-10-05 14:20 · `next` · `84cb9976`
-The phone tile tests join modal.spec; five unused transition groups go; the slow 3D panel test gets a longer timeout.
+**chore(scripts): drop capture-modal-frames, which the motion-sheet skill supersedes** · 2026-10-05 14:25 · `chore/dry-pass` · `a2157a9a`
+Its fake clock never drove Framer's value animations, so its frames misled.
 
+- **chore(entries): one entry spec, no dead tunables or page styles, CLAUDE.md points at the motion-sheet skill** · 14:20 · `next` · `84cb9976`
 - **feat(requests): drafted prose carries request ids and approved .md files replace it** · 14:19 · `next` · `ce7e18d3`
 - **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
-- **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
 | 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
 | 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
@@ -272,7 +273,7 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `chore/dry-pass` ◀ | DRY and code-splitting pass after the stream | active |  | 0/4 | 1 | 53 to push | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
+| `chore/dry-pass` ◀ | DRY and code-splitting pass after the stream | active |  | 0/4 | 2 | 54 to push | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
