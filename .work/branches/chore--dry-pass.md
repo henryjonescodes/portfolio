@@ -14,7 +14,7 @@ Once the stream's work is in, one pass removes dead code and styles, merges dupl
 
 ## Todo
 
-- [ ] Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep)
+- [x] Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep)
 - [ ] Merge duplicated helpers and styles
 - [ ] Check route and 3D code splitting in the bundle report
 - [ ] Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet)
@@ -22,3 +22,4 @@ Once the stream's work is in, one pass removes dead code and styles, merges dupl
 ## Log
 
 - 2026-10-05: seeded
+- 2026-10-05: done "Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep)" at f55c8db2
