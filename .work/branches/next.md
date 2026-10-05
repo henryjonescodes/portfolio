@@ -102,6 +102,10 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: The page exists and About links to it, but nothing else on the site leads there.
   - file: src/pages/links/index.tsx
   - kind: decision
+- [?] The resume PDF is the 2024 copy from the old site and predates Arbor
+  - why: The linked resume predates Arbor; send a new PDF or keep the old one for now.
+  - file: public/pdf/Henry-Jones-Resume.pdf
+  - kind: media
 
 ## Log
 
