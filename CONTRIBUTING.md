@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:05 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:07 UTC · 7 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:05 UTC by `bw board` on `feat/panel-phones` |
+| Generated | 2026-10-05 13:07 UTC by `bw board` on `feat/panel-phones` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | none |
@@ -18,11 +18,20 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
+    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▱▱▱▱▱ 1/3<br/><i>next: Panel opens as a bottom sheet on …</i>"]
+    class n_feat_panel_phones active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
+  n_next --> n_feat_panel_phones
   n_staging --> n_next
+  n_feat_panel_phones_t0["Panel opens as a bottom sheet<br/>on phones, scrolls inside"]
+  class n_feat_panel_phones_t0 todo
+  n_feat_panel_phones -.-> n_feat_panel_phones_t0
+  n_feat_panel_phones_t1["Touch works for every control,<br/>including the knob"]
+  class n_feat_panel_phones_t1 todo
+  n_feat_panel_phones -.-> n_feat_panel_phones_t1
   n_next_m0["✅ <code>feat/phone-3d</code>"]
   class n_next_m0 merged
   n_next_m0 --> n_next
@@ -66,8 +75,8 @@ flowchart LR
     class n_content_prose_requests planned
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Knob component: drag, wheel and a…</i>"]
     class n_feat_panel_knob planned
-    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
-    class n_feat_panel_phones planned,current
+    n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟩 active<br/><code>feat/panel-phones</code><br/>▰▰▰▱▱▱▱▱ 1/3<br/><i>next: Panel opens as a bottom sheet on …</i>"]
+    class n_feat_panel_phones active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active
   end
@@ -112,27 +121,27 @@ flowchart LR
 
 **How, next.**
 
-- Gear shows in the phone nav
 - Panel opens as a bottom sheet on phones, scrolls inside
 - Touch works for every control, including the knob
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/panel-phones` |  | planned, pushed | 0/3 | Gear shows in the phone nav |  |
+| `feat/panel-phones` |  | active, 2 to push | 1/3 | Panel opens as a bottom sheet on phones, scrolls inside |  |
 
 ## 🕘 Just happened
 
-**test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 2026-10-05 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
+**feat(panel): a bottom sheet on phones, and the waveform keys in one row** · 2026-10-05 13:07 · `feat/panel-phones` · `b795c7ca`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
+- **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
 - **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
 - **feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list** · 01:23 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90`
-- **fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows** · 01:04 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
+| 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6385b4c8` |
 | 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6b075a5` |
@@ -243,7 +252,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `feat/panel-phones` ◀ | The control panel on phones | planned |  | 0/3 | 0 | pushed | Gear shows in the phone nav |
+| `feat/panel-phones` ◀ | The control panel on phones | active |  | 1/3 | 1 | 2 to push | Panel opens as a bottom sheet on phones, scrolls inside |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | pushed |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
@@ -298,11 +307,11 @@ The panel's colour and FX controls become hardware: a rotary knob and mini slide
 
 </details>
 
-<details><summary><code>feat/panel-phones</code>: The control panel on phones (0/3)</summary>
+<details><summary><code>feat/panel-phones</code>: The control panel on phones (1/3)</summary>
 
 The owner wants the toy on phones too: the gear shows on phones, the panel opens as a bottom sheet that fits a small screen, and every control works by touch.
 
-- [ ] Gear shows in the phone nav
+- [x] Gear shows in the phone nav
 - [ ] Panel opens as a bottom sheet on phones, scrolls inside
 - [ ] Touch works for every control, including the knob
 
