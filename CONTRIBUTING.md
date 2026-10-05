@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 02:19 UTC by `bw board` on `` |
+| Generated | 2026-10-05 02:19 UTC by `bw board` on `entry/open` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
@@ -26,7 +26,7 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
-    class n_entry_open planned
+    class n_entry_open planned,current
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph plan_2["📋 Portfolio roadmap"]
@@ -66,17 +66,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**Motivation.** The phone morph is the reference; every open should feel like it.
+
+**What.** Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
 **How, next.**
 
-- EntryList with the list and tile presentations from CSS container queries (from entry/list)
-- One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
-- Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
+- Closed and open layouts keep the same elements in the same order, with shared layoutIds
+- Per-part timings from the carousel tunables, shared by every width
+- Remove EntryCarousel and EntryCard; one provider opens everything
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, local only | 3/28 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
+| `entry/open` |  | planned, local only | 0/6 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
@@ -198,7 +200,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `next` | Integration branch: the stream's second staging merge | active |  | 3/28 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
