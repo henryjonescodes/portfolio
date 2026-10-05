@@ -74,7 +74,8 @@ const ExperienceEntry = ({
   const dragX = useMotionValue(0);
   const dragY = useMotionValue(0);
   useEffect(() => {
-    if (!pageOpen) {
+    // Closing, or shrinking to a phone where the window is full screen, drops any drag offset.
+    if (!pageOpen || width < widthMobile) {
       dragX.set(0);
       dragY.set(0);
     }
@@ -82,7 +83,7 @@ const ExperienceEntry = ({
     const { duration } = TRANSITIONS.MODAL.CONTAINER_ANIMATE;
     const controls = [animate(dragX, 0, { duration }), animate(dragY, 0, { duration })];
     return () => controls.forEach((c) => c.stop());
-  }, [expanded, pageOpen, dragX, dragY, TRANSITIONS]);
+  }, [expanded, pageOpen, width, dragX, dragY, TRANSITIONS]);
 
   // The open entry's heading. Both the overview and an effort render it, so its shared
   // layoutIds stay mounted when tabs switch instead of handing back to the list item.
