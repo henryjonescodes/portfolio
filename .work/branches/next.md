@@ -18,7 +18,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [x] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
 - [x] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
-- [ ] 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
 - [x] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
 - [x] Colour page with presets (from feat/control-panel)
 - [x] Type page (families, size, typewriter) (from feat/control-panel)
@@ -162,3 +161,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)" at 222ef607
 - 2026-10-05: done "Window bar: the entry name has no left divider in the modal" at a80e210d
 - 2026-10-05: done "Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets" at 2800e9ec
+- 2026-10-05: dropped "2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)"
