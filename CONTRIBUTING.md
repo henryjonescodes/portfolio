@@ -27,7 +27,7 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: Mini slider variant of the range …</i>"]
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▰▰▱▱▱▱ 2/4<br/><i>next: Colour hues and FX ranges use the…</i>"]
     class n_feat_panel_knob planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -77,7 +77,7 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▱▱▱▱▱▱ 1/4<br/><i>next: Mini slider variant of the range …</i>"]
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▰▰▱▱▱▱ 2/4<br/><i>next: Colour hues and FX ranges use the…</i>"]
     class n_feat_panel_knob planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -166,13 +166,12 @@ flowchart LR
 
 **How, next.**
 
-- Mini slider variant of the range rows
 - Colour hues and FX ranges use them; each tick plays the toggle sound
 - Touch drag works on phones (the panel is a bottom sheet there)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/panel-knob` |  | planned, 1 to push | 1/4 | Mini slider variant of the range rows |  |
+| `feat/panel-knob` |  | planned, 3 to push | 2/4 | Colour hues and FX ranges use them; each tick plays the toggle sound |  |
 
 ## 🕘 Just happened
 
@@ -299,7 +298,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | planned |  | 1/4 | 0 | 1 to push | Mini slider variant of the range rows |
+| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | planned |  | 2/4 | 0 | 3 to push | Colour hues and FX ranges use them; each tick plays the toggle sound |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | 19 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
@@ -330,12 +329,12 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (1/4)</summary>
+<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (2/4)</summary>
 
 The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
 - [x] Knob component: drag, wheel and arrow keys, with aria slider semantics
-- [ ] Mini slider variant of the range rows
+- [x] Mini slider variant of the range rows
 - [ ] Colour hues and FX ranges use them; each tick plays the toggle sound
 - [ ] Touch drag works on phones (the panel is a bottom sheet there)
 
