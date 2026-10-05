@@ -106,6 +106,9 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
   - why: The linked resume predates Arbor; send a new PDF or keep the old one for now.
   - file: public/pdf/Henry-Jones-Resume.pdf
   - kind: media
+- [?] Design review in 3D and lite mode
+  - why: main still serves the old site, and you promote by hand once staging looks right: walk 3D, lite and a phone, including the list and modal, retro chrome, the carousel, tabs and gallery.
+  - kind: review
 
 ## Log
 
