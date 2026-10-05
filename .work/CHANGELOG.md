@@ -33,3 +33,4 @@ Landed branches, newest last. Appended by `bw land`.
 - 2026-10-05 plan `2026-10-content-and-inbox.md` complete: feat/entry-tabs, feat/content-requests, bw/inbox
 - 2026-10-05 plan `2026-10-roadmap.md` complete: anim/motion-idioms, content/real-copy, feat/projects-carousel, release/promote-main
 - 2026-10-05 **entry/open** → `next`: One open morph, the carousel's, at every width. Closed and open layouts keep the same elements in the same order, with shared layoutIds; Remove EntryCarousel and EntryCard; one provider opens everything; Phones: the entry image animates between list and window (its shape and fill now match)
+- 2026-10-05 **feat/panel-knob** → `next`: A 2D knob and mini sliders for the control panel. Knob component: drag, wheel and arrow keys, with aria slider semantics; Mini slider variant of the range rows; Colour hues and FX ranges use them; each tick plays the toggle sound; Touch drag works on phones (the panel is a bottom sheet there)
