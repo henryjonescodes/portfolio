@@ -22,7 +22,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)
 - [x] Colour page with presets (from feat/control-panel)
 - [x] Type page (families, size, typewriter) (from feat/control-panel)
-- [ ] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
+- [x] FX page (CRT, grain, motion speed, sound) (from feat/control-panel)
 - [x] Which fonts are in bounds? Proposal: Pixelify Sans, a mono (JetBrains Mono or IBM Plex Mono) and a grotesk (Inter or Space Grotesk) (from feat/control-panel)
   - why: The Type page swaps the site's face; a short list keeps it on-brand and fast to load.
   - kind: decision
@@ -96,3 +96,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Panel shell from the gear in the nav; pages switch from tabs and the model's buttons (from feat/control-panel)" at 126027bd
 - 2026-10-05: done "Colour page with presets (from feat/control-panel)" at 26849088
 - 2026-10-05: done "Type page (families, size, typewriter) (from feat/control-panel)" at 216bbb4f
+- 2026-10-05: done "FX page (CRT, grain, motion speed, sound) (from feat/control-panel)" at 6232ae9f
