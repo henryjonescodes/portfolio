@@ -29,3 +29,15 @@ test('lite mode never downloads three.js or the 3D scene', async ({ page }) => {
   );
   expect(threeish).toEqual([]);
 });
+
+test('full screen is in the URL, so a refresh stays full screen', async ({ page }) => {
+  await page.goto('/about?view=full');
+  await expect(page.getByRole('button', { name: 'Back to the device' })).toBeVisible({
+    timeout: 20_000,
+  });
+  await expect(page).toHaveURL(/view=full/);
+  await page.reload();
+  await expect(page.getByRole('button', { name: 'Back to the device' })).toBeVisible({
+    timeout: 20_000,
+  });
+});

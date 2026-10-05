@@ -6,6 +6,8 @@ import { useLoading } from './LoadingContext';
 import { useSettings } from './SettingsContext';
 import { handheldZoomType, ZoomContext, zoomLevelType } from './ZoomContext';
 
+const VIEW_PARAM = 'view';
+
 interface ZoomProviderProps {
   children: ReactNode;
 }
@@ -18,7 +20,12 @@ export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
   useEffect(() => () => clearTimeout(reEnableTimer.current), []);
   const location = useLocation();
 
-  const [zoomLevel, setZoomLevel] = useState<zoomLevelType>(liteMode ? 'fullscreen' : 'wide');
+  // ?view=full keeps the full-screen page across a refresh or a shared link.
+  const [zoomLevel, setZoomLevel] = useState<zoomLevelType>(() =>
+    liteMode || new URLSearchParams(window.location.search).get(VIEW_PARAM) === 'full'
+      ? 'fullscreen'
+      : 'wide',
+  );
   const handHeldZoomLevel = useRef<handheldZoomType>('wide');
 
   const pathSegments = location.pathname.split('/').filter(Boolean);
@@ -67,6 +74,16 @@ export const ZoomProvider: React.FC<ZoomProviderProps> = ({ children }) => {
       TIMEOUTS.ZOOM_ANIMATION_LOCK,
     );
   };
+
+  // Mirrors the full-screen view into the address bar (replaced in place, like the modal's
+  // state); lite mode needs no flag, since it is full screen anyway.
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    if (zoomLevel === 'fullscreen' && !liteMode) url.searchParams.set(VIEW_PARAM, 'full');
+    else url.searchParams.delete(VIEW_PARAM);
+    if (url.href !== window.location.href)
+      window.history.replaceState(window.history.state, '', url);
+  }, [zoomLevel, liteMode, page]);
 
   useEffect(() => {
     debugLog('ZoomContext', `zoom level ${zoomLevel}, handheld ref ${handHeldZoomLevel.current}`);
