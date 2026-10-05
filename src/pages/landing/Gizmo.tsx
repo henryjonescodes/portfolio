@@ -1,6 +1,6 @@
 import { SiteMixer } from '@components/3D/SiteMixer';
 import { useZoom } from '@context/ZoomContext';
-import { PresentationControls } from '@react-three/drei';
+import StageControls from '@components/3D/StageControls';
 import { GroupProps } from '@react-three/fiber';
 import { useAnimations } from '@context/AnimationContext';
 import { useSettings } from '@context/SettingsContext';
@@ -24,15 +24,13 @@ const Gizmo = ({ ...rest }: GroupProps) => {
           intensity={SCENE.dirLightIntensity}
           castShadow
         />
-        <PresentationControls
+        <StageControls
           global={globalRotation}
           enabled={zoomLevel !== 'info'}
           config={SCENE.drag}
           snap={SCENE.snap}
-          rotation={[0, 0, 0]}
           polar={[-polar, polar]}
           azimuth={[-azimuth, azimuth]}
-          cursor={false}
         >
           <group scale={3}>
             <group position={[-0.243, 0, 0.013]} scale={0.0851}>
@@ -43,7 +41,7 @@ const Gizmo = ({ ...rest }: GroupProps) => {
             </group>
             <SiteMixer position={[0, 0, 0]} />
           </group>
-        </PresentationControls>
+        </StageControls>
       </group>
     </>
   );
