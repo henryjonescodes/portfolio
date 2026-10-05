@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 14:28 UTC · 2 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:28 UTC · 1 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-05 14:28 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 2 |
+| Live branches | 1 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
@@ -18,13 +18,10 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_chore_dry_pass planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
-  n_next --> n_chore_dry_pass
   n_staging --> n_next
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
@@ -49,20 +46,17 @@ flowchart LR
   classDef current stroke:#0ea5e9,stroke-width:5px
 ```
 
-<details><summary><b>The wider world</b> · 2 live branches, 15 recent landings</summary>
+<details><summary><b>The wider world</b> · 1 live branches, 15 recent landings</summary>
 
 ```mermaid
 flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_chore_dry_pass planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
-  n_next --> n_chore_dry_pass
   n_staging --> n_next
   landed_0["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
   class landed_0 merged
@@ -260,19 +254,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 4/4 | 0 | 60 to push |  |
 | `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 58 | 12 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
-
-<details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (4/4)</summary>
-
-Once the stream's work is in, one pass removes dead code and styles, merges duplicates and checks the bundle splits, so next goes to staging lean.
-
-- [x] Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep)
-- [x] Merge duplicated helpers and styles
-- [x] Check route and 3D code splitting in the bundle report
-- [x] Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet)
-
-</details>
 
 <details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/49)</summary>
 
