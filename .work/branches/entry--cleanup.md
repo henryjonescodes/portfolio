@@ -15,9 +15,10 @@ Specs, skills and docs describe one entry component.
 ## Todo
 
 - [x] Merge carousel.spec into modal.spec; drop dead styles and tunables
-- [ ] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
+- [x] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
 
 ## Log
 
 - 2026-10-04: seeded
 - 2026-10-05: done "Merge carousel.spec into modal.spec; drop dead styles and tunables" at 84cb9976
+- 2026-10-05: done "Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md" at 8515f9e5
