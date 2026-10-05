@@ -126,3 +126,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Page toolkit: layout ideas and components for building pages with content, delivered as skills" at 7a2760b3
 - 2026-10-05: done "Rule in repertoire: keep bw and the refactor's skills current while working" at c213133f
 - 2026-10-05: done "Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy" at bf04726a
+- 2026-10-05: Phone window media now keeps the tile's 16:10 shape and fills its box; the presence hand-off between tile and window still needs the owner's eye on a phone
