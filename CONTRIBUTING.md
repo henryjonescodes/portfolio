@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 01:10 UTC · 7 live branches · 1 PRs open · 20 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 01:14 UTC · 7 live branches · 1 PRs open · 20 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 01:10 UTC by `bw board` on `cp-review` |
+| Generated | 2026-10-05 01:14 UTC by `bw board` on `cp-review` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | [#88](https://github.com/henryjonescodes/portfolio/pull/88) |
@@ -38,11 +38,11 @@ flowchart LR
     class n_entry_open planned
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
-  subgraph plan_4["📋 Portfolio roadmap"]
+  subgraph plan_3["📋 Portfolio roadmap"]
     n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
     class n_release_promote_main planned
   end
-  style plan_4 fill:#ede9fe,stroke:#64748b,color:#0f172a
+  style plan_3 fill:#fef3c7,stroke:#64748b,color:#0f172a
   n_staging --> n_bw_inbox
   n_entry_open --> n_entry_cleanup
   n_staging --> n_entry_list
@@ -84,7 +84,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/control-panel` |  | active, pushed | 0/8 | 2D knob, mini slider and key controls, keyboard and mouse | 2026-10-control-panel, 0 of 1 |
+| `feat/control-panel` |  | active, 0 to push, 56 to pull | 0/8 | 2D knob, mini slider and key controls, keyboard and mouse | 2026-10-control-panel, 0 of 1 |
 
 ## 🕘 Just happened
 
@@ -214,7 +214,6 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
 | [2026-10-control-panel.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-control-panel.md) | 0 of 1 branches done |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 1 of 4 branches done |
-| [2026-10-mobile-efforts.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-mobile-efforts.md) | 7 of 7 branches done (complete) |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
 </details>
@@ -228,7 +227,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/list` | One list that is a carousel on phones | review | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | 0/4 | 6 | pushed | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 5 | pushed | 2D knob, mini slider and key controls, keyboard and mouse |
+| `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 5 | 0 to push, 56 to pull | 2D knob, mini slider and key controls, keyboard and mouse |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
