@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 14:23 UTC · 2 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 14:24 UTC · 2 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:23 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 14:24 UTC by `bw board` on `chore/dry-pass` |
 | Trunk | `staging` |
 | Live branches | 2 |
 | Open PRs | none |
@@ -18,14 +18,26 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
-    class n_chore_dry_pass planned
+    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
+    class n_chore_dry_pass active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
   n_staging --> n_next
+  n_chore_dry_pass_t0["Delete unused components,<br/>styles, tunables and assets<br/>(knip…"]
+  class n_chore_dry_pass_t0 todo
+  n_chore_dry_pass -.-> n_chore_dry_pass_t0
+  n_chore_dry_pass_t1["Merge duplicated helpers and<br/>styles"]
+  class n_chore_dry_pass_t1 todo
+  n_chore_dry_pass -.-> n_chore_dry_pass_t1
+  n_chore_dry_pass_t2["Check route and 3D code<br/>splitting in the bundle report"]
+  class n_chore_dry_pass_t2 todo
+  n_chore_dry_pass -.-> n_chore_dry_pass_t2
+  n_chore_dry_pass_t3["Move capture-modal-frames.mjs<br/>and other agent-only scripts …"]
+  class n_chore_dry_pass_t3 todo
+  n_chore_dry_pass -.-> n_chore_dry_pass_t3
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -56,10 +68,10 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟦 planned<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
-    class n_chore_dry_pass planned
+    n_chore_dry_pass["<b>DRY and code-splitting<br/>pass after the stream</b><br/>🟩 active<br/><code>chore/dry-pass</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: Delete unused components, styles,…</i>"]
+    class n_chore_dry_pass active,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -138,17 +150,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**What.** Once the stream's work is in, one pass removes dead code and styles, merges duplicates and checks the bundle splits, so next goes to staging lean.
 
 **How, next.**
 
-- Per-part timings from the carousel tunables, shared by every width (from entry/open)
-- e2e: open and close at both widths, and a resize while open (from entry/open)
-- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
+- Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep)
+- Merge duplicated helpers and styles
+- Check route and 3D code splitting in the bundle report
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `chore/dry-pass` |  | active, 53 to push | 0/4 | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |  |
 
 ## 🕘 Just happened
 
@@ -260,8 +272,8 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `chore/dry-pass` ◀ | DRY and code-splitting pass after the stream | active |  | 0/4 | 1 | 53 to push | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 54 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
 
