@@ -301,70 +301,15 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
-  CAROUSEL: {
-    ROW_STAGGER: {
-      staggerChildren: tune(
+  ENTRY_LIST: {
+    REDRAW: {
+      duration: tune(
         'COMPONENT',
         0.33,
-        F,
-        'Carousel > Card Stagger',
-        'Delay between cards appearing',
-      ),
-    },
-    TILE_STAGGER: {
-      staggerChildren: tune(
-        'COMPONENT',
-        0.15,
-        F,
-        'Carousel > Tile Content Stagger',
-        'Delay between the parts of a tile painting in',
-      ),
-    },
-    CARD: {
-      duration: tune(
-        'MODAL',
-        1.17,
         S,
-        'Carousel > Card Morph',
-        'Card to page morph, open and close',
+        'Entry List > Redraw Duration',
+        'Border and line draw time after the list switches between rows and tiles',
       ),
-    },
-    DATE_OPEN: {
-      duration: tune(
-        'MODAL',
-        1.28,
-        S,
-        'Carousel > Date Open',
-        'Date travels slightly slower than the card on open',
-      ),
-    },
-    CONTENT: {
-      duration: tune(
-        'MODAL',
-        1.05,
-        S,
-        'Carousel > Body Content',
-        'Body content reflow inside the morph',
-      ),
-    },
-    MEDIA_OPEN: {
-      duration: tune(
-        'MODAL',
-        1.75,
-        S,
-        'Carousel > Media Open',
-        'Media settles slower than the card on open',
-      ),
-    },
-    DETAILS_ANIMATE: {
-      delay: tune(
-        'MODAL',
-        1.17,
-        S,
-        'Carousel > Details Delay',
-        'Open-only details wait for the morph',
-      ),
-      duration: tune('MODAL', 1.0, S, 'Carousel > Details Fade In'),
     },
   },
 

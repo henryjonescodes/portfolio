@@ -11,6 +11,9 @@ interface AnimatedBorderProps {
   height: number;
   borderWidth: number;
   borderRadius?: number;
+  animationDuration?: number;
+  /** Draws from nothing on mount, for a border mounted after its parent finished animating. */
+  drawOnMount?: boolean;
   onAnimationComplete?: () => void;
 }
 
@@ -19,6 +22,8 @@ const AnimatedBorder = ({
   height,
   borderWidth,
   borderRadius = radius.md,
+  animationDuration,
+  drawOnMount,
   onAnimationComplete,
 }: AnimatedBorderProps) => {
   const { TRANSITIONS } = useAnimations();
@@ -27,7 +32,10 @@ const AnimatedBorder = ({
     initial: { pathLength: 0 },
     animate: {
       pathLength: 1,
-      transition: TRANSITIONS.BORDER_BOX.ANIMATE,
+      transition:
+        animationDuration === undefined
+          ? TRANSITIONS.BORDER_BOX.ANIMATE
+          : { ...TRANSITIONS.BORDER_BOX.ANIMATE, duration: animationDuration },
     },
     exit: {
       pathLength: 0,
@@ -53,6 +61,7 @@ const AnimatedBorder = ({
         fill="transparent"
         strokeWidth={borderWidth}
         variants={pathVariants}
+        {...(drawOnMount && { initial: 'initial', animate: 'animate' })}
         onAnimationComplete={onAnimationComplete}
       />
     </motion.svg>
@@ -64,6 +73,10 @@ interface AnimatedBorderBoxProps {
   borderRadius?: number;
   className?: string;
   contentClassName?: string;
+  /** Overrides the draw time, in seconds. */
+  animationDuration?: number;
+  /** Changing it redraws the border from nothing without remounting the content. */
+  redrawKey?: number;
   children?: ReactNode;
 }
 
@@ -73,6 +86,8 @@ const AnimatedBorderBox = ({
   className,
   children,
   contentClassName,
+  animationDuration,
+  redrawKey,
   borderRadius = radius.md,
 }: AnimatedBorderBoxProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -118,10 +133,13 @@ const AnimatedBorderBox = ({
     <motion.div ref={containerRef} className={cn(styles.borderBox, className)}>
       {/* {!cssBorderVisible && ( */}
       <AnimatedBorder
+        key={redrawKey}
         width={dimensions.width}
         height={dimensions.height}
         borderWidth={borderWidth}
         borderRadius={borderRadius}
+        animationDuration={animationDuration}
+        drawOnMount={!!redrawKey}
         onAnimationComplete={() => setCssBorderVisible(true)}
       />
       {/* )} */}

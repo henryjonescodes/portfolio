@@ -20,6 +20,7 @@ import { GALLERY } from '@components/Efforts/subpages';
 import MasonryGallery from '@components/MasonryGallery';
 import EffortView from '@components/Efforts/EffortView';
 import RichText from '@components/Efforts/RichText';
+import { useEntryRedraw } from '@components/EntryList/EntryRedrawContext';
 
 const ExperienceEntry = ({
   data,
@@ -35,6 +36,7 @@ const ExperienceEntry = ({
   windowStyle,
   onLayoutAnimationComplete,
   mediaWhenClosed = true,
+  mediaInTilesOnly = false,
   onClose,
   expanded = false,
   onToggleExpand,
@@ -60,6 +62,9 @@ const ExperienceEntry = ({
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
   const { TRANSITIONS } = useAnimations();
+  // After the list switches layout, its borders and lines remount and draw again quickly.
+  const redraw = useEntryRedraw();
+  const redrawDuration = redraw ? TRANSITIONS.ENTRY_LIST.REDRAW.duration : undefined;
   const isOpen = pageOpen && !inList;
   const effort = isOpen ? efforts?.find((e) => e.id === effortId) : undefined;
   const showGallery = isOpen && effortId === GALLERY && !!gallery?.length;
@@ -159,10 +164,22 @@ const ExperienceEntry = ({
                 </motion.h3>
               </motion.div>
             )}
+            {inList && (
+              <AnimatedLine
+                key={redraw}
+                borderWidth={borderWidth}
+                animationDuration={redrawDuration}
+                horizontal
+                drawOnMount
+                className={styles.barLine}
+              />
+            )}
           </motion.span>
         )}
 
         <AnimatedBorderBox
+          redrawKey={inList ? redraw : undefined}
+          animationDuration={inList ? redrawDuration : undefined}
           className={styles.box}
           contentClassName={styles.boxContent}
           borderWidth={borderWidth}
@@ -274,16 +291,40 @@ const ExperienceEntry = ({
                       <motion.div
                         className={cn(styles.childrenWrapper, {
                           [styles.mediaCollapsed]: modal && !isOpen && !mediaWhenClosed,
+                          [styles.tilesOnly]: inList && mediaInTilesOnly,
                         })}
                         layoutId="childrenWrapper"
-                        initial={false}
-                        animate={{ opacity: modal && !isOpen && !mediaWhenClosed ? 0 : 1 }}
+                        // Only the modal window drives this itself; in a list item an own `animate`
+                        // would cut the list's variants off from the media inside.
+                        {...(modal && {
+                          initial: false,
+                          animate: { opacity: !isOpen && !mediaWhenClosed ? 0 : 1 },
+                        })}
                       >
-                        <AnimatedLine
-                          borderWidth={borderWidth}
-                          horizontal={width < widthMobile}
-                          className={styles.line}
-                        />
+                        {inList ? (
+                          // Both lines exist; the list's CSS shows the one that fits its layout.
+                          <>
+                            <AnimatedLine
+                              key={`v${redraw}`}
+                              borderWidth={borderWidth}
+                              animationDuration={redrawDuration}
+                              className={cn(styles.line, styles.lineVertical)}
+                            />
+                            <AnimatedLine
+                              key={`h${redraw}`}
+                              borderWidth={borderWidth}
+                              animationDuration={redrawDuration}
+                              horizontal
+                              className={cn(styles.line, styles.lineHorizontal)}
+                            />
+                          </>
+                        ) : (
+                          <AnimatedLine
+                            borderWidth={borderWidth}
+                            horizontal={width < widthMobile}
+                            className={styles.line}
+                          />
+                        )}
                         {url ? (
                           <a
                             href={url}
