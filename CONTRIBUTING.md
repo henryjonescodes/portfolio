@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 14:20 UTC by `bw board` on `entry/cleanup` |
+| Generated | 2026-10-05 14:20 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -18,8 +18,8 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▱▱▱▱ 1/2<br/><i>next: Update the layout-modal, carousel…</i>"]
-    class n_entry_cleanup active,current
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
+    class n_entry_cleanup active
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -28,7 +28,7 @@ flowchart LR
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -41,9 +41,6 @@ flowchart LR
   n_content_prose_requests_t1["REQUESTS.md lists prose with<br/>the draft and where it shows"]
   class n_content_prose_requests_t1 todo
   n_content_prose_requests -.-> n_content_prose_requests_t1
-  n_entry_cleanup_t0["Update the layout-modal,<br/>carousel-spec and entry-panels<br/>ski…"]
-  class n_entry_cleanup_t0 todo
-  n_entry_cleanup -.-> n_entry_cleanup_t0
   n_next_t0["Per-part timings from the<br/>carousel tunables, shared by<br/>ever…"]
   class n_next_t0 todo
   n_next -.-> n_next_t0
@@ -74,8 +71,8 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 One entry component: list"]
-    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▱▱▱▱ 1/2<br/><i>next: Update the layout-modal, carousel…</i>"]
-    class n_entry_cleanup active,current
+    n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟩 active<br/><code>entry/cleanup</code><br/>▰▰▰▰▰▰▰▰ 2/2"]
+    class n_entry_cleanup active
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
@@ -84,7 +81,7 @@ flowchart LR
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟩 active<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests active
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
-    class n_next active
+    class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -165,15 +162,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Specs, skills and docs describe one entry component.
+**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
 **How, next.**
 
-- Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
+- Per-part timings from the carousel tunables, shared by every width (from entry/open)
+- e2e: open and close at both widths, and a resize while open (from entry/open)
+- The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt (from entry/open)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/cleanup` |  | active, 108 to push | 1/2 | Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md | 2026-10-entry-reconcile, 3 of 4 |
+| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
@@ -296,8 +295,8 @@ The phone tile tests join modal.spec; five unused transition groups go; the slow
 |---|---|---|---|---|---|---|---|
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/4 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | active |  | 0/2 | 2 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
-| `entry/cleanup` ◀ | Tidy after the entry merge | active |  | 1/2 | 2 | 108 to push | Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md |
-| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `entry/cleanup` | Tidy after the entry merge | active |  | 2/2 | 2 | 109 to push |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/4)</summary>
 
@@ -319,12 +318,12 @@ Drafted prose carries a request id like mock media does, so REQUESTS.md lists wr
 
 </details>
 
-<details><summary><code>entry/cleanup</code>: Tidy after the entry merge (1/2)</summary>
+<details><summary><code>entry/cleanup</code>: Tidy after the entry merge (2/2)</summary>
 
 Specs, skills and docs describe one entry component.
 
 - [x] Merge carousel.spec into modal.spec; drop dead styles and tunables
-- [ ] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
+- [x] Update the layout-modal, carousel-spec and entry-panels skills and CLAUDE.md
 
 </details>
 
