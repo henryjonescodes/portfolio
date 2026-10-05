@@ -26,3 +26,4 @@ Landed branches, newest last. Appended by `bw land`.
 - 2026-10-05 plan `2026-10-mobile-efforts.md` complete: fix/mobile-polish, anim/restore-timing, feat/mobile-carousels, feat/links-retro, feat/efforts, feat/shareable-urls, feat/global-modal
 - 2026-10-05 **entry/list** → `staging`: One list that is a carousel on phones. 
 - 2026-10-05 plan `2026-10-control-panel.md` complete: feat/control-panel
+- 2026-10-05 **feat/control-panel** → `staging`: A control panel for colour, type and effects. 
