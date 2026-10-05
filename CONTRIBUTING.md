@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:05 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 13:05 UTC by `bw board` on `feat/panel-phones` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | none |
@@ -19,7 +19,7 @@ flowchart LR
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_next
@@ -67,9 +67,9 @@ flowchart LR
     n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Knob component: drag, wheel and a…</i>"]
     class n_feat_panel_knob planned
     n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
-    class n_feat_panel_phones planned
+    class n_feat_panel_phones planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_chore_dry_pass
@@ -108,13 +108,17 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**What.** The owner wants the toy on phones too: the gear shows on phones, the panel opens as a bottom sheet that fits a small screen, and every control works by touch.
 
-**How, next.** Every todo is done; it waits on review and merge.
+**How, next.**
+
+- Gear shows in the phone nav
+- Panel opens as a bottom sheet on phones, scrolls inside
+- Touch works for every control, including the knob
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/45 | nothing open |  |
+| `feat/panel-phones` |  | planned, pushed | 0/3 | Gear shows in the phone nav |  |
 
 ## 🕘 Just happened
 
@@ -239,8 +243,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
-| `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | pushed | Gear shows in the phone nav |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | pushed |  |
+| `feat/panel-phones` ◀ | The control panel on phones | planned |  | 0/3 | 0 | pushed | Gear shows in the phone nav |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | pushed |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
