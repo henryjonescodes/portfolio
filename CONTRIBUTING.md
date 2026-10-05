@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:19 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:20 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 02:19 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 02:20 UTC by `bw board` on `next` |
 | Trunk | `staging` |
 | Live branches | 5 |
 | Open PRs | none |
@@ -35,7 +35,7 @@ flowchart LR
   end
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▱▱▱▱▱▱▱ 3/28 · 🙋 8<br/><i>next: EntryList with the list and tile …</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▱▱▱▱▱▱▱ 4/28 · 🙋 8<br/><i>next: One paint-in (border, typewriter,…</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -70,17 +70,17 @@ flowchart LR
 
 **How, next.**
 
-- EntryList with the list and tile presentations from CSS container queries (from entry/list)
 - One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
+- Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, local only | 3/28 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
+| `next` |  | active, local only | 4/28 | One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list) |  |
 
 ## 🕘 Just happened
 
-**test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 2026-10-05 02:09 · `next` · `945a067b`
+**test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 2026-10-05 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
 - **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
@@ -199,7 +199,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 3/28 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 4/28 | 18 | local only | One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
@@ -237,11 +237,11 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (3/28)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (4/28)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
-- [ ] EntryList with the list and tile presentations from CSS container queries (from entry/list)
+- [x] EntryList with the list and tile presentations from CSS container queries (from entry/list)
 - [ ] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
 - [ ] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
 - [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
