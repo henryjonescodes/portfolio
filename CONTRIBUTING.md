@@ -1,12 +1,12 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 02:17 UTC · 5 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 02:17 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
 | Generated | 2026-10-05 02:17 UTC by `bw board` on `next` |
 | Trunk | `staging` |
-| Live branches | 5 |
+| Live branches | 6 |
 | Open PRs | none |
 | Waiting on you | 16 |
 | Merged, not yet landed | `entry/list`, `feat/control-panel` (run `bw land <branch> --into <next>`) |
@@ -39,10 +39,16 @@ flowchart LR
     class n_release_promote_main planned
   end
   style plan_3 fill:#fef3c7,stroke:#64748b,color:#0f172a
+  subgraph loose["🧩 Not in a plan"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/0"]
+    class n_next active,current
+  end
+  style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_bw_inbox
   n_entry_open --> n_entry_cleanup
   n_entry_list --> n_entry_open
   n_staging --> n_feat_content_requests
+  n_staging --> n_next
   n_staging --> n_release_promote_main
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
   classDef active fill:#bbf7d0,stroke:#16a34a,stroke-width:3px,color:#052e16
@@ -66,26 +72,32 @@ flowchart LR
 
 ## 🟢 Happening now
 
-Nothing checked out or active.
+**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+
+**How, next.** Every todo is done; it waits on review and merge.
+
+| Branch | PR | Status | Progress | Next | Plan |
+|---|---|---|---|---|---|
+| `next` |  | active, local only | 0/0 | nothing open |  |
 
 ## 🕘 Just happened
 
-**test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 2026-10-05 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
+**test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 2026-10-05 02:09 · `next` · `945a067b`
 Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 
-- **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
-- **feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list** · 01:23 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90`
-- **fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows** · 01:04 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12`
+- **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · `next` · `6a20899f`
+- **feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list** · 01:23 · `next` · `3b71cf90`
+- **fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows** · 01:04 · `next` · `2b953f12`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
-| 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6385b4c8` |
-| 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6b075a5` |
-| 2026-10-05 00:15 | test: tiles use the list markup; crossing the breakpoint keeps the elements | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `9cd6eff6` |
-| 2026-10-05 00:15 | feat(entries): one CSS-switched list for rows and tiles | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `c00d0c46` |
+| 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | `next` · `f6a2d263` |
+| 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | `next` · `6385b4c8` |
+| 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | `next` · `f6b075a5` |
+| 2026-10-05 00:15 | test: tiles use the list markup; crossing the breakpoint keeps the elements | `next` · `9cd6eff6` |
+| 2026-10-05 00:15 | feat(entries): one CSS-switched list for rows and tiles | `next` · `c00d0c46` |
 | 2026-10-05 00:15 | feat(border): redraw a border or line quickly on demand | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `b6f49807` |
 | 2026-10-05 00:15 | test: make the e2e port configurable | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2425db0f` |
 | 2026-10-05 00:11 | feat(panel): colour, type and FX control panel in 3D and 2D | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3d6f0049` |
@@ -191,6 +203,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | 24 to push, 85 to pull | Request ids on mock media and drafted prose |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 0/0 | 18 | local only |  |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
@@ -243,6 +256,13 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 - [ ] 🙋 claim: Kiki UI summary: the design system behind ChannelAI's iOS app (components, color, typography) (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 claim: User notifier summary: a real-time email notification system that shows Arbor users what they are saving (from feat/efforts) (from feat/global-modal)
 - [ ] 🙋 media: Replace each 'Image to come' placeholder (5 experience entries, 3 efforts); the label says what belongs there (from feat/entry-dock)
+
+</details>
+
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (0/0)</summary>
+
+Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+
 
 </details>
 
