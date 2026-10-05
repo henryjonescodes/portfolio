@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 02:41 UTC by `bw board` on `next` |
+| Generated | 2026-10-05 02:41 UTC by `bw board` on `entry/open` |
 | Trunk | `staging` |
 | Live branches | 4 |
 | Open PRs | none |
@@ -19,7 +19,7 @@ flowchart LR
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 16/30 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_next
@@ -42,7 +42,7 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
-    class n_entry_open planned
+    class n_entry_open planned,current
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph plan_2["📋 Portfolio roadmap"]
@@ -52,7 +52,7 @@ flowchart LR
   style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▱▱▱▱ 16/30 · 🙋 8<br/><i>next: 2D knob, mini slider and key cont…</i>"]
-    class n_next active,current
+    class n_next active
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_next --> n_entry_cleanup
@@ -86,17 +86,19 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
+**Motivation.** The phone morph is the reference; every open should feel like it.
+
+**What.** Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
 **How, next.**
 
-- 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel)
-- npm run requests renders the list; bw publishes it next to the board (from feat/content-requests)
-- Act on the answer to "Sound: synthesised clicks (no files) or recorded samples you pick? (from feat/control-panel)": A real or emulated synth powers every interaction sound, toggled globally, with sounds the visitor can tweak; start simple, and only gate it behind an experimental mode if it turns out heavy
+- Closed and open layouts keep the same elements in the same order, with shared layoutIds
+- Per-part timings from the carousel tunables, shared by every width
+- Remove EntryCarousel and EntryCard; one provider opens everything
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 16/30 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `entry/open` |  | planned, pushed | 0/6 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
@@ -220,8 +222,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 16/30 | 21 | pushed | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `next` | Integration branch: the stream's second staging merge | active |  | 16/30 | 21 | pushed | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
