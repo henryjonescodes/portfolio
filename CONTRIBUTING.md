@@ -9,7 +9,7 @@
 | Live branches | 6 |
 | Open PRs | none |
 | Waiting on you | 16 |
-| Merged, not yet landed | `entry/list`, `feat/control-panel` (run `bw land <branch> --into <next>`) |
+| Merged, not yet landed | `feat/control-panel` (run `bw land <branch> --into <next>`) |
 | Source of truth | each branch's seed in `.work/branches/`; this file is regenerated, never edited |
 
 </details>
@@ -18,8 +18,6 @@
 flowchart LR
   n_staging([staging])
   class n_staging trunk
-  n_entry_list([entry/list])
-  class n_entry_list trunk
   subgraph plan_0["📋 Entry tabs"]
     n_bw_inbox["<b>One inbox for the owner's<br/>answers</b><br/>🟦 planned<br/><code>bw/inbox</code><br/>▰▰▰▰▱▱▱▱ 3/6<br/><i>next: bw renders INBOX.md with one answ…</i>"]
     class n_bw_inbox planned
@@ -27,26 +25,26 @@ flowchart LR
     class n_feat_content_requests planned
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
-  subgraph plan_2["📋 One entry component: list"]
+  subgraph plan_1["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open planned
   end
-  style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
-  subgraph plan_3["📋 Portfolio roadmap"]
+  style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
+  subgraph plan_2["📋 Portfolio roadmap"]
     n_release_promote_main["<b>Promote the new site to<br/>main</b><br/>🟦 planned<br/><code>release/promote-main</code><br/>▰▱▱▱▱▱▱▱ 2/11 · 🙋 8<br/><i>next: PR staging into main</i>"]
     class n_release_promote_main planned
   end
-  style plan_3 fill:#fef3c7,stroke:#64748b,color:#0f172a
+  style plan_2 fill:#ecfccb,stroke:#64748b,color:#0f172a
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/0"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
   n_staging --> n_bw_inbox
   n_entry_open --> n_entry_cleanup
-  n_entry_list --> n_entry_open
+  n_staging --> n_entry_open
   n_staging --> n_feat_content_requests
   n_staging --> n_next
   n_staging --> n_release_promote_main
@@ -74,11 +72,15 @@ flowchart LR
 
 **What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
-**How, next.** Every todo is done; it waits on review and merge.
+**How, next.**
+
+- EntryList with the list and tile presentations from CSS container queries (from entry/list)
+- One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
+- Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, local only | 0/0 | nothing open |  |
+| `next` |  | active, local only | 0/4 | EntryList with the list and tile presentations from CSS container queries (from entry/list) |  |
 
 ## 🕘 Just happened
 
@@ -97,7 +99,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | `next` · `6385b4c8` |
 | 2026-10-05 00:20 | fix(prefs): ignore out-of-range stored values and apply before paint | `next` · `f6b075a5` |
 | 2026-10-05 00:15 | test: tiles use the list markup; crossing the breakpoint keeps the elements | `next` · `9cd6eff6` |
-| 2026-10-05 00:15 | feat(entries): one CSS-switched list for rows and tiles | `next` · `c00d0c46` |
+| 2026-10-05 00:15 | feat(entries): one CSS-switched list for rows and tiles | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `c00d0c46` |
 | 2026-10-05 00:15 | feat(border): redraw a border or line quickly on demand | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `b6f49807` |
 | 2026-10-05 00:15 | test: make the e2e port configurable | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2425db0f` |
 | 2026-10-05 00:11 | feat(panel): colour, type and FX control panel in 3D and 2D | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3d6f0049` |
@@ -189,7 +191,6 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | Plan | Progress |
 |---|---|
 | [2026-10-content-and-inbox.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-content-and-inbox.md) | 1 of 3 branches done |
-| [2026-10-control-panel.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-control-panel.md) | 1 of 1 branches done (complete) |
 | [2026-10-entry-reconcile.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-entry-reconcile.md) | 2 of 4 branches done |
 | [2026-10-roadmap.md](https://github.com/henryjonescodes/portfolio/blob/staging/.work/plans/2026-10-roadmap.md) | 3 of 4 branches done |
 
@@ -203,7 +204,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | 24 to push, 85 to pull | Request ids on mock media and drafted prose |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 0/0 | 18 | local only |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 0/4 | 18 | local only | EntryList with the list and tile presentations from CSS container queries (from entry/list) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
@@ -259,10 +260,14 @@ Layouts are built against mock images and drafted prose, each tagged with a requ
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (0/0)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (0/4)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
+- [ ] EntryList with the list and tile presentations from CSS container queries (from entry/list)
+- [ ] One paint-in (border, typewriter, stagger) for list items and tiles (from entry/list)
+- [ ] Crossing the breakpoint replays line draws quickly, not from scratch (from entry/list)
+- [ ] Resizing across the breakpoint keeps the same elements (e2e) (from entry/list)
 
 </details>
 
