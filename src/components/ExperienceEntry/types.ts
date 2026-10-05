@@ -82,6 +82,8 @@ export type ExperienceEntryProps = {
   onLayoutAnimationComplete?: () => void;
   /** In the window's closed layout, keep the image pane (the source showed one) or collapse it. */
   mediaWhenClosed?: boolean;
+  /** In a list item, show the media only when the list is laid out as tiles. */
+  mediaInTilesOnly?: boolean;
   onClose?: () => void;
   /** Open entry fills the overlay instead of its cozy size. */
   expanded?: boolean;

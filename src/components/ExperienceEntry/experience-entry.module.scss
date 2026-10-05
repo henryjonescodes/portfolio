@@ -168,6 +168,120 @@
   }
 }
 
+// List items carry both layouts. The lines and media the tile layout needs stay hidden until
+// the list's container query below shows them.
+.entry {
+  .barLine,
+  .lineHorizontal,
+  .tilesOnly {
+    display: none;
+  }
+}
+
+// Below mobileLarge the list is a row of tiles: the header becomes a title bar over the whole
+// tile, with the bordered box spanning it through a subgrid, then media, a divider, and text.
+@container entries (max-width: #{styles.$width-mobile-large - 0.02px}) {
+  .entry.inList.fullScreen {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 0;
+    flex: 0 0 var(--tile);
+    width: var(--tile);
+    min-height: 420px;
+    margin-bottom: 0;
+    overflow: hidden;
+    scroll-snap-align: center;
+    border-radius: styles.$radius-md;
+    background: var(--background-secondary);
+
+    &:focus-visible {
+      outline: 2px solid var(--accent-primary);
+      outline-offset: 2px;
+    }
+
+    .header {
+      @include styles.title-bar;
+      position: relative;
+      z-index: 1;
+      grid-area: 1 / 1;
+      justify-content: center;
+      gap: 2px;
+      min-height: 52px;
+      padding: 8px 16px;
+
+      .title {
+        gap: 12px;
+      }
+
+      h2 {
+        min-width: 0;
+      }
+
+      p {
+        flex-shrink: 0;
+      }
+    }
+
+    .box {
+      display: grid;
+      grid-area: 1 / 1 / 3 / 2;
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: subgrid;
+
+      > svg {
+        stroke: var(--foreground-secondary);
+      }
+    }
+
+    .boxContent {
+      grid-row: 2;
+      flex-direction: column;
+      justify-content: flex-start;
+      height: auto;
+      min-height: 0;
+      border-radius: 0;
+    }
+
+    .descriptionContents {
+      flex-direction: column;
+    }
+
+    .descriptionContentsFlex .text {
+      gap: 10px;
+    }
+
+    .tools {
+      display: none;
+    }
+
+    .childrenWrapper {
+      order: -1;
+      width: 100%;
+      max-width: none;
+      max-height: none;
+      aspect-ratio: 16 / 10;
+      background: black;
+    }
+
+    .tilesOnly {
+      display: flex;
+    }
+
+    .lineVertical {
+      display: none;
+    }
+
+    .lineHorizontal,
+    .barLine {
+      display: block;
+      top: auto;
+      bottom: 0;
+      background-color: var(--foreground-secondary);
+    }
+  }
+}
+
 @media (max-width: styles.$width-mobile) {
   .fullScreen {
     .box {
