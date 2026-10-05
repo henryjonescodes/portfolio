@@ -1,6 +1,6 @@
 # Work stats
 
-_From `origin/main` to `origin/staging`, generated 2026-10-05 00:12 UTC by `bw stats`._
+_From `origin/main` to `origin/staging`, generated 2026-10-05 00:15 UTC by `bw stats`._
 
 | | |
 |---|---|
@@ -61,17 +61,18 @@ src/  🚧
 │   ├── svg/  🚧
 ├── components/  🚧
 │   ├── 3D/  🆕  🚧
-│   ├── AnimatedBorderBox/  🆕
+│   ├── AnimatedBorderBox/  🆕  🚧
 │   ├── AnimatedLine/  🆕
 │   ├── AnimatedOutlet/  🆕
 │   ├── Background/  🆕
 │   ├── ControlPanel/  🆕  🚧
 │   ├── Crosshair/  🆕
 │   ├── Efforts/  🆕
-│   ├── EntryCarousel/  🆕
+│   ├── EntryCarousel/  🆕  🚧
 │   ├── EntryLink/  🆕
+│   ├── EntryList/  🆕  🚧
 │   ├── EntryMedia/  🆕
-│   ├── ExperienceEntry/  🆕
+│   ├── ExperienceEntry/  🆕  🚧
 │   ├── GlitchIcon/  🆕
 │   ├── GlitchIconItem/  🆕
 │   ├── GlitchMedia/  🆕
@@ -84,19 +85,19 @@ src/  🚧
 │   ├── Page/  🆕  🚧
 │   ├── Panels/  🆕
 │   ├── TypewriterText/  🆕
-├── config/  🆕
-│   ├── animation/  🆕
+├── config/  🆕  🚧
+│   ├── animation/  🆕  🚧
 ├── context/  🚧
 ├── data/  🆕
 ├── debug/  🆕
 ├── hooks/  🆕
 ├── pages/  🚧
 │   ├── about/  🆕
-│   ├── experience/  🆕
+│   ├── experience/  🆕  🚧
 │   ├── home/  🆕
 │   ├── landing/  🆕  🚧
 │   ├── links/  🆕
-│   ├── projects/  🆕
+│   ├── projects/  🆕  🚧
 ├── styles/  🚧
 ├── utils/  🆕
 ```
