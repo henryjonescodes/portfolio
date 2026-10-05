@@ -26,3 +26,4 @@ Once the stream's work is in, one pass removes dead code and styles, merges dupl
 - 2026-10-05: done "Merge duplicated helpers and styles" at 2bf2eed0
 - 2026-10-05: done "Check route and 3D code splitting in the bundle report" at 77bd22cd
 - 2026-10-05: done "Move capture-modal-frames.mjs and other agent-only scripts into repertoire skills (fake-clock frames are superseded by motion-sheet)" at f9a48008
+- 2026-10-05: Bundle: three.js (Scene, 891 KB), the debug panel (186 KB) and use-gesture load lazily; the main entry is 362 KB. Unused transition groups, a dead page class and the fake-clock frame script are gone.
