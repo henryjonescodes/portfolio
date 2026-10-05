@@ -87,6 +87,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Nav item hover: the underline collapses smoothly when the pointer leaves
 - [ ] Close button: full size, border-colour fill with the X knocked out
 - [ ] Phones: the entry image animates between list and window, and fills its space
+- [ ] StripedPanel: the placeholder's dashed frame with wide low-opacity stripes, as a general wrapper
 
 ## Log
 
