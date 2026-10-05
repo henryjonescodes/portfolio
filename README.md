@@ -1,11 +1,11 @@
 # Work board
 
-Published 2026-10-05 14:28 UTC by `bw publish`. Nothing on this branch merges or deploys; every file is regenerated.
+Published 2026-10-05 14:29 UTC by `bw publish`. Nothing on this branch merges or deploys; every file is regenerated.
 
 | | |
 |---|---|
 | In flight | `next` |
-| Planned | `chore/dry-pass` |
+| Planned | none |
 | Waiting on you | [16 questions](INBOX.md) |
 | Content to source | [20 missing](REQUESTS.md) |
 
