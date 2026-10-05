@@ -27,7 +27,7 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▰▰▰▰▱▱ 3/4<br/><i>next: Touch drag works on phones (the p…</i>"]
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
     class n_feat_panel_knob planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -77,7 +77,7 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▰▰▰▰▱▱ 3/4<br/><i>next: Touch drag works on phones (the p…</i>"]
+    n_feat_panel_knob["<b>A 2D knob and mini sliders<br/>for the control panel</b><br/>🟦 planned<br/><code>feat/panel-knob</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
     class n_feat_panel_knob planned,current
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active
@@ -164,13 +164,11 @@ flowchart LR
 
 **What.** The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
-**How, next.**
-
-- Touch drag works on phones (the panel is a bottom sheet there)
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/panel-knob` |  | planned, 4 to push | 3/4 | Touch drag works on phones (the panel is a bottom sheet there) |  |
+| `feat/panel-knob` |  | planned, 4 to push | 4/4 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -186,7 +184,6 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | When | What | Where |
 |---|---|---|
 | 2026-10-05 13:21 | perf(crosshair): follow raw pointer updates, re-render only when state changes | `next` · `21de6907` |
-| 2026-10-05 13:21 | feat(scripts): motion-sheet captures an animation in real time as one contact sheet | `next` · `aba8b241` |
 | 2026-10-05 02:09 | test(panel): skip the full screen round trip on CI, which cannot load the 3D scene | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b` |
 | 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
 | 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
@@ -297,8 +294,8 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | planned |  | 3/4 | 0 | 4 to push | Touch drag works on phones (the panel is a bottom sheet there) |
-| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | 19 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `feat/panel-knob` ◀ | A 2D knob and mini sliders for the control panel | planned |  | 4/4 | 0 | 4 to push |  |
+| `next` | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | 20 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -328,14 +325,14 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (3/4)</summary>
+<details><summary><code>feat/panel-knob</code>: A 2D knob and mini sliders for the control panel (4/4)</summary>
 
 The panel's colour and FX controls become hardware: a rotary knob and mini sliders that work with mouse drag, wheel and arrow keys, tick with the synth, and match the 3D model's knobs.
 
 - [x] Knob component: drag, wheel and arrow keys, with aria slider semantics
 - [x] Mini slider variant of the range rows
 - [x] Colour hues and FX ranges use them; each tick plays the toggle sound
-- [ ] Touch drag works on phones (the panel is a bottom sheet there)
+- [x] Touch drag works on phones (the panel is a bottom sheet there)
 
 </details>
 
