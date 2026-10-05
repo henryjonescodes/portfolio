@@ -4,7 +4,7 @@
 
 | | |
 |---|---|
-| Generated | 2026-10-05 00:08 UTC by `bw board` on `entry/list` |
+| Generated | 2026-10-05 00:08 UTC by `bw board` on `entry/window` |
 | Trunk | `staging` |
 | Live branches | 8 |
 | Open PRs | [#86](https://github.com/henryjonescodes/portfolio/pull/86) |
@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph plan_0["📋 Entry tabs"]
-    n_bw_inbox["<b>One inbox for the owner's<br/>answers</b><br/>🟦 planned<br/><code>bw/inbox</code><br/>▰▰▰▱▱▱▱▱ 2/6<br/><i>next: bw renders INBOX.md with one answ…</i>"]
+    n_bw_inbox["<b>One inbox for the owner's<br/>answers</b><br/>🟦 planned<br/><code>bw/inbox</code><br/>▰▰▰▰▱▱▱▱ 3/6<br/><i>next: bw renders INBOX.md with one answ…</i>"]
     class n_bw_inbox planned
     n_feat_content_requests["<b>Mock media and a list of<br/>content to source</b><br/>🟦 planned<br/><code>feat/content-requests</code><br/>▱▱▱▱▱▱▱▱ 0/11 · 🙋 8<br/><i>next: Request ids on mock media and dra…</i>"]
     class n_feat_content_requests planned
@@ -28,11 +28,11 @@ flowchart LR
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
     n_entry_list["<b>One list that is a<br/>carousel on phones</b><br/>🟩 active<br/><code>entry/list</code><br/>▱▱▱▱▱▱▱▱ 0/4<br/><i>next: EntryList with the list and tile …</i>"]
-    class n_entry_list active,current
+    class n_entry_list active
     n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟦 planned<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/6<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open planned
     n_entry_window["<b>One window for every open<br/>entry</b><br/>🟨 review · #86<br/><code>entry/window</code><br/>▰▰▰▰▰▰▰▰ 6/6"]
-    class n_entry_window review
+    class n_entry_window review,current
   end
   style plan_1 fill:#fce7f3,stroke:#64748b,color:#0f172a
   subgraph plan_3["📋 Portfolio roadmap"]
@@ -75,19 +75,15 @@ flowchart LR
 
 ## 🟢 Happening now
 
-**Motivation.** Resizing should re-lay out the same entries, not swap one component tree for another.
+**Motivation.** Phone and desktop open views should be the same window, so a fix or a polish lands once.
 
-**What.** Experience and projects render one EntryList. A container query turns it from a vertical list into a scroll-snapped row of tiles on narrow widths; the items are the same Entry list items with tile styles, painting in the same way. useAsCarousel and its width check go. Crossing the breakpoint replays line draws very quickly rather than from scratch.
+**What.** The open entry, modal or phone, renders one EntryWindow: the main nav bar with the sections and Close, then media under the bar on phones and beside the text on wide screens, then the body. The phone open view takes the full height over the site nav. Visual change on desktop is nil.
 
-**How, next.**
-
-- EntryList with the list and tile presentations from CSS container queries
-- One paint-in (border, typewriter, stagger) for list items and tiles
-- Crossing the breakpoint replays line draws quickly, not from scratch
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/list` |  | active, local only | 0/4 | EntryList with the list and tile presentations from CSS container queries | 2026-10-entry-reconcile, 0 of 4 |
+| `entry/window` | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | review, pushed | 6/6 | nothing open | 2026-10-entry-reconcile, 0 of 4 |
 
 ## 🕘 Just happened
 
@@ -221,23 +217,23 @@ Co-Authored-By: Claude Sonnet <noreply@anthropic.com>
 
 | Branch | Title | Status | PR | Todos | Commits | Remote | Next |
 |---|---|---|---|---|---|---|---|
-| `bw/inbox` | One inbox for the owner's answers | planned |  | 2/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
+| `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` ◀ | One list that is a carousel on phones | active |  | 0/4 | 1 | local only | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` | One list that is a carousel on phones | active |  | 0/4 | 1 | local only | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `entry/window` | One window for every open entry | review | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | 6/6 | 4 | pushed |  |
+| `entry/window` ◀ | One window for every open entry | review | [#86](https://github.com/henryjonescodes/portfolio/pull/86) | 6/6 | 4 | pushed |  |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
 | `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 2 | local only | 2D knob, mini slider and key controls, keyboard and mouse |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
-<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (2/6)</summary>
+<details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
 
 Every open question and claim across branches is gathered into INBOX.md on the board branch, answerable from GitHub's editor. bw pulls answers back into the right branch's seed as a todo to act on, so the session on that workstream picks it up.
 
 - [ ] bw renders INBOX.md with one answer slot per open question
 - [ ] bw ingests answers (from origin/board) into seeds and logs them
 - [ ] branchwork-loop applies the inbox at the start of a session
-- [ ] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
+- [x] bw stats: a STATS.md beside the board with lines added and removed, commits, PRs and files changed since a base, plus a before and after file tree (files on unmerged branches marked 🚧, sketched branches listed as planned)
 - [x] Board layout from the approved sample: metadata and legend folded, Happening now with motivation, what, how and a table, Just happened (one full, three short, earlier folded with changelog links), questions grouped by kind with why, ask and file links, instructions folded
 - [x] Ambient branchwork-quiz skill: offer a quiz at natural pauses without blocking, ask the juiciest few open questions (max 4) with AskUserQuestion, record answers with bw answer
 
