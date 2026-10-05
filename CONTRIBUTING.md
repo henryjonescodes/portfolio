@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 01:14 UTC · 7 live branches · 1 PRs open · 20 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 01:18 UTC · 7 live branches · 1 PRs open · 20 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 01:14 UTC by `bw board` on `cp-review` |
+| Generated | 2026-10-05 01:18 UTC by `bw board` on `cr-build` |
 | Trunk | `staging` |
 | Live branches | 7 |
 | Open PRs | [#88](https://github.com/henryjonescodes/portfolio/pull/88) |
@@ -84,7 +84,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `feat/control-panel` |  | active, 0 to push, 56 to pull | 0/8 | 2D knob, mini slider and key controls, keyboard and mouse | 2026-10-control-panel, 0 of 1 |
+| `feat/control-panel` |  | active, 0 to push, 67 to pull | 0/8 | 2D knob, mini slider and key controls, keyboard and mouse | 2026-10-control-panel, 0 of 1 |
 
 ## 🕘 Just happened
 
@@ -224,10 +224,10 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `bw/inbox` | One inbox for the owner's answers | planned |  | 3/6 | 0 | local only | bw renders INBOX.md with one answer slot per open question |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | local only | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/list` | One list that is a carousel on phones | review | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | 0/4 | 6 | pushed | EntryList with the list and tile presentations from CSS container queries |
+| `entry/list` | One list that is a carousel on phones | review | [#88](https://github.com/henryjonescodes/portfolio/pull/88) | 0/4 | 6 | 0 to push, 16 to pull | EntryList with the list and tile presentations from CSS container queries |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | local only | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/content-requests` | Mock media and a list of content to source | planned |  | 0/11 | 0 | local only | Request ids on mock media and drafted prose |
-| `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 5 | 0 to push, 56 to pull | 2D knob, mini slider and key controls, keyboard and mouse |
+| `feat/control-panel` | A control panel for colour, type and effects | active |  | 0/8 | 5 | 0 to push, 67 to pull | 2D knob, mini slider and key controls, keyboard and mouse |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>bw/inbox</code>: One inbox for the owner's answers (3/6)</summary>
