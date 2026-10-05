@@ -1,10 +1,10 @@
 # Work board
 
-<details><summary><b>About this board</b> · updated 2026-10-05 13:39 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
+<details><summary><b>About this board</b> · updated 2026-10-05 13:42 UTC · 6 live branches · 0 PRs open · 16 waiting on you</summary>
 
 | | |
 |---|---|
-| Generated | 2026-10-05 13:39 UTC by `bw board` on `entry/open` |
+| Generated | 2026-10-05 13:42 UTC by `bw board` on `entry/open` |
 | Trunk | `staging` |
 | Live branches | 6 |
 | Open PRs | none |
@@ -20,7 +20,7 @@ flowchart LR
   subgraph plan_0["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/7<br/><i>next: Closed and open layouts keep the …</i>"]
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▱▱▱▱▱▱▱ 1/7<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open active,current
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
@@ -56,7 +56,7 @@ flowchart LR
   n_entry_open_t4["The 'content never ahead of<br/>the window' check fails on the<br/>…"]
   class n_entry_open_t4 todo
   n_entry_open -.-> n_entry_open_t4
-  n_entry_open_more["… 2 more todos"]
+  n_entry_open_more["… 1 more todos"]
   class n_entry_open_more todo
   n_entry_open -.-> n_entry_open_more
   n_feat_panel_knob_t0["Knob component: drag, wheel<br/>and arrow keys, with aria<br/>slide…"]
@@ -91,7 +91,7 @@ flowchart LR
   subgraph plan_0["📋 One entry component: list"]
     n_entry_cleanup["<b>Tidy after the entry merge</b><br/>🟦 planned<br/><code>entry/cleanup</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Merge carousel.spec into modal.sp…</i>"]
     class n_entry_cleanup planned
-    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▱▱▱▱▱▱▱▱ 0/7<br/><i>next: Closed and open layouts keep the …</i>"]
+    n_entry_open["<b>One open morph, the<br/>carousel's, at every width</b><br/>🟩 active<br/><code>entry/open</code><br/>▰▱▱▱▱▱▱▱ 1/7<br/><i>next: Closed and open layouts keep the …</i>"]
     class n_entry_open active,current
   end
   style plan_0 fill:#e0f2fe,stroke:#64748b,color:#0f172a
@@ -198,7 +198,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `entry/open` |  | active, 84 to push | 0/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
+| `entry/open` |  | active, 85 to push | 1/7 | Closed and open layouts keep the same elements in the same order, with shared layoutIds | 2026-10-entry-reconcile, 2 of 4 |
 
 ## 🕘 Just happened
 
@@ -327,7 +327,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 0/7 | 7 | 84 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
+| `entry/open` ◀ | One open morph, the carousel's, at every width | active |  | 1/7 | 7 | 85 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | active |  | 0/4 | 2 | pushed | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `next` | Integration branch: the stream's second staging merge | active |  | 29/45 | 35 | pushed |  |
 
@@ -359,7 +359,7 @@ Specs, skills and docs describe one entry component.
 
 </details>
 
-<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (0/7)</summary>
+<details><summary><code>entry/open</code>: One open morph, the carousel's, at every width (1/7)</summary>
 
 Opening any entry mounts the window over its source in the closed layout and opens it to a target box the CSS decides (full height on phones, a centred window with a desktop margin on wide screens), with the carousel's per-part clocks (title, date, media, details). Closing morphs back and unmounts on completion. The carousel's own overlay code goes.
 
@@ -369,7 +369,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 - [ ] e2e: open and close at both widths, and a resize while open
 - [ ] The 'content never ahead of the window' check fails on the CI runner only (6 to 10px overhang) since #84; passes locally even CPU-throttled. Re-check once the morph is rebuilt
 - [ ] Re-enable the CI skip on the open-sync check in e2e/modal.spec.ts
-- [ ] Phones: the entry image animates between list and window (its shape and fill now match)
+- [x] Phones: the entry image animates between list and window (its shape and fill now match)
 
 </details>
 
