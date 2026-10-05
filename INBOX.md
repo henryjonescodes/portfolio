@@ -110,6 +110,15 @@ the next `bw publish --push` (or `bw inbox`) moves every answer into its branch 
 
 <!-- answer above this line -->
 
+### next: Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)
+<!-- bw:q {"branch":"next","text":"Pick one background-primary: static CSS uses #043030, the knobs' runtime default is #003838 (read from a commented SCSS line)"} -->
+*Why it matters:* The colour shifts slightly when a knob first moves, because static CSS and the knobs start from different shades.
+*Where:* `src/styles/_colors.scss#L12`
+
+<!-- answer below this line -->
+
+<!-- answer above this line -->
+
 ### release/promote-main: Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)
 <!-- bw:q {"branch":"release/promote-main","text":"Review the Arbor and project blurbs (written from existing descriptions) (from content/real-copy)"} -->
 *Why it matters:* They were rewritten from older descriptions and are the first thing visitors read in each entry.
