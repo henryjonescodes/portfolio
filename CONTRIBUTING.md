@@ -27,8 +27,8 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_feat_knob_mapping active
+    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
+    class n_feat_knob_mapping planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -77,8 +77,8 @@ flowchart LR
     class n_chore_dry_pass planned
     n_content_prose_requests["<b>Drafted prose in the<br/>request list</b><br/>🟦 planned<br/><code>content/prose-requests</code><br/>▱▱▱▱▱▱▱▱ 0/2<br/><i>next: Request ids on drafted prose (sum…</i>"]
     class n_content_prose_requests planned
-    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟩 active<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
-    class n_feat_knob_mapping active
+    n_feat_knob_mapping["<b>The 3D knobs drive the<br/>control panel's page</b><br/>🟦 planned<br/><code>feat/knob-mapping</code><br/>▰▰▰▰▰▰▰▰ 4/4"]
+    class n_feat_knob_mapping planned
     n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/49 · 🙋 16<br/><i>next: Per-part timings from the carouse…</i>"]
     class n_next active,current
   end
@@ -88,49 +88,49 @@ flowchart LR
   n_next --> n_entry_cleanup
   n_next --> n_feat_knob_mapping
   n_staging --> n_next
-  landed_0["✅ Real copy and missing<br/>content<br/><code>content/real-copy</code> · 2026-10-04"]
+  landed_0["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
   class landed_0 merged
   n_staging --- landed_0
-  landed_1["✅ Draco-compressed 3D model<br/><code>perf/glb-draco</code> · 2026-10-04"]
+  landed_1["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
   class landed_1 merged
   n_staging --- landed_1
-  landed_2["✅ Phone polish and an updated<br/>map<br/><code>fix/mobile-polish</code> · 2026-10-04"]
+  landed_2["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
   class landed_2 merged
   n_staging --- landed_2
-  landed_3["✅ Restore from expanded on the<br/>window's clock<br/><code>anim/restore-timing</code> · 2026-10-04"]
+  landed_3["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
   class landed_3 merged
   n_staging --- landed_3
-  landed_4["✅ Experience and projects<br/>carousels on phones<br/><code>feat/mobile-carousels</code> · 2026-10-04"]
+  landed_4["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
   class landed_4 merged
   n_staging --- landed_4
-  landed_5["✅ Links page in the retro<br/>style<br/><code>feat/links-retro</code> · 2026-10-04"]
+  landed_5["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
   class landed_5 merged
   n_staging --- landed_5
-  landed_6["✅ Highlighted efforts inside<br/>experience entri…<br/><code>feat/efforts</code> · 2026-10-04"]
+  landed_6["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
   class landed_6 merged
   n_staging --- landed_6
-  landed_7["✅ One window for every open<br/>entry<br/><code>entry/window</code> · 2026-10-05"]
+  landed_7["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
   class landed_7 merged
   n_staging --- landed_7
-  landed_8["✅ One list that is a carousel<br/>on phones<br/><code>entry/list</code> · 2026-10-05"]
+  landed_8["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
   class landed_8 merged
   n_staging --- landed_8
-  landed_9["✅ A control panel for colour,<br/>type and effects<br/><code>feat/control-panel</code> · 2026-10-05"]
+  landed_9["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
   class landed_9 merged
   n_staging --- landed_9
-  landed_10["✅ Mock media and a list of<br/>content to source<br/><code>feat/content-requests</code> · 2026-10-05"]
+  landed_10["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
   class landed_10 merged
   n_staging --- landed_10
-  landed_11["✅ One inbox for the owner's<br/>answers<br/><code>bw/inbox</code> · 2026-10-05"]
+  landed_11["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
   class landed_11 merged
-  n_staging --- landed_11
-  landed_12["✅ The control panel on phones<br/><code>feat/panel-phones</code> · 2026-10-05"]
+  n_next --- landed_11
+  landed_12["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
   class landed_12 merged
   n_next --- landed_12
-  landed_13["✅ One open morph, the<br/>carousel's, at every wi…<br/><code>entry/open</code> · 2026-10-05"]
+  landed_13["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
   class landed_13 merged
   n_next --- landed_13
-  landed_14["✅ A 2D knob and mini sliders<br/>for the control …<br/><code>feat/panel-knob</code> · 2026-10-05"]
+  landed_14["✅ The 3D knobs drive the<br/>control panel's page<br/><code>feat/knob-mapping</code> · 2026-10-05"]
   class landed_14 merged
   n_next --- landed_14
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
@@ -172,26 +172,21 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, pushed | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
+| `next` |  | active, 8 to push | 29/49 | Per-part timings from the carousel tunables, shared by every width (from entry/open) |  |
 
 ## 🕘 Just happened
 
-**feat(panel): the model's knobs turn the shown page's three main controls, named on the info screen** · 2026-10-05 13:53 · `feat/knob-mapping` · `1e027660`
+**feat(panel): the model's knobs turn the shown page's three main controls, named on the info screen** · 2026-10-05 13:53 · `next` · `1e027660`
 Colour turns the hues, Type the font, text size and motion speed, FX the CRT, volume and cutoff. Panel labels and buttons read in the site's colour and face on the 3D screen.
 
-- **chore(scripts): motion-sheet moves to the portfolio-motion-sheet skill in repertoire** · 13:39 · `next` · `da2ab139`
-- **fix(entries): a video carries its frame and time between list and window** · 13:37 · `next` · `48913e6f`
-- **fix(nav): the window bar spans its window at a fixed 40px, and Close simply fills its slot** · 13:33 · `next` · `9922dfdd`
+- **test(panel): skip the full screen round trip on CI, which cannot load the 3D scene** · 02:09 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b`
+- **fix(panel): the floating panel's tab line draws, and Escape only closes it from inside** · 01:25 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f`
+- **feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list** · 01:23 · [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90`
 
 <details><summary><b>Earlier</b> (full notes for every landed branch are in the <a href="https://github.com/henryjonescodes/portfolio/blob/staging/.work/CHANGELOG.md">changelog</a>)</summary>
 
 | When | What | Where |
 |---|---|---|
-| 2026-10-05 13:22 | feat(entries): on phones the tile's bar becomes the window's bar, and the filled Close reaches the bar's line | `next` · `72f91b91` |
-| 2026-10-05 13:21 | perf(crosshair): follow raw pointer updates, re-render only when state changes | `next` · `21de6907` |
-| 2026-10-05 02:09 | test(panel): skip the full screen round trip on CI, which cannot load the 3D scene | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `945a067b` |
-| 2026-10-05 01:25 | fix(panel): the floating panel's tab line draws, and Escape only closes it from inside | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6a20899f` |
-| 2026-10-05 01:23 | feat(requests): request ids on placeholders, resolved by file name, and a generated REQUESTS list | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `3b71cf90` |
 | 2026-10-05 01:04 | fix(entries): tile bar line draws, 3D list stays stacked, phone window header line shows | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `2b953f12` |
 | 2026-10-05 00:24 | fix(entries): tile media shows and fills the tile on phones | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `f6a2d263` |
 | 2026-10-05 00:20 | fix(panel): real tabs, a keyboard font row, and a modal floating window | [#88](https://github.com/henryjonescodes/portfolio/pull/88) · `6385b4c8` |
@@ -299,8 +294,8 @@ Colour turns the hues, Type the font, text size and motion speed, FX the CRT, vo
 | `chore/dry-pass` | DRY and code-splitting pass after the stream | planned |  | 0/3 | 0 | pushed | Delete unused components, styles, tunables and assets (knip, check-assets, a manual sweep) |
 | `content/prose-requests` | Drafted prose in the request list | planned |  | 0/2 | 0 | pushed | Request ids on drafted prose (summaries, blurbs, claims) |
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
-| `feat/knob-mapping` | The 3D knobs drive the control panel's page | active |  | 4/4 | 1 | 5 to push |  |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 46 | pushed | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
+| `feat/knob-mapping` | The 3D knobs drive the control panel's page | planned |  | 4/4 | 0 | 5 to push |  |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/49 | 48 | 8 to push | Per-part timings from the carousel tunables, shared by every width (from entry/open) |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
