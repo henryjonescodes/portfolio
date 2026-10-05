@@ -256,10 +256,10 @@ Add a tunable there and read it through `useAnimations()`; never hardcode a dura
 ## Testing
 
 `npm run test:e2e` runs the Playwright suite in `e2e/`, one spec per feature (`pages`, `modal`,
-`carousel`, `scene`, `a11y`) with shared helpers in `helpers.ts`; add tests to the matching spec.
+`scene`, `a11y`, `panel`, `share`; entry rows and phone tiles both live in `modal`) with shared helpers in `helpers.ts`; add tests to the matching spec.
 Run it before pushing anything that touches animation, the modal or the 3D bridge.
 `npm run check` (lint, types, knip, asset check) must pass; `npm run format` applies Prettier.
-`npm run modal-frames` captures modal open and close frames for a visual check.
+To judge an animation by eye, use the `portfolio-motion-sheet` skill (a real-time contact sheet of frames).
 
 ## Work Tracking
 
