@@ -96,7 +96,7 @@ flowchart LR
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 4 to push | 16/30 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
+| `next` |  | active, pushed | 16/30 | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |  |
 
 ## 🕘 Just happened
 
@@ -221,7 +221,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 |---|---|---|---|---|---|---|---|
 | `entry/cleanup` | Tidy after the entry merge | planned |  | 0/2 | 0 | pushed | Merge carousel.spec into modal.spec; drop dead styles and tunables |
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/6 | 0 | pushed | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 16/30 | 21 | 4 to push | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 16/30 | 21 | pushed | 2D knob, mini slider and key controls, keyboard and mouse (from feat/control-panel) |
 | `release/promote-main` | Promote the new site to main | planned |  | 2/11 | 0 | 23 to push | PR staging into main |
 
 <details><summary><code>entry/cleanup</code>: Tidy after the entry merge (0/2)</summary>
