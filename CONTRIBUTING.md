@@ -18,7 +18,7 @@ flowchart LR
   n_staging([staging])
   class n_staging trunk
   subgraph loose["🧩 Not in a plan"]
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/46 · 🙋 16<br/><i>next: After the stream lands: DRY and c…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -35,9 +35,6 @@ flowchart LR
   n_next_m3["✅ <code>feat/content-requests</code>"]
   class n_next_m3 merged
   n_next_m3 --> n_next
-  n_next_t0["After the stream lands: DRY<br/>and code-splitting pass,<br/>delete…"]
-  class n_next_t0 todo
-  n_next -.-> n_next_t0
   classDef merged fill:#dcfce7,stroke:#16a34a,color:#052e16
   classDef todo fill:#ffffff,stroke:#94a3b8,stroke-dasharray:2 2,color:#334155
   classDef planned fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
@@ -71,7 +68,7 @@ flowchart LR
     class n_feat_panel_knob planned
     n_feat_panel_phones["<b>The control panel on<br/>phones</b><br/>🟦 planned<br/><code>feat/panel-phones</code><br/>▱▱▱▱▱▱▱▱ 0/3<br/><i>next: Gear shows in the phone nav</i>"]
     class n_feat_panel_phones planned
-    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/46 · 🙋 16<br/><i>next: After the stream lands: DRY and c…</i>"]
+    n_next["<b>Integration branch: the<br/>stream's second staging<br/>merge</b><br/>🟩 active<br/><code>next</code><br/>▰▰▰▰▰▱▱▱ 29/45 · 🙋 16"]
     class n_next active,current
   end
   style loose fill:#f1f5f9,stroke:#94a3b8,color:#0f172a
@@ -113,13 +110,11 @@ flowchart LR
 
 **What.** Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
-**How, next.**
-
-- After the stream lands: DRY and code-splitting pass, delete unused code
+**How, next.** Every todo is done; it waits on review and merge.
 
 | Branch | PR | Status | Progress | Next | Plan |
 |---|---|---|---|---|---|
-| `next` |  | active, 17 to push | 29/46 | After the stream lands: DRY and code-splitting pass, delete unused code |  |
+| `next` |  | active, 17 to push | 29/45 | nothing open |  |
 
 ## 🕘 Just happened
 
@@ -245,7 +240,7 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 | `entry/open` | One open morph, the carousel's, at every width | planned |  | 0/7 | 0 | 1 to push | Closed and open layouts keep the same elements in the same order, with shared layoutIds |
 | `feat/panel-knob` | A 2D knob and mini sliders for the control panel | planned |  | 0/3 | 0 | local only | Knob component: drag, wheel and arrow keys, with aria slider semantics |
 | `feat/panel-phones` | The control panel on phones | planned |  | 0/3 | 0 | local only | Gear shows in the phone nav |
-| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/46 | 33 | 17 to push | After the stream lands: DRY and code-splitting pass, delete unused code |
+| `next` ◀ | Integration branch: the stream's second staging merge | active |  | 29/45 | 33 | 17 to push |  |
 
 <details><summary><code>chore/dry-pass</code>: DRY and code-splitting pass after the stream (0/3)</summary>
 
@@ -309,7 +304,7 @@ The owner wants the toy on phones too: the gear shows on phones, the panel opens
 
 </details>
 
-<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/46)</summary>
+<details><summary><code>next</code>: Integration branch: the stream's second staging merge (29/45)</summary>
 
 Every work-in-progress branch merges here instead of staging, so this stream reaches staging in two merges (the first was #88) and spends fewer build minutes. No Netlify deploy. Merges to staging once the stream is done.
 
@@ -349,7 +344,6 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [x] 3D view socials: smaller, no Instagram, two rows of three
 - [x] Page toolkit: layout ideas and components for building pages with content, delivered as skills
 - [x] Rule in repertoire: keep bw and the refactor's skills current while working
-- [ ] After the stream lands: DRY and code-splitting pass, delete unused code
 - [x] Resume feat/phone-3d from its local WIP commit 1fe59f9b, and entry/open, after the rate limit resets
 - [ ] 🙋 Review the Arbor and project blurbs (written from existing descriptions)
 - [ ] 🙋 Decide where /links appears (home menu, nav bar, or as home like the old branch)
