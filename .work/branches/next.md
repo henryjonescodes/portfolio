@@ -85,6 +85,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Modal window gets a max width on wide screens
 - [ ] Window bar: the entry name has no left divider in the modal
 - [ ] Nav item hover: the underline collapses smoothly when the pointer leaves
+- [ ] Close button: full size, border-colour fill with the X knocked out
 
 ## Log
 
