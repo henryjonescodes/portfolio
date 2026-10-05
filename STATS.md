@@ -57,22 +57,23 @@ src/
 
 ```
 src/  🚧
-├── assets/
+├── assets/  🚧
 │   ├── requests/  🆕
-│   ├── svg/
+│   ├── svg/  🚧
+├── audio/  🆕  🚧
 ├── components/  🚧
-│   ├── 3D/  🆕
+│   ├── 3D/  🆕  🚧
 │   ├── AnimatedBorderBox/  🆕
 │   ├── AnimatedLine/  🆕
 │   ├── AnimatedOutlet/  🆕
 │   ├── Background/  🆕
-│   ├── ControlPanel/  🆕
+│   ├── ControlPanel/  🆕  🚧
 │   ├── Crosshair/  🆕
 │   ├── Efforts/  🆕  🚧
 │   ├── EntryLink/  🆕
 │   ├── EntryList/  🆕
 │   ├── EntryMedia/  🆕
-│   ├── ExperienceEntry/  🆕
+│   ├── ExperienceEntry/  🆕  🚧
 │   ├── GlitchIcon/  🆕
 │   ├── GlitchIconItem/  🆕
 │   ├── GlitchMedia/  🆕
@@ -81,7 +82,7 @@ src/  🚧
 │   ├── Loading/  🆕  🚧
 │   ├── MapViewer/  🆕
 │   ├── MasonryGallery/  🆕
-│   ├── NavBar/  🆕
+│   ├── NavBar/  🆕  🚧
 │   ├── Page/  🆕  🚧
 │   ├── Panels/  🆕
 │   ├── TypewriterText/  🆕
