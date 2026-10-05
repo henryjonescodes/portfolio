@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: calc(100vh - styles.$height-nav-bar);
+    min-height: calc(100dvh - styles.$height-nav-bar);
 
     .twoColumns {
       position: relative;
@@ -62,11 +62,12 @@
         width: 100%;
       }
 
-      // Two rows of four.
+      // Two rows of three.
       .socials {
-        display: grid;
-        grid-template-columns: repeat(4, max-content);
+        display: flex;
+        flex-wrap: wrap;
         gap: 24px 32px;
+        max-width: calc(3 * 72px + 2 * 32px);
 
         .icon {
           width: 72px;
@@ -270,10 +271,12 @@
 
         .socials {
           margin-top: 32px;
+          gap: 20px 28px;
+          max-width: calc(3 * 48px + 2 * 28px);
 
           .icon {
-            width: 64px;
-            height: 64px;
+            width: 48px;
+            height: 48px;
           }
         }
       }

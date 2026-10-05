@@ -6,6 +6,41 @@
   z-index: 1;
 }
 
+// A retro grid of long dashes, gaps at every crossing, fading out from the centre. It starts
+// below the nav bar.
+$grid-cell: 96px;
+$grid-line: color-mix(in srgb, var(--foreground-primary) 30%, transparent);
+
+.grid {
+  position: absolute;
+  inset: var(--nav-bar-height) 0 0 0;
+  z-index: 1;
+  pointer-events: none;
+  mask-image: radial-gradient(circle at center, black 0%, transparent 70%);
+}
+
+.gridRows,
+.gridColumns {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  mask-position: center;
+}
+
+.gridRows {
+  background-image: linear-gradient(to bottom, $grid-line 0 1px, transparent 1px);
+  background-size: 100% $grid-cell;
+  mask-image: linear-gradient(to right, transparent 10%, black 10% 90%, transparent 90%);
+  mask-size: $grid-cell 100%;
+}
+
+.gridColumns {
+  background-image: linear-gradient(to right, $grid-line 0 1px, transparent 1px);
+  background-size: $grid-cell 100%;
+  mask-image: linear-gradient(to bottom, transparent 10%, black 10% 90%, transparent 90%);
+  mask-size: 100% $grid-cell;
+}
+
 .scanlines {
   @include styles.scanlines-effect;
   @include styles.full-screen-positioning;

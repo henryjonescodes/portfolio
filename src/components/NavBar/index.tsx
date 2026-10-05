@@ -4,6 +4,7 @@ import { useWindowDimensions } from '@context/WindowDimensionContext';
 import { useNavigatePreserveQuery } from '@hooks/useNavigatePreserveQuery';
 import { useAnimations } from '@context/AnimationContext';
 import { widthSmall } from '@styles/layout.constants.ts';
+import { isMobile } from 'react-device-detect';
 import TypewriterText from '@components/TypewriterText';
 import AnimatedLine from '@components/AnimatedLine';
 
@@ -14,6 +15,8 @@ import Handheld from '@assets/svg/icons/handheld.svg?react';
 import Home from '@assets/svg/icons/home.svg?react';
 import Pause from '@assets/svg/icons/pause.svg?react';
 import Play from '@assets/svg/icons/play.svg?react';
+import SoundOff from '@assets/svg/icons/sound-off.svg?react';
+import SoundOn from '@assets/svg/icons/sound-on.svg?react';
 import Settings from '@assets/svg/icons/settings.svg?react';
 import User from '@assets/svg/icons/user.svg?react';
 
@@ -21,6 +24,7 @@ import { usePage } from '@context/PageContext';
 import { useZoom } from '@context/ZoomContext';
 import { useLoading } from '@context/LoadingContext';
 import { useControlPanel } from '@context/ControlPanelContext';
+import { usePreferences } from '@context/PreferencesContext';
 
 import styles from './nav-bar.module.scss';
 import NavBarButton from './NavBarButton';
@@ -35,9 +39,10 @@ const NavBar = ({ page }: NavBarProps) => {
   const { width } = useWindowDimensions();
   const { embedded } = usePage();
   const { animationDisabled, setAnimationDisabled } = useSettings();
-  const { firstPageLoad } = useLoading();
+  const { firstPageLoad, liteMode } = useLoading();
   const { zoomLevel, toggleFullscreenZoomPosition } = useZoom();
   const { TRANSITIONS } = useAnimations();
+  const { preferences, setPreference } = usePreferences();
   const { open: panelOpen, setOpen: setPanelOpen } = useControlPanel();
 
   const navBarVariants = {
@@ -144,6 +149,13 @@ const NavBar = ({ page }: NavBarProps) => {
           </motion.h3>
         </motion.span>
         <motion.span className={styles.right}>
+          <NavBarButton
+            onClick={() => setPreference('sound', !preferences.sound)}
+            active={!preferences.sound}
+            Icon={SoundOn}
+            ActiveIcon={SoundOff}
+            label={preferences.sound ? 'Sound on' : 'Sound off'}
+          />
           {!embedded && zoomLevel === 'fullscreen' && (
             <NavBarButton
               onClick={() => setPanelOpen(!panelOpen)}
@@ -165,7 +177,13 @@ const NavBar = ({ page }: NavBarProps) => {
             active={zoomLevel === 'fullscreen'}
             Icon={Expand}
             ActiveIcon={Handheld}
-            label={zoomLevel === 'fullscreen' ? 'Back to the device' : 'Full screen'}
+            label={
+              zoomLevel !== 'fullscreen'
+                ? 'Full screen'
+                : liteMode && isMobile
+                  ? 'View in 3D'
+                  : 'Back to the device'
+            }
           />
           <NavBarButton onClick={() => navigate(`/`, { replace: true })} Icon={Home} label="Home" />
         </motion.span>

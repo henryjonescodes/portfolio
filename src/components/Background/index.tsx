@@ -8,11 +8,15 @@ const Background = () => {
   return (
     <>
       <motion.div className={cn(styles.backdrop)} />
+      <div className={styles.grid} aria-hidden>
+        <div className={styles.gridRows} />
+        <div className={styles.gridColumns} />
+      </div>
       <motion.div
         className={cn(styles.scanlines, {
           [styles.noAnimation]: animationDisabled, // Conditionally apply a no-animation style
         })}
-      />{' '}
+      />
     </>
   );
 };

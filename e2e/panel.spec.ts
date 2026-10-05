@@ -46,6 +46,43 @@ test.describe('control panel', () => {
     expect(value).toBe('0.5');
   });
 
+  test('the sound switch persists across reload', async ({ page }) => {
+    const panel = await openPanel(page);
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    const sound = panel.getByRole('switch');
+    await expect(sound).toHaveAttribute('aria-checked', 'true');
+    await sound.click();
+    await expect(sound).toHaveAttribute('aria-checked', 'false');
+
+    await page.reload();
+    await expect(page.getByRole('button', { name: 'Sound off' })).toBeVisible();
+    await page.getByRole('button', { name: 'Open control panel' }).click();
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    await expect(panel.getByRole('switch')).toHaveAttribute('aria-checked', 'false');
+  });
+
+  test('the waveform row is keyboard operable', async ({ page }) => {
+    const panel = await openPanel(page);
+    await panel.getByRole('tab', { name: 'FX' }).click();
+    await expect(panel.getByRole('radio', { name: 'square' })).toHaveAttribute(
+      'aria-checked',
+      'true',
+    );
+    await panel.getByRole('radio', { name: 'square' }).focus();
+    await page.keyboard.press('ArrowRight');
+    const saw = panel.getByRole('radio', { name: 'sawtooth' });
+    await expect(saw).toBeFocused();
+    await expect(saw).toHaveAttribute('aria-checked', 'true');
+  });
+
+  test('the nav speaker button toggles sound', async ({ page }) => {
+    await page.goto('/about?lite=true');
+    await page.getByRole('button', { name: 'Sound on' }).click();
+    await expect(page.getByRole('button', { name: 'Sound off' })).toBeVisible();
+    await page.getByRole('button', { name: 'Sound off' }).click();
+    await expect(page.getByRole('button', { name: 'Sound on' })).toBeVisible();
+  });
+
   test('closes with Close and with Escape', async ({ page }) => {
     const panel = await openPanel(page);
     await panel.getByRole('button', { name: 'Close' }).click();
@@ -75,9 +112,9 @@ test.describe('control panel', () => {
     await page.keyboard.press('ArrowLeft');
     await panel.getByRole('radio', { name: 'Pixelify Sans' }).focus();
     await page.keyboard.press('ArrowDown');
-    const plex = panel.getByRole('radio', { name: 'IBM Plex Mono' });
-    await expect(plex).toBeFocused();
-    await expect(plex).toHaveAttribute('aria-checked', 'true');
+    const vt323 = panel.getByRole('radio', { name: 'VT323' });
+    await expect(vt323).toBeFocused();
+    await expect(vt323).toHaveAttribute('aria-checked', 'true');
   });
 
   test('focus stays inside and returns to the gear on close', async ({ page }) => {

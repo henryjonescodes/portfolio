@@ -9,6 +9,7 @@ import { useAnimations } from '@context/AnimationContext';
 import { GALLERY } from '@components/Efforts/subpages';
 import { findEntry } from '@data/entries';
 import { entryTitle, pageTitle } from '@data/pages';
+import { useSound } from '@hooks/useSound';
 import { trapFocus } from '@utils/focus';
 import { boxWithin } from '@utils/geometry';
 import styles from './experience-entry-modal.module.scss';
@@ -24,6 +25,7 @@ type ExperienceEntryModalProviderProps = {
 export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalProviderProps) => {
   const { TRANSITIONS } = useAnimations();
   const { pathname } = useLocation();
+  const play = useSound();
   // A shared link names the entry to open, read on the first render so the URL never sees
   // a closed modal in between. Read from the address bar, which the provider keeps current,
   // not the router's copy, which goes stale once the URL is replaced in place.
@@ -85,6 +87,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
       zoom?: boolean;
     } = {},
   ) => {
+    play('open');
     const el = options.source ?? null;
     const stage = stageRef.current;
     const box = el && stage ? (boxWithin(el, stage) as Record<string, number>) : null;
@@ -128,6 +131,7 @@ export const ExperienceEntryModalProvider = ({ children }: ExperienceEntryModalP
   }, [pageOpen]);
 
   const closeModal = () => {
+    play('close');
     closingRef.current = true;
     setIsClosing(true);
     setPageOpen(false);

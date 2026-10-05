@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import { useAnimations } from '@context/AnimationContext';
 import NavBarButton from './NavBarButton';
 import AnimatedLine from '@components/AnimatedLine';
-import Close from '@assets/svg/icons/close.svg?react';
+import Close from '@assets/svg/icons/x.svg?react';
 import Expand from '@assets/svg/icons/expand.svg?react';
 import Shrink from '@assets/svg/icons/shrink.svg?react';
 import styles from './modal-nav-bar.module.scss';
@@ -70,7 +70,7 @@ const ModalNavBar = ({
               />
             </span>
           )}
-          {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" />}
+          {onClose && <NavBarButton onClick={onClose} Icon={Close} label="Close" filled />}
         </motion.div>
         <AnimatedLine
           className={styles.navbarBorder}

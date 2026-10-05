@@ -314,6 +314,7 @@ test('an entry without sourced media shows its placeholder with its request id',
   page,
 }) => {
   await page.goto('/experience?lite=true&entry=arbor');
-  await expect(page.getByRole('dialog')).toBeVisible();
-  await expect(page.locator('[data-request=arbor-hero]').first()).toBeVisible();
+  const dialog = page.getByRole('dialog');
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator('[data-request=arbor-hero]')).toBeVisible();
 });

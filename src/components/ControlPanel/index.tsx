@@ -12,11 +12,15 @@ import { useControlPanel, type ControlPanelPage } from '@context/ControlPanelCon
 import {
   FONT_FAMILIES,
   PREFERENCE_RANGES,
+  SOUND_KEYS,
+  WAVEFORM_IDS,
   usePreferences,
   type FontFamilyId,
+  type Preferences,
 } from '@context/PreferencesContext';
 import { useSettings } from '@context/SettingsContext';
 import { useRovingFocus } from '@hooks/useRovingFocus';
+import { useSound } from '@hooks/useSound';
 
 import Bolt from '@assets/svg/icons/bolt.svg?react';
 import Close from '@assets/svg/icons/close-01.svg?react';
@@ -27,6 +31,8 @@ import Type from '@assets/svg/icons/type.svg?react';
 import Unlocked from '@assets/svg/icons/unlocked.svg?react';
 
 import styles from './control-panel.module.scss';
+
+const PREVIEW_DELAY_MS = 30;
 
 const TABS: { id: ControlPanelPage; label: string; Icon: typeof Palette }[] = [
   { id: 'colour', label: 'Colour', Icon: Palette },
@@ -55,7 +61,7 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
   const reset = () => {
     if (page === 'colour') resetColors();
     else if (page === 'type') resetPreferences(['fontFamily', 'textScale']);
-    else resetPreferences(['motionSpeed', 'crt']);
+    else resetPreferences(['motionSpeed', 'crt', ...SOUND_KEYS]);
   };
 
   return (
@@ -92,7 +98,7 @@ const ControlPanel = ({ onClose, showLock = false }: ControlPanelProps) => {
           />
         )}
         <NavBarButton onClick={reset} Icon={Trash} label="Reset this page" />
-        <NavBarButton onClick={onClose} Icon={Close} label="Close" />
+        <NavBarButton onClick={onClose} Icon={Close} label="Close" filled />
         <AnimatedLine className={styles.border} borderWidth={5} horizontal drawOnMount />
       </motion.span>
       <div className={styles.body} role="tabpanel" id={panelId} aria-labelledby={tabId(page)}>
@@ -179,9 +185,19 @@ const TypePage = () => {
 
 const FxPage = () => {
   const { preferences, setPreference } = usePreferences();
+  const play = useSound();
+  // Every sound change plays a note so the new patch is heard straight away.
+  const change = <K extends keyof Preferences>(key: K, value: Preferences[K]) => {
+    setPreference(key, value);
+    // Waits for the provider to hand the engine the new patch.
+    window.setTimeout(() => play('click'), PREVIEW_DELAY_MS);
+  };
+  const roving = useRovingFocus(WAVEFORM_IDS.length, (i) => change('waveform', WAVEFORM_IDS[i]));
+  const soundRange = (key: Extract<keyof Preferences, keyof typeof PREFERENCE_RANGES>) =>
+    PREFERENCE_RANGES[key];
 
   return (
-    <div className={styles.controls}>
+    <div className={cn(styles.controls, styles.scrolling)}>
       <RangeRow
         label="Motion speed"
         {...PREFERENCE_RANGES.motionSpeed}
@@ -195,6 +211,71 @@ const FxPage = () => {
         value={preferences.crt}
         format={(v) => `${Math.round(v * 100)}%`}
         onChange={(v) => setPreference('crt', v)}
+      />
+      <h4 className={styles.sectionTitle}>Sound</h4>
+      <button
+        type="button"
+        role="switch"
+        aria-checked={preferences.sound}
+        className={cn(styles.choice, { [styles.chosen]: preferences.sound })}
+        onClick={() => change('sound', !preferences.sound)}
+      >
+        {preferences.sound ? 'Sound on' : 'Sound off'}
+      </button>
+      <RangeRow
+        label="Volume"
+        {...soundRange('volume')}
+        value={preferences.volume}
+        format={(v) => `${Math.round(v * 100)}%`}
+        onChange={(v) => change('volume', v)}
+      />
+      <div role="radiogroup" aria-label="Waveform" className={cn(styles.choices, styles.wave)}>
+        {WAVEFORM_IDS.map((id, i) => {
+          const chosen = preferences.waveform === id;
+          return (
+            <button
+              key={id}
+              ref={roving.itemRef(i)}
+              type="button"
+              role="radio"
+              aria-checked={chosen}
+              tabIndex={chosen ? 0 : -1}
+              className={cn(styles.choice, { [styles.chosen]: chosen })}
+              onClick={() => change('waveform', id)}
+              onKeyDown={(e) => roving.onKeyDown(e, i)}
+            >
+              {id}
+            </button>
+          );
+        })}
+      </div>
+      <RangeRow
+        label="Cutoff"
+        {...soundRange('cutoff')}
+        value={preferences.cutoff}
+        format={(v) => `${v} Hz`}
+        onChange={(v) => change('cutoff', v)}
+      />
+      <RangeRow
+        label="Resonance"
+        {...soundRange('resonance')}
+        value={preferences.resonance}
+        format={(v) => String(v)}
+        onChange={(v) => change('resonance', v)}
+      />
+      <RangeRow
+        label="Release"
+        {...soundRange('release')}
+        value={preferences.release}
+        format={(v) => `${Math.round(v * 1000)} ms`}
+        onChange={(v) => change('release', v)}
+      />
+      <RangeRow
+        label="Detune"
+        {...soundRange('detune')}
+        value={preferences.detune}
+        format={(v) => `${v} ct`}
+        onChange={(v) => change('detune', v)}
       />
     </div>
   );

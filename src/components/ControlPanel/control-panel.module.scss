@@ -109,6 +109,29 @@
   padding: 16px 20px;
 }
 
+.scrolling {
+  overflow-y: auto;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+.sectionTitle {
+  margin: 8px 0 0;
+}
+
+// Waveforms sit in one row of equal keys.
+.choices.wave {
+  flex-direction: row;
+  gap: 6px;
+
+  .choice {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 8px 4px;
+    text-align: center;
+  }
+}
+
 .choices {
   display: flex;
   flex-direction: column;
@@ -145,6 +168,11 @@
 
   output {
     text-align: right;
+  }
+
+  @media (max-width: 480px) {
+    grid-template-columns: 5.5rem 1fr 3.5rem;
+    gap: 8px;
   }
 }
 

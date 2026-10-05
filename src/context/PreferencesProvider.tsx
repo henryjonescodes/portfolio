@@ -1,9 +1,11 @@
+import { setPatch } from '../audio/synth';
 import { ReactNode, useCallback, useLayoutEffect, useMemo, useState } from 'react';
 import {
   DEFAULT_PREFERENCES,
   FONT_FAMILIES,
   PREFERENCE_RANGES,
   PreferencesContext,
+  WAVEFORM_IDS,
   type NumericPreference,
   type Preferences,
 } from './PreferencesContext';
@@ -16,6 +18,10 @@ const load = (): Preferences => {
     const merged = { ...DEFAULT_PREFERENCES };
     if (stored.fontFamily && stored.fontFamily in FONT_FAMILIES) {
       merged.fontFamily = stored.fontFamily;
+    }
+    if (typeof stored.sound === 'boolean') merged.sound = stored.sound;
+    if (stored.waveform && WAVEFORM_IDS.includes(stored.waveform)) {
+      merged.waveform = stored.waveform;
     }
     for (const key of Object.keys(PREFERENCE_RANGES) as NumericPreference[]) {
       const { min, max } = PREFERENCE_RANGES[key];
@@ -38,6 +44,15 @@ export const PreferencesProvider = ({ children }: { children: ReactNode }) => {
     root.setProperty('--font-family', FONT_FAMILIES[preferences.fontFamily].css);
     root.setProperty('--text-scale', String(preferences.textScale));
     root.setProperty('--crt-intensity', String(preferences.crt));
+    setPatch({
+      enabled: preferences.sound,
+      volume: preferences.volume,
+      waveform: preferences.waveform,
+      cutoff: preferences.cutoff,
+      resonance: preferences.resonance,
+      release: preferences.release,
+      detune: preferences.detune,
+    });
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(preferences));
     } catch {

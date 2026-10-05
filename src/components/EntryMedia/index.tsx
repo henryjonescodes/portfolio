@@ -1,5 +1,6 @@
 import GlitchMedia from '@components/GlitchMedia';
 import type { EntryMedia } from '@components/ExperienceEntry/types';
+import StripedPanel from '@components/StripedPanel';
 import { sourcedRequests } from '@utils/requests';
 import styles from './entry-media.module.scss';
 
@@ -15,15 +16,15 @@ const EntryMediaView = ({ media, alt = '' }: { media: EntryMedia; alt?: string }
         />
       );
     return (
-      <div
+      <StripedPanel
         className={styles.placeholder}
+        tag="Image to come"
         role="img"
         aria-label={`Image to come: ${media.placeholder}`}
         data-request={media.request}
       >
-        <span className={styles.tag}>Image to come</span>
         <span className={styles.brief}>{media.placeholder}</span>
-      </div>
+      </StripedPanel>
     );
   }
   return 'video' in media ? (
