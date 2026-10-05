@@ -4,9 +4,9 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 00:12 UTC by `bw s
 
 | | |
 |---|---|
-| Commits | 505 |
-| Pull requests merged | 25 |
-| Lines added | +15,339 |
+| Commits | 522 |
+| Pull requests merged | 26 |
+| Lines added | +15,252 |
 | Lines removed | -15,672 |
 | Branches in flight | 8 |
 
@@ -15,10 +15,10 @@ _From `origin/main` to `origin/staging`, generated 2026-10-05 00:12 UTC by `bw s
 | Type | Files | Added | Removed |
 |---|---|---|---|
 | `.svg` | 71 | +208 | -11,894 |
-| `.tsx` | 89 | +5,637 | -1,189 |
-| `.scss` | 50 | +4,344 | -1,955 |
-| `.ts` | 64 | +3,642 | -320 |
-| `.md` | 22 | +892 | -33 |
+| `.tsx` | 89 | +5,473 | -1,189 |
+| `.scss` | 50 | +4,314 | -1,955 |
+| `.ts` | 64 | +3,659 | -320 |
+| `.md` | 24 | +982 | -33 |
 | `.js` | 5 | +242 | -156 |
 | `.json` | 5 | +124 | -82 |
 | `.mjs` | 6 | +168 | -0 |
@@ -67,11 +67,11 @@ src/  🚧
 │   ├── Background/  🆕
 │   ├── ControlPanel/  🆕  🚧
 │   ├── Crosshair/  🆕
-│   ├── Efforts/  🆕  🚧
-│   ├── EntryCarousel/  🆕  🚧
+│   ├── Efforts/  🆕
+│   ├── EntryCarousel/  🆕
 │   ├── EntryLink/  🆕
 │   ├── EntryMedia/  🆕
-│   ├── ExperienceEntry/  🆕  🚧
+│   ├── ExperienceEntry/  🆕
 │   ├── GlitchIcon/  🆕
 │   ├── GlitchIconItem/  🆕
 │   ├── GlitchMedia/  🆕
@@ -98,7 +98,7 @@ src/  🚧
 │   ├── links/  🆕
 │   ├── projects/  🆕
 ├── styles/  🚧
-├── utils/  🆕  🚧
+├── utils/  🆕
 ```
 
 📝 **Planned, not started:**
