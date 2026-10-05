@@ -6,29 +6,35 @@ import { ZoomProvider } from './ZoomProvider';
 import { ColorsProvider } from './ColorsProvider';
 import { InteractionProvider } from './InteractionProvider';
 import { AnimationProvider } from './AnimationProvider';
+import { PreferencesProvider } from './PreferencesProvider';
+import { ControlPanelProvider } from './ControlPanelProvider';
 import { DebugTools } from '../debug';
 
 /**
  * Global providers, ordered by dependency: each may use any provider above it.
- * Loading reads timeouts from Animation; Zoom reads Loading, Settings and dimensions.
+ * Preferences feed Animation (motion speed). Loading reads timeouts from Animation; Zoom reads Loading, Settings and dimensions.
  * DebugTools mounts the lazily loaded Leva panel only under `?debug=true`.
  */
 export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <WindowDimensionProvider>
       <SettingsProvider>
-        <AnimationProvider>
-          <LoadingProvider>
-            <ZoomProvider>
-              <ColorsProvider>
-                <InteractionProvider>
-                  {children}
-                  <DebugTools />
-                </InteractionProvider>
-              </ColorsProvider>
-            </ZoomProvider>
-          </LoadingProvider>
-        </AnimationProvider>
+        <PreferencesProvider>
+          <AnimationProvider>
+            <LoadingProvider>
+              <ZoomProvider>
+                <ColorsProvider>
+                  <ControlPanelProvider>
+                    <InteractionProvider>
+                      {children}
+                      <DebugTools />
+                    </InteractionProvider>
+                  </ControlPanelProvider>
+                </ColorsProvider>
+              </ZoomProvider>
+            </LoadingProvider>
+          </AnimationProvider>
+        </PreferencesProvider>
       </SettingsProvider>
     </WindowDimensionProvider>
   );
