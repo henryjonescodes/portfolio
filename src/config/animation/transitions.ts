@@ -210,17 +210,6 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
-  COMMON: {
-    EXIT: {
-      duration: tune(
-        'COMPONENT',
-        1.0,
-        S,
-        'Common > Exit Duration',
-        'Default exit duration for generic components',
-      ),
-    },
-  },
 
   EXPERIENCE: {
     ANIMATE_STAGGER: {
@@ -351,24 +340,6 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
-  LOADING: {
-    EXIT: {
-      duration: tune(
-        'PAGE',
-        1.0,
-        S,
-        'Loading Screen > Exit Duration',
-        'How long loading screen takes to fade out',
-      ),
-      delay: tune(
-        'PAGE',
-        6.5,
-        E,
-        'Loading Screen > Exit Delay',
-        'Wait before loading screen starts fading out',
-      ),
-    },
-  },
 
   LOADING_PAGE: {
     ANIMATE: {
@@ -618,35 +589,6 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
-  NAV: {
-    ANIMATE_STAGGER: {
-      staggerChildren: tune(
-        'NAV',
-        0.33,
-        S,
-        'Nav Bar > Item Stagger',
-        'Delay between each nav item appearing',
-      ),
-    },
-    EXIT: {
-      duration: tune(
-        'NAV',
-        0.5,
-        S,
-        'Nav Bar > Exit Duration',
-        'How long nav bar takes to fade out',
-      ),
-    },
-    HOME_FIRST_LOAD_ANIMATE: {
-      delay: tune(
-        'NAV',
-        4.33,
-        E,
-        'Nav Bar > Home First Load Delay',
-        'Extra delay on initial home page load',
-      ),
-    },
-  },
 
   NAV_BUTTON: {
     ACTIVE_ANIMATE: {
@@ -723,27 +665,6 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
-  NAV_MINIMAL: {
-    ANIMATE: {
-      delay: tune(
-        'NAV',
-        1.17,
-        S,
-        'Nav Bar > Minimal Mode Delay',
-        'Delay when animations are disabled',
-      ),
-      duration: tune(
-        'NAV',
-        0.83,
-        S,
-        'Nav Bar > Minimal Mode Duration',
-        'Duration when animations are disabled',
-      ),
-    },
-    EXIT: {
-      duration: tune('NAV', 0.5, S, 'Nav Bar > Minimal Mode Exit', 'Exit duration in minimal mode'),
-    },
-  },
 
   PAGE: {
     CHILDREN_ANIMATE: {
@@ -951,33 +872,6 @@ export const TRANSITIONS_CONFIG = {
     },
   },
 
-  SCENE_CLOSE_BUTTON: {
-    ANIMATE: {
-      delay: tune(
-        'COMPONENT',
-        5.0,
-        E,
-        'Close Button > Appear Delay',
-        'Wait before close button appears',
-      ),
-      duration: tune(
-        'COMPONENT',
-        6.67,
-        E,
-        'Close Button > Fade In Duration',
-        'How long close button takes to appear',
-      ),
-    },
-    EXIT: {
-      duration: tune(
-        'COMPONENT',
-        3.33,
-        E,
-        'Close Button > Exit Duration',
-        'How long close button takes to fade out',
-      ),
-    },
-  },
 
   STAT_TRACKER: {
     ANIMATE: {
