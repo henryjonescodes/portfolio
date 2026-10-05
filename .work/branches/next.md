@@ -76,7 +76,7 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - [ ] Phones: the 3D view always renders landscape, whatever the device rotation (rotate the canvas in portrait and map pointer input to match)
   - why: The owner wants the 3D toy on phones in landscape; iOS cannot lock orientation, so the page has to rotate itself
   - file: src/pages/landing/Scene.tsx
-- [ ] Placeholder e2e test looks inside the dialog, not the first match on the page
+- [x] Placeholder e2e test looks inside the dialog, not the first match on the page
   - why: Bugbot on #88: the list's hidden copy of the placeholder can be the first match
   - file: e2e/modal.spec.ts
 - [ ] Drafted prose gets request ids too, so REQUESTS.md lists writing to approve beside the images
@@ -103,3 +103,4 @@ Every work-in-progress branch merges here instead of staging, so this stream rea
 - 2026-10-05: done "Request ids on mock media and drafted prose (from feat/content-requests)" at 20040d4d
 - 2026-10-05: done "Sourced files and prose resolve by id at build time (from feat/content-requests)" at 8e04965b
 - 2026-10-05: done "Entry tabs use the shared useRovingFocus hook" at ad9e6486
+- 2026-10-05: done "Placeholder e2e test looks inside the dialog, not the first match on the page" at b0467dda
