@@ -14,7 +14,7 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 ## Todo
 
-- [ ] Closed and open layouts keep the same elements in the same order, with shared layoutIds
+- [x] Closed and open layouts keep the same elements in the same order, with shared layoutIds
 - [ ] Per-part timings from the carousel tunables, shared by every width
 - [ ] Remove EntryCarousel and EntryCard; one provider opens everything
 - [ ] e2e: open and close at both widths, and a resize while open
@@ -26,3 +26,4 @@ Opening any entry mounts the window over its source in the closed layout and ope
 
 - 2026-10-04: seeded
 - 2026-10-05: done "Phones: the entry image animates between list and window (its shape and fill now match)" at da2ab139
+- 2026-10-05: done "Closed and open layouts keep the same elements in the same order, with shared layoutIds" at ad477c67
